@@ -1,0 +1,5 @@
+@import "components/Base/Mixins.scss";
+
+.ViewContainer {
+  @include full-width;
+}

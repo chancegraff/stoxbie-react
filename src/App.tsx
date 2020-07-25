@@ -1,31 +1,24 @@
 import React from 'react';
-import {Client as Styletron} from "styletron-engine-atomic";
-import {Provider as StyletronProvider} from "styletron-react";
-import {DarkTheme, BaseProvider} from 'baseui';
-import TradeShares from './views/TradeShares';
 import { Container } from './components/Base';
+import ViewContainer from './templates/ViewContainer';
+import TradeShares from './views/TradeShares';
 import styles from './App.module.scss';
+import WithBaseUI from 'services/WithBaseUI';
 
-const engine = new Styletron();
-
-const AppContainer: React.FC = (props) => {
-  return (
-    <Container className={styles.App}>
-      {props.children}
-    </Container>
-  );
-};
+const AppContainer: React.FC = (props) => (
+  <Container className={styles.App}>
+    {props.children}
+  </Container>
+);
 
 const overrides = {
   AppContainer,
 };
 
 const App: React.FC = () => (
-  <StyletronProvider value={engine}>
-    <BaseProvider theme={DarkTheme} overrides={overrides}>
-      <TradeShares />
-    </BaseProvider>
-  </StyletronProvider>
+  <ViewContainer>
+    <TradeShares />
+  </ViewContainer>
 );
 
-export default App;
+export default WithBaseUI(App, overrides);
