@@ -3,13 +3,13 @@ import { Container } from '../components/Base';
 import LineChart from '../components/LineChart';
 import HistoryTable from '../components/HistoryTable';
 import SharePurchase from '../templates/SharePurchase';
-import styles from './TradeView.module.scss';
+import styles from './TradeStock.module.scss';
 
 type Props = unknown;
 
-const TradeView: React.FC<Props> = () => {
+const TradeStock: React.FC<Props> = () => {
   return (
-    <Container className={styles.TradeView}>
+    <Container className={styles.TradeStock}>
       <LineChart className={styles.LineChart} />
       <SharePurchase className={styles.SharePurchase} />
       <HistoryTable className={styles.HistoryTable} />
@@ -18,4 +18,4 @@ const TradeView: React.FC<Props> = () => {
   );
 };
 
-export default TradeView;
+export default TradeStock;

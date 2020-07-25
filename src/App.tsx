@@ -3,7 +3,7 @@ import {Client as Styletron} from "styletron-engine-atomic";
 import {Provider as StyletronProvider} from "styletron-react";
 import {LightTheme, BaseProvider} from 'baseui';
 import { Container } from './components/Base';
-import TradeView from './views/TradeView';
+import TradeStock from './views/TradeStock';
 import styles from './App.module.scss';
 
 const engine = new Styletron();
@@ -12,7 +12,7 @@ const App: React.FC = () => (
   <StyletronProvider value={engine}>
     <BaseProvider theme={LightTheme}>
       <Container className={styles.App}>
-        <TradeView />
+        <TradeStock />
       </Container>
     </BaseProvider>
   </StyletronProvider>
