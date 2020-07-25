@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './App.module.scss';
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className={styles.App}>
       <header className={styles.Header}>
