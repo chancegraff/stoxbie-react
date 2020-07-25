@@ -1,18 +1,18 @@
 import React from 'react';
 import cx from 'classnames';
+import { useStyletron } from 'baseui';
 import { Container } from '../components/Base';
 import LineChart from '../components/LineChart';
 import HistoryTable from '../components/HistoryTable';
 import SharePurchase from '../templates/SharePurchase';
-import styles from './TradeStock.module.scss';
-import { useStyletron } from 'baseui';
+import styles from './TradeShares.module.scss';
 
 type Props = unknown;
 
-const TradeStock: React.FC<Props> = () => {
+const TradeShares: React.FC<Props> = () => {
   const [css, theme] = useStyletron();
   return (
-    <Container className={cx(styles.TradeStock, css({
+    <Container className={cx(styles.TradeShares, css({
       background: theme.colors.backgroundPrimary,
       color: theme.colors.contentPrimary,
     }))}>
@@ -23,4 +23,4 @@ const TradeStock: React.FC<Props> = () => {
   );
 };
 
-export default TradeStock;
+export default TradeShares;
