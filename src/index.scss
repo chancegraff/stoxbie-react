@@ -1,15 +1,17 @@
-@import "components/Base/Fonts";
+@import "components/Base/Mixins";
+
+html {
+  @include full-width;
+}
 
 body {
-  min-width: 100%;
-  min-height: 100%;
-  width: 100%;
-  height: 100%;
+  @include full-width;
   padding: 0;
   margin: 0;
-  font-size: $fontSize400;
-  background-color: #282c34;
-  color: #fafafa;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  @include full-width;
 }

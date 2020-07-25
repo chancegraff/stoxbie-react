@@ -1,6 +1,5 @@
 @import "components/Base/Mixins.scss";
 
 .App {
-  text-align: center;
   @include full-width;
 }
