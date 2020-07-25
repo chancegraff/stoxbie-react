@@ -1,8 +1,8 @@
-import React from 'react';
-import { Container } from '../components/Base';
-import ConfirmButton from '../components/ConfirmButton';
-import ShareSlider from '../components/ShareSlider';
-import styles from './SharePurchase.module.scss';
+import React from "react";
+import { Container } from "../components/Base";
+import ConfirmButton from "../components/ConfirmButton";
+import ShareSlider from "../components/ShareSlider";
+import styles from "./SharePurchase.module.scss";
 
 type Props = unknown & PropsWithClass;
 

@@ -1,8 +1,8 @@
-import React from 'react';
-import LineChart from '../components/LineChart';
-import HistoryTable from '../components/HistoryTable';
-import SharePurchase from '../templates/SharePurchase';
-import styles from './TradeShares.module.scss';
+import React from "react";
+import LineChart from "../components/LineChart";
+import HistoryTable from "../components/HistoryTable";
+import SharePurchase from "../templates/SharePurchase";
+import styles from "./TradeShares.module.scss";
 
 type Props = unknown;
 

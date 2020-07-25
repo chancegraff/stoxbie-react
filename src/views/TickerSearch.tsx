@@ -1,6 +1,6 @@
-import React from 'react';
-import TickerInput from '../components/TickerInput';
-import styles from './TradeShares.module.scss';
+import React from "react";
+import TickerInput from "../components/TickerInput";
+import styles from "./TradeShares.module.scss";
 
 type Props = unknown;
 
