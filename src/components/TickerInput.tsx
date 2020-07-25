@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatefulInput } from 'baseui/input';
+import { Container } from 'components/Base';
 import styles from './TickerInput.module.scss';
-import { Container } from './Base';
 
 const Root: React.FC = (props) => (
   <Container className={styles.TickerInput}>

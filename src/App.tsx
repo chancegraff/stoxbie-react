@@ -1,14 +1,12 @@
-import React from 'react';
-import { Container } from './components/Base';
-import ViewContainer from './templates/ViewContainer';
-import TradeShares from './views/TradeShares';
-import styles from './App.module.scss';
-import WithBaseUI from 'services/WithBaseUI';
+import React from "react";
+import { Container } from "components/Base";
+import ViewContainer from "templates/ViewContainer";
+import TradeShares from "views/TradeShares";
+import BaseUI from "services/BaseUI";
+import styles from "./App.module.scss";
 
 const AppContainer: React.FC = (props) => (
-  <Container className={styles.App}>
-    {props.children}
-  </Container>
+  <Container className={styles.App}>{props.children}</Container>
 );
 
 const overrides = {
@@ -16,9 +14,11 @@ const overrides = {
 };
 
 const App: React.FC = () => (
-  <ViewContainer>
-    <TradeShares />
-  </ViewContainer>
+  <BaseUI overrides={overrides}>
+    <ViewContainer>
+      <TradeShares />
+    </ViewContainer>
+  </BaseUI>
 );
 
-export default WithBaseUI(App, overrides);
+export default App;

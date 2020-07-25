@@ -5,8 +5,10 @@
     },
     "extends": [
         "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 2020,
@@ -18,7 +20,8 @@
     "parser": "@typescript-eslint/parser",
     "plugins": [
         "@typescript-eslint",
-        "react"
+        "react",
+        "prettier"
     ],
     "settings": {
         "react": {
@@ -27,6 +30,7 @@
     },
     "rules": {
         "react/prop-types": 0,
-        "react/display-name": 0
+        "react/display-name": 0,
+        "object-property-newline": "error"
     }
 }

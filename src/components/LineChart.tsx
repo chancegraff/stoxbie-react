@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bar } from '@vx/shape';
 import { Group } from '@vx/group';
-import { Container } from './Base';
+import { Container } from 'components/Base';
 import styles from './LineChart.module.scss';
 
 type Props = unknown & PropsWithClass;
