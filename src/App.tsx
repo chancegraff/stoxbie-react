@@ -1,16 +1,21 @@
 import React from 'react';
+import {Client as Styletron} from "styletron-engine-atomic";
+import {Provider as StyletronProvider} from "styletron-react";
+import {LightTheme, BaseProvider} from 'baseui';
+import { Container } from './components/Base';
+import TradeView from './views/TradeView';
 import styles from './App.module.scss';
 
-const App: React.FC = () => {
-  return (
-    <div className={styles.App}>
-      <header className={styles.Header}>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
-  );
-}
+const engine = new Styletron();
+
+const App: React.FC = () => (
+  <StyletronProvider value={engine}>
+    <BaseProvider theme={LightTheme}>
+      <Container className={styles.App}>
+        <TradeView />
+      </Container>
+    </BaseProvider>
+  </StyletronProvider>
+);
 
 export default App;

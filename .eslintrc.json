@@ -4,8 +4,9 @@
         "es6": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 2020,
@@ -16,12 +17,15 @@
     },
     "parser": "@typescript-eslint/parser",
     "plugins": [
-        "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "react"
     ],
     "settings": {
         "react": {
             "version": "detect"
         }
+    },
+    "rules": {
+        "react/prop-types": 0
     }
 }
