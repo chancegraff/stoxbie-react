@@ -1,28 +1,32 @@
-import React from "react";
-import { StatefulInput } from "baseui/input";
-import { Container } from "components/Base";
-import styles from "./TickerInput.module.scss";
+import React, { useState, useCallback } from "react";
+import { Combobox, SIZE } from "baseui/combobox";
+import { Search } from "iex-cloud";
 
-const Root: React.FC = (props) => (
-  <Container className={styles.TickerInput}>{props.children}</Container>
-);
-
-const overrides = {
-  Root,
+type Props = {
+  handleSearch: (
+    nextValue: string,
+    setOptions: React.Dispatch<React.SetStateAction<Search[]>>
+  ) => void;
 };
 
-type Props = unknown & PropsWithClass;
+const TickerInput: React.FC<Props> = ({ handleSearch }) => {
+  const [value, setValue] = useState<string>("");
+  const [options, setOptions] = useState<Search[]>([]);
 
-const initialState = {
-  value: "I manage my own state...",
-};
+  const handleChange = useCallback((nextValue: string) => {
+    setValue(nextValue);
+    handleSearch(nextValue, setOptions);
+  }, []);
 
-const TickerInput: React.FC<Props> = () => {
+  const mapOptions = useCallback((option: Search) => option.symbol, [options]);
+
   return (
-    <StatefulInput
-      initialState={initialState}
-      placeholder="I manage my own state..."
-      overrides={overrides}
+    <Combobox
+      value={value}
+      options={options}
+      size={SIZE.large}
+      onChange={handleChange}
+      mapOptionToString={mapOptions}
     />
   );
 };
