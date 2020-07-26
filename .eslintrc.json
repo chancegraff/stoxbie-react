@@ -32,7 +32,6 @@
     },
     "rules": {
         "react/prop-types": 0,
-        "react/display-name": 0,
-        "object-property-newline": "error"
+        "react/display-name": 0
     }
 }

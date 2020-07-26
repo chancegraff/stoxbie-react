@@ -2,7 +2,9 @@ import React from "react";
 import { useStyletron } from "baseui";
 import { Block } from "baseui/block";
 
-type Props = unknown;
+type Props = {
+  [key: string]: unknown;
+};
 
 const ContentContainer: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
@@ -16,6 +18,7 @@ const ContentContainer: React.FC<Props> = (props) => {
         `0 ${theme.sizing.scale3200}`,
       ]}
       height="100%"
+      {...props}
     >
       {props.children}
     </Block>
