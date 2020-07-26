@@ -1,24 +1,22 @@
 import React from "react";
-import { Container } from "components/Base";
-import ViewContainer from "templates/ViewContainer";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import TradeShares from "views/TradeShares";
+import TickerSearch from "views/TickerSearch";
 import BaseUI from "services/BaseUI";
-import styles from "./App.module.scss";
-
-const AppContainer: React.FC = (props) => (
-  <Container className={styles.App}>{props.children}</Container>
-);
-
-const overrides = {
-  AppContainer,
-};
 
 const App: React.FC = () => (
-  <BaseUI overrides={overrides}>
-    <ViewContainer>
-      <TradeShares />
-    </ViewContainer>
-  </BaseUI>
+  <BrowserRouter>
+    <BaseUI>
+      <Switch>
+        <Route path="/trade">
+          <TradeShares />
+        </Route>
+        <Route path="/">
+          <TickerSearch />
+        </Route>
+      </Switch>
+    </BaseUI>
+  </BrowserRouter>
 );
 
 export default App;
