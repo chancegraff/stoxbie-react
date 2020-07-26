@@ -1,11 +1,10 @@
 import React from "react";
 import { Table } from "baseui/table";
-import styles from "./HistoryTable.module.scss";
 
-type Props = unknown & PropsWithClass;
+type Props = unknown;
 
 const HistoryTable: React.FC<Props> = () => {
-  return <div className={styles.HistoryTable}>History Table</div>;
+  return <div>History Table</div>;
 };
 
 export default HistoryTable;

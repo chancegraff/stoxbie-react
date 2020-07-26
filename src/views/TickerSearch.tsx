@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useStyletron } from "baseui";
 import { Block } from "baseui/block";

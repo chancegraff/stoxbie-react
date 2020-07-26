@@ -5,7 +5,6 @@ import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";
 import LineChart from "components/LineChart";
 import TradeInput from "components/TradeInput";
-import styles from "./TradeShares.module.scss";
 
 type Props = unknown;
 
@@ -16,8 +15,8 @@ const TradeShares: React.FC<Props> = () => {
       <Switch>
         <Route path={`${match.path}/:ticker/:date`}>
           <BreadcrumbContainer />
-          <LineChart className={styles.LineChart} />
-          <TradeInput className={styles.TradeInput} />
+          <LineChart />
+          <TradeInput />
         </Route>
         <Route path={`${match.path}/:ticker`}>
           <Display3>Please select a date to trade from.</Display3>

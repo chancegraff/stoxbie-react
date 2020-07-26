@@ -1,12 +1,11 @@
 import React from "react";
 import { Slider } from "baseui/slider";
-import styles from "./TradeInput.module.scss";
 
-type Props = unknown & PropsWithClass;
+type Props = unknown;
 
 const TradeInput: React.FC<Props> = () => {
   return (
-    <div className={styles.TradeInput}>
+    <div>
       <div>Trade Input</div>
       <button>Buy</button>
       <button>Sell</button>
