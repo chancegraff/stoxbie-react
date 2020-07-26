@@ -3,7 +3,6 @@ import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { DarkTheme, BaseProvider, BaseProviderOverrides } from "baseui";
 import { Override } from "baseui/overrides";
-import BackgroundContainer from "templates/BackgroundContainer";
 
 const engine = new Styletron();
 
@@ -21,7 +20,7 @@ const overrides: BaseProviderOverrides = {
 const BaseUI: React.FC = (props) => (
   <StyletronProvider value={engine}>
     <BaseProvider theme={DarkTheme} overrides={overrides}>
-      <BackgroundContainer>{props.children}</BackgroundContainer>
+      {props.children}
     </BaseProvider>
   </StyletronProvider>
 );
