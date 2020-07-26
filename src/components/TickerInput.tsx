@@ -42,7 +42,7 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) => {
   const handleChange = useCallback(
     (params: OnChangeParams) => {
       const [value] = params.value;
-      history.push(`/ticker/${value.symbol}`);
+      history.push(`/stock/${value.symbol}`);
     },
     [history]
   );

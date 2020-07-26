@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { Display3 } from "baseui/typography";
+import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";
 import LineChart from "components/LineChart";
 import TradeInput from "components/TradeInput";
@@ -14,6 +15,7 @@ const TradeShares: React.FC<Props> = () => {
     <ContentContainer>
       <Switch>
         <Route path={`${match.path}/:ticker/:date`}>
+          <BreadcrumbContainer />
           <LineChart className={styles.LineChart} />
           <TradeInput className={styles.TradeInput} />
         </Route>

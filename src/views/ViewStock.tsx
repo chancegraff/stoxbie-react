@@ -1,9 +1,9 @@
 import React from "react";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { Display3 } from "baseui/typography";
+import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";
 import RewindCalendar from "components/RewindCalendar";
-
 import styles from "./ViewStock.module.scss";
 
 type Props = unknown;
@@ -14,6 +14,7 @@ const ViewStock: React.FC<Props> = () => {
     <ContentContainer>
       <Switch>
         <Route path={`${match.path}/:ticker`}>
+          <BreadcrumbContainer />
           <RewindCalendar className={styles.RewindCalendar} />
         </Route>
         <Route path={match.path}>

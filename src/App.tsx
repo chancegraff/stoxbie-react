@@ -14,7 +14,7 @@ const App: React.FC = () => (
           <Route path="/trade">
             <TradeShares />
           </Route>
-          <Route path="/ticker">
+          <Route path="/stock">
             <ViewStock />
           </Route>
           <Route path="/">
