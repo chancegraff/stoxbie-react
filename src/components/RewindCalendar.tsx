@@ -1,5 +1,5 @@
 import React from "react";
-import { StatefulCalendar } from "baseui/datepicker";
+import { StatefulCalendar } from "baseui/dist/datepicker";
 
 type Props = unknown;
 

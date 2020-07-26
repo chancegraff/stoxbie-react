@@ -1,6 +1,6 @@
 import React from "react";
-import { Breadcrumbs } from "baseui/breadcrumbs";
-import { StyledLink } from "baseui/link";
+import { Breadcrumbs } from "baseui/dist/breadcrumbs";
+import { StyledLink } from "baseui/dist/link";
 import { Link, useParams, useRouteMatch } from "react-router-dom";
 
 type Props = unknown;

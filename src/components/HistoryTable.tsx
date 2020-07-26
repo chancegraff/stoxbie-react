@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "baseui/table";
+import { Table } from "baseui/dist/table";
 
 type Props = unknown;
 

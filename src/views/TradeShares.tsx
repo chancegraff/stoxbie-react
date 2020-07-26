@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
-import { Display3 } from "baseui/typography";
+import { Display3 } from "baseui/dist/typography";
 import ScrollToTop from "services/ScrollToTop";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";

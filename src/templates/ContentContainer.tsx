@@ -1,6 +1,6 @@
 import React from "react";
-import { useStyletron } from "baseui";
-import { Block } from "baseui/block";
+import { useStyletron } from "baseui/dist";
+import { Block } from "baseui/dist/block";
 
 type Props = {
   [key: string]: unknown;

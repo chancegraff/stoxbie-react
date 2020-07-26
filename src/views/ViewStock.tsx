@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouteMatch, Switch, Route, useParams } from "react-router-dom";
-import { Display3 } from "baseui/typography";
-import { Spinner } from "baseui/spinner";
+import { Display3 } from "baseui/dist/typography";
 import {
   logo as getLogo,
   company as getCompany,
@@ -38,47 +37,35 @@ const Stock: React.FC = () => {
     };
   }, [ticker]);
 
-  if (isLoading) {
+  if (!isLoading && (!logo || !company)) {
     return (
-      <ContentContainer align="center">
-        <Spinner />
-      </ContentContainer>
-    );
-  }
-
-  if (!logo || !company) {
-    return (
-      <ContentContainer>
-        <Display3>There was an error loading the stock you requested.</Display3>
-      </ContentContainer>
+      <Display3>There was an error loading the stock you requested.</Display3>
     );
   }
 
   return (
-    <ContentContainer>
+    <>
       <ScrollToTop />
       <BreadcrumbContainer />
       <StockName logo={logo} company={company} />
       <RewindCalendar />
-    </ContentContainer>
+    </>
   );
 };
 
 const ViewStock: React.FC<Props> = () => {
   const match = useRouteMatch();
   return (
-    <Switch>
-      <Route path={`${match.path}/:ticker`}>
-        <ContentContainer>
+    <ContentContainer>
+      <Switch>
+        <Route path={`${match.path}/:ticker`}>
           <Stock />
-        </ContentContainer>
-      </Route>
-      <Route path={match.path}>
-        <ContentContainer>
+        </Route>
+        <Route path={match.path}>
           <Display3>Please select a stock to view.</Display3>
-        </ContentContainer>
-      </Route>
-    </Switch>
+        </Route>
+      </Switch>
+    </ContentContainer>
   );
 };
 

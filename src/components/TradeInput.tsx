@@ -1,5 +1,5 @@
 import React from "react";
-import { Slider } from "baseui/slider";
+import { Slider } from "baseui/dist/slider";
 
 type Props = unknown;
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { useStyletron } from "baseui";
-import { Block } from "baseui/block";
-import { Display2, Label2 } from "baseui/typography";
+import { useStyletron } from "baseui/dist";
+import { Block } from "baseui/dist/block";
+import { Display2, Label2 } from "baseui/dist/typography";
 import { search, Search } from "iex-cloud";
 import { DEBOUNCE_INPUT_MS } from "services/Constants";
 import ContentContainer from "templates/ContentContainer";

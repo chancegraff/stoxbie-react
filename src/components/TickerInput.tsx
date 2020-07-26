@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { Search } from "iex-cloud";
-import { Override } from "baseui/overrides";
-import { Select, SIZE, TYPE, OnChangeParams } from "baseui/select";
+import { Override } from "baseui/dist/overrides";
+import { Select, SIZE, TYPE, OnChangeParams } from "baseui/dist/select";
 
 type Props = {
   handleSearch: (
