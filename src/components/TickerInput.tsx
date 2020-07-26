@@ -1,12 +1,14 @@
 import React, { useState, useCallback } from "react";
-import { Combobox, SIZE } from "baseui/combobox";
+import { useHistory } from "react-router-dom";
 import { Search } from "iex-cloud";
 import { Override } from "baseui/overrides";
+import { Select, SIZE, TYPE, OnChangeParams } from "baseui/select";
 
 type Props = {
   handleSearch: (
     nextValue: string,
-    setOptions: React.Dispatch<React.SetStateAction<Search[]>>
+    setOptions: React.Dispatch<React.SetStateAction<Search[]>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => void;
 };
 
@@ -20,32 +22,44 @@ const overrides = {
   Input,
 };
 
-const mapOptions = (option: Search) => option.symbol;
-
 const TickerInput: React.FC<Props> = ({ handleSearch }) => {
-  const [value, setValue] = useState<string>("");
+  const history = useHistory();
   const [options, setOptions] = useState<Search[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleChange = useCallback(
-    (nextValue: string) => {
-      setValue(nextValue);
+  const handleInputChange = useCallback(
+    (event: React.FormEvent<HTMLInputElement>) => {
+      const nextValue = event.currentTarget.value;
       if (nextValue) {
-        handleSearch(nextValue, setOptions);
+        setIsLoading(true);
+        handleSearch(nextValue, setOptions, setIsLoading);
       } else {
         setOptions([]);
       }
     },
     [handleSearch]
   );
+  const handleChange = useCallback(
+    (params: OnChangeParams) => {
+      const [value] = params.value;
+      history.push(`/ticker/${value.symbol}`);
+    },
+    [history]
+  );
 
   return (
-    <Combobox
-      value={value}
+    <Select
+      isLoading={isLoading}
       options={options}
+      labelKey="symbol"
+      valueKey="symbol"
       size={SIZE.large}
+      type={TYPE.search}
       onChange={handleChange}
-      mapOptionToString={mapOptions}
+      onInputChange={handleInputChange}
       overrides={overrides}
+      clearable={false}
+      placeholder="Search for ticker..."
     />
   );
 };

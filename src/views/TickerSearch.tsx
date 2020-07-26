@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useStyletron } from "baseui";
 import { Block } from "baseui/block";
@@ -16,10 +16,12 @@ const TickerSearch: React.FC<Props> = () => {
   const [handleSearch] = useDebouncedCallback(
     async (
       nextValue: string,
-      setOptions: React.Dispatch<React.SetStateAction<Search[]>>
+      setOptions: React.Dispatch<React.SetStateAction<Search[]>>,
+      setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
     ) => {
       const [...options] = await search(nextValue);
       setOptions(options);
+      setIsLoading(false);
     },
     DEBOUNCE_INPUT_MS
   );
