@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouteMatch, Switch, Route, useParams } from "react-router-dom";
 import { Display3 } from "baseui/dist/typography";
+import { Cell } from "baseui/dist/layout-grid";
 import {
   logo as getLogo,
   company as getCompany,
@@ -57,14 +58,16 @@ const ViewStock: React.FC<Props> = () => {
   const match = useRouteMatch();
   return (
     <ContentContainer>
-      <Switch>
-        <Route path={`${match.path}/:ticker`}>
-          <Stock />
-        </Route>
-        <Route path={match.path}>
-          <Display3>Please select a stock to view.</Display3>
-        </Route>
-      </Switch>
+      <Cell span={[12]}>
+        <Switch>
+          <Route path={`${match.path}/:ticker`}>
+            <Stock />
+          </Route>
+          <Route path={match.path}>
+            <Display3>Please select a stock to view.</Display3>
+          </Route>
+        </Switch>
+      </Cell>
     </ContentContainer>
   );
 };
