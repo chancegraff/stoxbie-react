@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useStyletron } from "baseui";
 import { Block } from "baseui/block";
@@ -13,36 +13,20 @@ type Props = unknown;
 const TickerSearch: React.FC<Props> = () => {
   const [, theme] = useStyletron();
 
-  const [handleFetch] = useDebouncedCallback(
+  const [handleSearch] = useDebouncedCallback(
     async (
       nextValue: string,
       setOptions: React.Dispatch<React.SetStateAction<Search[]>>
     ) => {
-      const options = await search(nextValue);
-      const filtered = options?.filter((option) =>
-        option.symbol.toLowerCase().includes(nextValue.toLowerCase())
-      );
-      setOptions(filtered);
+      const [...options] = await search(nextValue);
+      setOptions(options);
     },
     DEBOUNCE_INPUT_MS
-  );
-  const handleSearch = useCallback(
-    (
-      nextValue: string,
-      setOptions: React.Dispatch<React.SetStateAction<Search[]>>
-    ) => {
-      if (nextValue) {
-        handleFetch(nextValue, setOptions);
-      } else {
-        setOptions([]);
-      }
-    },
-    []
   );
 
   return (
     <ContentContainer>
-      <Block padding={`${theme.sizing.scale800} 0`}>
+      <Block marginBottom={theme.sizing.scale800}>
         <Display2>Ticker Search</Display2>
         <Label2>Select the stock ticker to trade.</Label2>
       </Block>
