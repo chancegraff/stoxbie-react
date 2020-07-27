@@ -3,18 +3,18 @@ import ScrollToTop from "services/ScrollToTop";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import LineChart from "components/LineChart";
 import TradeInput from "components/TradeInput";
-import { Block } from "baseui/dist/block";
+import ContentContainer from "templates/ContentContainer";
 
 type Props = unknown;
 
 const TradeView: React.FC<Props> = () => {
   return (
-    <Block>
+    <ContentContainer>
       <ScrollToTop />
       <BreadcrumbContainer />
       <LineChart />
       <TradeInput />
-    </Block>
+    </ContentContainer>
   );
 };
 

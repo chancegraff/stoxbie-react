@@ -4,6 +4,7 @@ import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { Display2, Label2 } from "baseui/dist/typography";
 import TickerInput from "components/TickerInput";
+import ContentContainer from "templates/ContentContainer";
 
 type Props = {
   handleSearch: (
@@ -16,7 +17,7 @@ type Props = {
 const SearchView: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
   return (
-    <Block>
+    <ContentContainer>
       <Block marginBottom={theme.sizing.scale800}>
         <Display2>Ticker Search</Display2>
         <Label2>Select the stock ticker to trade.</Label2>
@@ -24,7 +25,7 @@ const SearchView: React.FC<Props> = (props) => {
       <Block>
         <TickerInput handleSearch={props.handleSearch} />
       </Block>
-    </Block>
+    </ContentContainer>
   );
 };
 

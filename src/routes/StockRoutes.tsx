@@ -8,27 +8,28 @@ import {
   Company,
 } from "iex-cloud";
 import ScrollToTop from "services/ScrollToTop";
-import ContentContainer from "templates/ContentContainer";
 import StockView from "views/StockView";
 
-type Props = unknown;
+const ERROR_MESSAGE =
+  "There was a problem attempting to load the stock you requested.";
 
-const StockRoutes: React.FC<Props> = () => {
-  const match = useRouteMatch();
-  const { ticker } = useParams();
+const ViewRoute: React.FC = () => {
+  const { ticker } = useParams<{ ticker: string }>();
 
   const [logo, setLogo] = useState<Logo>();
   const [company, setCompany] = useState<Company>();
   const [error, setError] = useState<string>("");
 
   const handleLoad = useCallback(async (ticker: string) => {
-    try {
+    if (ticker) {
       const nextCompany = await getCompany(ticker);
-      const nextLogo = await getLogo(ticker);
-      setLogo(nextLogo);
-      setCompany(nextCompany);
-    } catch (e) {
-      setError(e.toString());
+      const nextLogo = await getLogo(ticker).catch();
+      if (!nextCompany || !nextLogo) {
+        setError(ERROR_MESSAGE);
+      } else {
+        setLogo(nextLogo);
+        setCompany(nextCompany);
+      }
     }
   }, []);
 
@@ -42,19 +43,22 @@ const StockRoutes: React.FC<Props> = () => {
     return handleUnload;
   }, [ticker, handleLoad, handleUnload]);
 
+  return <StockView logo={logo} company={company} error={error} />;
+};
+
+const StockRoutes: React.FC = () => {
+  const match = useRouteMatch();
   return (
-    <ContentContainer>
-      <Switch>
-        <Route path={`${match.path}/:ticker`}>
-          <ScrollToTop />
-          <StockView logo={logo} company={company} error={error} />
-        </Route>
-        <Route path={match.path}>
-          <ScrollToTop />
-          <Display3>Please select a stock to view.</Display3>
-        </Route>
-      </Switch>
-    </ContentContainer>
+    <Switch>
+      <Route path={`${match.path}/:ticker`}>
+        <ScrollToTop />
+        <ViewRoute />
+      </Route>
+      <Route path={match.path}>
+        <ScrollToTop />
+        <Display3>Please select a stock to view.</Display3>
+      </Route>
+    </Switch>
   );
 };
 
