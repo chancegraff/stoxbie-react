@@ -1,10 +1,19 @@
 import React from "react";
-import { StatefulCalendar } from "baseui/dist/datepicker";
+import moment from "moment";
+import { StatefulDatePicker } from "baseui/dist/datepicker";
+import { FormControl } from "baseui/dist/form-control";
+import { Block } from "baseui/dist/block";
 
 type Props = unknown;
 
+const oneYear = moment().subtract(1, "year").toDate();
+
 const RewindCalendar: React.FC<Props> = () => {
-  return <div>Rewind Calendar</div>;
+  return (
+    <FormControl label="Pick Start Date">
+      <StatefulDatePicker maxDate={oneYear} />
+    </FormControl>
+  );
 };
 
 export default RewindCalendar;

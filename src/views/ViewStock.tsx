@@ -11,8 +11,9 @@ import {
 import ScrollToTop from "services/ScrollToTop";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";
-import RewindCalendar from "components/RewindCalendar";
 import StockName from "components/StockName";
+import TradeStart from "components/TradeStart";
+import { Block } from "baseui/dist/block";
 
 type Props = unknown;
 
@@ -47,9 +48,21 @@ const Stock: React.FC = () => {
   return (
     <>
       <ScrollToTop />
-      <BreadcrumbContainer />
-      <StockName logo={logo} company={company} />
-      <RewindCalendar />
+      <Cell span={[12]}>
+        <BreadcrumbContainer />
+      </Cell>
+      <Cell span={[0, 0, 7]}>
+        <StockName logo={logo} company={company} />
+      </Cell>
+      <Cell span={[0, 0, 5]}>
+        <TradeStart />
+      </Cell>
+      <Cell span={[4, 8, 0]}>
+        <Block display="flex" alignItems="center">
+          <StockName logo={logo} company={company} />
+          <TradeStart mobile />
+        </Block>
+      </Cell>
     </>
   );
 };
@@ -58,16 +71,16 @@ const ViewStock: React.FC<Props> = () => {
   const match = useRouteMatch();
   return (
     <ContentContainer>
-      <Cell span={[12]}>
-        <Switch>
-          <Route path={`${match.path}/:ticker`}>
-            <Stock />
-          </Route>
-          <Route path={match.path}>
+      <Switch>
+        <Route path={`${match.path}/:ticker`}>
+          <Stock />
+        </Route>
+        <Route path={match.path}>
+          <Cell span={[12]}>
             <Display3>Please select a stock to view.</Display3>
-          </Route>
-        </Switch>
-      </Cell>
+          </Cell>
+        </Route>
+      </Switch>
     </ContentContainer>
   );
 };

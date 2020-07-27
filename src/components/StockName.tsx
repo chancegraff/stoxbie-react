@@ -72,12 +72,7 @@ const SafeDetails: React.FC<Props> = (props) => {
 const StockName: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
   return (
-    <Block
-      width="100%"
-      display="flex"
-      alignItems="end"
-      margin={`${theme.sizing.scale1200} 0`}
-    >
+    <Block width="100%" display="flex" alignItems="end">
       <SafeAvatar {...props} />
       <Block margin={theme.sizing.scale400}>
         <SafeDetails {...props} />

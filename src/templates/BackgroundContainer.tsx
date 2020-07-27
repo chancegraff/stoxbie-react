@@ -10,6 +10,7 @@ const BackgroundContainer: React.FC<Props> = (props) => {
     <Block
       backgroundColor={theme.colors.backgroundPrimary}
       color={theme.colors.contentPrimary}
+      width="100%"
       height="100%"
     >
       {props.children}
