@@ -8,6 +8,7 @@ import { Filter } from "baseui/dist/icon";
 import { Block } from "baseui/dist/block";
 import { StatefulPopover } from "components/BaseUI/Popover";
 import { copyPropsToChildren } from "services/Utilities";
+import { TRADE_DATE_FORMAT } from "services/Constants";
 
 const today = moment();
 const oneYear = moment().subtract(1, "year");
@@ -44,15 +45,15 @@ const TradeStart: React.FC<Props> = ({ handleStart }) => {
     handleStart,
   ]);
   const handleOneYearStart = useCallback(
-    () => handleYearStart(oneYear.format("[m]MM[d]DD[y]YYYY")),
+    () => handleYearStart(oneYear.format(TRADE_DATE_FORMAT)),
     [handleYearStart]
   );
   const handleFiveYearStart = useCallback(
-    () => handleYearStart(fiveYear.format("[m]MM[d]DD[y]YYYY")),
+    () => handleYearStart(fiveYear.format(TRADE_DATE_FORMAT)),
     [handleYearStart]
   );
   const handleCustomYearStart = useCallback(
-    ({ date }) => handleYearStart(moment(date).format("[m]MM[d]DD[y]YYYY")),
+    ({ date }) => handleYearStart(moment(date).format(TRADE_DATE_FORMAT)),
     [handleYearStart]
   );
   return (

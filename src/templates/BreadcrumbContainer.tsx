@@ -1,7 +1,9 @@
 import React from "react";
+import moment from "moment";
+import { Link, useParams, useRouteMatch } from "react-router-dom";
 import { Breadcrumbs } from "baseui/dist/breadcrumbs";
 import { StyledLink } from "baseui/dist/link";
-import { Link, useParams, useRouteMatch } from "react-router-dom";
+import { TRADE_DATE_FORMAT } from "services/Constants";
 
 type Props = unknown;
 
@@ -27,7 +29,7 @@ const TradeBreadcrumb: React.FC = () => {
       <StyledLink $as={Link} to={`/stock/${ticker}`}>
         {ticker}
       </StyledLink>
-      <span>{date}</span>
+      <span>{moment(date, TRADE_DATE_FORMAT).format("MMMM Do YYYY")}</span>
     </Breadcrumbs>
   );
 };
