@@ -9,6 +9,7 @@ import {
 } from "iex-cloud";
 import ScrollToTop from "services/ScrollToTop";
 import StockView from "views/StockView";
+import ContentContainer from "templates/ContentContainer";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load the stock you requested.";
@@ -56,7 +57,9 @@ const StockRoutes: React.FC = () => {
       </Route>
       <Route path={match.path}>
         <ScrollToTop />
-        <Display3>Please select a stock to view.</Display3>
+        <ContentContainer>
+          <Display3>Please select a stock to view.</Display3>
+        </ContentContainer>
       </Route>
     </Switch>
   );

@@ -2,11 +2,12 @@ import React from "react";
 import { Logo, Company } from "iex-cloud";
 import { useStyletron } from "baseui/dist";
 import { Display3 } from "baseui/dist/typography";
-import { FlexGridItem } from "baseui/dist/flex-grid";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import StockName from "components/StockName";
+import StockLogo from "components/StockLogo";
 import TradeStart from "components/TradeStart";
 import ContentContainer from "templates/ContentContainer";
+import { Block } from "baseui/dist/block";
 
 type Props = {
   logo?: Logo;
@@ -27,13 +28,20 @@ const StockView: React.FC<Props> = (props) => {
   }
   return (
     <ContentContainer>
-      <FlexGridItem minWidth="100%" paddingBottom={theme.sizing.scale800}>
+      <Block width="100%" marginBottom={theme.sizing.scale800}>
         <BreadcrumbContainer />
-      </FlexGridItem>
-      <FlexGridItem>
-        <StockName logo={props.logo} company={props.company} />
-        <TradeStart />
-      </FlexGridItem>
+      </Block>
+      <Block width="100%" display="flex" alignItems="flex-end">
+        <Block>
+          <StockLogo logo={props.logo} />
+        </Block>
+        <Block marginLeft={theme.sizing.scale400} minHeight="68px">
+          <StockName company={props.company} />
+        </Block>
+        <Block marginLeft={theme.sizing.scale600} minHeight="68px">
+          <TradeStart />
+        </Block>
+      </Block>
     </ContentContainer>
   );
 };

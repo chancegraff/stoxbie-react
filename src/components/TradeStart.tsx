@@ -4,8 +4,7 @@ import { styled } from "styletron-react";
 import { Button, ButtonProps } from "baseui/dist/button";
 import { ButtonGroup } from "baseui/dist/button-group";
 import { StatefulCalendar } from "baseui/dist/datepicker";
-import { TriangleDown, Filter } from "baseui/dist/icon";
-import { FormControl } from "baseui/dist/form-control";
+import { Filter } from "baseui/dist/icon";
 import { Block } from "baseui/dist/block";
 import { StatefulPopover } from "components/BaseUI/Popover";
 import { copyPropsToChildren } from "services/Utilities";
@@ -21,7 +20,13 @@ const GrowingButton = styled(Button, { flexGrow: 1 });
 const DatePicker: React.FC<ButtonProps> = (props) => (
   <StatefulPopover
     placement="bottomLeft"
-    content={<StatefulCalendar maxDate={today} />}
+    content={
+      <StatefulCalendar
+        maxDate={today}
+        minDate={fiveYear}
+        initialState={{ value: oneYear }}
+      />
+    }
   >
     {copyPropsToChildren(props)}
   </StatefulPopover>
@@ -29,18 +34,16 @@ const DatePicker: React.FC<ButtonProps> = (props) => (
 
 const TradeStart: React.FC<Props> = (props) => {
   return (
-    <Block marginTop="30px">
-      <FormControl caption="Pick Start Date">
-        <ButtonGroup>
-          <GrowingButton>1Y</GrowingButton>
-          <GrowingButton>5Y</GrowingButton>
-          <DatePicker>
-            <GrowingButton>
-              <Filter />
-            </GrowingButton>
-          </DatePicker>
-        </ButtonGroup>
-      </FormControl>
+    <Block>
+      <ButtonGroup>
+        <GrowingButton>1Y</GrowingButton>
+        <GrowingButton>5Y</GrowingButton>
+        <DatePicker>
+          <GrowingButton>
+            <Filter />
+          </GrowingButton>
+        </DatePicker>
+      </ButtonGroup>
     </Block>
   );
 };

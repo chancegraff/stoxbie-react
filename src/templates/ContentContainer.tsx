@@ -1,12 +1,9 @@
 import React from "react";
-import { FlexGrid, FlexGridProps } from "baseui/dist/flex-grid";
 import { Grid as LayoutGrid } from "baseui/dist/layout-grid";
 import { Block } from "baseui/dist/block";
 import { useStyletron } from "baseui/dist";
 
-type Props = {
-  flexGrid?: FlexGridProps;
-};
+type Props = unknown;
 
 const ContentContainer: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
@@ -20,17 +17,7 @@ const ContentContainer: React.FC<Props> = (props) => {
       ]}
       height="100%"
     >
-      <LayoutGrid>
-        <FlexGrid
-          width="100%"
-          flexGridColumnCount={2}
-          flexGridColumnGap="scale800"
-          flexGridRowGap="scale800"
-          {...props.flexGrid}
-        >
-          {props.children}
-        </FlexGrid>
-      </LayoutGrid>
+      <LayoutGrid>{props.children}</LayoutGrid>
     </Block>
   );
 };

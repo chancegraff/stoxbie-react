@@ -1,83 +1,51 @@
 import React from "react";
-import { useStyletron } from "baseui/dist";
-import { Block } from "baseui/dist/block";
+import { Company } from "iex-cloud";
 import { Display3, Caption2 } from "baseui/dist/typography";
-import { Avatar } from "baseui/dist/avatar";
-import { Skeleton } from "baseui/dist/skeleton";
-import { Logo, Company } from "iex-cloud";
+import { Skeleton, OverridesT, SkeletonPropsT } from "baseui/dist/skeleton";
+import { Block } from "baseui/dist/block";
+import { useStyletron } from "baseui/dist";
 
 type Props = {
-  logo?: Logo;
   company?: Company;
 };
 
-const SafeAvatar: React.FC<Props> = (props) => {
-  const [, theme] = useStyletron();
-  if (!props.logo) {
-    return (
-      <Skeleton
-        animation={true}
-        width={theme.sizing.scale2400}
-        height={theme.sizing.scale2400}
-        overrides={{
-          Root: {
-            style: {
-              borderRadius: "50%",
-            },
-          },
-        }}
-      />
-    );
-  }
-  return (
-    <Avatar
-      name="Company logo"
-      src={props.logo.url}
-      size={theme.sizing.scale2400}
-    />
-  );
+const overrides: OverridesT = {
+  Row: {
+    style: {
+      ":first-of-type": {
+        height: "33px",
+        width: "320px",
+        marginBottom: "12px",
+      },
+      ":last-of-type": {
+        height: "10px",
+        width: "30px",
+      },
+    },
+  },
 };
 
-const SafeDetails: React.FC<Props> = (props) => {
+const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) => (
+  <Block
+    height={props.height}
+    display="flex"
+    alignItems="flex-end"
+    paddingBottom="2px"
+  >
+    <Skeleton animation={true} rows={2} overrides={overrides} />
+  </Block>
+);
+
+const StockName: React.FC<Props> = (props) => {
+  const [, theme] = useStyletron();
   if (!props.company) {
-    return (
-      <Skeleton
-        animation={true}
-        rows={2}
-        overrides={{
-          Row: {
-            style: {
-              height: "35px",
-              width: "300px",
-              marginBottom: "10px",
-              ":last-of-type": {
-                height: "10px",
-                width: "20px",
-                marginBottom: "2px",
-              },
-            },
-          },
-        }}
-      />
-    );
+    return <DetailsSkeleton height={theme.sizing.scale2400} />;
   }
   return (
     <>
       <Display3>{props.company.companyName}</Display3>
       <Caption2>{props.company.symbol}</Caption2>
     </>
-  );
-};
-
-const StockName: React.FC<Props> = (props) => {
-  const [, theme] = useStyletron();
-  return (
-    <Block width="100%" display="flex" alignItems="end">
-      <SafeAvatar {...props} />
-      <Block margin={theme.sizing.scale400}>
-        <SafeDetails {...props} />
-      </Block>
-    </Block>
   );
 };
 
