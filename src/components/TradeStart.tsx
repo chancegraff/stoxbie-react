@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { styled } from "styletron-react";
-import { Button, ButtonProps } from "baseui/dist/button";
+import { Button, ButtonProps, SIZE, SHAPE } from "baseui/dist/button";
 import { ButtonGroup } from "baseui/dist/button-group";
 import { StatefulCalendar } from "baseui/dist/datepicker";
 import { Filter } from "baseui/dist/icon";
@@ -35,7 +35,7 @@ const DatePicker: React.FC<ButtonProps> = (props) => (
 const TradeStart: React.FC<Props> = (props) => {
   return (
     <Block>
-      <ButtonGroup>
+      <ButtonGroup size={SIZE.mini} shape={SHAPE.pill}>
         <GrowingButton>1Y</GrowingButton>
         <GrowingButton>5Y</GrowingButton>
         <DatePicker>

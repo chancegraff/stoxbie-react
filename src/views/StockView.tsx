@@ -38,7 +38,7 @@ const StockView: React.FC<Props> = (props) => {
         <Block marginLeft={theme.sizing.scale400} minHeight="68px">
           <StockName company={props.company} />
         </Block>
-        <Block marginLeft={theme.sizing.scale600} minHeight="68px">
+        <Block marginLeft={theme.sizing.scale600} minHeight="52px">
           <TradeStart />
         </Block>
       </Block>
