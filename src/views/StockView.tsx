@@ -13,6 +13,7 @@ type Props = {
   logo?: Logo;
   company?: Company;
   error?: string;
+  handleStart: (date: string) => void;
 };
 
 const StockView: React.FC<Props> = (props) => {
@@ -39,7 +40,7 @@ const StockView: React.FC<Props> = (props) => {
           <StockName company={props.company} />
         </Block>
         <Block marginLeft={theme.sizing.scale600} minHeight="52px">
-          <TradeStart />
+          <TradeStart handleStart={props.handleStart} />
         </Block>
       </Block>
     </ContentContainer>

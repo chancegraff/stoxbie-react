@@ -1,5 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useRouteMatch, Switch, Route, useParams } from "react-router-dom";
+import {
+  useRouteMatch,
+  Switch,
+  Route,
+  useParams,
+  useHistory,
+} from "react-router-dom";
 import { Display3 } from "baseui/dist/typography";
 import {
   logo as getLogo,
@@ -16,10 +22,20 @@ const ERROR_MESSAGE =
 
 const ViewRoute: React.FC = () => {
   const { ticker } = useParams<{ ticker: string }>();
+  const history = useHistory();
 
   const [logo, setLogo] = useState<Logo>();
   const [company, setCompany] = useState<Company>();
   const [error, setError] = useState<string>("");
+
+  const handleStart = useCallback(
+    (date: string) => {
+      if (company) {
+        history.push(`/trade/${company.symbol}/${date}`);
+      }
+    },
+    [history, company]
+  );
 
   const handleLoad = useCallback(async (ticker: string) => {
     if (ticker) {
@@ -44,7 +60,14 @@ const ViewRoute: React.FC = () => {
     return handleUnload;
   }, [ticker, handleLoad, handleUnload]);
 
-  return <StockView logo={logo} company={company} error={error} />;
+  return (
+    <StockView
+      logo={logo}
+      company={company}
+      error={error}
+      handleStart={handleStart}
+    />
+  );
 };
 
 const StockRoutes: React.FC = () => {
