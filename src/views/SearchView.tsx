@@ -18,12 +18,14 @@ const SearchView: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
   return (
     <ContentContainer>
-      <Block marginBottom={theme.sizing.scale800}>
-        <Display2>Ticker Search</Display2>
-        <Label2>Select the stock ticker to trade.</Label2>
-      </Block>
-      <Block>
-        <TickerInput handleSearch={props.handleSearch} />
+      <Block width="50%">
+        <Block marginBottom={theme.sizing.scale800}>
+          <Display2>Ticker Search</Display2>
+          <Label2>Select the stock ticker to trade.</Label2>
+        </Block>
+        <Block>
+          <TickerInput handleSearch={props.handleSearch} />
+        </Block>
       </Block>
     </ContentContainer>
   );
