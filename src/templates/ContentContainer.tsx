@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "baseui/dist/layout-grid";
+import { FlexGrid } from "baseui/dist/flex-grid";
 import { Block } from "baseui/dist/block";
 import { useStyletron } from "baseui/dist";
 
@@ -17,7 +17,13 @@ const ContentContainer: React.FC = (props) => {
       ]}
       height="100%"
     >
-      <Grid gridGaps={theme.grid.gutters}>{props.children}</Grid>
+      <FlexGrid
+        flexGridColumnCount={2}
+        flexGridColumnGap="scale800"
+        flexGridRowGap="scale800"
+      >
+        {props.children}
+      </FlexGrid>
     </Block>
   );
 };

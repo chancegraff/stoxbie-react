@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import BaseUI from "services/BaseUI";
 import BackgroundContainer from "templates/BackgroundContainer";
-import TickerSearch from "views/TickerSearch";
-import TradeShares from "views/TradeShares";
-import ViewStock from "views/ViewStock";
+import SearchRoutes from "routes/SearchRoutes";
+import TradeRoutes from "routes/TradeRoutes";
+import StockRoutes from "routes/StockRoutes";
 
 const App: React.FC = () => (
   <BrowserRouter>
@@ -12,13 +12,13 @@ const App: React.FC = () => (
       <BackgroundContainer>
         <Switch>
           <Route path="/trade">
-            <TradeShares />
+            <TradeRoutes />
           </Route>
           <Route path="/stock">
-            <ViewStock />
+            <StockRoutes />
           </Route>
           <Route path="/">
-            <TickerSearch />
+            <SearchRoutes />
           </Route>
         </Switch>
       </BackgroundContainer>
