@@ -18,7 +18,7 @@ const SearchView: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
   return (
     <ContentContainer>
-      <Block width="50%">
+      <Block width={["100%", "100%", "70%", "60%"]}>
         <Block marginBottom={theme.sizing.scale800}>
           <Display2>Ticker Search</Display2>
           <Label2>Select the stock ticker to trade.</Label2>

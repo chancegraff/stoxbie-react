@@ -6,19 +6,18 @@ import {
   useParams,
   useHistory,
 } from "react-router-dom";
-import { Display3 } from "baseui/dist/typography";
 import {
   logo as getLogo,
   company as getCompany,
   Logo,
   Company,
 } from "iex-cloud";
+import Error from "components/BaseUI/Typography";
 import ScrollToTop from "services/ScrollToTop";
 import StockView from "views/StockView";
-import ContentContainer from "templates/ContentContainer";
 
 const ERROR_MESSAGE =
-  "There was a problem attempting to load the stock you requested.";
+  "There was a problem attempting to load company information about the stock you requested.";
 
 const ViewRoute: React.FC = () => {
   const { ticker } = useParams<{ ticker: string }>();
@@ -53,6 +52,7 @@ const ViewRoute: React.FC = () => {
   const handleUnload = useCallback(() => {
     setLogo(undefined);
     setCompany(undefined);
+    setError("");
   }, []);
 
   useEffect(() => {
@@ -80,9 +80,7 @@ const StockRoutes: React.FC = () => {
       </Route>
       <Route path={match.path}>
         <ScrollToTop />
-        <ContentContainer>
-          <Display3>Please select a stock to view.</Display3>
-        </ContentContainer>
+        <Error>Please select a stock to view.</Error>
       </Route>
     </Switch>
   );

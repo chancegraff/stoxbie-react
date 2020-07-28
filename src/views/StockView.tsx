@@ -1,13 +1,13 @@
 import React from "react";
 import { Logo, Company } from "iex-cloud";
 import { useStyletron } from "baseui/dist";
-import { Display3 } from "baseui/dist/typography";
+import { Block } from "baseui/dist/block";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
+import ContentContainer from "templates/ContentContainer";
+import Error from "components/BaseUI/Typography";
 import StockName from "components/StockName";
 import StockLogo from "components/StockLogo";
 import TradeStart from "components/TradeStart";
-import ContentContainer from "templates/ContentContainer";
-import { Block } from "baseui/dist/block";
 
 type Props = {
   logo?: Logo;
@@ -19,13 +19,7 @@ type Props = {
 const StockView: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
   if (props.error) {
-    return (
-      <ContentContainer>
-        <Display3>
-          There was a problem loading the stock you requested.
-        </Display3>
-      </ContentContainer>
-    );
+    return <Error>{props.error}</Error>;
   }
   return (
     <ContentContainer>

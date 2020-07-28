@@ -1,18 +1,24 @@
 import React from "react";
-import ScrollToTop from "services/ScrollToTop";
+import { HistoricalPrice } from "iex-cloud";
+import ContentContainer from "templates/ContentContainer";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import LineChart from "components/LineChart";
 import TradeInput from "components/TradeInput";
-import ContentContainer from "templates/ContentContainer";
+import Error from "components/BaseUI/Typography";
 
-type Props = unknown;
+type Props = {
+  prices?: Partial<HistoricalPrice>[];
+  error?: string;
+};
 
-const TradeView: React.FC<Props> = () => {
+const TradeView: React.FC<Props> = (props) => {
+  if (props.error) {
+    return <Error>{props.error}</Error>;
+  }
   return (
     <ContentContainer>
-      <ScrollToTop />
       <BreadcrumbContainer />
-      <LineChart />
+      <LineChart prices={props.prices} />
       <TradeInput />
     </ContentContainer>
   );
