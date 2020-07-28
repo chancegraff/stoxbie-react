@@ -29,7 +29,7 @@ const TradeBreadcrumb: React.FC = () => {
       <StyledLink $as={Link} to={`/stock/${ticker}`}>
         {ticker}
       </StyledLink>
-      <span>{moment(date, TRADE_DATE_FORMAT).format("MMMM Do YYYY")}</span>
+      <span>Trading from {moment(date, TRADE_DATE_FORMAT).format("MMMM Do, YYYY")}</span>
     </Breadcrumbs>
   );
 };

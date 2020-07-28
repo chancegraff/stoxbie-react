@@ -15,3 +15,6 @@ export const copyPropsToChildren = ({
     }
     return child;
   });
+
+export const parsePixels = (px: string): number =>
+  parseInt(px.replace("px", ""));

@@ -2,8 +2,6 @@ import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useRouteMatch, Switch, Route, useParams } from "react-router-dom";
 import moment from "moment";
 import { HistoricalPrice, historicalPrices } from "iex-cloud";
-import { Display3 } from "baseui/dist/typography";
-import ContentContainer from "templates/ContentContainer";
 import ScrollToTop from "services/ScrollToTop";
 import { TRADE_DATE_FORMAT } from "services/Constants";
 import TradeView from "views/TradeView";
@@ -58,7 +56,7 @@ const TradeRoute: React.FC = () => {
     return handleUnload;
   }, [ticker, safeDate, handleLoad, handleUnload]);
 
-  return <TradeView prices={prices} error={error} />;
+  return <TradeView prices={prices as HistoricalPrice[]} error={error} />;
 };
 
 const TradeRoutes: React.FC<Props> = () => {

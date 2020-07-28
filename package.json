@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/classnames": "^2.2.10",
+    "@types/d3-array": "^2.0.0",
     "@types/jest": "^26.0.7",
     "@types/node": "^14.0.26",
     "@types/react": "^16.9.43",
@@ -13,6 +14,7 @@
     "@types/styletron-react": "^5.0.2",
     "@vx/vx": "0.0.198",
     "baseui": "github:chancegraff/baseweb#v9.89.1",
+    "d3-array": "^2.4.0",
     "iex-cloud": "github:chancegraff/iex-cloud#v2.2.2",
     "moment": "^2.27.0",
     "node-sass": "^4.14.1",
@@ -23,7 +25,8 @@
     "styletron-engine-atomic": "^1.4.6",
     "styletron-react": "^5.2.7",
     "typescript": "^3.9.7",
-    "use-debounce": "^3.4.3"
+    "use-debounce": "^3.4.3",
+    "use-resize-observer": "^6.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
