@@ -5,7 +5,7 @@ import { Block } from "baseui/dist/block";
 import { FlexGridItem } from "baseui/dist/flex-grid";
 import ContentContainer from "templates/ContentContainer";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
-import LineChart from "components/LineChart";
+import StockChart from "components/StockChart";
 import TradeInput from "components/TradeInput";
 import Error from "components/BaseUI/Typography";
 import FlexGrid, { MultiplyWidth } from "components/BaseUI/FlexGrid";
@@ -27,7 +27,7 @@ const TradeView: React.FC<Props> = (props) => {
       </Block>
       <FlexGrid>
         <FlexGridItem>
-          <LineChart prices={props.prices} />
+          <StockChart prices={props.prices} />
         </FlexGridItem>
         <FlexGridItem overrides={MultiplyWidth(0.5)}>
           <TradeInput />
