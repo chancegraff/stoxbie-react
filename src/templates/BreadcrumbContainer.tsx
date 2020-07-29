@@ -1,9 +1,9 @@
-import React from "react";
-import moment from "moment";
+import React, { useMemo } from "react";
+import { format, parse } from "date-fns";
 import { Link, useParams, useRouteMatch } from "react-router-dom";
 import { Breadcrumbs } from "baseui/dist/breadcrumbs";
 import { StyledLink } from "baseui/dist/link";
-import { TRADE_DATE_FORMAT } from "services/Constants";
+import { URL_DATE_FORMAT } from "services/Constants";
 
 type Props = unknown;
 
@@ -20,7 +20,11 @@ const StockBreadcrumb: React.FC = () => {
 };
 
 const TradeBreadcrumb: React.FC = () => {
-  const { ticker, date } = useParams();
+  const { ticker, date }: { ticker: string; date: string } = useParams();
+  const safeDate = useMemo(() => {
+    const asDate = parse(date, URL_DATE_FORMAT, new Date());
+    return format(asDate, "MMMM do, y");
+  }, [date]);
   return (
     <Breadcrumbs>
       <StyledLink $as={Link} to="/">
@@ -29,7 +33,7 @@ const TradeBreadcrumb: React.FC = () => {
       <StyledLink $as={Link} to={`/stock/${ticker}`}>
         {ticker}
       </StyledLink>
-      <span>Trading from {moment(date, TRADE_DATE_FORMAT).format("MMMM Do, YYYY")}</span>
+      <span>Trading from {safeDate}</span>
     </Breadcrumbs>
   );
 };

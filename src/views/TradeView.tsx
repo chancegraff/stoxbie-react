@@ -1,5 +1,5 @@
 import React from "react";
-import { HistoricalPrice } from "iex-cloud";
+import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { FlexGridItem } from "baseui/dist/flex-grid";

@@ -1,46 +1,63 @@
 import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { useRouteMatch, Switch, Route, useParams } from "react-router-dom";
-import moment from "moment";
-import { HistoricalPrice, historicalPrices } from "iex-cloud";
+import { historicalPrices } from "iex-cloud";
+import { HistoricalPrice } from "iex";
+import { isSameDay, parse } from "date-fns";
 import ScrollToTop from "services/ScrollToTop";
-import { TRADE_DATE_FORMAT } from "services/Constants";
+import {
+  IEX_DATE_FORMAT,
+  URL_DATE_FORMAT,
+  FETCH_ERROR_MESSAGE,
+  DATE_ERROR_MESSAGE,
+  TICKER_ERROR_MESSAGE,
+} from "services/Constants";
 import TradeView from "views/TradeView";
 import Error from "components/BaseUI/Typography";
 
 type Props = unknown;
 
-const FETCH_ERROR_MESSAGE =
-  "There was a problem attempting to load trading information for the stock you requested.";
-
-const DATE_ERROR_MESSAGE =
-  "There was a problem attempting to parse the date you requested.";
-
 const TradeRoute: React.FC = () => {
   const { ticker, date } = useParams<{ ticker: string; date: string }>();
-  const [prices, setPrices] = useState<Partial<HistoricalPrice>[]>();
+  const [prices, setPrices] = useState<HistoricalPrice[]>();
   const [error, setError] = useState<string>("");
 
   const safeDate = useMemo(() => {
-    const unsafeDate = moment(date, TRADE_DATE_FORMAT);
-    if (unsafeDate.isValid()) {
-      return unsafeDate.toDate();
+    const unsafeDate = parse(date, URL_DATE_FORMAT, new Date());
+    if (unsafeDate.getTime()) {
+      return unsafeDate;
     }
     setError(DATE_ERROR_MESSAGE);
   }, [date]);
 
+  const safeTicker = useMemo(() => {
+    if (ticker) {
+      return ticker;
+    }
+    setError(TICKER_ERROR_MESSAGE);
+  }, [ticker]);
+
   const handleLoad = useCallback(async (ticker?: string, date?: Date) => {
     if (ticker && date) {
-      const immutablePrices = await historicalPrices(ticker, "max", undefined, {
-        chartByDay: true,
-      });
-      if (!immutablePrices) {
+      const pricesWithBadTypes = await historicalPrices(
+        ticker,
+        "max",
+        undefined,
+        {
+          chartByDay: true,
+        }
+      );
+      if (!pricesWithBadTypes) {
         setError(FETCH_ERROR_MESSAGE);
       } else {
-        const startDate = immutablePrices.findIndex((price) =>
-          moment(price.date).isSame(date)
-        );
+        const [
+          ...prices
+        ] = (pricesWithBadTypes as unknown) as readonly HistoricalPrice[];
+        const startDate = prices.findIndex((price) => {
+          const priceDate = parse(price.date, IEX_DATE_FORMAT, new Date());
+          return isSameDay(priceDate, date);
+        });
         const endDate = startDate > -1 ? startDate - 730 : 0;
-        const nextPrices = immutablePrices.slice(endDate, startDate);
+        const nextPrices = prices.slice(endDate, startDate);
         setPrices(nextPrices);
       }
     }
@@ -52,11 +69,11 @@ const TradeRoute: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    handleLoad(ticker, safeDate);
+    handleLoad(safeTicker, safeDate);
     return handleUnload;
-  }, [ticker, safeDate, handleLoad, handleUnload]);
+  }, [safeTicker, safeDate, handleLoad, handleUnload]);
 
-  return <TradeView prices={prices as HistoricalPrice[]} error={error} />;
+  return <TradeView prices={prices} error={error} />;
 };
 
 const TradeRoutes: React.FC<Props> = () => {

@@ -1,17 +1,18 @@
-import React, { useMemo, useCallback } from "react";
-import moment from "moment";
+import React, { useMemo, useCallback, useState } from "react";
 import { Group } from "@vx/group";
 import { scaleTime, scaleLinear } from "@vx/scale";
 import { AxisRight, AxisBottom } from "@vx/axis";
+import { Grid } from "@vx/grid";
 import { LinePath } from "@vx/shape";
 import { curveNatural } from "@vx/curve";
 import { extent, max } from "d3-array";
 import { ScaleTime, ScaleLinear } from "d3-scale";
-import { HistoricalPrice } from "iex-cloud";
+import { HistoricalPrice } from "iex";
 import { Spinner } from "baseui/dist/spinner";
 import { useStyletron } from "baseui/dist";
 import { Theme } from "baseui/dist/theme";
 import useResizeObserver from "use-resize-observer";
+import { format } from "date-fns";
 
 const xSelector = (price: HistoricalPrice) => new Date(price.date).valueOf();
 const ySelector = (price: HistoricalPrice) => price.close;
@@ -38,6 +39,7 @@ const getTickLabelProps = (theme: Theme) => ({
 
 const VXChart: React.FC<VXProps> = ({ prices, width, height, xMax, yMax }) => {
   const [, theme] = useStyletron();
+  const [previousTick, setPreviousTick] = useState();
 
   const xScale: ScaleTime<number, number> = useMemo(() => {
     const [minDate = 0, maxDate = 0] = extent(prices, xSelector);
@@ -56,10 +58,20 @@ const VXChart: React.FC<VXProps> = ({ prices, width, height, xMax, yMax }) => {
 
   const labelProps = useMemo(() => getLabelProps(theme), [theme]);
   const tickLabelProps = useCallback(() => getTickLabelProps(theme), [theme]);
+  const tickFormat = useCallback((tick: Date) => format(tick, "MMM yy"), []);
 
   return (
     <svg width={width} height={height}>
       <Group top={25} left={65}>
+        <Grid
+          xScale={xScale}
+          yScale={yScale}
+          stroke={theme.colors.borderOpaque}
+          width={width - 120}
+          height={height - 80}
+          numTicksRows={13}
+          numTicksColumns={10}
+        />
         <AxisBottom
           top={yMax}
           scale={xScale}
@@ -69,7 +81,8 @@ const VXChart: React.FC<VXProps> = ({ prices, width, height, xMax, yMax }) => {
           stroke={theme.colors.primaryA}
           tickStroke={theme.colors.primaryA}
           tickLabelProps={tickLabelProps}
-          tickFormat={(value) => moment(value).format("MMM YY")}
+          tickFormat={tickFormat}
+          numTicks={13}
         />
         <AxisRight
           left={xMax}
@@ -83,7 +96,7 @@ const VXChart: React.FC<VXProps> = ({ prices, width, height, xMax, yMax }) => {
         />
         {prices.map(
           (price, priceIndex) =>
-            priceIndex % 30 === 0 && (
+            priceIndex % 20 === 0 && (
               <circle
                 key={priceIndex}
                 r={2.5}
