@@ -1,0 +1,29 @@
+import React from "react";
+import { HistoricalPrice } from "iex";
+import { Theme } from "baseui/dist/theme";
+import withSelect, { Select } from "components/VX/Shared/Select";
+import withScale, { Scale } from "components/VX/Shared/Scale";
+import withMax, { Max } from "components/VX/Shared/Max";
+import withLabel, { Label } from "components/VX/Shared/Label";
+
+type BaseProps = {
+  prices: HistoricalPrice[];
+  resolution: Resolution;
+  theme: Theme;
+};
+
+type InjectedProps = {
+  label: Label;
+  max: Max;
+  scale: Scale;
+  select: Select;
+};
+
+type Props = BaseProps & InjectedProps;
+
+const withShared = (WrappedChart: React.FC<Props>): React.FC<BaseProps> =>
+  withLabel<Props>(
+    withSelect<Props>(withMax<Props>(withScale<Props>(WrappedChart)))
+  ) as React.FC<BaseProps>;
+
+export default withShared;

@@ -1,7 +1,7 @@
 import React from "react";
 import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
-import { ScaleX, ScaleY } from "./Scale";
+import { ScaleX, ScaleY } from "components/VX/Shared/Scale";
 
 type Props = {
   prices: HistoricalPrice[];

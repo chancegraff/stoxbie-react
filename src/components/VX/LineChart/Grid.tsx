@@ -1,11 +1,11 @@
 import React from "react";
 import { Grid as DefaultGrid } from "@vx/grid";
 import { useStyletron } from "baseui/dist";
-import { ScaleX, ScaleY } from "./Scale";
+import { Scale } from "components/VX/Shared/Scale";
 
 type Props = {
-  resolution: [Width, Height];
-  scales: [ScaleX, ScaleY];
+  resolution: Resolution;
+  scales: Scale;
   padding: [HorizontalPadding, VerticalPadding];
 };
 

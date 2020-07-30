@@ -3,6 +3,7 @@ import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { FlexGridItem } from "baseui/dist/flex-grid";
+import { Spinner } from "baseui/dist/spinner";
 import ContentContainer from "templates/ContentContainer";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import StockChart from "components/StockChart";
@@ -20,6 +21,13 @@ const TradeView: React.FC<Props> = (props) => {
   if (props.error) {
     return <Error>{props.error}</Error>;
   }
+  if (!props.prices || !props.prices.length) {
+    return (
+      <ContentContainer>
+        <Spinner />
+      </ContentContainer>
+    );
+  }
   return (
     <ContentContainer>
       <Block width="100%" marginBottom={theme.sizing.scale800}>
@@ -27,7 +35,11 @@ const TradeView: React.FC<Props> = (props) => {
       </Block>
       <FlexGrid>
         <FlexGridItem>
-          <StockChart prices={props.prices} />
+          <StockChart
+            prices={props.prices}
+            resolution={[800, 500]}
+            theme={theme}
+          />
         </FlexGridItem>
         <FlexGridItem overrides={MultiplyWidth(0.5)}>
           <TradeInput />

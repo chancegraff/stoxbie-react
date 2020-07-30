@@ -1,40 +1,33 @@
 import React from "react";
 import { Group } from "@vx/group";
-import { TextProps } from "@vx/text/lib/Text";
 import { HistoricalPrice } from "iex";
+import { Select } from "components/VX/Shared/Select";
+import { Scale } from "components/VX/Shared/Scale";
+import { Max } from "components/VX/Shared/Max";
+import { Label } from "components/VX/Shared/Label";
 import Grid from "./Grid";
 import AxisBottom from "./AxisBottom";
 import AxisRight from "./AxisRight";
 import LinePath from "./LinePath";
 import LinePoints from "./LinePoints";
-import { ScaleY, ScaleX } from "./Scale";
+import withShared from "../Shared";
 
-type VXProps = {
-  width: number;
-  height: number;
+type Props = {
   prices: HistoricalPrice[];
-  xMax: number;
-  yMax: number;
-  xScale: ScaleX;
-  yScale: ScaleY;
-  xSelector: (price: HistoricalPrice) => number;
-  ySelector: (price: HistoricalPrice) => number;
-  labelProps: Partial<TextProps>;
-  tickLabelProps: () => Partial<TextProps>;
+  resolution: Resolution;
+  select: Select;
+  scale: Scale;
+  max: Max;
+  label: Label;
 };
 
-const LineChart: React.FC<VXProps> = ({
+const LineChart: React.FC<Props> = ({
   prices,
-  width,
-  height,
-  xMax,
-  yMax,
-  xScale,
-  yScale,
-  xSelector,
-  ySelector,
-  labelProps,
-  tickLabelProps,
+  resolution: [width, height],
+  select: [xSelector, ySelector],
+  scale: [xScale, yScale],
+  max: [xMax, yMax],
+  label: [axisLabelProps, tickLabelProps],
 }) => (
   <svg width={width} height={height}>
     <Group top={25} left={65}>
@@ -46,13 +39,13 @@ const LineChart: React.FC<VXProps> = ({
       <AxisBottom
         yMax={yMax}
         xScale={xScale}
-        labelProps={labelProps}
+        labelProps={axisLabelProps}
         tickLabelProps={tickLabelProps}
       />
       <AxisRight
         xMax={xMax}
         yScale={yScale}
-        labelProps={labelProps}
+        labelProps={axisLabelProps}
         tickLabelProps={tickLabelProps}
       />
       <LinePoints
@@ -73,4 +66,4 @@ const LineChart: React.FC<VXProps> = ({
   </svg>
 );
 
-export default LineChart;
+export default withShared(LineChart);

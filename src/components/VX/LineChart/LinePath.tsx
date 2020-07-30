@@ -3,7 +3,7 @@ import { LinePath as DefaultLinePath } from "@vx/shape";
 import { curveNatural } from "@vx/curve";
 import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
-import { ScaleY, ScaleX } from "./Scale";
+import { ScaleX, ScaleY } from "components/VX/Shared/Scale";
 
 type Props = {
   prices: HistoricalPrice[];

@@ -2,7 +2,7 @@ import React from "react";
 import { TextProps } from "@vx/text/lib/Text";
 import { AxisRight as DefaultAxisRight } from "@vx/axis";
 import { useStyletron } from "baseui/dist";
-import { ScaleY } from "./Scale";
+import { ScaleY } from "components/VX/Shared/Scale";
 
 type Props = {
   xMax: number;

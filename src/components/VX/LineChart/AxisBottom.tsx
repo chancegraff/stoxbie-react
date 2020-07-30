@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { AxisBottom as DefaultAxisBottom } from "@vx/axis";
 import { TextProps } from "@vx/text/lib/Text";
 import { useStyletron } from "baseui/dist";
-import { ScaleX } from "./Scale";
+import { ScaleX } from "components/VX/Shared/Scale";
 
 type Props = {
   yMax: number;
