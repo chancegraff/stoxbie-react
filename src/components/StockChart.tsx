@@ -1,13 +1,15 @@
 import React, { useMemo } from "react";
 import { HistoricalPrice } from "iex";
-import { Theme } from "baseui/dist/theme";
-import LineChart from "components/VX/LineChart";
 import { useStyletron } from "baseui/dist";
-import { Label } from "./VX/Shared/Label";
+import { Theme } from "baseui/dist/theme";
+import { Spinner } from "baseui/dist/spinner";
+import { Block } from "baseui/dist/block";
+import LineChart from "components/VX/LineChart";
+import { Label } from "components/VX/Shared/Label";
 
 type Props = {
-  prices: HistoricalPrice[];
-  resolution: Resolution;
+  prices?: HistoricalPrice[];
+  resolution?: Resolution;
 };
 
 const getLabelProps = (theme: Theme) => ({
@@ -21,13 +23,26 @@ const getTickLabelProps = (theme: Theme) => () => ({
   ...theme.typography.LabelXSmall,
 });
 
-const StockChart: React.FC<Props> = (props) => {
+const StockChart: React.FC<Props> = ({ prices, resolution = [800, 500] }) => {
   const [, theme] = useStyletron();
   const label: Label = useMemo(
     () => [getLabelProps(theme), getTickLabelProps(theme)],
     [theme]
   );
-  return <LineChart {...props} label={label} />;
+  if (!prices || !prices.length) {
+    return (
+      <Block
+        width={`${resolution[0]}px`}
+        height={`${resolution[1]}px`}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Spinner />
+      </Block>
+    );
+  }
+  return <LineChart prices={prices} resolution={resolution} label={label} />;
 };
 
 export default StockChart;
