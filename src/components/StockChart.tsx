@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { HistoricalPrice } from "iex";
 import { Theme } from "baseui/dist/theme";
 import LineChart from "components/VX/LineChart";
 import { useStyletron } from "baseui/dist";
+import { Label } from "./VX/Shared/Label";
 
 type Props = {
   prices: HistoricalPrice[];
@@ -22,12 +23,11 @@ const getTickLabelProps = (theme: Theme) => () => ({
 
 const StockChart: React.FC<Props> = (props) => {
   const [, theme] = useStyletron();
-  return (
-    <LineChart
-      {...props}
-      label={[getLabelProps(theme), getTickLabelProps(theme)]}
-    />
+  const label: Label = useMemo(
+    () => [getLabelProps(theme), getTickLabelProps(theme)],
+    [theme]
   );
+  return <LineChart {...props} label={label} />;
 };
 
 export default StockChart;
