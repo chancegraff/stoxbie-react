@@ -35,11 +35,7 @@ const TradeView: React.FC<Props> = (props) => {
       </Block>
       <FlexGrid>
         <FlexGridItem>
-          <StockChart
-            prices={props.prices}
-            resolution={[800, 500]}
-            theme={theme}
-          />
+          <StockChart prices={props.prices} resolution={[800, 500]} />
         </FlexGridItem>
         <FlexGridItem overrides={MultiplyWidth(0.5)}>
           <TradeInput />

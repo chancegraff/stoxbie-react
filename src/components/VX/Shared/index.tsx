@@ -9,11 +9,10 @@ import withLabel, { Label } from "components/VX/Shared/Label";
 type BaseProps = {
   prices: HistoricalPrice[];
   resolution: Resolution;
-  theme: Theme;
+  label: Label;
 };
 
 type InjectedProps = {
-  label: Label;
   max: Max;
   scale: Scale;
   select: Select;
@@ -22,8 +21,8 @@ type InjectedProps = {
 type Props = BaseProps & InjectedProps;
 
 const withShared = (WrappedChart: React.FC<Props>): React.FC<BaseProps> =>
-  withLabel<Props>(
-    withSelect<Props>(withMax<Props>(withScale<Props>(WrappedChart)))
-  ) as React.FC<BaseProps>;
+  withSelect<Props>(withMax<Props>(withScale<Props>(WrappedChart))) as React.FC<
+    BaseProps
+  >;
 
 export default withShared;
