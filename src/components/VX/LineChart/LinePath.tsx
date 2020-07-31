@@ -1,6 +1,6 @@
 import React from "react";
 import { LinePath as DefaultLinePath } from "@vx/shape";
-import { curveNatural } from "@vx/curve";
+import { curveLinear } from "@vx/curve";
 import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
 import { ScaleX, ScaleY } from "components/VX/Shared/Scale";
@@ -24,11 +24,12 @@ const LinePath: React.FC<Props> = ({
   return (
     <DefaultLinePath
       data={prices}
-      curve={curveNatural}
+      curve={curveLinear}
       x={(d) => xScale(xSelector(d))}
       y={(d) => yScale(ySelector(d))}
       stroke={theme.colors.primaryA}
       strokeWidth={1}
+      shapeRendering="geometricPrecision"
     />
   );
 };

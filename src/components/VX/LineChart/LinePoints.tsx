@@ -32,6 +32,7 @@ const LinePoints: React.FC<Props> = ({
               stroke={theme.colors.primaryA}
               fill={theme.colors.primaryA}
               fillOpacity={0.5}
+              shapeRendering="geometricPrecision"
             />
           )
       )}

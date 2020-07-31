@@ -31,6 +31,10 @@ const StockChart: React.FC<Props> = ({
     () => [getLabelProps, getTickLabelProps(theme)],
     [theme]
   );
+  const responsivePadding: Padding = useMemo(
+    () => (resolution[0] <= 440 ? [10, 7.5] : padding),
+    [resolution, padding]
+  );
   if (!prices || !prices.length) {
     return <Spinner />;
   }
@@ -39,7 +43,7 @@ const StockChart: React.FC<Props> = ({
       prices={prices}
       resolution={resolution}
       label={label}
-      padding={padding}
+      padding={responsivePadding}
     />
   );
 };
