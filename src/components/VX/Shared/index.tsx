@@ -1,10 +1,9 @@
 import React from "react";
 import { HistoricalPrice } from "iex";
-import { Theme } from "baseui/dist/theme";
+import { Label } from "components/VX/LineChart";
 import withSelect, { Select } from "components/VX/Shared/Select";
 import withScale, { Scale } from "components/VX/Shared/Scale";
 import withMax, { Max } from "components/VX/Shared/Max";
-import withLabel, { Label } from "components/VX/Shared/Label";
 
 type BaseProps = {
   prices: HistoricalPrice[];

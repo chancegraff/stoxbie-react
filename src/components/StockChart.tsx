@@ -4,8 +4,7 @@ import { useStyletron } from "baseui/dist";
 import { Theme } from "baseui/dist/theme";
 import { Spinner } from "baseui/dist/spinner";
 import { Block } from "baseui/dist/block";
-import LineChart from "components/VX/LineChart";
-import { Label } from "components/VX/Shared/Label";
+import LineChart, { Label } from "components/VX/LineChart";
 
 type Props = {
   prices?: HistoricalPrice[];
@@ -30,10 +29,11 @@ const StockChart: React.FC<Props> = ({ prices, resolution = [800, 500] }) => {
     [theme]
   );
   if (!prices || !prices.length) {
+    const [width, height] = resolution;
     return (
       <Block
-        width={`${resolution[0]}px`}
-        height={`${resolution[1]}px`}
+        width={`${width}px`}
+        height={`${height}px`}
         display="flex"
         alignItems="center"
         justifyContent="center"

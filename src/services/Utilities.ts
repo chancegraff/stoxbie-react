@@ -18,3 +18,7 @@ export const copyPropsToChildren = ({
 
 export const parsePixels = (px: string): number =>
   parseInt(px.replace("px", ""));
+
+export const handleUnloadCreator = (
+  dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[]
+) => (): void => dispatchHandlers.forEach((dispatch) => dispatch(undefined));

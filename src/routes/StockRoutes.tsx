@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import {
   useRouteMatch,
   Switch,
@@ -15,17 +15,26 @@ import {
 import Error from "components/BaseUI/Typography";
 import ScrollToTop from "services/ScrollToTop";
 import StockView from "views/StockView";
+import { TICKER_ERROR_MESSAGE } from "services/Constants";
+import { handleUnloadCreator } from "services/Utilities";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
 
 const ViewRoute: React.FC = () => {
-  const { ticker } = useParams<{ ticker: string }>();
+  const { ticker = "" } = useParams<{ ticker?: string }>();
   const history = useHistory();
 
   const [logo, setLogo] = useState<Logo>();
   const [company, setCompany] = useState<Company>();
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>();
+
+  const safeTicker = useMemo(() => {
+    if (ticker) {
+      return ticker;
+    }
+    setError(TICKER_ERROR_MESSAGE);
+  }, [ticker]);
 
   const handleStart = useCallback(
     (date: string) => {
@@ -36,7 +45,7 @@ const ViewRoute: React.FC = () => {
     [history, company]
   );
 
-  const handleLoad = useCallback(async (ticker: string) => {
+  const handleLoad = useCallback(async (ticker?: string) => {
     if (ticker) {
       const nextCompany = await getCompany(ticker);
       const nextLogo = await getLogo(ticker).catch();
@@ -49,16 +58,11 @@ const ViewRoute: React.FC = () => {
     }
   }, []);
 
-  const handleUnload = useCallback(() => {
-    setLogo(undefined);
-    setCompany(undefined);
-    setError("");
-  }, []);
-
   useEffect(() => {
-    handleLoad(ticker);
-    return handleUnload;
-  }, [ticker, handleLoad, handleUnload]);
+    handleLoad(safeTicker);
+  }, [handleLoad, safeTicker]);
+
+  useEffect(() => handleUnloadCreator([setLogo, setCompany, setError]), []);
 
   return (
     <StockView

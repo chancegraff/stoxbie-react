@@ -1,16 +1,20 @@
 import React from "react";
 import { Group } from "@vx/group";
+import { TextProps } from "@vx/text/lib/Text";
 import { HistoricalPrice } from "iex";
 import { Select } from "components/VX/Shared/Select";
 import { Scale } from "components/VX/Shared/Scale";
 import { Max } from "components/VX/Shared/Max";
-import { Label } from "components/VX/Shared/Label";
+import withShared from "components/VX/Shared";
 import Grid from "./Grid";
 import AxisBottom from "./AxisBottom";
 import AxisRight from "./AxisRight";
 import LinePath from "./LinePath";
 import LinePoints from "./LinePoints";
-import withShared from "../Shared";
+
+export type AxisLabelProps = Partial<TextProps>;
+export type TickLabelProps = () => Partial<TextProps>;
+export type Label = [AxisLabelProps, TickLabelProps];
 
 type Props = {
   prices: HistoricalPrice[];
