@@ -19,7 +19,13 @@ const AxisBottom: React.FC<Props> = ({
   tickLabelProps,
 }) => {
   const [, theme] = useStyletron();
-  const tickFormat = useCallback((tick: Date) => format(tick, "MMM yy"), []);
+  const tickFormat = useCallback(
+    (tick: Date) =>
+      tick.getMonth() % 12 === 0
+        ? format(tick, "MMM ''yy")
+        : format(tick, "MMM"),
+    []
+  );
 
   return (
     <DefaultAxisBottom<Date>
@@ -30,7 +36,7 @@ const AxisBottom: React.FC<Props> = ({
       tickFormat={tickFormat}
       stroke={theme.colors.primaryA}
       tickStroke={theme.colors.primaryA}
-      numTicks={13}
+      numTicks={12}
       labelOffset={25}
       label="Date"
     />

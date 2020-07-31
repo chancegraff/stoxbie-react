@@ -49,7 +49,6 @@ const yScaleCreator = (
 const withScale = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>
 ): React.FC<P> => (props) => {
-  console.log("withScale", props.select, props.max);
   const select = useMemo(() => {
     if (!props.select) {
       return {
