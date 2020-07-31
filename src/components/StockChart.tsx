@@ -34,18 +34,7 @@ const StockChart: React.FC<Props> = ({
     [theme]
   );
   if (!prices || !prices.length) {
-    const [width, height] = resolution;
-    return (
-      <Block
-        width={`${width}px`}
-        height={`${height}px`}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <Spinner />
-      </Block>
-    );
+    return <Spinner />;
   }
   return (
     <LineChart

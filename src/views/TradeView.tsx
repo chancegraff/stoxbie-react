@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import useResizeObserver from "use-resize-observer";
 import { isSameDay, parse } from "date-fns";
 import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
@@ -23,6 +24,7 @@ type Props = {
 const TradeView: React.FC<Props> = ({ prices, date, error }) => {
   const [, theme] = useStyletron();
   const [pastPrices, setPastPrices] = useState<HistoricalPrice[]>();
+  const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
 
   const handleLoad = useCallback((prices?: HistoricalPrice[], date?: Date) => {
     if (prices && date) {
@@ -52,8 +54,26 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
         <BreadcrumbContainer />
       </Block>
       <FlexGrid>
-        <FlexGridItem>
-          <StockChart prices={pastPrices} />
+        <FlexGridItem
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height={0}
+          paddingBottom="34.65%"
+          position="relative"
+        >
+          <Block
+            ref={ref}
+            width="100%"
+            height="100%"
+            position="absolute"
+            top={0}
+            right={0}
+            bottom={0}
+            left={0}
+          >
+            <StockChart prices={pastPrices} resolution={[width, height]} />
+          </Block>
         </FlexGridItem>
         <FlexGridItem overrides={MultiplyWidth(0.5)}>
           <TimeControl />
