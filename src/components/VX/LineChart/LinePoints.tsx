@@ -26,7 +26,7 @@ const LinePoints: React.FC<Props> = ({
           priceIndex % 20 === 0 && (
             <circle
               key={priceIndex}
-              r={2.5}
+              r={2}
               cx={xScale(xSelector(price))}
               cy={yScale(ySelector(price))}
               stroke={theme.colors.primaryA}

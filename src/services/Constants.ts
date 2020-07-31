@@ -1,4 +1,4 @@
-export const DEBOUNCE_INPUT_MS = 300;
+export const DEBOUNCE_INPUT_MS = 500;
 export const TRADE_DATE_FORMAT = "[m]MM[d]DD[y]YYYY";
 export const URL_DATE_FORMAT = "'m'MM'd'dd'y'y";
 export const IEX_DATE_FORMAT = "y-MM-dd";

@@ -3,7 +3,6 @@ import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
 import { Theme } from "baseui/dist/theme";
 import { Spinner } from "baseui/dist/spinner";
-import { Block } from "baseui/dist/block";
 import LineChart, { Label } from "components/VX/LineChart";
 
 type Props = {

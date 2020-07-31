@@ -9,11 +9,12 @@ import { IEX_DATE_FORMAT } from "services/Constants";
 import { handleUnloadCreator } from "services/Utilities";
 import ContentContainer from "templates/ContentContainer";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
-import FlexGrid, { MultiplyWidth } from "components/BaseUI/FlexGrid";
+import FlexGrid from "components/BaseUI/FlexGrid";
 import Error from "components/BaseUI/Typography";
 import StockChart from "components/StockChart";
 import TradeControl from "components/TradeControl";
 import TimeControl from "components/TimeControl";
+import { AspectRatioBox, AspectRatioItem } from "components/AspectRatio";
 
 type Props = {
   prices?: HistoricalPrice[];
@@ -54,27 +55,11 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
         <BreadcrumbContainer />
       </Block>
       <FlexGrid flexWrap={[true, true, true, false]}>
-        <FlexGridItem
-          height={0}
-          paddingBottom={["100%", "75%", "56.25%"]}
-          position="relative"
-        >
-          <Block
-            ref={ref}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            width="100%"
-            height="100%"
-            position="absolute"
-            top={0}
-            right={0}
-            bottom={0}
-            left={0}
-          >
+        <AspectRatioBox component={FlexGridItem}>
+          <AspectRatioItem ref={ref}>
             <StockChart resolution={[width, height]} prices={pastPrices} />
-          </Block>
-        </FlexGridItem>
+          </AspectRatioItem>
+        </AspectRatioBox>
         <FlexGridItem
           flex="1 1"
           maxWidth={["100%", "100%", "25%"]}
