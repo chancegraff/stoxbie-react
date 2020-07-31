@@ -17,7 +17,7 @@ export const MultiplyWidth = (multiple = 2): Overrides<BlockOverrides> => ({
     style: ({ $theme }: { $theme: Theme }): StyleObject => ({
       width: `calc((${100 * multiple}% - ${
         $theme.sizing.scale800
-      }) / ${COLUMN_COUNT})`,
+      }) / ${COLUMN_COUNT}px)`,
     }),
   },
 });
@@ -26,9 +26,9 @@ const FlexGrid: React.FC<Props> = ({ children, ...props }) => {
   return (
     <DefaultFlexGrid
       width="100%"
-      flexGridColumnCount={COLUMN_COUNT}
-      flexGridColumnGap="scale800"
-      flexGridRowGap="scale800"
+      flexGridColumnCount={[1, 1, COLUMN_COUNT, COLUMN_COUNT]}
+      flexGridColumnGap="20px"
+      flexGridRowGap="20px"
       {...props}
     >
       {children}

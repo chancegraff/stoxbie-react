@@ -4,6 +4,9 @@ import { AxisBottom as DefaultAxisBottom } from "@vx/axis";
 import { TextProps } from "@vx/text/lib/Text";
 import { useStyletron } from "baseui/dist";
 import { ScaleX } from "components/VX/Shared/Scale";
+import TimeLabel from "components/VX/Shared/TimeLabel";
+
+export const BOTTOM_AXIS_HEIGHT = 20;
 
 type Props = {
   yMax: number;
@@ -36,6 +39,7 @@ const AxisBottom: React.FC<Props> = ({
       tickFormat={tickFormat}
       stroke={theme.colors.primaryA}
       tickStroke={theme.colors.primaryA}
+      tickComponent={TimeLabel}
       numTicks={12}
       labelOffset={25}
       label="Date"

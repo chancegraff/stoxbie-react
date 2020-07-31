@@ -7,16 +7,14 @@ import { Block } from "baseui/dist/block";
 import LineChart, { Label } from "components/VX/LineChart";
 
 type Props = {
+  resolution: Resolution;
   prices?: HistoricalPrice[];
-  resolution?: Resolution;
   padding?: Padding;
 };
 
-const getLabelProps = (theme: Theme) => ({
-  fill: theme.colors.primaryA,
-  strokeWidth: 0,
-  ...theme.typography.LabelSmall,
-});
+const getLabelProps = {
+  display: "none",
+};
 const getTickLabelProps = (theme: Theme) => () => ({
   fill: theme.colors.primaryA,
   strokeWidth: 0,
@@ -25,12 +23,12 @@ const getTickLabelProps = (theme: Theme) => () => ({
 
 const StockChart: React.FC<Props> = ({
   prices,
-  resolution = [800, 500],
-  padding = [60, 60],
+  resolution,
+  padding = [20, 20],
 }) => {
   const [, theme] = useStyletron();
   const label: Label = useMemo(
-    () => [getLabelProps(theme), getTickLabelProps(theme)],
+    () => [getLabelProps, getTickLabelProps(theme)],
     [theme]
   );
   if (!prices || !prices.length) {

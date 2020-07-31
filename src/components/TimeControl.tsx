@@ -1,10 +1,13 @@
 import React from "react";
+import { styled } from "styletron-react";
 import { Button, SIZE } from "baseui/dist/button";
 
 type Props = unknown;
 
+const FullButton = styled(Button, { width: "100%" });
+
 const TimeControl: React.FC<Props> = () => {
-  return <Button size={SIZE.large}>Next Day</Button>;
+  return <FullButton size={SIZE.large}>Next Day</FullButton>;
 };
 
 export default TimeControl;

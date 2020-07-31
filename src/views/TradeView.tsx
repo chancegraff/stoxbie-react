@@ -53,17 +53,17 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
       <Block width="100%" marginBottom={theme.sizing.scale800}>
         <BreadcrumbContainer />
       </Block>
-      <FlexGrid>
+      <FlexGrid flexWrap={[true, true, true, false]}>
         <FlexGridItem
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
           height={0}
-          paddingBottom="34.65%"
+          paddingBottom={["100%", "75%", "56.25%"]}
           position="relative"
         >
           <Block
             ref={ref}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
             width="100%"
             height="100%"
             position="absolute"
@@ -72,10 +72,14 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
             bottom={0}
             left={0}
           >
-            <StockChart prices={pastPrices} resolution={[width, height]} />
+            <StockChart resolution={[width, height]} prices={pastPrices} />
           </Block>
         </FlexGridItem>
-        <FlexGridItem overrides={MultiplyWidth(0.5)}>
+        <FlexGridItem
+          flex="1 1"
+          maxWidth={["100%", "100%", "25%"]}
+          minWidth={["auto", "30%", "25%"]}
+        >
           <TimeControl />
           <TradeControl />
         </FlexGridItem>

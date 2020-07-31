@@ -4,6 +4,8 @@ import { AxisRight as DefaultAxisRight } from "@vx/axis";
 import { useStyletron } from "baseui/dist";
 import { ScaleY } from "components/VX/Shared/Scale";
 
+export const RIGHT_AXIS_WIDTH = 25;
+
 type Props = {
   xMax: number;
   yScale: ScaleY;

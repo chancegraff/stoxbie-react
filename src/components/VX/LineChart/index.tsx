@@ -36,12 +36,8 @@ const LineChart: React.FC<Props> = ({
   label: [axisLabelProps, tickLabelProps],
 }) => (
   <svg width={width} height={height}>
-    <Group top={10} left={10}>
-      <Grid
-        resolution={[width, height]}
-        scales={[xScale, yScale]}
-        padding={[horizontalPadding, verticalPadding]}
-      />
+    <Group left={horizontalPadding} top={verticalPadding}>
+      <Grid scales={[xScale, yScale]} max={[xMax, yMax]} />
       <AxisBottom
         yMax={yMax}
         xScale={xScale}

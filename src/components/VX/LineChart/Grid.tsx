@@ -2,24 +2,23 @@ import React from "react";
 import { Grid as DefaultGrid } from "@vx/grid";
 import { useStyletron } from "baseui/dist";
 import { Scale } from "components/VX/Shared/Scale";
+import { Max } from "components/VX/Shared/Max";
 
 type Props = {
-  resolution: Resolution;
   scales: Scale;
-  padding: Padding;
+  max: Max;
 };
 
-const Grid: React.FC<Props> = ({ resolution, scales, padding }) => {
+const Grid: React.FC<Props> = ({ scales, max }) => {
   const [, theme] = useStyletron();
-  const [width, height] = resolution;
+  const [xMax, yMax] = max;
   const [xScale, yScale] = scales;
-  const [horizontalPadding, verticalPadding] = padding;
   return (
     <DefaultGrid
       xScale={xScale}
       yScale={yScale}
-      width={width - horizontalPadding}
-      height={height - verticalPadding}
+      width={xMax}
+      height={yMax}
       numTicksRows={13}
       numTicksColumns={10}
       stroke={theme.colors.borderOpaque}
