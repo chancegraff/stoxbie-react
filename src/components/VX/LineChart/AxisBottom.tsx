@@ -6,7 +6,7 @@ import { useStyletron } from "baseui/dist";
 import { ScaleX } from "components/VX/Shared/Scale";
 import TimeLabel from "components/VX/Shared/TimeLabel";
 
-export const BOTTOM_AXIS_HEIGHT = 20;
+export const BOTTOM_LABELS_HEIGHT = 15;
 
 type Props = {
   yMax: number;
@@ -37,9 +37,10 @@ const AxisBottom: React.FC<Props> = ({
       labelProps={labelProps}
       tickLabelProps={tickLabelProps}
       tickFormat={tickFormat}
-      stroke={theme.colors.primaryA}
-      tickStroke={theme.colors.primaryA}
+      stroke={theme.colors.mono400}
+      tickStroke={theme.colors.mono400}
       tickComponent={TimeLabel}
+      tickLength={5}
       numTicks={12}
       labelOffset={25}
       label="Date"

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import { BOTTOM_AXIS_HEIGHT } from "components/VX/LineChart/AxisBottom";
-import { RIGHT_AXIS_WIDTH } from "components/VX/LineChart/AxisRight";
+import { RIGHT_LABELS_WIDTH } from "components/VX/LineChart/AxisRight";
+import { BOTTOM_LABELS_HEIGHT } from "components/VX/LineChart/AxisBottom";
 
 export type MaxX = number;
 export type MaxY = number;
@@ -18,10 +18,10 @@ type MaxProps = {
 type Props = InjectedProps & MaxProps;
 
 const xMaxCreator = (width: number, horizontalPadding: number) =>
-  width - horizontalPadding * 2 - RIGHT_AXIS_WIDTH;
+  width - RIGHT_LABELS_WIDTH - horizontalPadding * 2;
 
 const yMaxCreator = (height: number, verticalPadding: number) =>
-  height - verticalPadding * 2 - BOTTOM_AXIS_HEIGHT;
+  height - BOTTOM_LABELS_HEIGHT - verticalPadding * 2;
 
 const withMax = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>

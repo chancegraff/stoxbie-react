@@ -29,8 +29,8 @@ const LinePoints: React.FC<Props> = ({
               r={2}
               cx={xScale(xSelector(price))}
               cy={yScale(ySelector(price))}
-              stroke={theme.colors.primaryA}
-              fill={theme.colors.primaryA}
+              stroke={theme.colors.contentPrimary}
+              fill={theme.colors.contentPrimary}
               fillOpacity={0.5}
               shapeRendering="geometricPrecision"
             />

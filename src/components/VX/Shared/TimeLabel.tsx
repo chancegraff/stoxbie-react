@@ -11,7 +11,7 @@ const DesktopTimeLabel: React.FC<Props> = ({ formattedValue, ...props }) => {
   const MediaQueriedText = useMemo(() => {
     return styled(Text, ({ $theme }) => ({
       [$theme.mediaQuery.large]: { display: "unset" },
-      [$theme.mediaQuery.medium]: { display: "unset" },
+      [$theme.mediaQuery.medium]: { display: "none" },
       [$theme.mediaQuery.small]: { display: "none" },
     }));
   }, []);
@@ -40,10 +40,8 @@ const MobileTimeLabel: React.FC<Props> = ({ formattedValue, ...props }) => {
         mediaQueries[$theme.mediaQuery.large] = {
           display: "none",
         };
-        mediaQueries[$theme.mediaQuery.medium] = {
-          display: "none",
-        };
         if (!formattedValueAsDate) {
+          mediaQueries[$theme.mediaQuery.medium] = { display: "unset" };
           mediaQueries[$theme.mediaQuery.small] = { display: "unset" };
         }
         return mediaQueries;

@@ -4,7 +4,7 @@ import { AxisRight as DefaultAxisRight } from "@vx/axis";
 import { useStyletron } from "baseui/dist";
 import { ScaleY } from "components/VX/Shared/Scale";
 
-export const RIGHT_AXIS_WIDTH = 25;
+export const RIGHT_LABELS_WIDTH = 25;
 
 type Props = {
   xMax: number;
@@ -28,8 +28,9 @@ const AxisRight: React.FC<Props> = ({
       tickLabelProps={tickLabelProps}
       label="Dollar"
       labelOffset={25}
-      stroke={theme.colors.primaryA}
-      tickStroke={theme.colors.primaryA}
+      stroke={theme.colors.mono400}
+      tickStroke={theme.colors.mono400}
+      tickLength={5}
       hideZero={true}
     />
   );

@@ -15,7 +15,7 @@ const getLabelProps = {
   display: "none",
 };
 const getTickLabelProps = (theme: Theme) => () => ({
-  fill: theme.colors.primaryA,
+  fill: theme.colors.mono300,
   strokeWidth: 0,
   ...theme.typography.LabelXSmall,
 });
@@ -31,7 +31,7 @@ const StockChart: React.FC<Props> = ({
     [theme]
   );
   const responsivePadding: Padding = useMemo(
-    () => (resolution[0] <= 440 ? [10, 7.5] : padding),
+    () => (resolution[0] <= theme.breakpoints.medium ? [10, 10] : padding),
     [resolution, padding]
   );
   if (!prices || !prices.length) {

@@ -27,7 +27,7 @@ const LinePath: React.FC<Props> = ({
       curve={curveLinear}
       x={(d) => xScale(xSelector(d))}
       y={(d) => yScale(ySelector(d))}
-      stroke={theme.colors.primaryA}
+      stroke={theme.colors.contentPrimary}
       strokeWidth={1}
       shapeRendering="geometricPrecision"
     />

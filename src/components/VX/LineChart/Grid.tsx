@@ -21,7 +21,7 @@ const Grid: React.FC<Props> = ({ scales, max }) => {
       height={yMax}
       numTicksRows={13}
       numTicksColumns={10}
-      stroke={theme.colors.borderOpaque}
+      stroke={theme.colors.mono500}
     />
   );
 };

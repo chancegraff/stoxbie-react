@@ -7,10 +7,11 @@ import { Scale } from "components/VX/Shared/Scale";
 import { Max } from "components/VX/Shared/Max";
 import withShared from "components/VX/Shared";
 import Grid from "./Grid";
-import AxisBottom from "./AxisBottom";
-import AxisRight from "./AxisRight";
+import AxisBottom, { BOTTOM_LABELS_HEIGHT } from "./AxisBottom";
+import AxisRight, { RIGHT_LABELS_WIDTH } from "./AxisRight";
 import LinePath from "./LinePath";
 import LinePoints from "./LinePoints";
+import { styled } from "baseui/dist";
 
 export type AxisLabelProps = Partial<TextProps>;
 export type TickLabelProps = () => Partial<TextProps>;
@@ -26,6 +27,10 @@ type Props = {
   label: Label;
 };
 
+const Rect = styled("rect", ({ $theme }) => ({
+  fill: $theme.colors.backgroundSecondary,
+}));
+
 const LineChart: React.FC<Props> = ({
   prices,
   resolution: [width, height],
@@ -36,6 +41,7 @@ const LineChart: React.FC<Props> = ({
   label: [axisLabelProps, tickLabelProps],
 }) => (
   <svg width={width} height={height}>
+    <Rect width={width} height={height} />
     <Group left={horizontalPadding} top={verticalPadding}>
       <Grid scales={[xScale, yScale]} max={[xMax, yMax]} />
       <AxisBottom
