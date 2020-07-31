@@ -28,6 +28,7 @@ const AxisRight: React.FC<Props> = ({
       labelOffset={25}
       stroke={theme.colors.primaryA}
       tickStroke={theme.colors.primaryA}
+      hideZero={true}
     />
   );
 };

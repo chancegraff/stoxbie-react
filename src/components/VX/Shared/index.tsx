@@ -8,6 +8,7 @@ import withMax, { Max } from "components/VX/Shared/Max";
 type BaseProps = {
   prices: HistoricalPrice[];
   resolution: Resolution;
+  padding: Padding;
   label: Label;
 };
 

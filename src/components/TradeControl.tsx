@@ -3,7 +3,7 @@ import { Slider } from "baseui/dist/slider";
 
 type Props = unknown;
 
-const TradeInput: React.FC<Props> = () => {
+const TradeControl: React.FC<Props> = () => {
   return (
     <div>
       <div>Trade Input</div>
@@ -13,4 +13,4 @@ const TradeInput: React.FC<Props> = () => {
   );
 };
 
-export default TradeInput;
+export default TradeControl;

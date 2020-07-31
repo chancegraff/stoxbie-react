@@ -6,7 +6,7 @@ import { Scale } from "components/VX/Shared/Scale";
 type Props = {
   resolution: Resolution;
   scales: Scale;
-  padding: [HorizontalPadding, VerticalPadding];
+  padding: Padding;
 };
 
 const Grid: React.FC<Props> = ({ resolution, scales, padding }) => {

@@ -9,6 +9,7 @@ import LineChart, { Label } from "components/VX/LineChart";
 type Props = {
   prices?: HistoricalPrice[];
   resolution?: Resolution;
+  padding?: Padding;
 };
 
 const getLabelProps = (theme: Theme) => ({
@@ -22,7 +23,11 @@ const getTickLabelProps = (theme: Theme) => () => ({
   ...theme.typography.LabelXSmall,
 });
 
-const StockChart: React.FC<Props> = ({ prices, resolution = [800, 500] }) => {
+const StockChart: React.FC<Props> = ({
+  prices,
+  resolution = [800, 500],
+  padding = [60, 60],
+}) => {
   const [, theme] = useStyletron();
   const label: Label = useMemo(
     () => [getLabelProps(theme), getTickLabelProps(theme)],
@@ -42,7 +47,14 @@ const StockChart: React.FC<Props> = ({ prices, resolution = [800, 500] }) => {
       </Block>
     );
   }
-  return <LineChart prices={prices} resolution={resolution} label={label} />;
+  return (
+    <LineChart
+      prices={prices}
+      resolution={resolution}
+      label={label}
+      padding={padding}
+    />
+  );
 };
 
 export default StockChart;

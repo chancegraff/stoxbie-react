@@ -8,10 +8,11 @@ import { IEX_DATE_FORMAT } from "services/Constants";
 import { handleUnloadCreator } from "services/Utilities";
 import ContentContainer from "templates/ContentContainer";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
-import StockChart from "components/StockChart";
-import TradeInput from "components/TradeInput";
-import Error from "components/BaseUI/Typography";
 import FlexGrid, { MultiplyWidth } from "components/BaseUI/FlexGrid";
+import Error from "components/BaseUI/Typography";
+import StockChart from "components/StockChart";
+import TradeControl from "components/TradeControl";
+import TimeControl from "components/TimeControl";
 
 type Props = {
   prices?: HistoricalPrice[];
@@ -55,7 +56,8 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
           <StockChart prices={pastPrices} />
         </FlexGridItem>
         <FlexGridItem overrides={MultiplyWidth(0.5)}>
-          <TradeInput />
+          <TimeControl />
+          <TradeControl />
         </FlexGridItem>
       </FlexGrid>
     </ContentContainer>

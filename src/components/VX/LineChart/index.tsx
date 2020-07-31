@@ -19,6 +19,7 @@ export type Label = [AxisLabelProps, TickLabelProps];
 type Props = {
   prices: HistoricalPrice[];
   resolution: Resolution;
+  padding: Padding;
   select: Select;
   scale: Scale;
   max: Max;
@@ -28,17 +29,18 @@ type Props = {
 const LineChart: React.FC<Props> = ({
   prices,
   resolution: [width, height],
+  padding: [horizontalPadding, verticalPadding],
   select: [xSelector, ySelector],
   scale: [xScale, yScale],
   max: [xMax, yMax],
   label: [axisLabelProps, tickLabelProps],
 }) => (
   <svg width={width} height={height}>
-    <Group top={25} left={65}>
+    <Group top={10} left={10}>
       <Grid
         resolution={[width, height]}
         scales={[xScale, yScale]}
-        padding={[120, 80]}
+        padding={[horizontalPadding, verticalPadding]}
       />
       <AxisBottom
         yMax={yMax}

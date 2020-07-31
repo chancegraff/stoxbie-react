@@ -82,7 +82,7 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) => {
       getValueLabel={handleLabel}
       autoFocus={true}
       clearable={false}
-      placeholder="Search for ticker..."
+      placeholder="Search for company by name or ticker..."
     />
   );
 };
