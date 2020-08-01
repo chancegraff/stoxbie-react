@@ -2,6 +2,8 @@ import React from "react";
 import {
   FlexGrid as DefaultFlexGrid,
   FlexGridProps,
+  FlexGridItemProps,
+  FlexGridItem,
 } from "baseui/dist/flex-grid";
 import { Overrides } from "baseui/dist/overrides";
 import { BlockOverrides } from "baseui/dist/block";
@@ -21,6 +23,15 @@ export const MultiplyWidth = (multiple = 2): Overrides<BlockOverrides> => ({
     }),
   },
 });
+
+export const FlexGridItemFull: React.FC<FlexGridItemProps> = ({
+  children,
+  ...props
+}) => (
+  <FlexGridItem {...props} overrides={MultiplyWidth()}>
+    {children}
+  </FlexGridItem>
+);
 
 const FlexGrid: React.FC<Props> = ({ children, ...props }) => {
   return (

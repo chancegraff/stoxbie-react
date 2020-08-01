@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import useResizeObserver from "use-resize-observer";
 import { isSameDay, parse } from "date-fns";
 import { HistoricalPrice } from "iex";
@@ -14,6 +14,7 @@ import Error from "components/BaseUI/Typography";
 import StockChart from "components/StockChart";
 import TradeControl from "components/TradeControl";
 import TimeControl from "components/TimeControl";
+import BalanceHistory from "components/BalanceHistory";
 import { AspectRatioBox, AspectRatioItem } from "components/AspectRatio";
 
 type Props = {
@@ -61,6 +62,11 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
 
   const [pastPrices, setPastPrices] = useState<HistoricalPrice[]>();
   const [nextPriceIndexes, setNextPriceIndexes] = useState<number[]>();
+
+  const currentPrice = useMemo(
+    () => pastPrices && pastPrices[pastPrices.length - 1],
+    [pastPrices]
+  );
 
   const handleLoad = useCallback((prices?: HistoricalPrice[], date?: Date) => {
     if (prices && date) {
@@ -114,7 +120,8 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
           minWidth={["auto", "30%", "25%"]}
         >
           <TimeControl handleContinue={handleContinue} />
-          <TradeControl />
+          <TradeControl price={currentPrice} />
+          <BalanceHistory />
         </FlexGridItem>
       </FlexGrid>
     </ContentContainer>
