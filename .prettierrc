@@ -4,7 +4,7 @@
   "singleQuote": false,
   "trailingComma": "es5",
   "tabWidth": 2,
-  "printWidth": 10,
+  "printWidth": 120,
   "proseWrap": "never",
   "htmlWhitespaceSensitivity": "strict",
   "arrowParens": "always"

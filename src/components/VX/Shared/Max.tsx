@@ -1,15 +1,10 @@
-import React, {
-  useMemo,
-} from "react";
-import { RIGHT_LABELS_WIDTH } from "components/VX/LineChart/AxisRight";
 import { BOTTOM_LABELS_HEIGHT } from "components/VX/LineChart/AxisBottom";
+import { RIGHT_LABELS_WIDTH } from "components/VX/LineChart/AxisRight";
+import React, { useMemo } from "react";
 
 export type MaxX = number;
 export type MaxY = number;
-export type Max = [
-  MaxX,
-  MaxY
-];
+export type Max = [MaxX, MaxY];
 
 type InjectedProps = {
   max: Max;
@@ -20,39 +15,18 @@ type MaxProps = {
   padding: Padding;
 };
 
-type Props = InjectedProps &
-  MaxProps;
+type Props = InjectedProps & MaxProps;
 
 const xMaxCreator = (
-  width: number,
-  horizontalPadding: number
-) =>
-  width -
-  RIGHT_LABELS_WIDTH -
-  horizontalPadding *
-    2;
+  width: number, horizontalPadding: number,
+) => width - RIGHT_LABELS_WIDTH - horizontalPadding * 2;
 
 const yMaxCreator = (
-  height: number,
-  verticalPadding: number
-) =>
-  height -
-  BOTTOM_LABELS_HEIGHT -
-  verticalPadding *
-    2;
+  height: number, verticalPadding: number,
+) => height - BOTTOM_LABELS_HEIGHT - verticalPadding * 2;
 
-const withMax = <
-  P extends React.PropsWithChildren<
-    Props
-  >
->(
-  WrappedChart: React.FC<
-    P
-  >
-): React.FC<
-  P
-> => (
-  props
+const withMax = <P extends React.PropsWithChildren<Props>>(WrappedChart: React.FC<P>): React.FC<P> => (
+  props,
 ) => {
   const {
     resolution: [
@@ -65,36 +39,30 @@ const withMax = <
     ],
   } = props;
   const xMax = useMemo(
-    () =>
-      xMaxCreator(
-        width,
-        horizontalPadding
-      ),
+    () => xMaxCreator(
+      width,
+      horizontalPadding,
+    ),
     [
       width,
       horizontalPadding,
-    ]
+    ],
   );
   const yMax = useMemo(
-    () =>
-      yMaxCreator(
-        height,
-        verticalPadding
-      ),
+    () => yMaxCreator(
+      height,
+      verticalPadding,
+    ),
     [
       height,
       verticalPadding,
-    ]
+    ],
   );
-  return (
-    <WrappedChart
-      {...(props as P)}
-      max={[
-        xMax,
-        yMax,
-      ]}
-    />
-  );
+
+  return <WrappedChart {...(props as P)} max={[
+    xMax,
+    yMax,
+  ]} />;
 };
 
 export default withMax;
