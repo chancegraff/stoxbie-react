@@ -1,6 +1,14 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import useResizeObserver from "use-resize-observer";
-import { isSameDay, parse } from "date-fns";
+import {
+  isSameDay,
+  parse,
+} from "date-fns";
 import { HistoricalPrice } from "iex";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
@@ -15,7 +23,10 @@ import StockChart from "components/StockChart";
 import TradeControl from "components/TradeControl";
 import TimeControl from "components/TimeControl";
 import BalanceHistory from "components/BalanceHistory";
-import { AspectRatioBox, AspectRatioItem } from "components/AspectRatio";
+import {
+  AspectRatioBox,
+  AspectRatioItem,
+} from "components/AspectRatio";
 
 type Props = {
   prices?: HistoricalPrice[];
@@ -23,21 +34,47 @@ type Props = {
   error?: string;
 };
 
-const getPriceIndexes = (prices: HistoricalPrice[], date: Date) => {
-  const startDateIndex = prices.findIndex((price) => {
-    const priceDate = parse(price.date, IEX_DATE_FORMAT, new Date());
-    return isSameDay(priceDate, date);
-  });
-  const endDateIndex = startDateIndex > -1 ? startDateIndex - 730 : 0;
-  return [endDateIndex, startDateIndex];
+const getPriceIndexes = (
+  prices: HistoricalPrice[],
+  date: Date
+) => {
+  const startDateIndex = prices.findIndex(
+    price => {
+      const priceDate = parse(
+        price.date,
+        IEX_DATE_FORMAT,
+        new Date()
+      );
+      return isSameDay(
+        priceDate,
+        date
+      );
+    }
+  );
+  const endDateIndex =
+    startDateIndex >
+    -1
+      ? startDateIndex -
+        730
+      : 0;
+  return [
+    endDateIndex,
+    startDateIndex,
+  ];
 };
 
 const canGetNextPrice = (
   prices: HistoricalPrice[],
   nextPriceIndexes: number[]
 ) => {
-  const [, startDateIndex] = nextPriceIndexes;
-  return prices.length > startDateIndex;
+  const [
+    ,
+    startDateIndex,
+  ] = nextPriceIndexes;
+  return (
+    prices.length >
+    startDateIndex
+  );
 };
 
 const setNextPrices = (
@@ -47,80 +84,223 @@ const setNextPrices = (
     setPastPrices,
     setNextPriceIndexes,
   }: {
-    setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
-    setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
+    setPastPrices: DispatchSetStateAction<
+      | HistoricalPrice[]
+      | undefined
+    >;
+    setNextPriceIndexes: DispatchSetStateAction<
+      | number[]
+      | undefined
+    >;
   }
 ) => {
-  const nextPrices = prices.slice(...priceIndexes);
-  setPastPrices(nextPrices);
-  setNextPriceIndexes(priceIndexes.map((i) => ++i));
+  const nextPrices = prices.slice(
+    ...priceIndexes
+  );
+  setPastPrices(
+    nextPrices
+  );
+  setNextPriceIndexes(
+    priceIndexes.map(
+      i =>
+        ++i
+    )
+  );
 };
 
-const TradeView: React.FC<Props> = ({ prices, date, error }) => {
-  const [, theme] = useStyletron();
-  const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
+const TradeView: React.FC<Props> = ({
+  prices,
+  date,
+  error,
+}) => {
+  const [
+    ,
+    theme,
+  ] = useStyletron();
+  const {
+    ref,
+    width = 1,
+    height = 1,
+  } = useResizeObserver<
+    HTMLDivElement
+  >();
 
-  const [pastPrices, setPastPrices] = useState<HistoricalPrice[]>();
-  const [nextPriceIndexes, setNextPriceIndexes] = useState<number[]>();
+  const [
+    pastPrices,
+    setPastPrices,
+  ] = useState<
+    HistoricalPrice[]
+  >();
+  const [
+    nextPriceIndexes,
+    setNextPriceIndexes,
+  ] = useState<
+    number[]
+  >();
 
   const currentPrice = useMemo(
-    () => pastPrices && pastPrices[pastPrices.length - 1],
-    [pastPrices]
+    () =>
+      pastPrices &&
+      pastPrices[
+        pastPrices.length -
+          1
+      ],
+    [
+      pastPrices,
+    ]
   );
 
-  const handleLoad = useCallback((prices?: HistoricalPrice[], date?: Date) => {
-    if (prices && date) {
-      const priceIndexes = getPriceIndexes(prices, date);
-      setNextPrices(prices, priceIndexes, {
-        setPastPrices,
-        setNextPriceIndexes,
-      });
-    }
-  }, []);
+  const handleLoad = useCallback(
+    (
+      prices?: HistoricalPrice[],
+      date?: Date
+    ) => {
+      if (
+        prices &&
+        date
+      ) {
+        const priceIndexes = getPriceIndexes(
+          prices,
+          date
+        );
+        setNextPrices(
+          prices,
+          priceIndexes,
+          {
+            setPastPrices,
+            setNextPriceIndexes,
+          }
+        );
+      }
+    },
+    []
+  );
 
   const handleContinue = useCallback(() => {
     if (
       prices &&
       nextPriceIndexes &&
-      canGetNextPrice(prices, nextPriceIndexes)
+      canGetNextPrice(
+        prices,
+        nextPriceIndexes
+      )
     ) {
-      setNextPrices(prices, nextPriceIndexes, {
-        setPastPrices,
-        setNextPriceIndexes,
-      });
+      setNextPrices(
+        prices,
+        nextPriceIndexes,
+        {
+          setPastPrices,
+          setNextPriceIndexes,
+        }
+      );
     }
-  }, [prices, nextPriceIndexes]);
+  }, [
+    prices,
+    nextPriceIndexes,
+  ]);
 
   useEffect(() => {
-    if (!pastPrices) {
-      handleLoad(prices, date);
+    if (
+      !pastPrices
+    ) {
+      handleLoad(
+        prices,
+        date
+      );
     }
-  }, [pastPrices, handleLoad, prices, date]);
+  }, [
+    pastPrices,
+    handleLoad,
+    prices,
+    date,
+  ]);
 
-  useEffect(() => handleUnloadCreator([setPastPrices]), []);
+  useEffect(
+    () =>
+      handleUnloadCreator(
+        [
+          setPastPrices,
+        ]
+      ),
+    []
+  );
 
-  if (error) {
-    return <Error>{error}</Error>;
+  if (
+    error
+  ) {
+    return (
+      <Error>
+        {
+          error
+        }
+      </Error>
+    );
   }
 
   return (
     <ContentContainer>
-      <Block width="100%" marginBottom={theme.sizing.scale800}>
+      <Block
+        width="100%"
+        marginBottom={
+          theme
+            .sizing
+            .scale800
+        }
+      >
         <BreadcrumbContainer />
       </Block>
-      <FlexGrid flexWrap={[true, true, true, false]}>
-        <AspectRatioBox component={FlexGridItem}>
-          <AspectRatioItem ref={ref}>
-            <StockChart resolution={[width, height]} prices={pastPrices} />
+      <FlexGrid
+        flexWrap={[
+          true,
+          true,
+          true,
+          false,
+        ]}
+      >
+        <AspectRatioBox
+          component={
+            FlexGridItem
+          }
+        >
+          <AspectRatioItem
+            ref={
+              ref
+            }
+          >
+            <StockChart
+              resolution={[
+                width,
+                height,
+              ]}
+              prices={
+                pastPrices
+              }
+            />
           </AspectRatioItem>
         </AspectRatioBox>
         <FlexGridItem
           flex="1 1"
-          maxWidth={["100%", "100%", "25%"]}
-          minWidth={["auto", "30%", "25%"]}
+          maxWidth={[
+            "100%",
+            "100%",
+            "25%",
+          ]}
+          minWidth={[
+            "auto",
+            "30%",
+            "25%",
+          ]}
         >
-          <TimeControl handleContinue={handleContinue} />
-          <TradeControl price={currentPrice} />
+          <TimeControl
+            handleContinue={
+              handleContinue
+            }
+          />
+          <TradeControl
+            price={
+              currentPrice
+            }
+          />
           <BalanceHistory />
         </FlexGridItem>
       </FlexGrid>

@@ -1,5 +1,9 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from "react-router-dom";
 import BaseUI from "services/BaseUI";
 import BackgroundContainer from "templates/BackgroundContainer";
 import SearchRoutes from "routes/SearchRoutes";

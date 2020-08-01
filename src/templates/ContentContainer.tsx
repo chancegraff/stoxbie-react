@@ -5,8 +5,11 @@ import { useStyletron } from "baseui/dist";
 
 type Props = unknown;
 
-const ContentContainer: React.FC<Props> = (props) => {
-  const [, theme] = useStyletron();
+const ContentContainer: React.FC<Props> = props => {
+  const [
+    ,
+    theme,
+  ] = useStyletron();
   return (
     <Block
       padding={[
@@ -17,7 +20,11 @@ const ContentContainer: React.FC<Props> = (props) => {
       ]}
       height="100%"
     >
-      <LayoutGrid>{props.children}</LayoutGrid>
+      <LayoutGrid>
+        {
+          props.children
+        }
+      </LayoutGrid>
     </Block>
   );
 };

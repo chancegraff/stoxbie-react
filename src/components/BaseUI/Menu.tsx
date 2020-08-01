@@ -7,8 +7,10 @@ import { Override } from "baseui/dist/overrides";
 
 const List: Override<unknown> = {
   style: {
-    paddingTop: "0",
-    paddingBottom: "0",
+    paddingTop:
+      "0",
+    paddingBottom:
+      "0",
   },
 };
 
@@ -20,7 +22,14 @@ export const StatefulMenu: React.FC<StatefulMenuProps> = ({
   children,
   ...props
 }) => (
-  <DefaultStatefulMenu overrides={overrides} {...props}>
-    {children}
+  <DefaultStatefulMenu
+    overrides={
+      overrides
+    }
+    {...props}
+  >
+    {
+      children
+    }
   </DefaultStatefulMenu>
 );

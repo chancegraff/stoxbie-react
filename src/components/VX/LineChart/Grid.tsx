@@ -9,19 +9,47 @@ type Props = {
   max: Max;
 };
 
-const Grid: React.FC<Props> = ({ scales, max }) => {
-  const [, theme] = useStyletron();
-  const [xMax, yMax] = max;
-  const [xScale, yScale] = scales;
+const Grid: React.FC<Props> = ({
+  scales,
+  max,
+}) => {
+  const [
+    ,
+    theme,
+  ] = useStyletron();
+  const [
+    xMax,
+    yMax,
+  ] = max;
+  const [
+    xScale,
+    yScale,
+  ] = scales;
   return (
     <DefaultGrid
-      xScale={xScale}
-      yScale={yScale}
-      width={xMax}
-      height={yMax}
-      numTicksRows={13}
-      numTicksColumns={10}
-      stroke={theme.colors.mono500}
+      xScale={
+        xScale
+      }
+      yScale={
+        yScale
+      }
+      width={
+        xMax
+      }
+      height={
+        yMax
+      }
+      numTicksRows={
+        13
+      }
+      numTicksColumns={
+        10
+      }
+      stroke={
+        theme
+          .colors
+          .mono500
+      }
     />
   );
 };

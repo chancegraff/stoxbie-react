@@ -1,4 +1,6 @@
-import React, { useCallback } from "react";
+import React, {
+  useCallback,
+} from "react";
 import { format } from "date-fns";
 import { AxisBottom as DefaultAxisBottom } from "@vx/axis";
 import { TextProps } from "@vx/text/lib/Text";
@@ -11,8 +13,12 @@ export const BOTTOM_LABELS_HEIGHT = 15;
 type Props = {
   yMax: number;
   xScale: ScaleX;
-  labelProps: Partial<TextProps>;
-  tickLabelProps: () => Partial<TextProps>;
+  labelProps: Partial<
+    TextProps
+  >;
+  tickLabelProps: () => Partial<
+    TextProps
+  >;
 };
 
 const AxisBottom: React.FC<Props> = ({
@@ -21,28 +27,69 @@ const AxisBottom: React.FC<Props> = ({
   labelProps,
   tickLabelProps,
 }) => {
-  const [, theme] = useStyletron();
+  const [
+    ,
+    theme,
+  ] = useStyletron();
   const tickFormat = useCallback(
-    (tick: Date) =>
-      tick.getMonth() % 12 === 0
-        ? format(tick, "MMM ''yy")
-        : format(tick, "MMM"),
+    (
+      tick: Date
+    ) =>
+      tick.getMonth() %
+        12 ===
+      0
+        ? format(
+            tick,
+            "MMM ''yy"
+          )
+        : format(
+            tick,
+            "MMM"
+          ),
     []
   );
 
   return (
-    <DefaultAxisBottom<Date>
-      top={yMax}
-      scale={xScale}
-      labelProps={labelProps}
-      tickLabelProps={tickLabelProps}
-      tickFormat={tickFormat}
-      stroke={theme.colors.mono400}
-      tickStroke={theme.colors.mono400}
-      tickComponent={TimeLabel}
-      tickLength={5}
-      numTicks={12}
-      labelOffset={25}
+    <DefaultAxisBottom<
+      Date
+    >
+      top={
+        yMax
+      }
+      scale={
+        xScale
+      }
+      labelProps={
+        labelProps
+      }
+      tickLabelProps={
+        tickLabelProps
+      }
+      tickFormat={
+        tickFormat
+      }
+      stroke={
+        theme
+          .colors
+          .mono400
+      }
+      tickStroke={
+        theme
+          .colors
+          .mono400
+      }
+      tickComponent={
+        TimeLabel
+      }
+      tickLength={
+        5
+      }
+      numTicks={
+        12
+      }
+      labelOffset={
+        25
+      }
       label="Date"
     />
   );

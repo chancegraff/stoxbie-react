@@ -1,44 +1,91 @@
-import React, { forwardRef } from "react";
-import { BlockProps, Block } from "baseui/dist/block";
+import React, {
+  forwardRef,
+} from "react";
+import {
+  BlockProps,
+  Block,
+} from "baseui/dist/block";
 import { FlexGridItemProps } from "baseui/dist/flex-grid";
 
-type DivProps = FlexGridItemProps | BlockProps;
-type Props = DivProps & { component?: React.FC<DivProps> };
+type DivProps =
+  | FlexGridItemProps
+  | BlockProps;
+type Props = DivProps & {
+  component?: React.FC<
+    DivProps
+  >;
+};
 
 export const AspectRatioItem: React.FC<Props> = forwardRef(
-  ({ component: Component = Block, children, ...props }, ref) => {
+  (
+    {
+      component: Component = Block,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <Component
-        ref={ref}
+        ref={
+          ref
+        }
         display="flex"
         alignItems="center"
         justifyContent="center"
         width="100%"
         height="100%"
         position="absolute"
-        top={0}
-        right={0}
-        bottom={0}
-        left={0}
+        top={
+          0
+        }
+        right={
+          0
+        }
+        bottom={
+          0
+        }
+        left={
+          0
+        }
         {...props}
       >
-        {children}
+        {
+          children
+        }
       </Component>
     );
   }
 );
 
 export const AspectRatioBox: React.FC<Props> = forwardRef(
-  ({ component: Component = Block, children, ...props }, ref) => {
+  (
+    {
+      component: Component = Block,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <Component
-        ref={ref}
-        height={0}
-        paddingBottom={["100%", "75%", "56.25%"]}
+        ref={
+          ref
+        }
+        height={
+          0
+        }
+        paddingBottom={[
+          "100%",
+          "75%",
+          "56.25%",
+        ]}
         position="relative"
         {...props}
       >
-        {children}
+        {
+          children
+        }
       </Component>
     );
   }

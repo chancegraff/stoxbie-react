@@ -7,15 +7,26 @@ import { Scale } from "components/VX/Shared/Scale";
 import { Max } from "components/VX/Shared/Max";
 import withShared from "components/VX/Shared";
 import Grid from "./Grid";
-import AxisBottom, { BOTTOM_LABELS_HEIGHT } from "./AxisBottom";
-import AxisRight, { RIGHT_LABELS_WIDTH } from "./AxisRight";
+import AxisBottom, {
+  BOTTOM_LABELS_HEIGHT,
+} from "./AxisBottom";
+import AxisRight, {
+  RIGHT_LABELS_WIDTH,
+} from "./AxisRight";
 import LinePath from "./LinePath";
 import LinePoints from "./LinePoints";
 import { styled } from "baseui/dist";
 
-export type AxisLabelProps = Partial<TextProps>;
-export type TickLabelProps = () => Partial<TextProps>;
-export type Label = [AxisLabelProps, TickLabelProps];
+export type AxisLabelProps = Partial<
+  TextProps
+>;
+export type TickLabelProps = () => Partial<
+  TextProps
+>;
+export type Label = [
+  AxisLabelProps,
+  TickLabelProps
+];
 
 type Props = {
   prices: HistoricalPrice[];
@@ -27,34 +38,106 @@ type Props = {
   label: Label;
 };
 
-const Rect = styled("rect", ({ $theme }) => ({
-  fill: $theme.colors.backgroundSecondary,
-}));
+const Rect = styled(
+  "rect",
+  ({
+    $theme,
+  }) => ({
+    fill:
+      $theme
+        .colors
+        .backgroundSecondary,
+  })
+);
 
 const LineChart: React.FC<Props> = ({
   prices,
-  resolution: [width, height],
-  padding: [horizontalPadding, verticalPadding],
-  select: [xSelector, ySelector],
-  scale: [xScale, yScale],
-  max: [xMax, yMax],
-  label: [axisLabelProps, tickLabelProps],
+  resolution: [
+    width,
+    height,
+  ],
+  padding: [
+    horizontalPadding,
+    verticalPadding,
+  ],
+  select: [
+    xSelector,
+    ySelector,
+  ],
+  scale: [
+    xScale,
+    yScale,
+  ],
+  max: [
+    xMax,
+    yMax,
+  ],
+  label: [
+    axisLabelProps,
+    tickLabelProps,
+  ],
 }) => (
-  <svg width={width} height={height}>
-    <Rect width={width} height={height} />
-    <Group left={horizontalPadding} top={verticalPadding}>
-      <Grid scales={[xScale, yScale]} max={[xMax, yMax]} />
+  <svg
+    width={
+      width
+    }
+    height={
+      height
+    }
+  >
+    <Rect
+      width={
+        width
+      }
+      height={
+        height
+      }
+    />
+    <Group
+      left={
+        horizontalPadding
+      }
+      top={
+        verticalPadding
+      }
+    >
+      <Grid
+        scales={[
+          xScale,
+          yScale,
+        ]}
+        max={[
+          xMax,
+          yMax,
+        ]}
+      />
       <AxisBottom
-        yMax={yMax}
-        xScale={xScale}
-        labelProps={axisLabelProps}
-        tickLabelProps={tickLabelProps}
+        yMax={
+          yMax
+        }
+        xScale={
+          xScale
+        }
+        labelProps={
+          axisLabelProps
+        }
+        tickLabelProps={
+          tickLabelProps
+        }
       />
       <AxisRight
-        xMax={xMax}
-        yScale={yScale}
-        labelProps={axisLabelProps}
-        tickLabelProps={tickLabelProps}
+        xMax={
+          xMax
+        }
+        yScale={
+          yScale
+        }
+        labelProps={
+          axisLabelProps
+        }
+        tickLabelProps={
+          tickLabelProps
+        }
       />
       {/* <LinePoints
         prices={prices}
@@ -64,14 +147,26 @@ const LineChart: React.FC<Props> = ({
         ySelector={ySelector}
       /> */}
       <LinePath
-        prices={prices}
-        xScale={xScale}
-        yScale={yScale}
-        xSelector={xSelector}
-        ySelector={ySelector}
+        prices={
+          prices
+        }
+        xScale={
+          xScale
+        }
+        yScale={
+          yScale
+        }
+        xSelector={
+          xSelector
+        }
+        ySelector={
+          ySelector
+        }
       />
     </Group>
   </svg>
 );
 
-export default withShared(LineChart);
+export default withShared(
+  LineChart
+);

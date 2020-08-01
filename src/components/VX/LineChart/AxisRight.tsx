@@ -9,8 +9,12 @@ export const RIGHT_LABELS_WIDTH = 25;
 type Props = {
   xMax: number;
   yScale: ScaleY;
-  labelProps: Partial<TextProps>;
-  tickLabelProps: () => Partial<TextProps>;
+  labelProps: Partial<
+    TextProps
+  >;
+  tickLabelProps: () => Partial<
+    TextProps
+  >;
 };
 
 const AxisRight: React.FC<Props> = ({
@@ -19,19 +23,44 @@ const AxisRight: React.FC<Props> = ({
   labelProps,
   tickLabelProps,
 }) => {
-  const [, theme] = useStyletron();
+  const [
+    ,
+    theme,
+  ] = useStyletron();
   return (
     <DefaultAxisRight
-      left={xMax}
-      scale={yScale}
-      labelProps={labelProps}
-      tickLabelProps={tickLabelProps}
+      left={
+        xMax
+      }
+      scale={
+        yScale
+      }
+      labelProps={
+        labelProps
+      }
+      tickLabelProps={
+        tickLabelProps
+      }
       label="Dollar"
-      labelOffset={25}
-      stroke={theme.colors.mono400}
-      tickStroke={theme.colors.mono400}
-      tickLength={5}
-      hideZero={true}
+      labelOffset={
+        25
+      }
+      stroke={
+        theme
+          .colors
+          .mono400
+      }
+      tickStroke={
+        theme
+          .colors
+          .mono400
+      }
+      tickLength={
+        5
+      }
+      hideZero={
+        true
+      }
     />
   );
 };
