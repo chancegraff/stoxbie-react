@@ -39,7 +39,9 @@ const getPriceIndexes = (
   date: Date
 ) => {
   const startDateIndex = prices.findIndex(
-    price => {
+    (
+      price
+    ) => {
       const priceDate = parse(
         price.date,
         IEX_DATE_FORMAT,
@@ -102,7 +104,9 @@ const setNextPrices = (
   );
   setNextPriceIndexes(
     priceIndexes.map(
-      i =>
+      (
+        i
+      ) =>
         ++i
     )
   );

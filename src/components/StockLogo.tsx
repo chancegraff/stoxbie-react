@@ -24,7 +24,9 @@ const overrides: OverridesT = {
 
 const AvatarSkeleton: React.FC<Partial<
   SkeletonPropsT
->> = props => {
+>> = (
+  props
+) => {
   return (
     <Block
       height={
@@ -44,7 +46,9 @@ const AvatarSkeleton: React.FC<Partial<
   );
 };
 
-const StockLogo: React.FC<Props> = props => {
+const StockLogo: React.FC<Props> = (
+  props
+) => {
   const [
     ,
     theme,

@@ -110,7 +110,11 @@ const withScale = <
   WrappedChart: React.FC<
     P
   >
-): React.FC<P> => props => {
+): React.FC<
+  P
+> => (
+  props
+) => {
   const select = useMemo(() => {
     if (
       !props.select

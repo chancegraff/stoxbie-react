@@ -39,7 +39,9 @@ const overrides: OverridesT = {
 
 const DetailsSkeleton: React.FC<Partial<
   SkeletonPropsT
->> = props => (
+>> = (
+  props
+) => (
   <Block
     height={
       props.height
@@ -62,7 +64,9 @@ const DetailsSkeleton: React.FC<Partial<
   </Block>
 );
 
-const StockName: React.FC<Props> = props => {
+const StockName: React.FC<Props> = (
+  props
+) => {
   const [
     ,
     theme,

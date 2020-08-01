@@ -25,7 +25,9 @@ type Props = {
   ) => void;
 };
 
-const SearchView: React.FC<Props> = props => {
+const SearchView: React.FC<Props> = (
+  props
+) => {
   const [
     ,
     theme,

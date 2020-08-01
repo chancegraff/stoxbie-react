@@ -49,7 +49,11 @@ const withMax = <
   WrappedChart: React.FC<
     P
   >
-): React.FC<P> => props => {
+): React.FC<
+  P
+> => (
+  props
+) => {
   const {
     resolution: [
       width,

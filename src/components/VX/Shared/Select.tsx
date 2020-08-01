@@ -40,7 +40,11 @@ const withSelect = <
   WrappedChart: React.FC<
     P
   >
-): React.FC<P> => props => (
+): React.FC<
+  P
+> => (
+  props
+) => (
   <WrappedChart
     {...(props as P)}
     select={[

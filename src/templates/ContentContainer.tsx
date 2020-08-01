@@ -5,7 +5,9 @@ import { useStyletron } from "baseui/dist";
 
 type Props = unknown;
 
-const ContentContainer: React.FC<Props> = props => {
+const ContentContainer: React.FC<Props> = (
+  props
+) => {
   const [
     ,
     theme,

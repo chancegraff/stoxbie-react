@@ -16,15 +16,19 @@ export const COLUMN_COUNT = 2;
 
 export const MultiplyWidth = (
   multiple = 2
-): Overrides<BlockOverrides> => ({
+): Overrides<
+  BlockOverrides
+> => ({
   Block: {
     style: ({
       $theme,
     }: {
       $theme: Theme;
     }): StyleObject => ({
-      width: `calc((${100 *
-        multiple}% - ${
+      width: `calc((${
+        100 *
+        multiple
+      }% - ${
         $theme
           .sizing
           .scale800

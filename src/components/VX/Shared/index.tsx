@@ -31,7 +31,9 @@ const withShared = (
   WrappedChart: React.FC<
     Props
   >
-): React.FC<BaseProps> =>
+): React.FC<
+  BaseProps
+> =>
   withSelect<
     Props
   >(

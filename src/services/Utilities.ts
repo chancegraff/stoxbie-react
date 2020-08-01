@@ -15,7 +15,9 @@ export const copyPropsToChildren = ({
 >): React.ReactNode =>
   Children.map(
     children,
-    child => {
+    (
+      child
+    ) => {
       if (
         isValidElement(
           child
@@ -49,7 +51,9 @@ export const handleUnloadCreator = (
   >[]
 ) => (): void =>
   dispatchHandlers.forEach(
-    dispatch =>
+    (
+      dispatch
+    ) =>
       dispatch(
         undefined
       )

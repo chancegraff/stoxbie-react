@@ -39,14 +39,18 @@ const LinePath: React.FC<Props> = ({
       curve={
         curveLinear
       }
-      x={d =>
+      x={(
+        d
+      ) =>
         xScale(
           xSelector(
             d
           )
         )
       }
-      y={d =>
+      y={(
+        d
+      ) =>
         yScale(
           ySelector(
             d

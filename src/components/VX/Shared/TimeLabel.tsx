@@ -134,7 +134,9 @@ const MobileTimeLabel: React.FC<Props> = ({
   );
 };
 
-const TimeLabel: React.FC<Props> = props => {
+const TimeLabel: React.FC<Props> = (
+  props
+) => {
   return (
     <>
       <DesktopTimeLabel

@@ -23,7 +23,9 @@ const overrides: BaseProviderOverrides = {
   AppContainer,
 };
 
-const BaseUI: React.FC = props => (
+const BaseUI: React.FC = (
+  props
+) => (
   <StyletronProvider
     value={
       engine

@@ -5,7 +5,9 @@ import { Block } from "baseui/dist/block";
 
 type Props = PropsWithChildren;
 
-const Error: React.FC<Props> = props => (
+const Error: React.FC<Props> = (
+  props
+) => (
   <ContentContainer>
     <Block
       width={[

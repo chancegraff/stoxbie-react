@@ -21,7 +21,9 @@ type Props = {
   ) => void;
 };
 
-const StockView: React.FC<Props> = props => {
+const StockView: React.FC<Props> = (
+  props
+) => {
   const [
     ,
     theme,
