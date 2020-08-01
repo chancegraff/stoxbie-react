@@ -32,7 +32,7 @@ const StockChart: React.FC<Props> = ({
   );
   const responsivePadding: Padding = useMemo(
     () => (resolution[0] <= theme.breakpoints.medium ? [10, 10] : padding),
-    [resolution, padding]
+    [resolution, theme, padding]
   );
   if (!prices || !prices.length) {
     return <Spinner />;
