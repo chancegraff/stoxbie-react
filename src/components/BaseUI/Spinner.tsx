@@ -6,7 +6,11 @@ type Props = SpinnerProps & {
   container: React.FC<BlockProps>;
 };
 
-const Spinner: React.FC<Props> = ({ container: Container, ...props }) => (
+const Spinner: React.FC<Props> = (
+  {
+    container: Container, ...props
+  },
+) => (
   <Container>
     <DefaultSpinner {...props} />
   </Container>

@@ -11,18 +11,32 @@ type Props = {
   ySelector: (price: HistoricalPrice) => number;
 };
 
-const LinePoints: React.FC<Props> = ({ prices, xScale, yScale, xSelector, ySelector }) => {
+const LinePoints: React.FC<Props> = (
+  {
+    prices, xScale, yScale, xSelector, ySelector,
+  },
+) => {
   const [, theme] = useStyletron();
 
   return (
     <>
       {prices.map(
-        (price, priceIndex) => priceIndex % 20 === 0 && (
+        (
+          price, priceIndex,
+        ) => priceIndex % 20 === 0 && (
           <circle
             key={priceIndex}
             r={2}
-            cx={xScale(xSelector(price))}
-            cy={yScale(ySelector(price))}
+            cx={xScale(
+              xSelector(
+                price,
+              ),
+            )}
+            cy={yScale(
+              ySelector(
+                price,
+              ),
+            )}
             stroke={theme.colors.contentPrimary}
             fill={theme.colors.contentPrimary}
             fillOpacity={0.5}

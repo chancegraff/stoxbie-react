@@ -6,12 +6,18 @@ type Props = {
   handleContinue: () => void;
 };
 
-const FullButton = styled(Button,
-{
-  width: "100%"
-});
+const FullButton = styled(
+  Button,
+  {
+    width: "100%",
+  },
+);
 
-const TimeControl: React.FC<Props> = ({ handleContinue }) => (
+const TimeControl: React.FC<Props> = (
+  {
+    handleContinue,
+  },
+) => (
   <FullButton size={SIZE.large} onClick={handleContinue}>
     {"Continue"}
   </FullButton>

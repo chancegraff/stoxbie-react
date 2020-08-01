@@ -17,13 +17,17 @@ const overrides: OverridesT = {
   },
 };
 
-const AvatarSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) => (
+const AvatarSkeleton: React.FC<Partial<SkeletonPropsT>> = (
+  props,
+) => (
   <Block height={props.height}>
     <Skeleton animation={true} overrides={overrides} {...props} />
   </Block>
 );
 
-const StockLogo: React.FC<Props> = (props) => {
+const StockLogo: React.FC<Props> = (
+  props,
+) => {
   const [, theme] = useStyletron();
 
   if (!props.logo) {

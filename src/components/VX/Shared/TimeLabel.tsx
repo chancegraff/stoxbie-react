@@ -8,13 +8,17 @@ import { StyleObject } from "styletron-react";
 type Props = TickRendererProps;
 
 const DesktopTimeLabel: React.FC<Props> = (
-  { formattedValue, ...props },
+  {
+    formattedValue, ...props
+  },
 ) => {
   const MediaQueriedText = useMemo(
     () => styled(
       Text,
       (
-        { $theme },
+        {
+          $theme,
+        },
       ) => ({
         [$theme.mediaQuery.large]: {
           display: "unset",
@@ -34,7 +38,9 @@ const DesktopTimeLabel: React.FC<Props> = (
 };
 
 const MobileTimeLabel: React.FC<Props> = (
-  { formattedValue, ...props },
+  {
+    formattedValue, ...props
+  },
 ) => {
   const formattedValueAsDate = useMemo(
     () => {
@@ -66,9 +72,12 @@ const MobileTimeLabel: React.FC<Props> = (
     () => styled(
       Text,
       (
-        { $theme },
+        {
+          $theme,
+        },
       ) => {
-        const mediaQueries: StyleObject = {};
+        const mediaQueries: StyleObject = {
+        };
 
         mediaQueries[$theme.mediaQuery.large] = {
           display: "none",

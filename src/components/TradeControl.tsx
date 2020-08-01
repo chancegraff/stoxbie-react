@@ -14,45 +14,75 @@ type Props = {
   balance?: number;
 };
 
-const FullButton = styled(Button,
-{
-  width: "100%"
-});
-
-const Container = styled(Block,
-({ $theme }) => ({
-  margin: `${$theme.sizing.scale800} 0`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flexWrap: "wrap"
-}));
-
-const TradeControl: React.FC<Props> = ({ price, balance = 10000 }) => {
-  const [purchaseAmount,
-setPurchaseAmount] = useState<number[]>([0]);
-  const previousPrice = usePrevious(price);
-  const maxPurchasable = useMemo(() => (price ? Math.floor(balance / price.close) : 0),
-[price,
-balance]);
-  const handleChange = useCallback(
-(event: State) => {
-    setPurchaseAmount(event.value);
+const FullButton = styled(
+  Button,
+  {
+    width: "100%",
   },
-  []
 );
+
+const Container = styled(
+  Block,
+  (
+    {
+      $theme,
+    },
+  ) => ({
+    alignItems: "center",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    margin: `${$theme.sizing.scale800} 0`,
+  }),
+);
+
+const TradeControl: React.FC<Props> = (
+  {
+    price, balance = 10000,
+  },
+) => {
+  const [
+    purchaseAmount,
+    setPurchaseAmount,
+  ] = useState<number[]>(
+    [0],
+  );
+  const previousPrice = usePrevious(
+    price,
+  );
+  const maxPurchasable = useMemo(
+    () => price ? Math.floor(
+      balance / price.close,
+    ) : 0,
+    [
+      price,
+      balance,
+    ],
+  );
+  const handleChange = useCallback(
+    (
+      event: State,
+    ) => {
+      setPurchaseAmount(
+        event.value,
+      );
+    },
+    [],
+  );
 
   useEffect(
-() => {
-    if (price && previousPrice && price !== previousPrice) {
-      setPurchaseAmount([0]);
-    }
-  },
-  [
-price,
-    previousPrice
-]
-);
+    () => {
+      if (price && previousPrice && price !== previousPrice) {
+        setPurchaseAmount(
+          [0],
+        );
+      }
+    },
+    [
+      price,
+      previousPrice,
+    ],
+  );
 
   if (!price) {
     return <Spinner container={Container} />;

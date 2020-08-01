@@ -13,7 +13,11 @@ const overrides: Overrides = {
   Body,
 };
 
-export const StatefulPopover: React.FC<Partial<PopoverProps>> = ({ children, ...props }) => (
+export const StatefulPopover: React.FC<Partial<PopoverProps>> = (
+  {
+    children, ...props
+  },
+) => (
   <DefaultStatefulPoover overrides={overrides} animateOutTime={300} returnFocus autoFocus {...props}>
     {children}
   </DefaultStatefulPoover>

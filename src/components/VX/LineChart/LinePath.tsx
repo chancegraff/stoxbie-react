@@ -13,15 +13,31 @@ type Props = {
   ySelector: (price: HistoricalPrice) => number;
 };
 
-const LinePath: React.FC<Props> = ({ prices, xScale, yScale, xSelector, ySelector }) => {
+const LinePath: React.FC<Props> = (
+  {
+    prices, xScale, yScale, xSelector, ySelector,
+  },
+) => {
   const [, theme] = useStyletron();
 
   return (
     <DefaultLinePath
       data={prices}
       curve={curveLinear}
-      x={(datum) => xScale(xSelector(datum))}
-      y={(datum) => yScale(ySelector(datum))}
+      x={(
+        datum,
+      ) => xScale(
+        xSelector(
+          datum,
+        ),
+      )}
+      y={(
+        datum,
+      ) => yScale(
+        ySelector(
+          datum,
+        ),
+      )}
       stroke={theme.colors.contentPrimary}
       strokeWidth={1}
       shapeRendering="geometricPrecision"

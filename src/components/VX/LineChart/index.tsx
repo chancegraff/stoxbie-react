@@ -28,38 +28,46 @@ type Props = {
   label: Label;
 };
 
-const Rect = styled("rect",
-  ({ $theme }) => ({
+const Rect = styled(
+  "rect",
+  (
+    {
+      $theme,
+    },
+  ) => ({
     fill: $theme.colors.backgroundSecondary,
-  }));
+  }),
+);
 
-const LineChart: React.FC<Props> = ({
-  prices,
-  resolution: [
-    width,
-    height,
-  ],
-  padding: [
-    horizontalPadding,
-    verticalPadding,
-  ],
-  select: [
-    xSelector,
-    ySelector,
-  ],
-  scale: [
-    xScale,
-    yScale,
-  ],
-  max: [
-    xMax,
-    yMax,
-  ],
-  label: [
-    axisLabelProps,
-    tickLabelProps,
-  ],
-}) => (
+const LineChart: React.FC<Props> = (
+  {
+    prices,
+    resolution: [
+      width,
+      height,
+    ],
+    padding: [
+      horizontalPadding,
+      verticalPadding,
+    ],
+    select: [
+      xSelector,
+      ySelector,
+    ],
+    scale: [
+      xScale,
+      yScale,
+    ],
+    max: [
+      xMax,
+      yMax,
+    ],
+    label: [
+      axisLabelProps,
+      tickLabelProps,
+    ],
+  },
+) => (
   <svg width={width} height={height}>
     <Rect width={width} height={height} />
     <Group left={horizontalPadding} top={verticalPadding}>
@@ -84,4 +92,6 @@ const LineChart: React.FC<Props> = ({
   </svg>
 );
 
-export default withShared(LineChart);
+export default withShared(
+  LineChart,
+);

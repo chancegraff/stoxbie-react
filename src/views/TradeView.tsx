@@ -23,22 +23,36 @@ type Props = {
   error?: string;
 };
 
-const getPriceIndexes = (prices: HistoricalPrice[], date: Date) => {
-  const startDateIndex = prices.findIndex((price) => {
-    const priceDate = parse(price.date,
-IEX_DATE_FORMAT,
-new Date());
+const getPriceIndexes = (
+  prices: HistoricalPrice[], date: Date,
+) => {
+  const startDateIndex = prices.findIndex(
+    (
+      price,
+    ) => {
+      const priceDate = parse(
+        price.date,
+        IEX_DATE_FORMAT,
+        new Date(),
+      );
 
-    return isSameDay(priceDate,
-date);
-  });
+      return isSameDay(
+        priceDate,
+        date,
+      );
+    },
+  );
   const endDateIndex = startDateIndex > -1 ? startDateIndex - 730 : 0;
 
-  return [endDateIndex,
-startDateIndex];
+  return [
+    endDateIndex,
+    startDateIndex,
+  ];
 };
 
-const canGetNextPrice = (prices: HistoricalPrice[], nextPriceIndexes: number[]) => {
+const canGetNextPrice = (
+  prices: HistoricalPrice[], nextPriceIndexes: number[],
+) => {
   const [, startDateIndex] = nextPriceIndexes;
 
   return prices.length > startDateIndex;
@@ -49,92 +63,120 @@ const setNextPrices = (
   priceIndexes: number[],
   {
     setPastPrices,
-    setNextPriceIndexes
+    setNextPriceIndexes,
   }: {
     setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
     setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
-  }
+  },
 ) => {
-  const nextPrices = prices.slice(...priceIndexes);
+  const nextPrices = prices.slice(
+    ...priceIndexes,
+  );
 
-  setPastPrices(nextPrices);
-  setNextPriceIndexes(priceIndexes.map((i) => ++i));
+  setPastPrices(
+    nextPrices,
+  );
+  setNextPriceIndexes(
+    priceIndexes.map(
+      (
+        i,
+      ) => ++i,
+    ),
+  );
 };
 
-const TradeView: React.FC<Props> = ({ prices, date, error }) => {
+const TradeView: React.FC<Props> = (
+  {
+    prices, date, error,
+  },
+) => {
   const [, theme] = useStyletron();
-  const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
+  const {
+    ref, width = 1, height = 1,
+  } = useResizeObserver<HTMLDivElement>();
 
-  const [pastPrices,
-setPastPrices] = useState<HistoricalPrice[]>();
-  const [nextPriceIndexes,
-setNextPriceIndexes] = useState<number[]>();
+  const [
+    pastPrices,
+    setPastPrices,
+  ] = useState<HistoricalPrice[]>();
+  const [
+    nextPriceIndexes,
+    setNextPriceIndexes,
+  ] = useState<number[]>();
 
-  const currentPrice = useMemo(() => pastPrices && pastPrices[pastPrices.length - 1],
-[pastPrices]);
+  const currentPrice = useMemo(
+    () => pastPrices && pastPrices[pastPrices.length - 1],
+    [pastPrices],
+  );
 
   const handleLoad = useCallback(
-(prices?: HistoricalPrice[], date?: Date) => {
-    if (prices && date) {
-      const priceIndexes = getPriceIndexes(
-prices,
-        date
-);
+    (
+      prices?: HistoricalPrice[], date?: Date,
+    ) => {
+      if (prices && date) {
+        const priceIndexes = getPriceIndexes(
+          prices,
+          date,
+        );
 
-      setNextPrices(
-prices,
-        priceIndexes,
-        {
-        setPastPrices,
-          setNextPriceIndexes,
+        setNextPrices(
+          prices,
+          priceIndexes,
+          {
+            setNextPriceIndexes,
+            setPastPrices,
+          },
+        );
       }
-);
-    }
-  },
-  []
-);
+    },
+    [],
+  );
 
   const handleContinue = useCallback(
-() => {
-    if (prices && nextPriceIndexes && canGetNextPrice(
-prices,
-      nextPriceIndexes
-)) {
-      setNextPrices(
-prices,
+    () => {
+      if (prices && nextPriceIndexes && canGetNextPrice(
+        prices,
         nextPriceIndexes,
-        {
-          setPastPrices,
-          setNextPriceIndexes
+      )) {
+        setNextPrices(
+          prices,
+          nextPriceIndexes,
+          {
+            setNextPriceIndexes,
+            setPastPrices,
+          },
+        );
       }
-);
-    }
-  },
-  [
-prices,
-    nextPriceIndexes
-]
-);
+    },
+    [
+      prices,
+      nextPriceIndexes,
+    ],
+  );
 
   useEffect(
-() => {
-    if (!pastPrices) {
-      handleLoad(
-prices,
-        date
-);
-    }
-  },
-  [
-pastPrices,
-    handleLoad,
-    prices,
-    date
-]
-);
+    () => {
+      if (!pastPrices) {
+        handleLoad(
+          prices,
+          date,
+        );
+      }
+    },
+    [
+      pastPrices,
+      handleLoad,
+      prices,
+      date,
+    ],
+  );
 
-  useEffect(() => handleUnloadCreator([setPastPrices]),
-[]);
+  useEffect(
+    () => handleUnloadCreator(
+      [setPastPrices],
+    ),
+    [],
+  );
 
   if (error) {
     return <Error>{error}</Error>;
@@ -145,21 +187,29 @@ pastPrices,
       <Block width="100%" marginBottom={theme.sizing.scale800}>
         <BreadcrumbContainer />
       </Block>
-      <FlexGrid flexWrap={[true,
-true,
-true,
-false]}>
+      <FlexGrid flexWrap={[
+        true,
+        true,
+        true,
+        false,
+      ]}>
         <AspectRatioBox component={FlexGridItem}>
           <AspectRatioItem ref={ref}>
-            <StockChart resolution={[width,
-height]} prices={pastPrices} />
+            <StockChart resolution={[
+              width,
+              height,
+            ]} prices={pastPrices} />
           </AspectRatioItem>
         </AspectRatioBox>
-        <FlexGridItem flex="1 1" maxWidth={["100%",
-"100%",
-"25%"]} minWidth={["auto",
-"30%",
-"25%"]}>
+        <FlexGridItem flex="1 1" maxWidth={[
+          "100%",
+          "100%",
+          "25%",
+        ]} minWidth={[
+          "auto",
+          "30%",
+          "25%",
+        ]}>
           <TimeControl handleContinue={handleContinue} />
           <TradeControl price={currentPrice} />
           <BalanceHistory />

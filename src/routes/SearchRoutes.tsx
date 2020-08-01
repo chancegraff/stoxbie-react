@@ -11,14 +11,20 @@ const SearchRoutes: React.FC<Props> = () => {
     async (
       nextValue: string,
       setOptions: React.Dispatch<React.SetStateAction<Search[]>>,
-      setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+      setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
     ) => {
-      const [...options] = await search(nextValue);
+      const [...options] = await search(
+        nextValue,
+      );
 
-      setOptions(options);
-      setIsLoading(false);
+      setOptions(
+        options,
+      );
+      setIsLoading(
+        false,
+      );
     },
-    DEBOUNCE_INPUT_MS
+    DEBOUNCE_INPUT_MS,
   );
 
   return <SearchView handleSearch={handleSearch} />;

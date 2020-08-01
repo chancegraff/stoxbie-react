@@ -8,7 +8,9 @@ import { URL_DATE_FORMAT } from "services/Constants";
 type Props = unknown;
 
 const StockBreadcrumb: React.FC = () => {
-  const { ticker } = useParams();
+  const {
+    ticker,
+  } = useParams();
 
   return (
     <Breadcrumbs>
@@ -23,26 +25,26 @@ const StockBreadcrumb: React.FC = () => {
 const TradeBreadcrumb: React.FC = () => {
   const {
     ticker,
-    date
+    date,
   }: {
     ticker: string;
     date: string;
   } = useParams();
   const safeDate = useMemo(
-() => {
-    const asDate = parse(
-date,
-      URL_DATE_FORMAT,
-      new Date()
-);
+    () => {
+      const asDate = parse(
+        date,
+        URL_DATE_FORMAT,
+        new Date(),
+      );
 
-    return format(
-asDate,
-      "MMMM do, y"
-);
-  },
-  [date]
-);
+      return format(
+        asDate,
+        "MMMM do, y",
+      );
+    },
+    [date],
+  );
 
   return (
     <Breadcrumbs>
@@ -58,8 +60,12 @@ asDate,
 };
 
 const BreadcrumbContainer: React.FC<Props> = () => {
-  const tradeView = useRouteMatch("/trade/:ticker/:date");
-  const stockView = useRouteMatch("/stock/:ticker");
+  const tradeView = useRouteMatch(
+    "/trade/:ticker/:date",
+  );
+  const stockView = useRouteMatch(
+    "/stock/:ticker",
+  );
 
   return (
     <>

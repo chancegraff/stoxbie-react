@@ -8,7 +8,11 @@ type Props = DivProps & {
 };
 
 export const AspectRatioItem: React.FC<Props> = forwardRef(
-  ({ component: Component = Block, children, ...props }, ref) => (
+  (
+    {
+      component: Component = Block, children, ...props
+    }, ref,
+  ) => (
     <Component
       ref={ref}
       display="flex"
@@ -29,7 +33,11 @@ export const AspectRatioItem: React.FC<Props> = forwardRef(
 );
 
 export const AspectRatioBox: React.FC<Props> = forwardRef(
-  ({ component: Component = Block, children, ...props }, ref) => (
+  (
+    {
+      component: Component = Block, children, ...props
+    }, ref,
+  ) => (
     <Component ref={ref} height={0} paddingBottom={[
       "100%",
       "75%",

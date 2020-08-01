@@ -8,16 +8,18 @@ const engine = new Styletron();
 
 const AppContainer: Override<unknown> = {
   style: {
+    height: "100%",
     width: "100%",
-    height: "100%"
-  }
+  },
 };
 
 const overrides: BaseProviderOverrides = {
-  AppContainer
+  AppContainer,
 };
 
-const BaseUI: React.FC = (props) => (
+const BaseUI: React.FC = (
+  props,
+) => (
   <StyletronProvider value={engine}>
     <BaseProvider theme={DarkTheme} overrides={overrides}>
       {props.children}

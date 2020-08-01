@@ -14,35 +14,45 @@ type Props = {
 const getLabelProps = {
   display: "none",
 };
-const getTickLabelProps = (theme: Theme) => () => ({
+const getTickLabelProps = (
+  theme: Theme,
+) => () => ({
   fill: theme.colors.mono300,
   strokeWidth: 0,
   ...theme.typography.LabelXSmall,
 });
 
-const StockChart: React.FC<Props> = ({
-  prices, resolution, padding = [
-    20,
-    20,
-  ],
-}) => {
+const StockChart: React.FC<Props> = (
+  {
+    prices, resolution, padding = [
+      20,
+      20,
+    ],
+  },
+) => {
   const [, theme] = useStyletron();
-  const label: Label = useMemo(() => [
-    getLabelProps,
-    getTickLabelProps(theme),
-  ],
-  [theme]);
-  const responsivePadding: Padding = useMemo(() => (resolution[0] <= theme.breakpoints.medium
-    ? [
-      10,
-      10,
-    ]
-    : padding),
-  [
-    resolution,
-    theme,
-    padding,
-  ]);
+  const label: Label = useMemo(
+    () => [
+      getLabelProps,
+      getTickLabelProps(
+        theme,
+      ),
+    ],
+    [theme],
+  );
+  const responsivePadding: Padding = useMemo(
+    () => resolution[0] <= theme.breakpoints.medium
+      ? [
+        10,
+        10,
+      ]
+      : padding,
+    [
+      resolution,
+      theme,
+      padding,
+    ],
+  );
 
   if (!prices || !prices.length) {
     return <Spinner />;
