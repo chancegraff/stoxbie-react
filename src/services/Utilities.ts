@@ -3,6 +3,8 @@ import {
   cloneElement,
   isValidElement,
   PropsWithChildren,
+  useRef,
+  useEffect,
 } from "react";
 
 export const copyPropsToChildren = ({
@@ -22,3 +24,11 @@ export const parsePixels = (px: string): number =>
 export const handleUnloadCreator = (
   dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[]
 ) => (): void => dispatchHandlers.forEach((dispatch) => dispatch(undefined));
+
+export const usePrevious = <P>(value?: P): P | undefined => {
+  const ref = useRef<P>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
