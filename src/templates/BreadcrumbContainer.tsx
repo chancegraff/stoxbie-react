@@ -28,8 +28,7 @@ const StockBreadcrumb: React.FC = () => {
         }
         to="/"
       >
-        Ticker
-        Search
+        {`Ticker Search`}
       </StyledLink>
       <span>
         {
@@ -69,8 +68,7 @@ const TradeBreadcrumb: React.FC = () => {
         }
         to="/"
       >
-        Ticker
-        Search
+        {`Ticker Search`}
       </StyledLink>
       <StyledLink
         $as={
@@ -83,11 +81,7 @@ const TradeBreadcrumb: React.FC = () => {
         }
       </StyledLink>
       <span>
-        Trading
-        from{" "}
-        {
-          safeDate
-        }
+        {`Trading from ${safeDate}`}
       </span>
     </Breadcrumbs>
   );

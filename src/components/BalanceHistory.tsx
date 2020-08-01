@@ -6,8 +6,7 @@ type Props = unknown;
 const BalanceHistory: React.FC<Props> = () => {
   return (
     <div>
-      History
-      Table
+      {`History Table`}
     </div>
   );
 };

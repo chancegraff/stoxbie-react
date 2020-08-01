@@ -4,6 +4,8 @@
   "singleQuote": false,
   "trailingComma": "es5",
   "tabWidth": 2,
-  "proseWrap": "always",
-  "printWidth": 10
+  "printWidth": 10,
+  "proseWrap": "never",
+  "htmlWhitespaceSensitivity": "strict",
+  "arrowParens": "always"
 }

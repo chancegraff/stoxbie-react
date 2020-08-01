@@ -29,7 +29,7 @@ const TimeControl: React.FC<Props> = ({
         handleContinue
       }
     >
-      Continue
+      {`Continue`}
     </FullButton>
   );
 };
