@@ -22,26 +22,74 @@ type Props = {
   error?: string;
 };
 
+const getPriceIndexes = (prices: HistoricalPrice[], date: Date) => {
+  const startDateIndex = prices.findIndex((price) => {
+    const priceDate = parse(price.date, IEX_DATE_FORMAT, new Date());
+    return isSameDay(priceDate, date);
+  });
+  const endDateIndex = startDateIndex > -1 ? startDateIndex - 730 : 0;
+  return [endDateIndex, startDateIndex];
+};
+
+const canGetNextPrice = (
+  prices: HistoricalPrice[],
+  nextPriceIndexes: number[]
+) => {
+  const [, startDateIndex] = nextPriceIndexes;
+  return prices.length > startDateIndex;
+};
+
+const setNextPrices = (
+  prices: HistoricalPrice[],
+  priceIndexes: number[],
+  {
+    setPastPrices,
+    setNextPriceIndexes,
+  }: {
+    setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
+    setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
+  }
+) => {
+  const nextPrices = prices.slice(...priceIndexes);
+  setPastPrices(nextPrices);
+  setNextPriceIndexes(priceIndexes.map((i) => ++i));
+};
+
 const TradeView: React.FC<Props> = ({ prices, date, error }) => {
   const [, theme] = useStyletron();
-  const [pastPrices, setPastPrices] = useState<HistoricalPrice[]>();
   const { ref, width = 1, height = 1 } = useResizeObserver<HTMLDivElement>();
+
+  const [pastPrices, setPastPrices] = useState<HistoricalPrice[]>();
+  const [nextPriceIndexes, setNextPriceIndexes] = useState<number[]>();
 
   const handleLoad = useCallback((prices?: HistoricalPrice[], date?: Date) => {
     if (prices && date) {
-      const startDate = prices.findIndex((price) => {
-        const priceDate = parse(price.date, IEX_DATE_FORMAT, new Date());
-        return isSameDay(priceDate, date);
+      const priceIndexes = getPriceIndexes(prices, date);
+      setNextPrices(prices, priceIndexes, {
+        setPastPrices,
+        setNextPriceIndexes,
       });
-      const endDate = startDate > -1 ? startDate - 730 : 0;
-      const nextPrices = prices.slice(endDate, startDate);
-      setPastPrices(nextPrices);
     }
   }, []);
 
+  const handleContinue = useCallback(() => {
+    if (
+      prices &&
+      nextPriceIndexes &&
+      canGetNextPrice(prices, nextPriceIndexes)
+    ) {
+      setNextPrices(prices, nextPriceIndexes, {
+        setPastPrices,
+        setNextPriceIndexes,
+      });
+    }
+  }, [prices, nextPriceIndexes]);
+
   useEffect(() => {
-    handleLoad(prices, date);
-  }, [handleLoad, prices, date]);
+    if (!pastPrices) {
+      handleLoad(prices, date);
+    }
+  }, [pastPrices, handleLoad, prices, date]);
 
   useEffect(() => handleUnloadCreator([setPastPrices]), []);
 
@@ -65,7 +113,7 @@ const TradeView: React.FC<Props> = ({ prices, date, error }) => {
           maxWidth={["100%", "100%", "25%"]}
           minWidth={["auto", "30%", "25%"]}
         >
-          <TimeControl />
+          <TimeControl handleContinue={handleContinue} />
           <TradeControl />
         </FlexGridItem>
       </FlexGrid>

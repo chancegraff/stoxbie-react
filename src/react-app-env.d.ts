@@ -18,3 +18,7 @@ declare type Padding = [HorizontalPadding, VerticalPadding];
 declare type Width = number;
 declare type Height = number;
 declare type Resolution = [Width, Height];
+
+declare type DispatchSetStateAction<P> = React.Dispatch<
+  React.SetStateAction<P>
+>;

@@ -56,13 +56,13 @@ const LineChart: React.FC<Props> = ({
         labelProps={axisLabelProps}
         tickLabelProps={tickLabelProps}
       />
-      <LinePoints
+      {/* <LinePoints
         prices={prices}
         xScale={xScale}
         yScale={yScale}
         xSelector={xSelector}
         ySelector={ySelector}
-      />
+      /> */}
       <LinePath
         prices={prices}
         xScale={xScale}
