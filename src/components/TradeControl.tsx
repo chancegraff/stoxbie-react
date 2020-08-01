@@ -1,13 +1,13 @@
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 import { HistoricalPrice } from "iex";
 import { Slider, State } from "baseui/dist/slider";
-import { Spinner } from "baseui/dist/spinner";
-import { Button } from "baseui/dist/button";
-import { styled } from "baseui/dist";
 import { FlexGridItem } from "baseui/dist/flex-grid";
+import { Button } from "baseui/dist/button";
 import { Block } from "baseui/dist/block";
+import { styled } from "baseui/dist";
+import { usePrevious } from "services/Utilities";
 import FlexGrid from "components/BaseUI/FlexGrid";
-import { usePrevious } from "../services/Utilities";
+import Spinner from "components/BaseUI/Spinner";
 
 type Props = {
   price?: HistoricalPrice;
@@ -42,11 +42,7 @@ const TradeControl: React.FC<Props> = ({ price, balance = 10000 }) => {
   }, [price, previousPrice]);
 
   if (!price) {
-    return (
-      <Container>
-        <Spinner />
-      </Container>
-    );
+    return <Spinner container={Container} />;
   }
   return (
     <Container>
