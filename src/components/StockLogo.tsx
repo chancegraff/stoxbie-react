@@ -31,12 +31,21 @@ const StockLogo: React.FC<Props> = (
   const [, theme] = useStyletron();
 
   if (!props.logo) {
-    return <AvatarSkeleton width={theme.sizing.scale2400} height={theme.sizing.scale2400} />;
+    return (
+      <AvatarSkeleton
+        width={theme.sizing.scale2400}
+        height={theme.sizing.scale2400}
+      />
+    );
   }
 
   return (
     <Block height={theme.sizing.scale2400} width={theme.sizing.scale2400}>
-      <Avatar name="Company logo" src={props.logo.url} size={theme.sizing.scale2400} />
+      <Avatar
+        name="Company logo"
+        src={props.logo.url}
+        size={theme.sizing.scale2400}
+      />
     </Block>
   );
 };

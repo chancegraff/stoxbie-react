@@ -13,7 +13,11 @@ type Props = {
 
 const LinePoints: React.FC<Props> = (
   {
-    prices, xScale, yScale, xSelector, ySelector,
+    prices,
+    xScale,
+    yScale,
+    xSelector,
+    ySelector,
   },
 ) => {
   const [, theme] = useStyletron();

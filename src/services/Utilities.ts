@@ -1,8 +1,16 @@
-import { Children, cloneElement, isValidElement, PropsWithChildren, useEffect, useRef } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  PropsWithChildren,
+  useEffect,
+  useRef,
+} from "react";
 
 export const copyPropsToChildren = (
   {
-    children, ...props
+    children,
+    ...props
   }: PropsWithChildren<unknown>,
 ): React.ReactNode => Children.map(
   children,

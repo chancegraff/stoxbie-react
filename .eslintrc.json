@@ -122,7 +122,7 @@
         "multiline-comment-style": "error",
         "multiline-ternary": [
             "error",
-            "always"
+            "always-multiline"
         ],
         "new-cap": "error",
         "new-parens": "error",

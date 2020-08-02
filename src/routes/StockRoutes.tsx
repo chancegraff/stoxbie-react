@@ -1,13 +1,25 @@
 import Error from "components/BaseUI/Typography";
-import { Company, company as getCompany, Logo, logo as getLogo } from "iex-cloud";
+import {
+  Company,
+  company as getCompany,
+  Logo,
+  logo as getLogo,
+} from "iex-cloud";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Route, Switch, useHistory, useParams, useRouteMatch } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useHistory,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 import { TICKER_ERROR_MESSAGE } from "services/Constants";
 import ScrollToTop from "services/ScrollToTop";
 import { handleUnloadCreator } from "services/Utilities";
 import StockView from "views/StockView";
 
-const ERROR_MESSAGE = "There was a problem attempting to load company information about the stock you requested.";
+const ERROR_MESSAGE
+  = "There was a problem attempting to load company information about the stock you requested.";
 
 const ViewRoute: React.FC = () => {
   const {
@@ -108,7 +120,14 @@ const ViewRoute: React.FC = () => {
     [],
   );
 
-  return <StockView logo={logo} company={company} error={error} handleStart={handleStart} />;
+  return (
+    <StockView
+      logo={logo}
+      company={company}
+      error={error}
+      handleStart={handleStart}
+    />
+  );
 };
 
 const StockRoutes: React.FC = () => {

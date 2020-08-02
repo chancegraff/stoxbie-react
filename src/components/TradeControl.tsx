@@ -51,11 +51,9 @@ const TradeControl: React.FC<Props> = (
     price,
   );
   const maxPurchasable = useMemo(
-    () => price
-      ? Math.floor(
-        balance / price.close,
-      )
-      : 0,
+    () => price ? Math.floor(
+      balance / price.close,
+    ) : 0,
     [
       price,
       balance,
@@ -92,7 +90,11 @@ const TradeControl: React.FC<Props> = (
 
   return (
     <Container>
-      <Slider max={maxPurchasable} value={purchaseAmount} onChange={handleChange} />
+      <Slider
+        max={maxPurchasable}
+        value={purchaseAmount}
+        onChange={handleChange}
+      />
       <FlexGrid>
         <FlexGridItem>
           <FullButton>{"Buy"}</FullButton>

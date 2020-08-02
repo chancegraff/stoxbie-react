@@ -24,7 +24,9 @@ const getTickLabelProps = (
 
 const StockChart: React.FC<Props> = (
   {
-    prices, resolution, padding = [
+    prices,
+    resolution,
+    padding = [
       20,
       20,
     ],
@@ -41,12 +43,10 @@ const StockChart: React.FC<Props> = (
     [theme],
   );
   const responsivePadding: Padding = useMemo(
-    () => resolution[0] <= theme.breakpoints.medium
-      ? [
-        10,
-        10,
-      ]
-      : padding,
+    () => resolution[0] <= theme.breakpoints.medium ? [
+      10,
+      10,
+    ] : padding,
     [
       resolution,
       theme,
@@ -58,7 +58,14 @@ const StockChart: React.FC<Props> = (
     return <Spinner />;
   }
 
-  return <LineChart prices={prices} resolution={resolution} label={label} padding={responsivePadding} />;
+  return (
+    <LineChart
+      prices={prices}
+      resolution={resolution}
+      label={label}
+      padding={responsivePadding}
+    />
+  );
 };
 
 export default StockChart;

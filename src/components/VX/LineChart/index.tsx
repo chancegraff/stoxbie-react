@@ -78,8 +78,18 @@ const LineChart: React.FC<Props> = (
         xMax,
         yMax,
       ]} />
-      <AxisBottom yMax={yMax} xScale={xScale} labelProps={axisLabelProps} tickLabelProps={tickLabelProps} />
-      <AxisRight xMax={xMax} yScale={yScale} labelProps={axisLabelProps} tickLabelProps={tickLabelProps} />
+      <AxisBottom
+        yMax={yMax}
+        xScale={xScale}
+        labelProps={axisLabelProps}
+        tickLabelProps={tickLabelProps}
+      />
+      <AxisRight
+        xMax={xMax}
+        yScale={yScale}
+        labelProps={axisLabelProps}
+        tickLabelProps={tickLabelProps}
+      />
       {/* <LinePoints
         prices={prices}
         xScale={xScale}
@@ -87,7 +97,13 @@ const LineChart: React.FC<Props> = (
         xSelector={xSelector}
         ySelector={ySelector}
       /> */}
-      <LinePath prices={prices} xScale={xScale} yScale={yScale} xSelector={xSelector} ySelector={ySelector} />
+      <LinePath
+        prices={prices}
+        xScale={xScale}
+        yScale={yScale}
+        xSelector={xSelector}
+        ySelector={ySelector}
+      />
     </Group>
   </svg>
 );

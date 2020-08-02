@@ -15,7 +15,10 @@ type Props = {
 
 const AxisRight: React.FC<Props> = (
   {
-    xMax, yScale, labelProps, tickLabelProps,
+    xMax,
+    yScale,
+    labelProps,
+    tickLabelProps,
   },
 ) => {
   const [, theme] = useStyletron();

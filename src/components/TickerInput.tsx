@@ -1,6 +1,14 @@
 import { Block } from "baseui/dist/block";
 import { Override } from "baseui/dist/overrides";
-import { OnChangeParams, Option, Select, SelectOverrides, SIZE, TYPE, Value } from "baseui/dist/select";
+import {
+  OnChangeParams,
+  Option,
+  Select,
+  SelectOverrides,
+  SIZE,
+  TYPE,
+  Value,
+} from "baseui/dist/select";
 import { Caption2, Label2 } from "baseui/dist/typography";
 import { Search } from "iex-cloud";
 import React, { useCallback, useState } from "react";

@@ -28,6 +28,8 @@ const withShared = (
       WrappedChart,
     ),
   ),
-) as React.FC<BaseProps>;
+) as React.FC<
+    BaseProps
+  >;
 
 export default withShared;

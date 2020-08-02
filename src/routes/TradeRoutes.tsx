@@ -4,7 +4,12 @@ import { HistoricalPrice } from "iex";
 import { historicalPrices } from "iex-cloud";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
-import { DATE_ERROR_MESSAGE, FETCH_ERROR_MESSAGE, TICKER_ERROR_MESSAGE, URL_DATE_FORMAT } from "services/Constants";
+import {
+  DATE_ERROR_MESSAGE,
+  FETCH_ERROR_MESSAGE,
+  TICKER_ERROR_MESSAGE,
+  URL_DATE_FORMAT,
+} from "services/Constants";
 import ScrollToTop from "services/ScrollToTop";
 import { handleUnloadCreator } from "services/Utilities";
 import TradeView from "views/TradeView";

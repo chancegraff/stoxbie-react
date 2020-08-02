@@ -1,7 +1,10 @@
 import { Block } from "baseui/dist/block";
 import { Button, ButtonProps, SHAPE, SIZE } from "baseui/dist/button";
 import { ButtonGroup } from "baseui/dist/button-group";
-import { onChange as defaultHandler, StatefulCalendar } from "baseui/dist/datepicker";
+import {
+  onChange as defaultHandler,
+  StatefulCalendar,
+} from "baseui/dist/datepicker";
 import { Filter } from "baseui/dist/icon";
 import { StatefulPopover } from "components/BaseUI/Popover";
 import { format, subYears } from "date-fns";

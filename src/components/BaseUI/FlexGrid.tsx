@@ -1,5 +1,10 @@
 import { BlockOverrides } from "baseui/dist/block";
-import { FlexGrid as DefaultFlexGrid, FlexGridItem, FlexGridItemProps, FlexGridProps } from "baseui/dist/flex-grid";
+import {
+  FlexGrid as DefaultFlexGrid,
+  FlexGridItem,
+  FlexGridItemProps,
+  FlexGridProps,
+} from "baseui/dist/flex-grid";
 import { Overrides } from "baseui/dist/overrides";
 import { Theme } from "baseui/dist/theme";
 import React from "react";
@@ -18,14 +23,17 @@ export const MultiplyWidth = (
         $theme,
       }: { $theme: Theme },
     ): StyleObject => ({
-      width: `calc((${100 * multiple}% - ${$theme.sizing.scale800}) / ${COLUMN_COUNT}px)`,
+      width: `calc((${100 * multiple}% - ${
+        $theme.sizing.scale800
+      }) / ${COLUMN_COUNT}px)`,
     }),
   },
 });
 
 export const FlexGridItemFull: React.FC<FlexGridItemProps> = (
   {
-    children, ...props
+    children,
+    ...props
   },
 ) => (
   <FlexGridItem {...props} overrides={MultiplyWidth()}>

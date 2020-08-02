@@ -35,14 +35,28 @@ const getPriceIndexes = (
         IEX_DATE_FORMAT,
         new Date(),
       );
-
-      return isSameDay(
+      const startDate = isSameDay(
         priceDate,
         date,
       );
+
+      if (
+        priceDate.getMonth() === 7
+      && priceDate.getDate() === 1
+      && priceDate.getFullYear() === 2015
+      ) {
+        console.log(
+          priceDate,
+          date,
+        );
+      }
+
+      return startDate;
     },
   );
   const endDateIndex = startDateIndex > -1 ? startDateIndex - 730 : 0;
+
+  debugger;
 
   return [
     endDateIndex,
@@ -51,7 +65,8 @@ const getPriceIndexes = (
 };
 
 const canGetNextPrice = (
-  prices: HistoricalPrice[], nextPriceIndexes: number[],
+  prices: HistoricalPrice[],
+  nextPriceIndexes: number[],
 ) => {
   const [, startDateIndex] = nextPriceIndexes;
 
@@ -73,14 +88,16 @@ const setNextPrices = (
     ...priceIndexes,
   );
 
+  debugger;
+
   setPastPrices(
     nextPrices,
   );
   setNextPriceIndexes(
     priceIndexes.map(
       (
-        i,
-      ) => ++i,
+        index,
+      ) => index + 1,
     ),
   );
 };
@@ -111,16 +128,18 @@ const TradeView: React.FC<Props> = (
 
   const handleLoad = useCallback(
     (
-      prices?: HistoricalPrice[], date?: Date,
+      nextPrices?: HistoricalPrice[], nextDate?: Date,
     ) => {
-      if (prices && date) {
+      if (nextPrices && nextDate) {
         const priceIndexes = getPriceIndexes(
-          prices,
-          date,
+          nextPrices,
+          nextDate,
         );
 
+        debugger;
+
         setNextPrices(
-          prices,
+          nextPrices,
           priceIndexes,
           {
             setNextPriceIndexes,
@@ -134,10 +153,16 @@ const TradeView: React.FC<Props> = (
 
   const handleContinue = useCallback(
     () => {
-      if (prices && nextPriceIndexes && canGetNextPrice(
+      if (
+        prices
+      && nextPriceIndexes
+      && canGetNextPrice(
         prices,
         nextPriceIndexes,
-      )) {
+      )
+      ) {
+        debugger;
+
         setNextPrices(
           prices,
           nextPriceIndexes,
@@ -201,15 +226,19 @@ const TradeView: React.FC<Props> = (
             ]} prices={pastPrices} />
           </AspectRatioItem>
         </AspectRatioBox>
-        <FlexGridItem flex="1 1" maxWidth={[
-          "100%",
-          "100%",
-          "25%",
-        ]} minWidth={[
-          "auto",
-          "30%",
-          "25%",
-        ]}>
+        <FlexGridItem
+          flex="1 1"
+          maxWidth={[
+            "100%",
+            "100%",
+            "25%",
+          ]}
+          minWidth={[
+            "auto",
+            "30%",
+            "25%",
+          ]}
+        >
           <TimeControl handleContinue={handleContinue} />
           <TradeControl price={currentPrice} />
           <BalanceHistory />

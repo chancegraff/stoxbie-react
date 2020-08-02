@@ -38,11 +38,17 @@ export const AspectRatioBox: React.FC<Props> = forwardRef(
       component: Component = Block, children, ...props
     }, ref,
   ) => (
-    <Component ref={ref} height={0} paddingBottom={[
-      "100%",
-      "75%",
-      "56.25%",
-    ]} position="relative" {...props}>
+    <Component
+      ref={ref}
+      height={0}
+      paddingBottom={[
+        "100%",
+        "75%",
+        "56.25%",
+      ]}
+      position="relative"
+      {...props}
+    >
       {children}
     </Component>
   ),

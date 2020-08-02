@@ -25,44 +25,46 @@ const yMaxCreator = (
   height: number, verticalPadding: number,
 ) => height - BOTTOM_LABELS_HEIGHT - verticalPadding * 2;
 
-const withMax = <P extends React.PropsWithChildren<Props>>(WrappedChart: React.FC<P>): React.FC<P> => (
-  props,
-) => {
-  const {
-    resolution: [
-      width,
-      height,
-    ],
-    padding: [
-      horizontalPadding,
-      verticalPadding,
-    ],
-  } = props;
-  const xMax = useMemo(
-    () => xMaxCreator(
-      width,
-      horizontalPadding,
-    ),
-    [
-      width,
-      horizontalPadding,
-    ],
-  );
-  const yMax = useMemo(
-    () => yMaxCreator(
-      height,
-      verticalPadding,
-    ),
-    [
-      height,
-      verticalPadding,
-    ],
-  );
+const withMax = <P extends React.PropsWithChildren<Props>>(
+  WrappedChart: React.FC<P>,
+): React.FC<P> => (
+    props,
+  ) => {
+    const {
+      resolution: [
+        width,
+        height,
+      ],
+      padding: [
+        horizontalPadding,
+        verticalPadding,
+      ],
+    } = props;
+    const xMax = useMemo(
+      () => xMaxCreator(
+        width,
+        horizontalPadding,
+      ),
+      [
+        width,
+        horizontalPadding,
+      ],
+    );
+    const yMax = useMemo(
+      () => yMaxCreator(
+        height,
+        verticalPadding,
+      ),
+      [
+        height,
+        verticalPadding,
+      ],
+    );
 
-  return <WrappedChart {...(props as P)} max={[
-    xMax,
-    yMax,
-  ]} />;
-};
+    return <WrappedChart {...(props as P)} max={[
+      xMax,
+      yMax,
+    ]} />;
+  };
 
 export default withMax;
