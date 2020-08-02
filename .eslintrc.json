@@ -24,13 +24,15 @@
         "react-hooks",
         "@typescript-eslint",
         "simple-import-sort",
-        "sort-keys-fix"
+        "sort-keys-fix",
+        "react-stocks"
     ],
     "settings": {
         "react": {
             "version": "detect"
         }
     },
+    "ignorePatterns": ["node_modules", "eslint"],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
@@ -40,7 +42,10 @@
             "error",
             "always"
         ],
-        "arrow-body-style": "error",
+        "arrow-body-style": [
+            "error",
+            "always"
+        ],
         "arrow-parens": "error",
         "arrow-spacing": "error",
         "block-scoped-var": "error",
@@ -77,9 +82,7 @@
         ],
         "function-paren-newline": [
             "error",
-            {
-                "minItems": 1
-            }
+            { "minItems": 1 }
         ],
         "generator-star-spacing": "error",
         "global-require": "error",
@@ -240,7 +243,7 @@
             }
         ],
         "object-curly-spacing": "error",
-        "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": false }],
+        "object-property-newline": "error",
         "object-shorthand": "error",
         "one-var": "error",
         "one-var-declaration-per-line": "error",
@@ -253,7 +256,13 @@
         "padding-line-between-statements": "error",
         "prefer-arrow-callback": "error",
         "prefer-const": "error",
-        "prefer-destructuring": "error",
+        "prefer-destructuring": [
+            "error",
+            {
+                "object": true,
+                "array": true
+            }
+        ],
         "prefer-exponentiation-operator": "error",
         "prefer-named-capture-group": "error",
         "prefer-numeric-literals": "error",
@@ -305,6 +314,7 @@
         "react/prop-types": 0,
         "react/display-name": 0,
         "simple-import-sort/sort": "error",
-        "sort-keys-fix/sort-keys-fix": "warn"
+        "sort-keys-fix/sort-keys-fix": "warn",
+        "react-stocks/wrap-destructured-object-params": "error"
     }
 }
