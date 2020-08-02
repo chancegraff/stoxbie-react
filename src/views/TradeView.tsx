@@ -8,10 +8,9 @@ import Error from "components/BaseUI/Typography";
 import StockChart from "components/StockChart";
 import TimeControl from "components/TimeControl";
 import TradeControl from "components/TradeControl";
-import { isSameDay, parse } from "date-fns";
+import { closestIndexTo, parseISO } from "date-fns";
 import { HistoricalPrice } from "iex";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { IEX_DATE_FORMAT } from "services/Constants";
 import { handleUnloadCreator } from "services/Utilities";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";
@@ -26,37 +25,20 @@ type Props = {
 const getPriceIndexes = (
   prices: HistoricalPrice[], date: Date,
 ) => {
-  const startDateIndex = prices.findIndex(
+  const priceDates = prices.map(
     (
-      price,
-    ) => {
-      const priceDate = parse(
-        price.date,
-        IEX_DATE_FORMAT,
-        new Date(),
-      );
-      const startDate = isSameDay(
-        priceDate,
-        date,
-      );
-
-      if (
-        priceDate.getMonth() === 7
-      && priceDate.getDate() === 1
-      && priceDate.getFullYear() === 2015
-      ) {
-        console.log(
-          priceDate,
-          date,
-        );
-      }
-
-      return startDate;
-    },
+      {
+        date: dateString,
+      },
+    ) => parseISO(
+      dateString,
+    ),
+  );
+  const startDateIndex = closestIndexTo(
+    date,
+    priceDates,
   );
   const endDateIndex = startDateIndex > -1 ? startDateIndex - 730 : 0;
-
-  debugger;
 
   return [
     endDateIndex,
@@ -87,8 +69,6 @@ const setNextPrices = (
   const nextPrices = prices.slice(
     ...priceIndexes,
   );
-
-  debugger;
 
   setPastPrices(
     nextPrices,
@@ -136,8 +116,6 @@ const TradeView: React.FC<Props> = (
           nextDate,
         );
 
-        debugger;
-
         setNextPrices(
           nextPrices,
           priceIndexes,
@@ -161,8 +139,6 @@ const TradeView: React.FC<Props> = (
         nextPriceIndexes,
       )
       ) {
-        debugger;
-
         setNextPrices(
           prices,
           nextPriceIndexes,
