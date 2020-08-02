@@ -31,10 +31,6 @@
             "version": "detect"
         }
     },
-    "ignorePatterns": [
-        "node_modules",
-        "eslint"
-    ],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
@@ -121,7 +117,7 @@
         "max-lines-per-function": "off",
         "max-nested-callbacks": "error",
         "max-params": "error",
-        "max-statements": "error",
+        "max-statements": "off",
         "max-statements-per-line": "error",
         "multiline-comment-style": "error",
         "multiline-ternary": [
@@ -216,7 +212,7 @@
         "no-throw-literal": "error",
         "no-trailing-spaces": "error",
         "no-undef-init": "error",
-        "no-undefined": "error",
+        "no-undefined": "off",
         "no-underscore-dangle": "error",
         "no-unmodified-loop-condition": "error",
         "no-unneeded-ternary": "error",

@@ -12,16 +12,19 @@ import { styled } from "styletron-react";
 
 const today = new Date();
 const oneYear = subYears(
-today, 1
+  today,
+  1,
 );
 const fiveYear = subYears(
-today, 5
+  today,
+  5,
 );
 
 const GrowingButton = styled(
-Button, {
+  Button,
+  {
     flexGrow: 1,
-  }
+  },
 );
 
 type onChange = (args: { date: Date }) => void;
@@ -30,7 +33,11 @@ type DatePickerProps = ButtonProps & {
   onChange?: onChange;
 };
 
-const DatePicker: React.FC<DatePickerProps> = ({ onChange, ...props }) => (
+const DatePicker: React.FC<DatePickerProps> = (
+  {
+    onChange, ...props
+  },
+) => (
   <StatefulPopover
     placement="bottomLeft"
     content={
@@ -44,7 +51,9 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange, ...props }) => (
       />
     }
   >
-    {copyPropsToChildren(props)}
+    {copyPropsToChildren(
+      props,
+    )}
   </StatefulPopover>
 );
 
@@ -52,23 +61,50 @@ type Props = {
   handleStart: (date: string) => void;
 };
 
-const TradeStart: React.FC<Props> = ({ handleStart }) => {
+const TradeStart: React.FC<Props> = (
+  {
+    handleStart,
+  },
+) => {
   const handleYearStart = useCallback(
-(date: string) => handleStart(date), [handleStart]
-);
+    (
+      date: string,
+    ) => handleStart(
+      date,
+    ),
+    [handleStart],
+  );
   const handleOneYearStart = useCallback(
-() => handleYearStart(format(
-oneYear, URL_DATE_FORMAT)), [handleYearStart]
-);
+    () => handleYearStart(
+      format(
+        oneYear,
+        URL_DATE_FORMAT,
+      ),
+    ),
+    [handleYearStart],
+  );
   const handleFiveYearStart = useCallback(
-() => handleYearStart(format(
-fiveYear, URL_DATE_FORMAT)), [handleYearStart]
-);
+    () => handleYearStart(
+      format(
+        fiveYear,
+        URL_DATE_FORMAT,
+      ),
+    ),
+    [handleYearStart],
+  );
   const handleCustomYearStart: onChange = useCallback(
-({ date }) => handleYearStart(format(
-date, URL_DATE_FORMAT)), [
-  [handleYearStart]
-);
+    (
+      {
+        date,
+      },
+    ) => handleYearStart(
+      format(
+        date,
+        URL_DATE_FORMAT,
+      ),
+    ),
+    [handleYearStart],
+  );
 
   return (
     <Block>

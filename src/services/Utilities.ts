@@ -1,29 +1,17 @@
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  PropsWithChildren,
-  useEffect,
-  useRef,
-} from "react";
+import { Children, cloneElement, isValidElement, PropsWithChildren, useEffect, useRef } from "react";
 
 export const copyPropsToChildren = (
   {
-    children,
-    ...props
-  }: PropsWithChildren<
-  unknown
->,
+    children, ...props
+  }: PropsWithChildren<unknown>,
 ): React.ReactNode => Children.map(
   children,
   (
     child,
   ) => {
-    if (
-      isValidElement(
-        child,
-      )
-    ) {
+    if (isValidElement(
+      child,
+    )) {
       return cloneElement(
         child,
         props,
@@ -41,15 +29,11 @@ export const parsePixels = (
     "px",
     "",
   ),
+  10,
 );
 
 export const handleUnloadCreator = (
-  dispatchHandlers: React.Dispatch<
-    React.SetStateAction<
-      | any
-      | undefined
-    >
-  >[],
+  dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[],
 ) => (): void => dispatchHandlers.forEach(
   (
     dispatch,
@@ -58,16 +42,8 @@ export const handleUnloadCreator = (
   ),
 );
 
-export const usePrevious = <
-  P
->(
-    value?: P,
-  ):
-  | P
-  | undefined => {
-  const ref = useRef<
-    P
-  >();
+export const usePrevious = <P>(value?: P): P | undefined => {
+  const ref = useRef<P>();
 
   useEffect(
     () => {

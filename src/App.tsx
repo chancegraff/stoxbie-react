@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import SearchRoutes from "routes/SearchRoutes";
 import StockRoutes from "routes/StockRoutes";
 import TradeRoutes from "routes/TradeRoutes";

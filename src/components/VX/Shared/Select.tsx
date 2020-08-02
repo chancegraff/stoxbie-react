@@ -24,11 +24,9 @@ type Props = InjectedProps & SelectProps;
 
 const withSelect = <P extends React.PropsWithChildren<Props>>(WrappedChart: React.FC<P>): React.FC<P> => (
   props,
-) => (
-  <WrappedChart {...(props as P)} select={[
-    xSelector,
-    ySelector,
-  ]} />
-);
+) => <WrappedChart {...(props as P)} select={[
+  xSelector,
+  ySelector,
+]} />;
 
 export default withSelect;
