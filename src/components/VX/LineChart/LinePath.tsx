@@ -22,7 +22,9 @@ const LinePath: React.FC<Props> = (
     ySelector,
   },
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
 
   return (
     <DefaultLinePath
@@ -30,18 +32,22 @@ const LinePath: React.FC<Props> = (
       curve={curveLinear}
       x={(
         datum,
-      ) => xScale(
-        xSelector(
-          datum,
-        ),
-      )}
+      ) => {
+        return xScale(
+          xSelector(
+            datum,
+          ),
+        );
+      }}
       y={(
         datum,
-      ) => yScale(
-        ySelector(
-          datum,
-        ),
-      )}
+      ) => {
+        return yScale(
+          ySelector(
+            datum,
+          ),
+        );
+      }}
       stroke={theme.colors.contentPrimary}
       strokeWidth={1}
       shapeRendering="geometricPrecision"

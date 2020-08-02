@@ -7,12 +7,14 @@ export type Select = [SelectX, SelectY];
 
 const xSelector = (
   price: HistoricalPrice,
-) => new Date(
-  price.date,
-).valueOf();
+) => {
+  return new Date(
+    price.date,
+  ).valueOf();
+};
 const ySelector = (
   price: HistoricalPrice,
-) => price.close;
+) => { return price.close; };
 
 type InjectedProps = {
   select: Select;
@@ -24,11 +26,15 @@ type Props = InjectedProps & SelectProps;
 
 const withSelect = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
-): React.FC<P> => (
+): React.FC<P> => {
+  return (
     props,
-  ) => <WrappedChart {...(props as P)} select={[
-    xSelector,
-    ySelector,
-  ]} />;
+  ) => {
+    return <WrappedChart {...(props as P)} select={[
+      xSelector,
+      ySelector,
+    ]} />;
+  };
+};
 
 export default withSelect;

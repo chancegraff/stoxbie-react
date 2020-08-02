@@ -71,13 +71,13 @@ const ViewRoute: React.FC = () => {
   );
 
   const handleLoad = useCallback(
-    async (ticker?: string) => {
-      if (ticker) {
+    async (nextTicker?: string) => {
+      if (nextTicker) {
         const nextCompany = await getCompany(
-          ticker,
+          nextTicker,
         );
         const nextLogo = await getLogo(
-          ticker,
+          nextTicker,
         ).catch();
 
         if (!nextCompany || !nextLogo) {
@@ -110,13 +110,15 @@ const ViewRoute: React.FC = () => {
   );
 
   useEffect(
-    () => handleUnloadCreator(
-      [
-        setLogo,
-        setCompany,
-        setError,
-      ],
-    ),
+    () => {
+      return handleUnloadCreator(
+        [
+          setLogo,
+          setCompany,
+          setError,
+        ],
+      );
+    },
     [],
   );
 

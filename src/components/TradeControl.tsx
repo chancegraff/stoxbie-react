@@ -27,13 +27,15 @@ const Container = styled(
     {
       $theme,
     },
-  ) => ({
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    margin: `${$theme.sizing.scale800} 0`,
-  }),
+  ) => {
+    return {
+      alignItems: "center",
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      margin: `${$theme.sizing.scale800} 0`,
+    };
+  },
 );
 
 const TradeControl: React.FC<Props> = (
@@ -45,15 +47,21 @@ const TradeControl: React.FC<Props> = (
     purchaseAmount,
     setPurchaseAmount,
   ] = useState<number[]>(
-    [0],
+    [
+      0,
+    ],
   );
   const previousPrice = usePrevious(
     price,
   );
   const maxPurchasable = useMemo(
-    () => price ? Math.floor(
-      balance / price.close,
-    ) : 0,
+    () => {
+      return price
+        ? Math.floor(
+          balance / price.close,
+        )
+        : 0;
+    },
     [
       price,
       balance,
@@ -74,7 +82,9 @@ const TradeControl: React.FC<Props> = (
     () => {
       if (price && previousPrice && price !== previousPrice) {
         setPurchaseAmount(
-          [0],
+          [
+            0,
+          ],
         );
       }
     },

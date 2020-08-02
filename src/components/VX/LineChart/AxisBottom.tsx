@@ -23,19 +23,23 @@ const AxisBottom: React.FC<Props> = (
     tickLabelProps,
   },
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
   const tickFormat = useCallback(
     (
       tick: Date,
-    ) => tick.getMonth() % 12 === 0
-      ? format(
-        tick,
-        "MMM ''yy",
-      )
-      : format(
-        tick,
-        "MMM",
-      ),
+    ) => {
+      return tick.getMonth() % 12 === 0
+        ? format(
+          tick,
+          "MMM ''yy",
+        )
+        : format(
+          tick,
+          "MMM",
+        );
+    },
     [],
   );
 

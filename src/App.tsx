@@ -6,24 +6,26 @@ import TradeRoutes from "routes/TradeRoutes";
 import BaseUI from "services/BaseUI";
 import BackgroundContainer from "templates/BackgroundContainer";
 
-const App: React.FC = () => (
-  <BrowserRouter>
-    <BaseUI>
-      <BackgroundContainer>
-        <Switch>
-          <Route path="/trade">
-            <TradeRoutes />
-          </Route>
-          <Route path="/stock">
-            <StockRoutes />
-          </Route>
-          <Route path="/">
-            <SearchRoutes />
-          </Route>
-        </Switch>
-      </BackgroundContainer>
-    </BaseUI>
-  </BrowserRouter>
-);
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <BaseUI>
+        <BackgroundContainer>
+          <Switch>
+            <Route path="/trade">
+              <TradeRoutes />
+            </Route>
+            <Route path="/stock">
+              <StockRoutes />
+            </Route>
+            <Route path="/">
+              <SearchRoutes />
+            </Route>
+          </Switch>
+        </BackgroundContainer>
+      </BaseUI>
+    </BrowserRouter>
+  );
+};
 
 export default App;

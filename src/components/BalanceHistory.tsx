@@ -5,6 +5,8 @@ type Props = {
   balance?: number;
 };
 
-const BalanceHistory: React.FC<Props> = () => <div>{"History Table"}</div>;
+const BalanceHistory: React.FC<Props> = () => {
+  return <div>{"History Table"}</div>;
+};
 
 export default BalanceHistory;

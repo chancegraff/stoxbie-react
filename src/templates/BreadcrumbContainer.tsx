@@ -43,7 +43,9 @@ const TradeBreadcrumb: React.FC = () => {
         "MMMM do, y",
       );
     },
-    [date],
+    [
+      date,
+    ],
   );
 
   return (

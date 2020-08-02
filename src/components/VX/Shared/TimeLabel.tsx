@@ -9,28 +9,33 @@ type Props = TickRendererProps;
 
 const DesktopTimeLabel: React.FC<Props> = (
   {
-    formattedValue, ...props
+    formattedValue,
+    ...props
   },
 ) => {
   const MediaQueriedText = useMemo(
-    () => styled(
-      Text,
-      (
-        {
-          $theme,
+    () => {
+      return styled(
+        Text,
+        (
+          {
+            $theme,
+          },
+        ) => {
+          return {
+            [$theme.mediaQuery.large]: {
+              display: "unset",
+            },
+            [$theme.mediaQuery.medium]: {
+              display: "none",
+            },
+            [$theme.mediaQuery.small]: {
+              display: "none",
+            },
+          };
         },
-      ) => ({
-        [$theme.mediaQuery.large]: {
-          display: "unset",
-        },
-        [$theme.mediaQuery.medium]: {
-          display: "none",
-        },
-        [$theme.mediaQuery.small]: {
-          display: "none",
-        },
-      }),
-    ),
+      );
+    },
     [],
   );
 
@@ -39,7 +44,8 @@ const DesktopTimeLabel: React.FC<Props> = (
 
 const MobileTimeLabel: React.FC<Props> = (
   {
-    formattedValue, ...props
+    formattedValue,
+    ...props
   },
 ) => {
   const formattedValueAsDate = useMemo(
@@ -66,35 +72,41 @@ const MobileTimeLabel: React.FC<Props> = (
         }
       }
     },
-    [formattedValue],
+    [
+      formattedValue,
+    ],
   );
   const MediaQueriedText = useMemo(
-    () => styled(
-      Text,
-      (
-        {
-          $theme,
+    () => {
+      return styled(
+        Text,
+        (
+          {
+            $theme,
+          },
+        ) => {
+          const mediaQueries: StyleObject = {
+          };
+
+          mediaQueries[$theme.mediaQuery.large] = {
+            display: "none",
+          };
+          if (!formattedValueAsDate) {
+            mediaQueries[$theme.mediaQuery.medium] = {
+              display: "unset",
+            };
+            mediaQueries[$theme.mediaQuery.small] = {
+              display: "unset",
+            };
+          }
+
+          return mediaQueries;
         },
-      ) => {
-        const mediaQueries: StyleObject = {
-        };
-
-        mediaQueries[$theme.mediaQuery.large] = {
-          display: "none",
-        };
-        if (!formattedValueAsDate) {
-          mediaQueries[$theme.mediaQuery.medium] = {
-            display: "unset",
-          };
-          mediaQueries[$theme.mediaQuery.small] = {
-            display: "unset",
-          };
-        }
-
-        return mediaQueries;
-      },
-    ),
-    [formattedValueAsDate],
+      );
+    },
+    [
+      formattedValueAsDate,
+    ],
   );
 
   return <MediaQueriedText {...props}>{formattedValueAsDate}</MediaQueriedText>;
@@ -102,11 +114,13 @@ const MobileTimeLabel: React.FC<Props> = (
 
 const TimeLabel: React.FC<Props> = (
   props,
-) => (
-  <>
-    <DesktopTimeLabel {...props} />
-    <MobileTimeLabel {...props} />
-  </>
-);
+) => {
+  return (
+    <>
+      <DesktopTimeLabel {...props} />
+      <MobileTimeLabel {...props} />
+    </>
+  );
+};
 
 export default TimeLabel;

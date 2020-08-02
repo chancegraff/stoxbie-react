@@ -8,7 +8,9 @@ type Props = unknown;
 const ContentContainer: React.FC<Props> = (
   props,
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
 
   return (
     <Block

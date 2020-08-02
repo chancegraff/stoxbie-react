@@ -19,12 +19,14 @@ const overrides: BaseProviderOverrides = {
 
 const BaseUI: React.FC = (
   props,
-) => (
-  <StyletronProvider value={engine}>
-    <BaseProvider theme={DarkTheme} overrides={overrides}>
-      {props.children}
-    </BaseProvider>
-  </StyletronProvider>
-);
+) => {
+  return (
+    <StyletronProvider value={engine}>
+      <BaseProvider theme={DarkTheme} overrides={overrides}>
+        {props.children}
+      </BaseProvider>
+    </StyletronProvider>
+  );
+};
 
 export default BaseUI;

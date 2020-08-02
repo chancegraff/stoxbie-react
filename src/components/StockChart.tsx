@@ -16,11 +16,15 @@ const getLabelProps = {
 };
 const getTickLabelProps = (
   theme: Theme,
-) => () => ({
-  fill: theme.colors.mono300,
-  strokeWidth: 0,
-  ...theme.typography.LabelXSmall,
-});
+) => {
+  return () => {
+    return {
+      fill: theme.colors.mono300,
+      strokeWidth: 0,
+      ...theme.typography.LabelXSmall,
+    };
+  };
+};
 
 const StockChart: React.FC<Props> = (
   {
@@ -32,21 +36,31 @@ const StockChart: React.FC<Props> = (
     ],
   },
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
   const label: Label = useMemo(
-    () => [
-      getLabelProps,
-      getTickLabelProps(
-        theme,
-      ),
+    () => {
+      return [
+        getLabelProps,
+        getTickLabelProps(
+          theme,
+        ),
+      ];
+    },
+    [
+      theme,
     ],
-    [theme],
   );
   const responsivePadding: Padding = useMemo(
-    () => resolution[0] <= theme.breakpoints.medium ? [
-      10,
-      10,
-    ] : padding,
+    () => {
+      return resolution[0] <= theme.breakpoints.medium
+        ? [
+          10,
+          10,
+        ]
+        : padding;
+    },
     [
       resolution,
       theme,

@@ -14,7 +14,9 @@ const Grid: React.FC<Props> = (
     scales, max,
   },
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
   const [
     xMax,
     yMax,

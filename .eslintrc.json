@@ -35,7 +35,7 @@
     "ignorePatterns": ["node_modules", "eslint"],
     "rules": {
         "accessor-pairs": "error",
-        "array-bracket-newline": "error",
+        "array-bracket-newline": ["error", { "minItems": 1 }],
         "array-bracket-spacing": "error",
         "array-callback-return": "error",
         "array-element-newline": [

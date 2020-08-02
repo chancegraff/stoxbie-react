@@ -40,25 +40,27 @@ const DatePicker: React.FC<DatePickerProps> = (
   {
     onChange, ...props
   },
-) => (
-  <StatefulPopover
-    placement="bottomLeft"
-    content={
-      <StatefulCalendar
-        maxDate={today}
-        minDate={fiveYear}
-        initialState={{
-          value: oneYear,
-        }}
-        onChange={onChange as defaultHandler}
-      />
-    }
-  >
-    {copyPropsToChildren(
-      props,
-    )}
-  </StatefulPopover>
-);
+) => {
+  return (
+    <StatefulPopover
+      placement="bottomLeft"
+      content={
+        <StatefulCalendar
+          maxDate={today}
+          minDate={fiveYear}
+          initialState={{
+            value: oneYear,
+          }}
+          onChange={onChange as defaultHandler}
+        />
+      }
+    >
+      {copyPropsToChildren(
+        props,
+      )}
+    </StatefulPopover>
+  );
+};
 
 type Props = {
   handleStart: (date: string) => void;
@@ -72,41 +74,57 @@ const TradeStart: React.FC<Props> = (
   const handleYearStart = useCallback(
     (
       date: string,
-    ) => handleStart(
-      date,
-    ),
-    [handleStart],
+    ) => {
+      return handleStart(
+        date,
+      );
+    },
+    [
+      handleStart,
+    ],
   );
   const handleOneYearStart = useCallback(
-    () => handleYearStart(
-      format(
-        oneYear,
-        URL_DATE_FORMAT,
-      ),
-    ),
-    [handleYearStart],
+    () => {
+      return handleYearStart(
+        format(
+          oneYear,
+          URL_DATE_FORMAT,
+        ),
+      );
+    },
+    [
+      handleYearStart,
+    ],
   );
   const handleFiveYearStart = useCallback(
-    () => handleYearStart(
-      format(
-        fiveYear,
-        URL_DATE_FORMAT,
-      ),
-    ),
-    [handleYearStart],
+    () => {
+      return handleYearStart(
+        format(
+          fiveYear,
+          URL_DATE_FORMAT,
+        ),
+      );
+    },
+    [
+      handleYearStart,
+    ],
   );
   const handleCustomYearStart: onChange = useCallback(
     (
       {
         date,
       },
-    ) => handleYearStart(
-      format(
-        date,
-        URL_DATE_FORMAT,
-      ),
-    ),
-    [handleYearStart],
+    ) => {
+      return handleYearStart(
+        format(
+          date,
+          URL_DATE_FORMAT,
+        ),
+      );
+    },
+    [
+      handleYearStart,
+    ],
   );
 
   return (

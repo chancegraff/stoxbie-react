@@ -13,7 +13,9 @@ const ScrollToTop: React.FC = () => {
         0,
       );
     },
-    [pathname],
+    [
+      pathname,
+    ],
   );
 
   return null;

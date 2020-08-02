@@ -34,9 +34,11 @@ const Rect = styled(
     {
       $theme,
     },
-  ) => ({
-    fill: $theme.colors.backgroundSecondary,
-  }),
+  ) => {
+    return {
+      fill: $theme.colors.backgroundSecondary,
+    };
+  },
 );
 
 const LineChart: React.FC<Props> = (
@@ -67,46 +69,48 @@ const LineChart: React.FC<Props> = (
       tickLabelProps,
     ],
   },
-) => (
-  <svg width={width} height={height}>
-    <Rect width={width} height={height} />
-    <Group left={horizontalPadding} top={verticalPadding}>
-      <Grid scales={[
-        xScale,
-        yScale,
-      ]} max={[
-        xMax,
-        yMax,
-      ]} />
-      <AxisBottom
-        yMax={yMax}
-        xScale={xScale}
-        labelProps={axisLabelProps}
-        tickLabelProps={tickLabelProps}
-      />
-      <AxisRight
-        xMax={xMax}
-        yScale={yScale}
-        labelProps={axisLabelProps}
-        tickLabelProps={tickLabelProps}
-      />
-      {/* <LinePoints
+) => {
+  return (
+    <svg width={width} height={height}>
+      <Rect width={width} height={height} />
+      <Group left={horizontalPadding} top={verticalPadding}>
+        <Grid scales={[
+          xScale,
+          yScale,
+        ]} max={[
+          xMax,
+          yMax,
+        ]} />
+        <AxisBottom
+          yMax={yMax}
+          xScale={xScale}
+          labelProps={axisLabelProps}
+          tickLabelProps={tickLabelProps}
+        />
+        <AxisRight
+          xMax={xMax}
+          yScale={yScale}
+          labelProps={axisLabelProps}
+          tickLabelProps={tickLabelProps}
+        />
+        {/* <LinePoints
         prices={prices}
         xScale={xScale}
         yScale={yScale}
         xSelector={xSelector}
         ySelector={ySelector}
       /> */}
-      <LinePath
-        prices={prices}
-        xScale={xScale}
-        yScale={yScale}
-        xSelector={xSelector}
-        ySelector={ySelector}
-      />
-    </Group>
-  </svg>
-);
+        <LinePath
+          prices={prices}
+          xScale={xScale}
+          yScale={yScale}
+          xSelector={xSelector}
+          ySelector={ySelector}
+        />
+      </Group>
+    </svg>
+  );
+};
 
 export default withShared(
   LineChart,

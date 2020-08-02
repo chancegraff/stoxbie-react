@@ -17,7 +17,9 @@ type Props = {
 const SearchView: React.FC<Props> = (
   props,
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
 
   return (
     <ContentContainer>

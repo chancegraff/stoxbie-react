@@ -21,7 +21,9 @@ const AxisRight: React.FC<Props> = (
     tickLabelProps,
   },
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
 
   return (
     <DefaultAxisRight

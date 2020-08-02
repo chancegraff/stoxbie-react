@@ -27,21 +27,25 @@ const overrides: OverridesT = {
 
 const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (
   props,
-) => (
-  <Block
-    height={props.height}
-    display="flex"
-    alignItems="flex-end"
-    paddingBottom="2px"
-  >
-    <Skeleton animation={true} rows={2} overrides={overrides} />
-  </Block>
-);
+) => {
+  return (
+    <Block
+      height={props.height}
+      display="flex"
+      alignItems="flex-end"
+      paddingBottom="2px"
+    >
+      <Skeleton animation={true} rows={2} overrides={overrides} />
+    </Block>
+  );
+};
 
 const StockName: React.FC<Props> = (
   props,
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
 
   if (!props.company) {
     return <DetailsSkeleton height={theme.sizing.scale2400} />;

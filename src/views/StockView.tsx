@@ -19,7 +19,9 @@ type Props = {
 const StockView: React.FC<Props> = (
   props,
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
 
   if (props.error) {
     return <Error>{props.error}</Error>;

@@ -47,7 +47,9 @@ const TradeRoute: React.FC = () => {
         DATE_ERROR_MESSAGE,
       );
     },
-    [date],
+    [
+      date,
+    ],
   );
 
   const safeTicker = useMemo(
@@ -59,14 +61,16 @@ const TradeRoute: React.FC = () => {
         TICKER_ERROR_MESSAGE,
       );
     },
-    [ticker],
+    [
+      ticker,
+    ],
   );
 
   const handleLoad = useCallback(
-    async (ticker?: string, date?: Date) => {
-      if (ticker && date) {
+    async (nextTicker?: string, nextDate?: Date) => {
+      if (nextTicker && nextDate) {
         const nextPrices = await historicalPrices(
-          ticker,
+          nextTicker,
           "max",
           undefined,
           {
@@ -74,15 +78,17 @@ const TradeRoute: React.FC = () => {
           },
         );
 
-        if (!nextPrices) {
-          setError(
-            FETCH_ERROR_MESSAGE,
-          );
-        } else {
+        if (nextPrices) {
           const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
 
           setPrices(
-            [...typedPrices],
+            [
+              ...typedPrices,
+            ],
+          );
+        } else {
+          setError(
+            FETCH_ERROR_MESSAGE,
           );
         }
       }
@@ -105,12 +111,14 @@ const TradeRoute: React.FC = () => {
   );
 
   useEffect(
-    () => handleUnloadCreator(
-      [
-        setPrices,
-        setError,
-      ],
-    ),
+    () => {
+      return handleUnloadCreator(
+        [
+          setPrices,
+          setError,
+        ],
+      );
+    },
     [],
   );
 

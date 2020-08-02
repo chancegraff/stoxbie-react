@@ -22,14 +22,16 @@ type Props = BaseProps & InjectedProps;
 
 const withShared = (
   WrappedChart: React.FC<Props>,
-): React.FC<BaseProps> => withSelect<Props>(
-  withMax<Props>(
-    withScale<Props>(
-      WrappedChart,
+): React.FC<BaseProps> => {
+  return withSelect<Props>(
+    withMax<Props>(
+      withScale<Props>(
+        WrappedChart,
+      ),
     ),
-  ),
-) as React.FC<
+  ) as React.FC<
     BaseProps
   >;
+};
 
 export default withShared;

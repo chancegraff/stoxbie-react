@@ -7,7 +7,9 @@ type Props = unknown;
 const BackgroundContainer: React.FC<Props> = (
   props,
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
 
   return (
     <Block

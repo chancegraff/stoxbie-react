@@ -8,12 +8,15 @@ type Props = SpinnerProps & {
 
 const Spinner: React.FC<Props> = (
   {
-    container: Container, ...props
+    container: Container,
+    ...props
   },
-) => (
-  <Container>
-    <DefaultSpinner {...props} />
-  </Container>
-);
+) => {
+  return (
+    <Container>
+      <DefaultSpinner {...props} />
+    </Container>
+  );
+};
 
 export default Spinner;

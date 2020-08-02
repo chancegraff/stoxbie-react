@@ -12,43 +12,53 @@ export const copyPropsToChildren = (
     children,
     ...props
   }: PropsWithChildren<unknown>,
-): React.ReactNode => Children.map(
-  children,
-  (
-    child,
-  ) => {
-    if (isValidElement(
+): React.ReactNode => {
+  return Children.map(
+    children,
+    (
       child,
-    )) {
-      return cloneElement(
+    ) => {
+      if (isValidElement(
         child,
-        props,
-      );
-    }
+      )) {
+        return cloneElement(
+          child,
+          props,
+        );
+      }
 
-    return child;
-  },
-);
+      return child;
+    },
+  );
+};
 
 export const parsePixels = (
   px: string,
-): number => parseInt(
-  px.replace(
-    "px",
-    "",
-  ),
-  10,
-);
+): number => {
+  return parseInt(
+    px.replace(
+      "px",
+      "",
+    ),
+    10,
+  );
+};
 
 export const handleUnloadCreator = (
   dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[],
-) => (): void => dispatchHandlers.forEach(
-  (
-    dispatch,
-  ) => dispatch(
-    undefined,
-  ),
-);
+) => {
+  return (): void => {
+    return dispatchHandlers.forEach(
+      (
+        dispatch,
+      ) => {
+        return dispatch(
+          undefined,
+        );
+      },
+    );
+  };
+};
 
 export const usePrevious = <P>(value?: P): P | undefined => {
   const ref = useRef<P>();

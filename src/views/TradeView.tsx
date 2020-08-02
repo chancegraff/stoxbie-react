@@ -30,9 +30,11 @@ const getPriceIndexes = (
       {
         date: dateString,
       },
-    ) => parseISO(
-      dateString,
-    ),
+    ) => {
+      return parseISO(
+        dateString,
+      );
+    },
   );
   const startDateIndex = closestIndexTo(
     date,
@@ -50,7 +52,9 @@ const canGetNextPrice = (
   prices: HistoricalPrice[],
   nextPriceIndexes: number[],
 ) => {
-  const [, startDateIndex] = nextPriceIndexes;
+  const [
+    , startDateIndex,
+  ] = nextPriceIndexes;
 
   return prices.length > startDateIndex;
 };
@@ -77,7 +81,9 @@ const setNextPrices = (
     priceIndexes.map(
       (
         index,
-      ) => index + 1,
+      ) => {
+        return index + 1;
+      },
     ),
   );
 };
@@ -87,7 +93,9 @@ const TradeView: React.FC<Props> = (
     prices, date, error,
   },
 ) => {
-  const [, theme] = useStyletron();
+  const [
+    , theme,
+  ] = useStyletron();
   const {
     ref, width = 1, height = 1,
   } = useResizeObserver<HTMLDivElement>();
@@ -102,8 +110,12 @@ const TradeView: React.FC<Props> = (
   ] = useState<number[]>();
 
   const currentPrice = useMemo(
-    () => pastPrices && pastPrices[pastPrices.length - 1],
-    [pastPrices],
+    () => {
+      return pastPrices && pastPrices[pastPrices.length - 1];
+    },
+    [
+      pastPrices,
+    ],
   );
 
   const handleLoad = useCallback(
@@ -173,9 +185,13 @@ const TradeView: React.FC<Props> = (
   );
 
   useEffect(
-    () => handleUnloadCreator(
-      [setPastPrices],
-    ),
+    () => {
+      return handleUnloadCreator(
+        [
+          setPastPrices,
+        ],
+      );
+    },
     [],
   );
 
