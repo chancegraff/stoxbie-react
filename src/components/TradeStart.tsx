@@ -38,7 +38,8 @@ type DatePickerProps = ButtonProps & {
 
 const DatePicker: React.FC<DatePickerProps> = (
   {
-    onChange, ...props
+    onChange,
+    ...props
   },
 ) => {
   return (

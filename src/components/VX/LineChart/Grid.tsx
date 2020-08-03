@@ -11,7 +11,8 @@ type Props = {
 
 const Grid: React.FC<Props> = (
   {
-    scales, max,
+    scales,
+    max,
   },
 ) => {
   const [

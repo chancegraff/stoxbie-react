@@ -10,7 +10,9 @@ type Props = DivProps & {
 export const AspectRatioItem: React.FC<Props> = forwardRef(
   (
     {
-      component: Component = Block, children, ...props
+      component: Component = Block,
+      children,
+      ...props
     }, ref,
   ) => {
     return (
@@ -37,7 +39,9 @@ export const AspectRatioItem: React.FC<Props> = forwardRef(
 export const AspectRatioBox: React.FC<Props> = forwardRef(
   (
     {
-      component: Component = Block, children, ...props
+      component: Component = Block,
+      children,
+      ...props
     }, ref,
   ) => {
     return (

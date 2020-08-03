@@ -51,7 +51,9 @@ const ViewRoute: React.FC = () => {
         TICKER_ERROR_MESSAGE,
       );
     },
-    [ticker],
+    [
+      ticker,
+    ],
   );
 
   const handleStart = useCallback(

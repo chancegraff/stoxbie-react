@@ -90,14 +90,18 @@ const setNextPrices = (
 
 const TradeView: React.FC<Props> = (
   {
-    prices, date, error,
+    prices,
+    date,
+    error,
   },
 ) => {
   const [
     , theme,
   ] = useStyletron();
   const {
-    ref, width = 1, height = 1,
+    ref,
+    width = 1,
+    height = 1,
   } = useResizeObserver<HTMLDivElement>();
 
   const [

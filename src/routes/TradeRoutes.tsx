@@ -18,7 +18,8 @@ type Props = unknown;
 
 const TradeRoute: React.FC = () => {
   const {
-    ticker = "", date = "",
+    ticker = "",
+    date = "",
   } = useParams<{
     ticker?: string;
     date?: string;

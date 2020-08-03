@@ -40,7 +40,8 @@ const Container = styled(
 
 const TradeControl: React.FC<Props> = (
   {
-    price, balance = 10000,
+    price,
+    balance = 10000,
   },
 ) => {
   const [

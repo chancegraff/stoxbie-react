@@ -7,13 +7,17 @@ import SearchView from "views/SearchView";
 type Props = unknown;
 
 const SearchRoutes: React.FC<Props> = () => {
-  const [handleSearch] = useDebouncedCallback(
+  const [
+    handleSearch,
+  ] = useDebouncedCallback(
     async (
       nextValue: string,
       setOptions: React.Dispatch<React.SetStateAction<Search[]>>,
       setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
     ) => {
-      const [...options] = await search(
+      const [
+        ...options
+      ] = await search(
         nextValue,
       );
 
