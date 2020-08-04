@@ -26,9 +26,9 @@ export const StatefulPopover: React.FC<Partial<PopoverProps>> = (
   return (
     <DefaultStatefulPoover
       animateOutTime={300}
-      autoFocus
+      autoFocus={true}
       overrides={overrides}
-      returnFocus
+      returnFocus={true}
       {...props}
     >
       {children}

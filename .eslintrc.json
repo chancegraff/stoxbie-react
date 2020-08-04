@@ -354,6 +354,8 @@
             "multiline"
         ],
         "react/jsx-curly-newline": "error",
+        "react/boolean-prop-naming": "error",
+        "react/jsx-boolean-value": ["error", "always"],
         "simple-import-sort/sort": "error",
         "sort-keys-fix/sort-keys-fix": "warn",
         "wrap-params/destructured-objects": "error",
