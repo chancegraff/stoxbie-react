@@ -109,12 +109,12 @@ const TradeControl: React.FC<Props> = (
       <FlexGrid>
         <FlexGridItem>
           <FullButton>
-            {"Buy"}
+            Buy
           </FullButton>
         </FlexGridItem>
         <FlexGridItem>
           <FullButton>
-            {"Sell"}
+            Sell
           </FullButton>
         </FlexGridItem>
       </FlexGrid>

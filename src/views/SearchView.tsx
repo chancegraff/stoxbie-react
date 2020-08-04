@@ -33,10 +33,10 @@ const SearchView: React.FC<Props> = (
       >
         <Block marginBottom={theme.sizing.scale800}>
           <Display2>
-            {"Ticker Search"}
+            Ticker Search
           </Display2>
           <Label2>
-            {"Select the stock ticker to trade."}
+            Select the stock ticker to trade.
           </Label2>
         </Block>
         <Block>

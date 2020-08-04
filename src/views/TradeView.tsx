@@ -23,7 +23,8 @@ type Props = {
 };
 
 const getPriceIndexes = (
-  prices: HistoricalPrice[], date: Date,
+  prices: HistoricalPrice[],
+  date: Date,
 ) => {
   const priceDates = prices.map(
     (
@@ -112,6 +113,10 @@ const TradeView: React.FC<Props> = (
     nextPriceIndexes,
     setNextPriceIndexes,
   ] = useState<number[]>();
+  const [
+    pastTrades,
+    setPastTrades,
+  ] = useState<HistoricalTrade[]>();
 
   const currentPrice = useMemo(
     () => {
@@ -249,7 +254,7 @@ const TradeView: React.FC<Props> = (
         >
           <TimeControl handleContinue={handleContinue} />
           <TradeControl price={currentPrice} />
-          <BalanceHistory />
+          <BalanceHistory trades={pastTrades} />
         </FlexGridItem>
       </FlexGrid>
     </ContentContainer>

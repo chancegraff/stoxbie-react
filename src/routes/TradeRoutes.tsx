@@ -143,12 +143,12 @@ const TradeRoutes: React.FC<Props> = () => {
       </Route>
       <Route path={`${match.path}/:ticker`}>
         <Error>
-          {"Please select a date to trade from."}
+          Please select a date to trade from.
         </Error>
       </Route>
       <Route path={match.path}>
         <Error>
-          {"Please select a stock to trade with."}
+          Please select a stock to trade with.
         </Error>
       </Route>
     </Switch>

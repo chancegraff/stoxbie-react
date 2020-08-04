@@ -18,7 +18,7 @@ const StockBreadcrumb: React.FC = () => {
         $as={Link}
         to="/"
       >
-        {"Ticker Search"}
+        Ticker Search
       </StyledLink>
       <span>
         {ticker}
@@ -59,7 +59,7 @@ const TradeBreadcrumb: React.FC = () => {
         $as={Link}
         to="/"
       >
-        {"Ticker Search"}
+        Ticker Search
       </StyledLink>
       <StyledLink
         $as={Link}

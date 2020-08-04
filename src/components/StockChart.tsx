@@ -1,6 +1,6 @@
 import { useStyletron } from "baseui/dist";
-import { Spinner } from "baseui/dist/spinner";
 import { Theme } from "baseui/dist/theme";
+import Spinner from "components/BaseUI/Spinner";
 import LineChart, { Label } from "components/VX/LineChart";
 import { HistoricalPrice } from "iex";
 import React, { useMemo } from "react";

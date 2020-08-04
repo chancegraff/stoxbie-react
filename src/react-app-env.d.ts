@@ -22,3 +22,17 @@ declare type Resolution = [Width, Height];
 declare type DispatchSetStateAction<P> = React.Dispatch<
   React.SetStateAction<P>
 >;
+
+declare type HistoricalTrade = {
+  ticker: string;
+  date: Date;
+  open?: number;
+  openBalance?: number;
+  openDate?: Date;
+  close?: number;
+  closeBalance?: number;
+  closeDate?: Date;
+  changePrice?: number;
+  changePercent?: number;
+  changeBalance?: number;
+};

@@ -23,7 +23,7 @@ const TimeControl: React.FC<Props> = (
       onClick={handleContinue}
       size={SIZE.large}
     >
-      {"Continue"}
+      Continue
     </FullButton>
   );
 };

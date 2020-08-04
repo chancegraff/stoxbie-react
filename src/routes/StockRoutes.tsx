@@ -146,7 +146,7 @@ const StockRoutes: React.FC = () => {
       <Route path={match.path}>
         <ScrollToTop />
         <Error>
-          {"Please select a stock to view."}
+          Please select a stock to view.
         </Error>
       </Route>
     </Switch>
