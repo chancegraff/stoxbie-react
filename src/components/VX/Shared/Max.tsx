@@ -18,13 +18,15 @@ type MaxProps = {
 type Props = InjectedProps & MaxProps;
 
 const xMaxCreator = (
-  width: number, horizontalPadding: number,
+  width: number,
+  horizontalPadding: number,
 ) => {
   return width - RIGHT_LABELS_WIDTH - horizontalPadding * 2;
 };
 
 const yMaxCreator = (
-  height: number, verticalPadding: number,
+  height: number,
+  verticalPadding: number,
 ) => {
   return height - BOTTOM_LABELS_HEIGHT - verticalPadding * 2;
 };

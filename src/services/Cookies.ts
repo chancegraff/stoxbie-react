@@ -1,14 +1,15 @@
 import { useState } from "react";
 
 const setItem = (
-  key: string, value: string, numberOfDays: number,
+  key: string,
+  value: string,
+  numberOfDays: number,
 ) => {
   const now = new Date();
 
   now.setTime(
     now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000),
   );
-
   document.cookie = `${key}=${value};     expires=${now.toUTCString()}; path=/`;
 };
 
