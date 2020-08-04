@@ -24,22 +24,39 @@ const StockView: React.FC<Props> = (
   ] = useStyletron();
 
   if (props.error) {
-    return <Error>{props.error}</Error>;
+    return (
+      <Error>
+        {props.error}
+      </Error>
+    );
   }
 
   return (
     <ContentContainer>
-      <Block width="100%" marginBottom={theme.sizing.scale800}>
+      <Block
+        marginBottom={theme.sizing.scale800}
+        width="100%"
+      >
         <BreadcrumbContainer />
       </Block>
-      <Block width="100%" display="flex" alignItems="flex-end">
+      <Block
+        alignItems="flex-end"
+        display="flex"
+        width="100%"
+      >
         <Block>
           <StockLogo logo={props.logo} />
         </Block>
-        <Block marginLeft={theme.sizing.scale400} minHeight="68px">
+        <Block
+          marginLeft={theme.sizing.scale400}
+          minHeight="68px"
+        >
           <StockName company={props.company} />
         </Block>
-        <Block marginLeft={theme.sizing.scale600} minHeight="52px">
+        <Block
+          marginLeft={theme.sizing.scale600}
+          minHeight="52px"
+        >
           <TradeStart handleStart={props.handleStart} />
         </Block>
       </Block>

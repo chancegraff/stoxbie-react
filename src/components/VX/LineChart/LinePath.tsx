@@ -28,8 +28,11 @@ const LinePath: React.FC<Props> = (
 
   return (
     <DefaultLinePath
-      data={prices}
       curve={curveLinear}
+      data={prices}
+      shapeRendering="geometricPrecision"
+      stroke={theme.colors.contentPrimary}
+      strokeWidth={1}
       x={(
         datum,
       ) => {
@@ -48,9 +51,6 @@ const LinePath: React.FC<Props> = (
           ),
         );
       }}
-      stroke={theme.colors.contentPrimary}
-      strokeWidth={1}
-      shapeRendering="geometricPrecision"
     />
   );
 };

@@ -30,12 +30,16 @@ const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (
 ) => {
   return (
     <Block
-      height={props.height}
-      display="flex"
       alignItems="flex-end"
+      display="flex"
+      height={props.height}
       paddingBottom="2px"
     >
-      <Skeleton animation={true} rows={2} overrides={overrides} />
+      <Skeleton
+        animation={true}
+        overrides={overrides}
+        rows={2}
+      />
     </Block>
   );
 };
@@ -53,8 +57,12 @@ const StockName: React.FC<Props> = (
 
   return (
     <>
-      <Display3>{props.company.companyName}</Display3>
-      <Caption2>{props.company.symbol}</Caption2>
+      <Display3>
+        {props.company.companyName}
+      </Display3>
+      <Caption2>
+        {props.company.symbol}
+      </Caption2>
     </>
   );
 };

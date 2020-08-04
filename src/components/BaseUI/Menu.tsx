@@ -23,7 +23,10 @@ export const StatefulMenu: React.FC<StatefulMenuProps> = (
   },
 ) => {
   return (
-    <DefaultStatefulMenu overrides={overrides} {...props}>
+    <DefaultStatefulMenu
+      overrides={overrides}
+      {...props}
+    >
       {children}
     </DefaultStatefulMenu>
   );

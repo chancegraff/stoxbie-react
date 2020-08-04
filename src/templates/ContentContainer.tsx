@@ -14,15 +14,17 @@ const ContentContainer: React.FC<Props> = (
 
   return (
     <Block
+      height="100%"
       padding={[
         `${theme.sizing.scale200} 0`,
         `${theme.sizing.scale400} 0`,
         `${theme.sizing.scale800} 0`,
         `${theme.sizing.scale1200} 0`,
       ]}
-      height="100%"
     >
-      <LayoutGrid>{props.children}</LayoutGrid>
+      <LayoutGrid>
+        {props.children}
+      </LayoutGrid>
     </Block>
   );
 };

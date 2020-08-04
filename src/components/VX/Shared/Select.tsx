@@ -30,10 +30,15 @@ const withSelect = <P extends React.PropsWithChildren<Props>>(
   return (
     props,
   ) => {
-    return <WrappedChart {...(props as P)} select={[
-      xSelector,
-      ySelector,
-    ]} />;
+    return (
+      <WrappedChart
+        {...(props as P)}
+        select={[
+          xSelector,
+          ySelector,
+        ]}
+      />
+    );
   };
 };
 

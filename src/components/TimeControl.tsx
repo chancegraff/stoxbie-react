@@ -19,7 +19,10 @@ const TimeControl: React.FC<Props> = (
   },
 ) => {
   return (
-    <FullButton size={SIZE.large} onClick={handleContinue}>
+    <FullButton
+      onClick={handleContinue}
+      size={SIZE.large}
+    >
       {"Continue"}
     </FullButton>
   );

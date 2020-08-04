@@ -42,9 +42,16 @@ const handleLabel = (
   args: { option?: Option },
 ) => {
   return (
-    <Block display="flex" alignItems="baseline">
-      <Label2>{args.option?.symbol}</Label2>
-      <Caption2 marginLeft="6px">{args.option?.securityName}</Caption2>
+    <Block
+      alignItems="baseline"
+      display="flex"
+    >
+      <Label2>
+        {args.option?.symbol}
+      </Label2>
+      <Caption2 marginLeft="6px">
+        {args.option?.securityName}
+      </Caption2>
     </Block>
   );
 };
@@ -112,21 +119,21 @@ const TickerInput: React.FC<Props> = (
 
   return (
     <Select
-      isLoading={isLoading}
-      overrides={overrides}
-      options={options}
-      labelKey="symbol"
-      valueKey="symbol"
-      size={SIZE.large}
-      type={TYPE.search}
-      onChange={handleChange}
-      onInputChange={handleInputChange}
+      autoFocus={true}
+      clearable={false}
       filterOptions={handleFilter}
       getOptionLabel={handleLabel}
       getValueLabel={handleLabel}
-      autoFocus={true}
-      clearable={false}
+      isLoading={isLoading}
+      labelKey="symbol"
+      onChange={handleChange}
+      onInputChange={handleInputChange}
+      options={options}
+      overrides={overrides}
       placeholder="Search for company by name or ticker..."
+      size={SIZE.large}
+      type={TYPE.search}
+      valueKey="symbol"
     />
   );
 };

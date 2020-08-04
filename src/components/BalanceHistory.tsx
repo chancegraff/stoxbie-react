@@ -6,7 +6,11 @@ type Props = {
 };
 
 const BalanceHistory: React.FC<Props> = () => {
-  return <div>{"History Table"}</div>;
+  return (
+    <div>
+      {"History Table"}
+    </div>
+  );
 };
 
 export default BalanceHistory;

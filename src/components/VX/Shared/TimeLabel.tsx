@@ -39,7 +39,11 @@ const DesktopTimeLabel: React.FC<Props> = (
     [],
   );
 
-  return <MediaQueriedText {...props}>{formattedValue}</MediaQueriedText>;
+  return (
+    <MediaQueriedText {...props}>
+      {formattedValue}
+    </MediaQueriedText>
+  );
 };
 
 const MobileTimeLabel: React.FC<Props> = (
@@ -109,7 +113,11 @@ const MobileTimeLabel: React.FC<Props> = (
     ],
   );
 
-  return <MediaQueriedText {...props}>{formattedValueAsDate}</MediaQueriedText>;
+  return (
+    <MediaQueriedText {...props}>
+      {formattedValueAsDate}
+    </MediaQueriedText>
+  );
 };
 
 const TimeLabel: React.FC<Props> = (

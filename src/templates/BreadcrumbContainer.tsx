@@ -14,10 +14,15 @@ const StockBreadcrumb: React.FC = () => {
 
   return (
     <Breadcrumbs>
-      <StyledLink $as={Link} to="/">
+      <StyledLink
+        $as={Link}
+        to="/"
+      >
         {"Ticker Search"}
       </StyledLink>
-      <span>{ticker}</span>
+      <span>
+        {ticker}
+      </span>
     </Breadcrumbs>
   );
 };
@@ -50,13 +55,21 @@ const TradeBreadcrumb: React.FC = () => {
 
   return (
     <Breadcrumbs>
-      <StyledLink $as={Link} to="/">
+      <StyledLink
+        $as={Link}
+        to="/"
+      >
         {"Ticker Search"}
       </StyledLink>
-      <StyledLink $as={Link} to={`/stock/${ticker}`}>
+      <StyledLink
+        $as={Link}
+        to={`/stock/${ticker}`}
+      >
         {ticker}
       </StyledLink>
-      <span>{`Trading from ${safeDate}`}</span>
+      <span>
+        {`Trading from ${safeDate}`}
+      </span>
     </Breadcrumbs>
   );
 };

@@ -32,10 +32,18 @@
             "version": "detect"
         }
     },
-    "ignorePatterns": ["node_modules", "eslint"],
+    "ignorePatterns": [
+        "node_modules",
+        "eslint"
+    ],
     "rules": {
         "accessor-pairs": "error",
-        "array-bracket-newline": ["error", { "minItems": 1 }],
+        "array-bracket-newline": [
+            "error",
+            {
+                "minItems": 1
+            }
+        ],
         "array-bracket-spacing": "error",
         "array-callback-return": "error",
         "array-element-newline": [
@@ -82,7 +90,9 @@
         ],
         "function-paren-newline": [
             "error",
-            { "minItems": 1 }
+            {
+                "minItems": 1
+            }
         ],
         "generator-star-spacing": "error",
         "global-require": "error",
@@ -313,6 +323,37 @@
         "yoda": "error",
         "react/prop-types": 0,
         "react/display-name": 0,
+        "react/jsx-closing-bracket-location": "error",
+        "react/jsx-sort-props": "error",
+        "react/jsx-wrap-multilines": [
+            "error",
+            {
+                "declaration": "parens-new-line",
+                "assignment": "parens-new-line",
+                "return": "parens-new-line",
+                "arrow": "parens-new-line",
+                "condition": "ignore",
+                "logical": "ignore",
+                "prop": "parens-new-line"
+            }
+        ],
+        "react/jsx-one-expression-per-line": "error",
+        "react/jsx-no-duplicate-props": "error",
+        "react/jsx-max-props-per-line": "error",
+        "react/jsx-handler-names": [
+            "error",
+            {
+                "eventHandlerPrefix": "handle",
+                "eventHandlerPropPrefix": "handle",
+                "checkLocalVariables": false
+            }
+        ],
+        "react/jsx-fragments": "error",
+        "react/jsx-first-prop-new-line": [
+            "error",
+            "multiline"
+        ],
+        "react/jsx-curly-newline": "error",
         "simple-import-sort/sort": "error",
         "sort-keys-fix/sort-keys-fix": "warn",
         "wrap-params/destructured-objects": "error",

@@ -22,7 +22,10 @@ const BaseUI: React.FC = (
 ) => {
   return (
     <StyletronProvider value={engine}>
-      <BaseProvider theme={DarkTheme} overrides={overrides}>
+      <BaseProvider
+        overrides={overrides}
+        theme={DarkTheme}
+      >
         {props.children}
       </BaseProvider>
     </StyletronProvider>

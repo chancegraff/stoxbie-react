@@ -29,13 +29,13 @@ const Grid: React.FC<Props> = (
 
   return (
     <DefaultGrid
+      height={yMax}
+      numTicksColumns={10}
+      numTicksRows={13}
+      stroke={theme.colors.mono500}
+      width={xMax}
       xScale={xScale}
       yScale={yScale}
-      width={xMax}
-      height={yMax}
-      numTicksRows={13}
-      numTicksColumns={10}
-      stroke={theme.colors.mono500}
     />
   );
 };

@@ -123,7 +123,13 @@ const TradeRoute: React.FC = () => {
     [],
   );
 
-  return <TradeView prices={prices} date={safeDate} error={error} />;
+  return (
+    <TradeView
+      date={safeDate}
+      error={error}
+      prices={prices}
+    />
+  );
 };
 
 const TradeRoutes: React.FC<Props> = () => {
@@ -136,10 +142,14 @@ const TradeRoutes: React.FC<Props> = () => {
         <TradeRoute />
       </Route>
       <Route path={`${match.path}/:ticker`}>
-        <Error>{"Please select a date to trade from."}</Error>
+        <Error>
+          {"Please select a date to trade from."}
+        </Error>
       </Route>
       <Route path={match.path}>
-        <Error>{"Please select a stock to trade with."}</Error>
+        <Error>
+          {"Please select a stock to trade with."}
+        </Error>
       </Route>
     </Switch>
   );

@@ -200,26 +200,38 @@ const TradeView: React.FC<Props> = (
   );
 
   if (error) {
-    return <Error>{error}</Error>;
+    return (
+      <Error>
+        {error}
+      </Error>
+    );
   }
 
   return (
     <ContentContainer>
-      <Block width="100%" marginBottom={theme.sizing.scale800}>
+      <Block
+        marginBottom={theme.sizing.scale800}
+        width="100%"
+      >
         <BreadcrumbContainer />
       </Block>
-      <FlexGrid flexWrap={[
-        true,
-        true,
-        true,
-        false,
-      ]}>
+      <FlexGrid
+        flexWrap={[
+          true,
+          true,
+          true,
+          false,
+        ]}
+      >
         <AspectRatioBox component={FlexGridItem}>
           <AspectRatioItem ref={ref}>
-            <StockChart resolution={[
-              width,
-              height,
-            ]} prices={pastPrices} />
+            <StockChart
+              prices={pastPrices}
+              resolution={[
+                width,
+                height,
+              ]}
+            />
           </AspectRatioItem>
         </AspectRatioBox>
         <FlexGridItem

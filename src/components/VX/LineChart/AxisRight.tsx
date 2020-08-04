@@ -27,16 +27,16 @@ const AxisRight: React.FC<Props> = (
 
   return (
     <DefaultAxisRight
-      left={xMax}
-      scale={yScale}
-      labelProps={labelProps}
-      tickLabelProps={tickLabelProps}
+      hideZero={true}
       label="Dollar"
       labelOffset={25}
+      labelProps={labelProps}
+      left={xMax}
+      scale={yScale}
       stroke={theme.colors.mono400}
-      tickStroke={theme.colors.mono400}
+      tickLabelProps={tickLabelProps}
       tickLength={5}
-      hideZero={true}
+      tickStroke={theme.colors.mono400}
     />
   );
 };

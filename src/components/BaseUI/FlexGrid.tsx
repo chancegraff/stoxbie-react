@@ -41,7 +41,10 @@ export const FlexGridItemFull: React.FC<FlexGridItemProps> = (
   },
 ) => {
   return (
-    <FlexGridItem {...props} overrides={MultiplyWidth()}>
+    <FlexGridItem
+      {...props}
+      overrides={MultiplyWidth()}
+    >
       {children}
     </FlexGridItem>
   );
@@ -55,7 +58,6 @@ const FlexGrid: React.FC<Props> = (
 ) => {
   return (
     <DefaultFlexGrid
-      width="100%"
       flexGridColumnCount={[
         1,
         1,
@@ -64,6 +66,7 @@ const FlexGrid: React.FC<Props> = (
       ]}
       flexGridColumnGap="20px"
       flexGridRowGap="20px"
+      width="100%"
       {...props}
     >
       {children}

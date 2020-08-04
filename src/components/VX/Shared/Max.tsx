@@ -70,10 +70,15 @@ const withMax = <P extends React.PropsWithChildren<Props>>(
       ],
     );
 
-    return <WrappedChart {...(props as P)} max={[
-      xMax,
-      yMax,
-    ]} />;
+    return (
+      <WrappedChart
+        {...(props as P)}
+        max={[
+          xMax,
+          yMax,
+        ]}
+      />
+    );
   };
 };
 

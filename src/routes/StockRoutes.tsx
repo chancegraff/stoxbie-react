@@ -126,10 +126,10 @@ const ViewRoute: React.FC = () => {
 
   return (
     <StockView
-      logo={logo}
       company={company}
       error={error}
       handleStart={handleStart}
+      logo={logo}
     />
   );
 };
@@ -145,7 +145,9 @@ const StockRoutes: React.FC = () => {
       </Route>
       <Route path={match.path}>
         <ScrollToTop />
-        <Error>{"Please select a stock to view."}</Error>
+        <Error>
+          {"Please select a stock to view."}
+        </Error>
       </Route>
     </Switch>
   );

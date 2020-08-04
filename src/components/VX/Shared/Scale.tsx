@@ -157,10 +157,15 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
       ],
     );
 
-    return <WrappedChart {...(props as P)} scale={[
-      xScale,
-      yScale,
-    ]} />;
+    return (
+      <WrappedChart
+        {...(props as P)}
+        scale={[
+          xScale,
+          yScale,
+        ]}
+      />
+    );
   };
 };
 

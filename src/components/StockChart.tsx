@@ -74,10 +74,10 @@ const StockChart: React.FC<Props> = (
 
   return (
     <LineChart
-      prices={prices}
-      resolution={resolution}
       label={label}
       padding={responsivePadding}
+      prices={prices}
+      resolution={resolution}
     />
   );
 };

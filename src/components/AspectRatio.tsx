@@ -17,17 +17,17 @@ export const AspectRatioItem: React.FC<Props> = forwardRef(
   ) => {
     return (
       <Component
-        ref={ref}
-        display="flex"
         alignItems="center"
-        justifyContent="center"
-        width="100%"
-        height="100%"
-        position="absolute"
-        top={0}
-        right={0}
         bottom={0}
+        display="flex"
+        height="100%"
+        justifyContent="center"
         left={0}
+        position="absolute"
+        ref={ref}
+        right={0}
+        top={0}
+        width="100%"
         {...props}
       >
         {children}
@@ -46,7 +46,6 @@ export const AspectRatioBox: React.FC<Props> = forwardRef(
   ) => {
     return (
       <Component
-        ref={ref}
         height={0}
         paddingBottom={[
           "100%",
@@ -54,6 +53,7 @@ export const AspectRatioBox: React.FC<Props> = forwardRef(
           "56.25%",
         ]}
         position="relative"
+        ref={ref}
         {...props}
       >
         {children}

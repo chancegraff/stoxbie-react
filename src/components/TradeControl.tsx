@@ -103,15 +103,19 @@ const TradeControl: React.FC<Props> = (
     <Container>
       <Slider
         max={maxPurchasable}
-        value={purchaseAmount}
         onChange={handleChange}
+        value={purchaseAmount}
       />
       <FlexGrid>
         <FlexGridItem>
-          <FullButton>{"Buy"}</FullButton>
+          <FullButton>
+            {"Buy"}
+          </FullButton>
         </FlexGridItem>
         <FlexGridItem>
-          <FullButton>{"Sell"}</FullButton>
+          <FullButton>
+            {"Sell"}
+          </FullButton>
         </FlexGridItem>
       </FlexGrid>
     </Container>

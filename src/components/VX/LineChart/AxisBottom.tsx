@@ -45,18 +45,18 @@ const AxisBottom: React.FC<Props> = (
 
   return (
     <DefaultAxisBottom<Date>
-      top={yMax}
-      scale={xScale}
-      labelProps={labelProps}
-      tickLabelProps={tickLabelProps}
-      tickFormat={tickFormat}
-      stroke={theme.colors.mono400}
-      tickStroke={theme.colors.mono400}
-      tickComponent={TimeLabel}
-      tickLength={5}
-      numTicks={12}
-      labelOffset={25}
       label="Date"
+      labelOffset={25}
+      labelProps={labelProps}
+      numTicks={12}
+      scale={xScale}
+      stroke={theme.colors.mono400}
+      tickComponent={TimeLabel}
+      tickFormat={tickFormat}
+      tickLabelProps={tickLabelProps}
+      tickLength={5}
+      tickStroke={theme.colors.mono400}
+      top={yMax}
     />
   );
 };

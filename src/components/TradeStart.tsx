@@ -44,17 +44,17 @@ const DatePicker: React.FC<DatePickerProps> = (
 ) => {
   return (
     <StatefulPopover
-      placement="bottomLeft"
-      content={
+      content={(
         <StatefulCalendar
-          maxDate={today}
-          minDate={fiveYear}
           initialState={{
             value: oneYear,
           }}
+          maxDate={today}
+          minDate={fiveYear}
           onChange={onChange as defaultHandler}
         />
-      }
+      )}
+      placement="bottomLeft"
     >
       {copyPropsToChildren(
         props,
@@ -130,9 +130,16 @@ const TradeStart: React.FC<Props> = (
 
   return (
     <Block>
-      <ButtonGroup size={SIZE.mini} shape={SHAPE.pill}>
-        <GrowingButton onClick={handleOneYearStart}>1Y</GrowingButton>
-        <GrowingButton onClick={handleFiveYearStart}>5Y</GrowingButton>
+      <ButtonGroup
+        shape={SHAPE.pill}
+        size={SIZE.mini}
+      >
+        <GrowingButton onClick={handleOneYearStart}>
+          1Y
+        </GrowingButton>
+        <GrowingButton onClick={handleFiveYearStart}>
+          5Y
+        </GrowingButton>
         <DatePicker onChange={handleCustomYearStart}>
           <GrowingButton>
             <Filter />
