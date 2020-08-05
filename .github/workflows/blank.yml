@@ -1,0 +1,38 @@
+name: ESLint
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  lint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12
+
+    - name: Install packages
+      run: npm install
+
+    - name: Run lint
+      uses: wearerequired/lint-action@v1.5.3
+      with:
+        # The GITHUB_TOKEN secret
+        github_token: ${{ secrets.github_token }}
+        # Enable or disable ESLint checks
+        eslint: true
+        # Additional arguments to pass to the linter
+        eslint_args: --format github
+        # Directory where the ESLint command should be run
+        eslint_dir: src
+        # Extensions of files to check with ESLint
+        eslint_extensions: ts, tsx
