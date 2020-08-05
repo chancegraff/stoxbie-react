@@ -60,6 +60,7 @@
     "@typescript-eslint/parser": "^3.7.1",
     "eslint": "^7.6.0",
     "eslint-config-standard": "^14.1.1",
+    "eslint-formatter-github": "^1.0.11",
     "eslint-plugin-baseui": "^9.85.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",

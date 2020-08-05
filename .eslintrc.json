@@ -260,7 +260,7 @@
         "operator-assignment": "error",
         "operator-linebreak": [
             "error",
-            "before"
+            "after"
         ],
         "padded-blocks": "error",
         "padding-line-between-statements": "error",

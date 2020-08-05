@@ -190,6 +190,22 @@ const TradeView: React.FC<Props> = (
       pastPrices,
     ],
   );
+  const currentBalance = useMemo(
+    () => {
+      if (pastTrades.length > 0) {
+        const [
+          currentTrade,
+        ] = pastTrades;
+
+        return currentTrade.open ?
+          currentTrade.closeBalance :
+          currentTrade.openBalance;
+      }
+    },
+    [
+      pastTrades,
+    ],
+  );
 
   const handleLoad = useCallback(
     (
@@ -217,12 +233,12 @@ const TradeView: React.FC<Props> = (
   const handleContinue = useCallback(
     () => {
       if (
-        prices
-      && nextPriceIndexes
-      && canGetNextPrice(
-        prices,
-        nextPriceIndexes,
-      )
+        prices &&
+        nextPriceIndexes &&
+        canGetNextPrice(
+          prices,
+          nextPriceIndexes,
+        )
       ) {
         setNextPrices(
           prices,
@@ -399,6 +415,7 @@ const TradeView: React.FC<Props> = (
         >
           <TimeControl handleContinue={handleContinue} />
           <TradeControl
+            balance={currentBalance}
             handleTrade={handleTrade}
             price={currentPrice}
           />
