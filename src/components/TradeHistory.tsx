@@ -1,8 +1,9 @@
+import React, { useMemo } from "react";
 import { styled } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { Table } from "baseui/dist/table";
+
 import Spinner from "components/BaseUI/Spinner";
-import React, { useMemo } from "react";
 
 type Props = {
   trades?: HistoricalTrade[];
@@ -32,7 +33,7 @@ const columns = [
   "changeBalance",
 ];
 
-const BalanceHistory: React.FC<Props> = (
+const TradeHistory: React.FC<Props> = (
   {
     trades,
   },
@@ -80,4 +81,4 @@ const BalanceHistory: React.FC<Props> = (
   );
 };
 
-export default BalanceHistory;
+export default TradeHistory;

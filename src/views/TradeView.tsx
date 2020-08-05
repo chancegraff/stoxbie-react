@@ -1,20 +1,22 @@
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { FlexGridItem } from "baseui/dist/flex-grid";
+import { closestIndexTo, parseISO } from "date-fns";
+import { HistoricalPrice } from "iex";
+import useResizeObserver from "use-resize-observer";
+
+import { useCookie } from "services/Cookies";
+import { handleUnloadCreator } from "services/Utilities";
+import BreadcrumbContainer from "templates/BreadcrumbContainer";
+import ContentContainer from "templates/ContentContainer";
 import { AspectRatioBox, AspectRatioItem } from "components/AspectRatio";
-import BalanceHistory from "components/BalanceHistory";
 import FlexGrid from "components/BaseUI/FlexGrid";
 import Error from "components/BaseUI/Typography";
 import StockChart from "components/StockChart";
 import TimeControl from "components/TimeControl";
 import TradeControl from "components/TradeControl";
-import { closestIndexTo, parseISO } from "date-fns";
-import { HistoricalPrice } from "iex";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { handleUnloadCreator } from "services/Utilities";
-import BreadcrumbContainer from "templates/BreadcrumbContainer";
-import ContentContainer from "templates/ContentContainer";
-import useResizeObserver from "use-resize-observer";
+import TradeHistory from "components/TradeHistory";
 
 type Props = {
   prices?: HistoricalPrice[];
@@ -113,10 +115,6 @@ const TradeView: React.FC<Props> = (
     nextPriceIndexes,
     setNextPriceIndexes,
   ] = useState<number[]>();
-  const [
-    pastTrades,
-    setPastTrades,
-  ] = useState<HistoricalTrade[]>();
 
   const currentPrice = useMemo(
     () => {
@@ -125,6 +123,42 @@ const TradeView: React.FC<Props> = (
     [
       pastPrices,
     ],
+  );
+  const initialPastTrades = useMemo(
+    () => {
+      if (currentPrice && date) {
+        const {
+          symbol: ticker,
+        } = currentPrice;
+        const openBalance = 10000;
+
+        if (ticker) {
+          const initialTrade: HistoricalTrade = {
+            date,
+            openBalance,
+            ticker,
+          };
+
+          return [
+            initialTrade,
+          ];
+        }
+      }
+
+      return [];
+    },
+    [
+      currentPrice,
+      date,
+    ],
+  );
+
+  const [
+    pastTrades,
+    setPastTrades,
+  ] = useCookie<HistoricalTrade[]>(
+    "pastTrades",
+    initialPastTrades,
   );
 
   const handleLoad = useCallback(
@@ -254,7 +288,7 @@ const TradeView: React.FC<Props> = (
         >
           <TimeControl handleContinue={handleContinue} />
           <TradeControl price={currentPrice} />
-          <BalanceHistory trades={pastTrades} />
+          <TradeHistory trades={pastTrades} />
         </FlexGridItem>
       </FlexGrid>
     </ContentContainer>

@@ -1,54 +1,62 @@
 import { useState } from "react";
 
-const setItem = (
+const setItem = <P extends unknown>(
   key: string,
-  value: string,
+  value: P,
   numberOfDays: number,
 ) => {
   const now = new Date();
+  const valueAsString = JSON.stringify(
+    value,
+  );
 
   now.setTime(
     now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000),
   );
-  document.cookie = `${key}=${value};     expires=${now.toUTCString()}; path=/`;
+  document.cookie = `${key}=${valueAsString};     expires=${now.toUTCString()}; path=/`;
 };
 
-const getItem = (
-  key: string,
-) => {
-  return document.cookie.split(
+const getItem = <P extends unknown>(
+  itemKey: string,
+): P => {
+  const allCookies = document.cookie.split(
     "; ",
-  ).reduce(
+  );
+  const itemValueAsString = allCookies.reduce(
     (
       total,
       currentCookie,
     ) => {
-      const item = currentCookie.split(
+      const storedItem = currentCookie.split(
         "=",
       );
       const [
-        storedKey,
-        storedValue,
-      ] = item;
+        storedItemKey,
+        storedItemValue,
+      ] = storedItem;
 
-      return key === storedKey
+      return itemKey === storedItemKey
         ? decodeURIComponent(
-          storedValue,
+          storedItemValue,
         )
         : total;
     },
     "",
   );
+
+  return itemValueAsString === ""
+    ? undefined
+    : JSON.parse(
+      itemValueAsString,
+    );
 };
 
-export const useCookie = (
+export const useCookie = <P = undefined>(
   key: string,
-  defaultValue: string,
-): (string | (
-    (value: any, numberOfDays: any) => void)
-)[] => {
-  const getCookie = () => {
-    return getItem(
+  defaultValue: P,
+): [P, (value: P, numberOfDays: number) => void] => {
+  const getCookie = (): P => {
+    return getItem<P>(
       key,
     ) || defaultValue;
   };
@@ -59,7 +67,7 @@ export const useCookie = (
     getCookie(),
   );
   const updateCookie = (
-    value: string,
+    value: P,
     numberOfDays: number,
   ) => {
     setCookie(
@@ -71,10 +79,9 @@ export const useCookie = (
       numberOfDays,
     );
   };
-  const result = [
+
+  return [
     cookie,
     updateCookie,
   ];
-
-  return result;
 };
