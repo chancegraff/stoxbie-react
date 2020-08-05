@@ -197,9 +197,9 @@ const TradeView: React.FC<Props> = (
           currentTrade,
         ] = pastTrades;
 
-        return currentTrade.open ?
-          currentTrade.closeBalance :
-          currentTrade.openBalance;
+        return currentTrade.open
+          ? currentTrade.closeBalance
+          : currentTrade.openBalance;
       }
     },
     [
@@ -257,7 +257,7 @@ const TradeView: React.FC<Props> = (
   );
   const handleTrade = useCallback(
     (
-      currentBalance: number,
+      previousBalance: number,
       shareClose: number,
       shareCount: number,
     ) => {
@@ -283,7 +283,7 @@ const TradeView: React.FC<Props> = (
         );
         const nextTrade = startNextTrade(
           finishedTrade,
-          currentBalance,
+          previousBalance,
         );
 
         nextTrades.unshift(

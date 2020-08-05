@@ -87,11 +87,11 @@ const TradeControl: React.FC<Props> = (
   );
   const maxPurchasable = useMemo(
     () => {
-      return balance && price ?
-        Math.floor(
+      return balance && price
+        ? Math.floor(
           balance / price.close,
-        ) :
-        0;
+        )
+        : 0;
     },
     [
       price,
