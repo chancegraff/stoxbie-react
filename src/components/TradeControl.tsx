@@ -13,6 +13,7 @@ import Spinner from "components/BaseUI/Spinner";
 type Props = {
   price?: HistoricalPrice;
   balance?: number;
+  handleTrade: (balance: number, close: number, shareCount: number) => void;
 };
 
 const FullButton = styled(
@@ -43,15 +44,14 @@ const TradeControl: React.FC<Props> = (
   {
     price,
     balance = 10000,
+    handleTrade,
   },
 ) => {
   const [
     purchaseAmount,
     setPurchaseAmount,
-  ] = useState<number[]>(
-    [
-      0,
-    ],
+  ] = useState<number>(
+    0,
   );
   const previousPrice = usePrevious(
     price,
@@ -73,20 +73,64 @@ const TradeControl: React.FC<Props> = (
     (
       event: State,
     ) => {
+      const [
+        nextPurchaseAmount,
+      ] = event.value;
+
       setPurchaseAmount(
-        event.value,
+        nextPurchaseAmount,
       );
     },
     [],
+  );
+  const handleBuy = useCallback(
+    () => {
+      if (price && balance) {
+        const shareCount = Math.abs(
+          purchaseAmount,
+        );
+
+        handleTrade(
+          balance,
+          price.close,
+          shareCount,
+        );
+      }
+    },
+    [
+      handleTrade,
+      purchaseAmount,
+      balance,
+      price,
+    ],
+  );
+  const handleSell = useCallback(
+    () => {
+      if (price && balance) {
+        const shareCount = Math.abs(
+          purchaseAmount,
+        ) * -1;
+
+        handleTrade(
+          balance,
+          price.close,
+          shareCount,
+        );
+      }
+    },
+    [
+      handleTrade,
+      purchaseAmount,
+      balance,
+      price,
+    ],
   );
 
   useEffect(
     () => {
       if (price && previousPrice && price !== previousPrice) {
         setPurchaseAmount(
-          [
-            0,
-          ],
+          0,
         );
       }
     },
@@ -105,16 +149,18 @@ const TradeControl: React.FC<Props> = (
       <Slider
         max={maxPurchasable}
         onChange={handleChange}
-        value={purchaseAmount}
+        value={[
+          purchaseAmount,
+        ]}
       />
       <FlexGrid>
         <FlexGridItem>
-          <FullButton>
+          <FullButton onClick={handleBuy}>
             Buy
           </FullButton>
         </FlexGridItem>
         <FlexGridItem>
-          <FullButton>
+          <FullButton onClick={handleSell}>
             Sell
           </FullButton>
         </FlexGridItem>

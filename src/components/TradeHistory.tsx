@@ -33,6 +33,19 @@ const FullTable = styled(
   },
 );
 
+const HeadCell = styled(
+  StyledHeadCell,
+  (
+    {
+      $theme,
+    },
+  ) => {
+    return {
+      ...$theme.typography.LabelSmall,
+    };
+  },
+);
+
 type CellProps = {
   trade: HistoricalTrade;
 };
@@ -93,6 +106,7 @@ const TradeHistoryCell: React.FC<CellProps> = (
           changePercent,
         ).format(
           {
+            average: true,
             output: "percent",
           },
         );
@@ -155,18 +169,18 @@ const TradeHistory: React.FC<Props> = (
     <Container>
       <FullTable>
         <StyledHead>
-          <StyledHeadCell>
+          <HeadCell>
             Open
-          </StyledHeadCell>
-          <StyledHeadCell>
+          </HeadCell>
+          <HeadCell>
             Close
-          </StyledHeadCell>
-          <StyledHeadCell>
-            ± %
-          </StyledHeadCell>
-          <StyledHeadCell>
-            $
-          </StyledHeadCell>
+          </HeadCell>
+          <HeadCell>
+            Change
+          </HeadCell>
+          <HeadCell>
+            Balance
+          </HeadCell>
         </StyledHead>
         <StyledBody>
           {trades.map(
