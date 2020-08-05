@@ -60,7 +60,9 @@ export const handleUnloadCreator = (
   };
 };
 
-export const usePrevious = <P>(value?: P): P | undefined => {
+export const usePrevious = <P>(
+  value?: P,
+): P | undefined => {
   const ref = useRef<P>();
 
   useEffect(

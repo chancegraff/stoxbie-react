@@ -74,7 +74,9 @@ const ViewRoute: React.FC = () => {
   );
 
   const handleLoad = useCallback(
-    async (nextTicker?: string) => {
+    async (
+      nextTicker?: string,
+    ) => {
       if (nextTicker) {
         const nextCompany = await getCompany(
           nextTicker,

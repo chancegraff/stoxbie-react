@@ -29,7 +29,8 @@ const LinePoints: React.FC<Props> = (
     <>
       {prices.map(
         (
-          price, priceIndex,
+          price,
+          priceIndex,
         ) => {
           return (
             priceIndex % 20 === 0 && (

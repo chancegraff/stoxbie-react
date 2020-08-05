@@ -137,7 +137,8 @@ const TradeView: React.FC<Props> = (
 
   const handleLoad = useCallback(
     (
-      nextPrices?: HistoricalPrice[], nextDate?: Date,
+      nextPrices?: HistoricalPrice[],
+      nextDate?: Date,
     ) => {
       if (nextPrices && nextDate) {
         const priceIndexes = getPriceIndexes(

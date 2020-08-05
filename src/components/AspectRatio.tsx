@@ -13,7 +13,8 @@ export const AspectRatioItem: React.FC<Props> = forwardRef(
       component: Component = Block,
       children,
       ...props
-    }, ref,
+    },
+    ref,
   ) => {
     return (
       <Component
@@ -42,7 +43,8 @@ export const AspectRatioBox: React.FC<Props> = forwardRef(
       component: Component = Block,
       children,
       ...props
-    }, ref,
+    },
+    ref,
   ) => {
     return (
       <Component

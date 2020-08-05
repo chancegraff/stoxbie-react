@@ -69,7 +69,10 @@ const TradeRoute: React.FC = () => {
   );
 
   const handleLoad = useCallback(
-    async (nextTicker?: string, nextDate?: Date) => {
+    async (
+      nextTicker?: string,
+      nextDate?: Date,
+    ) => {
       if (nextTicker && nextDate) {
         const nextPrices = await historicalPrices(
           nextTicker,
