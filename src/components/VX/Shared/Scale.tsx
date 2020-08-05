@@ -1,8 +1,8 @@
+import React, { useMemo } from "react";
 import { scaleLinear, scaleTime } from "@vx/scale";
 import { extent, max } from "d3-array";
 import { ScaleLinear, ScaleTime } from "d3-scale";
 import { HistoricalPrice } from "iex";
-import React, { useMemo } from "react";
 
 import { Max, MaxX, MaxY } from "./Max";
 import { Select, SelectX, SelectY } from "./Select";

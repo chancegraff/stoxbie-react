@@ -1,3 +1,5 @@
+import React, { useCallback, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Block } from "baseui/dist/block";
 import { Override } from "baseui/dist/overrides";
 import {
@@ -11,8 +13,6 @@ import {
 } from "baseui/dist/select";
 import { Caption2, Label2 } from "baseui/dist/typography";
 import { Search } from "iex-cloud";
-import React, { useCallback, useState } from "react";
-import { useHistory } from "react-router-dom";
 
 type Props = {
   handleSearch: (

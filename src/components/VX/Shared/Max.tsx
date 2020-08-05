@@ -1,6 +1,7 @@
+import React, { useMemo } from "react";
+
 import { BOTTOM_LABELS_HEIGHT } from "components/VX/LineChart/AxisBottom";
 import { RIGHT_LABELS_WIDTH } from "components/VX/LineChart/AxisRight";
-import React, { useMemo } from "react";
 
 export type MaxX = number;
 export type MaxY = number;

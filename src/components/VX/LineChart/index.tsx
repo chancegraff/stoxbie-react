@@ -1,12 +1,13 @@
+import React from "react";
 import { Group } from "@vx/group";
 import { TextProps } from "@vx/text/lib/Text";
 import { styled } from "baseui/dist";
+import { HistoricalPrice } from "iex";
+
 import withShared from "components/VX/Shared";
 import { Max } from "components/VX/Shared/Max";
 import { Scale } from "components/VX/Shared/Scale";
 import { Select } from "components/VX/Shared/Select";
-import { HistoricalPrice } from "iex";
-import React from "react";
 
 import AxisBottom from "./AxisBottom";
 import AxisRight from "./AxisRight";

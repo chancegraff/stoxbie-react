@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import BaseUI from "services/BaseUI";
+import BackgroundContainer from "templates/BackgroundContainer";
 import SearchRoutes from "routes/SearchRoutes";
 import StockRoutes from "routes/StockRoutes";
 import TradeRoutes from "routes/TradeRoutes";
-import BaseUI from "services/BaseUI";
-import BackgroundContainer from "templates/BackgroundContainer";
 
 const App: React.FC = () => {
   return (

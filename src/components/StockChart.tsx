@@ -1,9 +1,10 @@
+import React, { useMemo } from "react";
 import { useStyletron } from "baseui/dist";
 import { Theme } from "baseui/dist/theme";
+import { HistoricalPrice } from "iex";
+
 import Spinner from "components/BaseUI/Spinner";
 import LineChart, { Label } from "components/VX/LineChart";
-import { HistoricalPrice } from "iex";
-import React, { useMemo } from "react";
 
 type Props = {
   resolution: Resolution;

@@ -1,7 +1,7 @@
+import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { Grid as LayoutGrid } from "baseui/dist/layout-grid";
-import React from "react";
 
 type Props = unknown;
 

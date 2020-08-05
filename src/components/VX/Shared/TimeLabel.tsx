@@ -1,8 +1,8 @@
+import React, { useMemo } from "react";
 import { TickRendererProps } from "@vx/axis/lib/types";
 import { Text } from "@vx/text";
 import { styled } from "baseui/dist";
 import { format, parse } from "date-fns";
-import React, { useMemo } from "react";
 import { StyleObject } from "styletron-react";
 
 type Props = TickRendererProps;

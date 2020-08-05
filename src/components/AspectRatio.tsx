@@ -1,6 +1,6 @@
+import React, { forwardRef } from "react";
 import { Block, BlockProps } from "baseui/dist/block";
 import { FlexGridItemProps } from "baseui/dist/flex-grid";
-import React, { forwardRef } from "react";
 
 type DivProps = FlexGridItemProps | BlockProps;
 type Props = DivProps & {

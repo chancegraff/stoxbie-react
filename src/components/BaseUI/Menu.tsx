@@ -1,9 +1,9 @@
+import React from "react";
 import {
   StatefulMenu as DefaultStatefulMenu,
   StatefulMenuProps,
 } from "baseui/dist/menu";
 import { Override } from "baseui/dist/overrides";
-import React from "react";
 
 const List: Override<unknown> = {
   style: {

@@ -1,10 +1,3 @@
-import Error from "components/BaseUI/Typography";
-import {
-  Company,
-  company as getCompany,
-  Logo,
-  logo as getLogo,
-} from "iex-cloud";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Route,
@@ -13,10 +6,18 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
+import {
+  Company,
+  company as getCompany,
+  Logo,
+  logo as getLogo,
+} from "iex-cloud";
+
 import { TICKER_ERROR_MESSAGE } from "services/Constants";
 import ScrollToTop from "services/ScrollToTop";
 import { handleUnloadCreator } from "services/Utilities";
 import StockView from "views/StockView";
+import Error from "components/BaseUI/Typography";
 
 const ERROR_MESSAGE
   = "There was a problem attempting to load company information about the stock you requested.";

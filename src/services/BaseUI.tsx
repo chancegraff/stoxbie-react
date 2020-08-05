@@ -1,6 +1,6 @@
+import React from "react";
 import { BaseProvider, BaseProviderOverrides, DarkTheme } from "baseui/dist";
 import { Override } from "baseui/dist/overrides";
-import React from "react";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 

@@ -1,9 +1,10 @@
+import React from "react";
 import { curveLinear } from "@vx/curve";
 import { LinePath as DefaultLinePath } from "@vx/shape";
 import { useStyletron } from "baseui/dist";
-import { ScaleX, ScaleY } from "components/VX/Shared/Scale";
 import { HistoricalPrice } from "iex";
-import React from "react";
+
+import { ScaleX, ScaleY } from "components/VX/Shared/Scale";
 
 type Props = {
   prices: HistoricalPrice[];

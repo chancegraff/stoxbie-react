@@ -1,9 +1,9 @@
+import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { OverridesT, Skeleton, SkeletonPropsT } from "baseui/dist/skeleton";
 import { Caption2, Display3 } from "baseui/dist/typography";
 import { Company } from "iex-cloud";
-import React from "react";
 
 type Props = {
   company?: Company;

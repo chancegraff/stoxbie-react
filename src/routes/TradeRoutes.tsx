@@ -1,9 +1,9 @@
-import Error from "components/BaseUI/Typography";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
 import { parse } from "date-fns";
 import { HistoricalPrice } from "iex";
 import { historicalPrices } from "iex-cloud";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+
 import {
   DATE_ERROR_MESSAGE,
   FETCH_ERROR_MESSAGE,
@@ -13,6 +13,7 @@ import {
 import ScrollToTop from "services/ScrollToTop";
 import { handleUnloadCreator } from "services/Utilities";
 import TradeView from "views/TradeView";
+import Error from "components/BaseUI/Typography";
 
 type Props = unknown;
 

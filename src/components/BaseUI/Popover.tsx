@@ -1,10 +1,10 @@
+import React from "react";
 import { Override } from "baseui/dist/overrides";
 import {
   Overrides,
   PopoverProps,
   StatefulPopover as DefaultStatefulPoover,
 } from "baseui/dist/popover";
-import React from "react";
 
 const Body: Override<unknown> = {
   style: {

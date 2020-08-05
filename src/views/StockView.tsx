@@ -1,13 +1,14 @@
+import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
+import { Company, Logo } from "iex-cloud";
+
+import BreadcrumbContainer from "templates/BreadcrumbContainer";
+import ContentContainer from "templates/ContentContainer";
 import Error from "components/BaseUI/Typography";
 import StockLogo from "components/StockLogo";
 import StockName from "components/StockName";
 import TradeStart from "components/TradeStart";
-import { Company, Logo } from "iex-cloud";
-import React from "react";
-import BreadcrumbContainer from "templates/BreadcrumbContainer";
-import ContentContainer from "templates/ContentContainer";
 
 type Props = {
   logo?: Logo;

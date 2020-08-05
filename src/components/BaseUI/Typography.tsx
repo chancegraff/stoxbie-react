@@ -1,6 +1,7 @@
+import React from "react";
 import { Block } from "baseui/dist/block";
 import { Display3 } from "baseui/dist/typography";
-import React from "react";
+
 import ContentContainer from "templates/ContentContainer";
 
 type Props = PropsWithChildren;

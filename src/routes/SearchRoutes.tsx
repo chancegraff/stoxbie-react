@@ -1,7 +1,8 @@
-import { Search, search } from "iex-cloud";
 import React from "react";
-import { DEBOUNCE_INPUT_MS } from "services/Constants";
+import { Search, search } from "iex-cloud";
 import { useDebouncedCallback } from "use-debounce";
+
+import { DEBOUNCE_INPUT_MS } from "services/Constants";
 import SearchView from "views/SearchView";
 
 type Props = unknown;

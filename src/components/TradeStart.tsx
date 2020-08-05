@@ -1,3 +1,4 @@
+import React, { useCallback } from "react";
 import { Block } from "baseui/dist/block";
 import { Button, ButtonProps, SHAPE, SIZE } from "baseui/dist/button";
 import { ButtonGroup } from "baseui/dist/button-group";
@@ -6,12 +7,12 @@ import {
   StatefulCalendar,
 } from "baseui/dist/datepicker";
 import { Filter } from "baseui/dist/icon";
-import { StatefulPopover } from "components/BaseUI/Popover";
 import { format, subYears } from "date-fns";
-import React, { useCallback } from "react";
+import { styled } from "styletron-react";
+
 import { URL_DATE_FORMAT } from "services/Constants";
 import { copyPropsToChildren } from "services/Utilities";
-import { styled } from "styletron-react";
+import { StatefulPopover } from "components/BaseUI/Popover";
 
 const today = new Date();
 const oneYear = subYears(

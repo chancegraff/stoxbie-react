@@ -1,9 +1,9 @@
+import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Avatar } from "baseui/dist/avatar";
 import { Block } from "baseui/dist/block";
 import { OverridesT, Skeleton, SkeletonPropsT } from "baseui/dist/skeleton";
 import { Logo } from "iex-cloud";
-import React from "react";
 
 type Props = {
   logo?: Logo;

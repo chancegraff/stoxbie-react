@@ -1,10 +1,11 @@
+import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { Display2, Label2 } from "baseui/dist/typography";
-import TickerInput from "components/TickerInput";
 import { Search } from "iex-cloud";
-import React from "react";
+
 import ContentContainer from "templates/ContentContainer";
+import TickerInput from "components/TickerInput";
 
 type Props = {
   handleSearch: (

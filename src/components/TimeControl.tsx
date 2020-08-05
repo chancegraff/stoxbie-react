@@ -1,5 +1,5 @@
-import { Button, SIZE } from "baseui/dist/button";
 import React from "react";
+import { Button, SIZE } from "baseui/dist/button";
 import { styled } from "styletron-react";
 
 type Props = {

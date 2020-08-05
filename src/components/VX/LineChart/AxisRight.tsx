@@ -1,8 +1,9 @@
+import React from "react";
 import { AxisRight as DefaultAxisRight } from "@vx/axis";
 import { TextProps } from "@vx/text/lib/Text";
 import { useStyletron } from "baseui/dist";
+
 import { ScaleY } from "components/VX/Shared/Scale";
-import React from "react";
 
 export const RIGHT_LABELS_WIDTH = 25;
 

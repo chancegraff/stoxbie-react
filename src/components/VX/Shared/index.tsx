@@ -1,9 +1,10 @@
+import React from "react";
+import { HistoricalPrice } from "iex";
+
 import { Label } from "components/VX/LineChart";
 import withMax, { Max } from "components/VX/Shared/Max";
 import withScale, { Scale } from "components/VX/Shared/Scale";
 import withSelect, { Select } from "components/VX/Shared/Select";
-import { HistoricalPrice } from "iex";
-import React from "react";
 
 type BaseProps = {
   prices: HistoricalPrice[];

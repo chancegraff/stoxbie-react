@@ -1,3 +1,4 @@
+import React from "react";
 import { BlockOverrides } from "baseui/dist/block";
 import {
   FlexGrid as DefaultFlexGrid,
@@ -7,7 +8,6 @@ import {
 } from "baseui/dist/flex-grid";
 import { Overrides } from "baseui/dist/overrides";
 import { Theme } from "baseui/dist/theme";
-import React from "react";
 import { StyleObject } from "styletron-react";
 
 type Props = FlexGridProps;

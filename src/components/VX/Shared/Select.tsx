@@ -1,5 +1,5 @@
-import { HistoricalPrice } from "iex";
 import React from "react";
+import { HistoricalPrice } from "iex";
 
 export type SelectX = (price: HistoricalPrice) => number;
 export type SelectY = (price: HistoricalPrice) => number;

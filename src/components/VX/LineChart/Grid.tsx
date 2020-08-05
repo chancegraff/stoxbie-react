@@ -1,8 +1,9 @@
+import React from "react";
 import { Grid as DefaultGrid } from "@vx/grid";
 import { useStyletron } from "baseui/dist";
+
 import { Max } from "components/VX/Shared/Max";
 import { Scale } from "components/VX/Shared/Scale";
-import React from "react";
 
 type Props = {
   scales: Scale;

@@ -1,13 +1,14 @@
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { styled } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { Button } from "baseui/dist/button";
 import { FlexGridItem } from "baseui/dist/flex-grid";
 import { Slider, State } from "baseui/dist/slider";
+import { HistoricalPrice } from "iex";
+
+import { usePrevious } from "services/Utilities";
 import FlexGrid from "components/BaseUI/FlexGrid";
 import Spinner from "components/BaseUI/Spinner";
-import { HistoricalPrice } from "iex";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { usePrevious } from "services/Utilities";
 
 type Props = {
   price?: HistoricalPrice;
