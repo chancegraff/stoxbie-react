@@ -19,9 +19,10 @@ import TradeControl from "components/TradeControl";
 import TradeHistory from "components/TradeHistory";
 
 type Props = {
-  prices?: HistoricalPrice[];
   date?: Date;
   error?: string;
+  prices?: HistoricalPrice[];
+  ticker?: string;
 };
 
 const getPriceIndexes = (
@@ -96,6 +97,7 @@ const TradeView: React.FC<Props> = (
     prices,
     date,
     error,
+    ticker,
   },
 ) => {
   const [
@@ -124,41 +126,13 @@ const TradeView: React.FC<Props> = (
       pastPrices,
     ],
   );
-  const initialPastTrades = useMemo(
-    () => {
-      if (currentPrice && date) {
-        const {
-          symbol: ticker,
-        } = currentPrice;
-        const openBalance = 10000;
-
-        if (ticker) {
-          const initialTrade: HistoricalTrade = {
-            date,
-            openBalance,
-            ticker,
-          };
-
-          return [
-            initialTrade,
-          ];
-        }
-      }
-
-      return [];
-    },
-    [
-      currentPrice,
-      date,
-    ],
-  );
 
   const [
     pastTrades,
     setPastTrades,
   ] = useCookie<HistoricalTrade[]>(
     "pastTrades",
-    initialPastTrades,
+    [],
   );
 
   const handleLoad = useCallback(
@@ -229,6 +203,32 @@ const TradeView: React.FC<Props> = (
 
   useEffect(
     () => {
+      if (!pastTrades.length && ticker && date) {
+        const openBalance = 10000;
+        const initialTrade: HistoricalTrade = {
+          date,
+          openBalance,
+          ticker,
+        };
+
+        setPastTrades(
+          [
+            initialTrade,
+          ],
+          30,
+        );
+      }
+    },
+    [
+      pastTrades,
+      ticker,
+      date,
+      setPastTrades,
+    ],
+  );
+
+  useEffect(
+    () => {
       return handleUnloadCreator(
         [
           setPastPrices,
@@ -274,7 +274,9 @@ const TradeView: React.FC<Props> = (
           </AspectRatioItem>
         </AspectRatioBox>
         <FlexGridItem
-          flex="1 1"
+          display="flex"
+          flexDirection="column"
+          height={`${height}px`}
           maxWidth={[
             "100%",
             "100%",

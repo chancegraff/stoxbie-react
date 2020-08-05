@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { styled } from "baseui/dist";
 import { Block } from "baseui/dist/block";
-import { Table } from "baseui/dist/table";
+import { StyledBody, StyledCell, StyledHead, StyledHeadCell, StyledRow, StyledTable } from "baseui/dist/table";
 
 import Spinner from "components/BaseUI/Spinner";
 
@@ -11,73 +11,80 @@ type Props = {
 
 const Container = styled(
   Block,
-  (
-    {
-      $theme,
-    },
-  ) => {
+  () => {
     return {
       alignItems: "center",
       display: "flex",
+      flex: "1 0",
       flexWrap: "wrap",
       justifyContent: "center",
-      margin: `${$theme.sizing.scale800} 0`,
+      width: "100%",
     };
   },
 );
 
-const columns = [
-  "open",
-  "close",
-  "changePercent",
-  "changeBalance",
-];
+const FullTable = styled(
+  StyledTable,
+  () => {
+    return {
+      width: "100%",
+    };
+  },
+);
 
 const TradeHistory: React.FC<Props> = (
   {
     trades,
   },
 ) => {
-  const safeTrades = useMemo<Array<any>[]>(
-    () => {
-      if (!trades) {
-        return [];
-      }
-
-      return trades.map(
-        (
-          trade,
-        ) => {
-          return Object.entries(
-            trade,
-          ).filter(
-            (
-              [
-                key,
-              ],
-            ) => {
-              return columns.includes(
-                key,
-              );
-            },
-          );
-        },
-      );
-    },
-    [
-      trades,
-    ],
-  );
-
-  if (safeTrades.length === 0) {
+  if (!trades?.length) {
     return <Spinner container={Container} />;
   }
 
   return (
-    <Table
-      columns={columns}
-      data={safeTrades}
-    />
+    <Container>
+      <FullTable>
+        <StyledHead>
+          <StyledHeadCell>
+            Open
+          </StyledHeadCell>
+          <StyledHeadCell>
+            Close
+          </StyledHeadCell>
+          <StyledHeadCell>
+            ± %
+          </StyledHeadCell>
+          <StyledHeadCell>
+            $
+          </StyledHeadCell>
+        </StyledHead>
+        <StyledBody>
+          {trades.map(
+            (
+              trade,
+              index,
+            ) => {
+              return (
+                <StyledRow key={index}>
+                  <StyledCell>
+                    {trade.open}
+                  </StyledCell>
+                  <StyledCell>
+                    {trade.close}
+                  </StyledCell>
+                  <StyledCell>
+                    {trade.changePercent}
+                  </StyledCell>
+                  <StyledCell>
+                    {trade.changeBalance || trade.openBalance}
+                  </StyledCell>
+                </StyledRow>
+              );
+            },
+          )}
+        </StyledBody>
+      </FullTable>
+    </Container>
   );
 };
 

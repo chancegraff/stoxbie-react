@@ -129,6 +129,7 @@ const TradeRoute: React.FC = () => {
       date={safeDate}
       error={error}
       prices={prices}
+      ticker={safeTicker}
     />
   );
 };
