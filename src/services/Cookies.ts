@@ -6,7 +6,9 @@ const setItem = <P extends unknown>(
   numberOfDays: number,
 ) => {
   const now = new Date();
-  const valueAsString = JSON.stringify(value);
+  const valueAsString = value
+    ? JSON.stringify(value)
+    : undefined;
 
   now.setTime(now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000));
   document.cookie = `${key}=${valueAsString};     expires=${now.toUTCString()}; path=/`;
@@ -34,7 +36,7 @@ const getItem = <P extends unknown>(
     "",
   );
 
-  return itemValueAsString === ""
+  return itemValueAsString === "" || itemValueAsString === "undefined"
     ? undefined
     : JSON.parse(itemValueAsString);
 };

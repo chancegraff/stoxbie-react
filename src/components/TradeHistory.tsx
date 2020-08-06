@@ -9,7 +9,8 @@ import numbro from "numbro";
 import Spinner from "components/BaseUI/Spinner";
 
 type Props = {
-  trades?: HistoricalTrade[];
+  pastTrades?: HistoricalTrade[];
+  currentTrade?: HistoricalTrade;
 };
 
 const Container = styled(
@@ -121,8 +122,11 @@ const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
   );
 };
 
-const TradeHistory: React.FC<Props> = ({ trades }) => {
-  if (!trades) {
+const TradeHistory: React.FC<Props> = ({
+  pastTrades,
+  currentTrade,
+}) => {
+  if (!pastTrades) {
     return <Spinner container={Container} />;
   }
 
@@ -144,17 +148,23 @@ const TradeHistory: React.FC<Props> = ({ trades }) => {
           </HeadCell>
         </StyledHead>
         <StyledBody>
-          {trades.map((
-            trade,
-            index,
-          ) => {
-            return (
-              <TradeHistoryCell
-                key={index}
-                trade={trade}
-              />
-            );
-          })}
+          {
+            currentTrade &&
+            <TradeHistoryCell trade={currentTrade} />
+          }
+          {
+            pastTrades.map((
+              pastTrade,
+              index,
+            ) => {
+              return (
+                <TradeHistoryCell
+                  key={index}
+                  trade={pastTrade}
+                />
+              );
+            })
+          }
         </StyledBody>
       </FullTable>
     </Container>

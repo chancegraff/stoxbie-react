@@ -93,10 +93,13 @@ const getClosedTrade = (
   shareClose: number,
   shareCount: number,
 ): HistoricalTradeFinished => {
+  const typeOffset = previousTrade.type === "buy"
+    ? 1
+    : -1;
   const close = shareClose;
   const closeDate = new Date();
   const closeBalance = Math.abs(shareCount) * shareClose;
-  const changePrice = close - previousTrade.open;
+  const changePrice = (close - previousTrade.open) * typeOffset;
   const changePercent = changePrice / previousTrade.open;
   const changeBalance = closeBalance - previousTrade.openBalance;
   const currentTrade = {
@@ -215,35 +218,6 @@ const TradeView: React.FC<Props> = ({
       sharePrice: number,
       shareCount: number,
     ) => {
-      const openedTrade = currentTrade as HistoricalTradeStarted;
-      const closedTrade = getClosedTrade(
-        openedTrade,
-        sharePrice,
-        shareCount,
-      );
-      const tradeResults: TradeResults = {
-        currentTrade: undefined,
-        mainBalance: mainBalance + closedTrade.changeBalance,
-        pastTrades: [
-          closedTrade,
-          ...pastTrades,
-        ],
-      };
-
-      updateTradeResults(tradeResults);
-    },
-    [
-      currentTrade,
-      mainBalance,
-      pastTrades,
-      updateTradeResults,
-    ],
-  );
-  const closeTrade = useCallback(
-    (
-      sharePrice: number,
-      shareCount: number,
-    ) => {
       if (ticker && date) {
         const count = Math.abs(shareCount);
         const type: "buy" | "sell" = shareCount > 0
@@ -273,6 +247,35 @@ const TradeView: React.FC<Props> = ({
       ticker,
       date,
       mainBalance,
+      updateTradeResults,
+    ],
+  );
+  const closeTrade = useCallback(
+    (
+      sharePrice: number,
+      shareCount: number,
+    ) => {
+      const openedTrade = currentTrade as HistoricalTradeStarted;
+      const closedTrade = getClosedTrade(
+        openedTrade,
+        sharePrice,
+        shareCount,
+      );
+      const tradeResults: TradeResults = {
+        currentTrade: undefined,
+        mainBalance: mainBalance + closedTrade.closeBalance,
+        pastTrades: [
+          closedTrade,
+          ...pastTrades,
+        ],
+      };
+
+      updateTradeResults(tradeResults);
+    },
+    [
+      currentTrade,
+      mainBalance,
+      pastTrades,
       updateTradeResults,
     ],
   );
@@ -306,12 +309,12 @@ const TradeView: React.FC<Props> = ({
       shareCount: number,
     ) => {
       if (currentTrade) {
-        openTrade(
+        closeTrade(
           sharePrice,
           shareCount,
         );
       } else {
-        closeTrade(
+        openTrade(
           sharePrice,
           shareCount,
         );
@@ -393,21 +396,25 @@ const TradeView: React.FC<Props> = ({
         <BreadcrumbContainer />
       </Block>
       <FlexGrid
-        flexWrap={[
-          true,
-          true,
-          true,
-          false,
-        ]}
+        flexWrap={
+          [
+            true,
+            true,
+            true,
+            false,
+          ]
+        }
       >
         <AspectRatioBox component={FlexGridItem}>
           <AspectRatioItem ref={ref}>
             <StockChart
               prices={pastPrices}
-              resolution={[
-                width,
-                height,
-              ]}
+              resolution={
+                [
+                  width,
+                  height,
+                ]
+              }
             />
           </AspectRatioItem>
         </AspectRatioBox>
@@ -415,16 +422,20 @@ const TradeView: React.FC<Props> = ({
           display="flex"
           flexDirection="column"
           height={`${height}px`}
-          maxWidth={[
-            "100%",
-            "100%",
-            "25%",
-          ]}
-          minWidth={[
-            "auto",
-            "30%",
-            "25%",
-          ]}
+          maxWidth={
+            [
+              "100%",
+              "100%",
+              "25%",
+            ]
+          }
+          minWidth={
+            [
+              "auto",
+              "30%",
+              "25%",
+            ]
+          }
         >
           <TimeControl handleContinue={handleContinue} />
           <TradeControl
@@ -432,7 +443,10 @@ const TradeView: React.FC<Props> = ({
             handleTrade={handleTrade}
             price={currentPrice}
           />
-          <TradeHistory trades={pastTrades} />
+          <TradeHistory
+            currentTrade={currentTrade}
+            pastTrades={pastTrades}
+          />
         </FlexGridItem>
       </FlexGrid>
     </ContentContainer>
