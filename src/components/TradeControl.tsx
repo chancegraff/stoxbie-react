@@ -13,7 +13,7 @@ import Spinner from "components/BaseUI/Spinner";
 type Props = {
   price?: HistoricalPrice;
   balance?: number;
-  handleTrade: (balance: number, close: number, shareCount: number) => void;
+  handleTrade: (shareClose: number, shareCount: number) => void;
 };
 
 const FullButton = styled(
@@ -114,13 +114,12 @@ const TradeControl: React.FC<Props> = (
   );
   const handleBuy = useCallback(
     () => {
-      if (price && balance) {
+      if (price) {
         const shareCount = Math.abs(
           purchaseAmount,
         );
 
         handleTrade(
-          balance,
           price.close,
           shareCount,
         );
@@ -129,19 +128,17 @@ const TradeControl: React.FC<Props> = (
     [
       handleTrade,
       purchaseAmount,
-      balance,
       price,
     ],
   );
   const handleSell = useCallback(
     () => {
-      if (price && balance) {
+      if (price) {
         const shareCount = Math.abs(
           purchaseAmount,
         ) * -1;
 
         handleTrade(
-          balance,
           price.close,
           shareCount,
         );
@@ -150,7 +147,6 @@ const TradeControl: React.FC<Props> = (
     [
       handleTrade,
       purchaseAmount,
-      balance,
       price,
     ],
   );

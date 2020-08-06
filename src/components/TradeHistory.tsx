@@ -57,7 +57,6 @@ const TradeHistoryCell: React.FC<CellProps> = (
       close,
       changePercent,
       changeBalance,
-      openBalance,
     },
   },
 ) => {
@@ -120,21 +119,21 @@ const TradeHistoryCell: React.FC<CellProps> = (
   );
   const safeBalance = useMemo(
     () => {
-      const currentBalance = changeBalance || openBalance;
-      const abbreviatedBalance = numbro(
-        currentBalance,
-      ).formatCurrency(
-        {
-          average: true,
-          totalLength: 1,
-        },
-      );
+      if (changeBalance) {
+        const abbreviatedBalance = numbro(
+          changeBalance,
+        ).formatCurrency(
+          {
+            average: true,
+            totalLength: 1,
+          },
+        );
 
-      return abbreviatedBalance;
+        return abbreviatedBalance;
+      }
     },
     [
       changeBalance,
-      openBalance,
     ],
   );
 
@@ -161,7 +160,7 @@ const TradeHistory: React.FC<Props> = (
     trades,
   },
 ) => {
-  if (!trades?.length) {
+  if (!trades) {
     return <Spinner container={Container} />;
   }
 

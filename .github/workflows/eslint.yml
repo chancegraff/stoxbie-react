@@ -35,4 +35,4 @@ jobs:
         # Directory where the ESLint command should be run
         eslint_dir: src
         # Extensions of files to check with ESLint
-        eslint_extensions: ts, tsx
+        eslint_extensions: .ts,.tsx

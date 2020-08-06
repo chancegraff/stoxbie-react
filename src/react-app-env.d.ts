@@ -27,6 +27,7 @@ declare type HistoricalTradeBase = {
   ticker: string;
   date: Date;
   count: number;
+  type: "buy" | "sell";
 };
 
 declare type HistoricalTradeOpen = {
