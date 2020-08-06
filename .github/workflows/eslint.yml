@@ -30,8 +30,6 @@ jobs:
         github_token: ${{ secrets.github_token }}
         # Enable or disable ESLint checks
         eslint: true
-        # Additional arguments to pass to the linter
-        eslint_args: --format github
         # Directory where the ESLint command should be run
         eslint_dir: src
         # Extensions of files to check with ESLint
