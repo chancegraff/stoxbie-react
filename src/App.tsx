@@ -9,7 +9,8 @@ import SearchRoutes from "routes/SearchRoutes";
 import StockRoutes from "routes/StockRoutes";
 import TradeRoutes from "routes/TradeRoutes";
 
-const App: React.FC = () => {
+const App: React.FC = () =>
+{
   return (
     <BrowserRouter>
       <BaseUI>

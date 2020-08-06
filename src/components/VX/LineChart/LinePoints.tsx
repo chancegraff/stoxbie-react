@@ -20,32 +20,36 @@ const LinePoints: React.FC<Props> = ({
   yScale,
   xSelector,
   ySelector,
-}) => {
+}) =>
+{
   const [
     , theme,
   ] = useStyletron();
 
   return (
     <>
-      {prices.map((
-        price,
-        priceIndex,
-      ) => {
-        return (
-          priceIndex % 20 === 0 && (
-            <circle
-              cx={xScale(xSelector(price))}
-              cy={yScale(ySelector(price))}
-              fill={theme.colors.contentPrimary}
-              fillOpacity={0.5}
-              key={priceIndex}
-              r={2}
-              shapeRendering="geometricPrecision"
-              stroke={theme.colors.contentPrimary}
-            />
-          )
-        );
-      })}
+      {
+        prices.map((
+          price,
+          priceIndex,
+        ) =>
+        {
+          return (
+            priceIndex % 20 === 0 && (
+              <circle
+                cx={xScale(xSelector(price))}
+                cy={yScale(ySelector(price))}
+                fill={theme.colors.contentPrimary}
+                fillOpacity={0.5}
+                key={priceIndex}
+                r={2}
+                shapeRendering="geometricPrecision"
+                stroke={theme.colors.contentPrimary}
+              />
+            )
+          );
+        })
+      }
     </>
   );
 };

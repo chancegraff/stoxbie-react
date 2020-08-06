@@ -21,21 +21,25 @@ type Props = InjectedProps & MaxProps;
 const xMaxCreator = (
   width: number,
   horizontalPadding: number,
-) => {
+) =>
+{
   return width - RIGHT_LABELS_WIDTH - horizontalPadding * 2;
 };
 
 const yMaxCreator = (
   height: number,
   verticalPadding: number,
-) => {
+) =>
+{
   return height - BOTTOM_LABELS_HEIGHT - verticalPadding * 2;
 };
 
 const withMax = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
-): React.FC<P> => {
-  return (props) => {
+): React.FC<P> =>
+{
+  return (props) =>
+  {
     const {
       resolution: [
         width,
@@ -47,7 +51,8 @@ const withMax = <P extends React.PropsWithChildren<Props>>(
       ],
     } = props;
     const xMax = useMemo(
-      () => {
+      () =>
+      {
         return xMaxCreator(
           width,
           horizontalPadding,
@@ -59,7 +64,8 @@ const withMax = <P extends React.PropsWithChildren<Props>>(
       ],
     );
     const yMax = useMemo(
-      () => {
+      () =>
+      {
         return yMaxCreator(
           height,
           verticalPadding,
@@ -74,10 +80,12 @@ const withMax = <P extends React.PropsWithChildren<Props>>(
     return (
       <WrappedChart
         {...(props as P)}
-        max={[
-          xMax,
-          yMax,
-        ]}
+        max={
+          [
+            xMax,
+            yMax,
+          ]
+        }
       />
     );
   };

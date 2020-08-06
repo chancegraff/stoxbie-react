@@ -15,7 +15,8 @@ type Props = {
 
 const Container = styled(
   Block,
-  () => {
+  () =>
+  {
     return {
       alignItems: "center",
       display: "flex",
@@ -29,14 +30,16 @@ const Container = styled(
 
 const FullTable = styled(
   StyledTable,
-  () => {
+  () =>
+  {
     return { width: "100%" };
   },
 );
 
 const HeadCell = styled(
   StyledHeadCell,
-  ({ $theme }) => {
+  ({ $theme }) =>
+  {
     return { ...$theme.typography.LabelSmall };
   },
 );
@@ -50,10 +53,13 @@ const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
   close,
   changePercent,
   changeBalance,
-} }) => {
+} }) =>
+{
   const safeOpen = useMemo(
-    () => {
-      if (open) {
+    () =>
+    {
+      if (open)
+      {
         const abbreviatedOpen = numbro(open).formatCurrency({
           average: true,
           totalLength: 1,
@@ -65,8 +71,10 @@ const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
     [ open ],
   );
   const safeClose = useMemo(
-    () => {
-      if (close) {
+    () =>
+    {
+      if (close)
+      {
         const abbreviatedClose = numbro(close).formatCurrency({
           average: true,
           totalLength: 1,
@@ -78,8 +86,10 @@ const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
     [ close ],
   );
   const safeChange = useMemo(
-    () => {
-      if (changePercent) {
+    () =>
+    {
+      if (changePercent)
+      {
         const abbreviatedChange = numbro(changePercent).format({
           average: true,
           output: "percent",
@@ -91,8 +101,10 @@ const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
     [ changePercent ],
   );
   const safeBalance = useMemo(
-    () => {
-      if (changeBalance) {
+    () =>
+    {
+      if (changeBalance)
+      {
         const abbreviatedBalance = numbro(changeBalance).formatCurrency({
           average: true,
           totalLength: 1,
@@ -125,8 +137,10 @@ const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
 const TradeHistory: React.FC<Props> = ({
   pastTrades,
   currentTrade,
-}) => {
-  if (!pastTrades) {
+}) =>
+{
+  if (!pastTrades)
+  {
     return <Spinner container={Container} />;
   }
 
@@ -156,7 +170,8 @@ const TradeHistory: React.FC<Props> = ({
             pastTrades.map((
               pastTrade,
               index,
-            ) => {
+            ) =>
+            {
               return (
                 <TradeHistoryCell
                   key={index}

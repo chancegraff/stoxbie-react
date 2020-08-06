@@ -13,7 +13,8 @@ type Props = {
 const Grid: React.FC<Props> = ({
   scales,
   max,
-}) => {
+}) =>
+{
   const [
     , theme,
   ] = useStyletron();

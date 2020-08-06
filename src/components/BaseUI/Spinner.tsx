@@ -13,7 +13,8 @@ type Props = SpinnerProps & {
 const Spinner: React.FC<Props> = ({
   container: Container = Block,
   ...props
-}) => {
+}) =>
+{
   return (
     <Container>
       <DefaultSpinner {...props} />

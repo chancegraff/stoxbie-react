@@ -6,16 +6,19 @@ import ContentContainer from "templates/ContentContainer";
 
 type Props = PropsWithChildren;
 
-const Error: React.FC<Props> = (props) => {
+const Error: React.FC<Props> = (props) =>
+{
   return (
     <ContentContainer>
       <Block
-        width={[
-          "100%",
-          "100%",
-          "70%",
-          "60%",
-        ]}
+        width={
+          [
+            "100%",
+            "100%",
+            "70%",
+            "60%",
+          ]
+        }
       >
         <Display3>
           {props.children}

@@ -17,7 +17,8 @@ type Props = {
   ) => void;
 };
 
-const SearchView: React.FC<Props> = (props) => {
+const SearchView: React.FC<Props> = (props) =>
+{
   const [
     , theme,
   ] = useStyletron();
@@ -25,12 +26,14 @@ const SearchView: React.FC<Props> = (props) => {
   return (
     <ContentContainer>
       <Block
-        width={[
-          "100%",
-          "100%",
-          "70%",
-          "60%",
-        ]}
+        width={
+          [
+            "100%",
+            "100%",
+            "70%",
+            "60%",
+          ]
+        }
       >
         <Block marginBottom={theme.sizing.scale800}>
           <Display2>

@@ -24,7 +24,8 @@ import Error from "components/BaseUI/Typography";
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
 
-const ViewRoute: React.FC = () => {
+const ViewRoute: React.FC = () =>
+{
   const { ticker = "" } = useParams<{
     ticker?: string;
   }>();
@@ -44,8 +45,10 @@ const ViewRoute: React.FC = () => {
   ] = useState<string>();
 
   const safeTicker = useMemo(
-    () => {
-      if (ticker) {
+    () =>
+    {
+      if (ticker)
+      {
         return ticker;
       }
       setError(TICKER_ERROR_MESSAGE);
@@ -54,8 +57,10 @@ const ViewRoute: React.FC = () => {
   );
 
   const handleStart = useCallback(
-    (date: string) => {
-      if (company) {
+    (date: string) =>
+    {
+      if (company)
+      {
         history.push(`/trade/${company.symbol}/${date}`);
       }
     },
@@ -68,14 +73,19 @@ const ViewRoute: React.FC = () => {
   const handleLoad = useCallback(
     async (
       nextTicker?: string,
-    ) => {
-      if (nextTicker) {
+    ) =>
+    {
+      if (nextTicker)
+      {
         const nextCompany = await getCompany(nextTicker);
         const nextLogo = await getLogo(nextTicker).catch();
 
-        if (!nextCompany || !nextLogo) {
+        if (!nextCompany || !nextLogo)
+        {
           setError(ERROR_MESSAGE);
-        } else {
+        }
+        else
+        {
           setLogo(nextLogo);
           setCompany(nextCompany);
         }
@@ -85,7 +95,8 @@ const ViewRoute: React.FC = () => {
   );
 
   useEffect(
-    () => {
+    () =>
+    {
       handleLoad(safeTicker);
     },
     [
@@ -95,7 +106,8 @@ const ViewRoute: React.FC = () => {
   );
 
   useEffect(
-    () => {
+    () =>
+    {
       return handleUnloadCreator([
         setLogo,
         setCompany,
@@ -115,7 +127,8 @@ const ViewRoute: React.FC = () => {
   );
 };
 
-const StockRoutes: React.FC = () => {
+const StockRoutes: React.FC = () =>
+{
   const match = useRouteMatch();
 
   return (

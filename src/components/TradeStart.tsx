@@ -42,17 +42,20 @@ type DatePickerProps = ButtonProps & {
 const DatePicker: React.FC<DatePickerProps> = ({
   onChange,
   ...props
-}) => {
+}) =>
+{
   return (
     <StatefulPopover
-      content={(
-        <StatefulCalendar
-          initialState={{ value: oneYear }}
-          maxDate={today}
-          minDate={fiveYear}
-          onChange={onChange as defaultHandler}
-        />
-      )}
+      content={
+        (
+          <StatefulCalendar
+            initialState={{ value: oneYear }}
+            maxDate={today}
+            minDate={fiveYear}
+            onChange={onChange as defaultHandler}
+          />
+        )
+      }
       placement="bottomLeft"
     >
       {copyPropsToChildren(props)}
@@ -64,15 +67,18 @@ type Props = {
   handleStart: (date: string) => void;
 };
 
-const TradeStart: React.FC<Props> = ({ handleStart }) => {
+const TradeStart: React.FC<Props> = ({ handleStart }) =>
+{
   const handleYearStart = useCallback(
-    (date: string) => {
+    (date: string) =>
+    {
       return handleStart(date);
     },
     [ handleStart ],
   );
   const handleOneYearStart = useCallback(
-    () => {
+    () =>
+    {
       return handleYearStart(format(
         oneYear,
         URL_DATE_FORMAT,
@@ -81,7 +87,8 @@ const TradeStart: React.FC<Props> = ({ handleStart }) => {
     [ handleYearStart ],
   );
   const handleFiveYearStart = useCallback(
-    () => {
+    () =>
+    {
       return handleYearStart(format(
         fiveYear,
         URL_DATE_FORMAT,
@@ -90,7 +97,8 @@ const TradeStart: React.FC<Props> = ({ handleStart }) => {
     [ handleYearStart ],
   );
   const handleCustomYearStart: onChange = useCallback(
-    ({ date }) => {
+    ({ date }) =>
+    {
       return handleYearStart(format(
         date,
         URL_DATE_FORMAT,

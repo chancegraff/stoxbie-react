@@ -19,12 +19,14 @@ type Props = {
   handleStart: (date: string) => void;
 };
 
-const StockView: React.FC<Props> = (props) => {
+const StockView: React.FC<Props> = (props) =>
+{
   const [
     , theme,
   ] = useStyletron();
 
-  if (props.error) {
+  if (props.error)
+  {
     return (
       <Error>
         {props.error}

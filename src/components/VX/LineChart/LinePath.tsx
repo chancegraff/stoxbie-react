@@ -22,7 +22,8 @@ const LinePath: React.FC<Props> = ({
   yScale,
   xSelector,
   ySelector,
-}) => {
+}) =>
+{
   const [
     , theme,
   ] = useStyletron();
@@ -34,12 +35,18 @@ const LinePath: React.FC<Props> = ({
       shapeRendering="geometricPrecision"
       stroke={theme.colors.contentPrimary}
       strokeWidth={1}
-      x={(datum) => {
-        return xScale(xSelector(datum));
-      }}
-      y={(datum) => {
-        return yScale(ySelector(datum));
-      }}
+      x={
+        (datum) =>
+        {
+          return xScale(xSelector(datum));
+        }
+      }
+      y={
+        (datum) =>
+        {
+          return yScale(ySelector(datum));
+        }
+      }
     />
   );
 };

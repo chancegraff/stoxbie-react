@@ -25,7 +25,8 @@ const overrides: OverridesT = { Row: { style: {
   },
 } } };
 
-const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) => {
+const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) =>
+{
   return (
     <Block
       alignItems="flex-end"
@@ -42,12 +43,14 @@ const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) => {
   );
 };
 
-const StockName: React.FC<Props> = (props) => {
+const StockName: React.FC<Props> = (props) =>
+{
   const [
     , theme,
   ] = useStyletron();
 
-  if (!props.company) {
+  if (!props.company)
+  {
     return <DetailsSkeleton height={theme.sizing.scale2400} />;
   }
 

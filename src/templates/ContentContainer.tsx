@@ -5,7 +5,8 @@ import { Grid as LayoutGrid } from "baseui/dist/layout-grid";
 
 type Props = unknown;
 
-const ContentContainer: React.FC<Props> = (props) => {
+const ContentContainer: React.FC<Props> = (props) =>
+{
   const [
     , theme,
   ] = useStyletron();
@@ -13,12 +14,14 @@ const ContentContainer: React.FC<Props> = (props) => {
   return (
     <Block
       height="100%"
-      padding={[
-        `${theme.sizing.scale200} 0`,
-        `${theme.sizing.scale400} 0`,
-        `${theme.sizing.scale800} 0`,
-        `${theme.sizing.scale1200} 0`,
-      ]}
+      padding={
+        [
+          `${theme.sizing.scale200} 0`,
+          `${theme.sizing.scale400} 0`,
+          `${theme.sizing.scale800} 0`,
+          `${theme.sizing.scale1200} 0`,
+        ]
+      }
     >
       <LayoutGrid>
         {props.children}

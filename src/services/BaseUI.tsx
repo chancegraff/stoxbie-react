@@ -15,7 +15,8 @@ const AppContainer: Override<unknown> = { style: {
 
 const overrides: BaseProviderOverrides = { AppContainer };
 
-const BaseUI: React.FC = (props) => {
+const BaseUI: React.FC = (props) =>
+{
   return (
     <StyletronProvider value={engine}>
       <BaseProvider

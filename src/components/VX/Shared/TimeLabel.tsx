@@ -12,12 +12,15 @@ type Props = TickRendererProps;
 const DesktopTimeLabel: React.FC<Props> = ({
   formattedValue,
   ...props
-}) => {
+}) =>
+{
   const MediaQueriedText = useMemo(
-    () => {
+    () =>
+    {
       return styled(
         Text,
-        ({ $theme }) => {
+        ({ $theme }) =>
+        {
           return {
             [$theme.mediaQuery.large]: { display: "unset" },
             [$theme.mediaQuery.medium]: { display: "none" },
@@ -39,14 +42,18 @@ const DesktopTimeLabel: React.FC<Props> = ({
 const MobileTimeLabel: React.FC<Props> = ({
   formattedValue,
   ...props
-}) => {
+}) =>
+{
   const formattedValueAsDate = useMemo(
-    () => {
-      if (formattedValue) {
+    () =>
+    {
+      if (formattedValue)
+      {
         const yearPattern = new RegExp(/^[\w]+ '[\d]+$/);
         const yearMatch = yearPattern.test(formattedValue.toString());
 
-        if (yearMatch) {
+        if (yearMatch)
+        {
           const valueAsDate = parse(
             formattedValue.toString(),
             "MMM ''yy",
@@ -63,14 +70,17 @@ const MobileTimeLabel: React.FC<Props> = ({
     [ formattedValue ],
   );
   const MediaQueriedText = useMemo(
-    () => {
+    () =>
+    {
       return styled(
         Text,
-        ({ $theme }) => {
+        ({ $theme }) =>
+        {
           const mediaQueries: StyleObject = {};
 
           mediaQueries[$theme.mediaQuery.large] = { display: "none" };
-          if (!formattedValueAsDate) {
+          if (!formattedValueAsDate)
+          {
             mediaQueries[$theme.mediaQuery.medium] = { display: "unset" };
             mediaQueries[$theme.mediaQuery.small] = { display: "unset" };
           }
@@ -89,7 +99,8 @@ const MobileTimeLabel: React.FC<Props> = ({
   );
 };
 
-const TimeLabel: React.FC<Props> = (props) => {
+const TimeLabel: React.FC<Props> = (props) =>
+{
   return (
     <>
       <DesktopTimeLabel {...props} />

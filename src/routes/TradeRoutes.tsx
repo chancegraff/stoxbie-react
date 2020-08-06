@@ -21,7 +21,8 @@ import Error from "components/BaseUI/Typography";
 
 type Props = unknown;
 
-const TradeRoute: React.FC = () => {
+const TradeRoute: React.FC = () =>
+{
   const {
     ticker = "",
     date = "",
@@ -39,14 +40,16 @@ const TradeRoute: React.FC = () => {
   ] = useState<string>();
 
   const safeDate = useMemo(
-    () => {
+    () =>
+    {
       const parsedDate = parse(
         date,
         URL_DATE_FORMAT,
         new Date(),
       );
 
-      if (parsedDate.getTime()) {
+      if (parsedDate.getTime())
+      {
         return parsedDate;
       }
       setError(DATE_ERROR_MESSAGE);
@@ -55,8 +58,10 @@ const TradeRoute: React.FC = () => {
   );
 
   const safeTicker = useMemo(
-    () => {
-      if (ticker) {
+    () =>
+    {
+      if (ticker)
+      {
         return ticker;
       }
       setError(TICKER_ERROR_MESSAGE);
@@ -68,8 +73,10 @@ const TradeRoute: React.FC = () => {
     async (
       nextTicker?: string,
       nextDate?: Date,
-    ) => {
-      if (nextTicker && nextDate) {
+    ) =>
+    {
+      if (nextTicker && nextDate)
+      {
         const nextPrices = await historicalPrices(
           nextTicker,
           "max",
@@ -77,11 +84,14 @@ const TradeRoute: React.FC = () => {
           { chartByDay: true },
         );
 
-        if (nextPrices) {
+        if (nextPrices)
+        {
           const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
 
           setPrices([ ...typedPrices ]);
-        } else {
+        }
+        else
+        {
           setError(FETCH_ERROR_MESSAGE);
         }
       }
@@ -90,7 +100,8 @@ const TradeRoute: React.FC = () => {
   );
 
   useEffect(
-    () => {
+    () =>
+    {
       handleLoad(
         safeTicker,
         safeDate,
@@ -104,7 +115,8 @@ const TradeRoute: React.FC = () => {
   );
 
   useEffect(
-    () => {
+    () =>
+    {
       return handleUnloadCreator([
         setPrices,
         setError,
@@ -123,7 +135,8 @@ const TradeRoute: React.FC = () => {
   );
 };
 
-const TradeRoutes: React.FC<Props> = () => {
+const TradeRoutes: React.FC<Props> = () =>
+{
   const match = useRouteMatch();
 
   return (

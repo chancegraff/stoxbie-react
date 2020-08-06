@@ -37,7 +37,8 @@ const xScaleCreator = (
   prices: HistoricalPrice[],
   xSelector: SelectX,
   xMax: MaxX,
-) => {
+) =>
+{
   const [
     minDate = 0,
     maxDate = 0,
@@ -62,7 +63,8 @@ const yScaleCreator = (
   prices: HistoricalPrice[],
   ySelector: SelectY,
   yMax: MaxY,
-) => {
+) =>
+{
   const maxPrice = max(
     prices,
     ySelector,
@@ -82,16 +84,22 @@ const yScaleCreator = (
 
 const withScale = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
-): React.FC<P> => {
-  return (props) => {
+): React.FC<P> =>
+{
+  return (props) =>
+  {
     const select = useMemo(
-      () => {
-        if (!props.select) {
+      () =>
+      {
+        if (!props.select)
+        {
           return {
-            xSelector: () => {
+            xSelector: () =>
+            {
               return 0;
             },
-            ySelector: () => {
+            ySelector: () =>
+            {
               return 0;
             },
           };
@@ -109,8 +117,10 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
       [ props.select ],
     );
     const maxs = useMemo(
-      () => {
-        if (!props.max) {
+      () =>
+      {
+        if (!props.max)
+        {
           return {
             xMax: 0,
             yMax: 0,
@@ -129,7 +139,8 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
       [ props.max ],
     );
     const xScale: ScaleTime<number, number> = useMemo(
-      () => {
+      () =>
+      {
         return xScaleCreator(
           props.prices,
           select.xSelector,
@@ -143,7 +154,8 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
       ],
     );
     const yScale: ScaleLinear<number, number> = useMemo(
-      () => {
+      () =>
+      {
         return yScaleCreator(
           props.prices,
           select.ySelector,
@@ -160,10 +172,12 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
     return (
       <WrappedChart
         {...(props as P)}
-        scale={[
-          xScale,
-          yScale,
-        ]}
+        scale={
+          [
+            xScale,
+            yScale,
+          ]
+        }
       />
     );
   };

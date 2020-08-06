@@ -31,7 +31,8 @@ type Props = {
 
 const Rect = styled(
   "rect",
-  ({ $theme }) => {
+  ({ $theme }) =>
+  {
     return { fill: $theme.colors.backgroundSecondary };
   },
 );
@@ -62,7 +63,8 @@ const LineChart: React.FC<Props> = ({
     axisLabelProps,
     tickLabelProps,
   ],
-}) => {
+}) =>
+{
   return (
     <svg
       height={height}
@@ -77,14 +79,18 @@ const LineChart: React.FC<Props> = ({
         top={verticalPadding}
       >
         <Grid
-          max={[
-            xMax,
-            yMax,
-          ]}
-          scales={[
-            xScale,
-            yScale,
-          ]}
+          max={
+            [
+              xMax,
+              yMax,
+            ]
+          }
+          scales={
+            [
+              xScale,
+              yScale,
+            ]
+          }
         />
         <AxisBottom
           labelProps={axisLabelProps}

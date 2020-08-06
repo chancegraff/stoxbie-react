@@ -15,7 +15,8 @@ const overrides = { List };
 export const StatefulMenu: React.FC<StatefulMenuProps> = ({
   children,
   ...props
-}) => {
+}) =>
+{
   return (
     <DefaultStatefulMenu
       overrides={overrides}

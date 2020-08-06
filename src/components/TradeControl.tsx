@@ -27,7 +27,8 @@ const FullButton = styled(
 
 const Container = styled(
   Block,
-  ({ $theme }) => {
+  ({ $theme }) =>
+  {
     return {
       alignItems: "center",
       display: "flex",
@@ -42,7 +43,8 @@ const TradeControl: React.FC<Props> = ({
   price,
   balance,
   handleTrade,
-}) => {
+}) =>
+{
   const [
     purchaseAmount,
     setPurchaseAmount,
@@ -50,7 +52,8 @@ const TradeControl: React.FC<Props> = ({
   const previousPrice = usePrevious(price);
   const previousBalance = usePrevious(balance);
   const hasPriceChanged = useMemo(
-    () => {
+    () =>
+    {
       return (
         price &&
         previousPrice &&
@@ -63,7 +66,8 @@ const TradeControl: React.FC<Props> = ({
     ],
   );
   const hasBalanceChanged = useMemo(
-    () => {
+    () =>
+    {
       return (
         balance &&
         previousBalance &&
@@ -76,7 +80,8 @@ const TradeControl: React.FC<Props> = ({
     ],
   );
   const maxPurchasable = useMemo(
-    () => {
+    () =>
+    {
       return balance && price
         ? Math.floor(balance / price.close)
         : 0;
@@ -87,7 +92,8 @@ const TradeControl: React.FC<Props> = ({
     ],
   );
   const handleChange = useCallback(
-    (event: State) => {
+    (event: State) =>
+    {
       const [ nextPurchaseAmount ] = event.value;
 
       setPurchaseAmount(nextPurchaseAmount);
@@ -95,8 +101,10 @@ const TradeControl: React.FC<Props> = ({
     [],
   );
   const handleBuy = useCallback(
-    () => {
-      if (price) {
+    () =>
+    {
+      if (price)
+      {
         const shareCount = Math.abs(purchaseAmount);
 
         handleTrade(
@@ -112,8 +120,10 @@ const TradeControl: React.FC<Props> = ({
     ],
   );
   const handleSell = useCallback(
-    () => {
-      if (price) {
+    () =>
+    {
+      if (price)
+      {
         const shareCount = Math.abs(purchaseAmount) * -1;
 
         handleTrade(
@@ -130,8 +140,10 @@ const TradeControl: React.FC<Props> = ({
   );
 
   useEffect(
-    () => {
-      if (hasPriceChanged || hasBalanceChanged) {
+    () =>
+    {
+      if (hasPriceChanged || hasBalanceChanged)
+      {
         setPurchaseAmount(0);
       }
     },
@@ -141,7 +153,8 @@ const TradeControl: React.FC<Props> = ({
     ],
   );
 
-  if (!price) {
+  if (!price)
+  {
     return <Spinner container={Container} />;
   }
 

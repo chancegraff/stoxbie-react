@@ -13,7 +13,8 @@ const FullButton = styled(
   { width: "100%" },
 );
 
-const TimeControl: React.FC<Props> = ({ handleContinue }) => {
+const TimeControl: React.FC<Props> = ({ handleContinue }) =>
+{
   return (
     <FullButton
       onClick={handleContinue}

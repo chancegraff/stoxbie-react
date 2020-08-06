@@ -19,7 +19,8 @@ const AxisRight: React.FC<Props> = ({
   yScale,
   labelProps,
   tickLabelProps,
-}) => {
+}) =>
+{
   const [
     , theme,
   ] = useStyletron();

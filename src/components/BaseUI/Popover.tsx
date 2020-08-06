@@ -16,7 +16,8 @@ const overrides: Overrides = { Body };
 export const StatefulPopover: React.FC<Partial<PopoverProps>> = ({
   children,
   ...props
-}) => {
+}) =>
+{
   return (
     <DefaultStatefulPoover
       animateOutTime={300}

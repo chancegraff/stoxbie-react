@@ -21,7 +21,8 @@ type InjectedProps = {
 
 type Props = BaseProps & InjectedProps;
 
-const withShared = (WrappedChart: React.FC<Props>): React.FC<BaseProps> => {
+const withShared = (WrappedChart: React.FC<Props>): React.FC<BaseProps> =>
+{
   return withSelect<Props>(withMax<Props>(withScale<Props>(WrappedChart))) as React.FC<
     BaseProps
   >;

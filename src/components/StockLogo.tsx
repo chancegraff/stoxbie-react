@@ -13,7 +13,8 @@ type Props = {
 
 const overrides: OverridesT = { Root: { style: { borderRadius: "50%" } } };
 
-const AvatarSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) => {
+const AvatarSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) =>
+{
   return (
     <Block height={props.height}>
       <Skeleton
@@ -25,12 +26,14 @@ const AvatarSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) => {
   );
 };
 
-const StockLogo: React.FC<Props> = (props) => {
+const StockLogo: React.FC<Props> = (props) =>
+{
   const [
     , theme,
   ] = useStyletron();
 
-  if (!props.logo) {
+  if (!props.logo)
+  {
     return (
       <AvatarSkeleton
         height={theme.sizing.scale2400}

@@ -21,12 +21,14 @@ const AxisBottom: React.FC<Props> = ({
   yMax,
   labelProps,
   tickLabelProps,
-}) => {
+}) =>
+{
   const [
     , theme,
   ] = useStyletron();
   const tickFormat = useCallback(
-    (tick: Date) => {
+    (tick: Date) =>
+    {
       return tick.getMonth() % 12 === 0
         ? format(
             tick,

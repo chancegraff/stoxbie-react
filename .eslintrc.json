@@ -61,7 +61,10 @@
         "arrow-spacing": "error",
         "block-scoped-var": "error",
         "block-spacing": "error",
-        "brace-style": "error",
+        "brace-style": [
+            2,
+            "allman"
+        ],
         "callback-return": "error",
         "camelcase": "error",
         "capitalized-comments": "off",

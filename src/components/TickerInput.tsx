@@ -33,10 +33,12 @@ const Dropdown: Override<unknown> = { style: {
 
 const overrides: SelectOverrides = { Dropdown };
 
-const handleFilter = (options: Value) => {
+const handleFilter = (options: Value) =>
+{
   return options;
 };
-const handleLabel = (args: { option?: Option }) => {
+const handleLabel = (args: { option?: Option }) =>
+{
   return (
     <Block
       alignItems="baseline"
@@ -52,7 +54,8 @@ const handleLabel = (args: { option?: Option }) => {
   );
 };
 
-const TickerInput: React.FC<Props> = ({ handleSearch }) => {
+const TickerInput: React.FC<Props> = ({ handleSearch }) =>
+{
   const history = useHistory();
   const [
     options,
@@ -64,24 +67,29 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) => {
   ] = useState<boolean>(false);
 
   const handleInputChange = useCallback(
-    (event: React.FormEvent<HTMLInputElement>) => {
+    (event: React.FormEvent<HTMLInputElement>) =>
+    {
       const nextValue = event.currentTarget.value;
 
-      if (nextValue) {
+      if (nextValue)
+      {
         setIsLoading(true);
         handleSearch(
           nextValue,
           setOptions,
           setIsLoading,
         );
-      } else {
+      }
+      else
+      {
         setOptions([]);
       }
     },
     [ handleSearch ],
   );
   const handleChange = useCallback(
-    (params: OnChangeParams) => {
+    (params: OnChangeParams) =>
+    {
       const [ value ] = params.value;
 
       history.push(`/stock/${value.symbol}`);
