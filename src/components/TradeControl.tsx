@@ -1,9 +1,13 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from "react";
 import { styled } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { Button } from "baseui/dist/button";
 import { FlexGridItem } from "baseui/dist/flex-grid";
-import { Slider, State } from "baseui/dist/slider";
+import {
+  Slider, State,
+} from "baseui/dist/slider";
 import { HistoricalPrice } from "iex";
 
 import { usePrevious } from "services/Utilities";
@@ -18,18 +22,12 @@ type Props = {
 
 const FullButton = styled(
   Button,
-  {
-    width: "100%",
-  },
+  { width: "100%" },
 );
 
 const Container = styled(
   Block,
-  (
-    {
-      $theme,
-    },
-  ) => {
+  ({ $theme }) => {
     return {
       alignItems: "center",
       display: "flex",
@@ -40,25 +38,17 @@ const Container = styled(
   },
 );
 
-const TradeControl: React.FC<Props> = (
-  {
-    price,
-    balance,
-    handleTrade,
-  },
-) => {
+const TradeControl: React.FC<Props> = ({
+  price,
+  balance,
+  handleTrade,
+}) => {
   const [
     purchaseAmount,
     setPurchaseAmount,
-  ] = useState<number>(
-    0,
-  );
-  const previousPrice = usePrevious(
-    price,
-  );
-  const previousBalance = usePrevious(
-    balance,
-  );
+  ] = useState<number>(0);
+  const previousPrice = usePrevious(price);
+  const previousBalance = usePrevious(balance);
   const hasPriceChanged = useMemo(
     () => {
       return (
@@ -88,9 +78,7 @@ const TradeControl: React.FC<Props> = (
   const maxPurchasable = useMemo(
     () => {
       return balance && price
-        ? Math.floor(
-          balance / price.close,
-        )
+        ? Math.floor(balance / price.close)
         : 0;
     },
     [
@@ -99,25 +87,17 @@ const TradeControl: React.FC<Props> = (
     ],
   );
   const handleChange = useCallback(
-    (
-      event: State,
-    ) => {
-      const [
-        nextPurchaseAmount,
-      ] = event.value;
+    (event: State) => {
+      const [ nextPurchaseAmount ] = event.value;
 
-      setPurchaseAmount(
-        nextPurchaseAmount,
-      );
+      setPurchaseAmount(nextPurchaseAmount);
     },
     [],
   );
   const handleBuy = useCallback(
     () => {
       if (price) {
-        const shareCount = Math.abs(
-          purchaseAmount,
-        );
+        const shareCount = Math.abs(purchaseAmount);
 
         handleTrade(
           price.close,
@@ -134,9 +114,7 @@ const TradeControl: React.FC<Props> = (
   const handleSell = useCallback(
     () => {
       if (price) {
-        const shareCount = Math.abs(
-          purchaseAmount,
-        ) * -1;
+        const shareCount = Math.abs(purchaseAmount) * -1;
 
         handleTrade(
           price.close,
@@ -154,9 +132,7 @@ const TradeControl: React.FC<Props> = (
   useEffect(
     () => {
       if (hasPriceChanged || hasBalanceChanged) {
-        setPurchaseAmount(
-          0,
-        );
+        setPurchaseAmount(0);
       }
     },
     [
@@ -174,9 +150,7 @@ const TradeControl: React.FC<Props> = (
       <Slider
         max={maxPurchasable}
         onChange={handleChange}
-        value={[
-          purchaseAmount,
-        ]}
+        value={[ purchaseAmount ]}
       />
       <FlexGrid>
         <FlexGridItem>

@@ -1,7 +1,9 @@
 import React, { useMemo } from "react";
 import { styled } from "baseui/dist";
 import { Block } from "baseui/dist/block";
-import { StyledBody, StyledCell, StyledHead, StyledHeadCell, StyledRow, StyledTable } from "baseui/dist/table";
+import {
+  StyledBody, StyledCell, StyledHead, StyledHeadCell, StyledRow, StyledTable,
+} from "baseui/dist/table";
 import numbro from "numbro";
 
 import Spinner from "components/BaseUI/Spinner";
@@ -27,22 +29,14 @@ const Container = styled(
 const FullTable = styled(
   StyledTable,
   () => {
-    return {
-      width: "100%",
-    };
+    return { width: "100%" };
   },
 );
 
 const HeadCell = styled(
   StyledHeadCell,
-  (
-    {
-      $theme,
-    },
-  ) => {
-    return {
-      ...$theme.typography.LabelSmall,
-    };
+  ({ $theme }) => {
+    return { ...$theme.typography.LabelSmall };
   },
 );
 
@@ -50,91 +44,63 @@ type CellProps = {
   trade: HistoricalTrade;
 };
 
-const TradeHistoryCell: React.FC<CellProps> = (
-  {
-    trade: {
-      open,
-      close,
-      changePercent,
-      changeBalance,
-    },
-  },
-) => {
+const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
+  open,
+  close,
+  changePercent,
+  changeBalance,
+} }) => {
   const safeOpen = useMemo(
     () => {
       if (open) {
-        const abbreviatedOpen = numbro(
-          open,
-        ).formatCurrency(
-          {
-            average: true,
-            totalLength: 1,
-          },
-        );
+        const abbreviatedOpen = numbro(open).formatCurrency({
+          average: true,
+          totalLength: 1,
+        });
 
         return abbreviatedOpen;
       }
     },
-    [
-      open,
-    ],
+    [ open ],
   );
   const safeClose = useMemo(
     () => {
       if (close) {
-        const abbreviatedClose = numbro(
-          close,
-        ).formatCurrency(
-          {
-            average: true,
-            totalLength: 1,
-          },
-        );
+        const abbreviatedClose = numbro(close).formatCurrency({
+          average: true,
+          totalLength: 1,
+        });
 
         return abbreviatedClose;
       }
     },
-    [
-      close,
-    ],
+    [ close ],
   );
   const safeChange = useMemo(
     () => {
       if (changePercent) {
-        const abbreviatedChange = numbro(
-          changePercent,
-        ).format(
-          {
-            average: true,
-            output: "percent",
-          },
-        );
+        const abbreviatedChange = numbro(changePercent).format({
+          average: true,
+          output: "percent",
+        });
 
         return abbreviatedChange;
       }
     },
-    [
-      changePercent,
-    ],
+    [ changePercent ],
   );
   const safeBalance = useMemo(
     () => {
       if (changeBalance) {
-        const abbreviatedBalance = numbro(
-          changeBalance,
-        ).formatCurrency(
-          {
-            average: true,
-            totalLength: 1,
-          },
-        );
+        const abbreviatedBalance = numbro(changeBalance).formatCurrency({
+          average: true,
+          totalLength: 1,
+        });
 
         return abbreviatedBalance;
       }
     },
-    [
-      changeBalance,
-    ],
+    [ changeBalance ],
   );
 
   return (
@@ -155,11 +121,7 @@ const TradeHistoryCell: React.FC<CellProps> = (
   );
 };
 
-const TradeHistory: React.FC<Props> = (
-  {
-    trades,
-  },
-) => {
+const TradeHistory: React.FC<Props> = ({ trades }) => {
   if (!trades) {
     return <Spinner container={Container} />;
   }
@@ -182,19 +144,17 @@ const TradeHistory: React.FC<Props> = (
           </HeadCell>
         </StyledHead>
         <StyledBody>
-          {trades.map(
-            (
-              trade,
-              index,
-            ) => {
-              return (
-                <TradeHistoryCell
-                  key={index}
-                  trade={trade}
-                />
-              );
-            },
-          )}
+          {trades.map((
+            trade,
+            index,
+          ) => {
+            return (
+              <TradeHistoryCell
+                key={index}
+                trade={trade}
+              />
+            );
+          })}
         </StyledBody>
       </FullTable>
     </Container>

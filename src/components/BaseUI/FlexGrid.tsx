@@ -14,32 +14,18 @@ type Props = FlexGridProps;
 
 export const COLUMN_COUNT = 2;
 
-export const MultiplyWidth = (
-  multiple = 2,
-): Overrides<BlockOverrides> => {
-  return {
-    Block: {
-      style: (
-        {
-          $theme,
-        }: { $theme: Theme },
-      ): StyleObject => {
-        return {
-          width: `calc((${100 * multiple}% - ${
-            $theme.sizing.scale800
-          }) / ${COLUMN_COUNT}px)`,
-        };
-      },
-    },
-  };
+export const MultiplyWidth = (multiple = 2): Overrides<BlockOverrides> => {
+  return { Block: { style: ({ $theme }: { $theme: Theme }): StyleObject => {
+    return { width: `calc((${100 * multiple}% - ${
+      $theme.sizing.scale800
+    }) / ${COLUMN_COUNT}px)` };
+  } } };
 };
 
-export const FlexGridItemFull: React.FC<FlexGridItemProps> = (
-  {
-    children,
-    ...props
-  },
-) => {
+export const FlexGridItemFull: React.FC<FlexGridItemProps> = ({
+  children,
+  ...props
+}) => {
   return (
     <FlexGridItem
       {...props}
@@ -50,12 +36,10 @@ export const FlexGridItemFull: React.FC<FlexGridItemProps> = (
   );
 };
 
-const FlexGrid: React.FC<Props> = (
-  {
-    children,
-    ...props
-  },
-) => {
+const FlexGrid: React.FC<Props> = ({
+  children,
+  ...props
+}) => {
   return (
     <DefaultFlexGrid
       flexGridColumnCount={[

@@ -1,7 +1,9 @@
 import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
-import { Display2, Label2 } from "baseui/dist/typography";
+import {
+  Display2, Label2,
+} from "baseui/dist/typography";
 import { Search } from "iex-cloud";
 
 import ContentContainer from "templates/ContentContainer";
@@ -15,9 +17,7 @@ type Props = {
   ) => void;
 };
 
-const SearchView: React.FC<Props> = (
-  props,
-) => {
+const SearchView: React.FC<Props> = (props) => {
   const [
     , theme,
   ] = useStyletron();

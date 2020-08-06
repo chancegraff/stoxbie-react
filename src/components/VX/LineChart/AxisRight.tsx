@@ -14,14 +14,12 @@ type Props = {
   tickLabelProps: () => Partial<TextProps>;
 };
 
-const AxisRight: React.FC<Props> = (
-  {
-    xMax,
-    yScale,
-    labelProps,
-    tickLabelProps,
-  },
-) => {
+const AxisRight: React.FC<Props> = ({
+  xMax,
+  yScale,
+  labelProps,
+  tickLabelProps,
+}) => {
   const [
     , theme,
   ] = useStyletron();

@@ -5,16 +5,12 @@ export type SelectX = (price: HistoricalPrice) => number;
 export type SelectY = (price: HistoricalPrice) => number;
 export type Select = [SelectX, SelectY];
 
-const xSelector = (
-  price: HistoricalPrice,
-) => {
-  return new Date(
-    price.date,
-  ).valueOf();
+const xSelector = (price: HistoricalPrice) => {
+  return new Date(price.date).valueOf();
 };
-const ySelector = (
-  price: HistoricalPrice,
-) => { return price.close; };
+const ySelector = (price: HistoricalPrice) => {
+  return price.close;
+};
 
 type InjectedProps = {
   select: Select;
@@ -27,9 +23,7 @@ type Props = InjectedProps & SelectProps;
 const withSelect = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
 ): React.FC<P> => {
-  return (
-    props,
-  ) => {
+  return (props) => {
     return (
       <WrappedChart
         {...(props as P)}

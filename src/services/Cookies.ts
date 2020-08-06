@@ -6,39 +6,29 @@ const setItem = <P extends unknown>(
   numberOfDays: number,
 ) => {
   const now = new Date();
-  const valueAsString = JSON.stringify(
-    value,
-  );
+  const valueAsString = JSON.stringify(value);
 
-  now.setTime(
-    now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000),
-  );
+  now.setTime(now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000));
   document.cookie = `${key}=${valueAsString};     expires=${now.toUTCString()}; path=/`;
 };
 
 const getItem = <P extends unknown>(
   itemKey: string,
 ): P => {
-  const allCookies = document.cookie.split(
-    "; ",
-  );
+  const allCookies = document.cookie.split("; ");
   const itemValueAsString = allCookies.reduce(
     (
       total,
       currentCookie,
     ) => {
-      const storedItem = currentCookie.split(
-        "=",
-      );
+      const storedItem = currentCookie.split("=");
       const [
         storedItemKey,
         storedItemValue,
       ] = storedItem;
 
       return itemKey === storedItemKey
-        ? decodeURIComponent(
-          storedItemValue,
-        )
+        ? decodeURIComponent(storedItemValue)
         : total;
     },
     "",
@@ -46,9 +36,7 @@ const getItem = <P extends unknown>(
 
   return itemValueAsString === ""
     ? undefined
-    : JSON.parse(
-      itemValueAsString,
-    );
+    : JSON.parse(itemValueAsString);
 };
 
 export const useCookie = <P = undefined>(
@@ -56,23 +44,17 @@ export const useCookie = <P = undefined>(
   defaultValue: P,
 ): [P, (value: P, numberOfDays: number) => void] => {
   const getCookie = (): P => {
-    return getItem<P>(
-      key,
-    ) || defaultValue;
+    return getItem<P>(key) || defaultValue;
   };
   const [
     cookie,
     setCookie,
-  ] = useState(
-    getCookie(),
-  );
+  ] = useState(getCookie());
   const updateCookie = (
     value: P,
     numberOfDays: number,
   ) => {
-    setCookie(
-      value,
-    );
+    setCookie(value);
     setItem(
       key,
       value,

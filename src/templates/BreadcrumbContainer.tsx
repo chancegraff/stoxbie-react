@@ -1,17 +1,19 @@
 import React, { useMemo } from "react";
-import { Link, useParams, useRouteMatch } from "react-router-dom";
+import {
+  Link, useParams, useRouteMatch,
+} from "react-router-dom";
 import { Breadcrumbs } from "baseui/dist/breadcrumbs";
 import { StyledLink } from "baseui/dist/link";
-import { format, parse } from "date-fns";
+import {
+  format, parse,
+} from "date-fns";
 
 import { URL_DATE_FORMAT } from "services/Constants";
 
 type Props = unknown;
 
 const StockBreadcrumb: React.FC = () => {
-  const {
-    ticker,
-  } = useParams();
+  const { ticker } = useParams();
 
   return (
     <Breadcrumbs>
@@ -49,9 +51,7 @@ const TradeBreadcrumb: React.FC = () => {
         "MMMM do, y",
       );
     },
-    [
-      date,
-    ],
+    [ date ],
   );
 
   return (
@@ -76,12 +76,8 @@ const TradeBreadcrumb: React.FC = () => {
 };
 
 const BreadcrumbContainer: React.FC<Props> = () => {
-  const tradeView = useRouteMatch(
-    "/trade/:ticker/:date",
-  );
-  const stockView = useRouteMatch(
-    "/stock/:ticker",
-  );
+  const tradeView = useRouteMatch("/trade/:ticker/:date");
+  const stockView = useRouteMatch("/stock/:ticker");
 
   return (
     <>

@@ -7,20 +7,14 @@ import {
   useRef,
 } from "react";
 
-export const copyPropsToChildren = (
-  {
-    children,
-    ...props
-  }: PropsWithChildren<unknown>,
-): React.ReactNode => {
+export const copyPropsToChildren = ({
+  children,
+  ...props
+}: PropsWithChildren<unknown>): React.ReactNode => {
   return Children.map(
     children,
-    (
-      child,
-    ) => {
-      if (isValidElement(
-        child,
-      )) {
+    (child) => {
+      if (isValidElement(child)) {
         return cloneElement(
           child,
           props,
@@ -32,9 +26,7 @@ export const copyPropsToChildren = (
   );
 };
 
-export const parsePixels = (
-  px: string,
-): number => {
+export const parsePixels = (px: string): number => {
   return parseInt(
     px.replace(
       "px",
@@ -44,19 +36,11 @@ export const parsePixels = (
   );
 };
 
-export const handleUnloadCreator = (
-  dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[],
-) => {
+export const handleUnloadCreator = (dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[]) => {
   return (): void => {
-    return dispatchHandlers.forEach(
-      (
-        dispatch,
-      ) => {
-        return dispatch(
-          undefined,
-        );
-      },
-    );
+    return dispatchHandlers.forEach((dispatch) => {
+      return dispatch(undefined);
+    });
   };
 };
 
@@ -65,11 +49,9 @@ export const usePrevious = <P>(
 ): P | undefined => {
   const ref = useRef<P>();
 
-  useEffect(
-    () => {
-      ref.current = value;
-    },
-  );
+  useEffect(() => {
+    ref.current = value;
+  });
 
   return ref.current;
 };

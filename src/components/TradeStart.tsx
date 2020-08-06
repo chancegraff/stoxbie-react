@@ -1,13 +1,17 @@
 import React, { useCallback } from "react";
 import { Block } from "baseui/dist/block";
-import { Button, ButtonProps, SHAPE, SIZE } from "baseui/dist/button";
+import {
+  Button, ButtonProps, SHAPE, SIZE,
+} from "baseui/dist/button";
 import { ButtonGroup } from "baseui/dist/button-group";
 import {
   onChange as defaultHandler,
   StatefulCalendar,
 } from "baseui/dist/datepicker";
 import { Filter } from "baseui/dist/icon";
-import { format, subYears } from "date-fns";
+import {
+  format, subYears,
+} from "date-fns";
 import { styled } from "styletron-react";
 
 import { URL_DATE_FORMAT } from "services/Constants";
@@ -26,9 +30,7 @@ const fiveYear = subYears(
 
 const GrowingButton = styled(
   Button,
-  {
-    flexGrow: 1,
-  },
+  { flexGrow: 1 },
 );
 
 type onChange = (args: { date: Date }) => void;
@@ -37,19 +39,15 @@ type DatePickerProps = ButtonProps & {
   onChange?: onChange;
 };
 
-const DatePicker: React.FC<DatePickerProps> = (
-  {
-    onChange,
-    ...props
-  },
-) => {
+const DatePicker: React.FC<DatePickerProps> = ({
+  onChange,
+  ...props
+}) => {
   return (
     <StatefulPopover
       content={(
         <StatefulCalendar
-          initialState={{
-            value: oneYear,
-          }}
+          initialState={{ value: oneYear }}
           maxDate={today}
           minDate={fiveYear}
           onChange={onChange as defaultHandler}
@@ -57,9 +55,7 @@ const DatePicker: React.FC<DatePickerProps> = (
       )}
       placement="bottomLeft"
     >
-      {copyPropsToChildren(
-        props,
-      )}
+      {copyPropsToChildren(props)}
     </StatefulPopover>
   );
 };
@@ -68,65 +64,39 @@ type Props = {
   handleStart: (date: string) => void;
 };
 
-const TradeStart: React.FC<Props> = (
-  {
-    handleStart,
-  },
-) => {
+const TradeStart: React.FC<Props> = ({ handleStart }) => {
   const handleYearStart = useCallback(
-    (
-      date: string,
-    ) => {
-      return handleStart(
-        date,
-      );
+    (date: string) => {
+      return handleStart(date);
     },
-    [
-      handleStart,
-    ],
+    [ handleStart ],
   );
   const handleOneYearStart = useCallback(
     () => {
-      return handleYearStart(
-        format(
-          oneYear,
-          URL_DATE_FORMAT,
-        ),
-      );
+      return handleYearStart(format(
+        oneYear,
+        URL_DATE_FORMAT,
+      ));
     },
-    [
-      handleYearStart,
-    ],
+    [ handleYearStart ],
   );
   const handleFiveYearStart = useCallback(
     () => {
-      return handleYearStart(
-        format(
-          fiveYear,
-          URL_DATE_FORMAT,
-        ),
-      );
+      return handleYearStart(format(
+        fiveYear,
+        URL_DATE_FORMAT,
+      ));
     },
-    [
-      handleYearStart,
-    ],
+    [ handleYearStart ],
   );
   const handleCustomYearStart: onChange = useCallback(
-    (
-      {
+    ({ date }) => {
+      return handleYearStart(format(
         date,
-      },
-    ) => {
-      return handleYearStart(
-        format(
-          date,
-          URL_DATE_FORMAT,
-        ),
-      );
+        URL_DATE_FORMAT,
+      ));
     },
-    [
-      handleYearStart,
-    ],
+    [ handleYearStart ],
   );
 
   return (

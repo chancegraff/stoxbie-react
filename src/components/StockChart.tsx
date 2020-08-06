@@ -12,12 +12,8 @@ type Props = {
   padding?: Padding;
 };
 
-const getLabelProps = {
-  display: "none",
-};
-const getTickLabelProps = (
-  theme: Theme,
-) => {
+const getLabelProps = { display: "none" };
+const getTickLabelProps = (theme: Theme) => {
   return () => {
     return {
       fill: theme.colors.mono300,
@@ -27,16 +23,14 @@ const getTickLabelProps = (
   };
 };
 
-const StockChart: React.FC<Props> = (
-  {
-    prices,
-    resolution,
-    padding = [
-      20,
-      20,
-    ],
-  },
-) => {
+const StockChart: React.FC<Props> = ({
+  prices,
+  resolution,
+  padding = [
+    20,
+    20,
+  ],
+}) => {
   const [
     , theme,
   ] = useStyletron();
@@ -44,22 +38,18 @@ const StockChart: React.FC<Props> = (
     () => {
       return [
         getLabelProps,
-        getTickLabelProps(
-          theme,
-        ),
+        getTickLabelProps(theme),
       ];
     },
-    [
-      theme,
-    ],
+    [ theme ],
   );
   const responsivePadding: Padding = useMemo(
     () => {
       return resolution[0] <= theme.breakpoints.medium
         ? [
-          10,
-          10,
-        ]
+            10,
+            10,
+          ]
         : padding;
     },
     [

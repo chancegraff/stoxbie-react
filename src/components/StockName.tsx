@@ -1,33 +1,31 @@
 import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
-import { OverridesT, Skeleton, SkeletonPropsT } from "baseui/dist/skeleton";
-import { Caption2, Display3 } from "baseui/dist/typography";
+import {
+  OverridesT, Skeleton, SkeletonPropsT,
+} from "baseui/dist/skeleton";
+import {
+  Caption2, Display3,
+} from "baseui/dist/typography";
 import { Company } from "iex-cloud";
 
 type Props = {
   company?: Company;
 };
 
-const overrides: OverridesT = {
-  Row: {
-    style: {
-      ":first-of-type": {
-        height: "33px",
-        marginBottom: "12px",
-        width: "320px",
-      },
-      ":last-of-type": {
-        height: "10px",
-        width: "30px",
-      },
-    },
+const overrides: OverridesT = { Row: { style: {
+  ":first-of-type": {
+    height: "33px",
+    marginBottom: "12px",
+    width: "320px",
   },
-};
+  ":last-of-type": {
+    height: "10px",
+    width: "30px",
+  },
+} } };
 
-const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (
-  props,
-) => {
+const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) => {
   return (
     <Block
       alignItems="flex-end"
@@ -44,9 +42,7 @@ const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (
   );
 };
 
-const StockName: React.FC<Props> = (
-  props,
-) => {
+const StockName: React.FC<Props> = (props) => {
   const [
     , theme,
   ] = useStyletron();

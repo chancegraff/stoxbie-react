@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from "react";
 import {
   Route,
   Switch,
@@ -23,9 +25,7 @@ const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
 
 const ViewRoute: React.FC = () => {
-  const {
-    ticker = "",
-  } = useParams<{
+  const { ticker = "" } = useParams<{
     ticker?: string;
   }>();
   const history = useHistory();
@@ -48,23 +48,15 @@ const ViewRoute: React.FC = () => {
       if (ticker) {
         return ticker;
       }
-      setError(
-        TICKER_ERROR_MESSAGE,
-      );
+      setError(TICKER_ERROR_MESSAGE);
     },
-    [
-      ticker,
-    ],
+    [ ticker ],
   );
 
   const handleStart = useCallback(
-    (
-      date: string,
-    ) => {
+    (date: string) => {
       if (company) {
-        history.push(
-          `/trade/${company.symbol}/${date}`,
-        );
+        history.push(`/trade/${company.symbol}/${date}`);
       }
     },
     [
@@ -78,24 +70,14 @@ const ViewRoute: React.FC = () => {
       nextTicker?: string,
     ) => {
       if (nextTicker) {
-        const nextCompany = await getCompany(
-          nextTicker,
-        );
-        const nextLogo = await getLogo(
-          nextTicker,
-        ).catch();
+        const nextCompany = await getCompany(nextTicker);
+        const nextLogo = await getLogo(nextTicker).catch();
 
         if (!nextCompany || !nextLogo) {
-          setError(
-            ERROR_MESSAGE,
-          );
+          setError(ERROR_MESSAGE);
         } else {
-          setLogo(
-            nextLogo,
-          );
-          setCompany(
-            nextCompany,
-          );
+          setLogo(nextLogo);
+          setCompany(nextCompany);
         }
       }
     },
@@ -104,9 +86,7 @@ const ViewRoute: React.FC = () => {
 
   useEffect(
     () => {
-      handleLoad(
-        safeTicker,
-      );
+      handleLoad(safeTicker);
     },
     [
       handleLoad,
@@ -116,13 +96,11 @@ const ViewRoute: React.FC = () => {
 
   useEffect(
     () => {
-      return handleUnloadCreator(
-        [
-          setLogo,
-          setCompany,
-          setError,
-        ],
-      );
+      return handleUnloadCreator([
+        setLogo,
+        setCompany,
+        setError,
+      ]);
     },
     [],
   );

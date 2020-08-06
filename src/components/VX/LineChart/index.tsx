@@ -31,46 +31,38 @@ type Props = {
 
 const Rect = styled(
   "rect",
-  (
-    {
-      $theme,
-    },
-  ) => {
-    return {
-      fill: $theme.colors.backgroundSecondary,
-    };
+  ({ $theme }) => {
+    return { fill: $theme.colors.backgroundSecondary };
   },
 );
 
-const LineChart: React.FC<Props> = (
-  {
-    prices,
-    resolution: [
-      width,
-      height,
-    ],
-    padding: [
-      horizontalPadding,
-      verticalPadding,
-    ],
-    select: [
-      xSelector,
-      ySelector,
-    ],
-    scale: [
-      xScale,
-      yScale,
-    ],
-    max: [
-      xMax,
-      yMax,
-    ],
-    label: [
-      axisLabelProps,
-      tickLabelProps,
-    ],
-  },
-) => {
+const LineChart: React.FC<Props> = ({
+  prices,
+  resolution: [
+    width,
+    height,
+  ],
+  padding: [
+    horizontalPadding,
+    verticalPadding,
+  ],
+  select: [
+    xSelector,
+    ySelector,
+  ],
+  scale: [
+    xScale,
+    yScale,
+  ],
+  max: [
+    xMax,
+    yMax,
+  ],
+  label: [
+    axisLabelProps,
+    tickLabelProps,
+  ],
+}) => {
   return (
     <svg
       height={height}
@@ -125,6 +117,4 @@ const LineChart: React.FC<Props> = (
   );
 };
 
-export default withShared(
-  LineChart,
-);
+export default withShared(LineChart);

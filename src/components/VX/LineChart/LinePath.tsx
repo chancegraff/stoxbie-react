@@ -4,7 +4,9 @@ import { LinePath as DefaultLinePath } from "@vx/shape";
 import { useStyletron } from "baseui/dist";
 import { HistoricalPrice } from "iex";
 
-import { ScaleX, ScaleY } from "components/VX/Shared/Scale";
+import {
+  ScaleX, ScaleY,
+} from "components/VX/Shared/Scale";
 
 type Props = {
   prices: HistoricalPrice[];
@@ -14,15 +16,13 @@ type Props = {
   ySelector: (price: HistoricalPrice) => number;
 };
 
-const LinePath: React.FC<Props> = (
-  {
-    prices,
-    xScale,
-    yScale,
-    xSelector,
-    ySelector,
-  },
-) => {
+const LinePath: React.FC<Props> = ({
+  prices,
+  xScale,
+  yScale,
+  xSelector,
+  ySelector,
+}) => {
   const [
     , theme,
   ] = useStyletron();
@@ -34,23 +34,11 @@ const LinePath: React.FC<Props> = (
       shapeRendering="geometricPrecision"
       stroke={theme.colors.contentPrimary}
       strokeWidth={1}
-      x={(
-        datum,
-      ) => {
-        return xScale(
-          xSelector(
-            datum,
-          ),
-        );
+      x={(datum) => {
+        return xScale(xSelector(datum));
       }}
-      y={(
-        datum,
-      ) => {
-        return yScale(
-          ySelector(
-            datum,
-          ),
-        );
+      y={(datum) => {
+        return yScale(ySelector(datum));
       }}
     />
   );

@@ -190,14 +190,12 @@ const TradeView: React.FC<Props> = ({
           30,
         );
       }
-
       if (results.currentTrade !== null) {
         setCurrentTrade(
           results.currentTrade,
           30,
         );
       }
-
       if (results.pastTrades !== null) {
         setPastTrades(
           results.pastTrades,

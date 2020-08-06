@@ -1,7 +1,9 @@
 import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
-import { Company, Logo } from "iex-cloud";
+import {
+  Company, Logo,
+} from "iex-cloud";
 
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";
@@ -17,9 +19,7 @@ type Props = {
   handleStart: (date: string) => void;
 };
 
-const StockView: React.FC<Props> = (
-  props,
-) => {
+const StockView: React.FC<Props> = (props) => {
   const [
     , theme,
   ] = useStyletron();

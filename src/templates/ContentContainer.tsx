@@ -5,9 +5,7 @@ import { Grid as LayoutGrid } from "baseui/dist/layout-grid";
 
 type Props = unknown;
 
-const ContentContainer: React.FC<Props> = (
-  props,
-) => {
+const ContentContainer: React.FC<Props> = (props) => {
   const [
     , theme,
   ] = useStyletron();

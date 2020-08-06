@@ -4,9 +4,7 @@ import { Block } from "baseui/dist/block";
 
 type Props = unknown;
 
-const BackgroundContainer: React.FC<Props> = (
-  props,
-) => {
+const BackgroundContainer: React.FC<Props> = (props) => {
   const [
     , theme,
   ] = useStyletron();

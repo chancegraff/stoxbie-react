@@ -6,9 +6,7 @@ import ContentContainer from "templates/ContentContainer";
 
 type Props = PropsWithChildren;
 
-const Error: React.FC<Props> = (
-  props,
-) => {
+const Error: React.FC<Props> = (props) => {
   return (
     <ContentContainer>
       <Block

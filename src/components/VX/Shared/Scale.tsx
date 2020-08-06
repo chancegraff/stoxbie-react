@@ -1,11 +1,21 @@
 import React, { useMemo } from "react";
-import { scaleLinear, scaleTime } from "@vx/scale";
-import { extent, max } from "d3-array";
-import { ScaleLinear, ScaleTime } from "d3-scale";
+import {
+  scaleLinear, scaleTime,
+} from "@vx/scale";
+import {
+  extent, max,
+} from "d3-array";
+import {
+  ScaleLinear, ScaleTime,
+} from "d3-scale";
 import { HistoricalPrice } from "iex";
 
-import { Max, MaxX, MaxY } from "./Max";
-import { Select, SelectX, SelectY } from "./Select";
+import {
+  Max, MaxX, MaxY,
+} from "./Max";
+import {
+  Select, SelectX, SelectY,
+} from "./Select";
 
 export type ScaleX = ScaleTime<number, number>;
 export type ScaleY = ScaleLinear<number, number>;
@@ -36,18 +46,16 @@ const xScaleCreator = (
     xSelector,
   );
 
-  return scaleTime<number>(
-    {
-      domain: [
-        minDate,
-        maxDate,
-      ],
-      rangeRound: [
-        0,
-        xMax,
-      ],
-    },
-  );
+  return scaleTime<number>({
+    domain: [
+      minDate,
+      maxDate,
+    ],
+    rangeRound: [
+      0,
+      xMax,
+    ],
+  });
 };
 
 const yScaleCreator = (
@@ -60,26 +68,22 @@ const yScaleCreator = (
     ySelector,
   ) ?? 0;
 
-  return scaleLinear<number>(
-    {
-      domain: [
-        maxPrice,
-        0,
-      ],
-      rangeRound: [
-        0,
-        yMax,
-      ],
-    },
-  );
+  return scaleLinear<number>({
+    domain: [
+      maxPrice,
+      0,
+    ],
+    rangeRound: [
+      0,
+      yMax,
+    ],
+  });
 };
 
 const withScale = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
 ): React.FC<P> => {
-  return (
-    props,
-  ) => {
+  return (props) => {
     const select = useMemo(
       () => {
         if (!props.select) {
@@ -102,9 +106,7 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
           ySelector,
         };
       },
-      [
-        props.select,
-      ],
+      [ props.select ],
     );
     const maxs = useMemo(
       () => {
@@ -124,9 +126,7 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
           yMax,
         };
       },
-      [
-        props.max,
-      ],
+      [ props.max ],
     );
     const xScale: ScaleTime<number, number> = useMemo(
       () => {

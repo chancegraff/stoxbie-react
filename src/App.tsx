@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter, Route, Switch,
+} from "react-router-dom";
 
 import BaseUI from "services/BaseUI";
 import BackgroundContainer from "templates/BackgroundContainer";

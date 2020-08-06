@@ -1,5 +1,7 @@
 import React from "react";
-import { Button, SIZE } from "baseui/dist/button";
+import {
+  Button, SIZE,
+} from "baseui/dist/button";
 import { styled } from "styletron-react";
 
 type Props = {
@@ -8,16 +10,10 @@ type Props = {
 
 const FullButton = styled(
   Button,
-  {
-    width: "100%",
-  },
+  { width: "100%" },
 );
 
-const TimeControl: React.FC<Props> = (
-  {
-    handleContinue,
-  },
-) => {
+const TimeControl: React.FC<Props> = ({ handleContinue }) => {
   return (
     <FullButton
       onClick={handleContinue}

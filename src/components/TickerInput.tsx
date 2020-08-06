@@ -1,4 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, {
+  useCallback, useState,
+} from "react";
 import { useHistory } from "react-router-dom";
 import { Block } from "baseui/dist/block";
 import { Override } from "baseui/dist/overrides";
@@ -11,7 +13,9 @@ import {
   TYPE,
   Value,
 } from "baseui/dist/select";
-import { Caption2, Label2 } from "baseui/dist/typography";
+import {
+  Caption2, Label2,
+} from "baseui/dist/typography";
 import { Search } from "iex-cloud";
 
 type Props = {
@@ -22,25 +26,17 @@ type Props = {
   ) => void;
 };
 
-const Dropdown: Override<unknown> = {
-  style: {
-    boxShadow: "none",
-    padding: "0",
-  },
-};
+const Dropdown: Override<unknown> = { style: {
+  boxShadow: "none",
+  padding: "0",
+} };
 
-const overrides: SelectOverrides = {
-  Dropdown,
-};
+const overrides: SelectOverrides = { Dropdown };
 
-const handleFilter = (
-  options: Value,
-) => {
+const handleFilter = (options: Value) => {
   return options;
 };
-const handleLabel = (
-  args: { option?: Option },
-) => {
+const handleLabel = (args: { option?: Option }) => {
   return (
     <Block
       alignItems="baseline"
@@ -56,65 +52,41 @@ const handleLabel = (
   );
 };
 
-const TickerInput: React.FC<Props> = (
-  {
-    handleSearch,
-  },
-) => {
+const TickerInput: React.FC<Props> = ({ handleSearch }) => {
   const history = useHistory();
   const [
     options,
     setOptions,
-  ] = useState<Search[]>(
-    [],
-  );
+  ] = useState<Search[]>([]);
   const [
     isLoading,
     setIsLoading,
-  ] = useState<boolean>(
-    false,
-  );
+  ] = useState<boolean>(false);
 
   const handleInputChange = useCallback(
-    (
-      event: React.FormEvent<HTMLInputElement>,
-    ) => {
+    (event: React.FormEvent<HTMLInputElement>) => {
       const nextValue = event.currentTarget.value;
 
       if (nextValue) {
-        setIsLoading(
-          true,
-        );
+        setIsLoading(true);
         handleSearch(
           nextValue,
           setOptions,
           setIsLoading,
         );
       } else {
-        setOptions(
-          [],
-        );
+        setOptions([]);
       }
     },
-    [
-      handleSearch,
-    ],
+    [ handleSearch ],
   );
   const handleChange = useCallback(
-    (
-      params: OnChangeParams,
-    ) => {
-      const [
-        value,
-      ] = params.value;
+    (params: OnChangeParams) => {
+      const [ value ] = params.value;
 
-      history.push(
-        `/stock/${value.symbol}`,
-      );
+      history.push(`/stock/${value.symbol}`);
     },
-    [
-      history,
-    ],
+    [ history ],
   );
 
   return (

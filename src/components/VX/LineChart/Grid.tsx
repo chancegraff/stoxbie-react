@@ -10,12 +10,10 @@ type Props = {
   max: Max;
 };
 
-const Grid: React.FC<Props> = (
-  {
-    scales,
-    max,
-  },
-) => {
+const Grid: React.FC<Props> = ({
+  scales,
+  max,
+}) => {
   const [
     , theme,
   ] = useStyletron();

@@ -35,9 +35,7 @@ const yMaxCreator = (
 const withMax = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
 ): React.FC<P> => {
-  return (
-    props,
-  ) => {
+  return (props) => {
     const {
       resolution: [
         width,

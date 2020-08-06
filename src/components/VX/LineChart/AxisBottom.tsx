@@ -16,26 +16,22 @@ type Props = {
   tickLabelProps: () => Partial<TextProps>;
 };
 
-const AxisBottom: React.FC<Props> = (
-  {
-    xScale,
-    yMax,
-    labelProps,
-    tickLabelProps,
-  },
-) => {
+const AxisBottom: React.FC<Props> = ({
+  xScale,
+  yMax,
+  labelProps,
+  tickLabelProps,
+}) => {
   const [
     , theme,
   ] = useStyletron();
   const tickFormat = useCallback(
-    (
-      tick: Date,
-    ) => {
+    (tick: Date) => {
       return tick.getMonth() % 12 === 0
         ? format(
-          tick,
-          "MMM ''yy",
-        )
+            tick,
+            "MMM ''yy",
+          )
         : format(
           tick,
           "MMM",
