@@ -13,7 +13,7 @@ import Spinner from "components/BaseUI/Spinner";
 type Props = {
   price?: HistoricalPrice;
   balance?: number;
-  handleTrade: (shareClose: number, shareCount: number) => void;
+  handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
 const FullButton = styled(

@@ -41,10 +41,13 @@
         "array-bracket-newline": [
             "error",
             {
-                "minItems": 1
+                "minItems": 2
             }
         ],
-        "array-bracket-spacing": "error",
+        "array-bracket-spacing": [
+            "error",
+            "always"
+        ],
         "array-callback-return": "error",
         "array-element-newline": [
             "error",
@@ -91,7 +94,7 @@
         "function-paren-newline": [
             "error",
             {
-                "minItems": 1
+                "minItems": 2
             }
         ],
         "generator-star-spacing": "error",
@@ -105,7 +108,10 @@
         "implicit-arrow-linebreak": "error",
         "indent": [
             "error",
-            2
+            2,
+            {
+                "offsetTernaryExpressions": true
+            }
         ],
         "indent-legacy": "off",
         "init-declarations": "error",
@@ -132,7 +138,7 @@
         "multiline-comment-style": "off",
         "multiline-ternary": [
             "error",
-            "always-multiline"
+            "always"
         ],
         "new-cap": "error",
         "new-parens": "error",
@@ -242,13 +248,19 @@
         "object-curly-newline": [
             "error",
             {
-                "ObjectExpression": "always",
-                "ObjectPattern": "always",
+                "ObjectExpression": {
+                    "minProperties": 2
+                },
+                "ObjectPattern": {
+                    "minProperties": 2
+                },
                 "ImportDeclaration": {
-                    "multiline": true
+                    "multiline": true,
+                    "minProperties": 2
                 },
                 "ExportDeclaration": {
-                    "multiline": true
+                    "multiline": true,
+                    "minProperties": 2
                 }
             }
         ],
@@ -366,8 +378,18 @@
             "error",
             "always"
         ],
-        "wrap-params/destructured-objects": "error",
-        "wrap-params/wrap-params": "error",
+        "wrap-params/destructured-objects": [
+            "error",
+            {
+                "minProperties": 2
+            }
+        ],
+        "wrap-params/wrap-params": [
+            "error",
+            {
+                "minProperties": 2
+            }
+        ],
         "sort-keys-fix/sort-keys-fix": "warn",
         "simple-import-sort/sort": [
             "error",

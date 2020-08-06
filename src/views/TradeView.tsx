@@ -1,8 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from "react";
 import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { FlexGridItem } from "baseui/dist/flex-grid";
-import { closestIndexTo, parseISO } from "date-fns";
+import {
+  closestIndexTo, parseISO,
+} from "date-fns";
 import { HistoricalPrice } from "iex";
 import useResizeObserver from "use-resize-observer";
 
@@ -10,7 +14,9 @@ import { useCookie } from "services/Cookies";
 import { handleUnloadCreator } from "services/Utilities";
 import BreadcrumbContainer from "templates/BreadcrumbContainer";
 import ContentContainer from "templates/ContentContainer";
-import { AspectRatioBox, AspectRatioItem } from "components/AspectRatio";
+import {
+  AspectRatioBox, AspectRatioItem,
+} from "components/AspectRatio";
 import FlexGrid from "components/BaseUI/FlexGrid";
 import Err from "components/BaseUI/Typography";
 import StockChart from "components/StockChart";
@@ -25,26 +31,26 @@ type Props = {
   ticker?: string;
 };
 
+type TradeResults = {
+  currentTrade: HistoricalTrade | undefined | null;
+  mainBalance: number | null;
+  pastTrades: HistoricalTrade[] | null;
+};
+
 const getPriceIndexes = (
   prices: HistoricalPrice[],
   date: Date,
 ) => {
-  const priceDates = prices.map(
-    (
-      {
-        date: dateString,
-      },
-    ) => {
-      return parseISO(
-        dateString,
-      );
-    },
-  );
+  const priceDates = prices.map(({ date: dateString }) => {
+    return parseISO(dateString);
+  });
   const startDateIndex = closestIndexTo(
     date,
     priceDates,
   );
-  const endDateIndex = startDateIndex > -1 ? startDateIndex - 730 : 0;
+  const endDateIndex = startDateIndex > -1
+    ? startDateIndex - 730
+    : 0;
 
   return [
     endDateIndex,
@@ -74,34 +80,22 @@ const setNextPrices = (
     setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
   },
 ) => {
-  const nextPrices = prices.slice(
-    ...priceIndexes,
-  );
+  const nextPrices = prices.slice(...priceIndexes);
 
-  setPastPrices(
-    nextPrices,
-  );
-  setNextPriceIndexes(
-    priceIndexes.map(
-      (
-        index,
-      ) => {
-        return index + 1;
-      },
-    ),
-  );
+  setPastPrices(nextPrices);
+  setNextPriceIndexes(priceIndexes.map((index) => {
+    return index + 1;
+  }));
 };
 
-const closeTrade = (
+const getClosedTrade = (
   previousTrade: HistoricalTradeStarted,
   shareClose: number,
   shareCount: number,
 ): HistoricalTradeFinished => {
   const close = shareClose;
   const closeDate = new Date();
-  const closeBalance = Math.abs(
-    shareCount,
-  ) * shareClose;
+  const closeBalance = Math.abs(shareCount) * shareClose;
   const changePrice = close - previousTrade.open;
   const changePercent = changePrice / previousTrade.open;
   const changeBalance = closeBalance - previousTrade.openBalance;
@@ -118,16 +112,14 @@ const closeTrade = (
   return currentTrade;
 };
 
-const openTrade = (
+const getOpenedTrade = (
   previousTrade: HistoricalTrade,
   shareClose: number,
   shareCount: number,
 ): HistoricalTradeStarted => {
   const open = shareClose;
   const openDate = new Date();
-  const openBalance = Math.abs(
-    shareCount,
-  ) * shareClose;
+  const openBalance = Math.abs(shareCount) * shareClose;
   const currentTrade = {
     ...previousTrade,
     open,
@@ -138,14 +130,12 @@ const openTrade = (
   return currentTrade;
 };
 
-const TradeView: React.FC<Props> = (
-  {
-    prices,
-    date,
-    error,
-    ticker,
-  },
-) => {
+const TradeView: React.FC<Props> = ({
+  prices,
+  date,
+  error,
+  ticker,
+}) => {
   const [
     , theme,
   ] = useStyletron();
@@ -177,13 +167,115 @@ const TradeView: React.FC<Props> = (
     "pastTrades",
     [],
   );
+  const [
+    currentTrade,
+    setCurrentTrade,
+  ] = useCookie<HistoricalTrade | undefined>(
+    "currentTrade",
+    undefined,
+  );
 
   const currentPrice = useMemo(
     () => {
       return pastPrices && pastPrices[pastPrices.length - 1];
     },
+    [ pastPrices ],
+  );
+
+  const updateTradeResults = useCallback(
+    (results: TradeResults) => {
+      if (results.mainBalance !== null) {
+        setMainBalance(
+          results.mainBalance,
+          30,
+        );
+      }
+
+      if (results.currentTrade !== null) {
+        setCurrentTrade(
+          results.currentTrade,
+          30,
+        );
+      }
+
+      if (results.pastTrades !== null) {
+        setPastTrades(
+          results.pastTrades,
+          30,
+        );
+      }
+    },
     [
-      pastPrices,
+      setMainBalance,
+      setPastTrades,
+      setCurrentTrade,
+    ],
+  );
+
+  const openTrade = useCallback(
+    (
+      sharePrice: number,
+      shareCount: number,
+    ) => {
+      const openedTrade = currentTrade as HistoricalTradeStarted;
+      const closedTrade = getClosedTrade(
+        openedTrade,
+        sharePrice,
+        shareCount,
+      );
+      const tradeResults: TradeResults = {
+        currentTrade: undefined,
+        mainBalance: mainBalance + closedTrade.changeBalance,
+        pastTrades: [
+          closedTrade,
+          ...pastTrades,
+        ],
+      };
+
+      updateTradeResults(tradeResults);
+    },
+    [
+      currentTrade,
+      mainBalance,
+      pastTrades,
+      updateTradeResults,
+    ],
+  );
+  const closeTrade = useCallback(
+    (
+      sharePrice: number,
+      shareCount: number,
+    ) => {
+      if (ticker && date) {
+        const count = Math.abs(shareCount);
+        const type: "buy" | "sell" = shareCount > 0
+          ? "buy"
+          : "sell";
+        const nextTrade = {
+          count,
+          date,
+          ticker,
+          type,
+        };
+        const openedTrade = getOpenedTrade(
+          nextTrade,
+          sharePrice,
+          shareCount,
+        );
+        const tradeResults: TradeResults = {
+          currentTrade: openedTrade,
+          mainBalance: mainBalance - Math.abs(openedTrade.openBalance),
+          pastTrades: null,
+        };
+
+        updateTradeResults(tradeResults);
+      }
+    },
+    [
+      ticker,
+      date,
+      mainBalance,
+      updateTradeResults,
     ],
   );
 
@@ -212,79 +304,25 @@ const TradeView: React.FC<Props> = (
   );
   const handleTrade = useCallback(
     (
-      shareClose: number,
+      sharePrice: number,
       shareCount: number,
     ) => {
-      if (ticker && date) {
-        const result = {
-          nextBalance: 0,
-          nextTrades: [
-            ...pastTrades,
-          ],
-        };
-        const previousTrade = result.nextTrades.shift();
-
-        if (previousTrade && previousTrade.close === undefined) {
-          const tradeFinish = closeTrade(
-            previousTrade as HistoricalTradeStarted,
-            shareClose,
-            shareCount,
-          );
-
-          result.nextBalance = mainBalance - Math.abs(
-            tradeFinish.closeBalance,
-          );
-          result.nextTrades.unshift(
-            tradeFinish,
-          );
-        } else {
-          if (previousTrade) {
-            result.nextTrades.unshift(
-              previousTrade,
-            );
-          }
-
-          const count = Math.abs(
-            shareCount,
-          );
-          const type: "buy" | "sell" = shareCount > 0 ? "buy" : "sell";
-          const nextTrade = {
-            count,
-            date,
-            ticker,
-            type,
-          };
-          const tradeStart = openTrade(
-            nextTrade,
-            shareClose,
-            shareCount,
-          );
-
-          result.nextBalance = mainBalance - Math.abs(
-            tradeStart.openBalance,
-          );
-          result.nextTrades.unshift(
-            tradeStart,
-          );
-        }
-
-        setMainBalance(
-          result.nextBalance,
-          30,
+      if (currentTrade) {
+        openTrade(
+          sharePrice,
+          shareCount,
         );
-        setPastTrades(
-          result.nextTrades,
-          30,
+      } else {
+        closeTrade(
+          sharePrice,
+          shareCount,
         );
       }
     },
     [
-      ticker,
-      date,
-      pastTrades,
-      setPastTrades,
-      mainBalance,
-      setMainBalance,
+      currentTrade,
+      openTrade,
+      closeTrade,
     ],
   );
   const handleContinue = useCallback(
@@ -332,12 +370,10 @@ const TradeView: React.FC<Props> = (
 
   useEffect(
     () => {
-      return handleUnloadCreator(
-        [
-          setPastPrices,
-          setNextPriceIndexes,
-        ],
-      );
+      return handleUnloadCreator([
+        setPastPrices,
+        setNextPriceIndexes,
+      ]);
     },
     [],
   );
