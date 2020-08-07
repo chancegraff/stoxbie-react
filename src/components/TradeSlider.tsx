@@ -14,8 +14,8 @@ import { SLIDER_TICK_COUNT } from "services/Constants";
 import { usePrevious } from "services/Utilities";
 
 type Props = {
-  price: HistoricalPrice;
-  balance: number;
+  currentPrice: HistoricalPrice;
+  currentBalance: number;
   purchaseAmount: number;
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -29,47 +29,49 @@ const TickBar = styled(
       display: "flex",
       flexDirection: "row",
       justifyContent: "flex-start",
+      paddingLeft: "18px",
+      paddingRight: "16px",
     };
   },
 );
 
 const TradeSlider: React.FC<Props> = ({
-  price,
-  balance,
+  currentPrice,
+  currentBalance,
   purchaseAmount,
   setPurchaseAmount,
 }) =>
 {
-  const previousPrice = usePrevious(price);
-  const previousBalance = usePrevious(balance);
+  const previousPrice = usePrevious(currentPrice);
+  const previousBalance = usePrevious(currentBalance);
   const hasPriceChanged = useMemo(
     () =>
     {
-      return price !== previousPrice;
+      return currentPrice !== previousPrice;
     },
     [
-      price,
+      currentPrice,
       previousPrice,
     ],
   );
   const hasBalanceChanged = useMemo(
     () =>
     {
-      return balance !== previousBalance;
+      return currentBalance !== previousBalance;
     },
     [
-      balance,
+      currentBalance,
       previousBalance,
     ],
   );
   const maxPurchasable = useMemo(
     () =>
     {
-      return Math.floor(balance / price.close);
+      return Math.floor(currentBalance / currentPrice.close);
     },
     [
-      price,
-      balance,
+      currentPrice,
+      currentBalance,
     ],
   );
   const percentWidthPerShare = useMemo(
@@ -82,10 +84,7 @@ const TradeSlider: React.FC<Props> = ({
   const sharesPerTick = useMemo(
     () =>
     {
-      const remainder = maxPurchasable % SLIDER_TICK_COUNT;
-      const numerator = maxPurchasable - remainder;
-
-      return Math.floor(numerator / SLIDER_TICK_COUNT);
+      return maxPurchasable / SLIDER_TICK_COUNT;
     },
     [ maxPurchasable ],
   );
