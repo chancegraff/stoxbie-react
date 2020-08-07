@@ -252,9 +252,11 @@
             "error",
             {
                 "ObjectExpression": {
+                    "multiline": true,
                     "minProperties": 2
                 },
                 "ObjectPattern": {
+                    "multiline": true,
                     "minProperties": 2
                 },
                 "ImportDeclaration": {

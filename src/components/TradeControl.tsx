@@ -1,15 +1,21 @@
 import React, {
   useCallback, useEffect, useMemo, useState,
 } from "react";
-import { styled } from "baseui/dist";
+import {
+  styled, useStyletron,
+} from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { Button } from "baseui/dist/button";
 import { FlexGridItem } from "baseui/dist/flex-grid";
 import {
-  Slider, State,
+  Slider,
+  State,
+  StyledTick,
+  StyledTickBar,
 } from "baseui/dist/slider";
 import { HistoricalPrice } from "iex";
 
+import { SLIDER_TICK_COUNT } from "services/Constants";
 import { usePrevious } from "services/Utilities";
 import FlexGrid from "components/BaseUI/FlexGrid";
 import Spinner from "components/BaseUI/Spinner";
@@ -39,12 +45,28 @@ const Container = styled(
   },
 );
 
+const TickBar = styled(
+  StyledTickBar,
+  ({ $theme }) =>
+  {
+    return {
+      alignItems: "center",
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "flex-start",
+    };
+  },
+);
+
 const TradeControl: React.FC<Props> = ({
   price,
   balance,
   handleTrade,
 }) =>
 {
+  const [
+    , theme,
+  ] = useStyletron();
   const [
     purchaseAmount,
     setPurchaseAmount,
@@ -90,6 +112,80 @@ const TradeControl: React.FC<Props> = ({
       price,
       balance,
     ],
+  );
+  const percentWidthPerShare = useMemo(
+    () =>
+    {
+      return 100 / maxPurchasable;
+    },
+    [ maxPurchasable ],
+  );
+  const sharesPerTick = useMemo(
+    () =>
+    {
+      const remainder = maxPurchasable % SLIDER_TICK_COUNT;
+      const numerator = maxPurchasable - remainder;
+
+      return Math.floor(numerator / SLIDER_TICK_COUNT);
+    },
+    [ maxPurchasable ],
+  );
+  const tickRange = useMemo(
+    () =>
+    {
+      return Array.from(
+        Array(SLIDER_TICK_COUNT + 1),
+        (
+          element,
+          index,
+        ) =>
+        {
+          return sharesPerTick * index;
+        },
+      );
+    },
+    [ sharesPerTick ],
+  );
+
+  const Tick = useMemo(
+    () =>
+    {
+      return styled(
+        StyledTick,
+        ({ $theme }) =>
+        {
+          return {
+            ...$theme.typography.font100,
+            ":hover": { cursor: "pointer" },
+            margin: `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`,
+            textAlign: "center",
+            width: "14px",
+          };
+        },
+      );
+    },
+    [
+      percentWidthPerShare,
+      sharesPerTick,
+    ],
+  );
+
+  const handleTick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) =>
+    {
+      const { currentTarget: { textContent } } = event;
+
+      if (textContent)
+      {
+        const tickValue = parseInt(
+          textContent,
+          10,
+        );
+
+        setPurchaseAmount(tickValue);
+      }
+    },
+    [],
   );
   const handleChange = useCallback(
     (event: State) =>
@@ -163,9 +259,43 @@ const TradeControl: React.FC<Props> = ({
       <Slider
         max={maxPurchasable}
         onChange={handleChange}
+        overrides={
+          {
+            TickBar: () =>
+            {
+              return (
+                <TickBar>
+                  {
+                    tickRange.map((
+                      tickValue,
+                      index,
+                    ) =>
+                    {
+                      const nextTickValue = tickRange[index + 1];
+
+                      if (nextTickValue)
+                      {
+                        return (
+                          <Tick
+                            key={index}
+                            onClick={handleTick}
+                          >
+                            {Math.round((nextTickValue + tickValue) / 2)}
+                          </Tick>
+                        );
+                      }
+
+                      return null;
+                    })
+                  }
+                </TickBar>
+              );
+            },
+          }
+        }
         value={[ purchaseAmount ]}
       />
-      <FlexGrid>
+      <FlexGrid marginTop={theme.sizing.scale400}>
         <FlexGridItem>
           <FullButton onClick={handleBuy}>
             Buy
