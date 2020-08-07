@@ -1,53 +1,51 @@
 import React, { useCallback } from "react";
-import { styled } from "baseui/dist";
-import { Button } from "baseui/dist/button";
-import { HistoricalPrice } from "iex";
-
-  type Props = PropsWithChildren & {
-    modifier: 1 | -1;
-    price: HistoricalPrice;
-    purchaseAmount: number;
-    handleTrade: (sharePrice: number, shareCount: number) => void;
-  };
-
-const FullButton = styled(
+import {
   Button,
-  { width: "100%" },
-);
+  ButtonProps,
+} from "baseui/dist/button";
+
+type Props = PropsWithChildren & {
+  purchaseModifier: 1 | -1;
+  sharePrice: number;
+  purchaseAmount: number;
+  handleTrade: (sharePrice: number, shareCount: number) => void;
+  Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+};
 
 const TradeAction: React.FC<Props> = ({
   children,
   handleTrade,
-  modifier,
-  price,
+  purchaseModifier,
+  sharePrice,
   purchaseAmount,
+  Component = Button,
 }) =>
 {
   const handleClick = useCallback(
     () =>
     {
-      if (price)
+      if (sharePrice)
       {
-        const shareCount = Math.abs(purchaseAmount) * modifier;
+        const count = Math.abs(purchaseAmount) * purchaseModifier;
 
         handleTrade(
-          price.close,
-          shareCount,
+          sharePrice,
+          count,
         );
       }
     },
     [
       handleTrade,
-      modifier,
-      price,
+      purchaseModifier,
+      sharePrice,
       purchaseAmount,
     ],
   );
 
   return (
-    <FullButton onClick={handleClick}>
+    <Component onClick={handleClick}>
       {children}
-    </FullButton>
+    </Component>
   );
 };
 

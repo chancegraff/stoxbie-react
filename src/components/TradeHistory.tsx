@@ -1,16 +1,23 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { styled } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import {
-  StyledBody, StyledCell, StyledHead, StyledHeadCell, StyledRow, StyledTable,
+  StyledBody,
+  StyledHead,
+  StyledHeadCell,
+  StyledTable,
 } from "baseui/dist/table";
-import numbro from "numbro";
+import { HistoricalPrice } from "iex";
 
 import Spinner from "components/BaseUI/Spinner";
+
+import TradeCell from "./TradeCell";
 
 type Props = {
   pastTrades?: HistoricalTrade[];
   currentTrade?: HistoricalTrade;
+  currentPrice?: HistoricalPrice;
+  handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
 const Container = styled(
@@ -44,104 +51,14 @@ const HeadCell = styled(
   },
 );
 
-type CellProps = {
-  trade: HistoricalTrade;
-};
-
-const TradeHistoryCell: React.FC<CellProps> = ({
-  trade: {
-    open,
-    close,
-    changePercent,
-    changeBalance,
-  },
-}) =>
-{
-  const safeOpen = useMemo(
-    () =>
-    {
-      if (open)
-      {
-        const abbreviatedOpen = numbro(open).formatCurrency({
-          average: true,
-          totalLength: 1,
-        });
-
-        return abbreviatedOpen;
-      }
-    },
-    [ open ],
-  );
-  const safeClose = useMemo(
-    () =>
-    {
-      if (close)
-      {
-        const abbreviatedClose = numbro(close).formatCurrency({
-          average: true,
-          totalLength: 1,
-        });
-
-        return abbreviatedClose;
-      }
-    },
-    [ close ],
-  );
-  const safeChange = useMemo(
-    () =>
-    {
-      if (changePercent)
-      {
-        const abbreviatedChange = numbro(changePercent).format({
-          average: true,
-          output: "percent",
-        });
-
-        return abbreviatedChange;
-      }
-    },
-    [ changePercent ],
-  );
-  const safeBalance = useMemo(
-    () =>
-    {
-      if (changeBalance)
-      {
-        const abbreviatedBalance = numbro(changeBalance).formatCurrency({
-          average: true,
-          totalLength: 1,
-        });
-
-        return abbreviatedBalance;
-      }
-    },
-    [ changeBalance ],
-  );
-
-  return (
-    <StyledRow>
-      <StyledCell>
-        {safeOpen}
-      </StyledCell>
-      <StyledCell>
-        {safeClose}
-      </StyledCell>
-      <StyledCell>
-        {safeChange}
-      </StyledCell>
-      <StyledCell>
-        {safeBalance}
-      </StyledCell>
-    </StyledRow>
-  );
-};
-
 const TradeHistory: React.FC<Props> = ({
   pastTrades,
   currentTrade,
+  currentPrice,
+  handleTrade,
 }) =>
 {
-  if (!pastTrades)
+  if (!pastTrades || !currentPrice)
   {
     return <Spinner container={Container} />;
   }
@@ -166,7 +83,11 @@ const TradeHistory: React.FC<Props> = ({
         <StyledBody>
           {
             currentTrade &&
-            <TradeHistoryCell trade={currentTrade} />
+            <TradeCell
+              handleTrade={handleTrade}
+              sharePrice={currentPrice.close}
+              trade={currentTrade}
+            />
           }
           {
             pastTrades.map((
@@ -175,7 +96,7 @@ const TradeHistory: React.FC<Props> = ({
             ) =>
             {
               return (
-                <TradeHistoryCell
+                <TradeCell
                   key={index}
                   trade={pastTrade}
                 />

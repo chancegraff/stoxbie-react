@@ -467,12 +467,14 @@ const TradeView: React.FC<Props> = ({
         >
           <TimeControl handleContinue={handleContinue} />
           <TradeControl
-            balance={mainBalance}
+            currentBalance={mainBalance}
+            currentPrice={currentPrice}
             handleTrade={handleTrade}
-            price={currentPrice}
           />
           <TradeHistory
+            currentPrice={currentPrice}
             currentTrade={currentTrade}
+            handleTrade={handleTrade}
             pastTrades={pastTrades}
           />
         </FlexGridItem>
