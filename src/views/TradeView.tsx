@@ -21,7 +21,7 @@ import FlexGrid from "components/BaseUI/FlexGrid";
 import Err from "components/BaseUI/Typography";
 import StockChart from "components/StockChart";
 import TimeControl from "components/TimeControl";
-import TradeControl from "components/TradeControl";
+import TradeControl from "components/TradeControl/TradeControl";
 import TradeHistory from "components/TradeHistory";
 
 type Props = {
