@@ -12,13 +12,13 @@ import useResizeObserver from "use-resize-observer";
 
 import { useCookie } from "services/Cookies";
 import { handleUnloadCreator } from "services/Utilities";
-import BreadcrumbContainer from "templates/BreadcrumbContainer";
-import ContentContainer from "templates/ContentContainer";
 import {
   AspectRatioBox, AspectRatioItem,
-} from "components/AspectRatio";
+} from "templates/AspectRatio";
+import PageBreadcrumb from "templates/PageBreadcrumb";
+import PageContent from "templates/PageContent";
+import PageError from "templates/PageError";
 import FlexGrid from "components/BaseUI/FlexGrid";
-import Err from "components/BaseUI/Typography";
 import StockChart from "components/StockChart";
 import TimeControl from "components/TimeControl";
 import TradeControl from "components/TradeControl";
@@ -409,19 +409,19 @@ const TradeView: React.FC<Props> = ({
   if (error)
   {
     return (
-      <Err>
+      <PageError>
         {error}
-      </Err>
+      </PageError>
     );
   }
 
   return (
-    <ContentContainer>
+    <PageContent>
       <Block
         marginBottom={theme.sizing.scale800}
         width="100%"
       >
-        <BreadcrumbContainer />
+        <PageBreadcrumb />
       </Block>
       <FlexGrid
         flexWrap={
@@ -477,7 +477,7 @@ const TradeView: React.FC<Props> = ({
           />
         </FlexGridItem>
       </FlexGrid>
-    </ContentContainer>
+    </PageContent>
   );
 };
 

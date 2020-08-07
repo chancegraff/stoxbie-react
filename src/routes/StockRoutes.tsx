@@ -18,8 +18,8 @@ import {
 import { TICKER_ERROR_MESSAGE } from "services/Constants";
 import ScrollToTop from "services/ScrollToTop";
 import { handleUnloadCreator } from "services/Utilities";
+import PageError from "templates/PageError";
 import StockView from "views/StockView";
-import Error from "components/BaseUI/Typography";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
@@ -139,9 +139,9 @@ const StockRoutes: React.FC = () =>
       </Route>
       <Route path={match.path}>
         <ScrollToTop />
-        <Error>
+        <PageError>
           Please select a stock to view.
-        </Error>
+        </PageError>
       </Route>
     </Switch>
   );

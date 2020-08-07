@@ -4,7 +4,7 @@ import { Block } from "baseui/dist/block";
 
 type Props = unknown;
 
-const BackgroundContainer: React.FC<Props> = (props) =>
+const PageBackground: React.FC<Props> = (props) =>
 {
   const [
     , theme,
@@ -22,4 +22,4 @@ const BackgroundContainer: React.FC<Props> = (props) =>
   );
 };
 
-export default BackgroundContainer;
+export default PageBackground;

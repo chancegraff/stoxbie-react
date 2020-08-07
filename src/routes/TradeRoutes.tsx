@@ -16,8 +16,8 @@ import {
 } from "services/Constants";
 import ScrollToTop from "services/ScrollToTop";
 import { handleUnloadCreator } from "services/Utilities";
+import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
-import Error from "components/BaseUI/Typography";
 
 type Props = unknown;
 
@@ -146,14 +146,14 @@ const TradeRoutes: React.FC<Props> = () =>
         <TradeRoute />
       </Route>
       <Route path={`${match.path}/:ticker`}>
-        <Error>
+        <PageError>
           Please select a date to trade from.
-        </Error>
+        </PageError>
       </Route>
       <Route path={match.path}>
-        <Error>
+        <PageError>
           Please select a stock to trade with.
-        </Error>
+        </PageError>
       </Route>
     </Switch>
   );

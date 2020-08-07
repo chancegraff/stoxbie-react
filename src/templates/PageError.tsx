@@ -2,14 +2,14 @@ import React from "react";
 import { Block } from "baseui/dist/block";
 import { Display3 } from "baseui/dist/typography";
 
-import ContentContainer from "templates/ContentContainer";
+import PageContent from "templates/PageContent";
 
 type Props = PropsWithChildren;
 
 const Error: React.FC<Props> = (props) =>
 {
   return (
-    <ContentContainer>
+    <PageContent>
       <Block
         width={
           [
@@ -24,7 +24,7 @@ const Error: React.FC<Props> = (props) =>
           {props.children}
         </Display3>
       </Block>
-    </ContentContainer>
+    </PageContent>
   );
 };
 

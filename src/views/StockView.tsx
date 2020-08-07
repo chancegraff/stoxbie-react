@@ -5,9 +5,9 @@ import {
   Company, Logo,
 } from "iex-cloud";
 
-import BreadcrumbContainer from "templates/BreadcrumbContainer";
-import ContentContainer from "templates/ContentContainer";
-import Error from "components/BaseUI/Typography";
+import PageBreadcrumb from "templates/PageBreadcrumb";
+import PageContent from "templates/PageContent";
+import PageError from "templates/PageError";
 import StockLogo from "components/StockLogo";
 import StockName from "components/StockName";
 import TradeStart from "components/TradeStart";
@@ -28,19 +28,19 @@ const StockView: React.FC<Props> = (props) =>
   if (props.error)
   {
     return (
-      <Error>
+      <PageError>
         {props.error}
-      </Error>
+      </PageError>
     );
   }
 
   return (
-    <ContentContainer>
+    <PageContent>
       <Block
         marginBottom={theme.sizing.scale800}
         width="100%"
       >
-        <BreadcrumbContainer />
+        <PageBreadcrumb />
       </Block>
       <Block
         alignItems="flex-end"
@@ -63,7 +63,7 @@ const StockView: React.FC<Props> = (props) =>
           <TradeStart handleStart={props.handleStart} />
         </Block>
       </Block>
-    </ContentContainer>
+    </PageContent>
   );
 };
 

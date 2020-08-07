@@ -6,7 +6,7 @@ import {
 } from "baseui/dist/typography";
 import { Search } from "iex-cloud";
 
-import ContentContainer from "templates/ContentContainer";
+import PageContent from "templates/PageContent";
 import TickerInput from "components/TickerInput";
 
 type Props = {
@@ -24,7 +24,7 @@ const SearchView: React.FC<Props> = (props) =>
   ] = useStyletron();
 
   return (
-    <ContentContainer>
+    <PageContent>
       <Block
         width={
           [
@@ -47,7 +47,7 @@ const SearchView: React.FC<Props> = (props) =>
           <TickerInput handleSearch={props.handleSearch} />
         </Block>
       </Block>
-    </ContentContainer>
+    </PageContent>
   );
 };
 
