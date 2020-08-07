@@ -26,10 +26,12 @@ type Props = {
   ) => void;
 };
 
-const Dropdown: Override<unknown> = { style: {
-  boxShadow: "none",
-  padding: "0",
-} };
+const Dropdown: Override<unknown> = {
+  style: {
+    boxShadow: "none",
+    padding: "0",
+  },
+};
 
 const overrides: SelectOverrides = { Dropdown };
 

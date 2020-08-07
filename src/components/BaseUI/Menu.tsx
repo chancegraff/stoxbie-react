@@ -5,10 +5,12 @@ import {
 } from "baseui/dist/menu";
 import { Override } from "baseui/dist/overrides";
 
-const List: Override<unknown> = { style: {
-  paddingBottom: "0",
-  paddingTop: "0",
-} };
+const List: Override<unknown> = {
+  style: {
+    paddingBottom: "0",
+    paddingTop: "0",
+  },
+};
 
 const overrides = { List };
 

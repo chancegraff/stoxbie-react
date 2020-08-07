@@ -8,10 +8,12 @@ import { Provider as StyletronProvider } from "styletron-react";
 
 const engine = new Styletron();
 
-const AppContainer: Override<unknown> = { style: {
-  height: "100%",
-  width: "100%",
-} };
+const AppContainer: Override<unknown> = {
+  style: {
+    height: "100%",
+    width: "100%",
+  },
+};
 
 const overrides: BaseProviderOverrides = { AppContainer };
 

@@ -16,12 +16,18 @@ export const COLUMN_COUNT = 2;
 
 export const MultiplyWidth = (multiple = 2): Overrides<BlockOverrides> =>
 {
-  return { Block: { style: ({ $theme }: { $theme: Theme }): StyleObject =>
-  {
-    return { width: `calc((${100 * multiple}% - ${
-      $theme.sizing.scale800
-    }) / ${COLUMN_COUNT}px)` };
-  } } };
+  return {
+    Block: {
+      style: ({ $theme }: { $theme: Theme }): StyleObject =>
+      {
+        return {
+          width: `calc((${100 * multiple}% - ${
+            $theme.sizing.scale800
+          }) / ${COLUMN_COUNT}px)`,
+        };
+      },
+    },
+  };
 };
 
 export const FlexGridItemFull: React.FC<FlexGridItemProps> = ({

@@ -13,17 +13,21 @@ type Props = {
   company?: Company;
 };
 
-const overrides: OverridesT = { Row: { style: {
-  ":first-of-type": {
-    height: "33px",
-    marginBottom: "12px",
-    width: "320px",
+const overrides: OverridesT = {
+  Row: {
+    style: {
+      ":first-of-type": {
+        height: "33px",
+        marginBottom: "12px",
+        width: "320px",
+      },
+      ":last-of-type": {
+        height: "10px",
+        width: "30px",
+      },
+    },
   },
-  ":last-of-type": {
-    height: "10px",
-    width: "30px",
-  },
-} } };
+};
 
 const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) =>
 {

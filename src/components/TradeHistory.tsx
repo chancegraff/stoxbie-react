@@ -48,12 +48,14 @@ type CellProps = {
   trade: HistoricalTrade;
 };
 
-const TradeHistoryCell: React.FC<CellProps> = ({ trade: {
-  open,
-  close,
-  changePercent,
-  changeBalance,
-} }) =>
+const TradeHistoryCell: React.FC<CellProps> = ({
+  trade: {
+    open,
+    close,
+    changePercent,
+    changeBalance,
+  },
+}) =>
 {
   const safeOpen = useMemo(
     () =>

@@ -6,10 +6,12 @@ import {
   StatefulPopover as DefaultStatefulPoover,
 } from "baseui/dist/popover";
 
-const Body: Override<unknown> = { style: {
-  boxShadow: "rgba(0, 0, 0, 0.16) 0px 2px 8px",
-  padding: "0",
-} };
+const Body: Override<unknown> = {
+  style: {
+    boxShadow: "rgba(0, 0, 0, 0.16) 0px 2px 8px",
+    padding: "0",
+  },
+};
 
 const overrides: Overrides = { Body };
 
