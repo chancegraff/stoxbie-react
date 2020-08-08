@@ -24,7 +24,6 @@
         "react-hooks",
         "@typescript-eslint",
         "simple-import-sort",
-        "sort-keys-fix",
         "wrap-params"
     ],
     "settings": {
@@ -409,7 +408,6 @@
                 "minProperties": 2
             }
         ],
-        "sort-keys-fix/sort-keys-fix": ["warn", "asc", { "natural": true }],
         "simple-import-sort/sort": [
             "error",
             {

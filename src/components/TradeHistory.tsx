@@ -29,13 +29,12 @@ const Container = styled(
   () =>
   {
     return {
-      alignItems: "center",
-      display: "flex",
-      flex: "1 0",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      maxHeight: "100",
+      height: "0%",
       width: "100%",
+      flexGrow: 1,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     };
   },
 );
@@ -44,7 +43,11 @@ const FullTable = styled(
   StyledTable,
   () =>
   {
-    return { width: "100%" };
+    return {
+      height: "100%",
+      width: "100%",
+      flexGrow: 1,
+    };
   },
 );
 
@@ -64,22 +67,13 @@ const RightAlignedCell = styled(
   },
 );
 
-const StickyBody = styled(
-  StyledBody,
-  {
-    paddingBottom: "20px",
-    position: "relative",
-  },
-);
-
-const StickyRow = styled(
+const StickyFooter = styled(
   StyledRow,
   ({ $theme }) =>
   {
     return {
+      backgroundColor: $theme.colors.backgroundAlt,
       borderTop: `1px solid ${$theme.colors.borderOpaque}`,
-      bottom: "0",
-      position: "absolute",
       width: "100%",
     };
   },
@@ -120,7 +114,7 @@ const TradeHistory: React.FC<Props> = ({
   }
 
   return (
-    <Container>
+    <Container alignItems="flex-start">
       <FullTable>
         <StyledHead>
           <HeadCell>
@@ -136,14 +130,14 @@ const TradeHistory: React.FC<Props> = ({
             Balance
           </HeadCell>
         </StyledHead>
-        <StickyBody>
+        <StyledBody>
           {
             currentTrade &&
-            <TradeRow
-              handleTrade={handleTrade}
-              sharePrice={currentPrice.close}
-              trade={currentTrade}
-            />
+              <TradeRow
+                handleTrade={handleTrade}
+                sharePrice={currentPrice.close}
+                trade={currentTrade}
+              />
           }
           {
             pastTrades.map((
@@ -159,17 +153,17 @@ const TradeHistory: React.FC<Props> = ({
               );
             })
           }
-          <StickyRow>
-            <RightAlignedCell></RightAlignedCell>
-            <RightAlignedCell></RightAlignedCell>
-            <RightAlignedCell>
-              {safeChange}
-            </RightAlignedCell>
-            <RightAlignedCell>
-              {safeBalance}
-            </RightAlignedCell>
-          </StickyRow>
-        </StickyBody>
+        </StyledBody>
+        <StickyFooter>
+          <RightAlignedCell></RightAlignedCell>
+          <RightAlignedCell></RightAlignedCell>
+          <RightAlignedCell>
+            {safeChange}
+          </RightAlignedCell>
+          <RightAlignedCell>
+            {safeBalance}
+          </RightAlignedCell>
+        </StickyFooter>
       </FullTable>
     </Container>
   );
