@@ -43,7 +43,7 @@ const RightAlignedCell = styled(
   },
 );
 
-const TradeCell: React.FC<Props> = ({
+const TradeRow: React.FC<Props> = ({
   sharePrice,
   handleTrade,
   trade: {
@@ -154,4 +154,4 @@ const TradeCell: React.FC<Props> = ({
   );
 };
 
-export default TradeCell;
+export default TradeRow;

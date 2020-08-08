@@ -11,7 +11,7 @@ import { HistoricalPrice } from "iex";
 
 import Spinner from "components/BaseUI/Spinner";
 
-import TradeCell from "./TradeCell";
+import TradeRow from "./TradeRow";
 
 type Props = {
   pastTrades?: HistoricalTrade[];
@@ -83,7 +83,7 @@ const TradeHistory: React.FC<Props> = ({
         <StyledBody>
           {
             currentTrade &&
-            <TradeCell
+            <TradeRow
               handleTrade={handleTrade}
               sharePrice={currentPrice.close}
               trade={currentTrade}
@@ -96,7 +96,7 @@ const TradeHistory: React.FC<Props> = ({
             ) =>
             {
               return (
-                <TradeCell
+                <TradeRow
                   key={index}
                   trade={pastTrade}
                 />
