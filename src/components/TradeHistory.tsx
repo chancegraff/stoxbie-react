@@ -17,7 +17,7 @@ import Spinner from "components/BaseUI/Spinner";
 import TradeRow from "./TradeRow";
 
 type Props = {
-  pastTrades?: HistoricalTradeFinished[];
+  pastTrades: HistoricalTradeFinished[];
   currentTrade?: HistoricalTradeStarted;
   currentPrice?: HistoricalPrice;
   playerLedger: HistoricalLedger;
@@ -104,7 +104,7 @@ const CurrentTrades: React.FC<Pick<Props, "currentTrade" | "currentPrice" | "han
   );
 };
 
-const PastTrades: React.FC<Required<Pick<Props, "pastTrades">>> = ({ pastTrades }) =>
+const PastTrades: React.FC<Pick<Props, "pastTrades">> = ({ pastTrades }) =>
 {
   return (
     <>
@@ -137,12 +137,18 @@ const TradeHistory: React.FC<Props> = ({
   const safeChange = useMemo(
     () =>
     {
-      return numbro(playerLedger.totalChange).format({
-        average: true,
-        output: "percent",
-      });
+      if (pastTrades.length > 0)
+      {
+        return numbro(playerLedger.totalChange).format({
+          average: true,
+          output: "percent",
+        });
+      }
     },
-    [ playerLedger ],
+    [
+      playerLedger,
+      pastTrades,
+    ],
   );
   const safeBalance = useMemo(
     () =>
@@ -155,7 +161,7 @@ const TradeHistory: React.FC<Props> = ({
     [ playerLedger ],
   );
 
-  if (!pastTrades || !currentPrice)
+  if (!currentPrice)
   {
     return <Spinner container={Container} />;
   }
