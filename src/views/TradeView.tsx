@@ -334,7 +334,6 @@ const TradeView: React.FC<Props> = ({
       }
     },
     [
-      pastTrades,
       currentTrade,
       currentLedger,
       updatePlayerLedger,
@@ -374,9 +373,10 @@ const TradeView: React.FC<Props> = ({
       shareCount: number,
     ) =>
     {
-      const oppositeTradeType = shareCount / Math.abs(shareCount) * -1;
+      const currentTradeType = shareCount / Math.abs(shareCount);
+      const previousTradeOpposite = currentTrade && currentTrade.openModifier * -1;
 
-      if (currentTrade?.openModifier === oppositeTradeType)
+      if (previousTradeOpposite === currentTradeType)
       {
         closeTrade(
           sharePrice,
