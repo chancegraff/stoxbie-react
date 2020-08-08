@@ -26,20 +26,22 @@ declare type DispatchSetStateAction<P> = React.Dispatch<
 declare type HistoricalTradeBase = {
   ticker: string;
   date: Date;
-  count: number;
-  type: "buy" | "sell";
 };
 
 declare type HistoricalTradeOpen = {
-  open: number;
-  openDate: Date;
+  openPrice: number;
+  openCount: number;
   openBalance: number;
+  openDate: Date;
+  openModifier: -1 | 1;
 };
 
 declare type HistoricalTradeClose = {
-  close: number;
+  closePrice: number;
+  closeCount: number;
   closeBalance: number;
   closeDate: Date;
+  closeModifier: -1 | 1;
 };
 
 declare type HistoricalTradeChange = {
@@ -50,6 +52,7 @@ declare type HistoricalTradeChange = {
 
 declare type HistoricalLedger = {
   totalBalance: number;
+  totalReturns: number;
   totalChange: number;
 }
 
