@@ -177,12 +177,9 @@ const TradeView: React.FC<Props> = ({
   const [
     playerLedger,
     setPlayerLedger,
-  ] = useCookie<HistoricalLedger>(
+  ] = useCookie<HistoricalLedger[]>(
     "playerLedger",
-    {
-      totalBalance: 10000,
-      totalChange: 0,
-    },
+    [],
   );
 
   const currentPrice = useMemo(
@@ -192,23 +189,16 @@ const TradeView: React.FC<Props> = ({
     },
     [ pastPrices ],
   );
-
-  const updatePlayerLedger = useCallback(
-    (
-      nextBalance: number,
-      nextChange: number,
-    ) =>
+  const currentLedger = useMemo(
+    () =>
     {
-      setPlayerLedger(
-        {
-          totalBalance: nextBalance,
-          totalChange: nextChange,
-        },
-        30,
-      );
+      const [ nextLedger ] = playerLedger;
+
+      return nextLedger;
     },
-    [ setPlayerLedger ],
+    [ playerLedger ],
   );
+
   const updateCurrentTrade = useCallback(
     (nextTrade?: HistoricalTrade) =>
     {
@@ -220,14 +210,36 @@ const TradeView: React.FC<Props> = ({
     [ setCurrentTrade ],
   );
   const updatePastTrades = useCallback(
-    (nextTrades: HistoricalTrade[]) =>
+    (nextTrade: HistoricalTrade) =>
     {
       setPastTrades(
-        nextTrades,
+        [
+          nextTrade,
+          ...pastTrades,
+        ],
         30,
       );
     },
-    [ setPastTrades ],
+    [
+      pastTrades,
+      setPastTrades,
+    ],
+  );
+  const updatePlayerLedger = useCallback(
+    (nextLedger: HistoricalLedger) =>
+    {
+      setPlayerLedger(
+        [
+          nextLedger,
+          ...playerLedger,
+        ],
+        30,
+      );
+    },
+    [
+      playerLedger,
+      setPlayerLedger,
+    ],
   );
 
   const openTrade = useCallback(
@@ -253,20 +265,21 @@ const TradeView: React.FC<Props> = ({
           sharePrice,
           shareCount,
         );
-        const nextBalance = playerLedger.totalBalance - openedTrade.openBalance;
-        const nextChange = playerLedger.totalChange;
+        const nextBalance = currentLedger.totalBalance - openedTrade.openBalance;
+        const nextChange = currentLedger.totalChange;
+        const nextLedger = {
+          totalBalance: nextBalance,
+          totalChange: nextChange,
+        };
 
         updateCurrentTrade(openedTrade);
-        updatePlayerLedger(
-          nextBalance,
-          nextChange,
-        );
+        updatePlayerLedger(nextLedger);
       }
     },
     [
       ticker,
       date,
-      playerLedger,
+      currentLedger,
       updateCurrentTrade,
       updatePlayerLedger,
     ],
@@ -283,20 +296,18 @@ const TradeView: React.FC<Props> = ({
         sharePrice,
         shareCount,
       );
-      const nextTrades = [
-        closedTrade,
-        ...pastTrades,
-      ];
 
-      const nextBalance = playerLedger.totalBalance + closedTrade.closeBalance;
-      const nextChange = (playerLedger.totalChange + closedTrade.changePercent) / nextTrades.length;
+      const nextBalance = currentLedger.totalBalance + closedTrade.closeBalance;
+      const nextChange = (currentLedger.totalChange + closedTrade.changePercent) / pastTrades.length;
+      const nextLedger = {
+        totalBalance: nextBalance,
+        totalChange: nextChange,
+      };
+
+      updatePastTrades(closedTrade);
+      updatePlayerLedger(nextLedger);
+
       const remainingShares = closedTrade.count - Math.abs(shareCount);
-
-      updatePlayerLedger(
-        nextBalance,
-        nextChange,
-      );
-      updatePastTrades(nextTrades);
 
       if (remainingShares > 0)
       {
@@ -307,11 +318,15 @@ const TradeView: React.FC<Props> = ({
 
         updateCurrentTrade(nextTrade);
       }
+      else
+      {
+        updateCurrentTrade(undefined);
+      }
     },
     [
       currentTrade,
       pastTrades,
-      playerLedger,
+      currentLedger,
       updatePlayerLedger,
       updateCurrentTrade,
       updatePastTrades,
@@ -489,7 +504,7 @@ const TradeView: React.FC<Props> = ({
         >
           <TimeControl handleContinue={handleContinue} />
           <TradeControl
-            currentBalance={playerLedger.totalBalance}
+            currentBalance={currentLedger.totalBalance}
             currentPrice={currentPrice}
             handleTrade={handleTrade}
           />
@@ -498,7 +513,7 @@ const TradeView: React.FC<Props> = ({
             currentTrade={currentTrade}
             handleTrade={handleTrade}
             pastTrades={pastTrades}
-            playerLedger={playerLedger}
+            playerLedger={currentLedger}
           />
         </FlexGridItem>
       </FlexGrid>
