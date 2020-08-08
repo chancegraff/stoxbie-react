@@ -289,7 +289,7 @@ const TradeView: React.FC<Props> = ({
       ];
 
       const nextBalance = playerLedger.totalBalance + closedTrade.closeBalance;
-      const nextChange = (playerLedger.totalChange + closedTrade.changePercent) / (nextTrades.length + 1);
+      const nextChange = (playerLedger.totalChange + closedTrade.changePercent) / nextTrades.length;
       const remainingShares = closedTrade.count - Math.abs(shareCount);
 
       updatePlayerLedger(
