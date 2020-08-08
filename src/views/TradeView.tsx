@@ -179,7 +179,10 @@ const TradeView: React.FC<Props> = ({
     setPlayerLedger,
   ] = useCookie<HistoricalLedger[]>(
     "playerLedger",
-    [],
+    [ {
+      totalBalance: 10000,
+      totalChange: 0,
+    } ],
   );
 
   const currentPrice = useMemo(
@@ -298,7 +301,7 @@ const TradeView: React.FC<Props> = ({
       );
 
       const nextBalance = currentLedger.totalBalance + closedTrade.closeBalance;
-      const nextChange = (currentLedger.totalChange + closedTrade.changePercent) / pastTrades.length;
+      const nextChange = (currentLedger.totalChange + closedTrade.changePercent) / (pastTrades.length + 1);
       const nextLedger = {
         totalBalance: nextBalance,
         totalChange: nextChange,
