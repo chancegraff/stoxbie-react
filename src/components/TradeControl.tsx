@@ -24,9 +24,9 @@ const Container = styled(
   ({ $theme }) =>
   {
     return {
-      alignItems: "center",
       display: "flex",
       flexWrap: "wrap",
+      alignItems: "center",
       justifyContent: "center",
       margin: `${$theme.sizing.scale800} 0`,
     };

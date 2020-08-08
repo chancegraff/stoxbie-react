@@ -37,11 +37,11 @@ const LinePoints: React.FC<Props> = ({
           return (
             priceIndex % 20 === 0 && (
               <circle
+                key={priceIndex}
                 cx={xScale(xSelector(price))}
                 cy={yScale(ySelector(price))}
                 fill={theme.colors.contentPrimary}
                 fillOpacity={0.5}
-                key={priceIndex}
                 r={2}
                 shapeRendering="geometricPrecision"
                 stroke={theme.colors.contentPrimary}
