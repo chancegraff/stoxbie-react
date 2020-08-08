@@ -173,7 +173,6 @@ const TradeSlider: React.FC<Props> = ({
   return (
     <Slider
       max={maxPurchasable}
-      onChange={handleChange}
       overrides={
         {
           TickBar: () =>
@@ -209,6 +208,7 @@ const TradeSlider: React.FC<Props> = ({
         }
       }
       value={[ purchaseAmount ]}
+      onChange={handleChange}
     />
   );
 };

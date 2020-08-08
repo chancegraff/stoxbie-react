@@ -325,7 +325,7 @@
         "semi-style": "error",
         "sort-imports": "off",
         "sort-keys": "off",
-        "sort-vars": "error",
+        "sort-vars": "off",
         "space-before-blocks": "error",
         "space-before-function-paren": "error",
         "space-in-parens": "error",
@@ -348,7 +348,15 @@
         "react/prop-types": 0,
         "react/display-name": 0,
         "react/jsx-closing-bracket-location": "error",
-        "react/jsx-sort-props": "error",
+        "react/jsx-sort-props": [
+            "error",
+            {
+                "callbacksLast": true,
+                "shorthandFirst": true,
+                "noSortAlphabetically": true,
+                "reservedFirst": true
+            }
+        ],
         "react/jsx-wrap-multilines": [
             "error",
             {
@@ -401,7 +409,7 @@
                 "minProperties": 2
             }
         ],
-        "sort-keys-fix/sort-keys-fix": "warn",
+        "sort-keys-fix/sort-keys-fix": ["warn", "asc", { "natural": true }],
         "simple-import-sort/sort": [
             "error",
             {

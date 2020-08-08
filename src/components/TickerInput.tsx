@@ -102,20 +102,20 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) =>
   return (
     <Select
       autoFocus={true}
-      clearable={false}
+      valueKey="symbol"
       filterOptions={handleFilter}
       getOptionLabel={handleLabel}
       getValueLabel={handleLabel}
       isLoading={isLoading}
       labelKey="symbol"
-      onChange={handleChange}
-      onInputChange={handleInputChange}
+      clearable={false}
+      type={TYPE.search}
       options={options}
       overrides={overrides}
       placeholder="Search for company by name or ticker..."
       size={SIZE.large}
-      type={TYPE.search}
-      valueKey="symbol"
+      onInputChange={handleInputChange}
+      onChange={handleChange}
     />
   );
 };
