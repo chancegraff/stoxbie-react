@@ -34,6 +34,7 @@ const Container = styled(
       flex: "1 0",
       flexWrap: "wrap",
       justifyContent: "center",
+      maxHeight: "100",
       width: "100%",
     };
   },
