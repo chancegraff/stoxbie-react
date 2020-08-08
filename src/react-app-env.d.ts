@@ -48,6 +48,11 @@ declare type HistoricalTradeChange = {
   changeBalance: number;
 }
 
+declare type HistoricalLedger = {
+  totalBalance: number;
+  totalChange: number;
+}
+
 declare type HistoricalTrade = HistoricalTradeBase & Partial<HistoricalTradeOpen & HistoricalTradeClose & HistoricalTradeChange>;
 declare type HistoricalTradeStarted = HistoricalTradeBase & HistoricalTradeOpen & Partial<HistoricalTradeClose & HistoricalTradeChange>;
 declare type HistoricalTradeFinished = HistoricalTradeBase & HistoricalTradeOpen & HistoricalTradeClose & HistoricalTradeChange;
