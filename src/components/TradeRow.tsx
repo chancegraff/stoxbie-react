@@ -12,7 +12,7 @@ import numbro from "numbro";
 import TradeAction from "./TradeAction";
 
 type Props = {
-  trade: HistoricalTrade;
+  trade: HistoricalTradeStarted | HistoricalTradeFinished;
   sharePrice?: number;
   handleTrade?: (sharePrice: number, shareCount: number) => void;
 };
@@ -47,9 +47,10 @@ const TradeRow: React.FC<Props> = ({
   sharePrice,
   handleTrade,
   trade: {
-    count,
-    open,
-    close,
+    openPrice,
+    openCount,
+    closePrice,
+    closeCount,
     changePercent,
     changeBalance,
   },
@@ -58,9 +59,9 @@ const TradeRow: React.FC<Props> = ({
   const safeOpen = useMemo(
     () =>
     {
-      if (open)
+      if (openPrice)
       {
-        const abbreviatedOpen = numbro(open).formatCurrency({
+        const abbreviatedOpen = numbro(openPrice).formatCurrency({
           average: true,
           totalLength: 1,
         });
@@ -68,14 +69,14 @@ const TradeRow: React.FC<Props> = ({
         return abbreviatedOpen;
       }
     },
-    [ open ],
+    [ openPrice ],
   );
   const safeClose = useMemo(
     () =>
     {
-      if (close)
+      if (closePrice)
       {
-        const abbreviatedClose = numbro(close).formatCurrency({
+        const abbreviatedClose = numbro(closePrice).formatCurrency({
           average: true,
           totalLength: 1,
         });
@@ -89,7 +90,7 @@ const TradeRow: React.FC<Props> = ({
           <TradeAction
             Component={SmallButton}
             handleTrade={handleTrade}
-            purchaseAmount={count}
+            purchaseAmount={openCount}
             purchaseModifier={-1}
             sharePrice={sharePrice}
           >
@@ -99,10 +100,10 @@ const TradeRow: React.FC<Props> = ({
       }
     },
     [
-      close,
+      openCount,
+      closePrice,
       sharePrice,
       handleTrade,
-      count,
     ],
   );
   const safeChange = useMemo(

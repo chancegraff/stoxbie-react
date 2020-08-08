@@ -17,8 +17,8 @@ import Spinner from "components/BaseUI/Spinner";
 import TradeRow from "./TradeRow";
 
 type Props = {
-  pastTrades?: HistoricalTrade[];
-  currentTrade?: HistoricalTrade;
+  pastTrades?: HistoricalTradeFinished[];
+  currentTrade?: HistoricalTradeStarted;
   currentPrice?: HistoricalPrice;
   playerLedger: HistoricalLedger;
   handleTrade: (sharePrice: number, shareCount: number) => void;
@@ -61,9 +61,15 @@ const HeadCell = styled(
 
 const RightAlignedCell = styled(
   StyledCell,
+  ({ $theme }) =>
   {
-    display: "flex",
-    justifyContent: "flex-end",
+    return {
+      display: "flex",
+      justifyContent: "flex-end",
+      height: "100%",
+      borderRight: `1px solid ${$theme.colors.borderOpaque}`,
+      ":last-of-type": { borderRight: 0 },
+    };
   },
 );
 
@@ -73,11 +79,52 @@ const StickyFooter = styled(
   {
     return {
       backgroundColor: $theme.colors.backgroundAlt,
-      borderTop: `1px solid ${$theme.colors.borderOpaque}`,
       width: "100%",
     };
   },
 );
+
+const CurrentTrades: React.FC<Pick<Props, "currentTrade" | "currentPrice" | "handleTrade">> = ({
+  currentTrade,
+  currentPrice,
+  handleTrade,
+}) =>
+{
+  if (!currentTrade)
+  {
+    return null;
+  }
+
+  return (
+    <TradeRow
+      handleTrade={handleTrade}
+      sharePrice={currentPrice?.close}
+      trade={currentTrade}
+    />
+  );
+};
+
+const PastTrades: React.FC<Required<Pick<Props, "pastTrades">>> = ({ pastTrades }) =>
+{
+  return (
+    <>
+      {
+        pastTrades.map((
+          pastTrade,
+          index,
+        ) =>
+        {
+          return (
+            <TradeRow
+              key={index}
+              trade={pastTrade}
+            />
+          );
+        })
+      }
+    </>
+  );
+};
 
 const TradeHistory: React.FC<Props> = ({
   pastTrades,
@@ -124,35 +171,19 @@ const TradeHistory: React.FC<Props> = ({
             Close
           </HeadCell>
           <HeadCell>
-            Change
+            PL %
           </HeadCell>
           <HeadCell>
-            Balance
+            PL $
           </HeadCell>
         </StyledHead>
         <StyledBody>
-          {
-            currentTrade &&
-              <TradeRow
-                handleTrade={handleTrade}
-                sharePrice={currentPrice.close}
-                trade={currentTrade}
-              />
-          }
-          {
-            pastTrades.map((
-              pastTrade,
-              index,
-            ) =>
-            {
-              return (
-                <TradeRow
-                  key={index}
-                  trade={pastTrade}
-                />
-              );
-            })
-          }
+          <CurrentTrades
+            currentTrade={currentTrade}
+            currentPrice={currentPrice}
+            handleTrade={handleTrade}
+          />
+          <PastTrades pastTrades={pastTrades} />
         </StyledBody>
         <StickyFooter>
           <RightAlignedCell></RightAlignedCell>
