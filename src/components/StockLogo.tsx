@@ -2,28 +2,12 @@ import React from "react";
 import { useStyletron } from "baseui/dist";
 import { Avatar } from "baseui/dist/avatar";
 import { Block } from "baseui/dist/block";
-import {
-  OverridesT, Skeleton, SkeletonPropsT,
-} from "baseui/dist/skeleton";
 import { Logo } from "iex-cloud";
+
+import { AvatarSkeleton } from "./StockLogo.loading";
 
 type Props = {
   logo?: Logo;
-};
-
-const overrides: OverridesT = { Root: { style: { borderRadius: "50%" } } };
-
-const AvatarSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) =>
-{
-  return (
-    <Block height={props.height}>
-      <Skeleton
-        animation={true}
-        overrides={overrides}
-        {...props}
-      />
-    </Block>
-  );
 };
 
 const StockLogo: React.FC<Props> = (props) =>

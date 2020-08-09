@@ -1,17 +1,18 @@
 import React, {
-  useCallback, useEffect, useMemo,
+  useCallback,
+  useEffect,
+  useMemo,
 } from "react";
-import { styled } from "baseui/dist";
 import {
+  SharedProps,
   Slider,
   State,
-  StyledTick,
-  StyledTickBar,
 } from "baseui/dist/slider";
 import { HistoricalPrice } from "iex";
 
-import { SLIDER_TICK_COUNT } from "services/Constants";
 import { usePrevious } from "services/Utilities";
+
+import { TickBar } from "./TradeSlider.overrides";
 
 type Props = {
   currentPrice: HistoricalPrice;
@@ -19,21 +20,6 @@ type Props = {
   purchaseAmount: number;
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
 };
-
-const TickBar = styled(
-  StyledTickBar,
-  () =>
-  {
-    return {
-      alignItems: "center",
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "flex-start",
-      paddingLeft: "18px",
-      paddingRight: "16px",
-    };
-  },
-);
 
 const TradeSlider: React.FC<Props> = ({
   currentPrice,
@@ -64,6 +50,7 @@ const TradeSlider: React.FC<Props> = ({
       previousBalance,
     ],
   );
+
   const maxPurchasable = useMemo(
     () =>
     {
@@ -74,77 +61,6 @@ const TradeSlider: React.FC<Props> = ({
       currentBalance,
     ],
   );
-  const percentWidthPerShare = useMemo(
-    () =>
-    {
-      return 100 / maxPurchasable;
-    },
-    [ maxPurchasable ],
-  );
-  const sharesPerTick = useMemo(
-    () =>
-    {
-      return maxPurchasable / SLIDER_TICK_COUNT;
-    },
-    [ maxPurchasable ],
-  );
-  const tickRange = useMemo(
-    () =>
-    {
-      return Array.from(
-        Array(SLIDER_TICK_COUNT + 1),
-        (
-          element,
-          index,
-        ) =>
-        {
-          return sharesPerTick * index;
-        },
-      );
-    },
-    [ sharesPerTick ],
-  );
-
-  const Tick = useMemo(
-    () =>
-    {
-      return styled(
-        StyledTick,
-        ({ $theme }) =>
-        {
-          return {
-            ...$theme.typography.font100,
-            ":hover": { cursor: "pointer" },
-            margin: `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`,
-            textAlign: "center",
-            width: "14px",
-          };
-        },
-      );
-    },
-    [
-      percentWidthPerShare,
-      sharesPerTick,
-    ],
-  );
-
-  const handleTick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) =>
-    {
-      const { currentTarget: { textContent } } = event;
-
-      if (textContent)
-      {
-        const tickValue = parseInt(
-          textContent,
-          10,
-        );
-
-        setPurchaseAmount(tickValue);
-      }
-    },
-    [ setPurchaseAmount ],
-  );
   const handleChange = useCallback(
     (event: State) =>
     {
@@ -153,6 +69,29 @@ const TradeSlider: React.FC<Props> = ({
       setPurchaseAmount(nextPurchaseAmount);
     },
     [ setPurchaseAmount ],
+  );
+  const overrides = useMemo(
+    () =>
+    {
+      return {
+        TickBar: {
+          component: (props: SharedProps): JSX.Element =>
+          {
+            return (
+              <TickBar
+                {...props}
+                maxPurchasable={maxPurchasable}
+                setPurchaseAmount={setPurchaseAmount}
+              />
+            );
+          },
+        },
+      };
+    },
+    [
+      maxPurchasable,
+      setPurchaseAmount,
+    ],
   );
 
   useEffect(
@@ -173,40 +112,7 @@ const TradeSlider: React.FC<Props> = ({
   return (
     <Slider
       max={maxPurchasable}
-      overrides={
-        {
-          TickBar: () =>
-          {
-            return (
-              <TickBar>
-                {
-                  tickRange.map((
-                    tickValue,
-                    index,
-                  ) =>
-                  {
-                    const nextTickValue = tickRange[index + 1];
-
-                    if (nextTickValue)
-                    {
-                      return (
-                        <Tick
-                          key={index}
-                          onClick={handleTick}
-                        >
-                          {Math.round((nextTickValue + tickValue) / 2)}
-                        </Tick>
-                      );
-                    }
-
-                    return null;
-                  })
-                }
-              </TickBar>
-            );
-          },
-        }
-      }
+      overrides={overrides}
       value={[ purchaseAmount ]}
       onChange={handleChange}
     />

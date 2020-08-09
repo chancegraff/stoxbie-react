@@ -2,21 +2,17 @@ import React, {
   useCallback, useState,
 } from "react";
 import { useHistory } from "react-router-dom";
-import { Block } from "baseui/dist/block";
-import { Override } from "baseui/dist/overrides";
 import {
   OnChangeParams,
-  Option,
   Select,
-  SelectOverrides,
   SIZE,
   TYPE,
   Value,
 } from "baseui/dist/select";
-import {
-  Caption2, Label2,
-} from "baseui/dist/typography";
 import { Search } from "iex-cloud";
+
+import Label from "./TickerInput.label";
+import { Dropdown } from "./TickerInput.overrides";
 
 type Props = {
   handleSearch: (
@@ -26,35 +22,12 @@ type Props = {
   ) => void;
 };
 
-const Dropdown: Override<unknown> = {
-  style: {
-    boxShadow: "none",
-    padding: "0",
-  },
-};
-
-const overrides: SelectOverrides = { Dropdown };
-
-const handleFilter = (options: Value) =>
+const filterOptions = (options: Value) =>
 {
   return options;
 };
-const handleLabel = (args: { option?: Option }) =>
-{
-  return (
-    <Block
-      alignItems="baseline"
-      display="flex"
-    >
-      <Label2>
-        {args.option?.symbol}
-      </Label2>
-      <Caption2 marginLeft="6px">
-        {args.option?.securityName}
-      </Caption2>
-    </Block>
-  );
-};
+
+const overrides = { Dropdown };
 
 const TickerInput: React.FC<Props> = ({ handleSearch }) =>
 {
@@ -103,9 +76,9 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) =>
     <Select
       autoFocus={true}
       valueKey="symbol"
-      filterOptions={handleFilter}
-      getOptionLabel={handleLabel}
-      getValueLabel={handleLabel}
+      filterOptions={filterOptions}
+      getOptionLabel={Label}
+      getValueLabel={Label}
       isLoading={isLoading}
       labelKey="symbol"
       clearable={false}
