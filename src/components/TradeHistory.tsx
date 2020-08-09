@@ -18,7 +18,7 @@ import TradeRow from "./TradeRow";
 
 type Props = {
   pastTrades: HistoricalTradeFinished[];
-  currentTrade?: HistoricalTradeStarted;
+  currentTrades: HistoricalTradeStarted[];
   currentPrice?: HistoricalPrice;
   playerLedger: HistoricalLedger;
   handleTrade: (sharePrice: number, shareCount: number) => void;
@@ -84,23 +84,31 @@ const StickyFooter = styled(
   },
 );
 
-const CurrentTrades: React.FC<Pick<Props, "currentTrade" | "currentPrice" | "handleTrade">> = ({
-  currentTrade,
+const CurrentTrades: React.FC<Pick<Props, "currentTrades" | "currentPrice" | "handleTrade">> = ({
+  currentTrades,
   currentPrice,
   handleTrade,
 }) =>
 {
-  if (!currentTrade)
-  {
-    return null;
-  }
-
   return (
-    <TradeRow
-      handleTrade={handleTrade}
-      sharePrice={currentPrice?.close}
-      trade={currentTrade}
-    />
+    <>
+      {
+        currentTrades.map((
+          trade,
+          index,
+        ) =>
+        {
+          return (
+            <TradeRow
+              key={index}
+              handleTrade={handleTrade}
+              sharePrice={currentPrice?.close}
+              trade={trade}
+            />
+          );
+        })
+      }
+    </>
   );
 };
 
@@ -129,7 +137,7 @@ const PastTrades: React.FC<Pick<Props, "pastTrades">> = ({ pastTrades }) =>
 const TradeHistory: React.FC<Props> = ({
   pastTrades,
   playerLedger,
-  currentTrade,
+  currentTrades,
   currentPrice,
   handleTrade,
 }) =>
@@ -185,7 +193,7 @@ const TradeHistory: React.FC<Props> = ({
         </StyledHead>
         <StyledBody>
           <CurrentTrades
-            currentTrade={currentTrade}
+            currentTrades={currentTrades}
             currentPrice={currentPrice}
             handleTrade={handleTrade}
           />
