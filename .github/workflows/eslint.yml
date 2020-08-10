@@ -31,20 +31,3 @@ jobs:
         eslint_extensions: ts,tsx
         # Args
         eslint_args: "-c ../.eslintrc.json"
-  jest:
-    name: Run Jest
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Install Dependencies
-      run: npm install
-
-    - name: Jest Annotations & Coverage
-      uses: mattallty/jest-github-action@v1.0.3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        changes-only: true
