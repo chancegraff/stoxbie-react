@@ -1,6 +1,6 @@
 import React from "react";
 
-import TradeRow from "./TradeRow";
+import TradeRow from "components/TradeRow";
 
 type Props = {
   pastTrades: HistoricalTradeFinished[];

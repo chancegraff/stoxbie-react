@@ -3,6 +3,7 @@ import React from "react";
 import {
   fireEvent,
   screen,
+  within,
 } from "@testing-library/react";
 import { parseISO } from "date-fns";
 
@@ -17,6 +18,7 @@ const ticker = "NFLX";
 const route = `/stock/${ticker}/m12d16y2003`;
 const path = "/stock/:ticker/:date";
 
+const shareCount = 200;
 const startBalance = 10000;
 const startPrice = prices.find((price) =>
 {
@@ -39,54 +41,56 @@ it(
       route,
     );
 
-    // Breadcrumbs
+    // Breadcrumbs should render
     expect(screen.getByLabelText("Breadcrumbs navigation")).toBeInTheDocument();
     expect(screen.getByText(ticker)).toBeInTheDocument();
 
-    // StockChart
+    // StockChart should render
     expect(screen.getByRole("linechart")).toBeInTheDocument();
 
-    // TimeControl
+    // TimeControl should render
     expect(screen.getByText("Continue")).toBeInTheDocument();
 
-    // TradeControl
+    // TradeControl should render
     expect(screen.getByText("Buy")).toBeInTheDocument();
     expect(screen.getByText("Sell")).toBeInTheDocument();
     expect(screen.getByRole("slider")).toBeInTheDocument();
 
-    // TradeHistory header
+    // TradeHistory header should render
     expect(screen.getByText("Open")).toBeInTheDocument();
     expect(screen.getByText("Close")).toBeInTheDocument();
     expect(screen.getByText("PL %")).toBeInTheDocument();
     expect(screen.getByText("PL $")).toBeInTheDocument();
 
-    // TradeHistory footer
-    expect(screen.getByText("$10k")).toBeInTheDocument();
+    // TradeHistory footer should render
+    expect(screen.getByText(formatCurrency(startBalance))).toBeInTheDocument();
   },
 );
 
-// Current price:
-// {
-//   date: "2003-12-16",
-//   uClose: 45.7,
-//   uOpen: 46.07,
-//   uHigh: 47.13,
-//   uLow: 45.23,
-//   uVolume: 1422167,
-//   close: 3.2,
-//   open: 3.37,
-//   high: 3.31,
-//   low: 3.17,
-//   volume: 19970492,
-//   currency: "",
-//   change: -0.0376,
-//   changePercent: -1.1719,
-//   label: "Dec 16, 03",
-//   changeOverTime: 1.406634,
-// }
+it(
+  "continues forward in time",
+  () =>
+  {
+    renderWithBoilerplate(
+      (
+        <TradeView
+          date={date}
+          prices={prices}
+          ticker={ticker}
+        />
+      ),
+      path,
+      route,
+    );
+
+    fireEvent.click(screen.getByText("Continue"));
+
+    expect();
+  },
+);
 
 it(
-  "buys shares",
+  "buys and sells shares",
   () =>
   {
     renderWithBoilerplate(
@@ -103,16 +107,26 @@ it(
 
     fireEvent.change(
       screen.getByRole("slider"),
-      { value: [ 200 ] },
+      { value: [ shareCount ] },
     );
 
     fireEvent.click(screen.getByText("Buy"));
 
-    const openCellContent = formatCurrency(startPrice.close);
+    // Total balance should be updated
     const balanceCellContent = formatCurrency(startBalance - startPrice.close);
 
-    expect(screen.getByText(openCellContent)).toBeInTheDocument();
     expect(screen.getByText(balanceCellContent)).toBeInTheDocument();
-    expect(screen.getByText("Exit")).toBeInTheDocument();
+
+    // Table history rows should be updated
+    const tradeHistoryRows = within(screen.getByRole("rowgroup")).getAllByRole("row");
+
+    expect(tradeHistoryRows.length).toBe(1);
+
+    // Current trade row should be created
+    const [ openRow ] = tradeHistoryRows;
+    const openCellContent = formatCurrency(startPrice.close);
+
+    expect(within(openRow).getByText(openCellContent)).toBeInTheDocument();
+    expect(within(openRow).getByText("Exit")).toBeInTheDocument();
   },
 );

@@ -1,7 +1,7 @@
 import React from "react";
 import { HistoricalPrice } from "iex";
 
-import TradeRow from "./TradeRow";
+import TradeRow from "components/TradeRow";
 
 type Props = {
   totalShareCount: number;

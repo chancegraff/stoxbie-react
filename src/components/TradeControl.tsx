@@ -5,13 +5,13 @@ import { HistoricalPrice } from "iex";
 
 import FlexGrid from "components/BaseUI/FlexGrid";
 import Spinner from "components/BaseUI/Spinner";
+import TradeAction from "components/TradeAction";
+import TradeSlider from "components/TradeSlider";
 
-import TradeAction from "./TradeAction";
 import {
   Container,
   FullButton,
 } from "./TradeControl.styled";
-import TradeSlider from "./TradeSlider";
 
 type Props = {
   currentPrice?: HistoricalPrice;

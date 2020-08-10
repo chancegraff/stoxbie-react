@@ -5,7 +5,8 @@ import {
 import { Breadcrumbs } from "baseui/dist/breadcrumbs";
 import { StyledLink } from "baseui/dist/link";
 import {
-  format, parse,
+  format,
+  parse,
 } from "date-fns";
 
 import { URL_DATE_FORMAT } from "services/Constants";

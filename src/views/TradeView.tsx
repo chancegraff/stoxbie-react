@@ -593,7 +593,10 @@ const TradeView: React.FC<Props> = ({
             ]
           }
         >
-          <TimeControl handleContinue={handleContinue} />
+          <TimeControl
+            handleContinue={handleContinue}
+            currentPrice={currentPrice}
+          />
           <TradeControl
             currentBalance={currentLedger.totalBalance}
             currentPrice={currentPrice}

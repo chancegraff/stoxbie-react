@@ -5,8 +5,8 @@ import {
   formatCurrency,
   formatPercentage,
 } from "services/Utilities";
+import TradeAction from "components/TradeAction";
 
-import TradeAction from "./TradeAction";
 import {
   RightAlignedCell,
   SmallButton,
