@@ -4,11 +4,11 @@
         "es2020": true
     },
     "extends": [
+        "plugin:jest/recommended",
         "standard",
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:jest/recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended"
     ],
@@ -304,7 +304,7 @@
         "prefer-numeric-literals": "error",
         "prefer-object-spread": "error",
         "prefer-promise-reject-errors": "error",
-        "prefer-reflect": "error",
+        "prefer-reflect": "off",
         "prefer-regex-literals": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",

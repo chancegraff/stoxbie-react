@@ -4,7 +4,6 @@ import {
   render,
   screen,
 } from "@testing-library/react";
-import ResizeObserver from "mocks/ResizeObserver";
 
 import BaseUI from "services/BaseUI";
 import TradeView from "views/TradeView";

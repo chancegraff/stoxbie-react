@@ -1,3 +1,5 @@
+import ResizeObserver from "mocks/ResizeObserver";
+
 import "@testing-library/jest-dom/extend-expect";
 
 global.document.createRange = () =>
