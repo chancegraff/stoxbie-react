@@ -348,6 +348,8 @@
         "yield-star-spacing": "error",
         "yoda": "error",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-unused-vars": "warn",
         "react/prop-types": 0,
         "react/display-name": 0,
@@ -433,6 +435,7 @@
                     ],
                     // Internal packages.
                     [
+                        "^(tests)(/.*|$)",
                         "^(services)(/.*|$)",
                         "^(templates)(/.*|$)",
                         "^(routes)(/.*|$)",
@@ -457,5 +460,21 @@
                 ]
             }
         ]
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ],
+            "rules": {
+                "@typescript-eslint/explicit-function-return-type": [
+                    "error"
+                ],
+                "@typescript-eslint/explicit-module-boundary-types": [
+                    "error"
+                ]
+            }
+        }
+    ]
 }

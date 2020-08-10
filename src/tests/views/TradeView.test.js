@@ -1,33 +1,35 @@
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import {
-  render,
-  screen,
-} from "@testing-library/react";
 
-import BaseUI from "services/BaseUI";
+import React from "react";
+import { screen } from "@testing-library/react";
+
+import { renderWithBoilerplate } from "tests/utils/renderWithBoilerplate";
 import TradeView from "views/TradeView";
 
+import prices from "./TradeView.prices.json";
+
 it(
-  "renders trade view",
+  "renders trade view using boilerplate wrapper",
   () =>
   {
-    const date = new Date();
-    const prices = [];
+    const date = new Date("12-31-2003");
     const ticker = "NFLX";
+    const route = `/stock/${ticker}/m12d31y2003`;
+    const path = "/stock/:ticker/:date";
 
-    render((
-      <BrowserRouter>
-        <BaseUI>
-          <TradeView
-            date={date}
-            prices={prices}
-            ticker={ticker}
-          />
-        </BaseUI>
-      </BrowserRouter>
-    ));
+    renderWithBoilerplate(
+      (
+        <TradeView
+          date={date}
+          prices={prices}
+          ticker={ticker}
+        />
+      ),
+      path,
+      route,
+    );
 
     expect(screen.getByText("Continue")).toBeInTheDocument();
+    expect(screen.getByLabelText("Breadcrumbs navigation")).toBeInTheDocument();
+    expect(screen.getByText(ticker)).toBeInTheDocument();
   },
 );

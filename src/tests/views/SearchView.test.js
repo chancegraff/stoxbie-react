@@ -1,11 +1,10 @@
 import React from "react";
 import {
   fireEvent,
-  render,
   screen,
 } from "@testing-library/react";
 
-import BaseUI from "services/BaseUI";
+import { renderWithBoilerplate } from "tests/utils/renderWithBoilerplate";
 import SearchView from "views/SearchView";
 
 it(
@@ -14,11 +13,7 @@ it(
   {
     const handleSearch = jest.fn();
 
-    render((
-      <BaseUI>
-        <SearchView handleSearch={handleSearch} />
-      </BaseUI>
-    ));
+    renderWithBoilerplate(<SearchView handleSearch={handleSearch} />);
 
     const tickerInput = screen.getByRole("combobox");
 
