@@ -6,8 +6,7 @@ import {
 } from "@testing-library/react";
 
 import BaseUI from "services/BaseUI";
-
-import SearchView from "./SearchView";
+import SearchView from "views/SearchView";
 
 it(
   "renders search view and types into the input",
