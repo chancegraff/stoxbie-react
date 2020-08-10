@@ -80,13 +80,14 @@ const setNextPrices = (
   },
 ) =>
 {
-  const nextPrices = prices.slice(...priceIndexes);
-
-  setPastPrices(nextPrices);
-  setNextPriceIndexes(priceIndexes.map((index) =>
+  const nextPriceIndexes = priceIndexes.map((index) =>
   {
     return index + 1;
-  }));
+  });
+  const nextPrices = prices.slice(...nextPriceIndexes);
+
+  setPastPrices(nextPrices);
+  setNextPriceIndexes(nextPriceIndexes);
 };
 
 const getOpenedTrade = (

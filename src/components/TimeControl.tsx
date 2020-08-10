@@ -43,7 +43,7 @@ const TimeControl: React.FC<Props> = ({
       <LabelMedium
         paddingBottom="10px"
       >
-        {safeDate}
+        {`Today is ${safeDate || "..."}`}
       </LabelMedium>
       <FullButton
         size={SIZE.large}
