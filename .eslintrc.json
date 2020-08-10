@@ -6,9 +6,10 @@
     "extends": [
         "standard",
         "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:react-hooks/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -20,9 +21,9 @@
     },
     "plugins": [
         "standard",
+        "@typescript-eslint",
         "react",
         "react-hooks",
-        "@typescript-eslint",
         "simple-import-sort",
         "wrap-params"
     ],
@@ -235,6 +236,7 @@
         "no-unmodified-loop-condition": "error",
         "no-unneeded-ternary": "error",
         "no-unused-expressions": "error",
+        "no-unused-vars": "off",
         "no-use-before-define": "error",
         "no-useless-call": "error",
         "no-useless-computed-key": "error",
@@ -344,6 +346,7 @@
         "yield-star-spacing": "error",
         "yoda": "error",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
         "react/prop-types": 0,
         "react/display-name": 0,
         "react/jsx-closing-bracket-location": "error",

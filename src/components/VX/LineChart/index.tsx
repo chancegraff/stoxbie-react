@@ -17,7 +17,7 @@ import LinePath from "./LinePath";
 
 export type AxisLabelProps = Partial<TextProps>;
 export type TickLabelProps = () => Partial<TextProps>;
-export type Label = [AxisLabelProps, TickLabelProps];
+export type Label = TickLabelProps;
 
 type Props = {
   prices: HistoricalPrice[];
@@ -36,6 +36,8 @@ const Rect = styled(
     return { fill: $theme.colors.backgroundSecondary };
   },
 );
+
+const displayNone = { display: "none" };
 
 const LineChart: React.FC<Props> = ({
   prices,
@@ -59,10 +61,7 @@ const LineChart: React.FC<Props> = ({
     xMax,
     yMax,
   ],
-  label: [
-    axisLabelProps,
-    tickLabelProps,
-  ],
+  label,
 }) =>
 {
   return (
@@ -93,14 +92,14 @@ const LineChart: React.FC<Props> = ({
           }
         />
         <AxisBottom
-          labelProps={axisLabelProps}
-          tickLabelProps={tickLabelProps}
+          labelProps={displayNone}
+          tickLabelProps={label}
           xScale={xScale}
           yMax={yMax}
         />
         <AxisRight
-          labelProps={axisLabelProps}
-          tickLabelProps={tickLabelProps}
+          labelProps={displayNone}
+          tickLabelProps={label}
           xMax={xMax}
           yScale={yScale}
         />

@@ -1,55 +1,27 @@
 import React, { useMemo } from "react";
-import { styled } from "baseui/dist";
-import {
-  Button, SIZE,
-} from "baseui/dist/button";
-import {
-  StyledCell,
-  StyledRow,
-} from "baseui/dist/table";
+import { StyledRow } from "baseui/dist/table";
 import numbro from "numbro";
 
 import TradeAction from "./TradeAction";
+import {
+  RightAlignedCell,
+  SmallButton,
+} from "./TradeRow.styled";
 
 type Props = {
-  trade: HistoricalTrade;
+  trade: HistoricalTradeStarted | HistoricalTradeFinished;
   sharePrice?: number;
   handleTrade?: (sharePrice: number, shareCount: number) => void;
 };
-
-const SmallButton = styled(
-  (props) =>
-  {
-    return (
-      <Button
-        {...props}
-        size={SIZE.mini}
-      />
-    );
-  },
-  ({ $theme }) =>
-  {
-    return {
-      ...$theme.typography.font100, height: "20px",
-    };
-  },
-);
-
-const RightAlignedCell = styled(
-  StyledCell,
-  {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-);
 
 const TradeRow: React.FC<Props> = ({
   sharePrice,
   handleTrade,
   trade: {
-    count,
-    open,
-    close,
+    openPrice,
+    openCount,
+    openModifier,
+    closePrice,
     changePercent,
     changeBalance,
   },
@@ -58,9 +30,9 @@ const TradeRow: React.FC<Props> = ({
   const safeOpen = useMemo(
     () =>
     {
-      if (open)
+      if (openPrice)
       {
-        const abbreviatedOpen = numbro(open).formatCurrency({
+        const abbreviatedOpen = numbro(openPrice).formatCurrency({
           average: true,
           totalLength: 1,
         });
@@ -68,14 +40,14 @@ const TradeRow: React.FC<Props> = ({
         return abbreviatedOpen;
       }
     },
-    [ open ],
+    [ openPrice ],
   );
   const safeClose = useMemo(
     () =>
     {
-      if (close)
+      if (closePrice)
       {
-        const abbreviatedClose = numbro(close).formatCurrency({
+        const abbreviatedClose = numbro(closePrice).formatCurrency({
           average: true,
           totalLength: 1,
         });
@@ -85,24 +57,27 @@ const TradeRow: React.FC<Props> = ({
 
       if (handleTrade && sharePrice)
       {
+        const closeModifier = (openModifier * -1) as -1 | 1;
+
         return (
           <TradeAction
             Component={SmallButton}
             handleTrade={handleTrade}
-            purchaseAmount={count}
-            purchaseModifier={-1}
+            purchaseAmount={openCount}
+            purchaseModifier={closeModifier}
             sharePrice={sharePrice}
           >
-              Sell
+              Exit
           </TradeAction>
         );
       }
     },
     [
-      close,
+      openCount,
+      openModifier,
+      closePrice,
       sharePrice,
       handleTrade,
-      count,
     ],
   );
   const safeChange = useMemo(

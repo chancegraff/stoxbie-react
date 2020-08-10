@@ -1,88 +1,37 @@
 import React, { useMemo } from "react";
-import { styled } from "baseui/dist";
-import { Block } from "baseui/dist/block";
 import {
   StyledBody,
-  StyledCell,
   StyledHead,
-  StyledHeadCell,
-  StyledRow,
-  StyledTable,
 } from "baseui/dist/table";
 import { HistoricalPrice } from "iex";
 import numbro from "numbro";
 
 import Spinner from "components/BaseUI/Spinner";
 
-import TradeRow from "./TradeRow";
+import {
+  Container,
+  FullTable,
+  HeadCell,
+  RightAlignedCell,
+  StickyFooter,
+} from "./TradeHistory.styled";
+import TradeRowsClosed from "./TradeRowsClosed";
+import TradeRowsOpened from "./TradeRowsOpened";
 
 type Props = {
-  pastTrades?: HistoricalTrade[];
-  currentTrade?: HistoricalTrade;
+  pastTrades: HistoricalTradeFinished[];
+  visibleTrade?: HistoricalTradeStarted;
   currentPrice?: HistoricalPrice;
   playerLedger: HistoricalLedger;
+  currentTrades?: HistoricalTradeStarted[];
+  pastLedgers?: HistoricalLedger[];
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
-
-const Container = styled(
-  Block,
-  () =>
-  {
-    return {
-      height: "0%",
-      width: "100%",
-      flexGrow: 1,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    };
-  },
-);
-
-const FullTable = styled(
-  StyledTable,
-  () =>
-  {
-    return {
-      height: "100%",
-      width: "100%",
-      flexGrow: 1,
-    };
-  },
-);
-
-const HeadCell = styled(
-  StyledHeadCell,
-  ({ $theme }) =>
-  {
-    return { ...$theme.typography.LabelSmall };
-  },
-);
-
-const RightAlignedCell = styled(
-  StyledCell,
-  {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-);
-
-const StickyFooter = styled(
-  StyledRow,
-  ({ $theme }) =>
-  {
-    return {
-      backgroundColor: $theme.colors.backgroundAlt,
-      borderTop: `1px solid ${$theme.colors.borderOpaque}`,
-      width: "100%",
-    };
-  },
-);
 
 const TradeHistory: React.FC<Props> = ({
   pastTrades,
   playerLedger,
-  currentTrade,
+  visibleTrade,
   currentPrice,
   handleTrade,
 }) =>
@@ -90,12 +39,18 @@ const TradeHistory: React.FC<Props> = ({
   const safeChange = useMemo(
     () =>
     {
-      return numbro(playerLedger.totalChange).format({
-        average: true,
-        output: "percent",
-      });
+      if (pastTrades.length > 0)
+      {
+        return numbro(playerLedger.totalChange).format({
+          average: true,
+          output: "percent",
+        });
+      }
     },
-    [ playerLedger ],
+    [
+      playerLedger,
+      pastTrades,
+    ],
   );
   const safeBalance = useMemo(
     () =>
@@ -108,7 +63,7 @@ const TradeHistory: React.FC<Props> = ({
     [ playerLedger ],
   );
 
-  if (!pastTrades || !currentPrice)
+  if (!currentPrice)
   {
     return <Spinner container={Container} />;
   }
@@ -124,35 +79,19 @@ const TradeHistory: React.FC<Props> = ({
             Close
           </HeadCell>
           <HeadCell>
-            Change
+            PL %
           </HeadCell>
           <HeadCell>
-            Balance
+            PL $
           </HeadCell>
         </StyledHead>
         <StyledBody>
-          {
-            currentTrade &&
-              <TradeRow
-                handleTrade={handleTrade}
-                sharePrice={currentPrice.close}
-                trade={currentTrade}
-              />
-          }
-          {
-            pastTrades.map((
-              pastTrade,
-              index,
-            ) =>
-            {
-              return (
-                <TradeRow
-                  key={index}
-                  trade={pastTrade}
-                />
-              );
-            })
-          }
+          <TradeRowsOpened
+            visibleTrade={visibleTrade}
+            currentPrice={currentPrice}
+            handleTrade={handleTrade}
+          />
+          <TradeRowsClosed pastTrades={pastTrades} />
         </StyledBody>
         <StickyFooter>
           <RightAlignedCell></RightAlignedCell>

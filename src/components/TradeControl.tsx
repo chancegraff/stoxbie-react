@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  styled, useStyletron,
-} from "baseui/dist";
-import { Block } from "baseui/dist/block";
-import { Button } from "baseui/dist/button";
+import { useStyletron } from "baseui/dist";
 import { FlexGridItem } from "baseui/dist/flex-grid";
 import { HistoricalPrice } from "iex";
 
@@ -11,6 +7,10 @@ import FlexGrid from "components/BaseUI/FlexGrid";
 import Spinner from "components/BaseUI/Spinner";
 
 import TradeAction from "./TradeAction";
+import {
+  Container,
+  FullButton,
+} from "./TradeControl.styled";
 import TradeSlider from "./TradeSlider";
 
 type Props = {
@@ -18,25 +18,6 @@ type Props = {
   currentBalance?: number;
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
-
-const Container = styled(
-  Block,
-  ({ $theme }) =>
-  {
-    return {
-      display: "flex",
-      flexWrap: "wrap",
-      alignItems: "center",
-      justifyContent: "center",
-      margin: `${$theme.sizing.scale800} 0`,
-    };
-  },
-);
-
-const FullButton = styled(
-  Button,
-  { width: "100%" },
-);
 
 const TradeControl: React.FC<Props> = ({
   currentPrice,

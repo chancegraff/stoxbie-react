@@ -1,67 +1,21 @@
 import React, { useCallback } from "react";
 import { Block } from "baseui/dist/block";
 import {
-  Button, ButtonProps, SHAPE, SIZE,
+  SHAPE, SIZE,
 } from "baseui/dist/button";
 import { ButtonGroup } from "baseui/dist/button-group";
-import {
-  onChange as defaultHandler,
-  StatefulCalendar,
-} from "baseui/dist/datepicker";
 import { Filter } from "baseui/dist/icon";
-import {
-  format, subYears,
-} from "date-fns";
-import { styled } from "styletron-react";
+import { format } from "date-fns";
 
 import { URL_DATE_FORMAT } from "services/Constants";
-import { copyPropsToChildren } from "services/Utilities";
-import { StatefulPopover } from "components/BaseUI/Popover";
+import DatePicker from "components/BaseUI/DatePicker";
 
-const today = new Date();
-const oneYear = subYears(
-  today,
-  1,
-);
-const fiveYear = subYears(
-  today,
-  5,
-);
+import {
+  fiveYearsAgo,
+  oneYearAgo,
+} from "../services/Utilities";
 
-const GrowingButton = styled(
-  Button,
-  { flexGrow: 1 },
-);
-
-type onChange = (args: { date: Date }) => void;
-
-type DatePickerProps = ButtonProps & {
-  onChange?: onChange;
-};
-
-const DatePicker: React.FC<DatePickerProps> = ({
-  onChange,
-  ...props
-}) =>
-{
-  return (
-    <StatefulPopover
-      content={
-        (
-          <StatefulCalendar
-            initialState={{ value: oneYear }}
-            maxDate={today}
-            minDate={fiveYear}
-            onChange={onChange as defaultHandler}
-          />
-        )
-      }
-      placement="bottomLeft"
-    >
-      {copyPropsToChildren(props)}
-    </StatefulPopover>
-  );
-};
+import { GrowingButton } from "./TradeStart.styled";
 
 type Props = {
   handleStart: (date: string) => void;
@@ -80,7 +34,7 @@ const TradeStart: React.FC<Props> = ({ handleStart }) =>
     () =>
     {
       return handleYearStart(format(
-        oneYear,
+        oneYearAgo,
         URL_DATE_FORMAT,
       ));
     },
@@ -90,13 +44,13 @@ const TradeStart: React.FC<Props> = ({ handleStart }) =>
     () =>
     {
       return handleYearStart(format(
-        fiveYear,
+        fiveYearsAgo,
         URL_DATE_FORMAT,
       ));
     },
     [ handleYearStart ],
   );
-  const handleCustomYearStart: onChange = useCallback(
+  const handleCustomYearStart = useCallback(
     ({ date }) =>
     {
       return handleYearStart(format(
