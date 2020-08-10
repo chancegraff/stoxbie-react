@@ -6,6 +6,7 @@ import {
   useEffect,
   useRef,
 } from "react";
+import { subYears } from "date-fns";
 
 export const copyPropsToChildren = ({
   children,
@@ -64,3 +65,15 @@ export const usePrevious = <P>(
 
   return ref.current;
 };
+
+export const today = new Date();
+
+export const oneYearAgo = subYears(
+  today,
+  1,
+);
+
+export const fiveYearsAgo = subYears(
+  today,
+  5,
+);

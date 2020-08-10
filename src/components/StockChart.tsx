@@ -1,6 +1,8 @@
-import React, { useMemo } from "react";
+import React, {
+  useCallback,
+  useMemo,
+} from "react";
 import { useStyletron } from "baseui/dist";
-import { Theme } from "baseui/dist/theme";
 import { HistoricalPrice } from "iex";
 
 import Spinner from "components/BaseUI/Spinner";
@@ -10,19 +12,6 @@ type Props = {
   resolution: Resolution;
   prices?: HistoricalPrice[];
   padding?: Padding;
-};
-
-const getLabelProps = { display: "none" };
-const getTickLabelProps = (theme: Theme) =>
-{
-  return () =>
-  {
-    return {
-      fill: theme.colors.mono300,
-      strokeWidth: 0,
-      ...theme.typography.LabelXSmall,
-    };
-  };
 };
 
 const StockChart: React.FC<Props> = ({
@@ -37,13 +26,14 @@ const StockChart: React.FC<Props> = ({
   const [
     , theme,
   ] = useStyletron();
-  const label: Label = useMemo(
+  const label: Label = useCallback(
     () =>
     {
-      return [
-        getLabelProps,
-        getTickLabelProps(theme),
-      ];
+      return {
+        ...theme.typography.LabelXSmall,
+        fill: theme.colors.mono300,
+        strokeWidth: 0,
+      };
     },
     [ theme ],
   );

@@ -1,135 +1,37 @@
 import React, { useMemo } from "react";
-import { styled } from "baseui/dist";
-import { Block } from "baseui/dist/block";
 import {
   StyledBody,
-  StyledCell,
   StyledHead,
-  StyledHeadCell,
-  StyledRow,
-  StyledTable,
 } from "baseui/dist/table";
 import { HistoricalPrice } from "iex";
 import numbro from "numbro";
 
 import Spinner from "components/BaseUI/Spinner";
 
-import TradeRow from "./TradeRow";
+import {
+  Container,
+  FullTable,
+  HeadCell,
+  RightAlignedCell,
+  StickyFooter,
+} from "./TradeHistory.styled";
+import TradeRowsClosed from "./TradeRowsClosed";
+import TradeRowsOpened from "./TradeRowsOpened";
 
 type Props = {
   pastTrades: HistoricalTradeFinished[];
-  currentTrade?: HistoricalTradeStarted;
+  visibleTrade?: HistoricalTradeStarted;
   currentPrice?: HistoricalPrice;
   playerLedger: HistoricalLedger;
+  currentTrades?: HistoricalTradeStarted[];
+  pastLedgers?: HistoricalLedger[];
   handleTrade: (sharePrice: number, shareCount: number) => void;
-};
-
-const Container = styled(
-  Block,
-  () =>
-  {
-    return {
-      height: "0%",
-      width: "100%",
-      flexGrow: 1,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    };
-  },
-);
-
-const FullTable = styled(
-  StyledTable,
-  () =>
-  {
-    return {
-      height: "100%",
-      width: "100%",
-      flexGrow: 1,
-    };
-  },
-);
-
-const HeadCell = styled(
-  StyledHeadCell,
-  ({ $theme }) =>
-  {
-    return { ...$theme.typography.LabelSmall };
-  },
-);
-
-const RightAlignedCell = styled(
-  StyledCell,
-  ({ $theme }) =>
-  {
-    return {
-      display: "flex",
-      justifyContent: "flex-end",
-      height: "100%",
-      borderRight: `1px solid ${$theme.colors.borderOpaque}`,
-      ":last-of-type": { borderRight: 0 },
-    };
-  },
-);
-
-const StickyFooter = styled(
-  StyledRow,
-  ({ $theme }) =>
-  {
-    return {
-      backgroundColor: $theme.colors.backgroundAlt,
-      width: "100%",
-    };
-  },
-);
-
-const CurrentTrades: React.FC<Pick<Props, "currentTrade" | "currentPrice" | "handleTrade">> = ({
-  currentTrade,
-  currentPrice,
-  handleTrade,
-}) =>
-{
-  if (!currentTrade)
-  {
-    return null;
-  }
-
-  return (
-    <TradeRow
-      handleTrade={handleTrade}
-      sharePrice={currentPrice?.close}
-      trade={currentTrade}
-    />
-  );
-};
-
-const PastTrades: React.FC<Pick<Props, "pastTrades">> = ({ pastTrades }) =>
-{
-  return (
-    <>
-      {
-        pastTrades.map((
-          pastTrade,
-          index,
-        ) =>
-        {
-          return (
-            <TradeRow
-              key={index}
-              trade={pastTrade}
-            />
-          );
-        })
-      }
-    </>
-  );
 };
 
 const TradeHistory: React.FC<Props> = ({
   pastTrades,
   playerLedger,
-  currentTrade,
+  visibleTrade,
   currentPrice,
   handleTrade,
 }) =>
@@ -184,12 +86,12 @@ const TradeHistory: React.FC<Props> = ({
           </HeadCell>
         </StyledHead>
         <StyledBody>
-          <CurrentTrades
-            currentTrade={currentTrade}
+          <TradeRowsOpened
+            visibleTrade={visibleTrade}
             currentPrice={currentPrice}
             handleTrade={handleTrade}
           />
-          <PastTrades pastTrades={pastTrades} />
+          <TradeRowsClosed pastTrades={pastTrades} />
         </StyledBody>
         <StickyFooter>
           <RightAlignedCell></RightAlignedCell>

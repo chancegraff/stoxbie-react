@@ -25,7 +25,6 @@ declare type DispatchSetStateAction<P> = React.Dispatch<
 
 declare type HistoricalTradeBase = {
   ticker: string;
-  date: Date;
 };
 
 declare type HistoricalTradeOpen = {

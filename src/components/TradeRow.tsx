@@ -1,47 +1,18 @@
 import React, { useMemo } from "react";
-import { styled } from "baseui/dist";
-import {
-  Button, SIZE,
-} from "baseui/dist/button";
-import {
-  StyledCell,
-  StyledRow,
-} from "baseui/dist/table";
+import { StyledRow } from "baseui/dist/table";
 import numbro from "numbro";
 
 import TradeAction from "./TradeAction";
+import {
+  RightAlignedCell,
+  SmallButton,
+} from "./TradeRow.styled";
 
 type Props = {
   trade: HistoricalTradeStarted | HistoricalTradeFinished;
   sharePrice?: number;
   handleTrade?: (sharePrice: number, shareCount: number) => void;
 };
-
-const SmallButton = styled(
-  (props) =>
-  {
-    return (
-      <Button
-        {...props}
-        size={SIZE.mini}
-      />
-    );
-  },
-  ({ $theme }) =>
-  {
-    return {
-      ...$theme.typography.font100, height: "20px",
-    };
-  },
-);
-
-const RightAlignedCell = styled(
-  StyledCell,
-  {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-);
 
 const TradeRow: React.FC<Props> = ({
   sharePrice,
