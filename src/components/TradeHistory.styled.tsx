@@ -1,4 +1,7 @@
-import { styled, withStyle } from "baseui/dist";
+import {
+  styled,
+  withStyle,
+} from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import {
   StyledCell,

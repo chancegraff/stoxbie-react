@@ -2,11 +2,11 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
+import { withStyle } from "baseui/dist";
 import {
   SharedProps,
   StyledTick,
 } from "baseui/dist/slider";
-import { withStyle } from "styletron-react";
 
 import { SLIDER_TICK_COUNT } from "services/Constants";
 
