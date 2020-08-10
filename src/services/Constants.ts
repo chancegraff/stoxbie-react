@@ -13,4 +13,4 @@ export const DATE_ERROR_MESSAGE =
 export const TICKER_ERROR_MESSAGE =
   "There was a problem attempting to parse the ticker you requested.";
 
-export const SLIDER_TICK_COUNT = 8;
+export const SLIDER_TICK_COUNT = 7;
