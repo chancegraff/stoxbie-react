@@ -53,6 +53,7 @@ declare type HistoricalLedger = {
   totalBalance: number;
   totalReturns: number;
   totalChange: number;
+  totalCount: number;
 }
 
 declare type HistoricalTrade = HistoricalTradeBase & Partial<HistoricalTradeOpen & HistoricalTradeClose & HistoricalTradeChange>;

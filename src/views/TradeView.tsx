@@ -188,6 +188,7 @@ const TradeView: React.FC<Props> = ({
       totalBalance: 10000,
       totalChange: 0,
       totalReturns: 0,
+      totalCount: 0,
     } ],
   );
 
@@ -289,6 +290,7 @@ const TradeView: React.FC<Props> = ({
           totalBalance: previousTotalBalance,
           totalChange: previousTotalChange,
           totalReturns: previousTotalReturns,
+          totalCount: previousTotalCount,
         } = currentLedger;
         const openedTrade = getOpenedTrade(
           nextTrade,
@@ -299,6 +301,7 @@ const TradeView: React.FC<Props> = ({
         nextPlayerLedger.totalBalance = previousTotalBalance - (openedTrade.openPrice * openedTrade.openCount);
         nextPlayerLedger.totalChange = previousTotalChange;
         nextPlayerLedger.totalReturns = previousTotalReturns;
+        nextPlayerLedger.totalCount = previousTotalCount + openedTrade.openCount;
 
         const nextCurrentTrades = [
           openedTrade,
@@ -337,10 +340,6 @@ const TradeView: React.FC<Props> = ({
         {
           return previousTrade.openPrice - nextTrade.openPrice;
         });
-        const {
-          totalBalance: previousTotalBalance,
-          totalReturns: previousTotalReturns,
-        } = currentLedger;
 
         let remainingOrderShareCount = Math.abs(shareCount);
 
@@ -349,6 +348,12 @@ const TradeView: React.FC<Props> = ({
           sortedCurrentTrades.length > 0
         )
         {
+          const {
+            totalBalance: previousTotalBalance,
+            totalReturns: previousTotalReturns,
+            totalCount: previousTotalCount,
+          } = nextPlayerLedger;
+
           // Fill as much of the order as we can with the lowest-opened trade
           const lowestTrade = sortedCurrentTrades.shift() as HistoricalTradeStarted;
           const countPossible = Math.min(
@@ -369,6 +374,7 @@ const TradeView: React.FC<Props> = ({
           nextPlayerLedger.totalBalance = previousTotalBalance + (closedTrade.closePrice * closedTrade.closeCount);
           nextPlayerLedger.totalReturns = previousTotalReturns + closedTrade.changeBalance;
           nextPlayerLedger.totalChange = nextPlayerLedger.totalReturns / nextPlayerLedger.totalBalance;
+          nextPlayerLedger.totalCount = previousTotalCount - closedTrade.closeCount;
 
           // Remove the closed trade from current trades
           const lowestTradeIndex = nextCurrentTrades.indexOf(lowestTrade);

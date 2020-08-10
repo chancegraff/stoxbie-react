@@ -87,6 +87,7 @@ const TradeHistory: React.FC<Props> = ({
         </StyledHead>
         <StyledBody>
           <TradeRowsOpened
+            totalShareCount={playerLedger.totalCount}
             visibleTrade={visibleTrade}
             currentPrice={currentPrice}
             handleTrade={handleTrade}
