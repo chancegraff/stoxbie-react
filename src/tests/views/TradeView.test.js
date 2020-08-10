@@ -5,7 +5,9 @@ import {
   screen,
   within,
 } from "@testing-library/react";
-import { parseISO } from "date-fns";
+import {
+  format, parseISO,
+} from "date-fns";
 
 import { renderWithBoilerplate } from "tests/utils/renderWithBoilerplate";
 import { formatCurrency } from "services/Utilities";
@@ -20,7 +22,7 @@ const path = "/stock/:ticker/:date";
 
 const shareCount = 200;
 const startBalance = 10000;
-const startPrice = prices.find((price) =>
+const priceIndex = prices.findIndex((price) =>
 {
   return price.date === "2003-12-16";
 });
@@ -71,6 +73,13 @@ it(
   "continues forward in time",
   () =>
   {
+    const nextPrice = prices[priceIndex + 1];
+    const nextDate = parseISO(nextPrice.date);
+    const dateString = format(
+      nextDate,
+      "MMMM do, y",
+    );
+
     renderWithBoilerplate(
       (
         <TradeView
@@ -85,7 +94,7 @@ it(
 
     fireEvent.click(screen.getByText("Continue"));
 
-    expect();
+    expect(screen.getByText(dateString)).toBeInTheDocument();
   },
 );
 
@@ -93,6 +102,8 @@ it(
   "buys and sells shares",
   () =>
   {
+    const startPrice = prices[priceIndex];
+
     renderWithBoilerplate(
       (
         <TradeView
