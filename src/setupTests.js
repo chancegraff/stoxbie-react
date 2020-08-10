@@ -1,4 +1,4 @@
-import ResizeObserver from "mocks/ResizeObserver";
+import ResizeObserver from "tests/mocks/ResizeObserver";
 
 import "@testing-library/jest-dom/extend-expect";
 
