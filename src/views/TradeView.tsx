@@ -207,6 +207,30 @@ const TradeView: React.FC<Props> = ({
     },
     [ playerLedger ],
   );
+  const visibleTrade = useMemo(
+    () =>
+    {
+      if (currentTrades.length > 0)
+      {
+        const [ newestOpenedTrade ] = currentTrades;
+        const highestOpenedTrade = currentTrades.reduceRight(
+          (
+            previousTrade,
+            nextTrade,
+          ) =>
+          {
+            return previousTrade.openPrice > nextTrade.openPrice
+              ? previousTrade
+              : nextTrade;
+          },
+          newestOpenedTrade,
+        );
+
+        return highestOpenedTrade;
+      }
+    },
+    [ currentTrades ],
+  );
 
   const updateCurrentTrades = useCallback(
     (nextTrades: HistoricalTradeStarted[]) =>
@@ -219,11 +243,11 @@ const TradeView: React.FC<Props> = ({
     [ setCurrentTrades ],
   );
   const updatePastTrades = useCallback(
-    (nextTrade: HistoricalTradeFinished) =>
+    (nextTrades: HistoricalTradeFinished[]) =>
     {
       setPastTrades(
         [
-          nextTrade,
+          ...nextTrades,
           ...pastTrades,
         ],
         30,
@@ -259,31 +283,36 @@ const TradeView: React.FC<Props> = ({
     {
       if (ticker && date)
       {
-        const nextTrade = {
-          date,
-          ticker,
-        };
+        const nextTrade = { ticker };
+        const { ...nextPlayerLedger } = currentLedger;
+        const {
+          totalBalance: previousTotalBalance,
+          totalChange: previousTotalChange,
+          totalReturns: previousTotalReturns,
+        } = currentLedger;
         const openedTrade = getOpenedTrade(
           nextTrade,
           sharePrice,
           shareCount,
         );
-        const nextBalance = currentLedger.totalBalance - openedTrade.openBalance;
-        const nextChange = currentLedger.totalChange;
-        const nextReturns = currentLedger.totalReturns;
-        const nextLedger = {
-          totalBalance: nextBalance,
-          totalChange: nextChange,
-          totalReturns: nextReturns,
-        };
 
-        updateCurrentTrades([ openedTrade ]);
-        updatePlayerLedger(nextLedger);
+        nextPlayerLedger.totalBalance = previousTotalBalance - (openedTrade.openPrice * openedTrade.openCount);
+        nextPlayerLedger.totalChange = previousTotalChange;
+        nextPlayerLedger.totalReturns = previousTotalReturns;
+
+        const nextCurrentTrades = [
+          openedTrade,
+          ...currentTrades,
+        ];
+
+        updateCurrentTrades(nextCurrentTrades);
+        updatePlayerLedger(nextPlayerLedger);
       }
     },
     [
       ticker,
       date,
+      currentTrades,
       currentLedger,
       updateCurrentTrades,
       updatePlayerLedger,
@@ -295,42 +324,85 @@ const TradeView: React.FC<Props> = ({
       shareCount: number,
     ) =>
     {
-      const [ openedTrade ] = currentTrades;
-      const closedTrade = getClosedTrade(
-        openedTrade,
-        sharePrice,
-        shareCount,
-      );
-
-      const nextBalance = currentLedger.totalBalance + (closedTrade.openBalance + closedTrade.changeBalance);
-      const nextReturns = currentLedger.totalReturns + closedTrade.changeBalance;
-      const nextChange = nextReturns / nextBalance;
-      const nextLedger = {
-        totalBalance: nextBalance,
-        totalChange: nextChange,
-        totalReturns: nextReturns,
-      };
-
-      updatePastTrades(closedTrade);
-      updatePlayerLedger(nextLedger);
-
-      const remainingShares = closedTrade.openCount - closedTrade.closeCount;
-
-      if (remainingShares > 0)
+      if (currentTrades.length > 0)
       {
-        const remainingBalance = closedTrade.openPrice * remainingShares;
+        const { ...nextPlayerLedger } = currentLedger;
+        const [ ...nextCurrentTrades ] = currentTrades;
+        const nextPastTrades: HistoricalTradeFinished[] = [];
 
-        const nextTrade: HistoricalTradeStarted = {
-          ...openedTrade,
-          openBalance: remainingBalance,
-          openCount: remainingShares,
-        };
+        const [ ...sortedCurrentTrades ] = currentTrades.sort((
+          previousTrade,
+          nextTrade,
+        ) =>
+        {
+          return previousTrade.openPrice - nextTrade.openPrice;
+        });
+        const {
+          totalBalance: previousTotalBalance,
+          totalReturns: previousTotalReturns,
+        } = currentLedger;
 
-        updateCurrentTrades([ nextTrade ]);
-      }
-      else
-      {
-        updateCurrentTrades([]);
+        let remainingOrderShareCount = Math.abs(shareCount);
+
+        while (
+          remainingOrderShareCount > 0 &&
+          sortedCurrentTrades.length > 0
+        )
+        {
+          // Fill as much of the order as we can with the lowest-opened trade
+          const lowestTrade = sortedCurrentTrades.shift() as HistoricalTradeStarted;
+          const countPossible = Math.min(
+            lowestTrade.openCount,
+            remainingOrderShareCount,
+          );
+          const closedTrade = getClosedTrade(
+            lowestTrade,
+            sharePrice,
+            countPossible,
+          );
+
+          // Add closed trade to front of collection
+          nextPastTrades.unshift(closedTrade);
+
+          // Update ledger values and remaining shares in order
+          remainingOrderShareCount -= countPossible;
+          nextPlayerLedger.totalBalance = previousTotalBalance + (closedTrade.closePrice * closedTrade.closeCount);
+          nextPlayerLedger.totalReturns = previousTotalReturns + closedTrade.changeBalance;
+          nextPlayerLedger.totalChange = nextPlayerLedger.totalReturns / nextPlayerLedger.totalBalance;
+
+          // Remove the closed trade from current trades
+          const lowestTradeIndex = nextCurrentTrades.indexOf(lowestTrade);
+
+          nextCurrentTrades.splice(
+            lowestTradeIndex,
+            1,
+          );
+
+          // Check if there are any shares left in the trade we just removed
+          const remainingTradeShareCount = closedTrade.openCount - closedTrade.closeCount;
+
+          if (remainingTradeShareCount > 0)
+          {
+            // Copy the previous share, update its openBalance and openCount, and add it back in the same place
+            const remainingBalance = closedTrade.openPrice * remainingTradeShareCount;
+            const nextTrade: HistoricalTradeStarted = {
+              ...lowestTrade,
+              openBalance: remainingBalance,
+              openCount: remainingTradeShareCount,
+            };
+
+            nextCurrentTrades.splice(
+              lowestTradeIndex,
+              0,
+              nextTrade,
+            );
+          }
+        }
+
+        // Update state values
+        updateCurrentTrades(nextCurrentTrades);
+        updatePastTrades(nextPastTrades);
+        updatePlayerLedger(nextPlayerLedger);
       }
     },
     [
@@ -373,11 +445,10 @@ const TradeView: React.FC<Props> = ({
       shareCount: number,
     ) =>
     {
-      // Save this... we'll want it when we can open more trades
-      // const currentTradeType = shareCount / Math.abs(shareCount);
-      // const previousTradeOpposite = currentTrades.openModifier * -1;
+      const currentTradeType = shareCount / Math.abs(shareCount);
+      const previousTradeOpposite = visibleTrade && visibleTrade.openModifier * -1;
 
-      if (currentTrades.length > 0)
+      if (currentTradeType === previousTradeOpposite)
       {
         closeTrade(
           sharePrice,
@@ -393,7 +464,7 @@ const TradeView: React.FC<Props> = ({
       }
     },
     [
-      currentTrades,
+      visibleTrade,
       openTrade,
       closeTrade,
     ],
@@ -523,10 +594,12 @@ const TradeView: React.FC<Props> = ({
           />
           <TradeHistory
             currentPrice={currentPrice}
-            currentTrades={currentTrades}
+            visibleTrade={visibleTrade}
             handleTrade={handleTrade}
             pastTrades={pastTrades}
             playerLedger={currentLedger}
+            pastLedgers={playerLedger}
+            currentTrades={currentTrades}
           />
         </FlexGridItem>
       </FlexGrid>

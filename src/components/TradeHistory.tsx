@@ -20,16 +20,18 @@ import TradeRowsOpened from "./TradeRowsOpened";
 
 type Props = {
   pastTrades: HistoricalTradeFinished[];
-  currentTrades: HistoricalTradeStarted[];
+  visibleTrade?: HistoricalTradeStarted;
   currentPrice?: HistoricalPrice;
   playerLedger: HistoricalLedger;
+  currentTrades?: HistoricalTradeStarted[];
+  pastLedgers?: HistoricalLedger[];
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
 const TradeHistory: React.FC<Props> = ({
   pastTrades,
   playerLedger,
-  currentTrades,
+  visibleTrade,
   currentPrice,
   handleTrade,
 }) =>
@@ -85,7 +87,7 @@ const TradeHistory: React.FC<Props> = ({
         </StyledHead>
         <StyledBody>
           <TradeRowsOpened
-            currentTrades={currentTrades}
+            visibleTrade={visibleTrade}
             currentPrice={currentPrice}
             handleTrade={handleTrade}
           />
