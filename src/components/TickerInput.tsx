@@ -11,6 +11,8 @@ import {
 } from "baseui/dist/select";
 import { Search } from "iex-cloud";
 
+import { TICKER_INPUT_PLACERHOLDER } from "services/Constants";
+
 import Label from "./TickerInput.label";
 import { Dropdown } from "./TickerInput.overrides";
 
@@ -85,7 +87,7 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) =>
       type={TYPE.search}
       options={options}
       overrides={overrides}
-      placeholder="Search for company by name or ticker..."
+      placeholder={TICKER_INPUT_PLACERHOLDER}
       size={SIZE.large}
       onInputChange={handleInputChange}
       onChange={handleChange}

@@ -9,7 +9,10 @@ import {
 const Body: Override<unknown> = {
   style: {
     boxShadow: "rgba(0, 0, 0, 0.16) 0px 2px 8px",
-    padding: "0",
+    paddingLeft: "0",
+    paddingRight: "0",
+    paddingTop: "0",
+    paddingBottom: "0",
   },
 };
 
