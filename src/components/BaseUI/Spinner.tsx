@@ -3,7 +3,8 @@ import {
   Block, BlockProps,
 } from "baseui/dist/block";
 import {
-  Spinner as DefaultSpinner, SpinnerProps,
+  SpinnerProps,
+  StyledSpinnerNext,
 } from "baseui/dist/spinner";
 
 type Props = SpinnerProps & {
@@ -17,7 +18,7 @@ const Spinner: React.FC<Props> = ({
 {
   return (
     <Container>
-      <DefaultSpinner {...props} />
+      <StyledSpinnerNext {...props} />
     </Container>
   );
 };

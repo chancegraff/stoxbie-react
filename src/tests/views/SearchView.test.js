@@ -7,12 +7,12 @@ import {
 import { renderWithBoilerplate } from "tests/utils/renderWithBoilerplate";
 import SearchView from "views/SearchView";
 
+const handleSearch = jest.fn();
+
 it(
   "renders search view and types into the input",
   () =>
   {
-    const handleSearch = jest.fn();
-
     renderWithBoilerplate(<SearchView handleSearch={handleSearch} />);
 
     const tickerInput = screen.getByRole("combobox");

@@ -7,15 +7,15 @@ import TradeView from "views/TradeView";
 
 import prices from "./TradeView.prices.json";
 
+const date = new Date("12-31-2003");
+const ticker = "NFLX";
+const route = `/stock/${ticker}/m12d31y2003`;
+const path = "/stock/:ticker/:date";
+
 it(
   "renders trade view using boilerplate wrapper",
   () =>
   {
-    const date = new Date("12-31-2003");
-    const ticker = "NFLX";
-    const route = `/stock/${ticker}/m12d31y2003`;
-    const path = "/stock/:ticker/:date";
-
     renderWithBoilerplate(
       (
         <TradeView

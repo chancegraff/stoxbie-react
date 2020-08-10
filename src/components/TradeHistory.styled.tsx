@@ -1,4 +1,4 @@
-import { styled } from "baseui/dist";
+import { styled, withStyle } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import {
   StyledCell,
@@ -22,7 +22,7 @@ export const Container = styled(
   },
 );
 
-export const FullTable = styled(
+export const FullTable = withStyle(
   StyledTable,
   () =>
   {
@@ -34,7 +34,7 @@ export const FullTable = styled(
   },
 );
 
-export const HeadCell = styled(
+export const HeadCell = withStyle(
   StyledHeadCell,
   ({ $theme }) =>
   {
@@ -42,7 +42,7 @@ export const HeadCell = styled(
   },
 );
 
-export const RightAlignedCell = styled(
+export const RightAlignedCell = withStyle(
   StyledCell,
   ({ $theme }) =>
   {
@@ -56,7 +56,7 @@ export const RightAlignedCell = styled(
   },
 );
 
-export const StickyFooter = styled(
+export const StickyFooter = withStyle(
   StyledRow,
   ({ $theme }) =>
   {

@@ -2,11 +2,11 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { styled } from "baseui/dist";
 import {
   SharedProps,
   StyledTick,
 } from "baseui/dist/slider";
+import { withStyle } from "styletron-react";
 
 import { SLIDER_TICK_COUNT } from "services/Constants";
 
@@ -58,7 +58,7 @@ export const TickBar: React.FC<SharedProps & Props> = ({
   const Tick = useMemo(
     () =>
     {
-      return styled(
+      return withStyle(
         StyledTick,
         ({ $theme }) =>
         {

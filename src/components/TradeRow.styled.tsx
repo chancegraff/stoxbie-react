@@ -1,5 +1,8 @@
 import React from "react";
-import { styled } from "baseui/dist";
+import {
+  styled,
+  withStyle,
+} from "baseui/dist";
 import {
   Button, SIZE,
 } from "baseui/dist/button";
@@ -23,7 +26,7 @@ export const SmallButton = styled(
   },
 );
 
-export const RightAlignedCell = styled(
+export const RightAlignedCell = withStyle(
   StyledCell,
   {
     display: "flex",
