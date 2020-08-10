@@ -68,6 +68,7 @@ const LineChart: React.FC<Props> = ({
     <svg
       height={height}
       width={width}
+      role="linechart"
     >
       <Rect
         height={height}

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { HistoricalPrice } from "iex";
 
 import TradeRow from "./TradeRow";
@@ -17,20 +17,6 @@ const TradeRowsOpened: React.FC<Props> = ({
   handleTrade,
 }) =>
 {
-  const handleExit = useCallback(
-    (
-      sharePrice: number,
-      shareCount: number,
-    ) =>
-    {
-      handleTrade(
-        sharePrice,
-        shareCount,
-      );
-    },
-    [ handleTrade ],
-  );
-
   if (!visibleTrade)
   {
     return null;
@@ -39,7 +25,7 @@ const TradeRowsOpened: React.FC<Props> = ({
   return (
     <TradeRow
       totalShareCount={totalShareCount}
-      handleTrade={handleExit}
+      handleTrade={handleTrade}
       sharePrice={currentPrice.close}
       trade={visibleTrade}
     />

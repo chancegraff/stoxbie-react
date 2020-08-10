@@ -10,17 +10,23 @@ import SearchView from "views/SearchView";
 const handleSearch = jest.fn();
 
 it(
-  "renders search view and types into the input",
+  "renders search view",
   () =>
   {
     renderWithBoilerplate(<SearchView handleSearch={handleSearch} />);
 
-    const tickerInput = screen.getByRole("combobox");
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
+  },
+);
 
-    expect(tickerInput).toBeInTheDocument();
+it(
+  "types into the input",
+  () =>
+  {
+    renderWithBoilerplate(<SearchView handleSearch={handleSearch} />);
 
     fireEvent.change(
-      tickerInput,
+      screen.getByRole("combobox"),
       { target: { value: "netflix" } },
     );
 

@@ -1,6 +1,10 @@
 import React, { useMemo } from "react";
 import { StyledRow } from "baseui/dist/table";
-import numbro from "numbro";
+
+import {
+  formatCurrency,
+  formatPercentage,
+} from "services/Utilities";
 
 import TradeAction from "./TradeAction";
 import {
@@ -27,10 +31,7 @@ const TradeRow: React.FC<Props> = ({
     {
       if (trade.openPrice)
       {
-        const abbreviatedOpen = numbro(trade.openPrice).formatCurrency({
-          average: true,
-          totalLength: 1,
-        });
+        const abbreviatedOpen = formatCurrency(trade.openPrice);
 
         return abbreviatedOpen;
       }
@@ -42,15 +43,18 @@ const TradeRow: React.FC<Props> = ({
     {
       if (trade.closePrice)
       {
-        const abbreviatedClose = numbro(trade.closePrice).formatCurrency({
-          average: true,
-          totalLength: 1,
-        });
+        const abbreviatedClose = formatCurrency(trade.closePrice);
 
         return abbreviatedClose;
       }
 
-      if (handleTrade && sharePrice && totalShareCount)
+      if (
+        handleTrade &&
+        sharePrice && (
+          totalShareCount ||
+          totalShareCount === 0
+        )
+      )
       {
         const closeModifier = (trade.openModifier * -1) as -1 | 1;
 
@@ -79,10 +83,7 @@ const TradeRow: React.FC<Props> = ({
     {
       if (trade.changePercent)
       {
-        const abbreviatedChange = numbro(trade.changePercent).format({
-          average: true,
-          output: "percent",
-        });
+        const abbreviatedChange = formatPercentage(trade.changePercent);
 
         return abbreviatedChange;
       }
@@ -94,10 +95,7 @@ const TradeRow: React.FC<Props> = ({
     {
       if (trade.changeBalance)
       {
-        const abbreviatedBalance = numbro(trade.changeBalance).formatCurrency({
-          average: true,
-          totalLength: 1,
-        });
+        const abbreviatedBalance = formatCurrency(trade.changeBalance);
 
         return abbreviatedBalance;
       }

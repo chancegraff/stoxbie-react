@@ -4,9 +4,14 @@ import {
   StyledHead,
 } from "baseui/dist/table";
 import { HistoricalPrice } from "iex";
-import numbro from "numbro";
 
+import {
+  formatCurrency,
+  formatPercentage,
+} from "services/Utilities";
 import Spinner from "components/BaseUI/Spinner";
+import TradeRowsClosed from "components/TradeRowsClosed";
+import TradeRowsOpened from "components/TradeRowsOpened";
 
 import {
   Container,
@@ -15,8 +20,6 @@ import {
   RightAlignedCell,
   StickyFooter,
 } from "./TradeHistory.styled";
-import TradeRowsClosed from "./TradeRowsClosed";
-import TradeRowsOpened from "./TradeRowsOpened";
 
 type Props = {
   pastTrades: HistoricalTradeFinished[];
@@ -41,10 +44,7 @@ const TradeHistory: React.FC<Props> = ({
     {
       if (pastTrades.length > 0)
       {
-        return numbro(playerLedger.totalChange).format({
-          average: true,
-          output: "percent",
-        });
+        return formatPercentage(playerLedger.totalChange);
       }
     },
     [
@@ -55,10 +55,7 @@ const TradeHistory: React.FC<Props> = ({
   const safeBalance = useMemo(
     () =>
     {
-      return numbro(playerLedger.totalBalance).formatCurrency({
-        average: true,
-        totalLength: 1,
-      });
+      return formatCurrency(playerLedger.totalBalance);
     },
     [ playerLedger ],
   );

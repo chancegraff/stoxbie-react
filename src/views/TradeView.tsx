@@ -5,7 +5,8 @@ import { useStyletron } from "baseui/dist";
 import { Block } from "baseui/dist/block";
 import { FlexGridItem } from "baseui/dist/flex-grid";
 import {
-  closestIndexTo, parseISO,
+  closestIndexTo,
+  parseISO,
 } from "date-fns";
 import { HistoricalPrice } from "iex";
 import useResizeObserver from "use-resize-observer";
@@ -44,9 +45,10 @@ const getPriceIndexes = (
     date,
     priceDates,
   );
-  const endDateIndex = startDateIndex > -1
-    ? startDateIndex - 730
-    : 0;
+  const endDateIndex = Math.max(
+    startDateIndex - 730,
+    0,
+  );
 
   return [
     endDateIndex,
@@ -282,7 +284,7 @@ const TradeView: React.FC<Props> = ({
       shareCount: number,
     ) =>
     {
-      if (ticker && date)
+      if (ticker)
       {
         const nextTrade = { ticker };
         const { ...nextPlayerLedger } = currentLedger;
@@ -314,7 +316,6 @@ const TradeView: React.FC<Props> = ({
     },
     [
       ticker,
-      date,
       currentTrades,
       currentLedger,
       updateCurrentTrades,

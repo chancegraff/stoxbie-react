@@ -7,6 +7,7 @@ import {
   useRef,
 } from "react";
 import { subYears } from "date-fns";
+import numbro from "numbro";
 
 export const copyPropsToChildren = ({
   children,
@@ -77,3 +78,19 @@ export const fiveYearsAgo = subYears(
   today,
   5,
 );
+
+export const formatCurrency = (num: number) =>
+{
+  return numbro(num).formatCurrency({
+    average: true,
+    totalLength: 1,
+  });
+};
+
+export const formatPercentage = (num: number) =>
+{
+  return numbro(num).format({
+    average: true,
+    output: "percent",
+  });
+};
