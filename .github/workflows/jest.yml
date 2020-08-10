@@ -18,9 +18,5 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Jest Annotations & Coverage
-      uses: mattallty/jest-github-action@v1.0.3
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        changes-only: true
+    - name: Run Tests
+      run: npm test
