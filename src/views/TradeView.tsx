@@ -1,18 +1,30 @@
 import React, {
   useCallback, useEffect, useMemo, useState,
 } from "react";
-import { useStyletron } from "baseui/dist";
-import { Block } from "baseui/dist/block";
-import { FlexGridItem } from "baseui/dist/flex-grid";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  Block,
+} from "baseui/dist/block";
+import {
+  FlexGridItem,
+} from "baseui/dist/flex-grid";
 import {
   closestIndexTo,
   parseISO,
 } from "date-fns";
-import { HistoricalPrice } from "iex";
+import {
+  HistoricalPrice,
+} from "iex";
 import useResizeObserver from "use-resize-observer";
 
-import { useCookie } from "services/Cookies";
-import { handleUnloadCreator } from "services/Utilities";
+import {
+  useCookie,
+} from "services/Cookies";
+import {
+  handleUnloadCreator,
+} from "services/Utilities";
 import {
   AspectRatioBox, AspectRatioItem,
 } from "templates/AspectRatio";
@@ -37,10 +49,18 @@ const getPriceIndexes = (
   date: Date,
 ) =>
 {
-  const priceDates = prices.map(({ date: dateString }) =>
-  {
-    return parseISO(dateString);
-  });
+  const priceDates = prices.map(
+    (
+      {
+        date: dateString,
+      },
+    ) =>
+    {
+      return parseISO(
+        dateString,
+      );
+    },
+  );
   const startDateIndex = closestIndexTo(
     date,
     priceDates,
@@ -80,14 +100,24 @@ const setNextPrices = (
   },
 ) =>
 {
-  const nextPriceIndexes = priceIndexes.map((index) =>
-  {
-    return index + 1;
-  });
-  const nextPrices = prices.slice(...nextPriceIndexes);
+  const nextPriceIndexes = priceIndexes.map(
+    (
+      index,
+    ) =>
+    {
+      return index + 1;
+    },
+  );
+  const nextPrices = prices.slice(
+    ...nextPriceIndexes,
+  );
 
-  setPastPrices(nextPrices);
-  setNextPriceIndexes(nextPriceIndexes);
+  setPastPrices(
+    nextPrices,
+  );
+  setNextPriceIndexes(
+    nextPriceIndexes,
+  );
 };
 
 const getOpenedTrade = (
@@ -97,7 +127,9 @@ const getOpenedTrade = (
 ): HistoricalTradeStarted =>
 {
   const openPrice = shareClose;
-  const openCount = Math.abs(shareCount);
+  const openCount = Math.abs(
+    shareCount,
+  );
   const openModifier = (shareCount / openCount) as -1 | 1;
   const openDate = new Date();
   const openBalance = openCount * openPrice;
@@ -120,7 +152,9 @@ const getClosedTrade = (
 ): HistoricalTradeFinished =>
 {
   const closePrice = shareClose;
-  const closeCount = Math.abs(shareCount);
+  const closeCount = Math.abs(
+    shareCount,
+  );
   const closeModifier = (shareCount / closeCount) as -1 | 1;
   const closeDate = new Date();
   const closeBalance = closeCount * shareClose;
@@ -143,22 +177,24 @@ const getClosedTrade = (
   return currentTrade;
 };
 
-const TradeView: React.FC<Props> = ({
-  prices,
-  date,
-  error,
-  ticker,
-}) =>
+const TradeView: React.FC<Props> = (
+  {
+    prices,
+    date,
+    error,
+    ticker,
+  },
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
   const {
     ref,
     width = 1,
     height = 1,
   } = useResizeObserver<HTMLDivElement>();
-
   const [
     pastPrices,
     setPastPrices,
@@ -167,7 +203,6 @@ const TradeView: React.FC<Props> = ({
     nextPriceIndexes,
     setNextPriceIndexes,
   ] = useState<number[]>();
-
   const [
     pastTrades,
     setPastTrades,
@@ -187,36 +222,45 @@ const TradeView: React.FC<Props> = ({
     setPlayerLedger,
   ] = useCookie<HistoricalLedger[]>(
     "playerLedger",
-    [ {
-      totalBalance: 10000,
-      totalChange: 0,
-      totalReturns: 0,
-      totalCount: 0,
-    } ],
+    [
+      {
+        totalBalance: 10000,
+        totalChange: 0,
+        totalReturns: 0,
+        totalCount: 0,
+      },
+    ],
   );
-
   const currentPrice = useMemo(
     () =>
     {
       return pastPrices && pastPrices[pastPrices.length - 1];
     },
-    [ pastPrices ],
+    [
+      pastPrices,
+    ],
   );
   const currentLedger = useMemo(
     () =>
     {
-      const [ nextLedger ] = playerLedger;
+      const [
+        nextLedger,
+      ] = playerLedger;
 
       return nextLedger;
     },
-    [ playerLedger ],
+    [
+      playerLedger,
+    ],
   );
   const visibleTrade = useMemo(
     () =>
     {
       if (currentTrades.length > 0)
       {
-        const [ newestOpenedTrade ] = currentTrades;
+        const [
+          newestOpenedTrade,
+        ] = currentTrades;
         const highestOpenedTrade = currentTrades.reduceRight(
           (
             previousTrade,
@@ -233,21 +277,28 @@ const TradeView: React.FC<Props> = ({
         return highestOpenedTrade;
       }
     },
-    [ currentTrades ],
+    [
+      currentTrades,
+    ],
   );
-
   const updateCurrentTrades = useCallback(
-    (nextTrades: HistoricalTradeStarted[]) =>
+    (
+      nextTrades: HistoricalTradeStarted[],
+    ) =>
     {
       setCurrentTrades(
         nextTrades,
         30,
       );
     },
-    [ setCurrentTrades ],
+    [
+      setCurrentTrades,
+    ],
   );
   const updatePastTrades = useCallback(
-    (nextTrades: HistoricalTradeFinished[]) =>
+    (
+      nextTrades: HistoricalTradeFinished[],
+    ) =>
     {
       setPastTrades(
         [
@@ -263,7 +314,9 @@ const TradeView: React.FC<Props> = ({
     ],
   );
   const updatePlayerLedger = useCallback(
-    (nextLedger: HistoricalLedger) =>
+    (
+      nextLedger: HistoricalLedger,
+    ) =>
     {
       setPlayerLedger(
         [
@@ -278,7 +331,6 @@ const TradeView: React.FC<Props> = ({
       setPlayerLedger,
     ],
   );
-
   const openTrade = useCallback(
     (
       sharePrice: number,
@@ -287,8 +339,12 @@ const TradeView: React.FC<Props> = ({
     {
       if (ticker)
       {
-        const nextTrade = { ticker };
-        const { ...nextPlayerLedger } = currentLedger;
+        const nextTrade = {
+          ticker,
+        };
+        const {
+          ...nextPlayerLedger
+        } = currentLedger;
         const {
           totalBalance: previousTotalBalance,
           totalChange: previousTotalChange,
@@ -305,14 +361,17 @@ const TradeView: React.FC<Props> = ({
         nextPlayerLedger.totalChange = previousTotalChange;
         nextPlayerLedger.totalReturns = previousTotalReturns;
         nextPlayerLedger.totalCount = previousTotalCount + openedTrade.openCount;
-
         const nextCurrentTrades = [
           openedTrade,
           ...currentTrades,
         ];
 
-        updateCurrentTrades(nextCurrentTrades);
-        updatePlayerLedger(nextPlayerLedger);
+        updateCurrentTrades(
+          nextCurrentTrades,
+        );
+        updatePlayerLedger(
+          nextPlayerLedger,
+        );
       }
     },
     [
@@ -331,19 +390,27 @@ const TradeView: React.FC<Props> = ({
     {
       if (currentTrades.length > 0)
       {
-        const { ...nextPlayerLedger } = currentLedger;
-        const [ ...nextCurrentTrades ] = currentTrades;
+        const {
+          ...nextPlayerLedger
+        } = currentLedger;
+        const [
+          ...nextCurrentTrades
+        ] = currentTrades;
         const nextPastTrades: HistoricalTradeFinished[] = [];
-
-        const [ ...sortedCurrentTrades ] = currentTrades.sort((
-          previousTrade,
-          nextTrade,
-        ) =>
-        {
-          return previousTrade.openPrice - nextTrade.openPrice;
-        });
-
-        let remainingOrderShareCount = Math.abs(shareCount);
+        const [
+          ...sortedCurrentTrades
+        ] = currentTrades.sort(
+          (
+            previousTrade,
+            nextTrade,
+          ) =>
+          {
+            return previousTrade.openPrice - nextTrade.openPrice;
+          },
+        );
+        let remainingOrderShareCount = Math.abs(
+          shareCount,
+        );
 
         while (
           remainingOrderShareCount > 0 &&
@@ -355,7 +422,6 @@ const TradeView: React.FC<Props> = ({
             totalReturns: previousTotalReturns,
             totalCount: previousTotalCount,
           } = nextPlayerLedger;
-
           // Fill as much of the order as we can with the lowest-opened trade
           const lowestTrade = sortedCurrentTrades.shift() as HistoricalTradeStarted;
           const countPossible = Math.min(
@@ -367,25 +433,26 @@ const TradeView: React.FC<Props> = ({
             sharePrice,
             countPossible,
           );
-
           // Add closed trade to front of collection
-          nextPastTrades.unshift(closedTrade);
 
+          nextPastTrades.unshift(
+            closedTrade,
+          );
           // Update ledger values and remaining shares in order
           remainingOrderShareCount -= countPossible;
           nextPlayerLedger.totalBalance = previousTotalBalance + (closedTrade.closePrice * closedTrade.closeCount);
           nextPlayerLedger.totalReturns = previousTotalReturns + closedTrade.changeBalance;
           nextPlayerLedger.totalChange = nextPlayerLedger.totalReturns / nextPlayerLedger.totalBalance;
           nextPlayerLedger.totalCount = previousTotalCount - closedTrade.closeCount;
-
           // Remove the closed trade from current trades
-          const lowestTradeIndex = nextCurrentTrades.indexOf(lowestTrade);
+          const lowestTradeIndex = nextCurrentTrades.indexOf(
+            lowestTrade,
+          );
 
           nextCurrentTrades.splice(
             lowestTradeIndex,
             1,
           );
-
           // Check if there are any shares left in the trade we just removed
           const remainingTradeShareCount = closedTrade.openCount - closedTrade.closeCount;
 
@@ -406,11 +473,16 @@ const TradeView: React.FC<Props> = ({
             );
           }
         }
-
         // Update state values
-        updateCurrentTrades(nextCurrentTrades);
-        updatePastTrades(nextPastTrades);
-        updatePlayerLedger(nextPlayerLedger);
+        updateCurrentTrades(
+          nextCurrentTrades,
+        );
+        updatePastTrades(
+          nextPastTrades,
+        );
+        updatePlayerLedger(
+          nextPlayerLedger,
+        );
       }
     },
     [
@@ -421,7 +493,6 @@ const TradeView: React.FC<Props> = ({
       updatePastTrades,
     ],
   );
-
   const handleLoad = useCallback(
     (
       nextPrices?: HistoricalPrice[],
@@ -453,7 +524,9 @@ const TradeView: React.FC<Props> = ({
       shareCount: number,
     ) =>
     {
-      const currentTradeType = shareCount / Math.abs(shareCount);
+      const currentTradeType = shareCount / Math.abs(
+        shareCount,
+      );
       const previousTradeOpposite = visibleTrade && visibleTrade.openModifier * -1;
 
       if (currentTradeType === previousTradeOpposite)
@@ -523,18 +596,18 @@ const TradeView: React.FC<Props> = ({
       date,
     ],
   );
-
   useEffect(
     () =>
     {
-      return handleUnloadCreator([
-        setPastPrices,
-        setNextPriceIndexes,
-      ]);
+      return handleUnloadCreator(
+        [
+          setPastPrices,
+          setNextPriceIndexes,
+        ],
+      );
     },
     [],
   );
-
   if (error)
   {
     return (

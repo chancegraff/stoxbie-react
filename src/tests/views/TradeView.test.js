@@ -5,9 +5,13 @@ import {
   screen,
   within,
 } from "@testing-library/react";
-import { parseISO } from "date-fns";
+import {
+  parseISO,
+} from "date-fns";
 
-import { renderWithBoilerplate } from "tests/utils/renderWithBoilerplate";
+import {
+  renderWithBoilerplate,
+} from "tests/utils/renderWithBoilerplate";
 import {
   DateFormats,
   formatCurrency,
@@ -17,17 +21,23 @@ import TradeView from "views/TradeView";
 
 import prices from "./TradeView.prices.json";
 
-const date = parseISO("2003-12-16");
+const date = parseISO(
+  "2003-12-16",
+);
 const ticker = "NFLX";
 const route = `/stock/${ticker}/m12d16y2003`;
 const path = "/stock/:ticker/:date";
 
 const shareCount = 200;
 const startBalance = 10000;
-const priceIndex = prices.findIndex((price) =>
-{
-  return price.date === "2003-12-16";
-});
+const priceIndex = prices.findIndex(
+  (
+    price,
+  ) =>
+  {
+    return price.date === "2003-12-16";
+  },
+);
 
 it(
   "renders trade view",
@@ -46,28 +56,78 @@ it(
     );
 
     // Breadcrumbs should render
-    expect(screen.getByLabelText("Breadcrumbs navigation")).toBeInTheDocument();
-    expect(screen.getByText(ticker)).toBeInTheDocument();
+    expect(
+      screen.getByLabelText(
+        "Breadcrumbs navigation",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        ticker,
+      ),
+    ).toBeInTheDocument();
 
     // StockChart should render
-    expect(screen.getByRole("linechart")).toBeInTheDocument();
+    expect(
+      screen.getByRole(
+        "linechart",
+      ),
+    ).toBeInTheDocument();
 
     // TimeControl should render
-    expect(screen.getByText("Continue")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Continue",
+      ),
+    ).toBeInTheDocument();
 
     // TradeControl should render
-    expect(screen.getByText("Buy")).toBeInTheDocument();
-    expect(screen.getByText("Sell")).toBeInTheDocument();
-    expect(screen.getByRole("slider")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Buy",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Sell",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole(
+        "slider",
+      ),
+    ).toBeInTheDocument();
 
     // TradeHistory header should render
-    expect(screen.getByText("Open")).toBeInTheDocument();
-    expect(screen.getByText("Close")).toBeInTheDocument();
-    expect(screen.getByText("PL %")).toBeInTheDocument();
-    expect(screen.getByText("PL $")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Open",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Close",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "PL %",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "PL $",
+      ),
+    ).toBeInTheDocument();
 
     // TradeHistory footer should render
-    expect(screen.getByText(formatCurrency(startBalance))).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        formatCurrency(
+          startBalance,
+        ),
+      ),
+    ).toBeInTheDocument();
   },
 );
 
@@ -95,10 +155,18 @@ it(
       DateFormats.Full,
     );
 
-    expect(screen.getByText(`Today is ${currentDate}`)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        `Today is ${currentDate}`,
+      ),
+    ).toBeInTheDocument();
 
     // Click the "continue" button
-    fireEvent.click(screen.getByText("Continue"));
+    fireEvent.click(
+      screen.getByText(
+        "Continue",
+      ),
+    );
 
     // Next date should be on the page
     const nextPrice = prices[priceIndex + 1];
@@ -108,7 +176,11 @@ it(
       DateFormats.Full,
     );
 
-    expect(screen.getByText(`Today is ${nextDate}`)).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        `Today is ${nextDate}`,
+      ),
+    ).toBeInTheDocument();
   },
 );
 
@@ -116,9 +188,15 @@ describe(
   "conducts a simple trade",
   () =>
   {
-    const withinTradeRows = (source) =>
+    const withinTradeRows = (
+      source,
+    ) =>
     {
-      return within(source.getByRole("rowgroup"));
+      return within(
+        source.getByRole(
+          "rowgroup",
+        ),
+      );
     };
 
     const startPrice = prices[priceIndex];
@@ -127,59 +205,127 @@ describe(
     const balanceAfterOpen = startBalance - (startPrice.close * shareCount);
     const balanceAfterClose = balanceAfterOpen + (endPrice.close * shareCount);
 
-    beforeEach(() =>
-    {
-      renderWithBoilerplate(
-        (
-          <TradeView
-            date={date}
-            prices={prices}
-            ticker={ticker}
-          />
-        ),
-        path,
-        route,
-      );
-    });
+    beforeEach(
+      () =>
+      {
+        renderWithBoilerplate(
+          (
+            <TradeView
+              date={date}
+              prices={prices}
+              ticker={ticker}
+            />
+          ),
+          path,
+          route,
+        );
+      },
+    );
 
     it(
       "buys shares",
       () =>
       {
-        expect(within(screen.getByRole("footerRow")).getByText(formatCurrency(startBalance))).toBeInTheDocument();
+        expect(
+          within(
+            screen.getByRole(
+              "footerRow",
+            ),
+          ).getByText(
+            formatCurrency(
+              startBalance,
+            ),
+          ),
+        ).toBeInTheDocument();
 
         // Should change the slider and click buy
         fireEvent.mouseUp(
-          screen.getByTestId("sliderTrack"),
-          { value: [ shareCount ] },
+          screen.getByTestId(
+            "sliderTrack",
+          ),
+          {
+            value: [
+              shareCount,
+            ],
+          },
         );
 
-        expect(screen.getByRole("slider")).toHaveAttribute(
+        expect(
+          screen.getByRole(
+            "slider",
+          ),
+        ).toHaveAttribute(
           "aria-valuenow",
           `${shareCount}`,
         );
 
-        fireEvent.click(screen.getByText("Buy"));
+        fireEvent.click(
+          screen.getByText(
+            "Buy",
+          ),
+        );
 
-        expect(screen.getByRole("slider")).toHaveAttribute(
+        expect(
+          screen.getByRole(
+            "slider",
+          ),
+        ).toHaveAttribute(
           "aria-valuenow",
           "0",
         );
 
         // Total balance should be updated
-        const tomorrowsRows = screen.getAllByRole("row");
+        const tomorrowsRows = screen.getAllByRole(
+          "row",
+        );
         const tomorrowsFooterRow = tomorrowsRows[tomorrowsRows.length - 1];
 
-        expect(within(tomorrowsFooterRow).getByText(formatCurrency(balanceAfterOpen))).toBeInTheDocument();
+        expect(
+          within(
+            tomorrowsFooterRow,
+          ).getByText(
+            formatCurrency(
+              balanceAfterOpen,
+            ),
+          ),
+        ).toBeInTheDocument();
 
         // Table  should be updated
-        const nextTradeRows = withinTradeRows(screen).getAllByRole("row");
-        const [ openRow ] = withinTradeRows(screen).getAllByRole("row");
-        const openCellContent = formatCurrency(startPrice.close);
+        const nextTradeRows = withinTradeRows(
+          screen,
+        ).getAllByRole(
+          "row",
+        );
+        const [
+          openRow,
+        ] = withinTradeRows(
+          screen,
+        ).getAllByRole(
+          "row",
+        );
+        const openCellContent = formatCurrency(
+          startPrice.close,
+        );
 
-        expect(nextTradeRows.length).toBe(1);
-        expect(within(openRow).getByText(openCellContent)).toBeInTheDocument();
-        expect(within(openRow).getByText("Exit")).toBeInTheDocument();
+        expect(
+          nextTradeRows.length,
+        ).toBe(
+          1,
+        );
+        expect(
+          within(
+            openRow,
+          ).getByText(
+            openCellContent,
+          ),
+        ).toBeInTheDocument();
+        expect(
+          within(
+            openRow,
+          ).getByText(
+            "Exit",
+          ),
+        ).toBeInTheDocument();
       },
     );
 
@@ -187,32 +333,78 @@ describe(
       "sells shares",
       () =>
       {
-        fireEvent.click(screen.getByText("Continue"));
-
-        fireEvent.mouseDown(
-          screen.getByTestId("sliderTrack"),
-          { value: [ shareCount ] },
+        fireEvent.click(
+          screen.getByText(
+            "Continue",
+          ),
         );
 
-        fireEvent.click(screen.getByText("Sell"));
+        fireEvent.mouseDown(
+          screen.getByTestId(
+            "sliderTrack",
+          ),
+          {
+            value: [
+              shareCount,
+            ],
+          },
+        );
+
+        fireEvent.click(
+          screen.getByText(
+            "Sell",
+          ),
+        );
 
         // Slider should be reset
-        expect(screen.getByRole("slider")).toHaveAttribute(
+        expect(
+          screen.getByRole(
+            "slider",
+          ),
+        ).toHaveAttribute(
           "aria-valuenow",
           "0",
         );
 
         // Total balance should be updated
-        expect(screen.getByText(formatCurrency(balanceAfterClose))).toBeInTheDocument();
+        expect(
+          screen.getByText(
+            formatCurrency(
+              balanceAfterClose,
+            ),
+          ),
+        ).toBeInTheDocument();
 
         // Table history rows should be updated
-        expect(withinTradeRows(screen).getAllByRole("row").length).toBe(1);
+        expect(
+          withinTradeRows(
+            screen,
+          ).getAllByRole(
+            "row",
+          ).length,
+        ).toBe(
+          1,
+        );
 
         // Current trade row should be created
-        const [ closeRow ] = withinTradeRows(screen).getAllByRole("row");
-        const closeCellContent = formatCurrency(endPrice.close);
+        const [
+          closeRow,
+        ] = withinTradeRows(
+          screen,
+        ).getAllByRole(
+          "row",
+        );
+        const closeCellContent = formatCurrency(
+          endPrice.close,
+        );
 
-        expect(within(closeRow).getByText(closeCellContent)).toBeInTheDocument();
+        expect(
+          within(
+            closeRow,
+          ).getByText(
+            closeCellContent,
+          ),
+        ).toBeInTheDocument();
       },
     );
   },

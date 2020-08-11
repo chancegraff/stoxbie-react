@@ -2,11 +2,17 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import { useStyletron } from "baseui/dist";
-import { HistoricalPrice } from "iex";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import Spinner from "components/BaseUI/Spinner";
-import LineChart, { Label } from "components/VX/LineChart";
+import LineChart, {
+  Label,
+} from "components/VX/LineChart";
 
 type Props = {
   resolution: Resolution;
@@ -14,17 +20,20 @@ type Props = {
   padding?: Padding;
 };
 
-const StockChart: React.FC<Props> = ({
-  prices,
-  resolution,
-  padding = [
-    20,
-    20,
-  ],
-}) =>
+const StockChart: React.FC<Props> = (
+  {
+    prices,
+    resolution,
+    padding = [
+      20,
+      20,
+    ],
+  },
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
   const label: Label = useCallback(
     () =>
@@ -35,7 +44,9 @@ const StockChart: React.FC<Props> = ({
         strokeWidth: 0,
       };
     },
-    [ theme ],
+    [
+      theme,
+    ],
   );
   const responsivePadding: Padding = useMemo(
     () =>

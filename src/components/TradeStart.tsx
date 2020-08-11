@@ -1,10 +1,18 @@
-import React, { useCallback } from "react";
-import { Block } from "baseui/dist/block";
+import React, {
+  useCallback,
+} from "react";
+import {
+  Block,
+} from "baseui/dist/block";
 import {
   SHAPE, SIZE,
 } from "baseui/dist/button";
-import { ButtonGroup } from "baseui/dist/button-group";
-import { Filter } from "baseui/dist/icon";
+import {
+  ButtonGroup,
+} from "baseui/dist/button-group";
+import {
+  Filter,
+} from "baseui/dist/icon";
 
 import {
   DateFormats,
@@ -14,50 +22,78 @@ import {
 } from "services/Utilities";
 import DatePicker from "components/BaseUI/DatePicker";
 
-import { GrowingButton } from "./TradeStart.styled";
+import {
+  GrowingButton,
+} from "./TradeStart.styled";
 
 type Props = {
   handleStart: (date: string) => void;
 };
 
-const TradeStart: React.FC<Props> = ({ handleStart }) =>
+const TradeStart: React.FC<Props> = (
+  {
+    handleStart,
+  },
+) =>
 {
   const handleYearStart = useCallback(
-    (date: string) =>
+    (
+      date: string,
+    ) =>
     {
-      return handleStart(date);
+      return handleStart(
+        date,
+      );
     },
-    [ handleStart ],
+    [
+      handleStart,
+    ],
   );
   const handleOneYearStart = useCallback(
     () =>
     {
-      return handleYearStart(formatDate(
-        oneYearAgo,
-        DateFormats.URL,
-      ));
+      return handleYearStart(
+        formatDate(
+          oneYearAgo,
+          DateFormats.URL,
+        ),
+      );
     },
-    [ handleYearStart ],
+    [
+      handleYearStart,
+    ],
   );
   const handleFiveYearStart = useCallback(
     () =>
     {
-      return handleYearStart(formatDate(
-        fiveYearsAgo,
-        DateFormats.URL,
-      ));
+      return handleYearStart(
+        formatDate(
+          fiveYearsAgo,
+          DateFormats.URL,
+        ),
+      );
     },
-    [ handleYearStart ],
+    [
+      handleYearStart,
+    ],
   );
   const handleCustomYearStart = useCallback(
-    ({ date }) =>
-    {
-      return handleYearStart(formatDate(
+    (
+      {
         date,
-        DateFormats.URL,
-      ));
+      },
+    ) =>
+    {
+      return handleYearStart(
+        formatDate(
+          date,
+          DateFormats.URL,
+        ),
+      );
     },
-    [ handleYearStart ],
+    [
+      handleYearStart,
+    ],
   );
 
   return (

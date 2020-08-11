@@ -9,11 +9,17 @@ import {
   State,
   StyledTrack,
 } from "baseui/dist/slider";
-import { HistoricalPrice } from "iex";
+import {
+  HistoricalPrice,
+} from "iex";
 
-import { usePrevious } from "services/Utilities";
+import {
+  usePrevious,
+} from "services/Utilities";
 
-import { TickBar } from "./TradeSlider.overrides";
+import {
+  TickBar,
+} from "./TradeSlider.overrides";
 
 type Props = {
   currentPrice: HistoricalPrice;
@@ -22,15 +28,21 @@ type Props = {
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const TradeSlider: React.FC<Props> = ({
-  currentPrice,
-  currentBalance,
-  purchaseAmount,
-  setPurchaseAmount,
-}) =>
+const TradeSlider: React.FC<Props> = (
+  {
+    currentPrice,
+    currentBalance,
+    purchaseAmount,
+    setPurchaseAmount,
+  },
+) =>
 {
-  const previousPrice = usePrevious(currentPrice);
-  const previousBalance = usePrevious(currentBalance);
+  const previousPrice = usePrevious(
+    currentPrice,
+  );
+  const previousBalance = usePrevious(
+    currentBalance,
+  );
   const hasPriceChanged = useMemo(
     () =>
     {
@@ -51,11 +63,12 @@ const TradeSlider: React.FC<Props> = ({
       previousBalance,
     ],
   );
-
   const maxPurchasable = useMemo(
     () =>
     {
-      return Math.floor(currentBalance / currentPrice.close);
+      return Math.floor(
+        currentBalance / currentPrice.close,
+      );
     },
     [
       currentPrice,
@@ -63,20 +76,30 @@ const TradeSlider: React.FC<Props> = ({
     ],
   );
   const handleChange = useCallback(
-    (event: State) =>
+    (
+      event: State,
+    ) =>
     {
-      const [ nextPurchaseAmount ] = event.value;
+      const [
+        nextPurchaseAmount,
+      ] = event.value;
 
-      setPurchaseAmount(nextPurchaseAmount);
+      setPurchaseAmount(
+        nextPurchaseAmount,
+      );
     },
-    [ setPurchaseAmount ],
+    [
+      setPurchaseAmount,
+    ],
   );
   const overrides = useMemo(
     () =>
     {
       return {
         TickBar: {
-          component: (props: SharedProps): JSX.Element =>
+          component: (
+            props: SharedProps,
+          ): JSX.Element =>
           {
             return (
               <TickBar
@@ -88,7 +111,9 @@ const TradeSlider: React.FC<Props> = ({
           },
         },
         Track: {
-          component: (props: SharedProps): JSX.Element =>
+          component: (
+            props: SharedProps,
+          ): JSX.Element =>
           {
             return (
               <StyledTrack
@@ -111,7 +136,9 @@ const TradeSlider: React.FC<Props> = ({
     {
       if (hasPriceChanged || hasBalanceChanged)
       {
-        setPurchaseAmount(0);
+        setPurchaseAmount(
+          0,
+        );
       }
     },
     [
@@ -125,7 +152,11 @@ const TradeSlider: React.FC<Props> = ({
     <Slider
       max={maxPurchasable}
       overrides={overrides}
-      value={[ purchaseAmount ]}
+      value={
+        [
+          purchaseAmount,
+        ]
+      }
       onChange={handleChange}
     />
   );

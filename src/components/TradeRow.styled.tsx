@@ -6,10 +6,14 @@ import {
 import {
   Button, SIZE,
 } from "baseui/dist/button";
-import { StyledCell } from "baseui/dist/table";
+import {
+  StyledCell,
+} from "baseui/dist/table";
 
 export const SmallButton = styled(
-  (props) =>
+  (
+    props,
+  ) =>
   {
     return (
       <Button
@@ -18,10 +22,15 @@ export const SmallButton = styled(
       />
     );
   },
-  ({ $theme }) =>
+  (
+    {
+      $theme,
+    },
+  ) =>
   {
     return {
-      ...$theme.typography.font100, height: "20px",
+      ...$theme.typography.font100,
+      height: "20px",
     };
   },
 );

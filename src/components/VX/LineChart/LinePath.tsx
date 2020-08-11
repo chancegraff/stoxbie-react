@@ -1,8 +1,16 @@
 import React from "react";
-import { curveLinear } from "@vx/curve";
-import { LinePath as DefaultLinePath } from "@vx/shape";
-import { useStyletron } from "baseui/dist";
-import { HistoricalPrice } from "iex";
+import {
+  curveLinear,
+} from "@vx/curve";
+import {
+  LinePath as DefaultLinePath,
+} from "@vx/shape";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import {
   ScaleX, ScaleY,
@@ -16,16 +24,19 @@ type Props = {
   ySelector: (price: HistoricalPrice) => number;
 };
 
-const LinePath: React.FC<Props> = ({
-  prices,
-  xScale,
-  yScale,
-  xSelector,
-  ySelector,
-}) =>
+const LinePath: React.FC<Props> = (
+  {
+    prices,
+    xScale,
+    yScale,
+    xSelector,
+    ySelector,
+  },
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   return (
@@ -36,15 +47,27 @@ const LinePath: React.FC<Props> = ({
       stroke={theme.colors.contentPrimary}
       strokeWidth={1}
       x={
-        (datum) =>
+        (
+          datum,
+        ) =>
         {
-          return xScale(xSelector(datum));
+          return xScale(
+            xSelector(
+              datum,
+            ),
+          );
         }
       }
       y={
-        (datum) =>
+        (
+          datum,
+        ) =>
         {
-          return yScale(ySelector(datum));
+          return yScale(
+            ySelector(
+              datum,
+            ),
+          );
         }
       }
     />

@@ -1,5 +1,9 @@
-import { renderWithBaseUI } from "./renderWithBaseUI";
-import { renderWithRouter } from "./renderWithRouter";
+import {
+  renderWithBaseUI,
+} from "./renderWithBaseUI";
+import {
+  renderWithRouter,
+} from "./renderWithRouter";
 
 export const renderWithBoilerplate = (
   ui,
@@ -7,9 +11,11 @@ export const renderWithBoilerplate = (
   route = "/",
 ) =>
 {
-  return renderWithBaseUI(renderWithRouter(
-    ui,
-    path,
-    route,
-  ));
+  return renderWithBaseUI(
+    renderWithRouter(
+      ui,
+      path,
+      route,
+    ),
+  );
 };

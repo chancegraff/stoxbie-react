@@ -1,6 +1,12 @@
-import { styled } from "baseui/dist";
-import { Block } from "baseui/dist/block";
-import { Button } from "baseui/dist/button";
+import {
+  styled,
+} from "baseui/dist";
+import {
+  Block,
+} from "baseui/dist/block";
+import {
+  Button,
+} from "baseui/dist/button";
 
 export const Container = styled(
   Block,
@@ -14,5 +20,7 @@ export const Container = styled(
 
 export const FullButton = styled(
   Button,
-  { width: "100%" },
+  {
+    width: "100%",
+  },
 );

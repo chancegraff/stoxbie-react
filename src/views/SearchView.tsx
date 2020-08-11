@@ -1,10 +1,16 @@
 import React from "react";
-import { useStyletron } from "baseui/dist";
-import { Block } from "baseui/dist/block";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  Block,
+} from "baseui/dist/block";
 import {
   Display2, Label2,
 } from "baseui/dist/typography";
-import { Search } from "iex-cloud";
+import {
+  Search,
+} from "iex-cloud";
 
 import PageContent from "templates/PageContent";
 import TickerInput from "components/TickerInput";
@@ -17,10 +23,13 @@ type Props = {
   ) => void;
 };
 
-const SearchView: React.FC<Props> = (props) =>
+const SearchView: React.FC<Props> = (
+  props,
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   return (

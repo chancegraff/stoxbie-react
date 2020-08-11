@@ -7,20 +7,27 @@ import {
   useRef,
 } from "react";
 import {
-  format, parseISO, subYears, parse,
+  format, parse,
+  parseISO, subYears,
 } from "date-fns";
 import numbro from "numbro";
 
-export const copyPropsToChildren = ({
-  children,
-  ...props
-}: PropsWithChildren<unknown>): React.ReactNode =>
+export const copyPropsToChildren = (
+  {
+    children,
+    ...props
+  }: PropsWithChildren<unknown>,
+): React.ReactNode =>
 {
   return Children.map(
     children,
-    (child) =>
+    (
+      child,
+    ) =>
     {
-      if (isValidElement(child))
+      if (isValidElement(
+        child,
+      ))
       {
         return cloneElement(
           child,
@@ -33,7 +40,9 @@ export const copyPropsToChildren = ({
   );
 };
 
-export const parsePixels = (px: string): number =>
+export const parsePixels = (
+  px: string,
+): number =>
 {
   return parseInt(
     px.replace(
@@ -44,14 +53,22 @@ export const parsePixels = (px: string): number =>
   );
 };
 
-export const handleUnloadCreator = (dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[]) =>
+export const handleUnloadCreator = (
+  dispatchHandlers: React.Dispatch<React.SetStateAction<any | undefined>>[],
+) =>
 {
   return (): void =>
   {
-    return dispatchHandlers.forEach((dispatch) =>
-    {
-      return dispatch(undefined);
-    });
+    return dispatchHandlers.forEach(
+      (
+        dispatch,
+      ) =>
+      {
+        return dispatch(
+          undefined,
+        );
+      },
+    );
   };
 };
 
@@ -61,10 +78,12 @@ export const usePrevious = <P>(
 {
   const ref = useRef<P>();
 
-  useEffect(() =>
-  {
-    ref.current = value;
-  });
+  useEffect(
+    () =>
+    {
+      ref.current = value;
+    },
+  );
 
   return ref.current;
 };
@@ -81,20 +100,32 @@ export const fiveYearsAgo = subYears(
   5,
 );
 
-export const formatCurrency = (num: number) =>
+export const formatCurrency = (
+  num: number,
+) =>
 {
-  return numbro(num).formatCurrency({
-    average: true,
-    totalLength: 1,
-  });
+  return numbro(
+    num,
+  ).formatCurrency(
+    {
+      average: true,
+      totalLength: 1,
+    },
+  );
 };
 
-export const formatPercentage = (num: number) =>
+export const formatPercentage = (
+  num: number,
+) =>
 {
-  return numbro(num).format({
-    average: true,
-    output: "percent",
-  });
+  return numbro(
+    num,
+  ).format(
+    {
+      average: true,
+      output: "percent",
+    },
+  );
 };
 
 export enum DateFormats {
@@ -113,7 +144,9 @@ export const formatDate = (
 {
   return format(
     typeof date === "string"
-      ? parseISO(date)
+      ? parseISO(
+          date,
+        )
       : date,
     dateFormat,
   );

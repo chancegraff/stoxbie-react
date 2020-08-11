@@ -1,21 +1,30 @@
 import React from "react";
-import { useStyletron } from "baseui/dist";
+import {
+  useStyletron,
+} from "baseui/dist";
 import {
   Caption2,
   Display3,
 } from "baseui/dist/typography";
-import { Company } from "iex-cloud";
+import {
+  Company,
+} from "iex-cloud";
 
-import { DetailsSkeleton } from "./StockName.loading";
+import {
+  DetailsSkeleton,
+} from "./StockName.loading";
 
 type Props = {
   company?: Company;
 };
 
-const StockName: React.FC<Props> = (props) =>
+const StockName: React.FC<Props> = (
+  props,
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   if (!props.company)

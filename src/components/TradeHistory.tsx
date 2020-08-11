@@ -1,9 +1,13 @@
-import React, { useMemo } from "react";
+import React, {
+  useMemo,
+} from "react";
 import {
   StyledBody,
   StyledHead,
 } from "baseui/dist/table";
-import { HistoricalPrice } from "iex";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import {
   formatCurrency,
@@ -31,20 +35,24 @@ type Props = {
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
-const TradeHistory: React.FC<Props> = ({
-  pastTrades,
-  playerLedger,
-  visibleTrade,
-  currentPrice,
-  handleTrade,
-}) =>
+const TradeHistory: React.FC<Props> = (
+  {
+    pastTrades,
+    playerLedger,
+    visibleTrade,
+    currentPrice,
+    handleTrade,
+  },
+) =>
 {
   const safeChange = useMemo(
     () =>
     {
       if (pastTrades.length > 0)
       {
-        return formatPercentage(playerLedger.totalChange);
+        return formatPercentage(
+          playerLedger.totalChange,
+        );
       }
     },
     [
@@ -55,9 +63,13 @@ const TradeHistory: React.FC<Props> = ({
   const safeBalance = useMemo(
     () =>
     {
-      return formatCurrency(playerLedger.totalBalance);
+      return formatCurrency(
+        playerLedger.totalBalance,
+      );
     },
-    [ playerLedger ],
+    [
+      playerLedger,
+    ],
   );
 
   if (!currentPrice)

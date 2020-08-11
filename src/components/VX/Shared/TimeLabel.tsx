@@ -1,8 +1,18 @@
-import React, { useMemo } from "react";
-import { TickRendererProps } from "@vx/axis/lib/types";
-import { Text } from "@vx/text";
-import { styled } from "baseui/dist";
-import { StyleObject } from "styletron-react";
+import React, {
+  useMemo,
+} from "react";
+import {
+  TickRendererProps,
+} from "@vx/axis/lib/types";
+import {
+  Text,
+} from "@vx/text";
+import {
+  styled,
+} from "baseui/dist";
+import {
+  StyleObject,
+} from "styletron-react";
 
 import {
   DateFormats,
@@ -11,22 +21,34 @@ import {
 
 type Props = TickRendererProps;
 
-const DesktopTimeLabel: React.FC<Props> = ({
-  formattedValue,
-  ...props
-}) =>
+const DesktopTimeLabel: React.FC<Props> = (
+  {
+    formattedValue,
+    ...props
+  },
+) =>
 {
   const MediaQueriedText = useMemo(
     () =>
     {
       return styled(
         Text,
-        ({ $theme }) =>
+        (
+          {
+            $theme,
+          },
+        ) =>
         {
           return {
-            [$theme.mediaQuery.large]: { display: "unset" },
-            [$theme.mediaQuery.medium]: { display: "none" },
-            [$theme.mediaQuery.small]: { display: "none" },
+            [$theme.mediaQuery.large]: {
+              display: "unset",
+            },
+            [$theme.mediaQuery.medium]: {
+              display: "none",
+            },
+            [$theme.mediaQuery.small]: {
+              display: "none",
+            },
           };
         },
       );
@@ -41,18 +63,24 @@ const DesktopTimeLabel: React.FC<Props> = ({
   );
 };
 
-const MobileTimeLabel: React.FC<Props> = ({
-  formattedValue,
-  ...props
-}) =>
+const MobileTimeLabel: React.FC<Props> = (
+  {
+    formattedValue,
+    ...props
+  },
+) =>
 {
   const formattedValueAsDate = useMemo(
     () =>
     {
       if (formattedValue)
       {
-        const yearPattern = new RegExp(/^[\w]+ '[\d]+$/);
-        const yearMatch = yearPattern.test(formattedValue.toString());
+        const yearPattern = new RegExp(
+          /^[\w]+ '[\d]+$/,
+        );
+        const yearMatch = yearPattern.test(
+          formattedValue.toString(),
+        );
 
         if (yearMatch)
         {
@@ -64,29 +92,43 @@ const MobileTimeLabel: React.FC<Props> = ({
         }
       }
     },
-    [ formattedValue ],
+    [
+      formattedValue,
+    ],
   );
   const MediaQueriedText = useMemo(
     () =>
     {
       return styled(
         Text,
-        ({ $theme }) =>
+        (
+          {
+            $theme,
+          },
+        ) =>
         {
           const mediaQueries: StyleObject = {};
 
-          mediaQueries[$theme.mediaQuery.large] = { display: "none" };
+          mediaQueries[$theme.mediaQuery.large] = {
+            display: "none",
+          };
           if (!formattedValueAsDate)
           {
-            mediaQueries[$theme.mediaQuery.medium] = { display: "unset" };
-            mediaQueries[$theme.mediaQuery.small] = { display: "unset" };
+            mediaQueries[$theme.mediaQuery.medium] = {
+              display: "unset",
+            };
+            mediaQueries[$theme.mediaQuery.small] = {
+              display: "unset",
+            };
           }
 
           return mediaQueries;
         },
       );
     },
-    [ formattedValueAsDate ],
+    [
+      formattedValueAsDate,
+    ],
   );
 
   return (
@@ -96,7 +138,9 @@ const MobileTimeLabel: React.FC<Props> = ({
   );
 };
 
-const TimeLabel: React.FC<Props> = (props) =>
+const TimeLabel: React.FC<Props> = (
+  props,
+) =>
 {
   return (
     <>

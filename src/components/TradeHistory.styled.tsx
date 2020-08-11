@@ -2,7 +2,9 @@ import {
   styled,
   withStyle,
 } from "baseui/dist";
-import { Block } from "baseui/dist/block";
+import {
+  Block,
+} from "baseui/dist/block";
 import {
   StyledCell,
   StyledHeadCell,
@@ -39,29 +41,45 @@ export const FullTable = withStyle(
 
 export const HeadCell = withStyle(
   StyledHeadCell,
-  ({ $theme }) =>
+  (
+    {
+      $theme,
+    },
+  ) =>
   {
-    return { ...$theme.typography.LabelSmall };
+    return {
+      ...$theme.typography.LabelSmall,
+    };
   },
 );
 
 export const RightAlignedCell = withStyle(
   StyledCell,
-  ({ $theme }) =>
+  (
+    {
+      $theme,
+    },
+  ) =>
   {
     return {
       display: "flex",
       justifyContent: "flex-end",
       height: "100%",
       borderRight: `1px solid ${$theme.colors.borderOpaque}`,
-      ":last-of-type": { borderRight: 0 },
+      ":last-of-type": {
+        borderRight: 0,
+      },
     };
   },
 );
 
 export const StickyFooter = withStyle(
   StyledRow,
-  ({ $theme }) =>
+  (
+    {
+      $theme,
+    },
+  ) =>
   {
     return {
       backgroundColor: $theme.colors.backgroundAlt,

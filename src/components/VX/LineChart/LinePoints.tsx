@@ -1,6 +1,10 @@
 import React from "react";
-import { useStyletron } from "baseui/dist";
-import { HistoricalPrice } from "iex";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import {
   ScaleX, ScaleY,
@@ -14,41 +18,58 @@ type Props = {
   ySelector: (price: HistoricalPrice) => number;
 };
 
-const LinePoints: React.FC<Props> = ({
-  prices,
-  xScale,
-  yScale,
-  xSelector,
-  ySelector,
-}) =>
+const LinePoints: React.FC<Props> = (
+  {
+    prices,
+    xScale,
+    yScale,
+    xSelector,
+    ySelector,
+  },
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   return (
     <>
       {
-        prices.map((
-          price,
-          priceIndex,
-        ) =>
-        {
-          return (
-            priceIndex % 20 === 0 && (
-              <circle
-                key={priceIndex}
-                cx={xScale(xSelector(price))}
-                cy={yScale(ySelector(price))}
-                fill={theme.colors.contentPrimary}
-                fillOpacity={0.5}
-                r={2}
-                shapeRendering="geometricPrecision"
-                stroke={theme.colors.contentPrimary}
-              />
-            )
-          );
-        })
+        prices.map(
+          (
+            price,
+            priceIndex,
+          ) =>
+          {
+            return (
+              priceIndex % 20 === 0 && (
+                <circle
+                  key={priceIndex}
+                  cx={
+                    xScale(
+                      xSelector(
+                        price,
+                      ),
+                    )
+                  }
+                  cy={
+                    yScale(
+                      ySelector(
+                        price,
+                      ),
+                    )
+                  }
+                  fill={theme.colors.contentPrimary}
+                  fillOpacity={0.5}
+                  r={2}
+                  shapeRendering="geometricPrecision"
+                  stroke={theme.colors.contentPrimary}
+                />
+              )
+            );
+          },
+        )
       }
     </>
   );

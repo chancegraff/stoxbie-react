@@ -1,5 +1,7 @@
 import React from "react";
-import { Override } from "baseui/dist/overrides";
+import {
+  Override,
+} from "baseui/dist/overrides";
 import {
   Overrides,
   PopoverProps,
@@ -16,12 +18,16 @@ const Body: Override<unknown> = {
   },
 };
 
-const overrides: Overrides = { Body };
+const overrides: Overrides = {
+  Body,
+};
 
-export const StatefulPopover: React.FC<Partial<PopoverProps>> = ({
-  children,
-  ...props
-}) =>
+export const StatefulPopover: React.FC<Partial<PopoverProps>> = (
+  {
+    children,
+    ...props
+  },
+) =>
 {
   return (
     <DefaultStatefulPoover

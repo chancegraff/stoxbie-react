@@ -1,4 +1,6 @@
-import React, { useMemo } from "react";
+import React, {
+  useMemo,
+} from "react";
 import {
   scaleLinear, scaleTime,
 } from "@vx/scale";
@@ -8,7 +10,9 @@ import {
 import {
   ScaleLinear, ScaleTime,
 } from "d3-scale";
-import { HistoricalPrice } from "iex";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import {
   Max, MaxX, MaxY,
@@ -47,16 +51,18 @@ const xScaleCreator = (
     xSelector,
   );
 
-  return scaleTime<number>({
-    domain: [
-      minDate,
-      maxDate,
-    ],
-    rangeRound: [
-      0,
-      xMax,
-    ],
-  });
+  return scaleTime<number>(
+    {
+      domain: [
+        minDate,
+        maxDate,
+      ],
+      rangeRound: [
+        0,
+        xMax,
+      ],
+    },
+  );
 };
 
 const yScaleCreator = (
@@ -70,23 +76,27 @@ const yScaleCreator = (
     ySelector,
   ) ?? 0;
 
-  return scaleLinear<number>({
-    domain: [
-      maxPrice,
-      0,
-    ],
-    rangeRound: [
-      0,
-      yMax,
-    ],
-  });
+  return scaleLinear<number>(
+    {
+      domain: [
+        maxPrice,
+        0,
+      ],
+      rangeRound: [
+        0,
+        yMax,
+      ],
+    },
+  );
 };
 
 const withScale = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
 ): React.FC<P> =>
 {
-  return (props) =>
+  return (
+    props,
+  ) =>
   {
     const select = useMemo(
       () =>
@@ -114,7 +124,9 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
           ySelector,
         };
       },
-      [ props.select ],
+      [
+        props.select,
+      ],
     );
     const maxs = useMemo(
       () =>
@@ -136,38 +148,42 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
           yMax,
         };
       },
-      [ props.max ],
-    );
-    const xScale: ScaleTime<number, number> = useMemo(
-      () =>
-      {
-        return xScaleCreator(
-          props.prices,
-          select.xSelector,
-          maxs.xMax,
-        );
-      },
       [
-        props.prices,
-        select,
-        maxs,
+        props.max,
       ],
     );
-    const yScale: ScaleLinear<number, number> = useMemo(
-      () =>
-      {
-        return yScaleCreator(
-          props.prices,
-          select.ySelector,
-          maxs.yMax,
-        );
-      },
-      [
-        props.prices,
-        select,
-        maxs,
-      ],
-    );
+    const xScale: ScaleTime<number,
+ number> = useMemo(
+   () =>
+   {
+     return xScaleCreator(
+       props.prices,
+       select.xSelector,
+       maxs.xMax,
+     );
+   },
+   [
+     props.prices,
+     select,
+     maxs,
+   ],
+ );
+    const yScale: ScaleLinear<number,
+ number> = useMemo(
+   () =>
+   {
+     return yScaleCreator(
+       props.prices,
+       select.ySelector,
+       maxs.yMax,
+     );
+   },
+   [
+     props.prices,
+     select,
+     maxs,
+   ],
+ );
 
     return (
       <WrappedChart

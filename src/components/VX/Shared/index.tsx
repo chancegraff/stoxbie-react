@@ -1,10 +1,20 @@
 import React from "react";
-import { HistoricalPrice } from "iex";
+import {
+  HistoricalPrice,
+} from "iex";
 
-import { Label } from "components/VX/LineChart";
-import withMax, { Max } from "components/VX/Shared/Max";
-import withScale, { Scale } from "components/VX/Shared/Scale";
-import withSelect, { Select } from "components/VX/Shared/Select";
+import {
+  Label,
+} from "components/VX/LineChart";
+import withMax, {
+  Max,
+} from "components/VX/Shared/Max";
+import withScale, {
+  Scale,
+} from "components/VX/Shared/Scale";
+import withSelect, {
+  Select,
+} from "components/VX/Shared/Select";
 
 type BaseProps = {
   prices: HistoricalPrice[];
@@ -21,9 +31,17 @@ type InjectedProps = {
 
 type Props = BaseProps & InjectedProps;
 
-const withShared = (WrappedChart: React.FC<Props>): React.FC<BaseProps> =>
+const withShared = (
+  WrappedChart: React.FC<Props>,
+): React.FC<BaseProps> =>
 {
-  return withSelect<Props>(withMax<Props>(withScale<Props>(WrappedChart))) as React.FC<
+  return withSelect<Props>(
+    withMax<Props>(
+      withScale<Props>(
+        WrappedChart,
+      ),
+    ),
+  ) as React.FC<
     BaseProps
   >;
 };

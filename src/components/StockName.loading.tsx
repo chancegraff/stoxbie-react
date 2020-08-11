@@ -1,5 +1,7 @@
 import React from "react";
-import { Block } from "baseui/dist/block";
+import {
+  Block,
+} from "baseui/dist/block";
 import {
   OverridesT,
   Skeleton,
@@ -22,7 +24,9 @@ const overrides: OverridesT = {
   },
 };
 
-export const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (props) =>
+export const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (
+  props,
+) =>
 {
   return (
     <Block

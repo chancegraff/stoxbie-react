@@ -1,5 +1,9 @@
-import React, { useMemo } from "react";
-import { StyledRow } from "baseui/dist/table";
+import React, {
+  useMemo,
+} from "react";
+import {
+  StyledRow,
+} from "baseui/dist/table";
 
 import {
   formatCurrency,
@@ -19,35 +23,42 @@ type Props = {
   trade: HistoricalTradeStarted | HistoricalTradeFinished;
 };
 
-const TradeRow: React.FC<Props> = ({
-  totalShareCount,
-  sharePrice,
-  handleTrade,
-  trade,
-}) =>
+const TradeRow: React.FC<Props> = (
+  {
+    totalShareCount,
+    sharePrice,
+    handleTrade,
+    trade,
+  },
+) =>
 {
   const safeOpen = useMemo(
     () =>
     {
       if (trade.openPrice)
       {
-        const abbreviatedOpen = formatCurrency(trade.openPrice);
+        const abbreviatedOpen = formatCurrency(
+          trade.openPrice,
+        );
 
         return abbreviatedOpen;
       }
     },
-    [ trade ],
+    [
+      trade,
+    ],
   );
   const safeClose = useMemo(
     () =>
     {
       if (trade.closePrice)
       {
-        const abbreviatedClose = formatCurrency(trade.closePrice);
+        const abbreviatedClose = formatCurrency(
+          trade.closePrice,
+        );
 
         return abbreviatedClose;
       }
-
       if (
         handleTrade &&
         sharePrice && (
@@ -83,24 +94,32 @@ const TradeRow: React.FC<Props> = ({
     {
       if (trade.changePercent)
       {
-        const abbreviatedChange = formatPercentage(trade.changePercent);
+        const abbreviatedChange = formatPercentage(
+          trade.changePercent,
+        );
 
         return abbreviatedChange;
       }
     },
-    [ trade ],
+    [
+      trade,
+    ],
   );
   const safeBalance = useMemo(
     () =>
     {
       if (trade.changeBalance)
       {
-        const abbreviatedBalance = formatCurrency(trade.changeBalance);
+        const abbreviatedBalance = formatCurrency(
+          trade.changeBalance,
+        );
 
         return abbreviatedBalance;
       }
     },
-    [ trade ],
+    [
+      trade,
+    ],
   );
 
   return (

@@ -1,5 +1,9 @@
-import { withStyle } from "baseui/dist";
-import { StyledTickBar } from "baseui/dist/slider";
+import {
+  withStyle,
+} from "baseui/dist";
+import {
+  StyledTickBar,
+} from "baseui/dist/slider";
 
 export const LeftAlignedTickBar = withStyle(
   StyledTickBar,

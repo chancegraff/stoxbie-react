@@ -22,4 +22,6 @@ global.document.createRange = () =>
 
 delete window.location;
 
-window.location = { reload: jest.fn() };
+window.location = {
+  reload: jest.fn(),
+};

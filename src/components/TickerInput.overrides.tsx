@@ -1,4 +1,6 @@
-import { Override } from "baseui/dist/overrides";
+import {
+  Override,
+} from "baseui/dist/overrides";
 
 export const Dropdown: Override<unknown> = {
   style: {

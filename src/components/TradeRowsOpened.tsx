@@ -1,5 +1,7 @@
 import React from "react";
-import { HistoricalPrice } from "iex";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import TradeRow from "components/TradeRow";
 
@@ -10,12 +12,14 @@ type Props = {
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
-const TradeRowsOpened: React.FC<Props> = ({
-  totalShareCount,
-  visibleTrade,
-  currentPrice,
-  handleTrade,
-}) =>
+const TradeRowsOpened: React.FC<Props> = (
+  {
+    totalShareCount,
+    visibleTrade,
+    currentPrice,
+    handleTrade,
+  },
+) =>
 {
   if (!visibleTrade)
   {

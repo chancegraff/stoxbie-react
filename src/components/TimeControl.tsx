@@ -1,7 +1,15 @@
-import React, { useMemo } from "react";
-import { SIZE } from "baseui/dist/button";
-import { LabelMedium } from "baseui/dist/typography";
-import { HistoricalPrice } from "iex";
+import React, {
+  useMemo,
+} from "react";
+import {
+  SIZE,
+} from "baseui/dist/button";
+import {
+  LabelMedium,
+} from "baseui/dist/typography";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import {
   DateFormats, formatDate,
@@ -17,10 +25,12 @@ type Props = {
   handleContinue: () => void;
 };
 
-const TimeControl: React.FC<Props> = ({
-  handleContinue,
-  currentPrice,
-}) =>
+const TimeControl: React.FC<Props> = (
+  {
+    handleContinue,
+    currentPrice,
+  },
+) =>
 {
   const safeDate = useMemo(
     () =>
@@ -33,7 +43,9 @@ const TimeControl: React.FC<Props> = ({
         );
       }
     },
-    [ currentPrice ],
+    [
+      currentPrice,
+    ],
   );
 
   return (

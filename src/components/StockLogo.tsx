@@ -1,19 +1,32 @@
 import React from "react";
-import { useStyletron } from "baseui/dist";
-import { Avatar } from "baseui/dist/avatar";
-import { Block } from "baseui/dist/block";
-import { Logo } from "iex-cloud";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  Avatar,
+} from "baseui/dist/avatar";
+import {
+  Block,
+} from "baseui/dist/block";
+import {
+  Logo,
+} from "iex-cloud";
 
-import { AvatarSkeleton } from "./StockLogo.loading";
+import {
+  AvatarSkeleton,
+} from "./StockLogo.loading";
 
 type Props = {
   logo?: Logo;
 };
 
-const StockLogo: React.FC<Props> = (props) =>
+const StockLogo: React.FC<Props> = (
+  props,
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   if (!props.logo)

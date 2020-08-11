@@ -1,4 +1,6 @@
-import { useState } from "react";
+import {
+  useState,
+} from "react";
 
 const setItem = <P extends unknown>(
   key: string,
@@ -8,10 +10,14 @@ const setItem = <P extends unknown>(
 {
   const now = new Date();
   const valueAsString = value
-    ? JSON.stringify(value)
+    ? JSON.stringify(
+        value,
+      )
     : undefined;
 
-  now.setTime(now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000));
+  now.setTime(
+    now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000),
+  );
   document.cookie = `${key}=${valueAsString};     expires=${now.toUTCString()}; path=/`;
 };
 
@@ -19,21 +25,27 @@ const getItem = <P extends unknown>(
   itemKey: string,
 ): P =>
 {
-  const allCookies = document.cookie.split("; ");
+  const allCookies = document.cookie.split(
+    "; ",
+  );
   const itemValueAsString = allCookies.reduce(
     (
       total,
       currentCookie,
     ) =>
     {
-      const storedItem = currentCookie.split("=");
+      const storedItem = currentCookie.split(
+        "=",
+      );
       const [
         storedItemKey,
         storedItemValue,
       ] = storedItem;
 
       return itemKey === storedItemKey
-        ? decodeURIComponent(storedItemValue)
+        ? decodeURIComponent(
+            storedItemValue,
+          )
         : total;
     },
     "",
@@ -41,7 +53,9 @@ const getItem = <P extends unknown>(
 
   return itemValueAsString === "" || itemValueAsString === "undefined"
     ? undefined
-    : JSON.parse(itemValueAsString);
+    : JSON.parse(
+      itemValueAsString,
+    );
 };
 
 export const useCookie = <P = undefined>(
@@ -51,18 +65,24 @@ export const useCookie = <P = undefined>(
 {
   const getCookie = (): P =>
   {
-    return getItem<P>(key) || defaultValue;
+    return getItem<P>(
+      key,
+    ) || defaultValue;
   };
   const [
     cookie,
     setCookie,
-  ] = useState(getCookie());
+  ] = useState(
+    getCookie(),
+  );
   const updateCookie = (
     value: P,
     numberOfDays: number,
   ) =>
   {
-    setCookie(value);
+    setCookie(
+      value,
+    );
     setItem(
       key,
       value,

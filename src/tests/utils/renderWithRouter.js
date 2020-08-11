@@ -11,7 +11,13 @@ export const renderWithRouter = (
 ) =>
 {
   return (
-    <MemoryRouter initialEntries={[ route ]}>
+    <MemoryRouter
+      initialEntries={
+        [
+          route,
+        ]
+      }
+    >
       <Route path={path}>
         {ui}
       </Route>

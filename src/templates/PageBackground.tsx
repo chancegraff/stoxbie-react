@@ -1,13 +1,20 @@
 import React from "react";
-import { useStyletron } from "baseui/dist";
-import { Block } from "baseui/dist/block";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  Block,
+} from "baseui/dist/block";
 
 type Props = unknown;
 
-const PageBackground: React.FC<Props> = (props) =>
+const PageBackground: React.FC<Props> = (
+  props,
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   return (
