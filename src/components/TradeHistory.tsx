@@ -80,7 +80,7 @@ const TradeHistory: React.FC<Props> = (
   return (
     <Container alignItems="flex-start">
       <FullTable>
-        <StyledHead>
+        <StyledHead role="headerRow">
           <HeadCell>
             Open
           </HeadCell>

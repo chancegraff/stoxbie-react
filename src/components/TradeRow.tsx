@@ -59,7 +59,7 @@ const TradeRow: React.FC<Props> = (
 
         return abbreviatedClose;
       }
-      if (
+      else if (
         handleTrade &&
         sharePrice && (
           totalShareCount ||

@@ -109,7 +109,8 @@ export const formatCurrency = (
   ).formatCurrency(
     {
       average: true,
-      totalLength: 1,
+      mantissa: 2,
+      optionalMantissa: true,
     },
   );
 };

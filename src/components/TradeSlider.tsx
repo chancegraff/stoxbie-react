@@ -7,7 +7,6 @@ import {
   SharedProps,
   Slider,
   State,
-  StyledTrack,
 } from "baseui/dist/slider";
 import {
   HistoricalPrice,
@@ -92,6 +91,34 @@ const TradeSlider: React.FC<Props> = (
       setPurchaseAmount,
     ],
   );
+  const handleInputChange = useCallback(
+    (
+      event: React.ChangeEvent<HTMLInputElement>,
+    ) =>
+    {
+      const {
+        target: {
+          value,
+        },
+      } = event;
+      const orderCount = parseInt(
+        value,
+        10,
+      );
+      const shareCount = Math.min(
+        orderCount,
+        maxPurchasable,
+      );
+
+      setPurchaseAmount(
+        shareCount,
+      );
+    },
+    [
+      setPurchaseAmount,
+      maxPurchasable,
+    ],
+  );
   const overrides = useMemo(
     () =>
     {
@@ -102,24 +129,19 @@ const TradeSlider: React.FC<Props> = (
           ): JSX.Element =>
           {
             return (
-              <TickBar
-                {...props}
-                maxPurchasable={maxPurchasable}
-                setPurchaseAmount={setPurchaseAmount}
-              />
-            );
-          },
-        },
-        Track: {
-          component: (
-            props: SharedProps,
-          ): JSX.Element =>
-          {
-            return (
-              <StyledTrack
-                {...props}
-                data-testid="sliderTrack"
-              />
+              <>
+                <TickBar
+                  {...props}
+                  maxPurchasable={maxPurchasable}
+                  setPurchaseAmount={setPurchaseAmount}
+                />
+                <input
+                  hidden={true}
+                  value={purchaseAmount}
+                  data-testid="slider"
+                  onChange={handleInputChange}
+                />
+              </>
             );
           },
         },
@@ -128,6 +150,8 @@ const TradeSlider: React.FC<Props> = (
     [
       maxPurchasable,
       setPurchaseAmount,
+      handleInputChange,
+      purchaseAmount,
     ],
   );
 
