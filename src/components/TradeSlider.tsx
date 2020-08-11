@@ -7,6 +7,7 @@ import {
   SharedProps,
   Slider,
   State,
+  StyledTrack,
 } from "baseui/dist/slider";
 import { HistoricalPrice } from "iex";
 
@@ -82,6 +83,17 @@ const TradeSlider: React.FC<Props> = ({
                 {...props}
                 maxPurchasable={maxPurchasable}
                 setPurchaseAmount={setPurchaseAmount}
+              />
+            );
+          },
+        },
+        Track: {
+          component: (props: SharedProps): JSX.Element =>
+          {
+            return (
+              <StyledTrack
+                {...props}
+                data-testid="sliderTrack"
               />
             );
           },

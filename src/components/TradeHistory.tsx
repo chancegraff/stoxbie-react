@@ -91,7 +91,7 @@ const TradeHistory: React.FC<Props> = ({
           />
           <TradeRowsClosed pastTrades={pastTrades} />
         </StyledBody>
-        <StickyFooter>
+        <StickyFooter role="footerRow">
           <RightAlignedCell></RightAlignedCell>
           <RightAlignedCell></RightAlignedCell>
           <RightAlignedCell>

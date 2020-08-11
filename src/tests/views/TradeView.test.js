@@ -87,6 +87,7 @@ it(
       route,
     );
 
+    // Current date should be on the page
     const currentPrice = prices[priceIndex];
     const currentDate = formatParsedDate(
       currentPrice.date,
@@ -96,8 +97,10 @@ it(
 
     expect(screen.getByText(`Today is ${currentDate}`)).toBeInTheDocument();
 
+    // Click the "continue" button
     fireEvent.click(screen.getByText("Continue"));
 
+    // Next date should be on the page
     const nextPrice = prices[priceIndex + 1];
     const nextDate = formatParsedDate(
       nextPrice.date,
@@ -109,46 +112,108 @@ it(
   },
 );
 
-it(
-  "buys and sells shares",
+describe(
+  "conducts a simple trade",
   () =>
   {
+    const withinTradeRows = (source) =>
+    {
+      return within(source.getByRole("rowgroup"));
+    };
+
     const startPrice = prices[priceIndex];
+    const endPrice = prices[priceIndex + 1];
 
-    renderWithBoilerplate(
-      (
-        <TradeView
-          date={date}
-          prices={prices}
-          ticker={ticker}
-        />
-      ),
-      path,
-      route,
+    const balanceAfterOpen = startBalance - (startPrice.close * shareCount);
+    const balanceAfterClose = balanceAfterOpen + (endPrice.close * shareCount);
+
+    beforeEach(() =>
+    {
+      renderWithBoilerplate(
+        (
+          <TradeView
+            date={date}
+            prices={prices}
+            ticker={ticker}
+          />
+        ),
+        path,
+        route,
+      );
+    });
+
+    it(
+      "buys shares",
+      () =>
+      {
+        expect(within(screen.getByRole("footerRow")).getByText(formatCurrency(startBalance))).toBeInTheDocument();
+
+        // Should change the slider and click buy
+        fireEvent.mouseUp(
+          screen.getByTestId("sliderTrack"),
+          { value: [ shareCount ] },
+        );
+
+        expect(screen.getByRole("slider")).toHaveAttribute(
+          "aria-valuenow",
+          `${shareCount}`,
+        );
+
+        fireEvent.click(screen.getByText("Buy"));
+
+        expect(screen.getByRole("slider")).toHaveAttribute(
+          "aria-valuenow",
+          "0",
+        );
+
+        // Total balance should be updated
+        const tomorrowsRows = screen.getAllByRole("row");
+        const tomorrowsFooterRow = tomorrowsRows[tomorrowsRows.length - 1];
+
+        expect(within(tomorrowsFooterRow).getByText(formatCurrency(balanceAfterOpen))).toBeInTheDocument();
+
+        // Table  should be updated
+        const nextTradeRows = withinTradeRows(screen).getAllByRole("row");
+        const [ openRow ] = withinTradeRows(screen).getAllByRole("row");
+        const openCellContent = formatCurrency(startPrice.close);
+
+        expect(nextTradeRows.length).toBe(1);
+        expect(within(openRow).getByText(openCellContent)).toBeInTheDocument();
+        expect(within(openRow).getByText("Exit")).toBeInTheDocument();
+      },
     );
 
-    fireEvent.change(
-      screen.getByRole("slider"),
-      { value: [ shareCount ] },
+    it(
+      "sells shares",
+      () =>
+      {
+        fireEvent.click(screen.getByText("Continue"));
+
+        fireEvent.mouseDown(
+          screen.getByTestId("sliderTrack"),
+          { value: [ shareCount ] },
+        );
+
+        fireEvent.click(screen.getByText("Sell"));
+
+        // Slider should be reset
+        expect(screen.getByRole("slider")).toHaveAttribute(
+          "aria-valuenow",
+          "0",
+        );
+
+        // Total balance should be updated
+        expect(screen.getByText(formatCurrency(balanceAfterClose))).toBeInTheDocument();
+
+        // Table history rows should be updated
+        expect(withinTradeRows(screen).getAllByRole("row").length).toBe(1);
+
+        // Current trade row should be created
+        const [ closeRow ] = withinTradeRows(screen).getAllByRole("row");
+        const closeCellContent = formatCurrency(endPrice.close);
+
+        expect(within(closeRow).getByText(closeCellContent)).toBeInTheDocument();
+      },
     );
-
-    fireEvent.click(screen.getByText("Buy"));
-
-    // Total balance should be updated
-    const balanceCellContent = formatCurrency(startBalance - startPrice.close);
-
-    expect(screen.getByText(balanceCellContent)).toBeInTheDocument();
-
-    // Table history rows should be updated
-    const tradeHistoryRows = within(screen.getByRole("rowgroup")).getAllByRole("row");
-
-    expect(tradeHistoryRows.length).toBe(1);
-
-    // Current trade row should be created
-    const [ openRow ] = tradeHistoryRows;
-    const openCellContent = formatCurrency(startPrice.close);
-
-    expect(within(openRow).getByText(openCellContent)).toBeInTheDocument();
-    expect(within(openRow).getByText("Exit")).toBeInTheDocument();
   },
 );
