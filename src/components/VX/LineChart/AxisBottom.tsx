@@ -2,8 +2,11 @@ import React, { useCallback } from "react";
 import { AxisBottom as DefaultAxisBottom } from "@vx/axis";
 import { TextProps } from "@vx/text/lib/Text";
 import { useStyletron } from "baseui/dist";
-import { format } from "date-fns";
 
+import {
+  DateFormats,
+  formatDate,
+} from "services/Utilities";
 import { ScaleX } from "components/VX/Shared/Scale";
 import TimeLabel from "components/VX/Shared/TimeLabel";
 
@@ -30,13 +33,13 @@ const AxisBottom: React.FC<Props> = ({
     (tick: Date) =>
     {
       return tick.getMonth() % 12 === 0
-        ? format(
+        ? formatDate(
             tick,
-            "MMM ''yy",
+            DateFormats.TickLarge,
           )
-        : format(
+        : formatDate(
           tick,
-          "MMM",
+          DateFormats.TickSmall,
         );
     },
     [],

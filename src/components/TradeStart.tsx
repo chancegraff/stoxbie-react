@@ -5,15 +5,14 @@ import {
 } from "baseui/dist/button";
 import { ButtonGroup } from "baseui/dist/button-group";
 import { Filter } from "baseui/dist/icon";
-import { format } from "date-fns";
-
-import { URL_DATE_FORMAT } from "services/Constants";
-import DatePicker from "components/BaseUI/DatePicker";
 
 import {
+  DateFormats,
   fiveYearsAgo,
+  formatDate,
   oneYearAgo,
-} from "../services/Utilities";
+} from "services/Utilities";
+import DatePicker from "components/BaseUI/DatePicker";
 
 import { GrowingButton } from "./TradeStart.styled";
 
@@ -33,9 +32,9 @@ const TradeStart: React.FC<Props> = ({ handleStart }) =>
   const handleOneYearStart = useCallback(
     () =>
     {
-      return handleYearStart(format(
+      return handleYearStart(formatDate(
         oneYearAgo,
-        URL_DATE_FORMAT,
+        DateFormats.URL,
       ));
     },
     [ handleYearStart ],
@@ -43,9 +42,9 @@ const TradeStart: React.FC<Props> = ({ handleStart }) =>
   const handleFiveYearStart = useCallback(
     () =>
     {
-      return handleYearStart(format(
+      return handleYearStart(formatDate(
         fiveYearsAgo,
-        URL_DATE_FORMAT,
+        DateFormats.URL,
       ));
     },
     [ handleYearStart ],
@@ -53,9 +52,9 @@ const TradeStart: React.FC<Props> = ({ handleStart }) =>
   const handleCustomYearStart = useCallback(
     ({ date }) =>
     {
-      return handleYearStart(format(
+      return handleYearStart(formatDate(
         date,
-        URL_DATE_FORMAT,
+        DateFormats.URL,
       ));
     },
     [ handleYearStart ],

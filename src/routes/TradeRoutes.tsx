@@ -4,7 +4,6 @@ import React, {
 import {
   Route, Switch, useParams, useRouteMatch,
 } from "react-router-dom";
-import { parse } from "date-fns";
 import { HistoricalPrice } from "iex";
 import { historicalPrices } from "iex-cloud";
 
@@ -12,10 +11,13 @@ import {
   DATE_ERROR_MESSAGE,
   FETCH_ERROR_MESSAGE,
   TICKER_ERROR_MESSAGE,
-  URL_DATE_FORMAT,
 } from "services/Constants";
 import ScrollToTop from "services/ScrollToTop";
-import { handleUnloadCreator } from "services/Utilities";
+import {
+  DateFormats,
+  handleUnloadCreator,
+  parseDate,
+} from "services/Utilities";
 import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
 
@@ -42,10 +44,9 @@ const TradeRoute: React.FC = () =>
   const safeDate = useMemo(
     () =>
     {
-      const parsedDate = parse(
+      const parsedDate = parseDate(
         date,
-        URL_DATE_FORMAT,
-        new Date(),
+        DateFormats.URL,
       );
 
       if (parsedDate.getTime())

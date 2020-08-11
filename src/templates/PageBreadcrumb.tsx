@@ -4,12 +4,11 @@ import {
 } from "react-router-dom";
 import { Breadcrumbs } from "baseui/dist/breadcrumbs";
 import { StyledLink } from "baseui/dist/link";
-import {
-  format,
-  parse,
-} from "date-fns";
 
-import { URL_DATE_FORMAT } from "services/Constants";
+import {
+  DateFormats,
+  formatParsedDate,
+} from "services/Utilities";
 
 type Props = unknown;
 
@@ -44,15 +43,10 @@ const TradeBreadcrumb: React.FC = () =>
   const safeDate = useMemo(
     () =>
     {
-      const asDate = parse(
+      return formatParsedDate(
         date,
-        URL_DATE_FORMAT,
-        new Date(),
-      );
-
-      return format(
-        asDate,
-        "MMMM do, y",
+        DateFormats.URL,
+        DateFormats.Full,
       );
     },
     [ date ],

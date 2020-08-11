@@ -6,7 +6,9 @@ import {
   useEffect,
   useRef,
 } from "react";
-import { subYears } from "date-fns";
+import {
+  format, parseISO, subYears, parse,
+} from "date-fns";
 import numbro from "numbro";
 
 export const copyPropsToChildren = ({
@@ -93,4 +95,53 @@ export const formatPercentage = (num: number) =>
     average: true,
     output: "percent",
   });
+};
+
+export enum DateFormats {
+  Full = "MMMM do, y",
+  IEX = "y-MM-dd",
+  URL = "'m'MM'd'dd'y'y",
+  TickLarge = "MMM ''yy",
+  TickSmall = "MMM",
+  TickYear = "y",
+}
+
+export const formatDate = (
+  date: string | Date,
+  dateFormat: DateFormats,
+) =>
+{
+  return format(
+    typeof date === "string"
+      ? parseISO(date)
+      : date,
+    dateFormat,
+  );
+};
+
+export const parseDate = (
+  date: string,
+  dateFormat: DateFormats,
+) =>
+{
+  return parse(
+    date,
+    dateFormat,
+    new Date(),
+  );
+};
+
+export const formatParsedDate = (
+  asString: string,
+  inputFormat: DateFormats,
+  outputFormat: DateFormats,
+) =>
+{
+  return formatDate(
+    parseDate(
+      asString,
+      inputFormat,
+    ),
+    outputFormat,
+  );
 };

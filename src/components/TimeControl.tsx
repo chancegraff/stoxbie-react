@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
 import { SIZE } from "baseui/dist/button";
 import { LabelMedium } from "baseui/dist/typography";
-import {
-  format,
-  parseISO,
-} from "date-fns";
 import { HistoricalPrice } from "iex";
+
+import {
+  DateFormats, formatDate,
+} from "services/Utilities";
 
 import {
   Container,
@@ -27,11 +27,9 @@ const TimeControl: React.FC<Props> = ({
     {
       if (currentPrice)
       {
-        const asDate = parseISO(currentPrice.date);
-
-        return format(
-          asDate,
-          "MMMM do, y",
+        return formatDate(
+          currentPrice.date,
+          DateFormats.Full,
         );
       }
     },

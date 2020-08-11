@@ -2,10 +2,12 @@ import React, { useMemo } from "react";
 import { TickRendererProps } from "@vx/axis/lib/types";
 import { Text } from "@vx/text";
 import { styled } from "baseui/dist";
-import {
-  format, parse,
-} from "date-fns";
 import { StyleObject } from "styletron-react";
+
+import {
+  DateFormats,
+  formatParsedDate,
+} from "services/Utilities";
 
 type Props = TickRendererProps;
 
@@ -54,15 +56,10 @@ const MobileTimeLabel: React.FC<Props> = ({
 
         if (yearMatch)
         {
-          const valueAsDate = parse(
+          return formatParsedDate(
             formattedValue.toString(),
-            "MMM ''yy",
-            new Date(),
-          );
-
-          return format(
-            valueAsDate,
-            "y",
+            DateFormats.TickLarge,
+            DateFormats.TickYear,
           );
         }
       }

@@ -5,12 +5,14 @@ import {
   screen,
   within,
 } from "@testing-library/react";
-import {
-  format, parseISO,
-} from "date-fns";
+import { parseISO } from "date-fns";
 
 import { renderWithBoilerplate } from "tests/utils/renderWithBoilerplate";
-import { formatCurrency } from "services/Utilities";
+import {
+  DateFormats,
+  formatCurrency,
+  formatParsedDate,
+} from "services/Utilities";
 import TradeView from "views/TradeView";
 
 import prices from "./TradeView.prices.json";
@@ -73,13 +75,6 @@ it(
   "continues forward in time",
   () =>
   {
-    const nextPrice = prices[priceIndex + 1];
-    const nextDate = parseISO(nextPrice.date);
-    const dateString = format(
-      nextDate,
-      "MMMM do, y",
-    );
-
     renderWithBoilerplate(
       (
         <TradeView
@@ -92,9 +87,25 @@ it(
       route,
     );
 
+    const currentPrice = prices[priceIndex];
+    const currentDate = formatParsedDate(
+      currentPrice.date,
+      DateFormats.IEX,
+      DateFormats.Full,
+    );
+
+    expect(screen.getByText(`Today is ${currentDate}`)).toBeInTheDocument();
+
     fireEvent.click(screen.getByText("Continue"));
 
-    expect(screen.getByText(dateString)).toBeInTheDocument();
+    const nextPrice = prices[priceIndex + 1];
+    const nextDate = formatParsedDate(
+      nextPrice.date,
+      DateFormats.IEX,
+      DateFormats.Full,
+    );
+
+    expect(screen.getByText(`Today is ${nextDate}`)).toBeInTheDocument();
   },
 );
 
