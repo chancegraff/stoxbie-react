@@ -23,11 +23,27 @@ import TradeView from "views/TradeView";
 import {
   balanceShouldChange,
   changePercentShouldChange,
+  componentShouldRender,
   sliderShouldChange,
   tradeRowShouldHaveClosePrice,
   tradeRowShouldHaveExitButton,
   tradeRowsShouldHaveLength,
 } from "./TradeView.assertions";
+import {
+  BreadcrumbsContainer,
+  BreadcrumbsTicker,
+  BuyButton,
+  ContinueButton,
+  LineChart,
+  SellButton,
+  TableFooterDollarBalance,
+  TableHeaderChangePercent,
+  TableHeaderClose,
+  TableHeaderDollarBalance,
+  TableHeaderOpen,
+  TimeControlDate,
+  TradeSlider,
+} from "./TradeView.components";
 import {
   changeSlider,
   clickBuy,
@@ -77,79 +93,59 @@ it(
   {
     render();
 
-    // Breadcrumbs should render
-    expect(
-      screen.getByLabelText(
-        "Breadcrumbs navigation",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
+    componentShouldRender(
+      BreadcrumbsContainer(),
+    );
+
+    componentShouldRender(
+      BreadcrumbsTicker(
         ticker,
       ),
-    ).toBeInTheDocument();
+    );
 
-    // StockChart should render
-    expect(
-      screen.getByRole(
-        "linechart",
-      ),
-    ).toBeInTheDocument();
+    componentShouldRender(
+      LineChart(),
+    );
 
-    // TimeControl should render
-    expect(
-      screen.getByText(
-        "Continue",
-      ),
-    ).toBeInTheDocument();
+    componentShouldRender(
+      ContinueButton(),
+    );
 
-    // TradeControl should render
-    expect(
-      screen.getByText(
-        "Buy",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Sell",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole(
-        "slider",
-      ),
-    ).toBeInTheDocument();
+    componentShouldRender(
+      TradeSlider(),
+    );
 
-    // TradeHistory header should render
-    expect(
-      screen.getByText(
-        "Open",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Close",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "PL %",
-      ),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "PL $",
-      ),
-    ).toBeInTheDocument();
+    componentShouldRender(
+      BuyButton(),
+    );
 
-    // TradeHistory footer should render
-    expect(
-      screen.getByText(
+    componentShouldRender(
+      SellButton(),
+    );
+
+    componentShouldRender(
+      TableHeaderOpen(),
+    );
+
+    componentShouldRender(
+      TableHeaderClose(),
+    );
+
+    componentShouldRender(
+      TableHeaderChangePercent(),
+    );
+
+    componentShouldRender(
+      TableHeaderDollarBalance(),
+    );
+
+    componentShouldRender(
+      TableFooterDollarBalance(
         formatCurrency(
           ledgerBalance,
         ),
       ),
-    ).toBeInTheDocument();
+    );
   },
 );
 
@@ -159,36 +155,29 @@ it(
   {
     render();
 
-    // Current date should be on the page
-    const currentDate = formatParsedDate(
-      startPrice.date,
-      DateFormats.IEX,
-      DateFormats.Full,
+    componentShouldRender(
+      TimeControlDate(
+        formatParsedDate(
+          startPrice.date,
+          DateFormats.IEX,
+          DateFormats.Full,
+        ),
+      ),
     );
 
-    expect(
-      screen.getByText(
-        `Today is ${currentDate}`,
-      ),
-    ).toBeInTheDocument();
-
-    // Click the "continue" button
     clickContinue(
       screen,
     );
 
-    // Next date should be on the page
-    const nextDate = formatParsedDate(
-      endPrice.date,
-      DateFormats.IEX,
-      DateFormats.Full,
-    );
-
-    expect(
-      screen.getByText(
-        `Today is ${nextDate}`,
+    componentShouldRender(
+      TimeControlDate(
+        formatParsedDate(
+          endPrice.date,
+          DateFormats.IEX,
+          DateFormats.Full,
+        ),
       ),
-    ).toBeInTheDocument();
+    );
   },
 );
 
@@ -200,38 +189,27 @@ it(
 
     render();
 
-    // Slider value should be 0
     await waitFor(
       () =>
       {
-        return expect(
-          screen.getByRole(
-            "slider",
-          ),
-        ).toHaveAttribute(
-          "aria-valuenow",
-          "0",
+        return sliderShouldChange(
+          screen,
+          0,
         );
       },
     );
 
-    // Change the hidden input value
     changeSlider(
       screen,
       shareCount,
     );
 
-    // Slider value should be updated
     await waitFor(
       () =>
       {
-        return expect(
-          screen.getByRole(
-            "slider",
-          ),
-        ).toHaveAttribute(
-          "aria-valuenow",
-          `${shareCount}`,
+        return sliderShouldChange(
+          screen,
+          shareCount,
         );
       },
     );

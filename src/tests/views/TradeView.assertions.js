@@ -2,6 +2,15 @@ import {
   within,
 } from "@testing-library/react";
 
+export const componentShouldRender = (
+  component,
+) =>
+{
+  return expect(
+    component,
+  ).toBeInTheDocument();
+};
+
 export const sliderShouldChange = (
   source,
   count,
