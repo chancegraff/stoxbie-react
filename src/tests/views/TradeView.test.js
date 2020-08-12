@@ -56,21 +56,26 @@ const priceIndex = prices.findIndex(
 const startPrice = prices[priceIndex];
 const endPrice = prices[priceIndex + 1];
 
+const render = () =>
+{
+  return renderWithBoilerplate(
+    (
+      <TradeView
+        date={date}
+        prices={prices}
+        ticker={ticker}
+      />
+    ),
+    path,
+    route,
+  );
+};
+
 it(
   "renders trade view",
   () =>
   {
-    renderWithBoilerplate(
-      (
-        <TradeView
-          date={date}
-          prices={prices}
-          ticker={ticker}
-        />
-      ),
-      path,
-      route,
-    );
+    render();
 
     // Breadcrumbs should render
     expect(
@@ -152,17 +157,7 @@ it(
   "continues forward in time",
   () =>
   {
-    renderWithBoilerplate(
-      (
-        <TradeView
-          date={date}
-          prices={prices}
-          ticker={ticker}
-        />
-      ),
-      path,
-      route,
-    );
+    render();
 
     // Current date should be on the page
     const currentDate = formatParsedDate(
@@ -203,17 +198,7 @@ it(
   {
     const shareCount = 200;
 
-    renderWithBoilerplate(
-      (
-        <TradeView
-          date={date}
-          prices={prices}
-          ticker={ticker}
-        />
-      ),
-      path,
-      route,
-    );
+    render();
 
     // Slider value should be 0
     await waitFor(
@@ -277,17 +262,7 @@ describe(
     beforeEach(
       () =>
       {
-        renderWithBoilerplate(
-          (
-            <TradeView
-              date={date}
-              prices={prices}
-              ticker={ticker}
-            />
-          ),
-          path,
-          route,
-        );
+        render();
       },
     );
 
