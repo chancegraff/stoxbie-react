@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  fireEvent,
   screen,
   waitFor,
-  within,
 } from "@testing-library/react";
 import {
   parseISO,
@@ -22,7 +20,21 @@ import {
 } from "services/Utilities";
 import TradeView from "views/TradeView";
 
-import prices from "./TradeView.prices.json";
+import {
+  balanceShouldChange,
+  changePercentShouldChange,
+  sliderShouldChange,
+  tradeRowShouldHaveClosePrice,
+  tradeRowShouldHaveExitButton,
+  tradeRowsShouldHaveLength,
+} from "./TradeView.assertions";
+import {
+  changeSlider,
+  clickBuy,
+  clickContinue,
+  clickSell,
+} from "./TradeView.events";
+import prices from "./TradeView.prices";
 
 const date = parseISO(
   "2003-12-16",
@@ -40,156 +52,9 @@ const priceIndex = prices.findIndex(
     return price.date === "2003-12-16";
   },
 );
+
 const startPrice = prices[priceIndex];
 const endPrice = prices[priceIndex + 1];
-
-const changeSlider = (
-  source,
-  value,
-) =>
-{
-  fireEvent.change(
-    source.getByTestId(
-      "sliderInput",
-      {
-        hidden: true,
-      },
-    ),
-    {
-      target: {
-        value,
-      },
-    },
-  );
-};
-
-const clickContinue = (
-  source,
-) =>
-{
-  fireEvent.click(
-    source.getByText(
-      "Continue",
-    ),
-  );
-};
-
-const clickBuy = (
-  source,
-) =>
-{
-  fireEvent.click(
-    source.getByText(
-      "Buy",
-    ),
-  );
-};
-
-const clickSell = (
-  source,
-) =>
-{
-  fireEvent.click(
-    source.getByText(
-      "Sell",
-    ),
-  );
-};
-
-const getTradeRows = (
-  source,
-) =>
-{
-  return source.getAllByRole(
-    "row",
-  );
-};
-
-const sliderShouldChange = (
-  source,
-  count,
-) =>
-{
-  return expect(
-    source.getByRole(
-      "slider",
-    ),
-  ).toHaveAttribute(
-    "aria-valuenow",
-    `${count}`,
-  );
-};
-
-const balanceShouldChange = (
-  source,
-  balance,
-) =>
-{
-  return expect(
-    within(
-      source.getByRole(
-        "footerRow",
-      ),
-    ).getByText(
-      balance,
-    ),
-  ).toBeInTheDocument();
-};
-
-const changePercentShouldChange = (
-  source,
-  changePercent,
-) =>
-{
-  return expect(
-    within(
-      source.getByRole(
-        "footerRow",
-      ),
-    ).getByText(
-      changePercent,
-    ),
-  ).toBeInTheDocument();
-};
-
-const tradeRowsShouldHaveLength = (
-  tradeRows,
-  length,
-) =>
-{
-  return expect(
-    tradeRows,
-  ).toHaveLength(
-    length,
-  );
-};
-
-const tradeRowShouldHaveClosePrice = (
-  openedTrade,
-  closePrice,
-) =>
-{
-  return expect(
-    within(
-      openedTrade,
-    ).getByText(
-      closePrice,
-    ),
-  ).toBeInTheDocument();
-};
-
-const tradeRowShouldHaveExitButton = (
-  openedTrade,
-) =>
-{
-  return expect(
-    within(
-      openedTrade,
-    ).getByText(
-      "Exit",
-    ),
-  ).toBeInTheDocument();
-};
 
 it(
   "renders trade view",
@@ -464,8 +329,8 @@ describe(
           LedgerBalanceAfterOpen,
         );
 
-        const tradeRows = getTradeRows(
-          screen,
+        const tradeRows = screen.getAllByRole(
+          "row",
         );
 
         tradeRowsShouldHaveLength(
@@ -482,7 +347,6 @@ describe(
           StartPriceClose,
         );
 
-        // Row should have exit button
         tradeRowShouldHaveExitButton(
           openedTrade,
         );
@@ -516,8 +380,8 @@ describe(
           screen,
         );
 
-        const tradeRows = getTradeRows(
-          screen,
+        const tradeRows = screen.getAllByRole(
+          "row",
         );
 
         tradeRowsShouldHaveLength(
