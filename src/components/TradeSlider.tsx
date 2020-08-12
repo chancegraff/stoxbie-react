@@ -138,7 +138,7 @@ const TradeSlider: React.FC<Props> = (
                 <input
                   hidden={true}
                   value={purchaseAmount}
-                  data-testid="slider"
+                  data-testid="sliderInput"
                   onChange={handleInputChange}
                 />
               </>

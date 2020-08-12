@@ -422,6 +422,7 @@ const TradeView: React.FC<Props> = (
             totalReturns: previousTotalReturns,
             totalCount: previousTotalCount,
           } = nextPlayerLedger;
+
           // Fill as much of the order as we can with the lowest-opened trade
           const lowestTrade = sortedCurrentTrades.shift() as HistoricalTradeStarted;
           const countPossible = Math.min(
@@ -433,17 +434,19 @@ const TradeView: React.FC<Props> = (
             sharePrice,
             countPossible,
           );
-          // Add closed trade to front of collection
 
+          // Add closed trade to front of collection
           nextPastTrades.unshift(
             closedTrade,
           );
+
           // Update ledger values and remaining shares in order
           remainingOrderShareCount -= countPossible;
           nextPlayerLedger.totalBalance = previousTotalBalance + (closedTrade.closePrice * closedTrade.closeCount);
           nextPlayerLedger.totalReturns = previousTotalReturns + closedTrade.changeBalance;
           nextPlayerLedger.totalChange = nextPlayerLedger.totalReturns / nextPlayerLedger.totalBalance;
           nextPlayerLedger.totalCount = previousTotalCount - closedTrade.closeCount;
+
           // Remove the closed trade from current trades
           const lowestTradeIndex = nextCurrentTrades.indexOf(
             lowestTrade,
@@ -453,6 +456,7 @@ const TradeView: React.FC<Props> = (
             lowestTradeIndex,
             1,
           );
+
           // Check if there are any shares left in the trade we just removed
           const remainingTradeShareCount = closedTrade.openCount - closedTrade.closeCount;
 
@@ -473,6 +477,7 @@ const TradeView: React.FC<Props> = (
             );
           }
         }
+
         // Update state values
         updateCurrentTrades(
           nextCurrentTrades,

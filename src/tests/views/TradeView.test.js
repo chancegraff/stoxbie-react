@@ -1,8 +1,6 @@
-
 import React from "react";
 import {
   fireEvent,
-  prettyDOM,
   screen,
   waitFor,
   within,
@@ -11,6 +9,9 @@ import {
   parseISO,
 } from "date-fns";
 
+import {
+  calculateClosedTrade,
+} from "tests/utils/calculateTrades";
 import {
   renderWithBoilerplate,
 } from "tests/utils/renderWithBoilerplate";
@@ -30,8 +31,7 @@ const ticker = "NFLX";
 const route = `/stock/${ticker}/m12d16y2003`;
 const path = "/stock/:ticker/:date";
 
-const shareCount = 200;
-const startBalance = 10000;
+const ledgerBalance = 10000;
 const priceIndex = prices.findIndex(
   (
     price,
@@ -40,6 +40,111 @@ const priceIndex = prices.findIndex(
     return price.date === "2003-12-16";
   },
 );
+
+const changeSlider = (
+  source,
+  value,
+) =>
+{
+  // Change the slider value
+  fireEvent.change(
+    source.getByTestId(
+      "sliderInput",
+      {
+        hidden: true,
+      },
+    ),
+    {
+      target: {
+        value,
+      },
+    },
+  );
+
+  // Wait for slider to update
+  return waitFor(
+    () =>
+    {
+      return expect(
+        source.getByRole(
+          "slider",
+        ),
+      ).toHaveAttribute(
+        "aria-valuenow",
+        `${value}`,
+      );
+    },
+  );
+};
+
+const clickBuy = (
+  source,
+) =>
+{
+  // Buy the shares
+  fireEvent.click(
+    source.getByText(
+      "Buy",
+    ),
+  );
+
+  // Wait for slider to update
+  return waitFor(
+    () =>
+    {
+      return expect(
+        source.getByRole(
+          "slider",
+        ),
+      ).toHaveAttribute(
+        "aria-valuenow",
+        "0",
+      );
+    },
+  );
+};
+
+const checkBalance = (
+  source,
+  balance,
+) =>
+{
+  // Total balance should be updated
+  return waitFor(
+    () =>
+    {
+      return expect(
+        within(
+          source.getByRole(
+            "footerRow",
+          ),
+        ).getByText(
+          balance,
+        ),
+      ).toBeInTheDocument();
+    },
+  );
+};
+
+const getTrades = (
+  source,
+  length,
+) =>
+{
+  // Get all trade rows
+  const trades = source.getAllByRole(
+    "row",
+  );
+
+  // Table should have one trade row
+  expect(
+    trades.length,
+  ).toBe(
+    length,
+  );
+
+  return trades;
+};
 
 it(
   "renders trade view",
@@ -126,7 +231,7 @@ it(
     expect(
       screen.getByText(
         formatCurrency(
-          startBalance,
+          ledgerBalance,
         ),
       ),
     ).toBeInTheDocument();
@@ -186,28 +291,77 @@ it(
   },
 );
 
+it(
+  "changes share slider",
+  async () =>
+  {
+    const shareCount = 200;
+
+    renderWithBoilerplate(
+      (
+        <TradeView
+          date={date}
+          prices={prices}
+          ticker={ticker}
+        />
+      ),
+      path,
+      route,
+    );
+
+    // Change the hidden input value
+    fireEvent.change(
+      screen.getByTestId(
+        "sliderInput",
+        {
+          hidden: true,
+        },
+      ),
+      {
+        target: {
+          value: shareCount,
+        },
+      },
+    );
+
+    // Slider value should be updated
+    await waitFor(
+      () =>
+      {
+        return expect(
+          screen.getByRole(
+            "slider",
+          ),
+        ).toHaveAttribute(
+          "aria-valuenow",
+          `${shareCount}`,
+        );
+      },
+    );
+  },
+);
+
 describe(
   "conducts a simple trade",
   () =>
   {
+    const shareCount = 200;
     const startPrice = prices[priceIndex];
     const endPrice = prices[priceIndex + 1];
 
-    const formattedStartPriceClose = formatCurrency(
-      startPrice.close,
-    );
-    const formattedEndPriceClose = formatCurrency(
-      endPrice.close,
-    );
-
-    const balanceAfterOpen = startBalance - (startPrice.close * shareCount);
-    const balanceAfterClose = balanceAfterOpen + (endPrice.close * shareCount);
-
-    const formattedBalanceAfterOpen = formatCurrency(
-      balanceAfterOpen,
-    );
-    const formattedBalanceAfterClose = formatCurrency(
-      balanceAfterClose,
+    const {
+      StartPriceClose,
+      EndPriceClose,
+      LedgerBalanceAfterOpen,
+      LedgerBalanceAfterClose,
+      LedgerChangeAfterClose,
+    } = calculateClosedTrade(
+      ledgerBalance,
+      shareCount,
+      {
+        startPrice,
+        endPrice,
+      },
     );
 
     beforeEach(
@@ -231,10 +385,62 @@ describe(
       "buys shares",
       async () =>
       {
+        await changeSlider(
+          screen,
+          shareCount,
+        );
+
+        await clickBuy(
+          screen,
+        );
+
+        await checkBalance(
+          screen,
+          LedgerBalanceAfterOpen,
+        );
+
+        const [
+          openedTrade,
+        ] = await getTrades(
+          screen,
+          1,
+        );
+
+        // Row should have open price
+        expect(
+          within(
+            openedTrade,
+          ).getByText(
+            StartPriceClose,
+          ),
+        ).toBeInTheDocument();
+
+        // Row should have exit button
+        expect(
+          within(
+            openedTrade,
+          ).getByText(
+            "Exit",
+          ),
+        ).toBeInTheDocument();
+      },
+    );
+
+    it(
+      "sells shares",
+      async () =>
+      {
+        // Continue to the next day
+        fireEvent.click(
+          screen.getByText(
+            "Continue",
+          ),
+        );
+
         // Change the slider value
         fireEvent.change(
           screen.getByTestId(
-            "slider",
+            "sliderInput",
             {
               hidden: true,
             },
@@ -246,7 +452,7 @@ describe(
           },
         );
 
-        // Share count should be updated
+        // Wait for slider to update
         await waitFor(
           () =>
           {
@@ -261,27 +467,28 @@ describe(
           },
         );
 
-        // Buy the shares
+        // Sell the shares
         fireEvent.click(
           screen.getByText(
-            "Buy",
+            "Sell",
           ),
         );
 
-        // Share count should be reset
-        await waitFor(
-          () =>
-          {
-            return expect(
-              screen.getByRole(
-                "slider",
-              ),
-            ).toHaveAttribute(
-              "aria-valuenow",
-              "0",
-            );
-          },
+        // Get close trade row
+        const [
+          closedTrade,
+        ] = screen.getAllByRole(
+          "row",
         );
+
+        // Row should have close price
+        expect(
+          within(
+            closedTrade,
+          ).getByText(
+            EndPriceClose,
+          ),
+        ).toBeInTheDocument();
 
         // Total balance should be updated
         expect(
@@ -290,144 +497,21 @@ describe(
               "footerRow",
             ),
           ).getByText(
-            formattedBalanceAfterOpen,
+            LedgerBalanceAfterClose,
           ),
         ).toBeInTheDocument();
 
-        // Get all trade rows
-        const trades = screen.getAllByRole(
-          "row",
-        );
-
-        // Table should have one trade row
-        expect(
-          trades.length,
-        ).toBe(
-          1,
-        );
-
-        // Get open trade row
-        const [
-          openTrade,
-        ] = trades;
-
-        // Row should have open price
+        // Total change should be updated
         expect(
           within(
-            openTrade,
+            screen.getByRole(
+              "footerRow",
+            ),
           ).getByText(
-            formattedStartPriceClose,
-          ),
-        ).toBeInTheDocument();
-
-        // Row should have exit button
-        expect(
-          within(
-            openTrade,
-          ).getByText(
-            "Exit",
+            LedgerChangeAfterClose,
           ),
         ).toBeInTheDocument();
       },
     );
-
-    // it(
-    //   "sells shares",
-    //   () =>
-    //   {
-    //     // Continue to next day
-    //     fireEvent.click(
-    //       screen.getByText(
-    //         "Continue",
-    //       ),
-    //     );
-
-    //     // Change the slider value
-    //     fireEvent.change(
-    //       screen.getByTestId(
-    //         "slider",
-    //         {
-    //           hidden: true,
-    //         },
-    //       ),
-    //       {
-    //         value: [
-    //           shareCount,
-    //         ],
-    //       },
-    //     );
-
-    //     // Share count should be updated
-    //     expect(
-    //       screen.getByTestId(
-    //         "slider",
-    //         {
-    //           hidden: true,
-    //         },
-    //       ),
-    //     ).toHaveValue(
-    //       `${shareCount}`,
-    //     );
-
-    //     // Sell the shares
-    //     fireEvent.click(
-    //       screen.getByText(
-    //         "Sell",
-    //       ),
-    //     );
-
-    //     // Share count should be reset
-    //     expect(
-    //       screen.getByTestId(
-    //         "slider",
-    //         {
-    //           hidden: true,
-    //         },
-    //       ),
-    //     ).toHaveValue(
-    //       `${shareCount}`,
-    //     );
-
-    //     // Total balance should be updated
-    //     expect(
-    //       screen.getByText(
-    //         formatCurrency(
-    //           balanceAfterClose,
-    //         ),
-    //       ),
-    //     ).toBeInTheDocument();
-
-    //     // Table history rows should be updated
-    //     expect(
-    //       withinTradeRows(
-    //         screen,
-    //       ).getAllByRole(
-    //         "row",
-    //       ).length,
-    //     ).toBe(
-    //       1,
-    //     );
-
-    //     // Current trade row should be created
-    //     const [
-    //       closeRow,
-    //     ] = withinTradeRows(
-    //       screen,
-    //     ).getAllByRole(
-    //       "row",
-    //     );
-    //     const closeCellContent = formatCurrency(
-    //       endPrice.close,
-    //     );
-
-    //     expect(
-    //       within(
-    //         closeRow,
-    //       ).getByText(
-    //         closeCellContent,
-    //       ),
-    //     ).toBeInTheDocument();
-    //   },
-    // );
   },
 );
