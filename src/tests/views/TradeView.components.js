@@ -53,6 +53,16 @@ export const TradeSlider = () =>
   );
 };
 
+export const TradeSliderInput = () =>
+{
+  return screen.getByTestId(
+    "sliderInput",
+    {
+      hidden: true,
+    },
+  );
+};
+
 export const TableHeaderOpen = () =>
 {
   return screen.getByText(
@@ -78,6 +88,20 @@ export const TableHeaderDollarBalance = () =>
 {
   return screen.getByText(
     "PL $",
+  );
+};
+
+export const TableTradeRows = () =>
+{
+  return screen.getAllByRole(
+    "row",
+  );
+};
+
+export const TableFooter = () =>
+{
+  return screen.getByRole(
+    "footerRow",
   );
 };
 

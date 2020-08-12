@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  screen,
   waitFor,
 } from "@testing-library/react";
 import {
@@ -41,6 +40,7 @@ import {
   TableHeaderClose,
   TableHeaderDollarBalance,
   TableHeaderOpen,
+  TableTradeRows,
   TimeControlDate,
   TradeSlider,
 } from "./TradeView.components";
@@ -165,9 +165,7 @@ it(
       ),
     );
 
-    clickContinue(
-      screen,
-    );
+    clickContinue();
 
     componentShouldRender(
       TimeControlDate(
@@ -193,14 +191,12 @@ it(
       () =>
       {
         return sliderShouldChange(
-          screen,
           0,
         );
       },
     );
 
     changeSlider(
-      screen,
       shareCount,
     );
 
@@ -208,7 +204,6 @@ it(
       () =>
       {
         return sliderShouldChange(
-          screen,
           shareCount,
         );
       },
@@ -249,7 +244,6 @@ describe(
       async () =>
       {
         changeSlider(
-          screen,
           shareCount,
         );
 
@@ -257,34 +251,27 @@ describe(
           () =>
           {
             return sliderShouldChange(
-              screen,
               shareCount,
             );
           },
         );
 
-        clickBuy(
-          screen,
-        );
+        clickBuy();
 
         await waitFor(
           () =>
           {
             return sliderShouldChange(
-              screen,
               0,
             );
           },
         );
 
         balanceShouldChange(
-          screen,
           LedgerBalanceAfterOpen,
         );
 
-        const tradeRows = screen.getAllByRole(
-          "row",
-        );
+        const tradeRows = TableTradeRows();
 
         tradeRowsShouldHaveLength(
           tradeRows,
@@ -310,12 +297,9 @@ describe(
       "sells shares",
       async () =>
       {
-        clickContinue(
-          screen,
-        );
+        clickContinue();
 
         changeSlider(
-          screen,
           shareCount,
         );
 
@@ -323,19 +307,14 @@ describe(
           () =>
           {
             return sliderShouldChange(
-              screen,
               shareCount,
             );
           },
         );
 
-        clickSell(
-          screen,
-        );
+        clickSell();
 
-        const tradeRows = screen.getAllByRole(
-          "row",
-        );
+        const tradeRows = TableTradeRows();
 
         tradeRowsShouldHaveLength(
           tradeRows,
@@ -352,12 +331,10 @@ describe(
         );
 
         balanceShouldChange(
-          screen,
           LedgerBalanceAfterClose,
         );
 
         changePercentShouldChange(
-          screen,
           LedgerChangeAfterClose,
         );
       },

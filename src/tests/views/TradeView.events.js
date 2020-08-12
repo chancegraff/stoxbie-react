@@ -2,18 +2,19 @@ import {
   fireEvent,
 } from "@testing-library/react";
 
+import {
+  BuyButton,
+  ContinueButton,
+  SellButton,
+  TradeSliderInput,
+} from "./TradeView.components";
+
 export const changeSlider = (
-  source,
   value,
 ) =>
 {
   fireEvent.change(
-    source.getByTestId(
-      "sliderInput",
-      {
-        hidden: true,
-      },
-    ),
+    TradeSliderInput(),
     {
       target: {
         value,
@@ -22,35 +23,23 @@ export const changeSlider = (
   );
 };
 
-export const clickContinue = (
-  source,
-) =>
+export const clickContinue = () =>
 {
   fireEvent.click(
-    source.getByText(
-      "Continue",
-    ),
+    ContinueButton(),
   );
 };
 
-export const clickBuy = (
-  source,
-) =>
+export const clickBuy = () =>
 {
   fireEvent.click(
-    source.getByText(
-      "Buy",
-    ),
+    BuyButton(),
   );
 };
 
-export const clickSell = (
-  source,
-) =>
+export const clickSell = () =>
 {
   fireEvent.click(
-    source.getByText(
-      "Sell",
-    ),
+    SellButton(),
   );
 };

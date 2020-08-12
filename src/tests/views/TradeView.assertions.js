@@ -2,6 +2,11 @@ import {
   within,
 } from "@testing-library/react";
 
+import {
+  TableFooter,
+  TradeSlider,
+} from "./TradeView.components";
+
 export const componentShouldRender = (
   component,
 ) =>
@@ -12,14 +17,11 @@ export const componentShouldRender = (
 };
 
 export const sliderShouldChange = (
-  source,
   count,
 ) =>
 {
   return expect(
-    source.getByRole(
-      "slider",
-    ),
+    TradeSlider(),
   ).toHaveAttribute(
     "aria-valuenow",
     `${count}`,
@@ -27,15 +29,12 @@ export const sliderShouldChange = (
 };
 
 export const balanceShouldChange = (
-  source,
   balance,
 ) =>
 {
   return expect(
     within(
-      source.getByRole(
-        "footerRow",
-      ),
+      TableFooter(),
     ).getByText(
       balance,
     ),
@@ -43,15 +42,12 @@ export const balanceShouldChange = (
 };
 
 export const changePercentShouldChange = (
-  source,
   changePercent,
 ) =>
 {
   return expect(
     within(
-      source.getByRole(
-        "footerRow",
-      ),
+      TableFooter(),
     ).getByText(
       changePercent,
     ),
