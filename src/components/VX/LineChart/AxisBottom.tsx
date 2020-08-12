@@ -49,9 +49,9 @@ const AxisBottom: React.FC<Props> = (
     {
       return tick.getMonth() % 12 === 0
         ? formatDate(
-            tick,
-            DateFormats.TickLarge,
-          )
+          tick,
+          DateFormats.TickLarge,
+        )
         : formatDate(
           tick,
           DateFormats.TickSmall,

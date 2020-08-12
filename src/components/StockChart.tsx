@@ -53,9 +53,9 @@ const StockChart: React.FC<Props> = (
     {
       return resolution[0] <= theme.breakpoints.medium
         ? [
-            10,
-            10,
-          ]
+          10,
+          10,
+        ]
         : padding;
     },
     [

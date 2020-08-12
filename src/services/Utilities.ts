@@ -146,8 +146,8 @@ export const formatDate = (
   return format(
     typeof date === "string"
       ? parseISO(
-          date,
-        )
+        date,
+      )
       : date,
     dateFormat,
   );
