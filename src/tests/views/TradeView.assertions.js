@@ -24,11 +24,11 @@ export const sliderShouldChange = (
     TradeSlider(),
   ).toHaveAttribute(
     "aria-valuenow",
-    `${count}`,
+    count,
   );
 };
 
-export const balanceShouldChange = (
+export const ledgerBalanceShouldChange = (
   balance,
 ) =>
 {
@@ -41,7 +41,7 @@ export const balanceShouldChange = (
   ).toBeInTheDocument();
 };
 
-export const changePercentShouldChange = (
+export const ledgerChangeShouldChange = (
   changePercent,
 ) =>
 {
@@ -66,14 +66,14 @@ export const tradeRowsShouldHaveLength = (
   );
 };
 
-export const tradeRowShouldHaveClosePrice = (
-  openedTrade,
+export const tradeRowShouldHavePrice = (
+  tradeRow,
   closePrice,
 ) =>
 {
   return expect(
     within(
-      openedTrade,
+      tradeRow,
     ).getByText(
       closePrice,
     ),
@@ -81,12 +81,12 @@ export const tradeRowShouldHaveClosePrice = (
 };
 
 export const tradeRowShouldHaveExitButton = (
-  openedTrade,
+  tradeRow,
 ) =>
 {
   return expect(
     within(
-      openedTrade,
+      tradeRow,
     ).getByText(
       "Exit",
     ),

@@ -16,6 +16,7 @@ const prices = [
     changePercent: 3.523,
     label: "Dec 1, 03",
     changeOverTime: 1.717268,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-02",
@@ -34,6 +35,7 @@ const prices = [
     changePercent: 0.3975,
     label: "Dec 2, 03",
     changeOverTime: 1.69438,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-03",
@@ -52,6 +54,7 @@ const prices = [
     changePercent: -2.2604,
     label: "Dec 3, 03",
     changeOverTime: 1.681931,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-04",
@@ -70,6 +73,7 @@ const prices = [
     changePercent: -3.5742,
     label: "Dec 4, 03",
     changeOverTime: 1.569692,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-05",
@@ -88,6 +92,7 @@ const prices = [
     changePercent: -1.2316,
     label: "Dec 5, 03",
     changeOverTime: 1.513476,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-08",
@@ -106,6 +111,7 @@ const prices = [
     changePercent: -0.571,
     label: "Dec 8, 03",
     changeOverTime: 1.517013,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-09",
@@ -124,6 +130,7 @@ const prices = [
     changePercent: -3.8183,
     label: "Dec 9, 03",
     changeOverTime: 1.431745,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-10",
@@ -142,6 +149,7 @@ const prices = [
     changePercent: -0.8845,
     label: "Dec 10, 03",
     changeOverTime: 1.378844,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-11",
@@ -160,6 +168,7 @@ const prices = [
     changePercent: 5.4675,
     label: "Dec 11, 03",
     changeOverTime: 1.516129,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-12",
@@ -178,6 +187,7 @@ const prices = [
     changePercent: -1.349,
     label: "Dec 12, 03",
     changeOverTime: 1.484469,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-15",
@@ -196,6 +206,7 @@ const prices = [
     changePercent: -3.2128,
     label: "Dec 15, 03",
     changeOverTime: 1.39569,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-16",
@@ -214,6 +225,7 @@ const prices = [
     changePercent: -1.1719,
     label: "Dec 16, 03",
     changeOverTime: 1.406634,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-17",
@@ -232,6 +244,7 @@ const prices = [
     changePercent: 12.8,
     label: "Dec 17, 03",
     changeOverTime: 1.730864,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-18",
@@ -250,6 +263,7 @@ const prices = [
     changePercent: 1.3556,
     label: "Dec 18, 03",
     changeOverTime: 1.736847,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-19",
@@ -268,6 +282,7 @@ const prices = [
     changePercent: -0.195,
     label: "Dec 19, 03",
     changeOverTime: 1.773896,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-22",
@@ -286,6 +301,7 @@ const prices = [
     changePercent: 1.8195,
     label: "Dec 22, 03",
     changeOverTime: 1.792266,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-23",
@@ -304,6 +320,7 @@ const prices = [
     changePercent: 5.6081,
     label: "Dec 23, 03",
     changeOverTime: 1.988337,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-24",
@@ -322,6 +339,7 @@ const prices = [
     changePercent: 4.0128,
     label: "Dec 24, 03",
     changeOverTime: 2.013404,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-26",
@@ -340,6 +358,7 @@ const prices = [
     changePercent: 2.23,
     label: "Dec 26, 03",
     changeOverTime: 2.137578,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-29",
@@ -358,6 +377,7 @@ const prices = [
     changePercent: 0.19,
     label: "Dec 29, 03",
     changeOverTime: 2.0925,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-30",
@@ -376,6 +396,7 @@ const prices = [
     changePercent: -2.6557,
     label: "Dec 30, 03",
     changeOverTime: 2.0485,
+    symbol: "NFLX",
   },
   {
     date: "2003-12-31",
@@ -394,6 +415,7 @@ const prices = [
     changePercent: -3.8655,
     label: "Dec 31, 03",
     changeOverTime: 1.936383,
+    symbol: "NFLX",
   },
 ];
 
