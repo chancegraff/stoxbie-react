@@ -40,13 +40,14 @@ const priceIndex = prices.findIndex(
     return price.date === "2003-12-16";
   },
 );
+const startPrice = prices[priceIndex];
+const endPrice = prices[priceIndex + 1];
 
 const changeSlider = (
   source,
   value,
 ) =>
 {
-  // Change the slider value
   fireEvent.change(
     source.getByTestId(
       "sliderInput",
@@ -60,20 +61,16 @@ const changeSlider = (
       },
     },
   );
+};
 
-  // Wait for slider to update
-  return waitFor(
-    () =>
-    {
-      return expect(
-        source.getByRole(
-          "slider",
-        ),
-      ).toHaveAttribute(
-        "aria-valuenow",
-        `${value}`,
-      );
-    },
+const clickContinue = (
+  source,
+) =>
+{
+  fireEvent.click(
+    source.getByText(
+      "Continue",
+    ),
   );
 };
 
@@ -81,52 +78,25 @@ const clickBuy = (
   source,
 ) =>
 {
-  // Buy the shares
   fireEvent.click(
     source.getByText(
       "Buy",
     ),
   );
-
-  // Wait for slider to update
-  return waitFor(
-    () =>
-    {
-      return expect(
-        source.getByRole(
-          "slider",
-        ),
-      ).toHaveAttribute(
-        "aria-valuenow",
-        "0",
-      );
-    },
-  );
 };
 
-const checkBalance = (
+const clickSell = (
   source,
-  balance,
 ) =>
 {
-  // Total balance should be updated
-  return waitFor(
-    () =>
-    {
-      return expect(
-        within(
-          source.getByRole(
-            "footerRow",
-          ),
-        ).getByText(
-          balance,
-        ),
-      ).toBeInTheDocument();
-    },
+  fireEvent.click(
+    source.getByText(
+      "Sell",
+    ),
   );
 };
 
-const getTrades = (
+const getAllTradeRows = (
   source,
   length,
 ) =>
@@ -144,6 +114,37 @@ const getTrades = (
   );
 
   return trades;
+};
+
+const sliderShouldChange = (
+  source,
+  count,
+) =>
+{
+  return expect(
+    source.getByRole(
+      "slider",
+    ),
+  ).toHaveAttribute(
+    "aria-valuenow",
+    `${count}`,
+  );
+};
+
+const balanceShouldChange = (
+  source,
+  balance,
+) =>
+{
+  return expect(
+    within(
+      source.getByRole(
+        "footerRow",
+      ),
+    ).getByText(
+      balance,
+    ),
+  ).toBeInTheDocument();
 };
 
 it(
@@ -255,9 +256,8 @@ it(
     );
 
     // Current date should be on the page
-    const currentPrice = prices[priceIndex];
     const currentDate = formatParsedDate(
-      currentPrice.date,
+      startPrice.date,
       DateFormats.IEX,
       DateFormats.Full,
     );
@@ -269,16 +269,13 @@ it(
     ).toBeInTheDocument();
 
     // Click the "continue" button
-    fireEvent.click(
-      screen.getByText(
-        "Continue",
-      ),
+    clickContinue(
+      screen,
     );
 
     // Next date should be on the page
-    const nextPrice = prices[priceIndex + 1];
     const nextDate = formatParsedDate(
-      nextPrice.date,
+      endPrice.date,
       DateFormats.IEX,
       DateFormats.Full,
     );
@@ -309,19 +306,25 @@ it(
       route,
     );
 
-    // Change the hidden input value
-    fireEvent.change(
-      screen.getByTestId(
-        "sliderInput",
-        {
-          hidden: true,
-        },
-      ),
+    // Slider value should be 0
+    await waitFor(
+      () =>
       {
-        target: {
-          value: shareCount,
-        },
+        return expect(
+          screen.getByRole(
+            "slider",
+          ),
+        ).toHaveAttribute(
+          "aria-valuenow",
+          "0",
+        );
       },
+    );
+
+    // Change the hidden input value
+    changeSlider(
+      screen,
+      shareCount,
     );
 
     // Slider value should be updated
@@ -346,8 +349,6 @@ describe(
   () =>
   {
     const shareCount = 200;
-    const startPrice = prices[priceIndex];
-    const endPrice = prices[priceIndex + 1];
 
     const {
       StartPriceClose,
@@ -385,23 +386,43 @@ describe(
       "buys shares",
       async () =>
       {
-        await changeSlider(
+        changeSlider(
           screen,
           shareCount,
         );
 
-        await clickBuy(
+        await waitFor(
+          () =>
+          {
+            return sliderShouldChange(
+              screen,
+              shareCount,
+            );
+          },
+        );
+
+        clickBuy(
           screen,
         );
 
-        await checkBalance(
+        await waitFor(
+          () =>
+          {
+            return sliderShouldChange(
+              screen,
+              0,
+            );
+          },
+        );
+
+        balanceShouldChange(
           screen,
           LedgerBalanceAfterOpen,
         );
 
         const [
           openedTrade,
-        ] = await getTrades(
+        ] = await getAllTradeRows(
           screen,
           1,
         );
@@ -430,48 +451,27 @@ describe(
       "sells shares",
       async () =>
       {
-        // Continue to the next day
-        fireEvent.click(
-          screen.getByText(
-            "Continue",
-          ),
+        clickContinue(
+          screen,
         );
 
-        // Change the slider value
-        fireEvent.change(
-          screen.getByTestId(
-            "sliderInput",
-            {
-              hidden: true,
-            },
-          ),
-          {
-            target: {
-              value: shareCount,
-            },
-          },
+        changeSlider(
+          screen,
+          shareCount,
         );
 
-        // Wait for slider to update
         await waitFor(
           () =>
           {
-            return expect(
-              screen.getByRole(
-                "slider",
-              ),
-            ).toHaveAttribute(
-              "aria-valuenow",
-              `${shareCount}`,
+            return sliderShouldChange(
+              screen,
+              shareCount,
             );
           },
         );
 
-        // Sell the shares
-        fireEvent.click(
-          screen.getByText(
-            "Sell",
-          ),
+        clickSell(
+          screen,
         );
 
         // Get close trade row

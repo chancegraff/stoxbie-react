@@ -14,6 +14,7 @@ export const calculateOpenedTrade = (
   const ledgerBalanceAfterOpen = ledgerBalance - tradeCost; // previousTotalBalance = playerLedger.totalBalance - pricePaid;
 
   return {
+    tradeCost,
     ledgerBalanceAfterOpen,
   };
 };
@@ -27,26 +28,60 @@ export const calculateClosedTrade = (
   },
 ) =>
 {
-  // Opened trade
-  const tradeCost = shareCount * startPrice.close; // pricePaid = closeCount * trade.openPrice
-  const ledgerBalanceAfterOpen = ledgerBalance - tradeCost; // previousTotalBalance = playerLedger.totalBalance - pricePaid;
+  const {
+    tradeCost,
+    ledgerBalanceAfterOpen,
+  } = calculateOpenedTrade(
+    ledgerBalance,
+    shareCount,
+    startPrice,
+  );
 
-  // Closed trade
   const tradeProfit = shareCount * endPrice.close; // trade.closeBalance = closeCount * price.close;
   const tradeChange = tradeProfit - tradeCost; // trade.changeBalance = trade.closeBalance - pricePaid
   const ledgerBalanceAfterClose = ledgerBalanceAfterOpen + tradeProfit; // playerLedger.totalBalance = previousTotalBalance + trade.closeBalance;
   const ledgerReturnsAfterClose = 0 + tradeChange; // playerLedger.totalReturns = previousTotalReturns + trade.changeBalance;
   const ledgerChangeAfterClose = ledgerReturnsAfterClose / ledgerBalanceAfterClose; // playerLedger.totalChange = nextPlayerLedger.totalReturns / nextPlayerLedger.totalBalance;
 
-  // Formatted values
+  return {
+    ...formatOpenedTrade(
+      startPrice,
+      ledgerBalanceAfterOpen,
+    ),
+    ...formatClosedTrade(
+      endPrice,
+      ledgerBalanceAfterClose,
+      ledgerChangeAfterClose,
+    ),
+  };
+};
+
+export const formatOpenedTrade = (
+  startPrice,
+  ledgerBalanceAfterOpen,
+) =>
+{
   const StartPriceClose = formatCurrency(
     startPrice.close,
   );
-  const EndPriceClose = formatCurrency(
-    endPrice.close,
-  );
   const LedgerBalanceAfterOpen = formatCurrency(
     ledgerBalanceAfterOpen,
+  );
+
+  return {
+    StartPriceClose,
+    LedgerBalanceAfterOpen,
+  };
+};
+
+export const formatClosedTrade = (
+  endPrice,
+  ledgerBalanceAfterClose,
+  ledgerChangeAfterClose,
+) =>
+{
+  const EndPriceClose = formatCurrency(
+    endPrice.close,
   );
   const LedgerBalanceAfterClose = formatCurrency(
     ledgerBalanceAfterClose,
@@ -56,9 +91,7 @@ export const calculateClosedTrade = (
   );
 
   return {
-    StartPriceClose,
     EndPriceClose,
-    LedgerBalanceAfterOpen,
     LedgerBalanceAfterClose,
     LedgerChangeAfterClose,
   };
