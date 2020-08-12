@@ -1,12 +1,18 @@
 import React from "react";
-import { Block } from "baseui/dist/block";
-import { Display3 } from "baseui/dist/typography";
+import {
+  Block,
+} from "baseui/dist/block";
+import {
+  Display3,
+} from "baseui/dist/typography";
 
 import PageContent from "templates/PageContent";
 
 type Props = PropsWithChildren;
 
-const Error: React.FC<Props> = (props) =>
+const Error: React.FC<Props> = (
+  props,
+) =>
 {
   return (
     <PageContent>

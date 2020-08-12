@@ -1,24 +1,38 @@
 import React from "react";
-import { BlockOverrides } from "baseui/dist/block";
+import {
+  BlockOverrides,
+} from "baseui/dist/block";
 import {
   FlexGrid as DefaultFlexGrid,
   FlexGridItem,
   FlexGridItemProps,
   FlexGridProps,
 } from "baseui/dist/flex-grid";
-import { Overrides } from "baseui/dist/overrides";
-import { Theme } from "baseui/dist/theme";
-import { StyleObject } from "styletron-react";
+import {
+  Overrides,
+} from "baseui/dist/overrides";
+import {
+  Theme,
+} from "baseui/dist/theme";
+import {
+  StyleObject,
+} from "styletron-react";
 
 type Props = FlexGridProps;
 
 export const COLUMN_COUNT = 2;
 
-export const MultiplyWidth = (multiple = 2): Overrides<BlockOverrides> =>
+export const MultiplyWidth = (
+  multiple = 2,
+): Overrides<BlockOverrides> =>
 {
   return {
     Block: {
-      style: ({ $theme }: { $theme: Theme }): StyleObject =>
+      style: (
+        {
+          $theme,
+        }: { $theme: Theme },
+      ): StyleObject =>
       {
         return {
           width: `calc((${100 * multiple}% - ${
@@ -30,10 +44,12 @@ export const MultiplyWidth = (multiple = 2): Overrides<BlockOverrides> =>
   };
 };
 
-export const FlexGridItemFull: React.FC<FlexGridItemProps> = ({
-  children,
-  ...props
-}) =>
+export const FlexGridItemFull: React.FC<FlexGridItemProps> = (
+  {
+    children,
+    ...props
+  },
+) =>
 {
   return (
     <FlexGridItem
@@ -45,10 +61,12 @@ export const FlexGridItemFull: React.FC<FlexGridItemProps> = ({
   );
 };
 
-const FlexGrid: React.FC<Props> = ({
-  children,
-  ...props
-}) =>
+const FlexGrid: React.FC<Props> = (
+  {
+    children,
+    ...props
+  },
+) =>
 {
   return (
     <DefaultFlexGrid

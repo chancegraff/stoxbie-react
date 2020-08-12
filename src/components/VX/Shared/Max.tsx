@@ -1,7 +1,13 @@
-import React, { useMemo } from "react";
+import React, {
+  useMemo,
+} from "react";
 
-import { BOTTOM_LABELS_HEIGHT } from "components/VX/LineChart/AxisBottom";
-import { RIGHT_LABELS_WIDTH } from "components/VX/LineChart/AxisRight";
+import {
+  BOTTOM_LABELS_HEIGHT,
+} from "components/VX/LineChart/AxisBottom";
+import {
+  RIGHT_LABELS_WIDTH,
+} from "components/VX/LineChart/AxisRight";
 
 export type MaxX = number;
 export type MaxY = number;
@@ -38,7 +44,9 @@ const withMax = <P extends React.PropsWithChildren<Props>>(
   WrappedChart: React.FC<P>,
 ): React.FC<P> =>
 {
-  return (props) =>
+  return (
+    props,
+  ) =>
   {
     const {
       resolution: [

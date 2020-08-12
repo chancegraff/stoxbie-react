@@ -1,13 +1,27 @@
 import React from "react";
-import { Group } from "@vx/group";
-import { TextProps } from "@vx/text/lib/Text";
-import { styled } from "baseui/dist";
-import { HistoricalPrice } from "iex";
+import {
+  Group,
+} from "@vx/group";
+import {
+  TextProps,
+} from "@vx/text/lib/Text";
+import {
+  styled,
+} from "baseui/dist";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import withShared from "components/VX/Shared";
-import { Max } from "components/VX/Shared/Max";
-import { Scale } from "components/VX/Shared/Scale";
-import { Select } from "components/VX/Shared/Select";
+import {
+  Max,
+} from "components/VX/Shared/Max";
+import {
+  Scale,
+} from "components/VX/Shared/Scale";
+import {
+  Select,
+} from "components/VX/Shared/Select";
 
 import AxisBottom from "./AxisBottom";
 import AxisRight from "./AxisRight";
@@ -31,43 +45,54 @@ type Props = {
 
 const Rect = styled(
   "rect",
-  ({ $theme }) =>
+  (
+    {
+      $theme,
+    },
+  ) =>
   {
-    return { fill: $theme.colors.backgroundSecondary };
+    return {
+      fill: $theme.colors.backgroundSecondary,
+    };
   },
 );
 
-const displayNone = { display: "none" };
+const displayNone = {
+  display: "none",
+};
 
-const LineChart: React.FC<Props> = ({
-  prices,
-  resolution: [
-    width,
-    height,
-  ],
-  padding: [
-    horizontalPadding,
-    verticalPadding,
-  ],
-  select: [
-    xSelector,
-    ySelector,
-  ],
-  scale: [
-    xScale,
-    yScale,
-  ],
-  max: [
-    xMax,
-    yMax,
-  ],
-  label,
-}) =>
+const LineChart: React.FC<Props> = (
+  {
+    prices,
+    resolution: [
+      width,
+      height,
+    ],
+    padding: [
+      horizontalPadding,
+      verticalPadding,
+    ],
+    select: [
+      xSelector,
+      ySelector,
+    ],
+    scale: [
+      xScale,
+      yScale,
+    ],
+    max: [
+      xMax,
+      yMax,
+    ],
+    label,
+  },
+) =>
 {
   return (
     <svg
       height={height}
       width={width}
+      role="linechart"
     >
       <Rect
         height={height}
@@ -122,4 +147,6 @@ const LineChart: React.FC<Props> = ({
   );
 };
 
-export default withShared(LineChart);
+export default withShared(
+  LineChart,
+);

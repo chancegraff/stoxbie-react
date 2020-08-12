@@ -4,18 +4,24 @@ import React, {
 import {
   Route, Switch, useParams, useRouteMatch,
 } from "react-router-dom";
-import { parse } from "date-fns";
-import { HistoricalPrice } from "iex";
-import { historicalPrices } from "iex-cloud";
+import {
+  HistoricalPrice,
+} from "iex";
+import {
+  historicalPrices,
+} from "iex-cloud";
 
 import {
   DATE_ERROR_MESSAGE,
   FETCH_ERROR_MESSAGE,
   TICKER_ERROR_MESSAGE,
-  URL_DATE_FORMAT,
 } from "services/Constants";
 import ScrollToTop from "services/ScrollToTop";
-import { handleUnloadCreator } from "services/Utilities";
+import {
+  DateFormats,
+  handleUnloadCreator,
+  parseDate,
+} from "services/Utilities";
 import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
 
@@ -42,19 +48,22 @@ const TradeRoute: React.FC = () =>
   const safeDate = useMemo(
     () =>
     {
-      const parsedDate = parse(
+      const parsedDate = parseDate(
         date,
-        URL_DATE_FORMAT,
-        new Date(),
+        DateFormats.URL,
       );
 
       if (parsedDate.getTime())
       {
         return parsedDate;
       }
-      setError(DATE_ERROR_MESSAGE);
+      setError(
+        DATE_ERROR_MESSAGE,
+      );
     },
-    [ date ],
+    [
+      date,
+    ],
   );
 
   const safeTicker = useMemo(
@@ -64,35 +73,46 @@ const TradeRoute: React.FC = () =>
       {
         return ticker;
       }
-      setError(TICKER_ERROR_MESSAGE);
+      setError(
+        TICKER_ERROR_MESSAGE,
+      );
     },
-    [ ticker ],
+    [
+      ticker,
+    ],
   );
 
   const handleLoad = useCallback(
     async (
       nextTicker?: string,
-      nextDate?: Date,
     ) =>
     {
-      if (nextTicker && nextDate)
+      if (nextTicker)
       {
         const nextPrices = await historicalPrices(
           nextTicker,
           "max",
           undefined,
-          { chartByDay: true },
+          {
+            chartByDay: true,
+          },
         );
 
         if (nextPrices)
         {
           const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
 
-          setPrices([ ...typedPrices ]);
+          setPrices(
+            [
+              ...typedPrices,
+            ],
+          );
         }
         else
         {
-          setError(FETCH_ERROR_MESSAGE);
+          setError(
+            FETCH_ERROR_MESSAGE,
+          );
         }
       }
     },
@@ -104,23 +124,23 @@ const TradeRoute: React.FC = () =>
     {
       handleLoad(
         safeTicker,
-        safeDate,
       );
     },
     [
       handleLoad,
       safeTicker,
-      safeDate,
     ],
   );
 
   useEffect(
     () =>
     {
-      return handleUnloadCreator([
-        setPrices,
-        setError,
-      ]);
+      return handleUnloadCreator(
+        [
+          setPrices,
+          setError,
+        ],
+      );
     },
     [],
   );

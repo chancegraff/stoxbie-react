@@ -1,12 +1,21 @@
-import React, { useMemo } from "react";
+import React, {
+  useMemo,
+} from "react";
 import {
   StyledBody,
   StyledHead,
 } from "baseui/dist/table";
-import { HistoricalPrice } from "iex";
-import numbro from "numbro";
+import {
+  HistoricalPrice,
+} from "iex";
 
+import {
+  formatCurrency,
+  formatPercentage,
+} from "services/Utilities";
 import Spinner from "components/BaseUI/Spinner";
+import TradeRowsClosed from "components/TradeRowsClosed";
+import TradeRowsOpened from "components/TradeRowsOpened";
 
 import {
   Container,
@@ -15,8 +24,6 @@ import {
   RightAlignedCell,
   StickyFooter,
 } from "./TradeHistory.styled";
-import TradeRowsClosed from "./TradeRowsClosed";
-import TradeRowsOpened from "./TradeRowsOpened";
 
 type Props = {
   pastTrades: HistoricalTradeFinished[];
@@ -28,23 +35,24 @@ type Props = {
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
-const TradeHistory: React.FC<Props> = ({
-  pastTrades,
-  playerLedger,
-  visibleTrade,
-  currentPrice,
-  handleTrade,
-}) =>
+const TradeHistory: React.FC<Props> = (
+  {
+    pastTrades,
+    playerLedger,
+    visibleTrade,
+    currentPrice,
+    handleTrade,
+  },
+) =>
 {
   const safeChange = useMemo(
     () =>
     {
       if (pastTrades.length > 0)
       {
-        return numbro(playerLedger.totalChange).format({
-          average: true,
-          output: "percent",
-        });
+        return formatPercentage(
+          playerLedger.totalChange,
+        );
       }
     },
     [
@@ -55,12 +63,13 @@ const TradeHistory: React.FC<Props> = ({
   const safeBalance = useMemo(
     () =>
     {
-      return numbro(playerLedger.totalBalance).formatCurrency({
-        average: true,
-        totalLength: 1,
-      });
+      return formatCurrency(
+        playerLedger.totalBalance,
+      );
     },
-    [ playerLedger ],
+    [
+      playerLedger,
+    ],
   );
 
   if (!currentPrice)
@@ -71,7 +80,7 @@ const TradeHistory: React.FC<Props> = ({
   return (
     <Container alignItems="flex-start">
       <FullTable>
-        <StyledHead>
+        <StyledHead role="headerRow">
           <HeadCell>
             Open
           </HeadCell>
@@ -94,7 +103,7 @@ const TradeHistory: React.FC<Props> = ({
           />
           <TradeRowsClosed pastTrades={pastTrades} />
         </StyledBody>
-        <StickyFooter>
+        <StickyFooter role="footerRow">
           <RightAlignedCell></RightAlignedCell>
           <RightAlignedCell></RightAlignedCell>
           <RightAlignedCell>

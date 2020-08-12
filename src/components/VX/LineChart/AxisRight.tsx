@@ -1,9 +1,17 @@
 import React from "react";
-import { AxisRight as DefaultAxisRight } from "@vx/axis";
-import { TextProps } from "@vx/text/lib/Text";
-import { useStyletron } from "baseui/dist";
+import {
+  AxisRight as DefaultAxisRight,
+} from "@vx/axis";
+import {
+  TextProps,
+} from "@vx/text/lib/Text";
+import {
+  useStyletron,
+} from "baseui/dist";
 
-import { ScaleY } from "components/VX/Shared/Scale";
+import {
+  ScaleY,
+} from "components/VX/Shared/Scale";
 
 export const RIGHT_LABELS_WIDTH = 25;
 
@@ -14,15 +22,18 @@ type Props = {
   tickLabelProps: () => Partial<TextProps>;
 };
 
-const AxisRight: React.FC<Props> = ({
-  xMax,
-  yScale,
-  labelProps,
-  tickLabelProps,
-}) =>
+const AxisRight: React.FC<Props> = (
+  {
+    xMax,
+    yScale,
+    labelProps,
+    tickLabelProps,
+  },
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   return (

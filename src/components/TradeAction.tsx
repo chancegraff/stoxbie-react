@@ -1,4 +1,6 @@
-import React, { useCallback } from "react";
+import React, {
+  useCallback,
+} from "react";
 import {
   Button,
   ButtonProps,
@@ -12,21 +14,25 @@ type Props = PropsWithChildren & {
   Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
 };
 
-const TradeAction: React.FC<Props> = ({
-  children,
-  handleTrade,
-  purchaseModifier,
-  sharePrice,
-  purchaseAmount,
-  Component = Button,
-}) =>
+const TradeAction: React.FC<Props> = (
+  {
+    children,
+    handleTrade,
+    purchaseModifier,
+    sharePrice,
+    purchaseAmount,
+    Component = Button,
+  },
+) =>
 {
   const handleClick = useCallback(
     () =>
     {
       if (sharePrice)
       {
-        const count = Math.abs(purchaseAmount) * purchaseModifier;
+        const count = Math.abs(
+          purchaseAmount,
+        ) * purchaseModifier;
 
         handleTrade(
           sharePrice,

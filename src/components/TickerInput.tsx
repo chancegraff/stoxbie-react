@@ -1,7 +1,9 @@
 import React, {
   useCallback, useState,
 } from "react";
-import { useHistory } from "react-router-dom";
+import {
+  useHistory,
+} from "react-router-dom";
 import {
   OnChangeParams,
   Select,
@@ -9,10 +11,18 @@ import {
   TYPE,
   Value,
 } from "baseui/dist/select";
-import { Search } from "iex-cloud";
+import {
+  Search,
+} from "iex-cloud";
+
+import {
+  TICKER_INPUT_PLACERHOLDER,
+} from "services/Constants";
 
 import Label from "./TickerInput.label";
-import { Dropdown } from "./TickerInput.overrides";
+import {
+  Dropdown,
+} from "./TickerInput.overrides";
 
 type Props = {
   handleSearch: (
@@ -22,33 +32,48 @@ type Props = {
   ) => void;
 };
 
-const filterOptions = (options: Value) =>
+const filterOptions = (
+  options: Value,
+) =>
 {
   return options;
 };
 
-const overrides = { Dropdown };
+const overrides = {
+  Dropdown,
+};
 
-const TickerInput: React.FC<Props> = ({ handleSearch }) =>
+const TickerInput: React.FC<Props> = (
+  {
+    handleSearch,
+  },
+) =>
 {
   const history = useHistory();
   const [
     options,
     setOptions,
-  ] = useState<Search[]>([]);
+  ] = useState<Search[]>(
+    [],
+  );
   const [
     isLoading,
     setIsLoading,
-  ] = useState<boolean>(false);
-
+  ] = useState<boolean>(
+    false,
+  );
   const handleInputChange = useCallback(
-    (event: React.FormEvent<HTMLInputElement>) =>
+    (
+      event: React.FormEvent<HTMLInputElement>,
+    ) =>
     {
       const nextValue = event.currentTarget.value;
 
       if (nextValue)
       {
-        setIsLoading(true);
+        setIsLoading(
+          true,
+        );
         handleSearch(
           nextValue,
           setOptions,
@@ -57,19 +82,31 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) =>
       }
       else
       {
-        setOptions([]);
+        setOptions(
+          [],
+        );
       }
     },
-    [ handleSearch ],
+    [
+      handleSearch,
+    ],
   );
   const handleChange = useCallback(
-    (params: OnChangeParams) =>
+    (
+      params: OnChangeParams,
+    ) =>
     {
-      const [ value ] = params.value;
+      const [
+        value,
+      ] = params.value;
 
-      history.push(`/stock/${value.symbol}`);
+      history.push(
+        `/stock/${value.symbol}`,
+      );
     },
-    [ history ],
+    [
+      history,
+    ],
   );
 
   return (
@@ -85,7 +122,7 @@ const TickerInput: React.FC<Props> = ({ handleSearch }) =>
       type={TYPE.search}
       options={options}
       overrides={overrides}
-      placeholder="Search for company by name or ticker..."
+      placeholder={TICKER_INPUT_PLACERHOLDER}
       size={SIZE.large}
       onInputChange={handleInputChange}
       onChange={handleChange}

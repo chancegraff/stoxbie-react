@@ -1,12 +1,19 @@
 import React from "react";
-import { styled } from "baseui/dist";
+import {
+  styled,
+  withStyle,
+} from "baseui/dist";
 import {
   Button, SIZE,
 } from "baseui/dist/button";
-import { StyledCell } from "baseui/dist/table";
+import {
+  StyledCell,
+} from "baseui/dist/table";
 
 export const SmallButton = styled(
-  (props) =>
+  (
+    props,
+  ) =>
   {
     return (
       <Button
@@ -15,15 +22,20 @@ export const SmallButton = styled(
       />
     );
   },
-  ({ $theme }) =>
+  (
+    {
+      $theme,
+    },
+  ) =>
   {
     return {
-      ...$theme.typography.font100, height: "20px",
+      ...$theme.typography.font100,
+      height: "20px",
     };
   },
 );
 
-export const RightAlignedCell = styled(
+export const RightAlignedCell = withStyle(
   StyledCell,
   {
     display: "flex",

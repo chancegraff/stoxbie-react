@@ -1,13 +1,19 @@
 import React from "react";
-import { ButtonProps } from "baseui/dist/button";
+import {
+  ButtonProps,
+} from "baseui/dist/button";
 import {
   ContainerState,
   onChange as defaultHandler,
   StatefulCalendar,
 } from "baseui/dist/datepicker";
 
-import { copyPropsToChildren } from "services/Utilities";
-import { StatefulPopover } from "components/BaseUI/Popover";
+import {
+  copyPropsToChildren,
+} from "services/Utilities";
+import {
+  StatefulPopover,
+} from "components/BaseUI/Popover";
 
 type Props = ButtonProps & {
   initialState?: ContainerState,
@@ -16,13 +22,15 @@ type Props = ButtonProps & {
   onChange?: defaultHandler;
 };
 
-const DatePicker: React.FC<Props> = ({
-  initialState,
-  maxDate,
-  minDate,
-  onChange,
-  ...props
-}) =>
+const DatePicker: React.FC<Props> = (
+  {
+    initialState,
+    maxDate,
+    minDate,
+    onChange,
+    ...props
+  },
+) =>
 {
   return (
     <StatefulPopover
@@ -38,7 +46,11 @@ const DatePicker: React.FC<Props> = ({
       }
       placement="bottomLeft"
     >
-      {copyPropsToChildren(props)}
+      {
+        copyPropsToChildren(
+          props,
+        )
+      }
     </StatefulPopover>
   );
 };

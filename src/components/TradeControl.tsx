@@ -1,17 +1,25 @@
-import React, { useState } from "react";
-import { useStyletron } from "baseui/dist";
-import { FlexGridItem } from "baseui/dist/flex-grid";
-import { HistoricalPrice } from "iex";
+import React, {
+  useState,
+} from "react";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  FlexGridItem,
+} from "baseui/dist/flex-grid";
+import {
+  HistoricalPrice,
+} from "iex";
 
 import FlexGrid from "components/BaseUI/FlexGrid";
 import Spinner from "components/BaseUI/Spinner";
+import TradeAction from "components/TradeAction";
+import TradeSlider from "components/TradeSlider";
 
-import TradeAction from "./TradeAction";
 import {
   Container,
   FullButton,
 } from "./TradeControl.styled";
-import TradeSlider from "./TradeSlider";
 
 type Props = {
   currentPrice?: HistoricalPrice;
@@ -19,19 +27,24 @@ type Props = {
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
-const TradeControl: React.FC<Props> = ({
-  currentPrice,
-  currentBalance,
-  handleTrade,
-}) =>
+const TradeControl: React.FC<Props> = (
+  {
+    currentPrice,
+    currentBalance,
+    handleTrade,
+  },
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
   const [
     purchaseAmount,
     setPurchaseAmount,
-  ] = useState<number>(0);
+  ] = useState<number>(
+    0,
+  );
 
   if (!currentPrice || !currentBalance)
   {

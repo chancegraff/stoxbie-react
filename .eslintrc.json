@@ -4,6 +4,7 @@
         "es2020": true
     },
     "extends": [
+        "plugin:jest/recommended",
         "standard",
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
@@ -22,6 +23,7 @@
     "plugins": [
         "standard",
         "@typescript-eslint",
+        "jest",
         "react",
         "react-hooks",
         "simple-import-sort",
@@ -34,14 +36,16 @@
     },
     "ignorePatterns": [
         "node_modules",
-        "eslint"
+        "eslint",
+        "mocks",
+        "setupTests.js"
     ],
     "rules": {
         "accessor-pairs": "error",
         "array-bracket-newline": [
             "error",
             {
-                "minItems": 2
+                "minItems": 1
             }
         ],
         "array-bracket-spacing": [
@@ -97,7 +101,7 @@
         "function-paren-newline": [
             "error",
             {
-                "minItems": 2
+                "minItems": 1
             }
         ],
         "generator-star-spacing": "error",
@@ -108,20 +112,17 @@
         "id-blacklist": "error",
         "id-length": "error",
         "id-match": "error",
-        "implicit-arrow-linebreak": "error",
+        "implicit-arrow-linebreak": "off",
         "indent": [
             "error",
-            2,
-            {
-                "offsetTernaryExpressions": true
-            }
+            2
         ],
         "indent-legacy": "off",
         "init-declarations": "error",
         "jsx-quotes": "error",
         "key-spacing": "error",
         "keyword-spacing": "error",
-        "line-comment-position": "error",
+        "line-comment-position": "off",
         "linebreak-style": [
             "error",
             "unix"
@@ -181,7 +182,7 @@
         "no-implicit-coercion": "error",
         "no-implicit-globals": "error",
         "no-implied-eval": "error",
-        "no-inline-comments": "error",
+        "no-inline-comments": "off",
         "no-invalid-this": "error",
         "no-iterator": "error",
         "no-label-var": "error",
@@ -254,19 +255,19 @@
             {
                 "ObjectExpression": {
                     "multiline": true,
-                    "minProperties": 2
+                    "minProperties": 1
                 },
                 "ObjectPattern": {
                     "multiline": true,
-                    "minProperties": 2
+                    "minProperties": 1
                 },
                 "ImportDeclaration": {
                     "multiline": true,
-                    "minProperties": 2
+                    "minProperties": 1
                 },
                 "ExportDeclaration": {
                     "multiline": true,
-                    "minProperties": 2
+                    "minProperties": 1
                 }
             }
         ],
@@ -302,7 +303,7 @@
         "prefer-numeric-literals": "error",
         "prefer-object-spread": "error",
         "prefer-promise-reject-errors": "error",
-        "prefer-reflect": "error",
+        "prefer-reflect": "off",
         "prefer-regex-literals": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
@@ -346,6 +347,8 @@
         "yield-star-spacing": "error",
         "yoda": "error",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-unused-vars": "warn",
         "react/prop-types": 0,
         "react/display-name": 0,
@@ -366,8 +369,8 @@
                 "assignment": "parens-new-line",
                 "return": "parens-new-line",
                 "arrow": "parens-new-line",
-                "condition": "ignore",
-                "logical": "ignore",
+                "condition": "parens-new-line",
+                "logical": "parens-new-line",
                 "prop": "parens-new-line"
             }
         ],
@@ -402,13 +405,13 @@
         "wrap-params/destructured-objects": [
             "error",
             {
-                "minProperties": 2
+                "minProperties": 1
             }
         ],
         "wrap-params/wrap-params": [
             "error",
             {
-                "minProperties": 2
+                "minProperties": 1
             }
         ],
         "simple-import-sort/sort": [
@@ -431,6 +434,7 @@
                     ],
                     // Internal packages.
                     [
+                        "^(tests)(/.*|$)",
                         "^(services)(/.*|$)",
                         "^(templates)(/.*|$)",
                         "^(routes)(/.*|$)",
@@ -455,5 +459,13 @@
                 ]
             }
         ]
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ]
+        }
+    ]
 }

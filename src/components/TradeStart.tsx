@@ -1,64 +1,99 @@
-import React, { useCallback } from "react";
-import { Block } from "baseui/dist/block";
+import React, {
+  useCallback,
+} from "react";
+import {
+  Block,
+} from "baseui/dist/block";
 import {
   SHAPE, SIZE,
 } from "baseui/dist/button";
-import { ButtonGroup } from "baseui/dist/button-group";
-import { Filter } from "baseui/dist/icon";
-import { format } from "date-fns";
+import {
+  ButtonGroup,
+} from "baseui/dist/button-group";
+import {
+  Filter,
+} from "baseui/dist/icon";
 
-import { URL_DATE_FORMAT } from "services/Constants";
+import {
+  DateFormats,
+  fiveYearsAgo,
+  formatDate,
+  oneYearAgo,
+} from "services/Utilities";
 import DatePicker from "components/BaseUI/DatePicker";
 
 import {
-  fiveYearsAgo,
-  oneYearAgo,
-} from "../services/Utilities";
-
-import { GrowingButton } from "./TradeStart.styled";
+  GrowingButton,
+} from "./TradeStart.styled";
 
 type Props = {
   handleStart: (date: string) => void;
 };
 
-const TradeStart: React.FC<Props> = ({ handleStart }) =>
+const TradeStart: React.FC<Props> = (
+  {
+    handleStart,
+  },
+) =>
 {
   const handleYearStart = useCallback(
-    (date: string) =>
+    (
+      date: string,
+    ) =>
     {
-      return handleStart(date);
+      return handleStart(
+        date,
+      );
     },
-    [ handleStart ],
+    [
+      handleStart,
+    ],
   );
   const handleOneYearStart = useCallback(
     () =>
     {
-      return handleYearStart(format(
-        oneYearAgo,
-        URL_DATE_FORMAT,
-      ));
+      return handleYearStart(
+        formatDate(
+          oneYearAgo,
+          DateFormats.URL,
+        ),
+      );
     },
-    [ handleYearStart ],
+    [
+      handleYearStart,
+    ],
   );
   const handleFiveYearStart = useCallback(
     () =>
     {
-      return handleYearStart(format(
-        fiveYearsAgo,
-        URL_DATE_FORMAT,
-      ));
+      return handleYearStart(
+        formatDate(
+          fiveYearsAgo,
+          DateFormats.URL,
+        ),
+      );
     },
-    [ handleYearStart ],
+    [
+      handleYearStart,
+    ],
   );
   const handleCustomYearStart = useCallback(
-    ({ date }) =>
-    {
-      return handleYearStart(format(
+    (
+      {
         date,
-        URL_DATE_FORMAT,
-      ));
+      },
+    ) =>
+    {
+      return handleYearStart(
+        formatDate(
+          date,
+          DateFormats.URL,
+        ),
+      );
     },
-    [ handleYearStart ],
+    [
+      handleYearStart,
+    ],
   );
 
   return (

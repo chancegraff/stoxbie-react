@@ -1,6 +1,10 @@
 import React from "react";
-import { Block } from "baseui/dist/block";
-import { Option } from "baseui/dist/select";
+import {
+  Block,
+} from "baseui/dist/block";
+import {
+  Option,
+} from "baseui/dist/select";
 import {
   Caption2,
   Label2,
@@ -10,7 +14,11 @@ type Props = {
   option?: Option;
 };
 
-const Label: React.FC<Props> = ({ option }) =>
+const Label: React.FC<Props> = (
+  {
+    option,
+  },
+) =>
 {
   return (
     <Block

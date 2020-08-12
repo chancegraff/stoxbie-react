@@ -3,7 +3,9 @@ import {
   StatefulMenu as DefaultStatefulMenu,
   StatefulMenuProps,
 } from "baseui/dist/menu";
-import { Override } from "baseui/dist/overrides";
+import {
+  Override,
+} from "baseui/dist/overrides";
 
 const List: Override<unknown> = {
   style: {
@@ -12,12 +14,16 @@ const List: Override<unknown> = {
   },
 };
 
-const overrides = { List };
+const overrides = {
+  List,
+};
 
-export const StatefulMenu: React.FC<StatefulMenuProps> = ({
-  children,
-  ...props
-}) =>
+export const StatefulMenu: React.FC<StatefulMenuProps> = (
+  {
+    children,
+    ...props
+  },
+) =>
 {
   return (
     <DefaultStatefulMenu

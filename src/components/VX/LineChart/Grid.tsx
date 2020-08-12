@@ -1,22 +1,33 @@
 import React from "react";
-import { Grid as DefaultGrid } from "@vx/grid";
-import { useStyletron } from "baseui/dist";
+import {
+  Grid as DefaultGrid,
+} from "@vx/grid";
+import {
+  useStyletron,
+} from "baseui/dist";
 
-import { Max } from "components/VX/Shared/Max";
-import { Scale } from "components/VX/Shared/Scale";
+import {
+  Max,
+} from "components/VX/Shared/Max";
+import {
+  Scale,
+} from "components/VX/Shared/Scale";
 
 type Props = {
   scales: Scale;
   max: Max;
 };
 
-const Grid: React.FC<Props> = ({
-  scales,
-  max,
-}) =>
+const Grid: React.FC<Props> = (
+  {
+    scales,
+    max,
+  },
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
   const [
     xMax,

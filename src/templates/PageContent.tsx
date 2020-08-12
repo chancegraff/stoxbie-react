@@ -1,14 +1,23 @@
 import React from "react";
-import { useStyletron } from "baseui/dist";
-import { Block } from "baseui/dist/block";
-import { Grid as LayoutGrid } from "baseui/dist/layout-grid";
+import {
+  useStyletron,
+} from "baseui/dist";
+import {
+  Block,
+} from "baseui/dist/block";
+import {
+  Grid as LayoutGrid,
+} from "baseui/dist/layout-grid";
 
 type Props = unknown;
 
-const ContentContainer: React.FC<Props> = (props) =>
+const ContentContainer: React.FC<Props> = (
+  props,
+) =>
 {
   const [
-    , theme,
+    ,
+    theme,
   ] = useStyletron();
 
   return (

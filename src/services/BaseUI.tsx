@@ -2,9 +2,15 @@ import React from "react";
 import {
   BaseProvider, BaseProviderOverrides, DarkTheme,
 } from "baseui/dist";
-import { Override } from "baseui/dist/overrides";
-import { Client as Styletron } from "styletron-engine-atomic";
-import { Provider as StyletronProvider } from "styletron-react";
+import {
+  Override,
+} from "baseui/dist/overrides";
+import {
+  Client as Styletron,
+} from "styletron-engine-atomic";
+import {
+  Provider as StyletronProvider,
+} from "styletron-react";
 
 const engine = new Styletron();
 
@@ -15,9 +21,13 @@ const AppContainer: Override<unknown> = {
   },
 };
 
-const overrides: BaseProviderOverrides = { AppContainer };
+const overrides: BaseProviderOverrides = {
+  AppContainer,
+};
 
-const BaseUI: React.FC = (props) =>
+const BaseUI: React.FC = (
+  props,
+) =>
 {
   return (
     <StyletronProvider value={engine}>
