@@ -96,24 +96,13 @@ const clickSell = (
   );
 };
 
-const getAllTradeRows = (
+const getTradeRows = (
   source,
-  length,
 ) =>
 {
-  // Get all trade rows
-  const trades = source.getAllByRole(
+  return source.getAllByRole(
     "row",
   );
-
-  // Table should have one trade row
-  expect(
-    trades.length,
-  ).toBe(
-    length,
-  );
-
-  return trades;
 };
 
 const sliderShouldChange = (
@@ -143,6 +132,61 @@ const balanceShouldChange = (
       ),
     ).getByText(
       balance,
+    ),
+  ).toBeInTheDocument();
+};
+
+const changePercentShouldChange = (
+  source,
+  changePercent,
+) =>
+{
+  return expect(
+    within(
+      source.getByRole(
+        "footerRow",
+      ),
+    ).getByText(
+      changePercent,
+    ),
+  ).toBeInTheDocument();
+};
+
+const tradeRowsShouldHaveLength = (
+  tradeRows,
+  length,
+) =>
+{
+  return expect(
+    tradeRows,
+  ).toHaveLength(
+    length,
+  );
+};
+
+const tradeRowShouldHaveClosePrice = (
+  openedTrade,
+  closePrice,
+) =>
+{
+  return expect(
+    within(
+      openedTrade,
+    ).getByText(
+      closePrice,
+    ),
+  ).toBeInTheDocument();
+};
+
+const tradeRowShouldHaveExitButton = (
+  openedTrade,
+) =>
+{
+  return expect(
+    within(
+      openedTrade,
+    ).getByText(
+      "Exit",
     ),
   ).toBeInTheDocument();
 };
@@ -420,30 +464,28 @@ describe(
           LedgerBalanceAfterOpen,
         );
 
-        const [
-          openedTrade,
-        ] = await getAllTradeRows(
+        const tradeRows = getTradeRows(
           screen,
+        );
+
+        tradeRowsShouldHaveLength(
+          tradeRows,
           1,
         );
 
-        // Row should have open price
-        expect(
-          within(
-            openedTrade,
-          ).getByText(
-            StartPriceClose,
-          ),
-        ).toBeInTheDocument();
+        const [
+          openedTrade,
+        ] = tradeRows;
+
+        tradeRowShouldHaveClosePrice(
+          openedTrade,
+          StartPriceClose,
+        );
 
         // Row should have exit button
-        expect(
-          within(
-            openedTrade,
-          ).getByText(
-            "Exit",
-          ),
-        ).toBeInTheDocument();
+        tradeRowShouldHaveExitButton(
+          openedTrade,
+        );
       },
     );
 
@@ -474,43 +516,33 @@ describe(
           screen,
         );
 
-        // Get close trade row
-        const [
-          closedTrade,
-        ] = screen.getAllByRole(
-          "row",
+        const tradeRows = getTradeRows(
+          screen,
         );
 
-        // Row should have close price
-        expect(
-          within(
-            closedTrade,
-          ).getByText(
-            EndPriceClose,
-          ),
-        ).toBeInTheDocument();
+        tradeRowsShouldHaveLength(
+          tradeRows,
+          1,
+        );
 
-        // Total balance should be updated
-        expect(
-          within(
-            screen.getByRole(
-              "footerRow",
-            ),
-          ).getByText(
-            LedgerBalanceAfterClose,
-          ),
-        ).toBeInTheDocument();
+        const [
+          closedTrade,
+        ] = tradeRows;
 
-        // Total change should be updated
-        expect(
-          within(
-            screen.getByRole(
-              "footerRow",
-            ),
-          ).getByText(
-            LedgerChangeAfterClose,
-          ),
-        ).toBeInTheDocument();
+        tradeRowShouldHaveClosePrice(
+          closedTrade,
+          EndPriceClose,
+        );
+
+        balanceShouldChange(
+          screen,
+          LedgerBalanceAfterClose,
+        );
+
+        changePercentShouldChange(
+          screen,
+          LedgerChangeAfterClose,
+        );
       },
     );
   },

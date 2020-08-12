@@ -350,6 +350,17 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-unused-vars": "warn",
+        "jest/expect-expect": [
+            "error",
+            {
+                "assertFunctionNames": [
+                    "expect",
+                    "*Should",
+                    "*Should*",
+                    "should*"
+                ]
+            }
+        ],
         "react/prop-types": 0,
         "react/display-name": 0,
         "react/jsx-closing-bracket-location": "error",
