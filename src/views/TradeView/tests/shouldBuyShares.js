@@ -77,8 +77,4 @@ export const shouldBuyShares = async (
       trade.LedgerBalance,
     ),
   );
-
-  return {
-    ...trade,
-  };
 };

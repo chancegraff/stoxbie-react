@@ -63,7 +63,12 @@ export const shouldSellShares = async (
     secondTradeRow,
   ] = tradeRows;
 
-  const tradeRow = secondTradeRow || firstTradeRow;
+  let tradeRow = secondTradeRow;
+
+  if (!secondTradeRow || trade.TotalShares === 0)
+  {
+    tradeRow = firstTradeRow;
+  }
 
   tradeRowShouldHaveText(
     tradeRow,
@@ -104,8 +109,4 @@ export const shouldSellShares = async (
       trade.LedgerChange,
     ),
   );
-
-  return {
-    ...trade,
-  };
 };

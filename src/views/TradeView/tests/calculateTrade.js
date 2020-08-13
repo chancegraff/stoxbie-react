@@ -7,6 +7,7 @@ export default (
   if (previousTrade.OpenPrice && previousTrade.OpenCount)
   {
     const {
+      TotalShares: PreviousTotalShares,
       OpenPrice,
       OpenCount,
       ClosePrice = sharePrice,
@@ -17,11 +18,13 @@ export default (
       LedgerReturns: PreviousLedgerReturns,
     } = previousTrade;
 
+    const TotalShares = PreviousTotalShares - shareCount;
     const LedgerBalance = PreviousLedgerBalance + (CloseCount * ClosePrice);
     const LedgerReturns = PreviousLedgerReturns + ChangeBalance;
     const LedgerChange = LedgerReturns / LedgerBalance;
 
     return {
+      TotalShares,
       OpenPrice,
       OpenCount,
       ClosePrice,
@@ -35,6 +38,7 @@ export default (
   }
 
   const {
+    TotalShares: PreviousTotalShares = 0,
     OpenPrice = sharePrice,
     OpenCount = shareCount,
     ClosePrice = undefined,
@@ -45,7 +49,10 @@ export default (
     LedgerChange = undefined,
   } = previousTrade;
 
+  const TotalShares = PreviousTotalShares + shareCount;
+
   return {
+    TotalShares,
     OpenPrice,
     OpenCount,
     ClosePrice,
