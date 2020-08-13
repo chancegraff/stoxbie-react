@@ -1,3 +1,7 @@
+import {
+  iexStartDate,
+} from "./constants";
+
 const prices = [
   {
     date: "2003-12-01",
@@ -418,5 +422,20 @@ const prices = [
     symbol: "NFLX",
   },
 ];
+
+export const priceIndex = prices.findIndex(
+  (
+    price,
+  ) =>
+  {
+    return price.date === iexStartDate;
+  },
+);
+
+export const dayOnePrice = prices[priceIndex];
+export const dayTwoPrice = prices[priceIndex + 1];
+export const dayThreePrice = prices[priceIndex + 2];
+export const dayFourPrice = prices[priceIndex + 3];
+export const dayFivePrice = prices[priceIndex + 4];
 
 export default prices;

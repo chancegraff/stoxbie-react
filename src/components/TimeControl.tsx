@@ -52,6 +52,7 @@ const TimeControl: React.FC<Props> = (
     <Container>
       <LabelMedium
         paddingBottom="10px"
+        data-testid="date"
       >
         {`Today is ${safeDate || "..."}`}
       </LabelMedium>

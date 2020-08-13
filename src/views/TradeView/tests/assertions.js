@@ -5,7 +5,7 @@ import {
 import {
   TableFooter,
   TradeSlider,
-} from "./TradeView.components";
+} from "./components";
 
 export const componentShouldRender = (
   component,
@@ -66,16 +66,16 @@ export const tradeRowsShouldHaveLength = (
   );
 };
 
-export const tradeRowShouldHavePrice = (
+export const tradeRowShouldHaveText = (
   tradeRow,
-  closePrice,
+  text,
 ) =>
 {
   return expect(
     within(
       tradeRow,
     ).getByText(
-      closePrice,
+      text,
     ),
   ).toBeInTheDocument();
 };

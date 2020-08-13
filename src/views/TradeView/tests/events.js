@@ -7,7 +7,7 @@ import {
   ContinueButton,
   SellButton,
   TradeSliderInput,
-} from "./TradeView.components";
+} from "./components";
 
 export const changeSlider = (
   value,
@@ -23,10 +23,20 @@ export const changeSlider = (
   );
 };
 
-export const clickContinue = () =>
+export const clickContinue = (
+  times = 1,
+) =>
 {
-  fireEvent.click(
-    ContinueButton(),
+  Array.from(
+    Array(
+      times,
+    ),
+    () =>
+    {
+      fireEvent.click(
+        ContinueButton(),
+      );
+    },
   );
 };
 

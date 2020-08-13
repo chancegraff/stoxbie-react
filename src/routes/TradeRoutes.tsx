@@ -25,6 +25,8 @@ import ScrollToTop from "services/ScrollToTop";
 import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
 
+import defPrices from "../views/TradeView/tests/prices";
+
 type Props = unknown;
 
 const TradeRoute: React.FC = () =>
@@ -149,7 +151,7 @@ const TradeRoute: React.FC = () =>
     <TradeView
       date={safeDate}
       error={error}
-      prices={prices}
+      prices={defPrices}
       ticker={safeTicker}
     />
   );
