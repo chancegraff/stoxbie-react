@@ -1,14 +1,13 @@
 import React from "react";
 import {
+  render,
   waitFor,
 } from "@testing-library/react";
 import {
   parseISO,
 } from "date-fns";
 
-import {
-  renderWithBoilerplate,
-} from "tests/utils/renderWithBoilerplate";
+import Boilerplate from "tests/utils/Boilerplate";
 import {
   DateFormats,
   formatCurrency,
@@ -119,22 +118,25 @@ const calculateTrade = (
   };
 };
 
-const render = () =>
+const renderView = () =>
 {
-  return renderWithBoilerplate(
+  return render(
     (
-      <TradeView
-        date={
-          parseISO(
-            dayOnePrice.date,
-          )
-        }
-        prices={prices}
-        ticker={dayOnePrice.symbol}
-      />
+      <Boilerplate
+        path="/trade/:ticker/:date"
+        route={`/trade/${dayOnePrice.symbol}/${urlStartDate}`}
+      >
+        <TradeView
+          date={
+            parseISO(
+              dayOnePrice.date,
+            )
+          }
+          prices={prices}
+          ticker={dayOnePrice.symbol}
+        />
+      </Boilerplate>
     ),
-    "/stock/:ticker/:date",
-    `/stock/${dayOnePrice.symbol}/${urlStartDate}`,
   );
 };
 
@@ -142,7 +144,7 @@ it(
   "renders trade view",
   () =>
   {
-    render();
+    renderView();
 
     componentShouldRender(
       BreadcrumbsContainer(),
@@ -204,7 +206,7 @@ it(
   "continues forward in time",
   () =>
   {
-    render();
+    renderView();
 
     componentShouldRender(
       TimeControlDate(
@@ -236,7 +238,7 @@ it(
   {
     const shareCount = 200;
 
-    render();
+    renderView();
 
     await waitFor(
       () =>
@@ -262,6 +264,123 @@ it(
   },
 );
 
+const shouldBuyShares = (
+  trade,
+) =>
+{
+  return async () =>
+  {
+    changeSlider(
+      trade.OpenCount,
+    );
+
+    await waitFor(
+      () =>
+      {
+        return sliderShouldChange(
+          `${trade.OpenCount}`,
+        );
+      },
+    );
+
+    clickBuy();
+
+    await waitFor(
+      () =>
+      {
+        return sliderShouldChange(
+          "0",
+        );
+      },
+    );
+
+    ledgerBalanceShouldChange(
+      formatCurrency(
+        trade.LedgerBalance,
+      ),
+    );
+
+    const tradeRows = TableTradeRows();
+
+    tradeRowsShouldHaveLength(
+      tradeRows,
+      1,
+    );
+
+    const [
+      openedTrade,
+    ] = tradeRows;
+
+    tradeRowShouldHavePrice(
+      openedTrade,
+      formatCurrency(
+        trade.OpenPrice,
+      ),
+    );
+
+    tradeRowShouldHaveExitButton(
+      openedTrade,
+    );
+  };
+};
+
+const shouldSellShares = (
+  trade,
+) =>
+{
+  return async (
+  ) =>
+  {
+    clickContinue();
+    changeSlider(
+      trade.CloseCount,
+    );
+    await waitFor(
+      () =>
+      {
+        return sliderShouldChange(
+          `${trade.CloseCount}`,
+        );
+      },
+    );
+    clickSell();
+    await waitFor(
+      () =>
+      {
+        return sliderShouldChange(
+          "0",
+        );
+      },
+    );
+    const tradeRows = TableTradeRows();
+
+    tradeRowsShouldHaveLength(
+      tradeRows,
+      1,
+    );
+    const [
+      closedTrade,
+    ] = tradeRows;
+
+    tradeRowShouldHavePrice(
+      closedTrade,
+      formatCurrency(
+        trade.ClosePrice,
+      ),
+    );
+    ledgerBalanceShouldChange(
+      formatCurrency(
+        trade.LedgerBalance,
+      ),
+    );
+    ledgerChangeShouldChange(
+      formatPercentage(
+        trade.LedgerChange,
+      ),
+    );
+  };
+};
+
 describe(
   "conducts a simple trade",
   () =>
@@ -279,234 +398,126 @@ describe(
     beforeEach(
       () =>
       {
-        render();
+        renderView();
       },
     );
 
     it(
       "buys 200 shares on first day",
-      async () =>
-      {
-        changeSlider(
-          dayOneTrade.OpenCount,
-        );
-
-        await waitFor(
-          () =>
-          {
-            return sliderShouldChange(
-              `${dayOneTrade.OpenCount}`,
-            );
-          },
-        );
-
-        clickBuy();
-
-        await waitFor(
-          () =>
-          {
-            return sliderShouldChange(
-              "0",
-            );
-          },
-        );
-
-        ledgerBalanceShouldChange(
-          formatCurrency(
-            dayOneTrade.LedgerBalance,
-          ),
-        );
-
-        const tradeRows = TableTradeRows();
-
-        tradeRowsShouldHaveLength(
-          tradeRows,
-          1,
-        );
-
-        const [
-          openedTrade,
-        ] = tradeRows;
-
-        tradeRowShouldHavePrice(
-          openedTrade,
-          formatCurrency(
-            dayOneTrade.OpenPrice,
-          ),
-        );
-
-        tradeRowShouldHaveExitButton(
-          openedTrade,
-        );
-      },
+      shouldBuyShares(
+        dayOneTrade,
+      ),
     );
 
     it(
       "sells 200 shares on second day",
-      async () =>
-      {
-        clickContinue();
-
-        changeSlider(
-          dayTwoTrade.CloseCount,
-        );
-
-        await waitFor(
-          () =>
-          {
-            return sliderShouldChange(
-              `${dayTwoTrade.CloseCount}`,
-            );
-          },
-        );
-
-        clickSell();
-
-        await waitFor(
-          () =>
-          {
-            return sliderShouldChange(
-              "0",
-            );
-          },
-        );
-
-        const tradeRows = TableTradeRows();
-
-        tradeRowsShouldHaveLength(
-          tradeRows,
-          1,
-        );
-
-        const [
-          closedTrade,
-        ] = tradeRows;
-
-        tradeRowShouldHavePrice(
-          closedTrade,
-          formatCurrency(
-            dayTwoTrade.ClosePrice,
-          ),
-        );
-
-        ledgerBalanceShouldChange(
-          formatCurrency(
-            dayTwoTrade.LedgerBalance,
-          ),
-        );
-
-        ledgerChangeShouldChange(
-          formatPercentage(
-            dayTwoTrade.LedgerChange,
-          ),
-        );
-      },
+      shouldSellShares(
+        dayTwoTrade,
+      ),
     );
   },
 );
 
-describe(
-  "conducts a continuous trade",
-  () =>
-  {
-    // Day 1: Buy 200 shares @ 3.2
-    // 200 shares @ 3.2
-    const fromFirstDay = {
-      firstOpenedTrade: calculateTrade(
-        dayOnePrice.close,
-        200,
-      ),
-    };
+// describe(
+//   "conducts a continuous trade",
+//   () =>
+//   {
+//     // Day 1: Buy 200 shares @ 3.2
+//     // 200 shares @ 3.2
+//     const fromFirstDay = {
+//       firstOpenedTrade: calculateTrade(
+//         dayOnePrice.close,
+//         200,
+//       ),
+//     };
 
-    // Day 2: Sell 50/200 shares @ 3.79
-    // 150 shares @ 3.2
-    const fromSecondDay = {
-      firstOpenedTrade: calculateTrade(
-        dayOnePrice,
-        150,
-      ),
-      firstClosedTrade: calculateTrade(
-        dayTwoPrice.close,
-        50,
-        fromFirstDay.firstOpenedTrade,
-      ),
-    };
+//     // Day 2: Sell 50/200 shares @ 3.79
+//     // 150 shares @ 3.2
+//     const fromSecondDay = {
+//       firstOpenedTrade: calculateTrade(
+//         dayOnePrice.close,
+//         150,
+//       ),
+//       firstClosedTrade: calculateTrade(
+//         dayTwoPrice.close,
+//         50,
+//         fromFirstDay.firstOpenedTrade,
+//       ),
+//     };
 
-    // Day 3: Buy 100 shares @ 3.67
-    // 100 shares @ 3.67 <- Displayed first
-    // 150 shares @ 3.2 <- Sold first
-    const fromThirdDay = {
-      secondOpenedTrade: calculateTrade(
-        dayThreePrice.close,
-        100,
-      ),
-    };
+//     // Day 3: Buy 100 shares @ 3.67
+//     // 100 shares @ 3.67 <- Displayed first
+//     // 150 shares @ 3.2 <- Sold first
+//     const fromThirdDay = {
+//       secondOpenedTrade: calculateTrade(
+//         dayThreePrice.close,
+//         100,
+//       ),
+//     };
 
-    // Day 4: Sell 150/250 shares @ 3.78
-    // 100 shares @ 3.67 <- Sold next
-    const fromFourthDay = {
-      secondClosedTrade: calculateTrade(
-        dayFourPrice.close,
-        150,
-        fromSecondDay.firstOpenedTrade,
-      ),
-    };
+//     // Day 4: Sell 150/250 shares @ 3.78
+//     // 100 shares @ 3.67 <- Sold next
+//     const fromFourthDay = {
+//       secondClosedTrade: calculateTrade(
+//         dayFourPrice.close,
+//         150,
+//         fromSecondDay.firstOpenedTrade,
+//       ),
+//     };
 
-    // Day 5: Sell 100/100 shares @ 3.79
-    // Done!
-    const fromFifthDay = {
-      thirdClosedTrade: calculateTrade(
-        dayFivePrice.close,
-        100,
-        fromThirdDay.secondOpenedTrade,
-      ),
-    };
+//     // Day 5: Sell 100/100 shares @ 3.79
+//     // Done!
+//     const fromFifthDay = {
+//       thirdClosedTrade: calculateTrade(
+//         dayFivePrice.close,
+//         100,
+//         fromThirdDay.secondOpenedTrade,
+//       ),
+//     };
 
-    beforeEach(
-      () =>
-      {
-        render();
-      },
-    );
+//     beforeEach(
+//       () =>
+//       {
+//         renderView();
+//       },
+//     );
 
-    it(
-      "buys 200 shares on first day",
-      () =>
-      {
-        expect();
-      },
-    );
+//     it(
+//       "buys 200 shares on first day",
+//       () =>
+//       {
+//         return shouldBuyShares(
+//           fromFirstDay.firstOpenedTrade,
+//         );
+//       },
+//     );
 
-    it(
-      "sells 50 shares on second day",
-      () =>
-      {
-        expect();
-      },
-    );
+//     it(
+//       "sells 50 shares on second day",
+//       shouldSellShares(
+//         fromSecondDay.firstClosedTrade,
+//       ),
+//     );
 
-    it(
-      "buys 100 shares on third day",
-      () =>
-      {
-        expect();
-      },
-    );
+//     it(
+//       "buys 100 shares on third day",
+//       shouldBuyShares(
+//         fromThirdDay.secondOpenedTrade,
+//       ),
+//     );
 
-    it(
-      "sells 150 shares on fourth day",
-      () =>
-      {
-        expect();
-      },
-    );
+//     it(
+//       "sells 150 shares on fourth day",
+//       shouldSellShares(
+//         fromFourthDay.secondClosedTrade,
+//       ),
+//     );
 
-    it(
-      "sells 100 shares on fifth day",
-      () =>
-      {
-        expect();
-      },
-    );
-  },
-);
+//     it(
+//       "sells 100 shares on fifth day",
+//       shouldSellShares(
+//         fromFifthDay.thirdClosedTrade,
+//       ),
+//     );
+//   },
+// );
