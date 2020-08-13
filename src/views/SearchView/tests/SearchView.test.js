@@ -1,12 +1,11 @@
 import React from "react";
 import {
   fireEvent,
+  render,
   screen,
 } from "@testing-library/react";
 
-import {
-  renderWithBoilerplate,
-} from "tests/utils/renderWithBoilerplate";
+import Boilerplate from "utils/tests/Boilerplate";
 import SearchView from "views/SearchView";
 
 const handleSearch = jest.fn();
@@ -15,8 +14,10 @@ it(
   "renders search view",
   () =>
   {
-    renderWithBoilerplate(
-      <SearchView handleSearch={handleSearch} />,
+    render(
+      <Boilerplate>
+        <SearchView handleSearch={handleSearch} />
+      </Boilerplate>,
     );
 
     expect(
@@ -31,8 +32,10 @@ it(
   "types into the input",
   () =>
   {
-    renderWithBoilerplate(
-      <SearchView handleSearch={handleSearch} />,
+    render(
+      <Boilerplate>
+        <SearchView handleSearch={handleSearch} />
+      </Boilerplate>,
     );
 
     fireEvent.change(

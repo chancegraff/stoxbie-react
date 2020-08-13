@@ -17,11 +17,11 @@ import {
 
 import {
   TICKER_ERROR_MESSAGE,
-} from "services/Constants";
-import ScrollToTop from "services/ScrollToTop";
+} from "utils/Constants";
 import {
   handleUnloadCreator,
-} from "services/Utilities";
+} from "utils/Utilities";
+import ScrollToTop from "services/ScrollToTop";
 import PageError from "templates/PageError";
 import StockView from "views/StockView";
 

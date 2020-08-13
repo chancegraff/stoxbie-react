@@ -12,7 +12,7 @@ import {
 
 import {
   SLIDER_TICK_COUNT,
-} from "services/Constants";
+} from "utils/Constants";
 
 import {
   LeftAlignedTickBar,

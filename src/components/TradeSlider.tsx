@@ -14,7 +14,7 @@ import {
 
 import {
   usePrevious,
-} from "services/Utilities";
+} from "utils/Utilities";
 
 import {
   TickBar,

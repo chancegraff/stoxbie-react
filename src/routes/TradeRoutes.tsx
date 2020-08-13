@@ -15,15 +15,17 @@ import {
   DATE_ERROR_MESSAGE,
   FETCH_ERROR_MESSAGE,
   TICKER_ERROR_MESSAGE,
-} from "services/Constants";
-import ScrollToTop from "services/ScrollToTop";
+} from "utils/Constants";
 import {
   DateFormats,
   handleUnloadCreator,
   parseDate,
-} from "services/Utilities";
+} from "utils/Utilities";
+import ScrollToTop from "services/ScrollToTop";
 import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
+
+import defPrices from "../views/TradeView/tests/prices";
 
 type Props = unknown;
 
@@ -149,7 +151,7 @@ const TradeRoute: React.FC = () =>
     <TradeView
       date={safeDate}
       error={error}
-      prices={prices}
+      prices={defPrices}
       ticker={safeTicker}
     />
   );

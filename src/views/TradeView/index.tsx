@@ -21,10 +21,10 @@ import useResizeObserver from "use-resize-observer";
 
 import {
   useCookie,
-} from "services/Cookies";
+} from "utils/Cookies";
 import {
   handleUnloadCreator,
-} from "services/Utilities";
+} from "utils/Utilities";
 import {
   AspectRatioBox, AspectRatioItem,
 } from "templates/AspectRatio";
@@ -37,12 +37,12 @@ import TimeControl from "components/TimeControl";
 import TradeControl from "components/TradeControl";
 import TradeHistory from "components/TradeHistory";
 
-type Props = {
-  date?: Date;
-  error?: string;
-  prices?: HistoricalPrice[];
-  ticker?: string;
-};
+  type Props = {
+    date?: Date;
+    error?: string;
+    prices?: HistoricalPrice[];
+    ticker?: string;
+  };
 
 const getPriceIndexes = (
   prices: HistoricalPrice[],
@@ -95,9 +95,9 @@ const setNextPrices = (
     setPastPrices,
     setNextPriceIndexes,
   }: {
-    setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
-    setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
-  },
+      setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
+      setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
+    },
 ) =>
 {
   const nextPriceIndexes = priceIndexes.map(
@@ -414,7 +414,7 @@ const TradeView: React.FC<Props> = (
 
         while (
           remainingOrderShareCount > 0 &&
-          sortedCurrentTrades.length > 0
+            sortedCurrentTrades.length > 0
         )
         {
           const {
@@ -560,11 +560,11 @@ const TradeView: React.FC<Props> = (
     {
       if (
         prices &&
-        nextPriceIndexes &&
-        canGetNextPrice(
-          prices,
-          nextPriceIndexes,
-        )
+          nextPriceIndexes &&
+          canGetNextPrice(
+            prices,
+            nextPriceIndexes,
+          )
       )
       {
         setNextPrices(

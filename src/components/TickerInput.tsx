@@ -17,7 +17,7 @@ import {
 
 import {
   TICKER_INPUT_PLACERHOLDER,
-} from "services/Constants";
+} from "utils/Constants";
 
 import Label from "./TickerInput.label";
 import {

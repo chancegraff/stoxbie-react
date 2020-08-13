@@ -10,7 +10,7 @@ import {
 
 import {
   copyPropsToChildren,
-} from "services/Utilities";
+} from "utils/Utilities";
 import {
   StatefulPopover,
 } from "components/BaseUI/Popover";

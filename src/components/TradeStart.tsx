@@ -19,7 +19,7 @@ import {
   fiveYearsAgo,
   formatDate,
   oneYearAgo,
-} from "services/Utilities";
+} from "utils/Utilities";
 import DatePicker from "components/BaseUI/DatePicker";
 
 import {

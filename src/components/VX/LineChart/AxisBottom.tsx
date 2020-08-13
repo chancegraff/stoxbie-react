@@ -14,7 +14,7 @@ import {
 import {
   DateFormats,
   formatDate,
-} from "services/Utilities";
+} from "utils/Utilities";
 import {
   ScaleX,
 } from "components/VX/Shared/Scale";

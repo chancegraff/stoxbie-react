@@ -8,7 +8,7 @@ import {
 
 import {
   DEBOUNCE_INPUT_MS,
-} from "services/Constants";
+} from "utils/Constants";
 import SearchView from "views/SearchView";
 
 type Props = unknown;

@@ -17,7 +17,7 @@ import {
 import {
   DateFormats,
   formatParsedDate,
-} from "services/Utilities";
+} from "utils/Utilities";
 
 type Props = TickRendererProps;
 

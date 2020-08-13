@@ -72,7 +72,7 @@
         "callback-return": "error",
         "camelcase": "error",
         "capitalized-comments": "off",
-        "class-methods-use-this": "error",
+        "class-methods-use-this": "off",
         "comma-dangle": [
             "error",
             "always-multiline"
@@ -127,7 +127,7 @@
             "error",
             "unix"
         ],
-        "lines-around-comment": "error",
+        "lines-around-comment": "off",
         "lines-around-directive": "error",
         "lines-between-class-members": "error",
         "max-classes-per-file": "error",
@@ -350,6 +350,17 @@
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-unused-vars": "warn",
+        "jest/expect-expect": [
+            "error",
+            {
+                "assertFunctionNames": [
+                    "expect",
+                    "*Should",
+                    "*Should*",
+                    "should*"
+                ]
+            }
+        ],
         "react/prop-types": 0,
         "react/display-name": 0,
         "react/jsx-closing-bracket-location": "error",
@@ -435,6 +446,7 @@
                     // Internal packages.
                     [
                         "^(tests)(/.*|$)",
+                        "^(utils)(/.*|$)",
                         "^(services)(/.*|$)",
                         "^(templates)(/.*|$)",
                         "^(routes)(/.*|$)",
