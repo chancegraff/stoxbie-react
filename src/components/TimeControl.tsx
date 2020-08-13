@@ -10,6 +10,7 @@ import {
 import {
   HistoricalPrice,
 } from "iex";
+
 import {
   DateFormats, formatDate,
 } from "utils/Utilities";

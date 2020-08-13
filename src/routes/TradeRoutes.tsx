@@ -10,18 +10,18 @@ import {
 import {
   historicalPrices,
 } from "iex-cloud";
+
 import {
   DATE_ERROR_MESSAGE,
   FETCH_ERROR_MESSAGE,
   TICKER_ERROR_MESSAGE,
 } from "utils/Constants";
-import ScrollToTop from "utils/ScrollToTop";
 import {
   DateFormats,
   handleUnloadCreator,
   parseDate,
 } from "utils/Utilities";
-
+import ScrollToTop from "services/ScrollToTop";
 import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
 

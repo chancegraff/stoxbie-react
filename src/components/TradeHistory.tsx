@@ -8,11 +8,11 @@ import {
 import {
   HistoricalPrice,
 } from "iex";
+
 import {
   formatCurrency,
   formatPercentage,
 } from "utils/Utilities";
-
 import Spinner from "components/BaseUI/Spinner";
 import TradeRowsClosed from "components/TradeRowsClosed";
 import TradeRowsOpened from "components/TradeRowsOpened";

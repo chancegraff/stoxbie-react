@@ -11,6 +11,7 @@ import {
 import {
   HistoricalPrice,
 } from "iex";
+
 import {
   usePrevious,
 } from "utils/Utilities";

@@ -7,10 +7,10 @@ import {
   onChange as defaultHandler,
   StatefulCalendar,
 } from "baseui/dist/datepicker";
+
 import {
   copyPropsToChildren,
 } from "utils/Utilities";
-
 import {
   StatefulPopover,
 } from "components/BaseUI/Popover";

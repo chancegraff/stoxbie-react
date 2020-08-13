@@ -4,11 +4,11 @@ import React, {
 import {
   StyledRow,
 } from "baseui/dist/table";
+
 import {
   formatCurrency,
   formatPercentage,
 } from "utils/Utilities";
-
 import TradeAction from "components/TradeAction";
 
 import {

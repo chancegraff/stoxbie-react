@@ -5,10 +5,10 @@ import {
 import {
   useDebouncedCallback,
 } from "use-debounce";
+
 import {
   DEBOUNCE_INPUT_MS,
 } from "utils/Constants";
-
 import SearchView from "views/SearchView";
 
 type Props = unknown;

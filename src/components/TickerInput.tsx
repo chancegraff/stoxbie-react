@@ -14,6 +14,7 @@ import {
 import {
   Search,
 } from "iex-cloud";
+
 import {
   TICKER_INPUT_PLACERHOLDER,
 } from "utils/Constants";

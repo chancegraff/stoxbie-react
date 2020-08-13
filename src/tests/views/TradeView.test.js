@@ -6,14 +6,14 @@ import {
 import {
   parseISO,
 } from "date-fns";
+
+import Boilerplate from "tests/utils/Boilerplate";
 import {
   DateFormats,
   formatCurrency,
   formatParsedDate,
   formatPercentage,
 } from "utils/Utilities";
-
-import Boilerplate from "tests/utils/Boilerplate";
 import TradeView from "views/TradeView";
 
 import {

@@ -10,11 +10,11 @@ import {
 import {
   useStyletron,
 } from "baseui/dist";
+
 import {
   DateFormats,
   formatDate,
 } from "utils/Utilities";
-
 import {
   ScaleX,
 } from "components/VX/Shared/Scale";

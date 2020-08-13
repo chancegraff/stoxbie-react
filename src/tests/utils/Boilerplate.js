@@ -3,7 +3,8 @@ import {
   MemoryRouter,
   Route,
 } from "react-router-dom";
-import BaseUI from "utils/BaseUI";
+
+import BaseUI from "services/BaseUI";
 
 const Boilerplate = (
   {
