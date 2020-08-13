@@ -7,7 +7,7 @@ import {
   parseISO,
 } from "date-fns";
 
-import Boilerplate from "tests/utils/Boilerplate";
+import Boilerplate from "utils/tests/Boilerplate";
 import {
   DateFormats,
   formatCurrency,

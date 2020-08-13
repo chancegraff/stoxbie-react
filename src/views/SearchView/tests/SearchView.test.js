@@ -5,7 +5,7 @@ import {
   screen,
 } from "@testing-library/react";
 
-import Boilerplate from "tests/utils/Boilerplate";
+import Boilerplate from "utils/tests/Boilerplate";
 import SearchView from "views/SearchView";
 
 const handleSearch = jest.fn();
