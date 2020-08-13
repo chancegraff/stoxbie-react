@@ -11,10 +11,9 @@ import {
 import {
   HistoricalPrice,
 } from "iex";
-
 import {
   usePrevious,
-} from "services/Utilities";
+} from "utils/Utilities";
 
 import {
   TickBar,

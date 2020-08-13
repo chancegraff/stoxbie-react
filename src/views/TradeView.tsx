@@ -18,13 +18,13 @@ import {
   HistoricalPrice,
 } from "iex";
 import useResizeObserver from "use-resize-observer";
-
 import {
   useCookie,
-} from "services/Cookies";
+} from "utils/Cookies";
 import {
   handleUnloadCreator,
-} from "services/Utilities";
+} from "utils/Utilities";
+
 import {
   AspectRatioBox, AspectRatioItem,
 } from "templates/AspectRatio";

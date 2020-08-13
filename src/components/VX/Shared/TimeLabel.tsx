@@ -13,11 +13,10 @@ import {
 import {
   StyleObject,
 } from "styletron-react";
-
 import {
   DateFormats,
   formatParsedDate,
-} from "services/Utilities";
+} from "utils/Utilities";
 
 type Props = TickRendererProps;
 

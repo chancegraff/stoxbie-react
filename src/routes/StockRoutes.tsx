@@ -14,14 +14,14 @@ import {
   Logo,
   logo as getLogo,
 } from "iex-cloud";
-
 import {
   TICKER_ERROR_MESSAGE,
-} from "services/Constants";
-import ScrollToTop from "services/ScrollToTop";
+} from "utils/Constants";
+import ScrollToTop from "utils/ScrollToTop";
 import {
   handleUnloadCreator,
-} from "services/Utilities";
+} from "utils/Utilities";
+
 import PageError from "templates/PageError";
 import StockView from "views/StockView";
 

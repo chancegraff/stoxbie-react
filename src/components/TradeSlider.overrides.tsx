@@ -9,10 +9,9 @@ import {
   SharedProps,
   StyledTick,
 } from "baseui/dist/slider";
-
 import {
   SLIDER_TICK_COUNT,
-} from "services/Constants";
+} from "utils/Constants";
 
 import {
   LeftAlignedTickBar,

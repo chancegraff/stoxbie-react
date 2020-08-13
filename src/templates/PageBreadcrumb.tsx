@@ -10,11 +10,10 @@ import {
 import {
   StyledLink,
 } from "baseui/dist/link";
-
 import {
   DateFormats,
   formatParsedDate,
-} from "services/Utilities";
+} from "utils/Utilities";
 
 type Props = unknown;
 
