@@ -3,7 +3,7 @@ import {
 } from "utils/Utilities";
 
 import {
-  componentShouldRender, componentsShouldRender,
+  componentsShouldRender,
 } from "./helpers/assertions";
 import {
   BreadcrumbsContainer,
