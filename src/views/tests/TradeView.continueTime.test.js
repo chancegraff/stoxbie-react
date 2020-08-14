@@ -17,14 +17,14 @@ import {
   dayTwoPrice,
 } from "./helpers/prices";
 import {
-  renderView,
+  renderTradeView,
 } from "./helpers/render";
 
 it(
   "continues forward in time",
   () =>
   {
-    renderView();
+    renderTradeView();
 
     componentShouldRender(
       TimeControlDate(

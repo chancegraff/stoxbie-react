@@ -16,7 +16,7 @@ import prices, {
   dayOnePrice,
 } from "./prices";
 
-export const renderView = () =>
+export const renderTradeView = () =>
 {
   return render(
     (
