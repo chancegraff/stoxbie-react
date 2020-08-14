@@ -2,7 +2,7 @@ import {
   clickContinue,
 } from "./helpers/events";
 import {
-  renderView,
+  renderTradeView,
 } from "./helpers/render";
 import {
   shouldBuyShares,
@@ -15,7 +15,7 @@ it(
   "conducts a simple trade",
   async () =>
   {
-    renderView();
+    renderTradeView();
 
     await shouldBuyShares(
       {

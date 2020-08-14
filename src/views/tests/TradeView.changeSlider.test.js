@@ -9,7 +9,7 @@ import {
   changeSlider,
 } from "./helpers/events";
 import {
-  renderView,
+  renderTradeView,
 } from "./helpers/render";
 
 it(
@@ -18,7 +18,7 @@ it(
   {
     const shareCount = 200;
 
-    renderView();
+    renderTradeView();
 
     await waitFor(
       () =>

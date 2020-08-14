@@ -26,14 +26,14 @@ import {
   dayOnePrice,
 } from "./helpers/prices";
 import {
-  renderView,
+  renderTradeView,
 } from "./helpers/render";
 
 it(
   "renders trade view",
   () =>
   {
-    renderView();
+    renderTradeView();
 
     componentsShouldRender(
       [

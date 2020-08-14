@@ -2,7 +2,7 @@ import {
   clickContinue,
 } from "./helpers/events";
 import {
-  renderView,
+  renderTradeView,
 } from "./helpers/render";
 import {
   shouldBuyShares,
@@ -15,7 +15,7 @@ it(
   "conducts a continuous trade",
   async () =>
   {
-    renderView();
+    renderTradeView();
 
     // Day 1: Buy 200 shares @ 3.2
     // (200) 3.2 / - / - / -    <<
