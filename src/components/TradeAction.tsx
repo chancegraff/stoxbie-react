@@ -9,7 +9,7 @@ import {
 type Props = PropsWithChildren & {
   Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
   sharePrice: number;
-  purchaseAmount: number;
+  shareCount: number;
   handleTrade: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
@@ -20,7 +20,7 @@ const TradeAction: React.FC<Props> = (
     handleTrade,
     handleToggle,
     sharePrice,
-    purchaseAmount,
+    shareCount,
     Component = Button,
   },
 ) =>
@@ -28,11 +28,11 @@ const TradeAction: React.FC<Props> = (
   const handleClick = useCallback(
     () =>
     {
-      if (purchaseAmount > 0)
+      if (shareCount > 0)
       {
         handleTrade(
           sharePrice,
-          purchaseAmount,
+          shareCount,
         );
       }
       else if (handleToggle)
@@ -44,7 +44,7 @@ const TradeAction: React.FC<Props> = (
       handleTrade,
       handleToggle,
       sharePrice,
-      purchaseAmount,
+      shareCount,
     ],
   );
 

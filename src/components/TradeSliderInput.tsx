@@ -3,16 +3,16 @@ import React, {
 } from "react";
 
 type Props = {
-  purchaseAmount: number;
+  shareCount: number;
   maxValue: number;
-  setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
+  setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TradeSliderInput: React.FC<Props> = (
   {
-    purchaseAmount,
+    shareCount,
     maxValue,
-    setPurchaseAmount,
+    setShareAmount,
   },
 ) =>
 {
@@ -35,12 +35,12 @@ const TradeSliderInput: React.FC<Props> = (
         maxValue,
       );
 
-      setPurchaseAmount(
+      setShareAmount(
         shareCount,
       );
     },
     [
-      setPurchaseAmount,
+      setShareAmount,
       maxValue,
     ],
   );
@@ -48,7 +48,7 @@ const TradeSliderInput: React.FC<Props> = (
   return (
     <input
       hidden={true}
-      value={purchaseAmount}
+      value={shareCount}
       data-testid="sliderInput"
       onChange={handleInputChange}
     />

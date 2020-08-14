@@ -20,18 +20,18 @@ import TradeSliderTickBar from "components/TradeSliderTickBar";
 type Props = {
   currentPrice: HistoricalPrice;
   currentLedger: HistoricalLedger;
-  purchaseAmount: number;
+  shareCount: number;
   purchaseModifier: number;
-  setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
+  setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TradeSlider: React.FC<Props> = (
   {
     currentPrice,
     currentLedger,
-    purchaseAmount,
+    shareCount,
     purchaseModifier,
-    setPurchaseAmount,
+    setShareAmount,
   },
 ) =>
 {
@@ -104,12 +104,12 @@ const TradeSlider: React.FC<Props> = (
         nextPurchaseAmount,
       ] = event.value;
 
-      setPurchaseAmount(
+      setShareAmount(
         nextPurchaseAmount,
       );
     },
     [
-      setPurchaseAmount,
+      setShareAmount,
     ],
   );
   const overrides = useMemo(
@@ -121,9 +121,9 @@ const TradeSlider: React.FC<Props> = (
           {
             return (
               <TradeSliderInput
-                purchaseAmount={purchaseAmount}
+                shareCount={shareCount}
                 maxValue={maxValue}
-                setPurchaseAmount={setPurchaseAmount}
+                setShareAmount={setShareAmount}
               />
             );
           },
@@ -131,9 +131,9 @@ const TradeSlider: React.FC<Props> = (
       };
     },
     [
-      purchaseAmount,
+      shareCount,
       maxValue,
-      setPurchaseAmount,
+      setShareAmount,
     ],
   );
 
@@ -142,7 +142,7 @@ const TradeSlider: React.FC<Props> = (
     {
       if (hasPriceChanged || hasBalanceChanged)
       {
-        setPurchaseAmount(
+        setShareAmount(
           0,
         );
       }
@@ -150,7 +150,7 @@ const TradeSlider: React.FC<Props> = (
     [
       hasPriceChanged,
       hasBalanceChanged,
-      setPurchaseAmount,
+      setShareAmount,
     ],
   );
 
@@ -161,14 +161,14 @@ const TradeSlider: React.FC<Props> = (
         overrides={overrides}
         value={
           [
-            purchaseAmount,
+            shareCount,
           ]
         }
         onChange={handleChange}
       />
       <TradeSliderTickBar
         maxValue={maxValue}
-        setPurchaseAmount={setPurchaseAmount}
+        setShareAmount={setShareAmount}
       />
     </>
   );

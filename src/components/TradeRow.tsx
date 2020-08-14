@@ -66,13 +66,13 @@ const TradeRow: React.FC<Props> = (
       )
       {
         const closeModifier = (trade.openModifier * -1) as -1 | 1;
-        const purchaseAmount = totalShareCount * closeModifier;
+        const shareCount = totalShareCount * closeModifier;
 
         return (
           <TradeAction
             Component={SmallButton}
             handleTrade={handleTrade}
-            purchaseAmount={purchaseAmount}
+            shareCount={shareCount}
             sharePrice={sharePrice}
           >
               Exit

@@ -19,13 +19,13 @@ import {
 
 type Props = {
   maxValue: number;
-  setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
+  setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TradeSliderTickBar: React.FC<Props> = (
   {
     maxValue,
-    setPurchaseAmount,
+    setShareAmount,
   },
 ) =>
 {
@@ -114,13 +114,13 @@ const TradeSliderTickBar: React.FC<Props> = (
           10,
         );
 
-        setPurchaseAmount(
+        setShareAmount(
           tickValue,
         );
       }
     },
     [
-      setPurchaseAmount,
+      setShareAmount,
     ],
   );
 

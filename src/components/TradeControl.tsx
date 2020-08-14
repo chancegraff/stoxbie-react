@@ -41,8 +41,8 @@ const TradeControl: React.FC<Props> = (
     theme,
   ] = useStyletron();
   const [
-    purchaseAmount,
-    setPurchaseAmount,
+    shareCount,
+    setShareAmount,
   ] = useState<number>(
     0,
   );
@@ -84,9 +84,9 @@ const TradeControl: React.FC<Props> = (
       <TradeSlider
         currentLedger={currentLedger}
         currentPrice={currentPrice}
-        purchaseAmount={purchaseAmount}
         purchaseModifier={purchaseModifier}
-        setPurchaseAmount={setPurchaseAmount}
+        shareCount={shareCount}
+        setShareAmount={setShareAmount}
       />
       <FlexGrid marginTop={theme.sizing.scale400}>
         <FlexGridItem>
@@ -94,7 +94,7 @@ const TradeControl: React.FC<Props> = (
             Component={FullButton}
             handleToggle={handleToggle}
             handleTrade={handleTrade}
-            purchaseAmount={purchaseAmount}
+            shareCount={shareCount}
             sharePrice={currentPrice.close}
           >
             Buy
@@ -105,7 +105,7 @@ const TradeControl: React.FC<Props> = (
             Component={FullButton}
             handleToggle={handleToggle}
             handleTrade={handleTrade}
-            purchaseAmount={purchaseAmount}
+            shareCount={shareCount}
             sharePrice={currentPrice.close}
           >
             Sell
