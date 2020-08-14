@@ -16,6 +16,22 @@ export const componentShouldRender = (
   ).toBeInTheDocument();
 };
 
+export const componentsShouldRender = (
+  components,
+) =>
+{
+  return components.map(
+    (
+      component,
+    ) =>
+    {
+      return componentShouldRender(
+        component,
+      );
+    },
+  );
+};
+
 export const sliderShouldChange = (
   count,
 ) =>

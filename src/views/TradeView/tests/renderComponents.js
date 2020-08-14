@@ -3,7 +3,7 @@ import {
 } from "utils/Utilities";
 
 import {
-  componentShouldRender,
+  componentsShouldRender,
 } from "./helpers/assertions";
 import {
   BreadcrumbsContainer,
@@ -35,58 +35,27 @@ it(
   {
     renderView();
 
-    componentShouldRender(
-      BreadcrumbsContainer(),
-    );
-
-    componentShouldRender(
-      BreadcrumbsTicker(
-        dayOnePrice.symbol,
-      ),
-    );
-
-    componentShouldRender(
-      LineChart(),
-    );
-
-    componentShouldRender(
-      ContinueButton(),
-    );
-
-    componentShouldRender(
-      TradeSlider(),
-    );
-
-    componentShouldRender(
-      BuyButton(),
-    );
-
-    componentShouldRender(
-      SellButton(),
-    );
-
-    componentShouldRender(
-      TableHeaderOpen(),
-    );
-
-    componentShouldRender(
-      TableHeaderClose(),
-    );
-
-    componentShouldRender(
-      TableHeaderChangePercent(),
-    );
-
-    componentShouldRender(
-      TableHeaderDollarBalance(),
-    );
-
-    componentShouldRender(
-      TableFooterDollarBalance(
-        formatCurrency(
-          dayOneBalance,
+    componentsShouldRender(
+      [
+        BreadcrumbsContainer(),
+        BreadcrumbsTicker(
+          dayOnePrice.symbol,
         ),
-      ),
+        LineChart(),
+        ContinueButton(),
+        TradeSlider(),
+        BuyButton(),
+        SellButton(),
+        TableHeaderOpen(),
+        TableHeaderClose(),
+        TableHeaderChangePercent(),
+        TableHeaderDollarBalance(),
+        TableFooterDollarBalance(
+          formatCurrency(
+            dayOneBalance,
+          ),
+        ),
+      ],
     );
   },
 );
