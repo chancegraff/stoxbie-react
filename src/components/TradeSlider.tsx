@@ -19,7 +19,7 @@ import TradeSliderTickBar from "components/TradeSliderTickBar";
 
 type Props = {
   currentPrice: HistoricalPrice;
-  currentBalance: number;
+  currentLedger: HistoricalLedger;
   purchaseAmount: number;
   purchaseModifier: number;
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
@@ -28,7 +28,7 @@ type Props = {
 const TradeSlider: React.FC<Props> = (
   {
     currentPrice,
-    currentBalance,
+    currentLedger,
     purchaseAmount,
     purchaseModifier,
     setPurchaseAmount,
@@ -38,8 +38,8 @@ const TradeSlider: React.FC<Props> = (
   const previousPrice = usePrevious(
     currentPrice,
   );
-  const previousBalance = usePrevious(
-    currentBalance,
+  const previousLedger = usePrevious(
+    currentLedger,
   );
   const hasPriceChanged = useMemo(
     () =>
@@ -54,31 +54,33 @@ const TradeSlider: React.FC<Props> = (
   const hasBalanceChanged = useMemo(
     () =>
     {
-      return currentBalance !== previousBalance;
+      return currentLedger.totalBalance !== previousLedger?.totalBalance;
     },
     [
-      currentBalance,
-      previousBalance,
+      currentLedger,
+      previousLedger,
     ],
   );
   const maxPurchasable = useMemo(
     () =>
     {
       return Math.floor(
-        currentBalance / currentPrice.close,
+        currentLedger.totalBalance / currentPrice.close,
       );
     },
     [
       currentPrice,
-      currentBalance,
+      currentLedger,
     ],
   );
   const maxSaleable = useMemo(
     () =>
     {
-      return 0;
+      return currentLedger.totalCount;
     },
-    [],
+    [
+      currentLedger,
+    ],
   );
   const maxValue = useMemo(
     () =>

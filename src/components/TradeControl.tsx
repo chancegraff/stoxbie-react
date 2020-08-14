@@ -24,14 +24,14 @@ import {
 
 type Props = {
   currentPrice?: HistoricalPrice;
-  currentBalance?: number;
+  currentLedger?: HistoricalLedger;
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
 const TradeControl: React.FC<Props> = (
   {
     currentPrice,
-    currentBalance,
+    currentLedger,
     handleTrade,
   },
 ) =>
@@ -74,7 +74,7 @@ const TradeControl: React.FC<Props> = (
     ],
   );
 
-  if (!currentPrice || !currentBalance)
+  if (!currentPrice || !currentLedger)
   {
     return <Spinner container={Container} />;
   }
@@ -82,7 +82,7 @@ const TradeControl: React.FC<Props> = (
   return (
     <Container>
       <TradeSlider
-        currentBalance={currentBalance}
+        currentLedger={currentLedger}
         currentPrice={currentPrice}
         purchaseAmount={purchaseAmount}
         purchaseModifier={purchaseModifier}

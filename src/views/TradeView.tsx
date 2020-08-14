@@ -677,7 +677,7 @@ const TradeView: React.FC<Props> = (
             currentPrice={currentPrice}
           />
           <TradeControl
-            currentBalance={currentLedger.totalBalance}
+            currentLedger={currentLedger}
             currentPrice={currentPrice}
             handleTrade={handleTrade}
           />
