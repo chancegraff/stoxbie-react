@@ -4,14 +4,14 @@ import React, {
 
 type Props = {
   purchaseAmount: number;
-  maxPurchasable: number;
+  maxValue: number;
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TradeSliderInput: React.FC<Props> = (
   {
     purchaseAmount,
-    maxPurchasable,
+    maxValue,
     setPurchaseAmount,
   },
 ) =>
@@ -32,7 +32,7 @@ const TradeSliderInput: React.FC<Props> = (
       );
       const shareCount = Math.min(
         orderCount,
-        maxPurchasable,
+        maxValue,
       );
 
       setPurchaseAmount(
@@ -41,7 +41,7 @@ const TradeSliderInput: React.FC<Props> = (
     },
     [
       setPurchaseAmount,
-      maxPurchasable,
+      maxValue,
     ],
   );
 

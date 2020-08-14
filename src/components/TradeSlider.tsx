@@ -21,6 +21,7 @@ type Props = {
   currentPrice: HistoricalPrice;
   currentBalance: number;
   purchaseAmount: number;
+  purchaseModifier: number;
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
@@ -29,6 +30,7 @@ const TradeSlider: React.FC<Props> = (
     currentPrice,
     currentBalance,
     purchaseAmount,
+    purchaseModifier,
     setPurchaseAmount,
   },
 ) =>
@@ -71,6 +73,26 @@ const TradeSlider: React.FC<Props> = (
       currentBalance,
     ],
   );
+  const maxSaleable = useMemo(
+    () =>
+    {
+      return 0;
+    },
+    [],
+  );
+  const maxValue = useMemo(
+    () =>
+    {
+      return purchaseModifier > 0
+        ? maxPurchasable
+        : maxSaleable;
+    },
+    [
+      purchaseModifier,
+      maxPurchasable,
+      maxSaleable,
+    ],
+  );
   const handleChange = useCallback(
     (
       event: State,
@@ -98,7 +120,7 @@ const TradeSlider: React.FC<Props> = (
             return (
               <TradeSliderInput
                 purchaseAmount={purchaseAmount}
-                maxPurchasable={maxPurchasable}
+                maxValue={maxValue}
                 setPurchaseAmount={setPurchaseAmount}
               />
             );
@@ -108,7 +130,7 @@ const TradeSlider: React.FC<Props> = (
     },
     [
       purchaseAmount,
-      maxPurchasable,
+      maxValue,
       setPurchaseAmount,
     ],
   );
@@ -133,7 +155,7 @@ const TradeSlider: React.FC<Props> = (
   return (
     <>
       <Slider
-        max={maxPurchasable}
+        max={maxValue}
         overrides={overrides}
         value={
           [
@@ -143,7 +165,7 @@ const TradeSlider: React.FC<Props> = (
         onChange={handleChange}
       />
       <TradeSliderTickBar
-        maxPurchasable={maxPurchasable}
+        maxValue={maxValue}
         setPurchaseAmount={setPurchaseAmount}
       />
     </>

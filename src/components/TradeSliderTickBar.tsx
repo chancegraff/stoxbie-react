@@ -18,13 +18,13 @@ import {
 } from "./TradeSliderTickBar.styled";
 
 type Props = {
-  maxPurchasable: number;
+  maxValue: number;
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TradeSliderTickBar: React.FC<Props> = (
   {
-    maxPurchasable,
+    maxValue,
     setPurchaseAmount,
   },
 ) =>
@@ -32,19 +32,19 @@ const TradeSliderTickBar: React.FC<Props> = (
   const percentWidthPerShare = useMemo(
     () =>
     {
-      return 100 / maxPurchasable;
+      return 100 / maxValue;
     },
     [
-      maxPurchasable,
+      maxValue,
     ],
   );
   const sharesPerTick = useMemo(
     () =>
     {
-      return maxPurchasable / SLIDER_TICK_COUNT;
+      return maxValue / SLIDER_TICK_COUNT;
     },
     [
-      maxPurchasable,
+      maxValue,
     ],
   );
   const tickRange = useMemo(
@@ -96,7 +96,7 @@ const TradeSliderTickBar: React.FC<Props> = (
       sharesPerTick,
     ],
   );
-  const handleTick = useCallback(
+  const handleClick = useCallback(
     (
       event: React.MouseEvent<HTMLDivElement>,
     ) =>
@@ -140,7 +140,7 @@ const TradeSliderTickBar: React.FC<Props> = (
               return (
                 <Tick
                   key={index}
-                  onClick={handleTick}
+                  onClick={handleClick}
                 >
                   {
                     Math.round(

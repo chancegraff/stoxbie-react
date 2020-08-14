@@ -46,13 +46,32 @@ const TradeControl: React.FC<Props> = (
   ] = useState<number>(
     0,
   );
+  const [
+    purchaseModifier,
+    setPurchaseModifier,
+  ] = useState<number>(
+    1,
+  );
 
-  const handleClick = useCallback(
+  const handleToggle = useCallback(
     () =>
     {
-      return undefined;
+      if (purchaseModifier > 0)
+      {
+        setPurchaseModifier(
+          -1,
+        );
+      }
+      else
+      {
+        setPurchaseModifier(
+          1,
+        );
+      }
     },
-    [],
+    [
+      purchaseModifier,
+    ],
   );
 
   if (!currentPrice || !currentBalance)
@@ -66,16 +85,16 @@ const TradeControl: React.FC<Props> = (
         currentBalance={currentBalance}
         currentPrice={currentPrice}
         purchaseAmount={purchaseAmount}
+        purchaseModifier={purchaseModifier}
         setPurchaseAmount={setPurchaseAmount}
       />
       <FlexGrid marginTop={theme.sizing.scale400}>
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
-            handleClick={handleClick}
+            handleToggle={handleToggle}
             handleTrade={handleTrade}
             purchaseAmount={purchaseAmount}
-            purchaseModifier={1}
             sharePrice={currentPrice.close}
           >
             Buy
@@ -84,10 +103,9 @@ const TradeControl: React.FC<Props> = (
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
-            handleClick={handleClick}
+            handleToggle={handleToggle}
             handleTrade={handleTrade}
             purchaseAmount={purchaseAmount}
-            purchaseModifier={-1}
             sharePrice={currentPrice.close}
           >
             Sell

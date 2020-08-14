@@ -7,19 +7,18 @@ import {
 } from "baseui/dist/button";
 
 type Props = PropsWithChildren & {
-  purchaseModifier: 1 | -1;
+  Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
   sharePrice: number;
   purchaseAmount: number;
   handleTrade: (sharePrice: number, shareCount: number) => void;
-  handleClick?: () => void;
-  Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+  handleToggle?: () => void;
 };
 
 const TradeAction: React.FC<Props> = (
   {
     children,
     handleTrade,
-    purchaseModifier,
+    handleToggle,
     sharePrice,
     purchaseAmount,
     Component = Button,
@@ -29,21 +28,21 @@ const TradeAction: React.FC<Props> = (
   const handleClick = useCallback(
     () =>
     {
-      if (sharePrice)
+      if (purchaseAmount > 0)
       {
-        const count = Math.abs(
-          purchaseAmount,
-        ) * purchaseModifier;
-
         handleTrade(
           sharePrice,
-          count,
+          purchaseAmount,
         );
+      }
+      else if (handleToggle)
+      {
+        handleToggle();
       }
     },
     [
       handleTrade,
-      purchaseModifier,
+      handleToggle,
       sharePrice,
       purchaseAmount,
     ],
