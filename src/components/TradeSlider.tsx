@@ -21,7 +21,7 @@ type Props = {
   currentPrice: HistoricalPrice;
   currentLedger: HistoricalLedger;
   shareCount: number;
-  purchaseModifier: number;
+  shareModifier: number;
   setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
@@ -30,7 +30,7 @@ const TradeSlider: React.FC<Props> = (
     currentPrice,
     currentLedger,
     shareCount,
-    purchaseModifier,
+    shareModifier,
     setShareAmount,
   },
 ) =>
@@ -85,12 +85,12 @@ const TradeSlider: React.FC<Props> = (
   const maxValue = useMemo(
     () =>
     {
-      return purchaseModifier > 0
+      return shareModifier > 0
         ? maxPurchasable
         : maxSaleable;
     },
     [
-      purchaseModifier,
+      shareModifier,
       maxPurchasable,
       maxSaleable,
     ],

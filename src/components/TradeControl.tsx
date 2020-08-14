@@ -47,8 +47,8 @@ const TradeControl: React.FC<Props> = (
     0,
   );
   const [
-    purchaseModifier,
-    setPurchaseModifier,
+    shareModifier,
+    setShareModifier,
   ] = useState<number>(
     1,
   );
@@ -56,21 +56,21 @@ const TradeControl: React.FC<Props> = (
   const handleToggle = useCallback(
     () =>
     {
-      if (purchaseModifier > 0)
+      if (shareModifier > 0)
       {
-        setPurchaseModifier(
+        setShareModifier(
           -1,
         );
       }
       else
       {
-        setPurchaseModifier(
+        setShareModifier(
           1,
         );
       }
     },
     [
-      purchaseModifier,
+      shareModifier,
     ],
   );
 
@@ -84,8 +84,8 @@ const TradeControl: React.FC<Props> = (
       <TradeSlider
         currentLedger={currentLedger}
         currentPrice={currentPrice}
-        purchaseModifier={purchaseModifier}
         shareCount={shareCount}
+        shareModifier={shareModifier}
         setShareAmount={setShareAmount}
       />
       <FlexGrid marginTop={theme.sizing.scale400}>
@@ -96,6 +96,7 @@ const TradeControl: React.FC<Props> = (
             handleTrade={handleTrade}
             shareCount={shareCount}
             sharePrice={currentPrice.close}
+            shareModifier={1}
           >
             Buy
           </TradeAction>
@@ -107,6 +108,7 @@ const TradeControl: React.FC<Props> = (
             handleTrade={handleTrade}
             shareCount={shareCount}
             sharePrice={currentPrice.close}
+            shareModifier={-1}
           >
             Sell
           </TradeAction>

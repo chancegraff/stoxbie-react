@@ -10,6 +10,7 @@ type Props = PropsWithChildren & {
   Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
   sharePrice: number;
   shareCount: number;
+  shareModifier?: number;
   handleTrade: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
@@ -21,6 +22,7 @@ const TradeAction: React.FC<Props> = (
     handleToggle,
     sharePrice,
     shareCount,
+    shareModifier = 1,
     Component = Button,
   },
 ) =>
@@ -30,9 +32,13 @@ const TradeAction: React.FC<Props> = (
     {
       if (shareCount > 0)
       {
+        const count = Math.abs(
+          shareCount,
+        ) * shareModifier;
+
         handleTrade(
           sharePrice,
-          shareCount,
+          count,
         );
       }
       else if (handleToggle)
@@ -45,6 +51,7 @@ const TradeAction: React.FC<Props> = (
       handleToggle,
       sharePrice,
       shareCount,
+      shareModifier,
     ],
   );
 
