@@ -9,6 +9,9 @@ import {
   FlexGridItem,
 } from "baseui/dist/flex-grid";
 import {
+  Check,
+} from "baseui/dist/icon";
+import {
   HistoricalPrice,
 } from "iex";
 
@@ -49,13 +52,17 @@ const TradeControl: React.FC<Props> = (
   const [
     shareModifier,
     setShareModifier,
-  ] = useState<number>(
+  ] = useState<1 | -1>(
     1,
   );
 
   const handleToggle = useCallback(
     () =>
     {
+      setShareAmount(
+        0,
+      );
+
       if (shareModifier > 0)
       {
         setShareModifier(
@@ -92,11 +99,13 @@ const TradeControl: React.FC<Props> = (
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
+            EndEnhancer={Check}
             handleToggle={handleToggle}
             handleTrade={handleTrade}
             shareCount={shareCount}
             sharePrice={currentPrice.close}
-            shareModifier={1}
+            shareModifier={shareModifier}
+            actionModifier={1}
           >
             Buy
           </TradeAction>
@@ -104,11 +113,13 @@ const TradeControl: React.FC<Props> = (
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
+            EndEnhancer={Check}
             handleToggle={handleToggle}
             handleTrade={handleTrade}
             shareCount={shareCount}
             sharePrice={currentPrice.close}
-            shareModifier={-1}
+            shareModifier={shareModifier}
+            actionModifier={-1}
           >
             Sell
           </TradeAction>

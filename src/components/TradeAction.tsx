@@ -1,16 +1,20 @@
 import React, {
-  useCallback,
+  useCallback, useMemo,
 } from "react";
 import {
   Button,
   ButtonProps,
 } from "baseui/dist/button";
 
+import TradeActionCheck from "./TradeActionCheck";
+
 type Props = PropsWithChildren & {
   Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+  EndEnhancer?: React.FC;
   sharePrice: number;
   shareCount: number;
-  shareModifier?: number;
+  actionModifier: 1 | -1;
+  shareModifier?: 1 | -1;
   handleTrade: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
@@ -22,19 +26,50 @@ const TradeAction: React.FC<Props> = (
     handleToggle,
     sharePrice,
     shareCount,
+    actionModifier,
     shareModifier = 1,
     Component = Button,
+    EndEnhancer,
   },
 ) =>
 {
+  const isActive = useMemo(
+    () =>
+    {
+      return actionModifier === shareModifier;
+    },
+    [
+      actionModifier,
+      shareModifier,
+    ],
+  );
+  const endEnhancer = useMemo(
+    () =>
+    {
+      if (EndEnhancer)
+      {
+        return (
+          <TradeActionCheck
+            isActive={isActive}
+            EndEnhancer={EndEnhancer}
+          />
+        );
+      }
+    },
+    [
+      isActive,
+      EndEnhancer,
+    ],
+  );
+
   const handleClick = useCallback(
     () =>
     {
-      if (shareCount > 0)
+      if (shareCount > 0 && isActive)
       {
         const count = Math.abs(
           shareCount,
-        ) * shareModifier;
+        ) * actionModifier;
 
         handleTrade(
           sharePrice,
@@ -49,14 +84,18 @@ const TradeAction: React.FC<Props> = (
     [
       handleTrade,
       handleToggle,
+      isActive,
       sharePrice,
       shareCount,
-      shareModifier,
+      actionModifier,
     ],
   );
 
   return (
-    <Component onClick={handleClick}>
+    <Component
+      endEnhancer={endEnhancer}
+      onClick={handleClick}
+    >
       {children}
     </Component>
   );

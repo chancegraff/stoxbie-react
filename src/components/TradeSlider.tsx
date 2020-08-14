@@ -87,7 +87,9 @@ const TradeSlider: React.FC<Props> = (
     {
       return shareModifier > 0
         ? maxPurchasable
-        : maxSaleable;
+        : maxSaleable > 0
+          ? maxSaleable
+          : maxPurchasable;
     },
     [
       shareModifier,

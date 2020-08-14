@@ -73,7 +73,7 @@ const TradeRow: React.FC<Props> = (
             handleTrade={handleTrade}
             shareCount={totalShareCount}
             sharePrice={sharePrice}
-            shareModifier={closeModifier}
+            actionModifier={closeModifier}
           >
               Exit
           </TradeAction>
