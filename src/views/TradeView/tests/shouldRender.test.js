@@ -4,7 +4,7 @@ import {
 
 import {
   componentShouldRender,
-} from "./assertions";
+} from "./helpers/assertions";
 import {
   BreadcrumbsContainer,
   BreadcrumbsTicker,
@@ -18,16 +18,16 @@ import {
   TableHeaderDollarBalance,
   TableHeaderOpen,
   TradeSlider,
-} from "./components";
+} from "./helpers/components";
 import {
   dayOneBalance,
-} from "./constants";
+} from "./helpers/constants";
 import {
   dayOnePrice,
-} from "./prices";
+} from "./helpers/prices";
 import {
   renderView,
-} from "./render";
+} from "./helpers/render";
 
 it(
   "renders trade view",

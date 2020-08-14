@@ -4,13 +4,13 @@ import {
 
 import {
   sliderShouldChange,
-} from "./assertions";
+} from "./helpers/assertions";
 import {
   changeSlider,
-} from "./events";
+} from "./helpers/events";
 import {
   renderView,
-} from "./render";
+} from "./helpers/render";
 
 it(
   "changes share slider",

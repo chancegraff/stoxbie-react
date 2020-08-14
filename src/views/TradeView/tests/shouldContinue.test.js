@@ -5,20 +5,20 @@ import {
 
 import {
   componentShouldRender,
-} from "./assertions";
+} from "./helpers/assertions";
 import {
   TimeControlDate,
-} from "./components";
+} from "./helpers/components";
 import {
   clickContinue,
-} from "./events";
+} from "./helpers/events";
 import {
   dayOnePrice,
   dayTwoPrice,
-} from "./prices";
+} from "./helpers/prices";
 import {
   renderView,
-} from "./render";
+} from "./helpers/render";
 
 it(
   "continues forward in time",

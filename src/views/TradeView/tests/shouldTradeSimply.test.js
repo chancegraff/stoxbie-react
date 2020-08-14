@@ -1,15 +1,15 @@
 import {
   clickContinue,
-} from "./events";
+} from "./helpers/events";
 import {
   renderView,
-} from "./render";
+} from "./helpers/render";
 import {
   shouldBuyShares,
-} from "./shouldBuyShares";
+} from "./helpers/shouldBuyShares";
 import {
   shouldSellShares,
-} from "./shouldSellShares";
+} from "./helpers/shouldSellShares";
 
 it(
   "conducts a simple trade",
