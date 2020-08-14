@@ -2,10 +2,13 @@ import React from "react";
 import {
   Block,
 } from "baseui/dist/block";
+import {
+  IconProps,
+} from "baseui/dist/icon";
 
 type Props = {
   isActive: boolean;
-  EndEnhancer: React.FC;
+  EndEnhancer: React.FC<IconProps>;
 };
 
 const TradeActionCheck: React.FC<Props> = (
@@ -22,7 +25,7 @@ const TradeActionCheck: React.FC<Props> = (
 
   return (
     <Block>
-      <EndEnhancer />
+      <EndEnhancer data-testid="check" />
     </Block>
   );
 };

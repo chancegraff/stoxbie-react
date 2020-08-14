@@ -1,8 +1,11 @@
 import {
+  prettyDOM,
   within,
 } from "@testing-library/react";
 
 import {
+  BuyButtonCheck,
+  SellButtonCheck,
   TableFooter,
   TradeSlider,
 } from "./components";
@@ -42,6 +45,61 @@ export const sliderShouldChange = (
     "aria-valuenow",
     count,
   );
+};
+
+export const buyButtonShouldChange = (
+  active,
+) =>
+{
+  const assertion = expect(
+    BuyButtonCheck(),
+  );
+
+  return active
+    ? assertion.not.toBeNull()
+    : assertion.toBeNull();
+};
+
+export const sellButtonShouldChange = (
+  active,
+) =>
+{
+  const assertion = expect(
+    SellButtonCheck(),
+  );
+
+  return active
+    ? assertion.not.toBeNull()
+    : assertion.toBeNull();
+};
+
+export const TradeTypes = {
+  Buying: "buy",
+  Selling: "sell",
+};
+
+export const tradeTypeShouldChange = (
+  tradeType,
+) =>
+{
+  if (tradeType === TradeTypes.Buying)
+  {
+    buyButtonShouldChange(
+      true,
+    );
+    sellButtonShouldChange(
+      false,
+    );
+  }
+  else if (tradeType === TradeTypes.Selling)
+  {
+    buyButtonShouldChange(
+      false,
+    );
+    sellButtonShouldChange(
+      true,
+    );
+  }
 };
 
 export const ledgerBalanceShouldChange = (

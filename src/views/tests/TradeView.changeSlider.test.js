@@ -20,15 +20,6 @@ it(
 
     renderTradeView();
 
-    await waitFor(
-      () =>
-      {
-        return sliderShouldChange(
-          "0",
-        );
-      },
-    );
-
     changeSlider(
       shareCount,
     );

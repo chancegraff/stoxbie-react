@@ -1,5 +1,5 @@
 import {
-  clickContinue,
+  clickContinue, clickSell,
 } from "./helpers/events";
 import {
   renderTradeView,
@@ -34,6 +34,8 @@ it(
     );
 
     clickContinue();
+
+    clickSell();
 
     await shouldSellShares(
       {
