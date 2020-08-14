@@ -14,6 +14,7 @@ import {
 import {
   usePrevious,
 } from "utils/Utilities";
+import TradeSliderInput from "components/TradeSliderInput";
 import TradeSliderTickBar from "components/TradeSliderTickBar";
 
 type Props = {
@@ -87,47 +88,18 @@ const TradeSlider: React.FC<Props> = (
       setPurchaseAmount,
     ],
   );
-  const handleInputChange = useCallback(
-    (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ) =>
-    {
-      const {
-        target: {
-          value,
-        },
-      } = event;
-      const orderCount = parseInt(
-        value,
-        10,
-      );
-      const shareCount = Math.min(
-        orderCount,
-        maxPurchasable,
-      );
-
-      setPurchaseAmount(
-        shareCount,
-      );
-    },
-    [
-      setPurchaseAmount,
-      maxPurchasable,
-    ],
-  );
   const overrides = useMemo(
     () =>
     {
       return {
         TickBar: {
-          component: (): JSX.Element =>
+          component: () =>
           {
             return (
-              <input
-                hidden={true}
-                value={purchaseAmount}
-                data-testid="sliderInput"
-                onChange={handleInputChange}
+              <TradeSliderInput
+                purchaseAmount={purchaseAmount}
+                maxPurchasable={maxPurchasable}
+                setPurchaseAmount={setPurchaseAmount}
               />
             );
           },
@@ -136,7 +108,8 @@ const TradeSlider: React.FC<Props> = (
     },
     [
       purchaseAmount,
-      handleInputChange,
+      maxPurchasable,
+      setPurchaseAmount,
     ],
   );
 
