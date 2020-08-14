@@ -6,7 +6,6 @@ import {
   withStyle,
 } from "baseui/dist";
 import {
-  SharedProps,
   StyledTick,
 } from "baseui/dist/slider";
 
@@ -16,14 +15,14 @@ import {
 
 import {
   LeftAlignedTickBar,
-} from "./TradeSlider.styled";
+} from "./TradeSliderTickBar.styled";
 
 type Props = {
   maxPurchasable: number;
   setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const TickBar: React.FC<SharedProps & Props> = (
+const TradeSliderTickBar: React.FC<Props> = (
   {
     maxPurchasable,
     setPurchaseAmount,
@@ -81,12 +80,13 @@ export const TickBar: React.FC<SharedProps & Props> = (
         {
           return {
             ...$theme.typography.font100,
-            ":hover": {
-              cursor: "pointer",
-            },
             margin: `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`,
             textAlign: "center",
             width: "14px",
+            overflow: "visible",
+            ":hover": {
+              cursor: "pointer",
+            },
           };
         },
       );
@@ -158,3 +158,5 @@ export const TickBar: React.FC<SharedProps & Props> = (
     </LeftAlignedTickBar>
   );
 };
+
+export default TradeSliderTickBar;

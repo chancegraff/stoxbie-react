@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useState,
 } from "react";
 import {
@@ -46,6 +47,14 @@ const TradeControl: React.FC<Props> = (
     0,
   );
 
+  const handleClick = useCallback(
+    () =>
+    {
+      return undefined;
+    },
+    [],
+  );
+
   if (!currentPrice || !currentBalance)
   {
     return <Spinner container={Container} />;
@@ -63,6 +72,7 @@ const TradeControl: React.FC<Props> = (
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
+            handleClick={handleClick}
             handleTrade={handleTrade}
             purchaseAmount={purchaseAmount}
             purchaseModifier={1}
@@ -74,6 +84,7 @@ const TradeControl: React.FC<Props> = (
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
+            handleClick={handleClick}
             handleTrade={handleTrade}
             purchaseAmount={purchaseAmount}
             purchaseModifier={-1}

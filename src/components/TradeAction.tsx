@@ -11,6 +11,7 @@ type Props = PropsWithChildren & {
   sharePrice: number;
   purchaseAmount: number;
   handleTrade: (sharePrice: number, shareCount: number) => void;
+  handleClick?: () => void;
   Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
 };
 

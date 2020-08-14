@@ -4,7 +4,6 @@ import React, {
   useMemo,
 } from "react";
 import {
-  SharedProps,
   Slider,
   State,
 } from "baseui/dist/slider";
@@ -15,10 +14,7 @@ import {
 import {
   usePrevious,
 } from "utils/Utilities";
-
-import {
-  TickBar,
-} from "./TradeSlider.overrides";
+import TradeSliderTickBar from "components/TradeSliderTickBar";
 
 type Props = {
   currentPrice: HistoricalPrice;
@@ -124,34 +120,23 @@ const TradeSlider: React.FC<Props> = (
     {
       return {
         TickBar: {
-          component: (
-            props: SharedProps,
-          ): JSX.Element =>
+          component: (): JSX.Element =>
           {
             return (
-              <>
-                <TickBar
-                  {...props}
-                  maxPurchasable={maxPurchasable}
-                  setPurchaseAmount={setPurchaseAmount}
-                />
-                <input
-                  hidden={true}
-                  value={purchaseAmount}
-                  data-testid="sliderInput"
-                  onChange={handleInputChange}
-                />
-              </>
+              <input
+                hidden={true}
+                value={purchaseAmount}
+                data-testid="sliderInput"
+                onChange={handleInputChange}
+              />
             );
           },
         },
       };
     },
     [
-      maxPurchasable,
-      setPurchaseAmount,
-      handleInputChange,
       purchaseAmount,
+      handleInputChange,
     ],
   );
 
@@ -173,16 +158,22 @@ const TradeSlider: React.FC<Props> = (
   );
 
   return (
-    <Slider
-      max={maxPurchasable}
-      overrides={overrides}
-      value={
-        [
-          purchaseAmount,
-        ]
-      }
-      onChange={handleChange}
-    />
+    <>
+      <Slider
+        max={maxPurchasable}
+        overrides={overrides}
+        value={
+          [
+            purchaseAmount,
+          ]
+        }
+        onChange={handleChange}
+      />
+      <TradeSliderTickBar
+        maxPurchasable={maxPurchasable}
+        setPurchaseAmount={setPurchaseAmount}
+      />
+    </>
   );
 };
 

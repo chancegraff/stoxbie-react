@@ -7,8 +7,9 @@
         "plugin:jest/recommended",
         "standard",
         "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:@typescript-eslint/eslint-recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended"
     ],
@@ -18,7 +19,8 @@
             "jsx": true
         },
         "ecmaVersion": 11,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "../tsconfig.json"
     },
     "plugins": [
         "standard",
