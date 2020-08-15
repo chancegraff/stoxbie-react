@@ -1,7 +1,14 @@
 import {
+  prettyDOM,
+} from "@testing-library/react";
+
+import {
   TradeTypes,
   tradeTypeShouldChange,
 } from "./helpers/assertions";
+import {
+  BuyButton,
+} from "./helpers/components";
 import {
   clickBuy,
   clickSell,
