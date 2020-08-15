@@ -1,7 +1,7 @@
 import buyShares from "./events/buyShares";
 import clickContinue from "./events/clickContinue";
 import clickSell from "./events/clickSell";
-import sellShares from "./helpers/sellShares";
+import sellShares from "./events/sellShares";
 import render from "./render/TradeView";
 
 it(

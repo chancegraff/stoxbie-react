@@ -16,7 +16,7 @@ import TradeView from "views/TradeView";
 import prices, {
   getPrice,
   tradeViewStartDate,
-} from "./prices";
+} from "../helpers/prices";
 
 const urlDate = formatDate(
   tradeViewStartDate,
