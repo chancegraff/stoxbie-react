@@ -3,6 +3,7 @@ import {
 } from "@testing-library/react";
 
 import {
+  formatCount,
   formatCurrency,
   formatPercentage,
 } from "utils/Utilities";
@@ -65,6 +66,13 @@ const sellShares = async (
 
   tradeRowShouldHaveText(
     tradeRow,
+    formatCount(
+      trade.CloseCount,
+    ),
+  );
+
+  tradeRowShouldHaveText(
+    tradeRow,
     formatCurrency(
       trade.OpenPrice,
     ),
@@ -79,15 +87,8 @@ const sellShares = async (
 
   tradeRowShouldHaveText(
     tradeRow,
-    formatPercentage(
-      trade.ChangePercent,
-    ),
-  );
-
-  tradeRowShouldHaveText(
-    tradeRow,
     formatCurrency(
-      trade.ChangeBalance,
+      trade.CloseCount * trade.ClosePrice,
     ),
   );
 
