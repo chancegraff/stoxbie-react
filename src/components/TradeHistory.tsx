@@ -82,16 +82,16 @@ const TradeHistory: React.FC<Props> = (
       <FullTable>
         <StyledHead role="headerRow">
           <HeadCell>
+            Shares
+          </HeadCell>
+          <HeadCell>
             Open
           </HeadCell>
           <HeadCell>
             Close
           </HeadCell>
           <HeadCell>
-            PL %
-          </HeadCell>
-          <HeadCell>
-            PL $
+            Equity
           </HeadCell>
         </StyledHead>
         <StyledBody>
