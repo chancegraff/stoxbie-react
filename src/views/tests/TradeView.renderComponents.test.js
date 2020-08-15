@@ -16,14 +16,18 @@ import TableHeaderDollarBalance from "./elements/TableHeaderDollarBalance";
 import TableHeaderOpen from "./elements/TableHeaderOpen";
 import TradeSlider from "./elements/TradeSlider";
 import {
-  dayOneBalance,
+  startDate,
 } from "./helpers/constants";
 import {
-  dayOnePrice,
+  getPrice,
 } from "./helpers/prices";
 import {
   renderTradeView,
 } from "./helpers/render";
+
+const dayOnePrice = getPrice(
+  startDate,
+);
 
 it(
   "renders trade view",
@@ -48,7 +52,7 @@ it(
         TableHeaderDollarBalance(),
         TableFooterDollarBalance(
           formatCurrency(
-            dayOneBalance,
+            10000,
           ),
         ),
       ],

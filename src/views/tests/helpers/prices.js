@@ -1,6 +1,7 @@
 import {
-  iexStartDate,
-} from "./constants";
+  DateFormats,
+  formatDate,
+} from "utils/Utilities";
 
 const prices = [
   {
@@ -423,19 +424,56 @@ const prices = [
   },
 ];
 
-export const priceIndex = prices.findIndex(
-  (
-    price,
-  ) =>
-  {
-    return price.date === iexStartDate;
-  },
-);
+export const getIndexByDate = (
+  startDate,
+) =>
+{
+  const iexStartDate = formatDate(
+    startDate,
+    DateFormats.IEX,
+  );
 
-export const dayOnePrice = prices[priceIndex];
-export const dayTwoPrice = prices[priceIndex + 1];
-export const dayThreePrice = prices[priceIndex + 2];
-export const dayFourPrice = prices[priceIndex + 3];
-export const dayFivePrice = prices[priceIndex + 4];
+  return prices.findIndex(
+    (
+      price,
+    ) =>
+    {
+      return price.date === iexStartDate;
+    },
+  );
+};
+
+export const getPrice = (
+  priceDate,
+) =>
+{
+  const priceIndex = getIndexByDate(
+    priceDate,
+  );
+
+  return {
+    ...prices[priceIndex],
+  };
+};
+
+export const getPriceRange = (
+  startDate,
+  endDate,
+) =>
+{
+  const startIndex = getIndexByDate(
+    startDate,
+  );
+  const endIndex = getIndexByDate(
+    endDate,
+  ) + 1;
+
+  return [
+    ...prices.slice(
+      startIndex,
+      endIndex,
+    ),
+  ];
+};
 
 export default prices;

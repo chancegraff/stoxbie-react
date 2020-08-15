@@ -1,4 +1,8 @@
 import {
+  addBusinessDays,
+} from "date-fns";
+
+import {
   DateFormats,
   formatParsedDate,
 } from "utils/Utilities";
@@ -7,12 +11,25 @@ import componentShouldRender from "./assertions/componentShouldRender";
 import TimeControlDate from "./elements/TimeControlDate";
 import clickContinue from "./events/clickContinue";
 import {
-  dayOnePrice,
-  dayTwoPrice,
+  startDate,
+} from "./helpers/constants";
+import {
+  getPriceRange,
 } from "./helpers/prices";
 import {
   renderTradeView,
 } from "./helpers/render";
+
+const [
+  dayOnePrice,
+  dayTwoPrice,
+] = getPriceRange(
+  startDate,
+  addBusinessDays(
+    startDate,
+    1,
+  ),
+);
 
 it(
   "continues forward in time",

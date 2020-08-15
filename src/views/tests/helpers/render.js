@@ -7,15 +7,28 @@ import {
 } from "date-fns";
 
 import Boilerplate from "utils/tests/Boilerplate";
+import {
+  DateFormats,
+  formatDate,
+} from "utils/Utilities";
 import SearchView from "views/SearchView";
 import TradeView from "views/TradeView";
 
 import {
-  urlStartDate,
+  startDate,
 } from "./constants";
 import prices, {
-  dayOnePrice,
+  getPrice,
 } from "./prices";
+
+const urlDate = formatDate(
+  startDate,
+  DateFormats.URL,
+);
+
+const dayOnePrice = getPrice(
+  startDate,
+);
 
 export const renderTradeView = () =>
 {
@@ -23,7 +36,7 @@ export const renderTradeView = () =>
     (
       <Boilerplate
         path="/trade/:ticker/:date"
-        route={`/trade/${dayOnePrice.symbol}/${urlStartDate}`}
+        route={`/trade/${dayOnePrice.symbol}/${urlDate}`}
       >
         <TradeView
           date={
