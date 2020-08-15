@@ -1,20 +1,18 @@
 import clickContinue from "./events/clickContinue";
 import clickSell from "./events/clickSell";
 import {
-  renderTradeView,
-} from "./helpers/render";
-import {
   shouldBuyShares,
 } from "./helpers/shouldBuyShares";
 import {
   shouldSellShares,
 } from "./helpers/shouldSellShares";
+import render from "./render/TradeView";
 
 it(
   "conducts a simple trade",
   async () =>
   {
-    renderTradeView();
+    render();
 
     await shouldBuyShares(
       {

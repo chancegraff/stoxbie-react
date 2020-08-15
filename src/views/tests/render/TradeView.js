@@ -11,7 +11,6 @@ import {
   DateFormats,
   formatDate,
 } from "utils/Utilities";
-import SearchView from "views/SearchView";
 import TradeView from "views/TradeView";
 
 import prices, {
@@ -28,7 +27,7 @@ const dayOnePrice = getPrice(
   tradeViewStartDate,
 );
 
-export const renderTradeView = () =>
+const renderTradeView = () =>
 {
   return render(
     (
@@ -50,13 +49,4 @@ export const renderTradeView = () =>
   );
 };
 
-export const renderSearchView = (
-  props,
-) =>
-{
-  return render(
-    <Boilerplate>
-      <SearchView {...props} />
-    </Boilerplate>,
-  );
-};
+export default renderTradeView;

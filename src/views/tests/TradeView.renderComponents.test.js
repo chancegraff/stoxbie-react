@@ -19,9 +19,7 @@ import {
   getPrice,
   tradeViewStartDate,
 } from "./helpers/prices";
-import {
-  renderTradeView,
-} from "./helpers/render";
+import render from "./render/TradeView";
 
 const dayOnePrice = getPrice(
   tradeViewStartDate,
@@ -31,7 +29,7 @@ it(
   "renders trade view",
   () =>
   {
-    renderTradeView();
+    render();
 
     componentsShouldRender(
       [

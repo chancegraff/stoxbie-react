@@ -3,15 +3,13 @@ import tradeTypeShouldChange, {
 } from "./assertions/tradeTypeShouldChange";
 import clickBuy from "./events/clickBuy";
 import clickSell from "./events/clickSell";
-import {
-  renderTradeView,
-} from "./helpers/render";
+import render from "./render/TradeView";
 
 it(
   "toggles trade buttons",
   () =>
   {
-    renderTradeView();
+    render();
 
     tradeTypeShouldChange(
       TradeTypes.Buying,

@@ -14,9 +14,7 @@ import {
   getPriceRange,
   tradeViewStartDate,
 } from "./helpers/prices";
-import {
-  renderTradeView,
-} from "./helpers/render";
+import render from "./render/TradeView";
 
 const [
   dayOnePrice,
@@ -33,7 +31,7 @@ it(
   "continues forward in time",
   () =>
   {
-    renderTradeView();
+    render();
 
     componentShouldRender(
       TimeControlDate(

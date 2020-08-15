@@ -2,20 +2,18 @@ import clickBuy from "./events/clickBuy";
 import clickContinue from "./events/clickContinue";
 import clickSell from "./events/clickSell";
 import {
-  renderTradeView,
-} from "./helpers/render";
-import {
   shouldBuyShares,
 } from "./helpers/shouldBuyShares";
 import {
   shouldSellShares,
 } from "./helpers/shouldSellShares";
+import render from "./render/TradeView";
 
 it(
   "conducts a continuous trade",
   async () =>
   {
-    renderTradeView();
+    render();
 
     // Day 1: Buy 200 shares @ 3.2
     // (200) 3.2 / - / - / -    <<

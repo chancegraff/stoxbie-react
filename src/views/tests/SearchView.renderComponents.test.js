@@ -1,9 +1,7 @@
 import TickerInput from "views/tests/elements/TickerInput";
 
 import componentShouldRender from "./assertions/componentShouldRender";
-import {
-  renderSearchView,
-} from "./helpers/render";
+import render from "./render/SearchView";
 
 it(
   "renders search view",
@@ -11,7 +9,7 @@ it(
   {
     const handleSearch = jest.fn();
 
-    renderSearchView(
+    render(
       {
         handleSearch,
       },

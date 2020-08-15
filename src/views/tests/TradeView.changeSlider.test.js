@@ -4,9 +4,7 @@ import {
 
 import sliderShouldChange from "./assertions/sliderShouldChange";
 import changeSlider from "./events/changeSlider";
-import {
-  renderTradeView,
-} from "./helpers/render";
+import render from "./render/TradeView";
 
 it(
   "changes share slider",
@@ -14,7 +12,7 @@ it(
   {
     const shareCount = 200;
 
-    renderTradeView();
+    render();
 
     changeSlider(
       shareCount,
