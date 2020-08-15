@@ -424,6 +424,10 @@ const prices = [
   },
 ];
 
+export const tradeViewStartDate = new Date(
+  "12-16-2003",
+);
+
 export const getIndexByDate = (
   startDate,
 ) =>

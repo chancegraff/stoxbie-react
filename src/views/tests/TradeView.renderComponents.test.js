@@ -16,17 +16,15 @@ import TableHeaderDollarBalance from "./elements/TableHeaderDollarBalance";
 import TableHeaderOpen from "./elements/TableHeaderOpen";
 import TradeSlider from "./elements/TradeSlider";
 import {
-  startDate,
-} from "./helpers/constants";
-import {
   getPrice,
+  tradeViewStartDate,
 } from "./helpers/prices";
 import {
   renderTradeView,
 } from "./helpers/render";
 
 const dayOnePrice = getPrice(
-  startDate,
+  tradeViewStartDate,
 );
 
 it(

@@ -11,10 +11,8 @@ import componentShouldRender from "./assertions/componentShouldRender";
 import TimeControlDate from "./elements/TimeControlDate";
 import clickContinue from "./events/clickContinue";
 import {
-  startDate,
-} from "./helpers/constants";
-import {
   getPriceRange,
+  tradeViewStartDate,
 } from "./helpers/prices";
 import {
   renderTradeView,
@@ -24,9 +22,9 @@ const [
   dayOnePrice,
   dayTwoPrice,
 ] = getPriceRange(
-  startDate,
+  tradeViewStartDate,
   addBusinessDays(
-    startDate,
+    tradeViewStartDate,
     1,
   ),
 );

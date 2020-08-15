@@ -14,20 +14,18 @@ import {
 import SearchView from "views/SearchView";
 import TradeView from "views/TradeView";
 
-import {
-  startDate,
-} from "./constants";
 import prices, {
   getPrice,
+  tradeViewStartDate,
 } from "./prices";
 
 const urlDate = formatDate(
-  startDate,
+  tradeViewStartDate,
   DateFormats.URL,
 );
 
 const dayOnePrice = getPrice(
-  startDate,
+  tradeViewStartDate,
 );
 
 export const renderTradeView = () =>
