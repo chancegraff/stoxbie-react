@@ -10,10 +10,10 @@ import ContinueButton from "./elements/ContinueButton";
 import LineChart from "./elements/LineChart";
 import SellButton from "./elements/SellButton";
 import TableFooterDollarBalance from "./elements/TableFooterDollarBalance";
-import TableHeaderChangePercent from "./elements/TableHeaderChangePercent";
 import TableHeaderClose from "./elements/TableHeaderClose";
-import TableHeaderDollarBalance from "./elements/TableHeaderDollarBalance";
+import TableHeaderEquity from "./elements/TableHeaderEquity";
 import TableHeaderOpen from "./elements/TableHeaderOpen";
+import TableHeaderShares from "./elements/TableHeaderShares";
 import TradeSlider from "./elements/TradeSlider";
 import {
   getPrice,
@@ -42,10 +42,10 @@ it(
         TradeSlider(),
         BuyButton(),
         SellButton(),
+        TableHeaderShares(),
         TableHeaderOpen(),
         TableHeaderClose(),
-        TableHeaderChangePercent(),
-        TableHeaderDollarBalance(),
+        TableHeaderEquity(),
         TableFooterDollarBalance(
           formatCurrency(
             10000,
