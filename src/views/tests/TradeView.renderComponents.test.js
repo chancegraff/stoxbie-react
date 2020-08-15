@@ -2,23 +2,19 @@ import {
   formatCurrency,
 } from "utils/Utilities";
 
-import {
-  componentsShouldRender,
-} from "./helpers/assertions";
-import {
-  BreadcrumbsContainer,
-  BreadcrumbsTicker,
-  BuyButton,
-  ContinueButton,
-  LineChart,
-  SellButton,
-  TableFooterDollarBalance,
-  TableHeaderChangePercent,
-  TableHeaderClose,
-  TableHeaderDollarBalance,
-  TableHeaderOpen,
-  TradeSlider,
-} from "./helpers/components";
+import componentsShouldRender from "./assertions/componentsShouldRender";
+import BreadcrumbsContainer from "./components/BreadcrumbsContainer";
+import BreadcrumbsTicker from "./components/BreadcrumbsTicker";
+import BuyButton from "./components/BuyButton";
+import ContinueButton from "./components/ContinueButton";
+import LineChart from "./components/LineChart";
+import SellButton from "./components/SellButton";
+import TableFooterDollarBalance from "./components/TableFooterDollarBalance";
+import TableHeaderChangePercent from "./components/TableHeaderChangePercent";
+import TableHeaderClose from "./components/TableHeaderClose";
+import TableHeaderDollarBalance from "./components/TableHeaderDollarBalance";
+import TableHeaderOpen from "./components/TableHeaderOpen";
+import TradeSlider from "./components/TradeSlider";
 import {
   dayOneBalance,
 } from "./helpers/constants";

@@ -3,15 +3,9 @@ import {
   formatParsedDate,
 } from "utils/Utilities";
 
-import {
-  componentShouldRender,
-} from "./helpers/assertions";
-import {
-  TimeControlDate,
-} from "./helpers/components";
-import {
-  clickContinue,
-} from "./helpers/events";
+import componentShouldRender from "./assertions/componentShouldRender";
+import TimeControlDate from "./components/TimeControlDate";
+import clickContinue from "./events/clickContinue";
 import {
   dayOnePrice,
   dayTwoPrice,

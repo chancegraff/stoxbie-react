@@ -2,12 +2,8 @@ import {
   waitFor,
 } from "@testing-library/react";
 
-import {
-  sliderShouldChange,
-} from "./helpers/assertions";
-import {
-  changeSlider,
-} from "./helpers/events";
+import sliderShouldChange from "./assertions/sliderShouldChange";
+import changeSlider from "./events/changeSlider";
 import {
   renderTradeView,
 } from "./helpers/render";

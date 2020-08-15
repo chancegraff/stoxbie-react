@@ -5,21 +5,14 @@ import {
 import {
   formatCurrency,
 } from "utils/Utilities";
-
-import {
-  ledgerBalanceShouldChange,
-  sliderShouldChange,
-  tradeRowShouldHaveExitButton,
-  tradeRowShouldHaveText,
-  tradeRowsShouldHaveLength,
-} from "./assertions";
-import {
-  TableTradeRows,
-} from "./components";
-import {
-  changeSlider,
-  clickBuy,
-} from "./events";
+import ledgerBalanceShouldChange from "views/tests/assertions/ledgerBalanceShouldChange";
+import sliderShouldChange from "views/tests/assertions/sliderShouldChange";
+import tradeRowShouldHaveExitButton from "views/tests/assertions/tradeRowShouldHaveExitButton";
+import tradeRowShouldHaveText from "views/tests/assertions/tradeRowShouldHaveText";
+import tradeRowsShouldHaveLength from "views/tests/assertions/tradeRowsShouldHaveLength";
+import TableTradeRows from "views/tests/components/TableTradeRows";
+import changeSlider from "views/tests/events/changeSlider";
+import clickBuy from "views/tests/events/clickBuy";
 
 export const shouldBuyShares = async (
   trade,

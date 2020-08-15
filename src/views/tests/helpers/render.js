@@ -7,6 +7,7 @@ import {
 } from "date-fns";
 
 import Boilerplate from "utils/tests/Boilerplate";
+import SearchView from "views/SearchView";
 import TradeView from "views/TradeView";
 
 import {
@@ -35,5 +36,16 @@ export const renderTradeView = () =>
         />
       </Boilerplate>
     ),
+  );
+};
+
+export const renderSearchView = (
+  props,
+) =>
+{
+  return render(
+    <Boilerplate>
+      <SearchView {...props} />
+    </Boilerplate>,
   );
 };

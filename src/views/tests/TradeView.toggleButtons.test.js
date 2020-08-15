@@ -1,18 +1,8 @@
-import {
-  prettyDOM,
-} from "@testing-library/react";
-
-import {
+import tradeTypeShouldChange, {
   TradeTypes,
-  tradeTypeShouldChange,
-} from "./helpers/assertions";
-import {
-  BuyButton,
-} from "./helpers/components";
-import {
-  clickBuy,
-  clickSell,
-} from "./helpers/events";
+} from "./assertions/tradeTypeShouldChange";
+import clickBuy from "./events/clickBuy";
+import clickSell from "./events/clickSell";
 import {
   renderTradeView,
 } from "./helpers/render";
