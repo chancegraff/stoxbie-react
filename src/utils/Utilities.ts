@@ -100,6 +100,21 @@ export const fiveYearsAgo = subYears(
   5,
 );
 
+export const formatCount = (
+  num: number,
+) =>
+{
+  return numbro(
+    num,
+  ).format(
+    {
+      average: true,
+      mantissa: 2,
+      optionalMantissa: true,
+    },
+  );
+};
+
 export const formatCurrency = (
   num: number,
 ) =>

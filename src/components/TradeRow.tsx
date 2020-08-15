@@ -6,6 +6,7 @@ import {
 } from "baseui/dist/table";
 
 import {
+  formatCount,
   formatCurrency,
   formatPercentage,
 } from "utils/Utilities";
@@ -32,16 +33,34 @@ const TradeRow: React.FC<Props> = (
   },
 ) =>
 {
+  const safeShares = useMemo(
+    () =>
+    {
+      if (trade.closeCount)
+      {
+        return formatCount(
+          trade.closeCount,
+        );
+      }
+      else if (trade.openCount)
+      {
+        return formatCount(
+          trade.openCount,
+        );
+      }
+    },
+    [
+      trade,
+    ],
+  );
   const safeOpen = useMemo(
     () =>
     {
       if (trade.openPrice)
       {
-        const abbreviatedOpen = formatCurrency(
+        return formatCurrency(
           trade.openPrice,
         );
-
-        return abbreviatedOpen;
       }
     },
     [
@@ -87,32 +106,20 @@ const TradeRow: React.FC<Props> = (
       handleTrade,
     ],
   );
-  const safeChange = useMemo(
-    () =>
-    {
-      if (trade.changePercent)
-      {
-        const abbreviatedChange = formatPercentage(
-          trade.changePercent,
-        );
-
-        return abbreviatedChange;
-      }
-    },
-    [
-      trade,
-    ],
-  );
   const safeBalance = useMemo(
     () =>
     {
-      if (trade.changeBalance)
+      if (trade.closeCount && trade.closePrice)
       {
-        const abbreviatedBalance = formatCurrency(
-          trade.changeBalance,
+        return formatCurrency(
+          trade.closeCount * trade.closePrice,
         );
-
-        return abbreviatedBalance;
+      }
+      else if (trade.openCount && trade.openPrice)
+      {
+        return formatCurrency(
+          trade.openCount * trade.openPrice,
+        );
       }
     },
     [
@@ -123,13 +130,13 @@ const TradeRow: React.FC<Props> = (
   return (
     <StyledRow>
       <RightAlignedCell>
+        {safeShares}
+      </RightAlignedCell>
+      <RightAlignedCell>
         {safeOpen}
       </RightAlignedCell>
       <RightAlignedCell>
         {safeClose}
-      </RightAlignedCell>
-      <RightAlignedCell>
-        {safeChange}
       </RightAlignedCell>
       <RightAlignedCell>
         {safeBalance}
