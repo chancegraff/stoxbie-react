@@ -33,7 +33,7 @@ export const clickContinue = (
     ),
     () =>
     {
-      fireEvent.click(
+      return fireEvent.click(
         ContinueButton(),
       );
     },

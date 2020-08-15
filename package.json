@@ -34,8 +34,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom-fourteen",
     "eject": "react-scripts eject",
-    "format": "eslint --fix --ext .ts,.tsx,.js ./src",
-    "check": "eslint --format github ./src/**/*{.ts,.tsx}"
+    "format": "cd ./src && eslint --fix --ext .ts,.tsx,.js **/*",
+    "check": "cd ./src && eslint --format github --ext .ts,.tsx,.js **/*"
   },
   "eslintConfig": {
     "extends": "react-app"
