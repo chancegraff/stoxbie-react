@@ -9,7 +9,7 @@ import {
   Check,
 } from "baseui/dist/icon";
 
-import TradeActionCheck from "./TradeActionCheck";
+import TradeActionCheck from "./TradeActionEnhancer";
 
 type Props = PropsWithChildren & {
   Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
@@ -32,7 +32,7 @@ const TradeAction: React.FC<Props> = (
     actionModifier,
     shareModifier = 1,
     Component = Button,
-    EndEnhancer = Check,
+    EndEnhancer,
   },
 ) =>
 {
@@ -44,6 +44,24 @@ const TradeAction: React.FC<Props> = (
     [
       actionModifier,
       shareModifier,
+    ],
+  );
+  const endEnhancer = useMemo(
+    () =>
+    {
+      if (EndEnhancer)
+      {
+        return (
+          <TradeActionCheck
+            isActive={isActive}
+            EndEnhancer={EndEnhancer}
+          />
+        );
+      }
+    },
+    [
+      EndEnhancer,
+      isActive,
     ],
   );
 
@@ -78,14 +96,7 @@ const TradeAction: React.FC<Props> = (
 
   return (
     <Component
-      endEnhancer={
-        (
-          <TradeActionCheck
-            isActive={isActive}
-            EndEnhancer={EndEnhancer}
-          />
-        )
-      }
+      endEnhancer={endEnhancer}
       onClick={handleClick}
     >
       {children}

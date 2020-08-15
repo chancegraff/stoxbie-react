@@ -6,11 +6,11 @@ import {
 
 import {
   Container,
-} from "./TradeActionCheck.styled";
+} from "./TradeActionEnhancer.styled";
 
 type Props = {
   isActive: boolean;
-  EndEnhancer?: React.FC<IconProps>;
+  EndEnhancer: React.FC<IconProps>;
 };
 
 const TradeActionCheck: React.FC<Props> = (
