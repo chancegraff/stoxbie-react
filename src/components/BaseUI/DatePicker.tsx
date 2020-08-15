@@ -16,7 +16,7 @@ import {
 } from "components/BaseUI/Popover";
 
 type Props = ButtonProps & {
-  initialState?: ContainerState,
+  initialState?: ContainerState;
   maxDate?: Date;
   minDate?: Date;
   onChange?: defaultHandler;

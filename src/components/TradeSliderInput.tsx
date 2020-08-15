@@ -30,13 +30,13 @@ const TradeSliderInput: React.FC<Props> = (
         value,
         10,
       );
-      const shareCount = Math.min(
+      const minimumCount = Math.min(
         orderCount,
         maxValue,
       );
 
       setShareAmount(
-        shareCount,
+        minimumCount,
       );
     },
     [
