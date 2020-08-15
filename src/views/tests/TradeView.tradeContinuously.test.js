@@ -1,12 +1,8 @@
+import buyShares from "./events/buyShares";
 import clickBuy from "./events/clickBuy";
 import clickContinue from "./events/clickContinue";
 import clickSell from "./events/clickSell";
-import {
-  shouldBuyShares,
-} from "./helpers/shouldBuyShares";
-import {
-  shouldSellShares,
-} from "./helpers/shouldSellShares";
+import sellShares from "./helpers/sellShares";
 import render from "./render/TradeView";
 
 it(
@@ -18,7 +14,7 @@ it(
     // Day 1: Buy 200 shares @ 3.2
     // (200) 3.2 / - / - / -    <<
     //                 - / 9360
-    await shouldBuyShares(
+    await buyShares(
       {
         TotalShares: 200,
         OpenPrice: 3.2,
@@ -42,7 +38,7 @@ it(
     // (150)  3.2 / -    / -   / -
     // (50)   3.2 / 3.79 / 18% / 29.50    <<
     //                     0%   / 9549.50
-    await shouldSellShares(
+    await sellShares(
       {
         TotalShares: 150,
         OpenPrice: 3.2,
@@ -67,7 +63,7 @@ it(
     // (150)  3.2  / -    / -   / -       xx
     // (50)   3.2  / 3.79 / 18% / 29.50
     //                      0%  / 9182.50
-    await shouldBuyShares(
+    await buyShares(
       {
         TotalShares: 250,
         OpenPrice: 3.67,
@@ -92,7 +88,7 @@ it(
     // (150)  3.2  / 3.78 / 18% / 87      <<
     // (50)   3.2  / 3.79 / 18% / 29.50
     //                      1%   / 9749.5
-    await shouldSellShares(
+    await sellShares(
       {
         TotalShares: 100,
         OpenPrice: 3.2,
@@ -115,7 +111,7 @@ it(
     // (150)  3.2  / 3.78 / 18% / 87
     // (50)   3.2  / 3.79 / 18% / 29.50
     //                      1%   / 10128.5
-    await shouldSellShares(
+    await sellShares(
       {
         TotalShares: 0,
         OpenPrice: 3.67,

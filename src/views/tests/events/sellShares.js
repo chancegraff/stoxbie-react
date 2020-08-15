@@ -4,35 +4,36 @@ import {
 
 import {
   formatCurrency,
+  formatPercentage,
 } from "utils/Utilities";
 import ledgerBalanceShouldChange from "views/tests/assertions/ledgerBalanceShouldChange";
+import ledgerChangeShouldChange from "views/tests/assertions/ledgerChangeShouldChange";
 import sliderShouldChange from "views/tests/assertions/sliderShouldChange";
-import tradeRowShouldHaveExitButton from "views/tests/assertions/tradeRowShouldHaveExitButton";
 import tradeRowShouldHaveText from "views/tests/assertions/tradeRowShouldHaveText";
 import tradeRowsShouldHaveLength from "views/tests/assertions/tradeRowsShouldHaveLength";
 import TableTradeRows from "views/tests/elements/TableTradeRows";
 import changeSlider from "views/tests/events/changeSlider";
-import clickBuy from "views/tests/events/clickBuy";
+import clickSell from "views/tests/events/clickSell";
 
-export const shouldBuyShares = async (
+const sellShares = async (
   trade,
   tradeRowsLength,
 ) =>
 {
   changeSlider(
-    trade.OpenCount,
+    trade.CloseCount,
   );
 
   await waitFor(
     () =>
     {
       return sliderShouldChange(
-        `${trade.OpenCount}`,
+        `${trade.CloseCount}`,
       );
     },
   );
 
-  clickBuy();
+  clickSell();
 
   await waitFor(
     () =>
@@ -51,18 +52,43 @@ export const shouldBuyShares = async (
   );
 
   const [
-    openedTrade,
+    firstTradeRow,
+    secondTradeRow,
   ] = tradeRows;
 
+  let tradeRow = secondTradeRow;
+
+  if (!secondTradeRow || trade.TotalShares === 0)
+  {
+    tradeRow = firstTradeRow;
+  }
+
   tradeRowShouldHaveText(
-    openedTrade,
+    tradeRow,
     formatCurrency(
       trade.OpenPrice,
     ),
   );
 
-  tradeRowShouldHaveExitButton(
-    openedTrade,
+  tradeRowShouldHaveText(
+    tradeRow,
+    formatCurrency(
+      trade.ClosePrice,
+    ),
+  );
+
+  tradeRowShouldHaveText(
+    tradeRow,
+    formatPercentage(
+      trade.ChangePercent,
+    ),
+  );
+
+  tradeRowShouldHaveText(
+    tradeRow,
+    formatCurrency(
+      trade.ChangeBalance,
+    ),
   );
 
   ledgerBalanceShouldChange(
@@ -70,4 +96,12 @@ export const shouldBuyShares = async (
       trade.LedgerBalance,
     ),
   );
+
+  ledgerChangeShouldChange(
+    formatPercentage(
+      trade.LedgerChange,
+    ),
+  );
 };
+
+export default sellShares;
