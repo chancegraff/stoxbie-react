@@ -3,6 +3,7 @@ import {
 } from "@testing-library/react";
 
 import {
+  formatCount,
   formatCurrency,
 } from "utils/Utilities";
 import ledgerBalanceShouldChange from "views/tests/assertions/ledgerBalanceShouldChange";
@@ -56,6 +57,13 @@ const buyShares = async (
 
   tradeRowShouldHaveText(
     openedTrade,
+    formatCount(
+      trade.CloseCount || trade.OpenCount,
+    ),
+  );
+
+  tradeRowShouldHaveText(
+    openedTrade,
     formatCurrency(
       trade.OpenPrice,
     ),
@@ -63,6 +71,13 @@ const buyShares = async (
 
   tradeRowShouldHaveExitButton(
     openedTrade,
+  );
+
+  tradeRowShouldHaveText(
+    openedTrade,
+    formatCurrency(
+      trade.OpenCount * trade.OpenPrice,
+    ),
   );
 
   ledgerBalanceShouldChange(
