@@ -4,11 +4,8 @@
         "es2020": true
     },
     "extends": [
-        "plugin:jest/recommended",
         "standard",
         "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended"
     ],
@@ -22,7 +19,6 @@
     },
     "plugins": [
         "standard",
-        "@typescript-eslint",
         "jest",
         "react",
         "react-hooks",
@@ -34,6 +30,59 @@
             "version": "detect"
         }
     },
+    "overrides": [
+        {
+            "files": [
+                "**/**.ts",
+                "**/**.tsx"
+            ],
+            "extends": [
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "plugin:@typescript-eslint/eslint-recommended"
+            ],
+            "plugins": [
+                "@typescript-eslint"
+            ],
+            "parserOptions": {
+                "project": "../tsconfig.json"
+            },
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "off",
+                "@typescript-eslint/explicit-function-return-type": "off",
+                "@typescript-eslint/explicit-module-boundary-types": "off",
+                "@typescript-eslint/no-unused-vars": "warn",
+                "@typescript-eslint/member-delimiter-style": "error",
+                "@typescript-eslint/no-floating-promises": "off",
+                "@typescript-eslint/no-unsafe-assignment": "off"
+            }
+        },
+        {
+            "files": [
+                "**/**.js",
+                "**/**.test.js"
+            ],
+            "extends": [
+                "plugin:jest/recommended"
+            ],
+            "plugins": [
+                "jest"
+            ],
+            "rules": {
+                "jest/expect-expect": [
+                    "error",
+                    {
+                        "assertFunctionNames": [
+                            "expect",
+                            "*Should",
+                            "*Should*",
+                            "should*"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
     "ignorePatterns": [
         "node_modules",
         "eslint",
@@ -200,7 +249,7 @@
         "no-native-reassign": "error",
         "no-negated-condition": "error",
         "no-negated-in-lhs": "error",
-        "no-nested-ternary": "error",
+        "no-nested-ternary": "off",
         "no-new": "error",
         "no-new-func": "error",
         "no-new-object": "error",
@@ -346,21 +395,7 @@
         "wrap-regex": "error",
         "yield-star-spacing": "error",
         "yoda": "error",
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off",
-        "@typescript-eslint/no-unused-vars": "warn",
-        "jest/expect-expect": [
-            "error",
-            {
-                "assertFunctionNames": [
-                    "expect",
-                    "*Should",
-                    "*Should*",
-                    "should*"
-                ]
-            }
-        ],
+
         "react/prop-types": 0,
         "react/display-name": 0,
         "react/jsx-closing-bracket-location": "error",
@@ -471,13 +506,5 @@
                 ]
             }
         ]
-    },
-    "overrides": [
-        {
-            "files": [
-                "*.ts",
-                "*.tsx"
-            ]
-        }
-    ]
+    }
 }

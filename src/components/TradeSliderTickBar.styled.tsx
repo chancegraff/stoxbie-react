@@ -10,6 +10,7 @@ export const LeftAlignedTickBar = withStyle(
   () =>
   {
     return {
+      width: "100%",
       alignItems: "center",
       display: "flex",
       flexDirection: "row",

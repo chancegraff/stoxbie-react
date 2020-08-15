@@ -6,7 +6,6 @@ import {
   withStyle,
 } from "baseui/dist";
 import {
-  SharedProps,
   StyledTick,
 } from "baseui/dist/slider";
 
@@ -16,36 +15,36 @@ import {
 
 import {
   LeftAlignedTickBar,
-} from "./TradeSlider.styled";
+} from "./TradeSliderTickBar.styled";
 
 type Props = {
-  maxPurchasable: number;
-  setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
+  maxValue: number;
+  setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const TickBar: React.FC<SharedProps & Props> = (
+const TradeSliderTickBar: React.FC<Props> = (
   {
-    maxPurchasable,
-    setPurchaseAmount,
+    maxValue,
+    setShareAmount,
   },
 ) =>
 {
   const percentWidthPerShare = useMemo(
     () =>
     {
-      return 100 / maxPurchasable;
+      return 100 / maxValue;
     },
     [
-      maxPurchasable,
+      maxValue,
     ],
   );
   const sharesPerTick = useMemo(
     () =>
     {
-      return maxPurchasable / SLIDER_TICK_COUNT;
+      return maxValue / SLIDER_TICK_COUNT;
     },
     [
-      maxPurchasable,
+      maxValue,
     ],
   );
   const tickRange = useMemo(
@@ -81,12 +80,13 @@ export const TickBar: React.FC<SharedProps & Props> = (
         {
           return {
             ...$theme.typography.font100,
-            ":hover": {
-              cursor: "pointer",
-            },
             margin: `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`,
             textAlign: "center",
             width: "14px",
+            overflow: "visible",
+            ":hover": {
+              cursor: "pointer",
+            },
           };
         },
       );
@@ -96,7 +96,7 @@ export const TickBar: React.FC<SharedProps & Props> = (
       sharesPerTick,
     ],
   );
-  const handleTick = useCallback(
+  const handleClick = useCallback(
     (
       event: React.MouseEvent<HTMLDivElement>,
     ) =>
@@ -114,13 +114,13 @@ export const TickBar: React.FC<SharedProps & Props> = (
           10,
         );
 
-        setPurchaseAmount(
+        setShareAmount(
           tickValue,
         );
       }
     },
     [
-      setPurchaseAmount,
+      setShareAmount,
     ],
   );
 
@@ -140,7 +140,7 @@ export const TickBar: React.FC<SharedProps & Props> = (
               return (
                 <Tick
                   key={index}
-                  onClick={handleTick}
+                  onClick={handleClick}
                 >
                   {
                     Math.round(
@@ -158,3 +158,5 @@ export const TickBar: React.FC<SharedProps & Props> = (
     </LeftAlignedTickBar>
   );
 };
+
+export default TradeSliderTickBar;

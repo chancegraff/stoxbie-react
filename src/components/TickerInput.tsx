@@ -101,7 +101,7 @@ const TickerInput: React.FC<Props> = (
       ] = params.value;
 
       history.push(
-        `/stock/${value.symbol}`,
+        `/stock/${value.symbol as string}`,
       );
     },
     [

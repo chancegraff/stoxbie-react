@@ -4,7 +4,6 @@ import React, {
   useMemo,
 } from "react";
 import {
-  SharedProps,
   Slider,
   State,
 } from "baseui/dist/slider";
@@ -15,32 +14,32 @@ import {
 import {
   usePrevious,
 } from "utils/Utilities";
-
-import {
-  TickBar,
-} from "./TradeSlider.overrides";
+import TradeSliderInput from "components/TradeSliderInput";
+import TradeSliderTickBar from "components/TradeSliderTickBar";
 
 type Props = {
   currentPrice: HistoricalPrice;
-  currentBalance: number;
-  purchaseAmount: number;
-  setPurchaseAmount: React.Dispatch<React.SetStateAction<number>>;
+  currentLedger: HistoricalLedger;
+  shareCount: number;
+  shareModifier: number;
+  setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TradeSlider: React.FC<Props> = (
   {
     currentPrice,
-    currentBalance,
-    purchaseAmount,
-    setPurchaseAmount,
+    currentLedger,
+    shareCount,
+    shareModifier,
+    setShareAmount,
   },
 ) =>
 {
   const previousPrice = usePrevious(
     currentPrice,
   );
-  const previousBalance = usePrevious(
-    currentBalance,
+  const previousLedger = usePrevious(
+    currentLedger,
   );
   const hasPriceChanged = useMemo(
     () =>
@@ -55,23 +54,47 @@ const TradeSlider: React.FC<Props> = (
   const hasBalanceChanged = useMemo(
     () =>
     {
-      return currentBalance !== previousBalance;
+      return currentLedger.totalBalance !== previousLedger?.totalBalance;
     },
     [
-      currentBalance,
-      previousBalance,
+      currentLedger,
+      previousLedger,
     ],
   );
   const maxPurchasable = useMemo(
     () =>
     {
       return Math.floor(
-        currentBalance / currentPrice.close,
+        currentLedger.totalBalance / currentPrice.close,
       );
     },
     [
       currentPrice,
-      currentBalance,
+      currentLedger,
+    ],
+  );
+  const maxSaleable = useMemo(
+    () =>
+    {
+      return currentLedger.totalCount;
+    },
+    [
+      currentLedger,
+    ],
+  );
+  const maxValue = useMemo(
+    () =>
+    {
+      return shareModifier > 0
+        ? maxPurchasable
+        : maxSaleable > 0
+          ? maxSaleable
+          : maxPurchasable;
+    },
+    [
+      shareModifier,
+      maxPurchasable,
+      maxSaleable,
     ],
   );
   const handleChange = useCallback(
@@ -83,40 +106,12 @@ const TradeSlider: React.FC<Props> = (
         nextPurchaseAmount,
       ] = event.value;
 
-      setPurchaseAmount(
+      setShareAmount(
         nextPurchaseAmount,
       );
     },
     [
-      setPurchaseAmount,
-    ],
-  );
-  const handleInputChange = useCallback(
-    (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ) =>
-    {
-      const {
-        target: {
-          value,
-        },
-      } = event;
-      const orderCount = parseInt(
-        value,
-        10,
-      );
-      const shareCount = Math.min(
-        orderCount,
-        maxPurchasable,
-      );
-
-      setPurchaseAmount(
-        shareCount,
-      );
-    },
-    [
-      setPurchaseAmount,
-      maxPurchasable,
+      setShareAmount,
     ],
   );
   const overrides = useMemo(
@@ -124,34 +119,23 @@ const TradeSlider: React.FC<Props> = (
     {
       return {
         TickBar: {
-          component: (
-            props: SharedProps,
-          ): JSX.Element =>
+          component: () =>
           {
             return (
-              <>
-                <TickBar
-                  {...props}
-                  maxPurchasable={maxPurchasable}
-                  setPurchaseAmount={setPurchaseAmount}
-                />
-                <input
-                  hidden={true}
-                  value={purchaseAmount}
-                  data-testid="sliderInput"
-                  onChange={handleInputChange}
-                />
-              </>
+              <TradeSliderInput
+                shareCount={shareCount}
+                maxValue={maxValue}
+                setShareAmount={setShareAmount}
+              />
             );
           },
         },
       };
     },
     [
-      maxPurchasable,
-      setPurchaseAmount,
-      handleInputChange,
-      purchaseAmount,
+      shareCount,
+      maxValue,
+      setShareAmount,
     ],
   );
 
@@ -160,7 +144,7 @@ const TradeSlider: React.FC<Props> = (
     {
       if (hasPriceChanged || hasBalanceChanged)
       {
-        setPurchaseAmount(
+        setShareAmount(
           0,
         );
       }
@@ -168,21 +152,27 @@ const TradeSlider: React.FC<Props> = (
     [
       hasPriceChanged,
       hasBalanceChanged,
-      setPurchaseAmount,
+      setShareAmount,
     ],
   );
 
   return (
-    <Slider
-      max={maxPurchasable}
-      overrides={overrides}
-      value={
-        [
-          purchaseAmount,
-        ]
-      }
-      onChange={handleChange}
-    />
+    <>
+      <Slider
+        max={maxValue}
+        overrides={overrides}
+        value={
+          [
+            shareCount,
+          ]
+        }
+        onChange={handleChange}
+      />
+      <TradeSliderTickBar
+        maxValue={maxValue}
+        setShareAmount={setShareAmount}
+      />
+    </>
   );
 };
 

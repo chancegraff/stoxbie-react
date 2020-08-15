@@ -13,7 +13,7 @@ const setItem = <P extends unknown>(
     ? JSON.stringify(
       value,
     )
-    : undefined;
+    : "undefined";
 
   now.setTime(
     now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000),
@@ -23,7 +23,7 @@ const setItem = <P extends unknown>(
 
 const getItem = <P extends unknown>(
   itemKey: string,
-): P =>
+): P | undefined =>
 {
   const allCookies = document.cookie.split(
     "; ",
@@ -55,7 +55,7 @@ const getItem = <P extends unknown>(
     ? undefined
     : JSON.parse(
       itemValueAsString,
-    );
+    ) as P;
 };
 
 export const useCookie = <P = undefined>(

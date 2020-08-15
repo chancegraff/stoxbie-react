@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useState,
 } from "react";
 import {
@@ -7,6 +8,9 @@ import {
 import {
   FlexGridItem,
 } from "baseui/dist/flex-grid";
+import {
+  Check,
+} from "baseui/dist/icon";
 import {
   HistoricalPrice,
 } from "iex";
@@ -23,14 +27,14 @@ import {
 
 type Props = {
   currentPrice?: HistoricalPrice;
-  currentBalance?: number;
+  currentLedger?: HistoricalLedger;
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
 const TradeControl: React.FC<Props> = (
   {
     currentPrice,
-    currentBalance,
+    currentLedger,
     handleTrade,
   },
 ) =>
@@ -40,13 +44,44 @@ const TradeControl: React.FC<Props> = (
     theme,
   ] = useStyletron();
   const [
-    purchaseAmount,
-    setPurchaseAmount,
+    shareCount,
+    setShareAmount,
   ] = useState<number>(
     0,
   );
+  const [
+    shareModifier,
+    setShareModifier,
+  ] = useState<1 | -1>(
+    1,
+  );
 
-  if (!currentPrice || !currentBalance)
+  const handleToggle = useCallback(
+    () =>
+    {
+      setShareAmount(
+        0,
+      );
+
+      if (shareModifier > 0)
+      {
+        setShareModifier(
+          -1,
+        );
+      }
+      else
+      {
+        setShareModifier(
+          1,
+        );
+      }
+    },
+    [
+      shareModifier,
+    ],
+  );
+
+  if (!currentPrice || !currentLedger)
   {
     return <Spinner container={Container} />;
   }
@@ -54,19 +89,23 @@ const TradeControl: React.FC<Props> = (
   return (
     <Container>
       <TradeSlider
-        currentBalance={currentBalance}
+        currentLedger={currentLedger}
         currentPrice={currentPrice}
-        purchaseAmount={purchaseAmount}
-        setPurchaseAmount={setPurchaseAmount}
+        shareCount={shareCount}
+        shareModifier={shareModifier}
+        setShareAmount={setShareAmount}
       />
       <FlexGrid marginTop={theme.sizing.scale400}>
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
+            EndEnhancer={Check}
+            handleToggle={handleToggle}
             handleTrade={handleTrade}
-            purchaseAmount={purchaseAmount}
-            purchaseModifier={1}
+            shareCount={shareCount}
             sharePrice={currentPrice.close}
+            shareModifier={shareModifier}
+            actionModifier={1}
           >
             Buy
           </TradeAction>
@@ -74,10 +113,13 @@ const TradeControl: React.FC<Props> = (
         <FlexGridItem>
           <TradeAction
             Component={FullButton}
+            EndEnhancer={Check}
+            handleToggle={handleToggle}
             handleTrade={handleTrade}
-            purchaseAmount={purchaseAmount}
-            purchaseModifier={-1}
+            shareCount={shareCount}
             sharePrice={currentPrice.close}
+            shareModifier={shareModifier}
+            actionModifier={-1}
           >
             Sell
           </TradeAction>

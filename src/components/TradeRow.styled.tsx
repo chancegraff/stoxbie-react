@@ -31,6 +31,7 @@ export const SmallButton = styled(
     return {
       ...$theme.typography.font100,
       height: "20px",
+      width: "100%",
     };
   },
 );

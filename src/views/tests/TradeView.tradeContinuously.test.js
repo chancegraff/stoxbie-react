@@ -1,5 +1,6 @@
 import {
-  clickContinue,
+  clickBuy,
+  clickContinue, clickSell,
 } from "./helpers/events";
 import {
   renderTradeView,
@@ -38,6 +39,8 @@ it(
 
     clickContinue();
 
+    clickSell();
+
     // Day 2: Sell 50/200 shares @ 3.79
     // (150)  3.2 / -    / -   / -
     // (50)   3.2 / 3.79 / 18% / 29.50    <<
@@ -59,6 +62,8 @@ it(
     );
 
     clickContinue();
+
+    clickBuy();
 
     // Day 3: Buy 100 shares @ 3.67
     // (100)  3.67 / -    / -   / -       <<
@@ -82,6 +87,8 @@ it(
     );
 
     clickContinue();
+
+    clickSell();
 
     // Day 4: Sell 150/250 shares @ 3.78
     // (100)  3.67 / -    / -   / -

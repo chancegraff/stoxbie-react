@@ -1,5 +1,5 @@
 import {
-  screen,
+  screen, within,
 } from "@testing-library/react";
 
 export const BreadcrumbsContainer = () =>
@@ -39,10 +39,28 @@ export const BuyButton = () =>
   );
 };
 
+export const BuyButtonCheck = () =>
+{
+  return within(
+    BuyButton(),
+  ).queryByTestId(
+    "check",
+  );
+};
+
 export const SellButton = () =>
 {
   return screen.getByText(
     "Sell",
+  );
+};
+
+export const SellButtonCheck = () =>
+{
+  return within(
+    SellButton(),
+  ).queryByTestId(
+    "check",
   );
 };
 
