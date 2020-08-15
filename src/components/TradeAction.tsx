@@ -5,9 +5,6 @@ import {
   Button,
   ButtonProps,
 } from "baseui/dist/button";
-import {
-  Check,
-} from "baseui/dist/icon";
 
 import TradeActionCheck from "./TradeActionEnhancer";
 
@@ -30,7 +27,7 @@ const TradeAction: React.FC<Props> = (
     sharePrice,
     shareCount,
     actionModifier,
-    shareModifier = 1,
+    shareModifier = actionModifier,
     Component = Button,
     EndEnhancer,
   },
