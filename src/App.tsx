@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 
 import BaseUI from "services/BaseUI";
+import Grommet from "services/Grommet";
 import PageBackground from "templates/PageBackground";
 import SearchRoutes from "routes/SearchRoutes";
 import StockRoutes from "routes/StockRoutes";
@@ -13,21 +14,23 @@ const App: React.FC = () =>
 {
   return (
     <BrowserRouter>
-      <BaseUI>
-        <PageBackground>
-          <Switch>
-            <Route path="/trade">
-              <TradeRoutes />
-            </Route>
-            <Route path="/stock">
-              <StockRoutes />
-            </Route>
-            <Route path="/">
-              <SearchRoutes />
-            </Route>
-          </Switch>
-        </PageBackground>
-      </BaseUI>
+      <Grommet>
+        <BaseUI>
+          <PageBackground>
+            <Switch>
+              <Route path="/trade">
+                <TradeRoutes />
+              </Route>
+              <Route path="/stock">
+                <StockRoutes />
+              </Route>
+              <Route path="/">
+                <SearchRoutes />
+              </Route>
+            </Switch>
+          </PageBackground>
+        </BaseUI>
+      </Grommet>
     </BrowserRouter>
   );
 };
