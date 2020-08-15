@@ -1,9 +1,5 @@
-import {
-  buyButtonShouldChange,
-} from "./buyButtonShouldChange";
-import {
-  sellButtonShouldChange,
-} from "./sellButtonShouldChange";
+import buyButtonShouldChange from "./buyButtonShouldChange";
+import sellButtonShouldChange from "./sellButtonShouldChange";
 
 export const TradeTypes = {
   Buying: "buy",

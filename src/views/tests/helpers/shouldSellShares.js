@@ -11,7 +11,7 @@ import ledgerChangeShouldChange from "views/tests/assertions/ledgerChangeShouldC
 import sliderShouldChange from "views/tests/assertions/sliderShouldChange";
 import tradeRowShouldHaveText from "views/tests/assertions/tradeRowShouldHaveText";
 import tradeRowsShouldHaveLength from "views/tests/assertions/tradeRowsShouldHaveLength";
-import TableTradeRows from "views/tests/components/TableTradeRows";
+import TableTradeRows from "views/tests/elements/TableTradeRows";
 import changeSlider from "views/tests/events/changeSlider";
 import clickSell from "views/tests/events/clickSell";
 

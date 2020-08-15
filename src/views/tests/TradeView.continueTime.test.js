@@ -4,7 +4,7 @@ import {
 } from "utils/Utilities";
 
 import componentShouldRender from "./assertions/componentShouldRender";
-import TimeControlDate from "./components/TimeControlDate";
+import TimeControlDate from "./elements/TimeControlDate";
 import clickContinue from "./events/clickContinue";
 import {
   dayOnePrice,

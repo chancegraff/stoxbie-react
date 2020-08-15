@@ -1,6 +1,4 @@
-import {
-  componentShouldRender,
-} from "./componentShouldRender";
+import componentShouldRender from "./componentShouldRender";
 
 const componentsShouldRender = (
   components,

@@ -1,8 +1,6 @@
 import TickerInput from "views/tests/elements/TickerInput";
 
-import {
-  componentShouldRender,
-} from "./assertions/componentShouldRender";
+import componentShouldRender from "./assertions/componentShouldRender";
 import {
   renderSearchView,
 } from "./helpers/render";

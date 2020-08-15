@@ -2,9 +2,7 @@ import {
   fireEvent,
 } from "@testing-library/react";
 
-import {
-  ContinueButton,
-} from "./components";
+import ContinueButton from "views/tests/elements/ContinueButton";
 
 const clickContinue = (
   times = 1,

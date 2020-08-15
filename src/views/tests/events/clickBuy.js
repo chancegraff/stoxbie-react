@@ -2,9 +2,7 @@ import {
   fireEvent,
 } from "@testing-library/react";
 
-import {
-  BuyButton,
-} from "./components";
+import BuyButton from "views/tests/elements/BuyButton";
 
 const clickBuy = () =>
 {

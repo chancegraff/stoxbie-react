@@ -1,6 +1,6 @@
-import clickBuy from "./events./clickBuy";
-import clickContinue from "./events./clickContinue";
-import clickSell from "./events./clickSell";
+import clickBuy from "./events/clickBuy";
+import clickContinue from "./events/clickContinue";
+import clickSell from "./events/clickSell";
 import {
   renderTradeView,
 } from "./helpers/render";
