@@ -8,7 +8,6 @@ import {
 import {
   formatCount,
   formatCurrency,
-  formatPercentage,
 } from "utils/Utilities";
 import TradeAction from "components/TradeAction";
 
