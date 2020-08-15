@@ -76,7 +76,9 @@
                             "expect",
                             "*Should",
                             "*Should*",
-                            "should*"
+                            "should*",
+                            "buyShares",
+                            "sellShares"
                         ]
                     }
                 ]

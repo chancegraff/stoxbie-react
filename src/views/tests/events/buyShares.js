@@ -5,23 +5,16 @@ import {
 import {
   formatCurrency,
 } from "utils/Utilities";
+import ledgerBalanceShouldChange from "views/tests/assertions/ledgerBalanceShouldChange";
+import sliderShouldChange from "views/tests/assertions/sliderShouldChange";
+import tradeRowShouldHaveExitButton from "views/tests/assertions/tradeRowShouldHaveExitButton";
+import tradeRowShouldHaveText from "views/tests/assertions/tradeRowShouldHaveText";
+import tradeRowsShouldHaveLength from "views/tests/assertions/tradeRowsShouldHaveLength";
+import TableTradeRows from "views/tests/elements/TableTradeRows";
+import changeSlider from "views/tests/events/changeSlider";
+import clickBuy from "views/tests/events/clickBuy";
 
-import {
-  ledgerBalanceShouldChange,
-  sliderShouldChange,
-  tradeRowShouldHaveExitButton,
-  tradeRowShouldHaveText,
-  tradeRowsShouldHaveLength,
-} from "./assertions";
-import {
-  TableTradeRows,
-} from "./components";
-import {
-  changeSlider,
-  clickBuy,
-} from "./events";
-
-export const shouldBuyShares = async (
+const buyShares = async (
   trade,
   tradeRowsLength,
 ) =>
@@ -78,3 +71,5 @@ export const shouldBuyShares = async (
     ),
   );
 };
+
+export default buyShares;

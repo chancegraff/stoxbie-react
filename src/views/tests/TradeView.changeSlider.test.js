@@ -2,15 +2,9 @@ import {
   waitFor,
 } from "@testing-library/react";
 
-import {
-  sliderShouldChange,
-} from "./helpers/assertions";
-import {
-  changeSlider,
-} from "./helpers/events";
-import {
-  renderTradeView,
-} from "./helpers/render";
+import sliderShouldChange from "./assertions/sliderShouldChange";
+import changeSlider from "./events/changeSlider";
+import render from "./render/TradeView";
 
 it(
   "changes share slider",
@@ -18,7 +12,7 @@ it(
   {
     const shareCount = 200;
 
-    renderTradeView();
+    render();
 
     changeSlider(
       shareCount,

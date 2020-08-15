@@ -1,27 +1,15 @@
-import {
-  prettyDOM,
-} from "@testing-library/react";
-
-import {
+import tradeTypeShouldChange, {
   TradeTypes,
-  tradeTypeShouldChange,
-} from "./helpers/assertions";
-import {
-  BuyButton,
-} from "./helpers/components";
-import {
-  clickBuy,
-  clickSell,
-} from "./helpers/events";
-import {
-  renderTradeView,
-} from "./helpers/render";
+} from "./assertions/tradeTypeShouldChange";
+import clickBuy from "./events/clickBuy";
+import clickSell from "./events/clickSell";
+import render from "./render/TradeView";
 
 it(
   "toggles trade buttons",
   () =>
   {
-    renderTradeView();
+    render();
 
     tradeTypeShouldChange(
       TradeTypes.Buying,

@@ -1,30 +1,37 @@
 import {
+  addBusinessDays,
+} from "date-fns";
+
+import {
   DateFormats,
   formatParsedDate,
 } from "utils/Utilities";
 
+import componentShouldRender from "./assertions/componentShouldRender";
+import TimeControlDate from "./elements/TimeControlDate";
+import clickContinue from "./events/clickContinue";
 import {
-  componentShouldRender,
-} from "./helpers/assertions";
-import {
-  TimeControlDate,
-} from "./helpers/components";
-import {
-  clickContinue,
-} from "./helpers/events";
-import {
+  getPriceRange,
+  tradeViewStartDate,
+} from "./helpers/prices";
+import render from "./render/TradeView";
+
+const [
   dayOnePrice,
   dayTwoPrice,
-} from "./helpers/prices";
-import {
-  renderTradeView,
-} from "./helpers/render";
+] = getPriceRange(
+  tradeViewStartDate,
+  addBusinessDays(
+    tradeViewStartDate,
+    1,
+  ),
+);
 
 it(
   "continues forward in time",
   () =>
   {
-    renderTradeView();
+    render();
 
     componentShouldRender(
       TimeControlDate(

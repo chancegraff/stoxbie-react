@@ -1,23 +1,16 @@
-import {
-  clickContinue, clickSell,
-} from "./helpers/events";
-import {
-  renderTradeView,
-} from "./helpers/render";
-import {
-  shouldBuyShares,
-} from "./helpers/shouldBuyShares";
-import {
-  shouldSellShares,
-} from "./helpers/shouldSellShares";
+import buyShares from "./events/buyShares";
+import clickContinue from "./events/clickContinue";
+import clickSell from "./events/clickSell";
+import sellShares from "./events/sellShares";
+import render from "./render/TradeView";
 
 it(
   "conducts a simple trade",
   async () =>
   {
-    renderTradeView();
+    render();
 
-    await shouldBuyShares(
+    await buyShares(
       {
         TotalShares: 200,
         OpenPrice: 3.2,
@@ -37,7 +30,7 @@ it(
 
     clickSell();
 
-    await shouldSellShares(
+    await sellShares(
       {
         TotalShares: 0,
         OpenPrice: 3.2,

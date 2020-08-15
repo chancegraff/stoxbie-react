@@ -6,23 +6,16 @@ import {
   formatCurrency,
   formatPercentage,
 } from "utils/Utilities";
+import ledgerBalanceShouldChange from "views/tests/assertions/ledgerBalanceShouldChange";
+import ledgerChangeShouldChange from "views/tests/assertions/ledgerChangeShouldChange";
+import sliderShouldChange from "views/tests/assertions/sliderShouldChange";
+import tradeRowShouldHaveText from "views/tests/assertions/tradeRowShouldHaveText";
+import tradeRowsShouldHaveLength from "views/tests/assertions/tradeRowsShouldHaveLength";
+import TableTradeRows from "views/tests/elements/TableTradeRows";
+import changeSlider from "views/tests/events/changeSlider";
+import clickSell from "views/tests/events/clickSell";
 
-import {
-  ledgerBalanceShouldChange,
-  ledgerChangeShouldChange,
-  sliderShouldChange,
-  tradeRowShouldHaveText,
-  tradeRowsShouldHaveLength,
-} from "./assertions";
-import {
-  TableTradeRows,
-} from "./components";
-import {
-  changeSlider,
-  clickSell,
-} from "./events";
-
-export const shouldSellShares = async (
+const sellShares = async (
   trade,
   tradeRowsLength,
 ) =>
@@ -110,3 +103,5 @@ export const shouldSellShares = async (
     ),
   );
 };
+
+export default sellShares;
