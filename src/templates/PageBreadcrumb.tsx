@@ -10,6 +10,9 @@ import {
 import {
   StyledLink,
 } from "baseui/dist/link";
+import {
+  Box,
+} from "grommet";
 
 import {
   DateFormats,
@@ -93,10 +96,16 @@ const BreadcrumbContainer: React.FC<Props> = () =>
   );
 
   return (
-    <>
+    <Box
+      pad={
+        {
+          vertical: "medium",
+        }
+      }
+    >
       {stockView && <StockBreadcrumb />}
       {tradeView && <TradeBreadcrumb />}
-    </>
+    </Box>
   );
 };
 

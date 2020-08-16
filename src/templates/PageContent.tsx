@@ -6,6 +6,7 @@ import {
 } from "grommet";
 
 import PageBreadcrumb from "templates/PageBreadcrumb";
+import FooterName from "components/FooterName";
 
 type Props = unknown;
 
@@ -15,10 +16,9 @@ const ContentContainer: React.FC<Props> = (
 {
   return (
     <Main
-      height="100%"
       pad={
         {
-          vertical: "large",
+          vertical: "medium",
           horizontal: "xlarge",
         }
       }
@@ -26,17 +26,11 @@ const ContentContainer: React.FC<Props> = (
       <Header>
         <PageBreadcrumb />
       </Header>
-      <Main
-        pad={
-          {
-            vertical: "medium",
-          }
-        }
-      >
+      <Main flex="shrink">
         {props.children}
       </Main>
       <Footer>
-        Stoxbie
+        <FooterName />
       </Footer>
     </Main>
   );

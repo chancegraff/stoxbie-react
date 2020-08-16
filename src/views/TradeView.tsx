@@ -622,7 +622,7 @@ const TradeView: React.FC<Props> = (
         gap="medium"
         columns={
           [
-            "3/4",
+            "flex",
             "auto",
           ]
         }
@@ -650,7 +650,14 @@ const TradeView: React.FC<Props> = (
             </AspectRatioItem>
           </AspectRatioBox>
         </Box>
-        <Box gridArea="trades">
+        <Box
+          gridArea="trades"
+          height={
+            {
+              max: `${height}px`,
+            }
+          }
+        >
           <TimeControl
             handleContinue={handleContinue}
             currentPrice={currentPrice}

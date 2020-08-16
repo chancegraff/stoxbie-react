@@ -3,9 +3,6 @@ import React, {
   useState,
 } from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
   Check,
 } from "baseui/dist/icon";
 import {
