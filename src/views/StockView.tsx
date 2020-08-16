@@ -46,6 +46,7 @@ const StockView: React.FC<Props> = (
         <PageBreadcrumb />
       </Box>
       <Box
+        direction="row"
         align="end"
         width="100%"
       >

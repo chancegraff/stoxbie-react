@@ -1,6 +1,8 @@
 import React from "react";
 import {
-  Box, Main,
+  Footer,
+  Header,
+  Main,
 } from "grommet";
 
 type Props = unknown;
@@ -19,7 +21,9 @@ const ContentContainer: React.FC<Props> = (
         }
       }
     >
+      <Header pad="medium" />
       {props.children}
+      <Footer pad="medium" />
     </Main>
   );
 };

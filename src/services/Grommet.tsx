@@ -350,8 +350,9 @@ const Grommet: React.FC = (
 {
   return (
     <GrommetProvider
-      theme={theme}
       full={true}
+      theme={theme}
+      themeMode="dark"
     >
       {props.children}
     </GrommetProvider>
