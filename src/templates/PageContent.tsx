@@ -35,7 +35,9 @@ const ContentContainer: React.FC<Props> = (
       >
         {props.children}
       </Main>
-      <Footer/>
+      <Footer>
+        Stoxbie
+      </Footer>
     </Main>
   );
 };
