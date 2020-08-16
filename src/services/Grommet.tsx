@@ -50,18 +50,6 @@ const theme = {
         dark: "#444444",
         light: "#CCCCCC",
       },
-      control: "brand",
-      "active-background": "background-contrast",
-      "active-text": "text-strong",
-      "selected-background": "brand",
-      "selected-text": "text-strong",
-      "status-critical": "#FF4040",
-      "status-warning": "#FFAA15",
-      "status-ok": "#00C781",
-      "status-unknown": "#CCCCCC",
-      "status-disabled": "#CCCCCC",
-      "graph-0": "brand",
-      "graph-1": "status-warning",
     },
     font: {
       family: "\"Mulish\"",
@@ -69,18 +57,6 @@ const theme = {
       height: "24px",
       maxWidth: "432px",
       face: "/* vietnamese */\n@font-face {\n  font-family: 'Mulish';\n  font-style: normal;\n  font-weight: 400;\n  src: url(https://fonts.gstatic.com/s/mulish/v1/1Ptyg83HX_SGhgqO0yLcmjzUAuWexZNR8aivHZ47LTdNwPak.woff) format('woff');\n  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;\n}\n/* latin-ext */\n@font-face {\n  font-family: 'Mulish';\n  font-style: normal;\n  font-weight: 400;\n  src: url(https://fonts.gstatic.com/s/mulish/v1/1Ptyg83HX_SGhgqO0yLcmjzUAuWexZNR8amvHZ47LTdNwPak.woff) format('woff');\n  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;\n}\n/* latin */\n@font-face {\n  font-family: 'Mulish';\n  font-style: normal;\n  font-weight: 400;\n  src: url(https://fonts.gstatic.com/s/mulish/v1/1Ptyg83HX_SGhgqO0yLcmjzUAuWexZNR8aevHZ47LTdNwA.woff) format('woff');\n  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;\n}\n",
-    },
-    active: {
-      background: "active-background",
-      color: "active-text",
-    },
-    hover: {
-      background: "active-background",
-      color: "active-text",
-    },
-    selected: {
-      background: "selected-background",
-      color: "selected-text",
     },
     control: {
       border: {
@@ -159,162 +135,6 @@ const theme = {
       xlarge: "1152px",
       xxlarge: "1536px",
       full: "100%",
-    },
-  },
-  chart: {},
-  diagram: {
-    line: {},
-  },
-  meter: {},
-  button: {
-    border: {
-      width: "2px",
-      radius: "18px",
-    },
-    padding: {
-      vertical: "4px",
-      horizontal: "22px",
-    },
-  },
-  checkBox: {
-    check: {
-      radius: "2px",
-    },
-    toggle: {
-      radius: "24px",
-      size: "48px",
-    },
-    size: "24px",
-  },
-  radioButton: {
-    size: "24px",
-  },
-  formField: {
-    border: {
-      color: "border",
-      error: {
-        color: {
-          dark: "white",
-          light: "status-critical",
-        },
-      },
-      position: "outer",
-      side: "left",
-      size: "small",
-      style: "solid",
-    },
-    content: {
-      pad: "medium",
-    },
-    disabled: {
-      background: {
-        color: "status-disabled",
-        opacity: "medium",
-      },
-    },
-    error: {
-      color: "status-critical",
-      margin: {
-        vertical: "xsmall",
-        horizontal: "small",
-      },
-    },
-    help: {
-      color: "dark-3",
-      margin: {
-        start: "small",
-        horizontal: "small",
-      },
-      size: "small",
-      weight: "normal",
-    },
-    info: {
-      color: "text-xweak",
-      margin: {
-        vertical: "xsmall",
-        horizontal: "small",
-      },
-    },
-    label: {
-      margin: {
-        vertical: "xsmall",
-        horizontal: "small",
-      },
-      size: "large",
-      weight: "bold",
-      color: "text-strong",
-    },
-    margin: {
-      bottom: "medium",
-    },
-    round: "2px",
-  },
-  calendar: {
-    small: {
-      fontSize: "12px",
-      lineHeight: 1.375,
-      daySize: "27.43px",
-    },
-    medium: {
-      fontSize: "18px",
-      lineHeight: 1.45,
-      daySize: "54.86px",
-    },
-    large: {
-      fontSize: "36px",
-      lineHeight: 1.11,
-      daySize: "109.71px",
-    },
-  },
-  clock: {
-    analog: {
-      hour: {
-        width: "8px",
-        size: "24px",
-      },
-      minute: {
-        width: "4px",
-        size: "12px",
-      },
-      second: {
-        width: "3px",
-        size: "9px",
-      },
-      size: {
-        small: "72px",
-        medium: "96px",
-        large: "144px",
-        xlarge: "216px",
-        huge: "288px",
-      },
-    },
-    digital: {
-      text: {
-        xsmall: {
-          size: "6px",
-          height: 1.5,
-        },
-        small: {
-          size: "12px",
-          height: 1.43,
-        },
-        medium: {
-          size: "18px",
-          height: 1.375,
-        },
-        large: {
-          size: "24px",
-          height: 1.167,
-        },
-        xlarge: {
-          size: "30px",
-          height: 1.1875,
-        },
-        xxlarge: {
-          size: "42px",
-          height: 1.125,
-        },
-      },
     },
   },
   heading: {
