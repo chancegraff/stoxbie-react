@@ -6,7 +6,6 @@ import {
   Company, Logo,
 } from "iex-cloud";
 
-import PageBreadcrumb from "templates/PageBreadcrumb";
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
 import StockLogo from "components/StockLogo";
@@ -35,16 +34,6 @@ const StockView: React.FC<Props> = (
 
   return (
     <PageContent>
-      <Box
-        margin={
-          {
-            bottom: "24px",
-          }
-        }
-        width="100%"
-      >
-        <PageBreadcrumb />
-      </Box>
       <Box
         direction="row"
         align="end"

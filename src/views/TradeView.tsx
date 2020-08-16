@@ -9,9 +9,6 @@ import {
   parseISO,
 } from "date-fns";
 import {
-  Box,
-} from "grommet";
-import {
   HistoricalPrice,
 } from "iex";
 import useResizeObserver from "use-resize-observer";
@@ -25,7 +22,6 @@ import {
 import {
   AspectRatioBox, AspectRatioItem,
 } from "templates/AspectRatio";
-import PageBreadcrumb from "templates/PageBreadcrumb";
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
 import FlexGrid from "components/BaseUI/FlexGrid";
@@ -34,12 +30,12 @@ import TimeControl from "components/TimeControl";
 import TradeControl from "components/TradeControl";
 import TradeHistory from "components/TradeHistory";
 
-  type Props = {
-    date?: Date;
-    error?: string;
-    prices?: HistoricalPrice[];
-    ticker?: string;
-  };
+type Props = {
+  date?: Date;
+  error?: string;
+  prices?: HistoricalPrice[];
+  ticker?: string;
+};
 
 const getPriceIndexes = (
   prices: HistoricalPrice[],
@@ -617,16 +613,6 @@ const TradeView: React.FC<Props> = (
 
   return (
     <PageContent>
-      <Box
-        margin={
-          {
-            bottom: "24px",
-          }
-        }
-        width="100%"
-      >
-        <PageBreadcrumb />
-      </Box>
       <FlexGrid
         flexWrap={
           [
