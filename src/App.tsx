@@ -14,9 +14,9 @@ const App: React.FC = () =>
 {
   return (
     <BrowserRouter>
-      <Grommet>
-        <BaseUI>
-          <PageBackground>
+      <BaseUI>
+        <PageBackground>
+          <Grommet>
             <Switch>
               <Route path="/trade">
                 <TradeRoutes />
@@ -28,9 +28,9 @@ const App: React.FC = () =>
                 <SearchRoutes />
               </Route>
             </Switch>
-          </PageBackground>
-        </BaseUI>
-      </Grommet>
+          </Grommet>
+        </PageBackground>
+      </BaseUI>
     </BrowserRouter>
   );
 };
