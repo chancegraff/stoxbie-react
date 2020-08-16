@@ -1,6 +1,6 @@
 export default {
   brand: "#4e60af",
-  "accent-1": "#FFA62B",
+  accent: "#FFA62B",
   background: {
     dark: "#111111",
     light: "#EEEEEE",

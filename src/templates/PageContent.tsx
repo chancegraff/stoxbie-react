@@ -19,17 +19,26 @@ const ContentContainer: React.FC<Props> = (
 {
   return (
     <Main >
-      <Header pad={pad}>
+      <Header
+        background="background-front"
+        pad={pad}
+      >
         <PageBreadcrumb />
       </Header>
       <Main
-        flex="shrink"
-        pad={pad}
+        height="auto !important"
+        overflow="visible"
+        flex="grow"
+        pad={
+          {
+            ...pad,
+            vertical: "medium",
+          }
+        }
       >
         {props.children}
       </Main>
       <Footer
-        background="background-front"
         pad={pad}
       >
         <FooterName />
