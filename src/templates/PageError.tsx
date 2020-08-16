@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  Block,
-} from "baseui/dist/block";
-import {
   Display3,
 } from "baseui/dist/typography";
+import {
+  Box,
+} from "grommet";
 
 import PageContent from "templates/PageContent";
 
@@ -16,20 +16,18 @@ const Error: React.FC<Props> = (
 {
   return (
     <PageContent>
-      <Block
+      <Box
         width={
-          [
-            "100%",
-            "100%",
-            "70%",
-            "60%",
-          ]
+          {
+            min: "60%",
+            max: "100%",
+          }
         }
       >
         <Display3>
           {props.children}
         </Display3>
-      </Block>
+      </Box>
     </PageContent>
   );
 };

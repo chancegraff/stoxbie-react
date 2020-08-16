@@ -1,10 +1,7 @@
 import React from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
+  Box,
+} from "grommet";
 import {
   Company, Logo,
 } from "iex-cloud";
@@ -27,11 +24,6 @@ const StockView: React.FC<Props> = (
   props,
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
-
   if (props.error)
   {
     return (
@@ -43,33 +35,52 @@ const StockView: React.FC<Props> = (
 
   return (
     <PageContent>
-      <Block
-        marginBottom={theme.sizing.scale800}
+      <Box
+        margin={
+          {
+            bottom: "24px",
+          }
+        }
         width="100%"
       >
         <PageBreadcrumb />
-      </Block>
-      <Block
-        alignItems="flex-end"
-        display="flex"
+      </Box>
+      <Box
+        align="end"
         width="100%"
       >
-        <Block>
+        <Box>
           <StockLogo logo={props.logo} />
-        </Block>
-        <Block
-          marginLeft={theme.sizing.scale400}
-          minHeight="68px"
+        </Box>
+        <Box
+          margin={
+            {
+              left: "12px",
+            }
+          }
+          height={
+            {
+              min: "68px",
+            }
+          }
         >
           <StockName company={props.company} />
-        </Block>
-        <Block
-          marginLeft={theme.sizing.scale600}
-          minHeight="52px"
+        </Box>
+        <Box
+          margin={
+            {
+              left: "18px",
+            }
+          }
+          height={
+            {
+              min: "52px",
+            }
+          }
         >
           <TradeStart handleStart={props.handleStart} />
-        </Block>
-      </Block>
+        </Box>
+      </Box>
     </PageContent>
   );
 };

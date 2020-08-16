@@ -2,18 +2,15 @@ import React, {
   useCallback, useEffect, useMemo, useState,
 } from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
-import {
   FlexGridItem,
 } from "baseui/dist/flex-grid";
 import {
   closestIndexTo,
   parseISO,
 } from "date-fns";
+import {
+  Box,
+} from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
@@ -186,10 +183,6 @@ const TradeView: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
   const {
     ref,
     width = 1,
@@ -624,12 +617,16 @@ const TradeView: React.FC<Props> = (
 
   return (
     <PageContent>
-      <Block
-        marginBottom={theme.sizing.scale800}
+      <Box
+        margin={
+          {
+            bottom: "24px",
+          }
+        }
         width="100%"
       >
         <PageBreadcrumb />
-      </Block>
+      </Box>
       <FlexGrid
         flexWrap={
           [

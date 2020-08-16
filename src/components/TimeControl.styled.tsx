@@ -1,22 +1,28 @@
-import {
-  styled,
-} from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
+import React from "react";
 import {
   Button,
 } from "baseui/dist/button";
+import {
+  Box,
+  BoxProps,
+} from "grommet";
+import {
+  styled,
+} from "styletron-react";
 
-export const Container = styled(
-  Block,
-  {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-);
+export const Container: React.FC<BoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      wrap={true}
+      align="center"
+      justify="center"
+      {...props}
+    />
+  );
+};
 
 export const FullButton = styled(
   Button,

@@ -1,31 +1,32 @@
+import React from "react";
 import {
-  styled,
   withStyle,
 } from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
 import {
   StyledCell,
   StyledHeadCell,
   StyledRow,
   StyledTable,
 } from "baseui/dist/table";
+import {
+  Box,
+  BoxProps,
+} from "grommet";
 
-export const Container = styled(
-  Block,
-  () =>
-  {
-    return {
-      height: "0%",
-      width: "100%",
-      flexGrow: 1,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    };
-  },
-);
+export const Container: React.FC<BoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      height="0"
+      width="100%"
+      align="center"
+      justify="center"
+      {...props}
+    />
+  );
+};
 
 export const FullTable = withStyle(
   StyledTable,

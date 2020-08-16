@@ -2,9 +2,6 @@ import React, {
   useCallback,
 } from "react";
 import {
-  Block,
-} from "baseui/dist/block";
-import {
   SHAPE, SIZE,
 } from "baseui/dist/button";
 import {
@@ -13,6 +10,9 @@ import {
 import {
   Filter,
 } from "baseui/dist/icon";
+import {
+  Box,
+} from "grommet";
 
 import {
   DateFormats,
@@ -97,7 +97,7 @@ const TradeStart: React.FC<Props> = (
   );
 
   return (
-    <Block>
+    <Box>
       <ButtonGroup
         shape={SHAPE.pill}
         size={SIZE.mini}
@@ -114,7 +114,7 @@ const TradeStart: React.FC<Props> = (
           </GrowingButton>
         </DatePicker>
       </ButtonGroup>
-    </Block>
+    </Box>
   );
 };
 

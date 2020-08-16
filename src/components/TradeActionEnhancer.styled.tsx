@@ -1,26 +1,21 @@
+import React from "react";
 import {
-  styled,
-} from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
+  Box, BoxProps,
+} from "grommet";
 
-export const Container = styled(
-  Block,
-  (
-    {
-      $theme,
-    },
-  ) =>
-  {
-    return {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      width: `${$theme.sizing.scale800}`,
-      height: `${$theme.sizing.scale800}`,
-      borderRadius: "100%",
-      border: `2px solid ${$theme.colors.primaryB}`,
-    };
-  },
-);
+export const Container: React.FC<BoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      align="center"
+      justify="center"
+      width="24px"
+      height="24px"
+      border={true}
+      round={true}
+      {...props}
+    />
+  );
+};

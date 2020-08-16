@@ -1,13 +1,11 @@
 import React from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
-import {
-  Display2, Label2,
+  Display2,
+  Label2,
 } from "baseui/dist/typography";
+import {
+  Box,
+} from "grommet";
 import {
   Search,
 } from "iex-cloud";
@@ -27,35 +25,34 @@ const SearchView: React.FC<Props> = (
   props,
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
-
   return (
     <PageContent>
-      <Block
+      <Box
         width={
-          [
-            "100%",
-            "100%",
-            "70%",
-            "60%",
-          ]
+          {
+            min: "60%",
+            max: "100%",
+          }
         }
       >
-        <Block marginBottom={theme.sizing.scale800}>
+        <Box
+          margin={
+            {
+              bottom: "24px",
+            }
+          }
+        >
           <Display2>
             Ticker Search
           </Display2>
           <Label2>
             Select the stock ticker to trade.
           </Label2>
-        </Block>
-        <Block>
+        </Box>
+        <Box>
           <TickerInput handleSearch={props.handleSearch} />
-        </Block>
-      </Block>
+        </Box>
+      </Box>
     </PageContent>
   );
 };

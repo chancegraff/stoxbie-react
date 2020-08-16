@@ -6,8 +6,8 @@ import {
   Avatar,
 } from "baseui/dist/avatar";
 import {
-  Block,
-} from "baseui/dist/block";
+  Box,
+} from "grommet";
 import {
   Logo,
 } from "iex-cloud";
@@ -40,7 +40,7 @@ const StockLogo: React.FC<Props> = (
   }
 
   return (
-    <Block
+    <Box
       height={theme.sizing.scale2400}
       width={theme.sizing.scale2400}
     >
@@ -49,7 +49,7 @@ const StockLogo: React.FC<Props> = (
         size={theme.sizing.scale2400}
         src={props.logo.url}
       />
-    </Block>
+    </Box>
   );
 };
 

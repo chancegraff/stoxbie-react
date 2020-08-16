@@ -3,8 +3,8 @@ import {
   useStyletron,
 } from "baseui/dist";
 import {
-  Block,
-} from "baseui/dist/block";
+  Box,
+} from "grommet";
 
 type Props = unknown;
 
@@ -18,14 +18,14 @@ const PageBackground: React.FC<Props> = (
   ] = useStyletron();
 
   return (
-    <Block
-      backgroundColor={theme.colors.backgroundPrimary}
+    <Box
+      background={theme.colors.backgroundPrimary}
       color={theme.colors.contentPrimary}
       height="100%"
       width="100%"
     >
       {props.children}
-    </Block>
+    </Box>
   );
 };
 

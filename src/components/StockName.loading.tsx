@@ -1,12 +1,12 @@
 import React from "react";
 import {
-  Block,
-} from "baseui/dist/block";
-import {
   OverridesT,
   Skeleton,
   SkeletonPropsT,
 } from "baseui/dist/skeleton";
+import {
+  Box,
+} from "grommet";
 
 const overrides: OverridesT = {
   Row: {
@@ -29,17 +29,16 @@ export const DetailsSkeleton: React.FC<Partial<SkeletonPropsT>> = (
 ) =>
 {
   return (
-    <Block
-      alignItems="flex-end"
-      display="flex"
+    <Box
+      alignContent="end"
       height={props.height}
-      paddingBottom="2px"
+      pad="xxsmall"
     >
       <Skeleton
         animation={true}
         overrides={overrides}
         rows={2}
       />
-    </Block>
+    </Box>
   );
 };
