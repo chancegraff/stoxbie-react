@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BaseProvider, BaseProviderOverrides, DarkTheme,
+  BaseProvider, BaseProviderOverrides, LightTheme,
 } from "baseui/dist";
 import {
   Override,
@@ -33,7 +33,7 @@ const BaseUI: React.FC = (
     <StyletronProvider value={engine}>
       <BaseProvider
         overrides={overrides}
-        theme={DarkTheme}
+        theme={LightTheme}
       >
         {props.children}
       </BaseProvider>

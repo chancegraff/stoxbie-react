@@ -1,9 +1,6 @@
 import React from "react";
 import {
-  Grid as LayoutGrid,
-} from "baseui/dist/layout-grid";
-import {
-  Box,
+  Box, Main,
 } from "grommet";
 
 type Props = unknown;
@@ -13,14 +10,17 @@ const ContentContainer: React.FC<Props> = (
 ) =>
 {
   return (
-    <Box
+    <Main
       height="100%"
-      pad="medium"
+      pad={
+        {
+          vertical: "large",
+          horizontal: "xlarge",
+        }
+      }
     >
-      <LayoutGrid>
-        {props.children}
-      </LayoutGrid>
-    </Box>
+      {props.children}
+    </Main>
   );
 };
 
