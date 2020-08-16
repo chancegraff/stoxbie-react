@@ -3,7 +3,7 @@ import {
   Grommet as GrommetProvider,
 } from "grommet";
 
-import Theme from "./Theme";
+import Theme from "theme";
 
 const Grommet: React.FC = (
   props,
