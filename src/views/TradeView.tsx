@@ -626,11 +626,6 @@ const TradeView: React.FC<Props> = (
             "auto",
           ]
         }
-        rows={
-          [
-            "auto",
-          ]
-        }
         areas={
           [
             [

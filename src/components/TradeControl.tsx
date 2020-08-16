@@ -6,16 +6,16 @@ import {
   useStyletron,
 } from "baseui/dist";
 import {
-  FlexGridItem,
-} from "baseui/dist/flex-grid";
-import {
   Check,
 } from "baseui/dist/icon";
+import {
+  Box,
+  Grid,
+} from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
 
-import FlexGrid from "components/BaseUI/FlexGrid";
 import Spinner from "components/BaseUI/Spinner";
 import TradeAction from "components/TradeAction";
 import TradeSlider from "components/TradeSlider";
@@ -39,10 +39,6 @@ const TradeControl: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
   const [
     shareCount,
     setShareAmount,
@@ -95,8 +91,26 @@ const TradeControl: React.FC<Props> = (
         shareModifier={shareModifier}
         setShareAmount={setShareAmount}
       />
-      <FlexGrid marginTop={theme.sizing.scale400}>
-        <FlexGridItem>
+      <Grid
+        responsive={true}
+        fill="horizontal"
+        gap="small"
+        columns={
+          {
+            count: 2,
+            size: "auto",
+          }
+        }
+        areas={
+          [
+            [
+              "buy",
+              "sell",
+            ],
+          ]
+        }
+      >
+        <Box gridArea="buy">
           <TradeAction
             Component={FullButton}
             EndEnhancer={Check}
@@ -107,10 +121,10 @@ const TradeControl: React.FC<Props> = (
             shareModifier={shareModifier}
             actionModifier={1}
           >
-            Buy
+              Buy
           </TradeAction>
-        </FlexGridItem>
-        <FlexGridItem>
+        </Box>
+        <Box gridArea="sell">
           <TradeAction
             Component={FullButton}
             EndEnhancer={Check}
@@ -123,8 +137,8 @@ const TradeControl: React.FC<Props> = (
           >
             Sell
           </TradeAction>
-        </FlexGridItem>
-      </FlexGrid>
+        </Box>
+      </Grid>
     </Container>
   );
 };
