@@ -23,25 +23,19 @@ const ContentContainer: React.FC<Props> = (
         }
       }
     >
-      <Header
+      <Header>
+        <PageBreadcrumb />
+      </Header>
+      <Main
         pad={
           {
             vertical: "medium",
           }
         }
       >
-        <PageBreadcrumb />
-      </Header>
-      <Main>
         {props.children}
       </Main>
-      <Footer
-        pad={
-          {
-            vertical: "medium",
-          }
-        }
-      />
+      <Footer/>
     </Main>
   );
 };

@@ -4,13 +4,9 @@ import React, {
 import {
   Block, BlockProps,
 } from "baseui/dist/block";
-import {
-  FlexGridItemProps,
-} from "baseui/dist/flex-grid";
 
-type DivProps = FlexGridItemProps | BlockProps;
-type Props = DivProps & {
-  component?: React.FC<DivProps>;
+type Props = BlockProps & {
+  component?: React.FC<BlockProps>;
 };
 
 export const AspectRatioItem: React.FC<Props> = forwardRef(

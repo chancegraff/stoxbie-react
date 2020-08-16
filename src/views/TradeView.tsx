@@ -2,12 +2,16 @@ import React, {
   useCallback, useEffect, useMemo, useState,
 } from "react";
 import {
-  FlexGridItem,
-} from "baseui/dist/flex-grid";
+  Block,
+} from "baseui/dist/block";
 import {
   closestIndexTo,
   parseISO,
 } from "date-fns";
+import {
+  Box,
+  Grid,
+} from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
@@ -24,7 +28,6 @@ import {
 } from "templates/AspectRatio";
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
-import FlexGrid from "components/BaseUI/FlexGrid";
 import StockChart from "components/StockChart";
 import TimeControl from "components/TimeControl";
 import TradeControl from "components/TradeControl";
@@ -613,48 +616,46 @@ const TradeView: React.FC<Props> = (
 
   return (
     <PageContent>
-      <FlexGrid
-        flexWrap={
+      <Grid
+        responsive={true}
+        fill={true}
+        gap="medium"
+        columns={
           [
-            true,
-            true,
-            true,
-            false,
+            "3/4",
+            "auto",
+          ]
+        }
+        rows={
+          [
+            "auto",
+          ]
+        }
+        areas={
+          [
+            [
+              "chart",
+              "trades",
+            ],
           ]
         }
       >
-        <AspectRatioBox component={FlexGridItem}>
-          <AspectRatioItem ref={ref}>
-            <StockChart
-              prices={pastPrices}
-              resolution={
-                [
-                  width,
-                  height,
-                ]
-              }
-            />
-          </AspectRatioItem>
-        </AspectRatioBox>
-        <FlexGridItem
-          display="flex"
-          flexDirection="column"
-          height={`${height}px`}
-          maxWidth={
-            [
-              "100%",
-              "100%",
-              "25%",
-            ]
-          }
-          minWidth={
-            [
-              "auto",
-              "30%",
-              "25%",
-            ]
-          }
-        >
+        <Box gridArea="chart">
+          <AspectRatioBox component={Block}>
+            <AspectRatioItem ref={ref}>
+              <StockChart
+                prices={pastPrices}
+                resolution={
+                  [
+                    width,
+                    height,
+                  ]
+                }
+              />
+            </AspectRatioItem>
+          </AspectRatioBox>
+        </Box>
+        <Box gridArea="trades">
           <TimeControl
             handleContinue={handleContinue}
             currentPrice={currentPrice}
@@ -673,8 +674,8 @@ const TradeView: React.FC<Props> = (
             pastLedgers={playerLedger}
             currentTrades={currentTrades}
           />
-        </FlexGridItem>
-      </FlexGrid>
+        </Box>
+      </Grid>
     </PageContent>
   );
 };
