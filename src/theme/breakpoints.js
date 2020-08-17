@@ -3,7 +3,7 @@ export default {
     value: 600,
   },
   medium: {
-    value: 900,
+    value: 1200,
   },
   large: {
     value: 3000,
