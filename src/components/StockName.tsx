@@ -1,8 +1,7 @@
 import React from "react";
 import {
-  Caption2,
-  Display3,
-} from "baseui/dist/typography";
+  Text,
+} from "grommet";
 import {
   Company,
 } from "iex-cloud";
@@ -21,12 +20,15 @@ const StockName: React.FC<Props> = (
     <>
       <Skeleton
         on={!props.company}
-        height="44px !important"
+        height="34px !important"
         width="220px !important"
       >
-        <Display3>
+        <Text
+          size="xlarge"
+          weight="bold"
+        >
           {props.company?.companyName}
-        </Display3>
+        </Text>
       </Skeleton>
       <Skeleton
         on={!props.company}
@@ -38,9 +40,12 @@ const StockName: React.FC<Props> = (
           }
         }
       >
-        <Caption2>
+        <Text
+          size="xsmall"
+          color="text-xweak"
+        >
           {props.company?.symbol}
-        </Caption2>
+        </Text>
       </Skeleton>
     </>
   );
