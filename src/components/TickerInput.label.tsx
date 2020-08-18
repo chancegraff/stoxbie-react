@@ -3,11 +3,7 @@ import {
   Option,
 } from "baseui/dist/select";
 import {
-  Caption2,
-  Label2,
-} from "baseui/dist/typography";
-import {
-  Box,
+  Box, Text,
 } from "grommet";
 
 type Props = {
@@ -22,12 +18,18 @@ const Label: React.FC<Props> = (
 {
   return (
     <Box align="baseline">
-      <Label2>
+      <Text
+        size="medium"
+        color="text"
+      >
         {option?.symbol}
-      </Label2>
-      <Caption2 marginLeft="6px">
+      </Text>
+      <Text
+        size="xsmall"
+        color="text-xweak"
+      >
         {option?.securityName}
-      </Caption2>
+      </Text>
     </Box>
   );
 };

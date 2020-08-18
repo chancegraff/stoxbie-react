@@ -5,8 +5,8 @@ import {
   SIZE,
 } from "baseui/dist/button";
 import {
-  LabelMedium,
-} from "baseui/dist/typography";
+  Text,
+} from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
@@ -50,11 +50,17 @@ const TimeControl: React.FC<Props> = (
 
   return (
     <Container>
-      <LabelMedium
-        paddingBottom="10px"
+      <Text
+        size="small"
+        weight="bold"
+        margin={
+          {
+            bottom: "10px",
+          }
+        }
       >
         {`Today is ${safeDate || "..."}`}
-      </LabelMedium>
+      </Text>
       <FullButton
         size={SIZE.large}
         onClick={handleContinue}
