@@ -3,7 +3,8 @@ import {
   getYear,
 } from "date-fns";
 import {
-  Box, Text,
+  Box,
+  Text,
 } from "grommet";
 
 type Props = unknown;
@@ -12,9 +13,7 @@ const currentYear = getYear(
   new Date(),
 );
 
-const FooterName: React.FC<Props> = (
-  props,
-) =>
+const FooterName: React.FC<Props> = () =>
 {
   return (
     <Box

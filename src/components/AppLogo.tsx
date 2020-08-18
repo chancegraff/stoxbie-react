@@ -1,46 +1,61 @@
 import React from "react";
 import {
-  Box,
+  Box, ThemeContext,
 } from "grommet";
 
 import logo from "theme/logo.png";
+import Anchor from "components/Grommet/Anchor";
 
 import {
-  LogoImage,
-  LogoLink,
-  LogoText,
-} from "./AppLogo.overrides";
+  StyledImage,
+  StyledText,
+} from "./AppLogo.styled";
 
 type Props = unknown;
 
 const AppLogo: React.FC<Props> = () =>
 {
   return (
-    <LogoLink
-      to="/"
-    >
-      <Box
-        direction="row"
-        height="xxsmall"
-      >
-        <LogoImage
-          src={logo}
-          fill="vertical"
-          margin={
+    <ThemeContext.Extend
+      value={
+        {
+          anchor: {
+            color: "text-strong",
+            fontWeight: 900,
+            textDecoration: "none",
+            hover: {
+              textDecoration: "none",
+            },
+            extend: () =>
             {
-              right: "small",
-            }
-          }
-        />
-        <LogoText
-          size="logo"
-          weight={900}
-          color="text-strong"
+              return `
+                font-family: 'Catamaran';
+              `;
+            },
+          },
+        }
+      }
+    >
+      <Anchor to="/">
+        <Box
+          direction="row"
+          height="xxsmall"
         >
-        Stoxbie
-        </LogoText>
-      </Box>
-    </LogoLink>
+          <StyledImage
+            src={logo}
+            fill="vertical"
+            margin={
+              {
+                right: "small",
+              }
+            }
+          />
+          <StyledText size="logo">
+          Stoxbie
+          </StyledText>
+        </Box>
+      </Anchor>
+    </ThemeContext.Extend>
   );
 };
 

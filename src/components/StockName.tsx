@@ -1,8 +1,5 @@
 import React from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
   Caption2,
   Display3,
 } from "baseui/dist/typography";
@@ -10,9 +7,7 @@ import {
   Company,
 } from "iex-cloud";
 
-import {
-  DetailsSkeleton,
-} from "./StockName.loading";
+import Skeleton from "components/Grommet/Skeleton";
 
 type Props = {
   company?: Company;
@@ -22,24 +17,31 @@ const StockName: React.FC<Props> = (
   props,
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
-
-  if (!props.company)
-  {
-    return <DetailsSkeleton height={theme.sizing.scale2400} />;
-  }
-
   return (
     <>
-      <Display3>
-        {props.company.companyName}
-      </Display3>
-      <Caption2>
-        {props.company.symbol}
-      </Caption2>
+      <Skeleton
+        on={!props.company}
+        height="44px !important"
+        width="220px !important"
+      >
+        <Display3>
+          {props.company?.companyName}
+        </Display3>
+      </Skeleton>
+      <Skeleton
+        on={!props.company}
+        height="14px !important"
+        width="60px !important"
+        margin={
+          {
+            top: "4px",
+          }
+        }
+      >
+        <Caption2>
+          {props.company?.symbol}
+        </Caption2>
+      </Skeleton>
     </>
   );
 };
