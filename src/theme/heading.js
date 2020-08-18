@@ -13,6 +13,7 @@ const H1 = {
     size: "114px",
     height: "120px",
     maxWidth: "2736px",
+    edgeSize: "0px",
   },
   xlarge: {
     size: "162px",

@@ -30,7 +30,7 @@ const SearchView: React.FC<Props> = (
         size="large"
         margin={
           {
-            vertical: "small",
+            vertical: "large",
           }
         }
       >
@@ -38,9 +38,11 @@ const SearchView: React.FC<Props> = (
       </Heading>
       <Text
         size="medium"
+        color="text-xweak"
         margin={
           {
-            vertical: "large",
+            top: "none",
+            bottom: "xsmall",
           }
         }
       >
