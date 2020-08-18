@@ -146,6 +146,6 @@ export default {
     6: H6,
   },
   font: {
-    family: "'K2D'",
+    family: "'Catamaran'",
   },
 };

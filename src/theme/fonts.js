@@ -2,17 +2,10 @@ import {
   createGlobalStyle,
 } from "styled-components";
 
-// K2D
-import K2DBold from "./K2D/K2D-Bold.ttf";
-import K2DBoldItalic from "./K2D/K2D-BoldItalic.ttf";
-import K2DExtraBold from "./K2D/K2D-ExtraBold.ttf";
-import K2DExtraBoldItalic from "./K2D/K2D-ExtraBoldItalic.ttf";
-import K2DMedium from "./K2D/K2D-Medium.ttf";
-import K2DMediumItalic from "./K2D/K2D-MediumItalic.ttf";
-import K2DSemiBold from "./K2D/K2D-SemiBold.ttf";
-import K2DSemiBoldItalic from "./K2D/K2D-SemiBoldItalic.ttf";
-// Khula
-import KhulaExtraBold from "./Khula/Khula-ExtraBold.ttf";
+// Catamaran
+import CatamaranBlack from "./Catamaran/Catamaran-Black.ttf";
+import CatamaranBold from "./Catamaran/Catamaran-Bold.ttf";
+import CatamaranExtraBold from "./Catamaran/Catamaran-ExtraBold.ttf";
 // Mulish
 import MulishBold from "./Mulish/Mulish-Bold.ttf";
 import MulishBoldItalic from "./Mulish/Mulish-BoldItalic.ttf";
@@ -27,66 +20,24 @@ import MulishSemiBoldItalic from "./Mulish/Mulish-SemiBoldItalic.ttf";
 
 export default createGlobalStyle`
 @font-face {
-  font-family: "K2D";
-  font-weight: 500;
-  font-style: normal;
-  src: url(${K2DMedium}) format("truetype");
-}
-
-@font-face {
-  font-family: "K2D";
-  font-weight: 500;
-  font-style: italic;
-  src: url(${K2DMediumItalic}) format("truetype");
-}
-
-@font-face {
-  font-family: "K2D";
-  font-weight: 600;
-  font-style: normal;
-  src: url(${K2DSemiBold}) format("truetype");
-}
-
-@font-face {
-  font-family: "K2D";
-  font-weight: 600;
-  font-style: italic;
-  src: url(${K2DSemiBoldItalic}) format("truetype");
-}
-
-@font-face {
-  font-family: "K2D";
+  font-family: "Catamaran";
   font-weight: 700;
   font-style: normal;
-  src: url(${K2DBold}) format("truetype");
+  src: url(${CatamaranBold}) format("truetype");
 }
 
 @font-face {
-  font-family: "K2D";
-  font-weight: 700;
-  font-style: italic;
-  src: url(${K2DBoldItalic}) format("truetype");
-}
-
-@font-face {
-  font-family: "K2D";
+  font-family: "Catamaran";
   font-weight: 800;
   font-style: normal;
-  src: url(${K2DExtraBold}) format("truetype");
+  src: url(${CatamaranExtraBold}) format("truetype");
 }
 
 @font-face {
-  font-family: "K2D";
-  font-weight: 800;
-  font-style: italic;
-  src: url(${K2DExtraBoldItalic}) format("truetype");
-}
-
-@font-face {
-  font-family: "Khula";
-  font-weight: normal;
+  font-family: "Catamaran";
+  font-weight: 900;
   font-style: normal;
-  src: url(${KhulaExtraBold}) format("truetype");
+  src: url(${CatamaranBlack}) format("truetype");
 }
 
 @font-face {

@@ -34,7 +34,7 @@ const AppLogo: React.FC<Props> = () =>
         />
         <LogoText
           size="logo"
-          weight={800}
+          weight={900}
           color="text-strong"
         >
         Stoxbie
