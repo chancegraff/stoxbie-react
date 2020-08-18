@@ -7,12 +7,6 @@ import {
 import {
   Text,
 } from "@vx/text";
-import {
-  styled,
-} from "baseui/dist";
-import {
-  StyleObject,
-} from "styletron-react";
 
 import {
   DateFormats,
@@ -28,38 +22,10 @@ const DesktopTimeLabel: React.FC<Props> = (
   },
 ) =>
 {
-  const MediaQueriedText = useMemo(
-    () =>
-    {
-      return styled(
-        Text,
-        (
-          {
-            $theme,
-          },
-        ) =>
-        {
-          return {
-            [$theme.mediaQuery.large]: {
-              display: "unset",
-            },
-            [$theme.mediaQuery.medium]: {
-              display: "none",
-            },
-            [$theme.mediaQuery.small]: {
-              display: "none",
-            },
-          };
-        },
-      );
-    },
-    [],
-  );
-
   return (
-    <MediaQueriedText {...props}>
+    <Text {...props}>
       {formattedValue}
-    </MediaQueriedText>
+    </Text>
   );
 };
 
@@ -96,45 +62,11 @@ const MobileTimeLabel: React.FC<Props> = (
       formattedValue,
     ],
   );
-  const MediaQueriedText = useMemo(
-    () =>
-    {
-      return styled(
-        Text,
-        (
-          {
-            $theme,
-          },
-        ) =>
-        {
-          const mediaQueries: StyleObject = {};
-
-          mediaQueries[$theme.mediaQuery.large] = {
-            display: "none",
-          };
-          if (!formattedValueAsDate)
-          {
-            mediaQueries[$theme.mediaQuery.medium] = {
-              display: "unset",
-            };
-            mediaQueries[$theme.mediaQuery.small] = {
-              display: "unset",
-            };
-          }
-
-          return mediaQueries;
-        },
-      );
-    },
-    [
-      formattedValueAsDate,
-    ],
-  );
 
   return (
-    <MediaQueriedText {...props}>
+    <Text {...props}>
       {formattedValueAsDate}
-    </MediaQueriedText>
+    </Text>
   );
 };
 
@@ -145,7 +77,7 @@ const TimeLabel: React.FC<Props> = (
   return (
     <>
       <DesktopTimeLabel {...props} />
-      <MobileTimeLabel {...props} />
+      {/* <MobileTimeLabel {...props} /> */}
     </>
   );
 };

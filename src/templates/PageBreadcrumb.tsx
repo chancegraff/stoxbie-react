@@ -2,14 +2,12 @@ import React, {
   useMemo,
 } from "react";
 import {
-  Link, useParams, useRouteMatch,
+  useParams,
+  useRouteMatch,
 } from "react-router-dom";
 import {
   Breadcrumbs,
 } from "baseui/dist/breadcrumbs";
-import {
-  StyledLink,
-} from "baseui/dist/link";
 import {
   Box,
 } from "grommet";
@@ -18,6 +16,7 @@ import {
   DateFormats,
   formatParsedDate,
 } from "utils/Utilities";
+import Anchor from "components/Grommet/Anchor";
 
 type Props = unknown;
 
@@ -29,12 +28,9 @@ const StockBreadcrumb: React.FC = () =>
 
   return (
     <Breadcrumbs>
-      <StyledLink
-        $as={Link}
-        to="/"
-      >
+      <Anchor to="/">
         Ticker Search
-      </StyledLink>
+      </Anchor>
       <span>
         {ticker}
       </span>
@@ -67,18 +63,12 @@ const TradeBreadcrumb: React.FC = () =>
 
   return (
     <Breadcrumbs>
-      <StyledLink
-        $as={Link}
-        to="/"
-      >
+      <Anchor to="/">
         Ticker Search
-      </StyledLink>
-      <StyledLink
-        $as={Link}
-        to={`/stock/${ticker}`}
-      >
+      </Anchor>
+      <Anchor to={`/stock/${ticker}`}>
         {ticker}
-      </StyledLink>
+      </Anchor>
       <span>
         {`Trading from ${safeDate}`}
       </span>
