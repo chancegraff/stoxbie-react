@@ -56,9 +56,9 @@ export const AspectRatioBox: React.FC<Props> = forwardRef(
         height={0}
         paddingBottom={
           [
-            "100%",
-            "75%",
-            "56.25%",
+            "87.5%",
+            "77.5%",
+            "67.5%",
           ]
         }
         position="relative"

@@ -9,7 +9,7 @@ import {
   Breadcrumbs,
 } from "baseui/dist/breadcrumbs";
 import {
-  Box,
+  Box, ThemeContext,
 } from "grommet";
 
 import {
@@ -86,15 +86,24 @@ const BreadcrumbContainer: React.FC<Props> = () =>
   );
 
   return (
-    <Box
-      pad={
-        {
-          vertical: "medium",
+    <Box>
+      <ThemeContext.Extend
+        value={
+          {
+            anchor: {
+              color: "text",
+              fontWeight: "semibold",
+              textDecoration: "underline",
+              hover: {
+                textDecoration: "none",
+              },
+            },
+          }
         }
-      }
-    >
-      {stockView && <StockBreadcrumb />}
-      {tradeView && <TradeBreadcrumb />}
+      >
+        {stockView && <StockBreadcrumb />}
+        {tradeView && <TradeBreadcrumb />}
+      </ThemeContext.Extend>
     </Box>
   );
 };
