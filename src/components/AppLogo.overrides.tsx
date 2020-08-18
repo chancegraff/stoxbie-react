@@ -1,4 +1,7 @@
 import {
+  Link,
+} from "react-router-dom";
+import {
   Image,
   Text,
 } from "grommet";
@@ -16,4 +19,10 @@ export const LogoImage = styled(
   Image,
 )`
   filter: invert(1);
+`;
+
+export const LogoLink = styled(
+  Link,
+)`
+  text-decoration: none;
 `;

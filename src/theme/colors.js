@@ -37,4 +37,5 @@ export default {
     dark: "#404040",
     light: "#CFCFCF",
   },
+  focus: "none",
 };

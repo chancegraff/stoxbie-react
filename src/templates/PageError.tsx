@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  Display3,
-} from "baseui/dist/typography";
-import {
   Box,
+  Heading,
 } from "grommet";
 
 import PageContent from "templates/PageContent";
@@ -24,9 +22,12 @@ const Error: React.FC<Props> = (
           }
         }
       >
-        <Display3>
+        <Heading
+          size="medium"
+          level="1"
+        >
           {props.children}
-        </Display3>
+        </Heading>
       </Box>
     </PageContent>
   );

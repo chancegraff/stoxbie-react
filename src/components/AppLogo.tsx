@@ -7,36 +7,40 @@ import logo from "theme/logo.png";
 
 import {
   LogoImage,
+  LogoLink,
   LogoText,
 } from "./AppLogo.overrides";
 
 type Props = unknown;
 
-const AppLogo: React.FC<Props> = (
-  props,
-) =>
+const AppLogo: React.FC<Props> = () =>
 {
   return (
-    <Box
-      direction="row"
-      height="xxsmall"
+    <LogoLink
+      to="/"
     >
-      <LogoImage
-        src={logo}
-        fill="vertical"
-        margin={
-          {
-            right: "small",
-          }
-        }
-      />
-      <LogoText
-        size="logo"
-        weight={800}
+      <Box
+        direction="row"
+        height="xxsmall"
       >
+        <LogoImage
+          src={logo}
+          fill="vertical"
+          margin={
+            {
+              right: "small",
+            }
+          }
+        />
+        <LogoText
+          size="logo"
+          weight={800}
+          color="text-strong"
+        >
         Stoxbie
-      </LogoText>
-    </Box>
+        </LogoText>
+      </Box>
+    </LogoLink>
   );
 };
 

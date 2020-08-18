@@ -1,10 +1,8 @@
 import React from "react";
 import {
-  Display2,
-  Label2,
-} from "baseui/dist/typography";
-import {
   Box,
+  Heading,
+  Text,
 } from "grommet";
 import {
   Search,
@@ -27,31 +25,31 @@ const SearchView: React.FC<Props> = (
 {
   return (
     <PageContent>
-      <Box
-        width={
+      <Heading
+        level="1"
+        size="large"
+        margin={
           {
-            min: "60%",
-            max: "100%",
+            top: "none",
+            bottom: "small",
           }
         }
       >
-        <Box
-          margin={
-            {
-              bottom: "24px",
-            }
+        Ticker Search
+      </Heading>
+      <Text
+        size="medium"
+        margin={
+          {
+            top: "none",
+            bottom: "large",
           }
-        >
-          <Display2>
-            Ticker Search
-          </Display2>
-          <Label2>
-            Select the stock ticker to trade.
-          </Label2>
-        </Box>
-        <Box>
-          <TickerInput handleSearch={props.handleSearch} />
-        </Box>
+        }
+      >
+        Select the stock ticker to trade.
+      </Text>
+      <Box>
+        <TickerInput handleSearch={props.handleSearch} />
       </Box>
     </PageContent>
   );

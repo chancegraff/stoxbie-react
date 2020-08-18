@@ -5,6 +5,7 @@ import {
   deepMerge,
 } from "grommet/utils";
 
+import anchor from "./anchor";
 import borderSize from "./borderSize";
 import breakpoints from "./breakpoints";
 import colors from "./colors";
@@ -41,6 +42,7 @@ export default deepMerge(
     paragraph,
     text,
     scale: 1.5,
+    anchor,
     layer,
   },
 );
