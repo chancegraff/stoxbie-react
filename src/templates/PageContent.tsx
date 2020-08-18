@@ -6,7 +6,8 @@ import {
 } from "grommet";
 
 import PageBreadcrumb from "templates/PageBreadcrumb";
-import FooterName from "components/FooterName";
+import AppCopyright from "components/AppCopyright";
+import AppLogo from "components/AppLogo";
 
 type Props = unknown;
 const pad = {
@@ -21,8 +22,16 @@ const ContentContainer: React.FC<Props> = (
     <Main >
       <Header
         background="background-front"
-        pad={pad}
+        justify="start"
+        gap="large"
+        pad={
+          {
+            ...pad,
+            vertical: "medium",
+          }
+        }
       >
+        <AppLogo />
         <PageBreadcrumb />
       </Header>
       <Main
@@ -41,7 +50,7 @@ const ContentContainer: React.FC<Props> = (
       <Footer
         pad={pad}
       >
-        <FooterName />
+        <AppCopyright />
       </Footer>
     </Main>
   );
