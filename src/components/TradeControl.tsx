@@ -91,11 +91,16 @@ const TradeControl: React.FC<Props> = (
         responsive={true}
         fill="horizontal"
         gap="small"
+        rows={
+          [
+            "auto",
+          ]
+        }
         columns={
-          {
-            count: 2,
-            size: "auto",
-          }
+          [
+            "auto",
+            "auto",
+          ]
         }
         areas={
           [
