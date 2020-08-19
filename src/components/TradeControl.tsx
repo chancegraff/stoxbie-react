@@ -19,7 +19,6 @@ import TradeSlider from "components/TradeSlider";
 
 import {
   Container,
-  FullButton,
 } from "./TradeControl.styled";
 
 type Props = {
@@ -109,7 +108,6 @@ const TradeControl: React.FC<Props> = (
       >
         <Box gridArea="buy">
           <TradeAction
-            Component={FullButton}
             EndEnhancer={Check}
             handleToggle={handleToggle}
             handleTrade={handleTrade}
@@ -117,13 +115,14 @@ const TradeControl: React.FC<Props> = (
             sharePrice={currentPrice.close}
             shareModifier={shareModifier}
             actionModifier={1}
+            primary={true}
+            size="medium"
           >
               Buy
           </TradeAction>
         </Box>
         <Box gridArea="sell">
           <TradeAction
-            Component={FullButton}
             EndEnhancer={Check}
             handleToggle={handleToggle}
             handleTrade={handleTrade}
@@ -131,6 +130,8 @@ const TradeControl: React.FC<Props> = (
             sharePrice={currentPrice.close}
             shareModifier={shareModifier}
             actionModifier={-1}
+            primary={true}
+            size="medium"
           >
             Sell
           </TradeAction>

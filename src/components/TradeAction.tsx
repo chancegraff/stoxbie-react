@@ -4,12 +4,11 @@ import React, {
 import {
   Button,
   ButtonProps,
-} from "baseui/dist/button";
+} from "grommet";
 
 import TradeActionCheck from "./TradeActionEnhancer";
 
-type Props = PropsWithChildren & {
-  Component?: React.FC<ButtonProps & React.RefAttributes<HTMLButtonElement>>;
+type Props = PropsWithChildren & ButtonProps & {
   EndEnhancer?: React.FC;
   sharePrice: number;
   shareCount: number;
@@ -28,8 +27,8 @@ const TradeAction: React.FC<Props> = (
     shareCount,
     actionModifier,
     shareModifier = actionModifier,
-    Component = Button,
     EndEnhancer,
+    ...props
   },
 ) =>
 {
@@ -92,12 +91,13 @@ const TradeAction: React.FC<Props> = (
   );
 
   return (
-    <Component
-      endEnhancer={endEnhancer}
+    <Button
+      gap="small"
+      label={children}
+      icon={endEnhancer}
       onClick={handleClick}
-    >
-      {children}
-    </Component>
+      {...props}
+    />
   );
 };
 

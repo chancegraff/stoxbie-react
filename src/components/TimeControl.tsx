@@ -2,9 +2,8 @@ import React, {
   useMemo,
 } from "react";
 import {
-  SIZE,
-} from "baseui/dist/button";
-import {
+  Box,
+  Button,
   Text,
 } from "grommet";
 import {
@@ -14,11 +13,6 @@ import {
 import {
   DateFormats, formatDate,
 } from "utils/Utilities";
-
-import {
-  Container,
-  FullButton,
-} from "./TimeControl.styled";
 
 type Props = {
   currentPrice?: HistoricalPrice;
@@ -49,7 +43,11 @@ const TimeControl: React.FC<Props> = (
   );
 
   return (
-    <Container>
+    <Box
+      align="center"
+      justify="center"
+      direction="column"
+    >
       <Text
         size="small"
         weight="bold"
@@ -61,13 +59,14 @@ const TimeControl: React.FC<Props> = (
       >
         {`Today is ${safeDate || "..."}`}
       </Text>
-      <FullButton
-        size={SIZE.large}
+      <Button
+        primary={true}
+        size="large"
+        label="Continue"
+        fill="horizontal"
         onClick={handleContinue}
-      >
-        Continue
-      </FullButton>
-    </Container>
+      />
+    </Box>
   );
 };
 

@@ -13,7 +13,11 @@ export const Container: React.FC<BoxProps> = (
       justify="center"
       width="24px"
       height="24px"
-      border={true}
+      border={
+        {
+          color: "text",
+        }
+      }
       round={true}
       {...props}
     />

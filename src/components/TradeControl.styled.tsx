@@ -1,11 +1,5 @@
 import React from "react";
 import {
-  styled,
-} from "baseui/dist";
-import {
-  Button,
-} from "baseui/dist/button";
-import {
   Box, BoxProps,
 } from "grommet";
 
@@ -28,10 +22,3 @@ export const Container: React.FC<BoxProps> = (
     />
   );
 };
-
-export const FullButton = styled(
-  Button,
-  {
-    width: "100%",
-  },
-);

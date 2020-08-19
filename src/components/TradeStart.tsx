@@ -11,7 +11,7 @@ import {
   Filter,
 } from "baseui/dist/icon";
 import {
-  Box,
+  Box, Button,
 } from "grommet";
 
 import {
@@ -21,10 +21,6 @@ import {
   oneYearAgo,
 } from "utils/Utilities";
 import DatePicker from "components/BaseUI/DatePicker";
-
-import {
-  GrowingButton,
-} from "./TradeStart.styled";
 
 type Props = {
   handleStart: (date: string) => void;
@@ -102,16 +98,16 @@ const TradeStart: React.FC<Props> = (
         shape={SHAPE.pill}
         size={SIZE.mini}
       >
-        <GrowingButton onClick={handleOneYearStart}>
+        <Button onClick={handleOneYearStart}>
           1Y
-        </GrowingButton>
-        <GrowingButton onClick={handleFiveYearStart}>
+        </Button>
+        <Button onClick={handleFiveYearStart}>
           5Y
-        </GrowingButton>
+        </Button>
         <DatePicker onChange={handleCustomYearStart}>
-          <GrowingButton>
+          <Button>
             <Filter />
-          </GrowingButton>
+          </Button>
         </DatePicker>
       </ButtonGroup>
     </Box>

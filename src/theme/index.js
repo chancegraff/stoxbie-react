@@ -8,6 +8,7 @@ import {
 import anchor from "./anchor";
 import borderSize from "./borderSize";
 import breakpoints from "./breakpoints";
+import button from "./button";
 import colors from "./colors";
 import control from "./control";
 import drop from "./drop";
@@ -44,5 +45,6 @@ export default deepMerge(
     scale: 1.5,
     anchor,
     layer,
+    button,
   },
 );

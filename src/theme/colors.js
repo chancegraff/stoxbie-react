@@ -1,6 +1,12 @@
 export default {
-  brand: "#4e60af",
-  accent: "#FFA62B",
+  brand: {
+    dark: "#4e60af",
+    light: "#4e60af",
+  },
+  accent: {
+    dark: "#FFA62B",
+    light: "#FFA62B",
+  },
   background: {
     dark: "#111111",
     light: "#EEEEEE",
@@ -37,5 +43,17 @@ export default {
     dark: "#404040",
     light: "#CFCFCF",
   },
-  focus: "none",
+  control: "brand",
+  focus: "",
+  "active-background": "background-contrast",
+  "active-text": "text-strong",
+  "selected-background": "brand",
+  "selected-text": "text-strong",
+  "status-critical": "#FF4040",
+  "status-warning": "#FFAA15",
+  "status-ok": "#00C781",
+  "status-unknown": "#CCCCCC",
+  "status-disabled": "#CCCCCC",
+  "graph-0": "brand",
+  "graph-1": "status-warning",
 };

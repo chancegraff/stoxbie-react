@@ -13,7 +13,6 @@ import TradeAction from "components/TradeAction";
 
 import {
   RightAlignedCell,
-  SmallButton,
 } from "./TradeRow.styled";
 
 type Props = {
@@ -87,11 +86,12 @@ const TradeRow: React.FC<Props> = (
 
         return (
           <TradeAction
-            Component={SmallButton}
             handleTrade={handleTrade}
             shareCount={totalShareCount}
             sharePrice={sharePrice}
             actionModifier={closeModifier}
+            secondary={true}
+            size="small"
           >
               Exit
           </TradeAction>
