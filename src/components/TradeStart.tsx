@@ -2,17 +2,8 @@ import React, {
   useCallback,
 } from "react";
 import {
-  SHAPE, SIZE,
-} from "baseui/dist/button";
-import {
-  ButtonGroup,
-} from "baseui/dist/button-group";
-import {
-  Filter,
-} from "baseui/dist/icon";
-import {
-  Box, Button,
-} from "grommet";
+  Schedule,
+} from "grommet-icons";
 
 import {
   DateFormats,
@@ -21,6 +12,11 @@ import {
   oneYearAgo,
 } from "utils/Utilities";
 import DatePicker from "components/BaseUI/DatePicker";
+
+import {
+  StyledButton,
+  StyledContainer,
+} from "./TradeStart.styled";
 
 type Props = {
   handleStart: (date: string) => void;
@@ -93,24 +89,19 @@ const TradeStart: React.FC<Props> = (
   );
 
   return (
-    <Box>
-      <ButtonGroup
-        shape={SHAPE.pill}
-        size={SIZE.mini}
-      >
-        <Button onClick={handleOneYearStart}>
+    <StyledContainer>
+      <StyledButton onClick={handleOneYearStart}>
           1Y
-        </Button>
-        <Button onClick={handleFiveYearStart}>
+      </StyledButton>
+      <StyledButton onClick={handleFiveYearStart}>
           5Y
-        </Button>
-        <DatePicker onChange={handleCustomYearStart}>
-          <Button>
-            <Filter />
-          </Button>
-        </DatePicker>
-      </ButtonGroup>
-    </Box>
+      </StyledButton>
+      <DatePicker onChange={handleCustomYearStart}>
+        <StyledButton>
+          <Schedule size="14px" />
+        </StyledButton>
+      </DatePicker>
+    </StyledContainer>
   );
 };
 

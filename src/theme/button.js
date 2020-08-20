@@ -1,33 +1,14 @@
 export default {
-  // primary: {
-  //   background: {
-  //     color: "brand",
-  //   },
-  //   border: {
-  //     radius: "2px",
-  //   },
-  //   color: "text-strong",
-  //   font: {
-  //     weight: "700",
-  //   },
-  //   padding: {
-  //     horizontal: "0px !important",
-  //     vertical: "0px !important",
-  //   },
-  // },
-  // secondary: {
-  //   background: {
-  //     color: "brand",
-  //   },
-  //   border: {
-  //     radius: "2px",
-  //   },
-  //   color: "text-strong",
-  //   padding: {
-  //     horizontal: "0px !important",
-  //     vertical: "0px !important",
-  //   },
-  // },
+  primary: {
+    border: {
+      radius: "2px",
+    },
+  },
+  secondary: {
+    border: {
+      radius: "2px",
+    },
+  },
   size: {
     small: {
       pad: {
