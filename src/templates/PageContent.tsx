@@ -6,8 +6,8 @@ import {
 } from "grommet";
 
 import PageBreadcrumb from "templates/PageBreadcrumb";
-import AppCopyright from "components/AppBrand/AppCopyright";
-import AppLogo from "components/AppBrand/AppLogo";
+import AppCopyright from "components/AppBranding/AppCopyright";
+import AppLogo from "components/AppBranding/AppLogo";
 
 type Props = unknown;
 const pad = {
