@@ -20,7 +20,7 @@ export const Container: React.FC<BoxProps> = (
   return (
     <Box
       width="100%"
-      align="center"
+      align="start"
       justify="center"
       flex="grow"
       {...props}

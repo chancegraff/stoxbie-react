@@ -1,49 +1,33 @@
-import React, {
-  forwardRef,
-} from "react";
+import React from "react";
 import {
-  Box, Text,
+  Box,
+  Text,
 } from "grommet";
 
-import {
-  BoxProps, TextProps,
-} from "services/Grommet";
-
-export const StyledContainer: React.FC<BoxProps> = forwardRef<HTMLDivElement>(
-  (
-    props,
-    ref,
-  ) =>
-  {
-    return (
-      <Box
-        ref={ref}
-        pad={
-          {
-            vertical: "medium",
-          }
+export const StyledContainer: React.FC<BoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      pad={
+        {
+          vertical: "medium",
         }
-        {...props}
-      >
-        {props.children}
-      </Box>
-    );
-  },
-);
+      }
+      {...props}
+    />
+  );
+};
 
-export const StyledText: React.FC<TextProps> = forwardRef<HTMLSpanElement>(
-  (
-    props,
-    ref,
-  ) =>
-  {
-    return (
-      <Text
-        ref={ref}
-        size="xsmall"
-      >
-        {props.children}
-      </Text>
-    );
-  },
-);
+export const StyledText: React.FC<TextProps> = (
+  props,
+) =>
+{
+  return (
+    <Text
+      size="xsmall"
+      {...props}
+    />
+  );
+};

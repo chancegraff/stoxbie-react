@@ -1,6 +1,4 @@
-import React, {
-  forwardRef,
-} from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -8,44 +6,30 @@ import {
 } from "grommet";
 import styled from "styled-components";
 
-import {
-  BoxProps,
-  ButtonProps,
-  TextProps,
-} from "services/Grommet";
+export const StyledContainer: React.FC<BoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      width="xsmall"
+      direction="row"
+      {...props}
+    />
+  );
+};
 
-export const StyledContainer: React.FC<BoxProps> = forwardRef<HTMLDivElement>(
-  (
-    props,
-    ref,
-  ) =>
-  {
-    return (
-      <Box
-        ref={ref}
-        width="xsmall"
-        direction="row"
-        {...props}
-      />
-    );
-  },
-);
-
-export const StyledText: React.FC<TextProps> = forwardRef<HTMLSpanElement>(
-  (
-    props,
-    ref,
-  ) =>
-  {
-    return (
-      <Text
-        ref={ref}
-        size="xsmall"
-        {...props}
-      />
-    );
-  },
-);
+export const StyledText: React.FC<TextProps> = (
+  props,
+) =>
+{
+  return (
+    <Text
+      size="xsmall"
+      {...props}
+    />
+  );
+};
 
 export const GroupedButton = styled(
   Button,
@@ -74,9 +58,12 @@ border-radius: 0px;
 }
 `;
 
-export const StyledButton: React.FC<ButtonProps> = forwardRef(
+export const StyledButton: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement>(
   (
-    props,
+    {
+      children,
+      ...props
+    },
     ref,
   ) =>
   {
@@ -93,7 +80,7 @@ export const StyledButton: React.FC<ButtonProps> = forwardRef(
           fill="horizontal"
         >
           <StyledText>
-            {props.children}
+            {children}
           </StyledText>
         </Box>
       </GroupedButton>

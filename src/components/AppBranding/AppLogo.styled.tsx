@@ -1,6 +1,4 @@
-import React, {
-  forwardRef,
-} from "react";
+import React from "react";
 import {
   Box,
   Image,
@@ -8,12 +6,6 @@ import {
   ThemeContext,
 } from "grommet";
 import styled from "styled-components";
-
-import {
-  BoxProps,
-  ImageProps,
-  TextProps,
-} from "services/Grommet";
 
 export const ExtendedTheme: React.FC<PropsWithChildren> = (
   props,
@@ -40,9 +32,7 @@ export const ExtendedTheme: React.FC<PropsWithChildren> = (
           },
         }
       }
-    >
-      {props.children}
-    </ThemeContext.Extend>
+    />
   );
 };
 
@@ -53,23 +43,17 @@ const LogoText = styled(
   text-transform: uppercase;
 `;
 
-export const StyledText: React.FC<TextProps> = forwardRef<HTMLSpanElement>(
-  (
-    props,
-    ref,
-  ) =>
-  {
-    return (
-      <LogoText
-        ref={ref}
-        size="logo"
-        {...props}
-      >
-        {props.children}
-      </LogoText>
-    );
-  },
-);
+export const StyledText: React.FC<TextProps> = (
+  props,
+) =>
+{
+  return (
+    <LogoText
+      size="logo"
+      {...props}
+    />
+  );
+};
 
 const InvertedImage = styled(
   Image,
@@ -77,41 +61,32 @@ const InvertedImage = styled(
   filter: invert(1);
 `;
 
-export const StyledImage: React.FC<ImageProps> = forwardRef<HTMLImageElement>(
-  (
-    props,
-    ref,
-  ) =>
-  {
-    return (
-      <InvertedImage
-        ref={ref}
-        fill="vertical"
-        margin={
-          {
-            right: "small",
-          }
+export const StyledImage: React.FC<ImageProps> = (
+  props,
+) =>
+{
+  return (
+    <InvertedImage
+      fill="vertical"
+      margin={
+        {
+          right: "small",
         }
-        {...props}
-      />
-    );
-  },
-);
+      }
+      {...props}
+    />
+  );
+};
 
-export const StyledContainer: React.FC<BoxProps> = forwardRef<HTMLDivElement>(
-  (
-    props,
-    ref,
-  ) =>
-  {
-    return (
-      <Box
-        ref={ref}
-        direction="row"
-        height="xxsmall"
-      >
-        {props.children}
-      </Box>
-    );
-  },
-);
+export const StyledContainer: React.FC<BoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      direction="row"
+      height="xxsmall"
+      {...props}
+    />
+  );
+};

@@ -78,7 +78,7 @@ const TradeHistory: React.FC<Props> = (
   }
 
   return (
-    <Container align="start">
+    <Container>
       <FullTable>
         <StyledHead role="headerRow">
           <HeadCell>
