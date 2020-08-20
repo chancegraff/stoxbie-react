@@ -3,15 +3,18 @@ import React, {
 } from "react";
 import {
   Box,
-  BoxProps,
   Button,
-  ButtonProps,
   Text,
-  TextProps,
 } from "grommet";
 import styled from "styled-components";
 
-export const StyledContainer: React.FC<BoxProps & Omit<JSX.IntrinsicElements["div"], "ref">> = forwardRef<HTMLDivElement>(
+import {
+  BoxProps,
+  ButtonProps,
+  TextProps,
+} from "services/Grommet";
+
+export const StyledContainer: React.FC<BoxProps> = forwardRef<HTMLDivElement>(
   (
     props,
     ref,
@@ -28,7 +31,7 @@ export const StyledContainer: React.FC<BoxProps & Omit<JSX.IntrinsicElements["di
   },
 );
 
-export const StyledText: React.FC<TextProps & Omit<JSX.IntrinsicElements["span"], "color" | "ref">> = forwardRef<HTMLSpanElement>(
+export const StyledText: React.FC<TextProps> = forwardRef<HTMLSpanElement>(
   (
     props,
     ref,
@@ -71,7 +74,7 @@ border-radius: 0px;
 }
 `;
 
-export const StyledButton: React.FC<ButtonProps & Omit<JSX.IntrinsicElements["button"], "color" | "ref">> = forwardRef(
+export const StyledButton: React.FC<ButtonProps> = forwardRef(
   (
     props,
     ref,

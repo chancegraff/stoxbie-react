@@ -2,10 +2,11 @@ import React from "react";
 import {
   getYear,
 } from "date-fns";
+
 import {
-  Box,
-  Text,
-} from "grommet";
+  StyledContainer,
+  StyledText,
+} from "./AppCopyright.styled";
 
 type Props = unknown;
 
@@ -16,17 +17,11 @@ const currentYear = getYear(
 const FooterName: React.FC<Props> = () =>
 {
   return (
-    <Box
-      pad={
-        {
-          vertical: "medium",
-        }
-      }
-    >
-      <Text size="xsmall">
+    <StyledContainer>
+      <StyledText>
         {`© ${currentYear} Chance Technologies, LLC`}
-      </Text>
-    </Box>
+      </StyledText>
+    </StyledContainer>
   );
 };
 

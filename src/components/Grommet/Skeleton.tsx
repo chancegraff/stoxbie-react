@@ -1,10 +1,13 @@
-import React from "react";
+import React, {
+  Ref,
+} from "react";
 import {
   Box, BoxProps,
 } from "grommet";
 import styled from "styled-components";
 
-type Props = PropsWithChildren & BoxProps & {
+export type SkeletonProps = PropsWithChildren & BoxProps & {
+  ref?: Ref<HTMLDivElement>;
   on: boolean;
 };
 
@@ -15,8 +18,9 @@ const ShimmeringBox = styled(
   background-size: 2000px;
 `;
 
-const Skeleton: React.FC<Props> = (
+const Skeleton: React.FC<SkeletonProps> = (
   {
+    ref,
     children,
     on,
     ...props
@@ -31,6 +35,7 @@ const Skeleton: React.FC<Props> = (
     )
     : (
       <ShimmeringBox
+        ref={ref}
         fill={true}
         background={
           {

@@ -1,13 +1,14 @@
 import React from "react";
 import {
-  Avatar,
-  Box,
-} from "grommet";
-import {
   Logo,
 } from "iex-cloud";
 
 import Skeleton from "components/Grommet/Skeleton";
+
+import {
+  StyledAvatar,
+  StyledContainer,
+} from "./StockLogo.styled";
 
 type Props = {
   logo?: Logo;
@@ -18,20 +19,14 @@ const StockLogo: React.FC<Props> = (
 ) =>
 {
   return (
-    <Box
-      height="96px"
-      width="96px"
-    >
+    <StyledContainer>
       <Skeleton
         on={!props.logo}
         round="100%"
       >
-        <Avatar
-          size="96px"
-          src={props?.logo?.url}
-        />
+        <StyledAvatar src={props?.logo?.url} />
       </Skeleton>
-    </Box>
+    </StyledContainer>
   );
 };
 

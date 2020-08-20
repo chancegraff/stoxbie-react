@@ -1,12 +1,11 @@
 import React from "react";
-import {
-  Box, ThemeContext,
-} from "grommet";
 
 import logo from "theme/logo.png";
 import Anchor from "components/Grommet/Anchor";
 
 import {
+  ExtendedTheme,
+  StyledContainer,
   StyledImage,
   StyledText,
 } from "./AppLogo.styled";
@@ -16,46 +15,16 @@ type Props = unknown;
 const AppLogo: React.FC<Props> = () =>
 {
   return (
-    <ThemeContext.Extend
-      value={
-        {
-          anchor: {
-            color: "text-strong",
-            fontWeight: 900,
-            textDecoration: "none",
-            hover: {
-              textDecoration: "none",
-            },
-            extend: () =>
-            {
-              return `
-                font-family: 'Catamaran';
-              `;
-            },
-          },
-        }
-      }
-    >
+    <ExtendedTheme>
       <Anchor to="/">
-        <Box
-          direction="row"
-          height="xxsmall"
-        >
-          <StyledImage
-            src={logo}
-            fill="vertical"
-            margin={
-              {
-                right: "small",
-              }
-            }
-          />
-          <StyledText size="logo">
-          Stoxbie
+        <StyledContainer>
+          <StyledImage src={logo} />
+          <StyledText>
+            Stoxbie
           </StyledText>
-        </Box>
+        </StyledContainer>
       </Anchor>
-    </ThemeContext.Extend>
+    </ExtendedTheme>
   );
 };
 
