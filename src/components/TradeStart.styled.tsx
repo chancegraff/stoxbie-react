@@ -11,7 +11,7 @@ import {
 } from "grommet";
 import styled from "styled-components";
 
-export const StyledContainer: React.FC<BoxProps & Omit<JSX.IntrinsicElements["div"], "ref">> = forwardRef(
+export const StyledContainer: React.FC<BoxProps & Omit<JSX.IntrinsicElements["div"], "ref">> = forwardRef<HTMLDivElement>(
   (
     props,
     ref,
@@ -19,7 +19,7 @@ export const StyledContainer: React.FC<BoxProps & Omit<JSX.IntrinsicElements["di
   {
     return (
       <Box
-        ref={ref as any}
+        ref={ref}
         width="xsmall"
         direction="row"
         {...props}
@@ -28,7 +28,7 @@ export const StyledContainer: React.FC<BoxProps & Omit<JSX.IntrinsicElements["di
   },
 );
 
-export const StyledText: React.FC<TextProps & Omit<JSX.IntrinsicElements["span"], "color" | "ref">> = forwardRef(
+export const StyledText: React.FC<TextProps & Omit<JSX.IntrinsicElements["span"], "color" | "ref">> = forwardRef<HTMLSpanElement>(
   (
     props,
     ref,
@@ -36,7 +36,7 @@ export const StyledText: React.FC<TextProps & Omit<JSX.IntrinsicElements["span"]
   {
     return (
       <Text
-        ref={ref as any}
+        ref={ref}
         size="xsmall"
         {...props}
       />
