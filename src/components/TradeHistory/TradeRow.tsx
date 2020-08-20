@@ -9,7 +9,7 @@ import {
   formatCount,
   formatCurrency,
 } from "utils/Utilities";
-import TradeAction from "components/TradeAction";
+import TradeAction from "components/TradeControl/TradeAction";
 
 import {
   RightAlignedCell,

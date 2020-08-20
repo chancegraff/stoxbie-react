@@ -8,9 +8,9 @@ import {
 
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
-import StockLogo from "components/StockLogo";
-import StockName from "components/StockName";
-import TradeStart from "components/TradeStart";
+import StockLogo from "components/StockSearch/StockLogo";
+import StockName from "components/StockSearch/StockName";
+import TradeStart from "components/TradeControl/TradeStart";
 
 type Props = {
   logo?: Logo;

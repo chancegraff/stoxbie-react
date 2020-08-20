@@ -14,8 +14,8 @@ import {
   formatPercentage,
 } from "utils/Utilities";
 import Spinner from "components/BaseUI/Spinner";
-import TradeRowsClosed from "components/TradeRowsClosed";
-import TradeRowsOpened from "components/TradeRowsOpened";
+import TradeRowsClosed from "components/TradeHistory/TradeRowsClosed";
+import TradeRowsOpened from "components/TradeHistory/TradeRowsOpened";
 
 import {
   Container,

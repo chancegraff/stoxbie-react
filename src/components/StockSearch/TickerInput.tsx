@@ -43,6 +43,7 @@ const overrides = {
   Dropdown,
 };
 
+// TODO Remove use of BaseUI
 const TickerInput: React.FC<Props> = (
   {
     handleSearch,

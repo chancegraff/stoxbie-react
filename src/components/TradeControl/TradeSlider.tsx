@@ -14,8 +14,8 @@ import {
 import {
   usePrevious,
 } from "utils/Utilities";
-import TradeSliderInput from "components/TradeSliderInput";
-import TradeSliderTickBar from "components/TradeSliderTickBar";
+import TradeSliderInput from "components/TradeControl/TradeSliderInput";
+import TradeSliderTickBar from "components/TradeControl/TradeSliderTickBar";
 
 type Props = {
   currentPrice: HistoricalPrice;

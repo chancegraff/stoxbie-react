@@ -3,7 +3,7 @@ import {
   HistoricalPrice,
 } from "iex";
 
-import TradeRow from "components/TradeRow";
+import TradeRow from "components/TradeHistory/TradeRow";
 
 type Props = {
   totalShareCount: number;

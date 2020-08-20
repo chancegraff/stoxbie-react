@@ -9,7 +9,7 @@ import {
 } from "iex-cloud";
 
 import PageContent from "templates/PageContent";
-import TickerInput from "components/TickerInput";
+import TickerInput from "components/StockSearch/TickerInput";
 
 type Props = {
   handleSearch: (

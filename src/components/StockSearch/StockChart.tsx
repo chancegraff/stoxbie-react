@@ -20,6 +20,7 @@ type Props = {
   padding?: Padding;
 };
 
+// TODO Remove use of BaseUI
 const StockChart: React.FC<Props> = (
   {
     prices,

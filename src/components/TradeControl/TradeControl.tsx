@@ -14,8 +14,8 @@ import {
 } from "iex";
 
 import Spinner from "components/BaseUI/Spinner";
-import TradeAction from "components/TradeAction";
-import TradeSlider from "components/TradeSlider";
+import TradeAction from "components/TradeControl/TradeAction";
+import TradeSlider from "components/TradeControl/TradeSlider";
 
 import {
   Container,

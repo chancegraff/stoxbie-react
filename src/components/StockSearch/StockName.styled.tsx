@@ -9,8 +9,7 @@ import {
   SkeletonProps,
   TextProps,
 } from "services/Grommet";
-
-import Skeleton from "./Grommet/Skeleton";
+import Skeleton from "components/Grommet/Skeleton";
 
 export const StyledLargeSkeleton: React.FC<SkeletonProps> = forwardRef<HTMLDivElement, SkeletonProps>(
   (

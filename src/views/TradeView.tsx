@@ -28,10 +28,10 @@ import {
 } from "templates/AspectRatio";
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
-import StockChart from "components/StockChart";
-import TimeControl from "components/TimeControl";
-import TradeControl from "components/TradeControl";
-import TradeHistory from "components/TradeHistory";
+import StockChart from "components/StockSearch/StockChart";
+import TimeControl from "components/TradeControl/TimeControl";
+import TradeControl from "components/TradeControl/TradeControl";
+import TradeHistory from "components/TradeHistory/TradeHistory";
 
 type Props = {
   date?: Date;
