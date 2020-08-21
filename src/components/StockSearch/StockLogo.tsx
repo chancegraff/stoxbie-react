@@ -3,11 +3,10 @@ import {
   Logo,
 } from "iex-cloud";
 
-import Skeleton from "components/Grommet/Skeleton";
-
 import {
   StyledAvatar,
   StyledContainer,
+  StyledSkeleton,
 } from "./StockLogo.styled";
 
 type Props = {
@@ -18,14 +17,14 @@ const StockLogo: React.FC<Props> = (
   props,
 ) =>
 {
+  if (!props.logo)
+  {
+    return <StyledSkeleton Container={StyledContainer} />;
+  }
+
   return (
     <StyledContainer>
-      <Skeleton
-        on={!props.logo}
-        round="100%"
-      >
-        <StyledAvatar src={props?.logo?.url} />
-      </Skeleton>
+      <StyledAvatar src={props?.logo?.url} />
     </StyledContainer>
   );
 };

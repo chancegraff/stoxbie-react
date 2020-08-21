@@ -4,6 +4,7 @@ import {
 } from "iex-cloud";
 
 import {
+  StyledContainer,
   StyledLargeSkeleton,
   StyledLargeText,
   StyledSmallSkeleton,
@@ -18,19 +19,25 @@ const StockName: React.FC<Props> = (
   props,
 ) =>
 {
+  if (!props.company)
+  {
+    return (
+      <StyledContainer>
+        <StyledLargeSkeleton Container="off" />
+        <StyledSmallSkeleton Container="off" />
+      </StyledContainer>
+    );
+  }
+
   return (
-    <>
-      <StyledLargeSkeleton on={!props.company}>
-        <StyledLargeText>
-          {props.company?.companyName}
-        </StyledLargeText>
-      </StyledLargeSkeleton>
-      <StyledSmallSkeleton on={!props.company}>
-        <StyledSmallText>
-          {props.company?.symbol}
-        </StyledSmallText>
-      </StyledSmallSkeleton>
-    </>
+    <StyledContainer>
+      <StyledLargeText>
+        {props.company?.companyName}
+      </StyledLargeText>
+      <StyledSmallText>
+        {props.company?.symbol}
+      </StyledSmallText>
+    </StyledContainer>
   );
 };
 

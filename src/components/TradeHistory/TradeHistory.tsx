@@ -13,16 +13,16 @@ import {
   formatCurrency,
   formatPercentage,
 } from "utils/Utilities";
-import Spinner from "components/BaseUI/Spinner";
+import Spinner from "components/Grommet/Spinner";
 import TradeRowsClosed from "components/TradeHistory/TradeRowsClosed";
 import TradeRowsOpened from "components/TradeHistory/TradeRowsOpened";
 
 import {
-  Container,
-  FullTable,
-  HeadCell,
-  RightAlignedCell,
-  StickyFooter,
+  StyledCell,
+  StyledContainer,
+  StyledFooterRow,
+  StyledHeadCell,
+  StyledTable,
 } from "./TradeHistory.styled";
 
 type Props = {
@@ -75,25 +75,25 @@ const TradeHistory: React.FC<Props> = (
 
   if (!currentPrice)
   {
-    return <Spinner container={Container} />;
+    return <Spinner Container={StyledContainer} />;
   }
 
   return (
-    <Container>
-      <FullTable>
+    <StyledContainer>
+      <StyledTable>
         <StyledHead role="headerRow">
-          <HeadCell>
+          <StyledHeadCell>
             Shares
-          </HeadCell>
-          <HeadCell>
+          </StyledHeadCell>
+          <StyledHeadCell>
             Open
-          </HeadCell>
-          <HeadCell>
+          </StyledHeadCell>
+          <StyledHeadCell>
             Close
-          </HeadCell>
-          <HeadCell>
+          </StyledHeadCell>
+          <StyledHeadCell>
             Equity
-          </HeadCell>
+          </StyledHeadCell>
         </StyledHead>
         <StyledBody>
           <TradeRowsOpened
@@ -104,18 +104,18 @@ const TradeHistory: React.FC<Props> = (
           />
           <TradeRowsClosed pastTrades={pastTrades} />
         </StyledBody>
-        <StickyFooter role="footerRow">
-          <RightAlignedCell></RightAlignedCell>
-          <RightAlignedCell></RightAlignedCell>
-          <RightAlignedCell>
+        <StyledFooterRow role="footerRow">
+          <StyledCell></StyledCell>
+          <StyledCell></StyledCell>
+          <StyledCell>
             {safeChange}
-          </RightAlignedCell>
-          <RightAlignedCell>
+          </StyledCell>
+          <StyledCell>
             {safeBalance}
-          </RightAlignedCell>
-        </StickyFooter>
-      </FullTable>
-    </Container>
+          </StyledCell>
+        </StyledFooterRow>
+      </StyledTable>
+    </StyledContainer>
   );
 };
 

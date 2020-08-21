@@ -3,17 +3,17 @@ import {
   withStyle,
 } from "baseui/dist";
 import {
-  StyledCell,
-  StyledHeadCell,
+  StyledCell as DefaultStyledCell,
+  StyledHeadCell as DefaultStyledHeadCell,
   StyledRow,
-  StyledTable,
+  StyledTable as DefaultStyledTable,
 } from "baseui/dist/table";
 import {
   Box,
   BoxProps,
 } from "grommet";
 
-export const Container: React.FC<BoxProps> = (
+export const StyledContainer: React.FC<BoxProps> = (
   props,
 ) =>
 {
@@ -28,8 +28,8 @@ export const Container: React.FC<BoxProps> = (
   );
 };
 
-export const FullTable = withStyle(
-  StyledTable,
+export const StyledTable = withStyle(
+  DefaultStyledTable,
   () =>
   {
     return {
@@ -40,8 +40,8 @@ export const FullTable = withStyle(
   },
 );
 
-export const HeadCell = withStyle(
-  StyledHeadCell,
+export const StyledHeadCell = withStyle(
+  DefaultStyledHeadCell,
   (
     {
       $theme,
@@ -54,8 +54,8 @@ export const HeadCell = withStyle(
   },
 );
 
-export const RightAlignedCell = withStyle(
-  StyledCell,
+export const StyledCell = withStyle(
+  DefaultStyledCell,
   (
     {
       $theme,
@@ -74,7 +74,7 @@ export const RightAlignedCell = withStyle(
   },
 );
 
-export const StickyFooter = withStyle(
+export const StyledFooterRow = withStyle(
   StyledRow,
   (
     {

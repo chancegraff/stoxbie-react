@@ -6,7 +6,7 @@ import {
   HistoricalPrice,
 } from "iex";
 
-import Spinner from "components/BaseUI/Spinner";
+import Spinner from "components/Grommet/Spinner";
 import TradeSlider from "components/TradeControl/TradeSlider";
 
 import {
@@ -70,7 +70,7 @@ const TradeControl: React.FC<Props> = (
 
   if (!currentPrice || !currentLedger)
   {
-    return <Spinner container={StyledContainer} />;
+    return <Spinner Container={StyledContainer} />;
   }
 
   return (

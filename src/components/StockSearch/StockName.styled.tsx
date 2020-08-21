@@ -1,12 +1,21 @@
 import React from "react";
 import {
+  Box,
   Text,
-  TextProps,
 } from "grommet";
 
 import Skeleton, {
   SkeletonProps,
 } from "components/Grommet/Skeleton";
+
+export const StyledContainer: React.FC<BoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box {...props} />
+  );
+};
 
 export const StyledLargeSkeleton: React.FC<SkeletonProps> = (
   props,

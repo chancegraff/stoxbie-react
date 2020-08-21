@@ -9,7 +9,7 @@ import {
   HistoricalPrice,
 } from "iex";
 
-import Spinner from "components/BaseUI/Spinner";
+import Spinner from "components/Grommet/Spinner";
 import LineChart, {
   Label,
 } from "components/VX/LineChart";
@@ -20,7 +20,7 @@ type Props = {
   padding?: Padding;
 };
 
-// TODO Replace Spinner and theme with Grommet
+// TODO Replace theme with Grommet
 const StockChart: React.FC<Props> = (
   {
     prices,
