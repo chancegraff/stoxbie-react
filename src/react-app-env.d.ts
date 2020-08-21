@@ -29,6 +29,10 @@ type DefaultGridProps = import(
   "grommet"
 ).GridProps;
 
+type DefaultRangeInputProps = import(
+  "grommet"
+).RangeInputProps;
+
 type DefaultThemeType = import(
   "grommet"
 ).ThemeType;
@@ -48,6 +52,8 @@ declare type AvatarProps = DefaultBoxProps & DefaultAvatarProps & JSX.IntrinsicE
 declare type ButtonProps = DefaultButtonProps & Omit<JSX.IntrinsicElements["button"], "color" | "ref">;
 
 declare type GridProps = DefaultGridProps & JSX.IntrinsicElements["div"];
+
+declare type RangeInputProps = DefaultRangeInputProps & JSX.IntrinsicElements["input"];
 
 declare type ThemeType = DefaultThemeType & {
   name?: string;

@@ -5,16 +5,14 @@ import React, {
 } from "react";
 import {
   ResponsiveContext,
-  ThemeContext,
 } from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
-
 import {
-  getColors,
-  useTheme,
-} from "services/Grommet";
+  ThemeContext,
+} from "styled-components";
+
 import Spinner from "components/Grommet/Spinner";
 import LineChart, {
   Label,
@@ -37,7 +35,7 @@ const StockChart: React.FC<Props> = (
   },
 ) =>
 {
-  const theme = useTheme(
+  const theme = useContext(
     ThemeContext,
   );
   const breakpoint = useContext(
@@ -47,17 +45,10 @@ const StockChart: React.FC<Props> = (
   const label: Label = useCallback(
     () =>
     {
-      const {
-        dark,
-        light,
-      } = getColors(
-        theme.global.colors["text-xweak"],
-      );
-
       return {
         fill: theme.dark
-          ? dark
-          : light,
+          ? theme.global.colors["text-xweak"].dark
+          : theme.global.colors["text-xweak"].light,
         strokeWidth: 0,
         fontSize: theme.text.xsmall.size,
         fontFamily: theme.global.font.family,

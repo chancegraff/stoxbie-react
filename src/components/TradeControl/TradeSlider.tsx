@@ -4,9 +4,8 @@ import React, {
   useMemo,
 } from "react";
 import {
-  Slider,
-  State,
-} from "baseui/dist/slider";
+  RangeInput,
+} from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
@@ -14,8 +13,11 @@ import {
 import {
   usePrevious,
 } from "utils/Utilities";
-import TradeSliderInput from "components/TradeControl/TradeSliderInput";
-import TradeSliderTickBar from "components/TradeControl/TradeSliderTickBar";
+import TradeSliderTickBar from "components/TradeControl/TickBar";
+
+import {
+  StyledContainer,
+} from "./TradeSlider.styled";
 
 type Props = {
   currentPrice: HistoricalPrice;
@@ -25,7 +27,6 @@ type Props = {
   setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-// TODO Replace with Grommet
 const TradeSlider: React.FC<Props> = (
   {
     currentPrice,
@@ -100,42 +101,21 @@ const TradeSlider: React.FC<Props> = (
   );
   const handleChange = useCallback(
     (
-      event: State,
+      event: React.ChangeEvent<HTMLInputElement>,
     ) =>
     {
-      const [
-        nextPurchaseAmount,
-      ] = event.value;
+      const {
+        value: nextPurchaseAmount,
+      } = event.target;
 
       setShareAmount(
-        nextPurchaseAmount,
+        parseInt(
+          nextPurchaseAmount,
+          10,
+        ),
       );
     },
     [
-      setShareAmount,
-    ],
-  );
-  const overrides = useMemo(
-    () =>
-    {
-      return {
-        TickBar: {
-          component: () =>
-          {
-            return (
-              <TradeSliderInput
-                shareCount={shareCount}
-                maxValue={maxValue}
-                setShareAmount={setShareAmount}
-              />
-            );
-          },
-        },
-      };
-    },
-    [
-      shareCount,
-      maxValue,
       setShareAmount,
     ],
   );
@@ -158,22 +138,17 @@ const TradeSlider: React.FC<Props> = (
   );
 
   return (
-    <>
-      <Slider
+    <StyledContainer>
+      <RangeInput
         max={maxValue}
-        overrides={overrides}
-        value={
-          [
-            shareCount,
-          ]
-        }
+        value={shareCount}
         onChange={handleChange}
       />
       <TradeSliderTickBar
         maxValue={maxValue}
         setShareAmount={setShareAmount}
       />
-    </>
+    </StyledContainer>
   );
 };
 

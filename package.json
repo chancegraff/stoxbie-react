@@ -17,7 +17,7 @@
     "baseui": "github:chancegraff/baseweb#v9.89.1",
     "d3-array": "^2.4.0",
     "date-fns": "^2.15.0",
-    "grommet": "^2.14.0",
+    "grommet": "^2.15.0",
     "grommet-icons": "^4.4.0",
     "iex-cloud": "github:chancegraff/iex-cloud#v2.2.2",
     "node-sass": "^4.14.1",

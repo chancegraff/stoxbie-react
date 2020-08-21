@@ -14,8 +14,8 @@ import {
 } from "utils/Constants";
 
 import {
-  LeftAlignedTickBar,
-} from "./TradeSliderTickBar.styled";
+  StyledContainer,
+} from "./TickBar.styled";
 
 type Props = {
   maxValue: number;
@@ -125,7 +125,7 @@ const TradeSliderTickBar: React.FC<Props> = (
   );
 
   return (
-    <LeftAlignedTickBar>
+    <StyledContainer>
       {
         tickRange.map(
           (
@@ -155,7 +155,7 @@ const TradeSliderTickBar: React.FC<Props> = (
           },
         )
       }
-    </LeftAlignedTickBar>
+    </StyledContainer>
   );
 };
 
