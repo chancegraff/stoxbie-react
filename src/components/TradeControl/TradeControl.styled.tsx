@@ -84,14 +84,14 @@ const StyledTradeAction: React.FC<TradeActionProps> = (
   );
 };
 
-export const StyledBuyAction: React.FC<PartialBy<TradeActionProps, "actionModifier">> = (
+export const StyledBuyAction: React.FC<PartialBy<TradeActionProps, "shareModifier">> = (
   props,
 ) =>
 {
   return (
     <StyledTradeAction
       {...props}
-      actionModifier={1}
+      shareModifier={1}
       gridArea="buy"
     >
       Buy
@@ -99,14 +99,14 @@ export const StyledBuyAction: React.FC<PartialBy<TradeActionProps, "actionModifi
   );
 };
 
-export const StyledSellAction: React.FC<PartialBy<TradeActionProps, "actionModifier">> = (
+export const StyledSellAction: React.FC<PartialBy<TradeActionProps, "shareModifier">> = (
   props,
 ) =>
 {
   return (
     <StyledTradeAction
       {...props}
-      actionModifier={-1}
+      shareModifier={-1}
       gridArea="sell"
     >
       Sell

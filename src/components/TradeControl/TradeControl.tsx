@@ -87,15 +87,15 @@ const TradeControl: React.FC<Props> = (
           handleToggle={handleToggle}
           handleTrade={handleTrade}
           shareCount={shareCount}
-          shareModifier={shareModifier}
           sharePrice={currentPrice.close}
+          activeModifier={shareModifier}
         />
         <StyledSellAction
           handleToggle={handleToggle}
           handleTrade={handleTrade}
           shareCount={shareCount}
-          shareModifier={shareModifier}
           sharePrice={currentPrice.close}
+          activeModifier={shareModifier}
         />
       </StyledGrid>
     </StyledContainer>

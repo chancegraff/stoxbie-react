@@ -15,8 +15,8 @@ type Props = ButtonProps & {
   Icon?: React.ComponentType<IconProps>;
   sharePrice: number;
   shareCount: number;
-  actionModifier: 1 | -1;
-  shareModifier?: 1 | -1;
+  shareModifier: 1 | -1;
+  activeModifier?: 1 | -1;
   handleTrade: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
@@ -30,8 +30,8 @@ const TradeAction: React.FC<Props> = (
     handleToggle,
     sharePrice,
     shareCount,
-    actionModifier,
-    shareModifier = actionModifier,
+    shareModifier,
+    activeModifier = shareModifier,
     Icon,
     ...props
   },
@@ -40,11 +40,11 @@ const TradeAction: React.FC<Props> = (
   const isActive = useMemo(
     () =>
     {
-      return actionModifier === shareModifier;
+      return shareModifier === activeModifier;
     },
     [
-      actionModifier,
       shareModifier,
+      activeModifier,
     ],
   );
   const endEnhancer = useMemo(
@@ -67,20 +67,22 @@ const TradeAction: React.FC<Props> = (
   );
 
   const handleClick = useCallback(
-    () =>
+    (
+      event: React.MouseEvent<HTMLButtonElement>,
+    ) =>
     {
       if (shareCount > 0 && isActive)
       {
         const count = Math.abs(
           shareCount,
-        ) * actionModifier;
+        ) * shareModifier;
 
         handleTrade(
           sharePrice,
           count,
         );
       }
-      else if (handleToggle)
+      else if (!isActive && handleToggle)
       {
         handleToggle();
       }
@@ -91,14 +93,15 @@ const TradeAction: React.FC<Props> = (
       isActive,
       sharePrice,
       shareCount,
-      actionModifier,
+      shareModifier,
     ],
   );
 
   return (
     <StyledButton
-      label={children}
       icon={endEnhancer}
+      label={children}
+      value={shareModifier}
       onClick={handleClick}
       {...props}
     />

@@ -82,14 +82,14 @@ const TradeRow: React.FC<Props> = (
         totalShareCount
       )
       {
-        const closeModifier = (trade.openModifier * -1) as -1 | 1;
+        const shareModifier = (trade.openModifier * -1) as -1 | 1;
 
         return (
           <TradeAction
             handleTrade={handleTrade}
             shareCount={totalShareCount}
             sharePrice={sharePrice}
-            actionModifier={closeModifier}
+            shareModifier={shareModifier}
             secondary={true}
             size="small"
           >
