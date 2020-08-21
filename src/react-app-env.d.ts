@@ -1,6 +1,10 @@
 /// <reference types="react-scripts" />
 /// <reference types="@vx/axis" />
 
+type ColorType = import(
+  "grommet/utils"
+).ColorType;
+
 type DefaultBoxProps = import(
   "grommet"
 ).BoxProps;
@@ -25,6 +29,10 @@ type DefaultGridProps = import(
   "grommet"
 ).GridProps;
 
+type DefaultThemeType = import(
+  "grommet"
+).ThemeType;
+
 type DefaultIconProps = import(
   "grommet-icons"
 ).IconProps;
@@ -40,6 +48,16 @@ declare type AvatarProps = DefaultBoxProps & DefaultAvatarProps & JSX.IntrinsicE
 declare type ButtonProps = DefaultButtonProps & Omit<JSX.IntrinsicElements["button"], "color" | "ref">;
 
 declare type GridProps = DefaultGridProps & JSX.IntrinsicElements["div"];
+
+declare type ThemeType = DefaultThemeType & {
+  name?: string;
+  rounding?: number;
+  spacing?: number;
+  defaultMode?: "dark" | "light";
+  scale?: number;
+  dark?: boolean;
+  baseBackground?: ColorType;
+};
 
 declare type IconProps = DefaultIconProps & React.SVGProps<SVGSVGElement>;
 

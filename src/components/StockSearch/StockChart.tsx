@@ -1,14 +1,20 @@
 import React, {
   useCallback,
+  useContext,
   useMemo,
 } from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
+  ResponsiveContext,
+  ThemeContext,
+} from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
 
+import {
+  getColors,
+  useTheme,
+} from "services/Grommet";
 import Spinner from "components/Grommet/Spinner";
 import LineChart, {
   Label,
@@ -20,7 +26,6 @@ type Props = {
   padding?: Padding;
 };
 
-// TODO Replace theme with Grommet
 const StockChart: React.FC<Props> = (
   {
     prices,
@@ -32,17 +37,30 @@ const StockChart: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
+  const theme = useTheme(
+    ThemeContext,
+  );
+  const breakpoint = useContext(
+    ResponsiveContext,
+  );
+
   const label: Label = useCallback(
     () =>
     {
+      const {
+        dark,
+        light,
+      } = getColors(
+        theme.global.colors["text-xweak"],
+      );
+
       return {
-        ...theme.typography.LabelXSmall,
-        fill: theme.colors.mono300,
+        fill: theme.dark
+          ? dark
+          : light,
         strokeWidth: 0,
+        fontSize: theme.text.xsmall.size,
+        fontFamily: theme.global.font.family,
       };
     },
     [
@@ -52,16 +70,18 @@ const StockChart: React.FC<Props> = (
   const responsivePadding: Padding = useMemo(
     () =>
     {
-      return resolution[0] <= theme.breakpoints.medium
-        ? [
+      if (breakpoint === "small")
+      {
+        return [
           10,
           10,
-        ]
-        : padding;
+        ];
+      }
+
+      return padding;
     },
     [
-      resolution,
-      theme,
+      breakpoint,
       padding,
     ],
   );
