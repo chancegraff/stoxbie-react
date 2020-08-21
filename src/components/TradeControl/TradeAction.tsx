@@ -67,9 +67,7 @@ const TradeAction: React.FC<Props> = (
   );
 
   const handleClick = useCallback(
-    (
-      event: React.MouseEvent<HTMLButtonElement>,
-    ) =>
+    () =>
     {
       if (shareCount > 0 && isActive)
       {
