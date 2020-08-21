@@ -4,13 +4,9 @@ import React, {
 import {
   Block, BlockProps,
 } from "baseui/dist/block";
-import {
-  FlexGridItemProps,
-} from "baseui/dist/flex-grid";
 
-type DivProps = FlexGridItemProps | BlockProps;
-type Props = DivProps & {
-  component?: React.FC<DivProps>;
+type Props = BlockProps & {
+  component?: React.FC<BlockProps>;
 };
 
 export const AspectRatioItem: React.FC<Props> = forwardRef(
@@ -60,9 +56,9 @@ export const AspectRatioBox: React.FC<Props> = forwardRef(
         height={0}
         paddingBottom={
           [
-            "100%",
-            "75%",
-            "56.25%",
+            "87.5%",
+            "77.5%",
+            "67.5%",
           ]
         }
         position="relative"

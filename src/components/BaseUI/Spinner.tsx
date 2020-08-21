@@ -1,19 +1,20 @@
 import React from "react";
 import {
-  Block, BlockProps,
-} from "baseui/dist/block";
-import {
   SpinnerProps,
   StyledSpinnerNext,
 } from "baseui/dist/spinner";
+import {
+  Box,
+  BoxProps,
+} from "grommet";
 
 type Props = SpinnerProps & {
-  container?: React.FC<BlockProps>;
+  container?: React.FC<BoxProps>;
 };
 
 const Spinner: React.FC<Props> = (
   {
-    container: Container = Block,
+    container: Container = Box,
     ...props
   },
 ) =>

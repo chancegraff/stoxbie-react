@@ -1,8 +1,5 @@
 import React from "react";
 import {
-  ButtonProps,
-} from "baseui/dist/button";
-import {
   ContainerState,
   onChange as defaultHandler,
   StatefulCalendar,
@@ -15,7 +12,7 @@ import {
   StatefulPopover,
 } from "components/BaseUI/Popover";
 
-type Props = ButtonProps & {
+type Props = {
   initialState?: ContainerState;
   maxDate?: Date;
   minDate?: Date;

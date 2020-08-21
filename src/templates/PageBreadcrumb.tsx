@@ -2,19 +2,21 @@ import React, {
   useMemo,
 } from "react";
 import {
-  Link, useParams, useRouteMatch,
+  useParams,
+  useRouteMatch,
 } from "react-router-dom";
 import {
   Breadcrumbs,
 } from "baseui/dist/breadcrumbs";
 import {
-  StyledLink,
-} from "baseui/dist/link";
+  Box, ThemeContext,
+} from "grommet";
 
 import {
   DateFormats,
   formatParsedDate,
 } from "utils/Utilities";
+import Anchor from "components/Grommet/Anchor";
 
 type Props = unknown;
 
@@ -26,12 +28,9 @@ const StockBreadcrumb: React.FC = () =>
 
   return (
     <Breadcrumbs>
-      <StyledLink
-        $as={Link}
-        to="/"
-      >
+      <Anchor to="/">
         Ticker Search
-      </StyledLink>
+      </Anchor>
       <span>
         {ticker}
       </span>
@@ -64,18 +63,12 @@ const TradeBreadcrumb: React.FC = () =>
 
   return (
     <Breadcrumbs>
-      <StyledLink
-        $as={Link}
-        to="/"
-      >
+      <Anchor to="/">
         Ticker Search
-      </StyledLink>
-      <StyledLink
-        $as={Link}
-        to={`/stock/${ticker}`}
-      >
+      </Anchor>
+      <Anchor to={`/stock/${ticker}`}>
         {ticker}
-      </StyledLink>
+      </Anchor>
       <span>
         {`Trading from ${safeDate}`}
       </span>
@@ -93,10 +86,25 @@ const BreadcrumbContainer: React.FC<Props> = () =>
   );
 
   return (
-    <>
-      {stockView && <StockBreadcrumb />}
-      {tradeView && <TradeBreadcrumb />}
-    </>
+    <Box>
+      <ThemeContext.Extend
+        value={
+          {
+            anchor: {
+              color: "text",
+              fontWeight: "semibold",
+              textDecoration: "underline",
+              hover: {
+                textDecoration: "none",
+              },
+            },
+          }
+        }
+      >
+        {stockView && <StockBreadcrumb />}
+        {tradeView && <TradeBreadcrumb />}
+      </ThemeContext.Extend>
+    </Box>
   );
 };
 

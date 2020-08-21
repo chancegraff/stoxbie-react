@@ -18,7 +18,7 @@ const setItem = <P extends unknown>(
   now.setTime(
     now.getTime() + (numberOfDays * 60 * 60 * 24 * 1000),
   );
-  document.cookie = `${key}=${valueAsString};     expires=${now.toUTCString()}; path=/`;
+  document.cookie = `${key}=${valueAsString};     expires=${now.toUTCString()}; path=/; SameSite=Strict`;
 };
 
 const getItem = <P extends unknown>(

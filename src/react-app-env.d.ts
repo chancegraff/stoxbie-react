@@ -1,6 +1,48 @@
 /// <reference types="react-scripts" />
 /// <reference types="@vx/axis" />
 
+type DefaultBoxProps = import(
+  "grommet"
+).BoxProps;
+
+type DefaultImageProps = import(
+  "grommet"
+).ImageProps;
+
+type DefaultTextProps = import(
+  "grommet"
+).TextProps;
+
+type DefaultAvatarProps = import(
+  "grommet"
+).AvatarProps;
+
+type DefaultButtonProps = import(
+  "grommet"
+).ButtonProps;
+
+type DefaultGridProps = import(
+  "grommet"
+).GridProps;
+
+type DefaultIconProps = import(
+  "grommet-icons"
+).IconProps;
+
+declare type BoxProps = DefaultBoxProps & JSX.IntrinsicElements["div"];
+
+declare type ImageProps = DefaultImageProps & Omit<JSX.IntrinsicElements["img"], "ref">;
+
+declare type TextProps = DefaultTextProps & JSX.IntrinsicElements["span"];
+
+declare type AvatarProps = DefaultBoxProps & DefaultAvatarProps & JSX.IntrinsicElements["div"];
+
+declare type ButtonProps = DefaultButtonProps & Omit<JSX.IntrinsicElements["button"], "color" | "ref">;
+
+declare type GridProps = DefaultGridProps & JSX.IntrinsicElements["div"];
+
+declare type IconProps = DefaultIconProps & React.SVGProps<SVGSVGElement>;
+
 declare type PropsWithClass = {
   className?: string;
 };

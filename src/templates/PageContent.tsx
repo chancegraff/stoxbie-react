@@ -1,41 +1,58 @@
 import React from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
-import {
-  Grid as LayoutGrid,
-} from "baseui/dist/layout-grid";
+  Footer,
+  Header,
+  Main,
+} from "grommet";
+
+import PageBreadcrumb from "templates/PageBreadcrumb";
+import AppCopyright from "components/AppBranding/AppCopyright";
+import AppLogo from "components/AppBranding/AppLogo";
 
 type Props = unknown;
+const pad = {
+  horizontal: "xlarge",
+};
 
 const ContentContainer: React.FC<Props> = (
   props,
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
-
   return (
-    <Block
-      height="100%"
-      padding={
-        [
-          `${theme.sizing.scale200} 0`,
-          `${theme.sizing.scale400} 0`,
-          `${theme.sizing.scale800} 0`,
-          `${theme.sizing.scale1200} 0`,
-        ]
-      }
-    >
-      <LayoutGrid>
+    <Main >
+      <Header
+        background="background-front"
+        justify="start"
+        gap="large"
+        pad={
+          {
+            ...pad,
+            vertical: "medium",
+          }
+        }
+      >
+        <AppLogo />
+        <PageBreadcrumb />
+      </Header>
+      <Main
+        height="auto !important"
+        overflow="visible"
+        flex="grow"
+        pad={
+          {
+            ...pad,
+            vertical: "medium",
+          }
+        }
+      >
         {props.children}
-      </LayoutGrid>
-    </Block>
+      </Main>
+      <Footer
+        pad={pad}
+      >
+        <AppCopyright />
+      </Footer>
+    </Main>
   );
 };
 

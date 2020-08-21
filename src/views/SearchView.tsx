@@ -1,19 +1,15 @@
 import React from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
-  Block,
-} from "baseui/dist/block";
-import {
-  Display2, Label2,
-} from "baseui/dist/typography";
+  Box,
+  Heading,
+  Text,
+} from "grommet";
 import {
   Search,
 } from "iex-cloud";
 
 import PageContent from "templates/PageContent";
-import TickerInput from "components/TickerInput";
+import TickerInput from "components/StockSearch/TickerInput";
 
 type Props = {
   handleSearch: (
@@ -27,35 +23,34 @@ const SearchView: React.FC<Props> = (
   props,
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
-
   return (
     <PageContent>
-      <Block
-        width={
-          [
-            "100%",
-            "100%",
-            "70%",
-            "60%",
-          ]
+      <Heading
+        level="1"
+        size="large"
+        margin={
+          {
+            vertical: "large",
+          }
         }
       >
-        <Block marginBottom={theme.sizing.scale800}>
-          <Display2>
-            Ticker Search
-          </Display2>
-          <Label2>
-            Select the stock ticker to trade.
-          </Label2>
-        </Block>
-        <Block>
-          <TickerInput handleSearch={props.handleSearch} />
-        </Block>
-      </Block>
+        Ticker Search
+      </Heading>
+      <Text
+        size="medium"
+        color="text-xweak"
+        margin={
+          {
+            top: "none",
+            bottom: "xsmall",
+          }
+        }
+      >
+        Select the stock ticker to trade.
+      </Text>
+      <Box>
+        <TickerInput handleSearch={props.handleSearch} />
+      </Box>
     </PageContent>
   );
 };

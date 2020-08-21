@@ -2,18 +2,16 @@ import React, {
   useCallback, useEffect, useMemo, useState,
 } from "react";
 import {
-  useStyletron,
-} from "baseui/dist";
-import {
   Block,
 } from "baseui/dist/block";
-import {
-  FlexGridItem,
-} from "baseui/dist/flex-grid";
 import {
   closestIndexTo,
   parseISO,
 } from "date-fns";
+import {
+  Box,
+  Grid,
+} from "grommet";
 import {
   HistoricalPrice,
 } from "iex";
@@ -28,21 +26,19 @@ import {
 import {
   AspectRatioBox, AspectRatioItem,
 } from "templates/AspectRatio";
-import PageBreadcrumb from "templates/PageBreadcrumb";
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
-import FlexGrid from "components/BaseUI/FlexGrid";
-import StockChart from "components/StockChart";
-import TimeControl from "components/TimeControl";
-import TradeControl from "components/TradeControl";
-import TradeHistory from "components/TradeHistory";
+import StockChart from "components/StockSearch/StockChart";
+import TimeControl from "components/TradeControl/TimeControl";
+import TradeControl from "components/TradeControl/TradeControl";
+import TradeHistory from "components/TradeHistory/TradeHistory";
 
-  type Props = {
-    date?: Date;
-    error?: string;
-    prices?: HistoricalPrice[];
-    ticker?: string;
-  };
+type Props = {
+  date?: Date;
+  error?: string;
+  prices?: HistoricalPrice[];
+  ticker?: string;
+};
 
 const getPriceIndexes = (
   prices: HistoricalPrice[],
@@ -186,10 +182,6 @@ const TradeView: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
   const {
     ref,
     width = 1,
@@ -624,52 +616,51 @@ const TradeView: React.FC<Props> = (
 
   return (
     <PageContent>
-      <Block
-        marginBottom={theme.sizing.scale800}
-        width="100%"
-      >
-        <PageBreadcrumb />
-      </Block>
-      <FlexGrid
-        flexWrap={
+      <Grid
+        responsive={true}
+        fill={true}
+        gap="medium"
+        columns={
           [
-            true,
-            true,
-            true,
-            false,
+            "flex",
+            "auto",
+          ]
+        }
+        rows={
+          [
+            "auto",
+          ]
+        }
+        areas={
+          [
+            [
+              "chart",
+              "trades",
+            ],
           ]
         }
       >
-        <AspectRatioBox component={FlexGridItem}>
-          <AspectRatioItem ref={ref}>
-            <StockChart
-              prices={pastPrices}
-              resolution={
-                [
-                  width,
-                  height,
-                ]
-              }
-            />
-          </AspectRatioItem>
-        </AspectRatioBox>
-        <FlexGridItem
-          display="flex"
-          flexDirection="column"
-          height={`${height}px`}
-          maxWidth={
-            [
-              "100%",
-              "100%",
-              "25%",
-            ]
-          }
-          minWidth={
-            [
-              "auto",
-              "30%",
-              "25%",
-            ]
+        <Box gridArea="chart">
+          <AspectRatioBox component={Block}>
+            <AspectRatioItem ref={ref}>
+              <StockChart
+                prices={pastPrices}
+                resolution={
+                  [
+                    width,
+                    height,
+                  ]
+                }
+              />
+            </AspectRatioItem>
+          </AspectRatioBox>
+        </Box>
+        <Box
+          gridArea="trades"
+          height={
+            {
+              max: `${height}px`,
+            }
           }
         >
           <TimeControl
@@ -690,8 +681,8 @@ const TradeView: React.FC<Props> = (
             pastLedgers={playerLedger}
             currentTrades={currentTrades}
           />
-        </FlexGridItem>
-      </FlexGrid>
+        </Box>
+      </Grid>
     </PageContent>
   );
 };

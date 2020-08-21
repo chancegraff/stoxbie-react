@@ -54,7 +54,8 @@
                 "@typescript-eslint/no-unused-vars": "warn",
                 "@typescript-eslint/member-delimiter-style": "error",
                 "@typescript-eslint/no-floating-promises": "off",
-                "@typescript-eslint/no-unsafe-assignment": "off"
+                "@typescript-eslint/no-unsafe-assignment": "off",
+                "@typescript-eslint/no-unsafe-call": "off"
             }
         },
         {
@@ -298,7 +299,7 @@
         "no-useless-return": "error",
         "no-var": "error",
         "no-void": "error",
-        "no-warning-comments": "error",
+        "no-warning-comments": "off",
         "no-whitespace-before-property": "error",
         "nonblock-statement-body-position": "error",
         "object-curly-newline": [
@@ -484,6 +485,7 @@
                     [
                         "^(tests)(/.*|$)",
                         "^(utils)(/.*|$)",
+                        "^(theme)(/.*|$)",
                         "^(services)(/.*|$)",
                         "^(templates)(/.*|$)",
                         "^(routes)(/.*|$)",
