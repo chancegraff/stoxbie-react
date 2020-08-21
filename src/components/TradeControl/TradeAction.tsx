@@ -1,15 +1,18 @@
 import React, {
-  useCallback, useMemo,
+  useCallback,
+  useMemo,
 } from "react";
 import {
-  Button,
-  ButtonProps,
-} from "grommet";
+  Checkmark,
+} from "grommet-icons";
 
+import {
+  StyledButton,
+} from "./TradeAction.styled";
 import TradeActionCheck from "./TradeActionEnhancer";
 
-type Props = PropsWithChildren & ButtonProps & {
-  EndEnhancer?: React.FC;
+type Props = ButtonProps & {
+  Icon?: React.ComponentType<IconProps>;
   sharePrice: number;
   shareCount: number;
   actionModifier: 1 | -1;
@@ -17,6 +20,8 @@ type Props = PropsWithChildren & ButtonProps & {
   handleTrade: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
+
+export type TradeActionProps = Props;
 
 const TradeAction: React.FC<Props> = (
   {
@@ -27,7 +32,7 @@ const TradeAction: React.FC<Props> = (
     shareCount,
     actionModifier,
     shareModifier = actionModifier,
-    EndEnhancer,
+    Icon,
     ...props
   },
 ) =>
@@ -45,18 +50,18 @@ const TradeAction: React.FC<Props> = (
   const endEnhancer = useMemo(
     () =>
     {
-      if (EndEnhancer)
+      if (Icon)
       {
         return (
           <TradeActionCheck
             isActive={isActive}
-            EndEnhancer={EndEnhancer}
+            Icon={Checkmark}
           />
         );
       }
     },
     [
-      EndEnhancer,
+      Icon,
       isActive,
     ],
   );
@@ -91,8 +96,7 @@ const TradeAction: React.FC<Props> = (
   );
 
   return (
-    <Button
-      gap="small"
+    <StyledButton
       label={children}
       icon={endEnhancer}
       onClick={handleClick}

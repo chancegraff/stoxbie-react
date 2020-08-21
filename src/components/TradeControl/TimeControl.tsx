@@ -2,17 +2,18 @@ import React, {
   useMemo,
 } from "react";
 import {
-  Box,
-  Button,
-  Text,
-} from "grommet";
-import {
   HistoricalPrice,
 } from "iex";
 
 import {
   DateFormats, formatDate,
 } from "utils/Utilities";
+
+import {
+  StyledButton,
+  StyledContainer,
+  StyledText,
+} from "./TimeControl.styled";
 
 type Props = {
   currentPrice?: HistoricalPrice;
@@ -43,30 +44,12 @@ const TimeControl: React.FC<Props> = (
   );
 
   return (
-    <Box
-      align="center"
-      justify="center"
-      direction="column"
-    >
-      <Text
-        size="small"
-        weight="bold"
-        margin={
-          {
-            bottom: "10px",
-          }
-        }
-      >
+    <StyledContainer>
+      <StyledText>
         {`Today is ${safeDate || "..."}`}
-      </Text>
-      <Button
-        primary={true}
-        size="large"
-        label="Continue"
-        fill="horizontal"
-        onClick={handleContinue}
-      />
-    </Box>
+      </StyledText>
+      <StyledButton onClick={handleContinue} />
+    </StyledContainer>
   );
 };
 

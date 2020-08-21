@@ -1,35 +1,34 @@
 import React from "react";
 import {
-  Check,
-  IconProps,
-} from "baseui/dist/icon";
+  Checkmark,
+} from "grommet-icons";
 
 import {
-  Container,
+  StyledContainer,
 } from "./TradeActionEnhancer.styled";
 
 type Props = {
   isActive: boolean;
-  EndEnhancer: React.FC<IconProps>;
+  Icon: React.ComponentType<IconProps>;
 };
 
-const TradeActionCheck: React.FC<Props> = (
+const TradeActionEnhancer: React.FC<Props> = (
   {
     isActive,
-    EndEnhancer = Check,
+    Icon = Checkmark,
   },
 ) =>
 {
   if (!isActive)
   {
-    return <Container />;
+    return <StyledContainer />;
   }
 
   return (
-    <Container>
-      <EndEnhancer data-testid="check" />
-    </Container>
+    <StyledContainer>
+      <Icon data-testid="check" />
+    </StyledContainer>
   );
 };
 
-export default TradeActionCheck;
+export default TradeActionEnhancer;

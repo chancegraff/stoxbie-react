@@ -35,6 +35,7 @@ type Props = {
   handleTrade: (sharePrice: number, shareCount: number) => void;
 };
 
+// TODO Replace Table with Grommet
 const TradeHistory: React.FC<Props> = (
   {
     pastTrades,

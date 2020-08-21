@@ -20,7 +20,7 @@ type Props = {
   padding?: Padding;
 };
 
-// TODO Remove use of BaseUI
+// TODO Replace Spinner and theme with Grommet
 const StockChart: React.FC<Props> = (
   {
     prices,

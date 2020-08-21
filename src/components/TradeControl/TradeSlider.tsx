@@ -25,6 +25,7 @@ type Props = {
   setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
+// TODO Replace with Grommet
 const TradeSlider: React.FC<Props> = (
   {
     currentPrice,

@@ -43,7 +43,7 @@ const overrides = {
   Dropdown,
 };
 
-// TODO Remove use of BaseUI
+// TODO Replace Select with Grommet
 const TickerInput: React.FC<Props> = (
   {
     handleSearch,
