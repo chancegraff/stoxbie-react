@@ -45,25 +45,24 @@ fill: ${
     );
   }
 };
+font-size: ${
+  (
+    props,
+  ) =>
+  {
+    return String(
+      props.theme.text.xsmall.size,
+    );
+  }
+};
+font-family: ${
+  (
+    props,
+  ) =>
+  {
+    return String(
+      props.theme.global.font.family,
+    );
+  }
+};
 `;
-
-// font-size: ${
-//   (
-//     props,
-//   ) =>
-//   {
-//     return String(
-//       props.theme.text.xsmall.size,
-//     );
-//   },
-// };
-// font-family: ${
-//   (
-//     props,
-//   ) =>
-//   {
-//     return String(
-//       props.theme.global.font.family,
-//     );
-//   }
-// };

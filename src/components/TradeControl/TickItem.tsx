@@ -8,8 +8,8 @@ import {
 } from "./TickItem.styled";
 
 type Props = PropsHasChildren & PropsHasClass & {
-  tickMargin: string;
-  handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  margin: string;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 const TickItem: React.FC<Props> = (

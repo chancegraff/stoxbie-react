@@ -22,6 +22,7 @@ export const StyledTick: React.FC<JSXBoxProps> = (
       overflow="visible"
       width="14px"
       align="center"
+      focus="none"
       {...props}
     />
   );

@@ -116,8 +116,8 @@ const TickBar: React.FC<Props> = (
               return (
                 <StyledTickItem
                   key={index}
-                  tickMargin={tickMargin}
-                  handleClick={handleClick}
+                  margin={tickMargin}
+                  onClick={handleClick}
                 >
                   {
                     Math.round(
