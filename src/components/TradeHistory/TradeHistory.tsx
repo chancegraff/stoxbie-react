@@ -7,7 +7,12 @@ import {
 } from "baseui/dist/table";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  HistoricalLedger,
+  HistoricalTradeFinished,
+  HistoricalTradeStarted,
+} from "trade-types";
 
 import {
   formatCurrency,

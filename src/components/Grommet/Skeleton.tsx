@@ -1,15 +1,18 @@
 import React from "react";
+import {
+  JSXBoxProps,
+} from "grommet";
 
 import {
   StyledBox,
   StyledContainer,
 } from "./Skeleton.styled";
 
-export type SkeletonProps = BoxProps & {
-  Container?: React.FC<BoxProps> | "off";
+export type JSXSkeletonProps = JSXBoxProps & {
+  Container?: React.FC<JSXBoxProps> | "off";
 };
 
-const Skeleton: React.FC<SkeletonProps> = (
+const Skeleton: React.FC<JSXSkeletonProps> = (
   {
     Container = StyledContainer,
     ...props

@@ -10,7 +10,7 @@ import {
 } from "baseui/dist";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
 
 import {
   ScaleX, ScaleY,

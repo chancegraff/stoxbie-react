@@ -8,12 +8,15 @@ import {
 } from "grommet";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  HistoricalLedger,
+} from "trade-types";
 
 import {
   usePrevious,
 } from "utils/Utilities";
-import TradeSliderTickBar from "components/TradeControl/TickBar";
+import TickBar from "components/TradeControl/TickBar";
 
 import {
   StyledContainer,
@@ -144,7 +147,7 @@ const TradeSlider: React.FC<Props> = (
         value={shareCount}
         onChange={handleChange}
       />
-      <TradeSliderTickBar
+      <TickBar
         maxValue={maxValue}
         setShareAmount={setShareAmount}
       />

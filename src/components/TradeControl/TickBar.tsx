@@ -2,12 +2,6 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import {
-  withStyle,
-} from "baseui/dist";
-import {
-  StyledTick,
-} from "baseui/dist/slider";
 
 import {
   SLIDER_TICK_COUNT,
@@ -15,6 +9,7 @@ import {
 
 import {
   StyledContainer,
+  StyledTickItem,
 } from "./TickBar.styled";
 
 type Props = {
@@ -22,7 +17,7 @@ type Props = {
   setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const TradeSliderTickBar: React.FC<Props> = (
+const TickBar: React.FC<Props> = (
   {
     maxValue,
     setShareAmount,
@@ -67,29 +62,10 @@ const TradeSliderTickBar: React.FC<Props> = (
       sharesPerTick,
     ],
   );
-  const Tick = useMemo(
+  const tickMargin = useMemo(
     () =>
     {
-      return withStyle(
-        StyledTick,
-        (
-          {
-            $theme,
-          },
-        ) =>
-        {
-          return {
-            ...$theme.typography.font100,
-            margin: `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`,
-            textAlign: "center",
-            width: "14px",
-            overflow: "visible",
-            ":hover": {
-              cursor: "pointer",
-            },
-          };
-        },
-      );
+      return `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`;
     },
     [
       percentWidthPerShare,
@@ -138,16 +114,17 @@ const TradeSliderTickBar: React.FC<Props> = (
             if (nextTickValue)
             {
               return (
-                <Tick
+                <StyledTickItem
                   key={index}
-                  onClick={handleClick}
+                  tickMargin={tickMargin}
+                  handleClick={handleClick}
                 >
                   {
                     Math.round(
                       (nextTickValue + tickValue) / 2,
                     )
                   }
-                </Tick>
+                </StyledTickItem>
               );
             }
 
@@ -159,4 +136,4 @@ const TradeSliderTickBar: React.FC<Props> = (
   );
 };
 
-export default TradeSliderTickBar;
+export default TickBar;

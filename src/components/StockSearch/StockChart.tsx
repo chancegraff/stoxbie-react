@@ -8,7 +8,11 @@ import {
 } from "grommet";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  Padding,
+  Resolution,
+} from "style-types";
 import {
   ThemeContext,
 } from "styled-components";

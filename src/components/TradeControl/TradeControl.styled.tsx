@@ -1,18 +1,22 @@
 import React from "react";
 import {
   Box,
-  BoxProps,
   Grid,
+  JSXBoxProps,
+  JSXGridProps,
 } from "grommet";
 import {
   Checkmark,
 } from "grommet-icons";
+import {
+  PartialBy,
+} from "util-types";
 
 import TradeAction, {
   TradeActionProps,
 } from "./TradeAction";
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -32,7 +36,7 @@ export const StyledContainer: React.FC<BoxProps> = (
   );
 };
 
-export const StyledGrid: React.FC<GridProps> = (
+export const StyledGrid: React.FC<JSXGridProps> = (
   props,
 ) =>
 {

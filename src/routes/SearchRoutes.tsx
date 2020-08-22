@@ -1,6 +1,7 @@
 import React from "react";
 import {
-  Search, search,
+  Search,
+  search,
 } from "iex-cloud";
 import {
   useDebouncedCallback,

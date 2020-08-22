@@ -1,4 +1,7 @@
 import React from "react";
+import {
+  HistoricalTradeFinished,
+} from "trade-types";
 
 import TradeRow from "components/TradeHistory/TradeRow";
 

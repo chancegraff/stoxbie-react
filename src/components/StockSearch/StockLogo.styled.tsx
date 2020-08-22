@@ -1,11 +1,13 @@
 import React from "react";
 import {
   Avatar,
+  AvatarProps,
   Box,
+  BoxProps,
 } from "grommet";
 
 import Skeleton, {
-  SkeletonProps,
+  JSXSkeletonProps,
 } from "components/Grommet/Skeleton";
 
 export const StyledContainer: React.FC<BoxProps> = (
@@ -21,7 +23,7 @@ export const StyledContainer: React.FC<BoxProps> = (
   );
 };
 
-export const StyledSkeleton: React.FC<SkeletonProps> = (
+export const StyledSkeleton: React.FC<JSXSkeletonProps> = (
   props,
 ) =>
 {

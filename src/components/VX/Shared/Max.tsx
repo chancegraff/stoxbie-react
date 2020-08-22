@@ -1,6 +1,10 @@
 import React, {
   useMemo,
 } from "react";
+import {
+  Padding,
+  Resolution,
+} from "style-types";
 
 import {
   BOTTOM_LABELS_HEIGHT,

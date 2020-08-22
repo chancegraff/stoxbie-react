@@ -92,10 +92,10 @@ const TradeStart: React.FC<Props> = (
   return (
     <StyledContainer>
       <StyledButton onClick={handleOneYearStart}>
-          1Y
+        1Y
       </StyledButton>
       <StyledButton onClick={handleFiveYearStart}>
-          5Y
+        5Y
       </StyledButton>
       <DatePicker onChange={handleCustomYearStart}>
         <StyledButton>

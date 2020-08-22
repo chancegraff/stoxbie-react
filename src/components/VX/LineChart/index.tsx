@@ -10,7 +10,11 @@ import {
 } from "baseui/dist";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  Padding,
+  Resolution,
+} from "style-types";
 
 import withShared from "components/VX/Shared";
 import {
@@ -27,7 +31,6 @@ import AxisBottom from "./AxisBottom";
 import AxisRight from "./AxisRight";
 import Grid from "./Grid";
 import LinePath from "./LinePath";
-// import LinePoints from "./LinePoints";
 
 export type AxisLabelProps = Partial<TextProps>;
 export type TickLabelProps = () => Partial<TextProps>;
@@ -128,13 +131,6 @@ const LineChart: React.FC<Props> = (
           xMax={xMax}
           yScale={yScale}
         />
-        {/* <LinePoints
-        prices={prices}
-        xScale={xScale}
-        yScale={yScale}
-        xSelector={xSelector}
-        ySelector={ySelector}
-      /> */}
         <LinePath
           prices={prices}
           xScale={xScale}

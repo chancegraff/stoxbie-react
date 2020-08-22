@@ -1,14 +1,16 @@
 import React from "react";
 import {
   Box,
+  JSXBoxProps,
+  JSXTextProps,
   Text,
 } from "grommet";
 
 import Skeleton, {
-  SkeletonProps,
+  JSXSkeletonProps,
 } from "components/Grommet/Skeleton";
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -17,7 +19,7 @@ export const StyledContainer: React.FC<BoxProps> = (
   );
 };
 
-export const StyledLargeSkeleton: React.FC<SkeletonProps> = (
+export const StyledLargeSkeleton: React.FC<JSXSkeletonProps> = (
   props,
 ) =>
 {
@@ -30,7 +32,7 @@ export const StyledLargeSkeleton: React.FC<SkeletonProps> = (
   );
 };
 
-export const StyledSmallSkeleton: React.FC<SkeletonProps> = (
+export const StyledSmallSkeleton: React.FC<JSXSkeletonProps> = (
   props,
 ) =>
 {
@@ -48,7 +50,7 @@ export const StyledSmallSkeleton: React.FC<SkeletonProps> = (
   );
 };
 
-export const StyledLargeText: React.FC<TextProps> = (
+export const StyledLargeText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {
@@ -61,7 +63,7 @@ export const StyledLargeText: React.FC<TextProps> = (
   );
 };
 
-export const StyledSmallText: React.FC<TextProps> = (
+export const StyledSmallText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {

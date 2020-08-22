@@ -3,6 +3,7 @@ import React, {
 } from "react";
 import {
   Box,
+  JSXBoxProps,
 } from "grommet";
 import styled from "styled-components";
 
@@ -16,7 +17,7 @@ right: 0px;
 top: 0px;
 `;
 
-export const AspectRatioItem = forwardRef<HTMLElement, BoxProps>(
+export const AspectRatioItem = forwardRef<HTMLElement, JSXBoxProps>(
   (
     props,
     ref,
@@ -40,7 +41,7 @@ const StyledBox = styled(
 position: relative;
 `;
 
-export const AspectRatioBox = forwardRef<HTMLElement, BoxProps>(
+export const AspectRatioBox = forwardRef<HTMLElement, JSXBoxProps>(
   (
     props,
     ref,

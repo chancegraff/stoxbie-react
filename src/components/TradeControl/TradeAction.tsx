@@ -3,7 +3,11 @@ import React, {
   useMemo,
 } from "react";
 import {
+  JSXButtonProps,
+} from "grommet";
+import {
   Checkmark,
+  JSXIconProps,
 } from "grommet-icons";
 
 import {
@@ -11,8 +15,8 @@ import {
 } from "./TradeAction.styled";
 import TradeActionCheck from "./TradeActionEnhancer";
 
-type Props = ButtonProps & {
-  Icon?: React.ComponentType<IconProps>;
+type Props = JSXButtonProps & {
+  Icon?: React.ComponentType<JSXIconProps>;
   sharePrice: number;
   shareCount: number;
   shareModifier: 1 | -1;

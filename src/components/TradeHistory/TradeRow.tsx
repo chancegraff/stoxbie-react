@@ -4,6 +4,10 @@ import React, {
 import {
   StyledRow,
 } from "baseui/dist/table";
+import {
+  HistoricalTradeFinished,
+  HistoricalTradeStarted,
+} from "trade-types";
 
 import {
   formatCount,
@@ -93,7 +97,7 @@ const TradeRow: React.FC<Props> = (
             secondary={true}
             size="small"
           >
-              Exit
+            Exit
           </TradeAction>
         );
       }

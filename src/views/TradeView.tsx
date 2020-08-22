@@ -1,4 +1,5 @@
 import React, {
+  DispatchSetStateAction,
   useCallback,
   useEffect,
   useMemo,
@@ -14,7 +15,13 @@ import {
 } from "grommet";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  HistoricalLedger,
+  HistoricalTrade,
+  HistoricalTradeFinished,
+  HistoricalTradeStarted,
+} from "trade-types";
 import useResizeObserver from "use-resize-observer";
 
 import {
@@ -91,9 +98,9 @@ const setNextPrices = (
     setPastPrices,
     setNextPriceIndexes,
   }: {
-      setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
-      setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
-    },
+    setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
+    setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
+  },
 ) =>
 {
   const nextPriceIndexes = priceIndexes.map(

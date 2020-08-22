@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Checkmark,
+  JSXIconProps,
 } from "grommet-icons";
 
 import {
@@ -9,7 +10,7 @@ import {
 
 type Props = {
   isActive: boolean;
-  Icon: React.ComponentType<IconProps>;
+  Icon: React.ComponentType<JSXIconProps>;
 };
 
 const TradeActionEnhancer: React.FC<Props> = (

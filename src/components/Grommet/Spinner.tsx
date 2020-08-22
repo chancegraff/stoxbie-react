@@ -1,5 +1,8 @@
 import React from "react";
 import {
+  JSXBoxProps,
+} from "grommet";
+import {
   Oval,
 } from "svg-loaders-react";
 
@@ -8,7 +11,7 @@ import {
 } from "./Spinner.styled";
 
 type Props = JSX.IntrinsicElements["svg"] & {
-  Container?: React.FC<BoxProps> | "off";
+  Container?: React.FC<JSXBoxProps> | "off";
 };
 
 const Spinner: React.FC<Props> = (

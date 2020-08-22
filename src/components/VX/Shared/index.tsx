@@ -1,7 +1,11 @@
 import React from "react";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  Padding,
+  Resolution,
+} from "style-types";
 
 import {
   Label,
@@ -42,7 +46,7 @@ const withShared = (
       ),
     ),
   ) as React.FC<
-    BaseProps
+  BaseProps
   >;
 };
 

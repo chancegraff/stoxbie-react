@@ -2,11 +2,14 @@ import React from "react";
 import {
   Box,
   Button,
+  JSXBoxProps,
+  JSXButtonProps,
+  JSXTextProps,
   Text,
 } from "grommet";
 import styled from "styled-components";
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -19,7 +22,7 @@ export const StyledContainer: React.FC<BoxProps> = (
   );
 };
 
-export const StyledText: React.FC<TextProps> = (
+export const StyledText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {
@@ -58,32 +61,28 @@ border-radius: 0px;
 }
 `;
 
-export const StyledButton: React.FC<ButtonProps> = React.forwardRef<HTMLButtonElement>(
-  (
-    {
-      children,
-      ...props
-    },
-    ref,
-  ) =>
+export const StyledButton: React.FC<JSXButtonProps> = (
   {
-    return (
-      <GroupedButton
-        ref={ref}
-        primary={true}
-        fill="horizontal"
-        {...props}
-      >
-        <Box
-          align="center"
-          justify="center"
-          fill="horizontal"
-        >
-          <StyledText>
-            {children}
-          </StyledText>
-        </Box>
-      </GroupedButton>
-    );
+    children,
+    ...props
   },
-);
+) =>
+{
+  return (
+    <GroupedButton
+      primary={true}
+      fill="horizontal"
+      {...props}
+    >
+      <Box
+        align="center"
+        justify="center"
+        fill="horizontal"
+      >
+        <StyledText>
+          {children}
+        </StyledText>
+      </Box>
+    </GroupedButton>
+  );
+};

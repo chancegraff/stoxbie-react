@@ -1,13 +1,18 @@
-import React from "react";
+import React, {
+  PropsHasChildren,
+} from "react";
 import {
   Box,
   Image,
+  JSXBoxProps,
+  JSXImageProps,
+  JSXTextProps,
   Text,
   ThemeContext,
 } from "grommet";
 import styled from "styled-components";
 
-export const ExtendedTheme: React.FC<PropsWithChildren> = (
+export const ExtendedTheme: React.FC<PropsHasChildren> = (
   props,
 ) =>
 {
@@ -43,7 +48,7 @@ const LogoText = styled(
   text-transform: uppercase;
 `;
 
-export const StyledText: React.FC<TextProps> = (
+export const StyledText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {
@@ -61,7 +66,7 @@ const InvertedImage = styled(
   filter: invert(1);
 `;
 
-export const StyledImage: React.FC<ImageProps> = (
+export const StyledImage: React.FC<JSXImageProps> = (
   props,
 ) =>
 {
@@ -78,7 +83,7 @@ export const StyledImage: React.FC<ImageProps> = (
   );
 };
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  PropsHasChildren,
+} from "react";
 import {
   Box,
   Heading,
@@ -6,9 +8,7 @@ import {
 
 import PageContent from "templates/PageContent";
 
-type Props = PropsWithChildren;
-
-const Error: React.FC<Props> = (
+const Error: React.FC<PropsHasChildren> = (
   props,
 ) =>
 {

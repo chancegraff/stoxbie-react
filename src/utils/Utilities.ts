@@ -2,13 +2,15 @@ import {
   Children,
   cloneElement,
   isValidElement,
-  PropsWithChildren,
+  PropsHasChildren,
   useEffect,
   useRef,
 } from "react";
 import {
-  format, parse,
-  parseISO, subYears,
+  format,
+  parse,
+  parseISO,
+  subYears,
 } from "date-fns";
 import numbro from "numbro";
 
@@ -16,7 +18,7 @@ export const copyPropsToChildren = (
   {
     children,
     ...props
-  }: PropsWithChildren<unknown>,
+  }: PropsHasChildren,
 ): React.ReactNode =>
 {
   return Children.map(

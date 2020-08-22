@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  PropsHasChildren,
+} from "react";
 import {
   ContainerState,
   onChange as defaultHandler,
@@ -12,7 +14,7 @@ import {
   StatefulPopover,
 } from "components/BaseUI/Popover";
 
-type Props = {
+type Props = PropsHasChildren & {
   initialState?: ContainerState;
   maxDate?: Date;
   minDate?: Date;

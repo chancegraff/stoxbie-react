@@ -4,7 +4,10 @@ import React, {
 } from "react";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  HistoricalLedger,
+} from "trade-types";
 
 import Spinner from "components/Grommet/Spinner";
 import TradeSlider from "components/TradeControl/TradeSlider";

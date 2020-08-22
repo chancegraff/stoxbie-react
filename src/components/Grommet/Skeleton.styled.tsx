@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  JSXBoxProps,
 } from "grommet";
 import styled from "styled-components";
 
@@ -11,7 +12,7 @@ const ShimmeringBox = styled(
   background-size: 2000px;
 `;
 
-export const StyledBox: React.FC<BoxProps> = (
+export const StyledBox: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -29,7 +30,7 @@ export const StyledBox: React.FC<BoxProps> = (
   );
 };
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

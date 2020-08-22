@@ -6,8 +6,6 @@ import {
 } from "react-router-dom";
 import {
   HistoricalPrice,
-} from "iex";
-import {
   historicalPrices,
 } from "iex-cloud";
 
