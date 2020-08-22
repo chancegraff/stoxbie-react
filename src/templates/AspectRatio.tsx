@@ -2,70 +2,61 @@ import React, {
   forwardRef,
 } from "react";
 import {
-  Block, BlockProps,
-} from "baseui/dist/block";
+  Box,
+} from "grommet";
+import styled from "styled-components";
 
-type Props = BlockProps & {
-  component?: React.FC<BlockProps>;
-};
+const StyledItem = styled(
+  Box,
+)`
+position: absolute;
+left: 0px;
+bottom: 0px;
+right: 0px;
+top: 0px;
+`;
 
-export const AspectRatioItem: React.FC<Props> = forwardRef(
+export const AspectRatioItem = forwardRef<HTMLElement, BoxProps>(
   (
-    {
-      component: Component = Block,
-      children,
-      ...props
-    },
+    props,
     ref,
   ) =>
   {
     return (
-      <Component
+      <StyledItem
         ref={ref}
-        left={0}
-        display="flex"
-        height="100%"
-        justifyContent="center"
-        bottom={0}
-        position="absolute"
-        alignItems="center"
-        right={0}
-        top={0}
-        width="100%"
+        fill={true}
+        justify="center"
+        align="center"
         {...props}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );
 
-export const AspectRatioBox: React.FC<Props> = forwardRef(
+const StyledBox = styled(
+  Box,
+)`
+position: relative;
+`;
+
+export const AspectRatioBox = forwardRef<HTMLElement, BoxProps>(
   (
-    {
-      component: Component = Block,
-      children,
-      ...props
-    },
+    props,
     ref,
   ) =>
   {
     return (
-      <Component
+      <StyledBox
         ref={ref}
-        height={0}
-        paddingBottom={
-          [
-            "87.5%",
-            "77.5%",
-            "67.5%",
-          ]
+        height="0"
+        pad={
+          {
+            bottom: "67.5%",
+          }
         }
-        position="relative"
         {...props}
-      >
-        {children}
-      </Component>
+      />
     );
   },
 );

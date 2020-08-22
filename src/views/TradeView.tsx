@@ -1,9 +1,9 @@
 import React, {
-  useCallback, useEffect, useMemo, useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
-import {
-  Block,
-} from "baseui/dist/block";
 import {
   closestIndexTo,
   parseISO,
@@ -186,7 +186,7 @@ const TradeView: React.FC<Props> = (
     ref,
     width = 1,
     height = 1,
-  } = useResizeObserver<HTMLDivElement>();
+  } = useResizeObserver();
   const [
     pastPrices,
     setPastPrices,
@@ -641,7 +641,7 @@ const TradeView: React.FC<Props> = (
         }
       >
         <Box gridArea="chart">
-          <AspectRatioBox component={Block}>
+          <AspectRatioBox>
             <AspectRatioItem ref={ref}>
               <StockChart
                 prices={pastPrices}

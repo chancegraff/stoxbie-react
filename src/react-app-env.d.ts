@@ -5,43 +5,43 @@ type ColorType = import(
   "grommet/utils"
 ).ColorType;
 
-type DefaultBoxProps = import(
+declare type DefaultBoxProps = import(
   "grommet"
 ).BoxProps;
 
-type DefaultImageProps = import(
+declare type DefaultImageProps = import(
   "grommet"
 ).ImageProps;
 
-type DefaultTextProps = import(
+declare type DefaultTextProps = import(
   "grommet"
 ).TextProps;
 
-type DefaultAvatarProps = import(
+declare type DefaultAvatarProps = import(
   "grommet"
 ).AvatarProps;
 
-type DefaultButtonProps = import(
+declare type DefaultButtonProps = import(
   "grommet"
 ).ButtonProps;
 
-type DefaultGridProps = import(
+declare type DefaultGridProps = import(
   "grommet"
 ).GridProps;
 
-type DefaultRangeInputProps = import(
+declare type DefaultRangeInputProps = import(
   "grommet"
 ).RangeInputProps;
 
-type DefaultThemeType = import(
+declare type DefaultThemeType = import(
   "grommet"
 ).ThemeType;
 
-type DefaultIconProps = import(
+declare type DefaultIconProps = import(
   "grommet-icons"
 ).IconProps;
 
-declare type BoxProps = DefaultBoxProps & JSX.IntrinsicElements["div"];
+declare type BoxProps = DefaultBoxProps & Omit<JSX.IntrinsicElements["div"], "ref">;
 
 declare type ImageProps = DefaultImageProps & Omit<JSX.IntrinsicElements["img"], "ref">;
 
