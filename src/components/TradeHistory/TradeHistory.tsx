@@ -1,9 +1,6 @@
-import React, {
-  useMemo,
-} from "react";
+import React from "react";
 import {
   StyledBody,
-  StyledHead,
 } from "baseui/dist/table";
 import {
   HistoricalPrice,
@@ -14,19 +11,14 @@ import {
   HistoricalTradeStarted,
 } from "trade-types";
 
-import {
-  formatCurrency,
-  formatPercentage,
-} from "utils/Utilities";
 import Spinner from "components/Grommet/Spinner";
 import TradeRowsClosed from "components/TradeHistory/TradeRowsClosed";
 import TradeRowsOpened from "components/TradeHistory/TradeRowsOpened";
 
+import TradeFooter from "./TradeFooter";
+import TradeHeader from "./TradeHeader";
 import {
-  StyledCell,
   StyledContainer,
-  StyledFooterRow,
-  StyledHeadCell,
   StyledTable,
 } from "./TradeHistory.styled";
 
@@ -51,33 +43,6 @@ const TradeHistory: React.FC<Props> = (
   },
 ) =>
 {
-  const safeChange = useMemo(
-    () =>
-    {
-      if (pastTrades.length > 0)
-      {
-        return formatPercentage(
-          playerLedger.totalChange,
-        );
-      }
-    },
-    [
-      playerLedger,
-      pastTrades,
-    ],
-  );
-  const safeBalance = useMemo(
-    () =>
-    {
-      return formatCurrency(
-        playerLedger.totalBalance,
-      );
-    },
-    [
-      playerLedger,
-    ],
-  );
-
   if (!currentPrice)
   {
     return <Spinner Container={StyledContainer} />;
@@ -86,20 +51,7 @@ const TradeHistory: React.FC<Props> = (
   return (
     <StyledContainer>
       <StyledTable>
-        <StyledHead role="headerRow">
-          <StyledHeadCell>
-            Shares
-          </StyledHeadCell>
-          <StyledHeadCell>
-            Open
-          </StyledHeadCell>
-          <StyledHeadCell>
-            Close
-          </StyledHeadCell>
-          <StyledHeadCell>
-            Equity
-          </StyledHeadCell>
-        </StyledHead>
+        <TradeHeader />
         <StyledBody>
           <TradeRowsOpened
             totalShareCount={playerLedger.totalCount}
@@ -109,16 +61,10 @@ const TradeHistory: React.FC<Props> = (
           />
           <TradeRowsClosed pastTrades={pastTrades} />
         </StyledBody>
-        <StyledFooterRow role="footerRow">
-          <StyledCell></StyledCell>
-          <StyledCell></StyledCell>
-          <StyledCell>
-            {safeChange}
-          </StyledCell>
-          <StyledCell>
-            {safeBalance}
-          </StyledCell>
-        </StyledFooterRow>
+        <TradeFooter
+          pastTrades={pastTrades}
+          playerLedger={playerLedger}
+        />
       </StyledTable>
     </StyledContainer>
   );
