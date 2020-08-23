@@ -16,30 +16,30 @@ import {
 } from "./TimeControl.styled";
 
 type Props = {
-  currentPrice?: HistoricalPrice;
+  presentPrice?: HistoricalPrice;
   handleContinue: () => void;
 };
 
 const TimeControl: React.FC<Props> = (
   {
     handleContinue,
-    currentPrice,
+    presentPrice,
   },
 ) =>
 {
   const safeDate = useMemo(
     () =>
     {
-      if (currentPrice)
+      if (presentPrice)
       {
         return formatDate(
-          currentPrice.date,
+          presentPrice.date,
           DateFormats.Full,
         );
       }
     },
     [
-      currentPrice,
+      presentPrice,
     ],
   );
 

@@ -21,7 +21,7 @@ type Props = JSXButtonProps & {
   shareCount: number;
   shareModifier: 1 | -1;
   activeModifier?: 1 | -1;
-  handleTrade: (sharePrice: number, shareCount: number) => void;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
 
@@ -30,7 +30,7 @@ export type TradeActionProps = Props;
 const TradeAction: React.FC<Props> = (
   {
     children,
-    handleTrade,
+    handleOrder,
     handleToggle,
     sharePrice,
     shareCount,
@@ -79,7 +79,7 @@ const TradeAction: React.FC<Props> = (
           shareCount,
         ) * shareModifier;
 
-        handleTrade(
+        handleOrder(
           sharePrice,
           count,
         );
@@ -90,7 +90,7 @@ const TradeAction: React.FC<Props> = (
       }
     },
     [
-      handleTrade,
+      handleOrder,
       handleToggle,
       isActive,
       sharePrice,

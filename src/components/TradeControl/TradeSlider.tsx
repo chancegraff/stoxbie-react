@@ -23,8 +23,8 @@ import {
 } from "./TradeSlider.styled";
 
 type Props = {
-  currentPrice: HistoricalPrice;
-  currentLedger: HistoricalLedger;
+  presentPrice: HistoricalPrice;
+  presentLedger: HistoricalLedger;
   shareCount: number;
   shareModifier: number;
   setShareAmount: React.Dispatch<React.SetStateAction<number>>;
@@ -32,8 +32,8 @@ type Props = {
 
 const TradeSlider: React.FC<Props> = (
   {
-    currentPrice,
-    currentLedger,
+    presentPrice,
+    presentLedger,
     shareCount,
     shareModifier,
     setShareAmount,
@@ -41,28 +41,28 @@ const TradeSlider: React.FC<Props> = (
 ) =>
 {
   const previousPrice = usePrevious(
-    currentPrice,
+    presentPrice,
   );
   const previousLedger = usePrevious(
-    currentLedger,
+    presentLedger,
   );
   const hasPriceChanged = useMemo(
     () =>
     {
-      return currentPrice !== previousPrice;
+      return presentPrice !== previousPrice;
     },
     [
-      currentPrice,
+      presentPrice,
       previousPrice,
     ],
   );
   const hasBalanceChanged = useMemo(
     () =>
     {
-      return currentLedger.totalBalance !== previousLedger?.totalBalance;
+      return presentLedger.totalBalance !== previousLedger?.totalBalance;
     },
     [
-      currentLedger,
+      presentLedger,
       previousLedger,
     ],
   );
@@ -70,21 +70,21 @@ const TradeSlider: React.FC<Props> = (
     () =>
     {
       return Math.floor(
-        currentLedger.totalBalance / currentPrice.close,
+        presentLedger.totalBalance / presentPrice.close,
       );
     },
     [
-      currentPrice,
-      currentLedger,
+      presentPrice,
+      presentLedger,
     ],
   );
   const maxSaleable = useMemo(
     () =>
     {
-      return currentLedger.totalCount;
+      return presentLedger.totalCount;
     },
     [
-      currentLedger,
+      presentLedger,
     ],
   );
   const maxValue = useMemo(

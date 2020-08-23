@@ -22,75 +22,75 @@ import {
 type Props = {
   totalShareCount?: number;
   sharePrice?: number;
-  handleTrade?: (sharePrice: number, shareCount: number) => void;
-  trade: HistoricalTradeStarted | HistoricalTradeFinished;
+  handleOrder?: (sharePrice: number, shareCount: number) => void;
+  holding: HistoricalTradeStarted | HistoricalTradeFinished;
 };
 
 const TradeRow: React.FC<Props> = (
   {
     totalShareCount,
     sharePrice,
-    handleTrade,
-    trade,
+    handleOrder,
+    holding,
   },
 ) =>
 {
   const safeShares = useMemo(
     () =>
     {
-      if (trade.closeCount)
+      if (holding.closeCount)
       {
         return formatCount(
-          trade.closeCount,
+          holding.closeCount,
         );
       }
-      else if (trade.openCount)
+      else if (holding.openCount)
       {
         return formatCount(
-          trade.openCount,
+          holding.openCount,
         );
       }
     },
     [
-      trade,
+      holding,
     ],
   );
   const safeOpen = useMemo(
     () =>
     {
-      if (trade.openPrice)
+      if (holding.openPrice)
       {
         return formatCurrency(
-          trade.openPrice,
+          holding.openPrice,
         );
       }
     },
     [
-      trade,
+      holding,
     ],
   );
   const safeClose = useMemo(
     () =>
     {
-      if (trade.closePrice)
+      if (holding.closePrice)
       {
         const abbreviatedClose = formatCurrency(
-          trade.closePrice,
+          holding.closePrice,
         );
 
         return abbreviatedClose;
       }
       else if (
-        handleTrade &&
+        handleOrder &&
         sharePrice &&
         totalShareCount
       )
       {
-        const shareModifier = (trade.openModifier * -1) as -1 | 1;
+        const shareModifier = (holding.openModifier * -1) as -1 | 1;
 
         return (
           <TradeAction
-            handleTrade={handleTrade}
+            handleOrder={handleOrder}
             shareCount={totalShareCount}
             sharePrice={sharePrice}
             shareModifier={shareModifier}
@@ -105,28 +105,28 @@ const TradeRow: React.FC<Props> = (
     [
       totalShareCount,
       sharePrice,
-      trade,
-      handleTrade,
+      holding,
+      handleOrder,
     ],
   );
   const safeBalance = useMemo(
     () =>
     {
-      if (trade.closeCount && trade.closePrice)
+      if (holding.closeCount && holding.closePrice)
       {
         return formatCurrency(
-          trade.closeCount * trade.closePrice,
+          holding.closeCount * holding.closePrice,
         );
       }
-      else if (trade.openCount && trade.openPrice)
+      else if (holding.openCount && holding.openPrice)
       {
         return formatCurrency(
-          trade.openCount * trade.openPrice,
+          holding.openCount * holding.openPrice,
         );
       }
     },
     [
-      trade,
+      holding,
     ],
   );
 

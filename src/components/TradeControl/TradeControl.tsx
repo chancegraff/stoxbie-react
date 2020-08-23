@@ -20,16 +20,16 @@ import {
 } from "./TradeControl.styled";
 
 type Props = {
-  currentPrice?: HistoricalPrice;
-  currentLedger?: HistoricalLedger;
-  handleTrade: (sharePrice: number, shareCount: number) => void;
+  presentPrice?: HistoricalPrice;
+  presentLedger?: HistoricalLedger;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 
 const TradeControl: React.FC<Props> = (
   {
-    currentPrice,
-    currentLedger,
-    handleTrade,
+    presentPrice,
+    presentLedger,
+    handleOrder,
   },
 ) =>
 {
@@ -71,7 +71,7 @@ const TradeControl: React.FC<Props> = (
     ],
   );
 
-  if (!currentPrice || !currentLedger)
+  if (!presentPrice || !presentLedger)
   {
     return <Spinner Container={StyledContainer} />;
   }
@@ -79,8 +79,8 @@ const TradeControl: React.FC<Props> = (
   return (
     <StyledContainer>
       <TradeSlider
-        currentLedger={currentLedger}
-        currentPrice={currentPrice}
+        presentLedger={presentLedger}
+        presentPrice={presentPrice}
         shareCount={shareCount}
         shareModifier={shareModifier}
         setShareAmount={setShareAmount}
@@ -88,16 +88,16 @@ const TradeControl: React.FC<Props> = (
       <StyledGrid>
         <StyledBuyAction
           handleToggle={handleToggle}
-          handleTrade={handleTrade}
+          handleOrder={handleOrder}
           shareCount={shareCount}
-          sharePrice={currentPrice.close}
+          sharePrice={presentPrice.close}
           activeModifier={shareModifier}
         />
         <StyledSellAction
           handleToggle={handleToggle}
-          handleTrade={handleTrade}
+          handleOrder={handleOrder}
           shareCount={shareCount}
-          sharePrice={currentPrice.close}
+          sharePrice={presentPrice.close}
           activeModifier={shareModifier}
         />
       </StyledGrid>

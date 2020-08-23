@@ -23,27 +23,26 @@ import {
 } from "./TradeHistory.styled";
 
 type Props = {
-  pastTrades: HistoricalTradeFinished[];
-  visibleTrade?: HistoricalTradeStarted;
-  currentPrice?: HistoricalPrice;
-  playerLedger: HistoricalLedger;
-  currentTrades?: HistoricalTradeStarted[];
-  pastLedgers?: HistoricalLedger[];
-  handleTrade: (sharePrice: number, shareCount: number) => void;
+  historicalHoldings: HistoricalTradeFinished[];
+  combinedHoldings?: HistoricalTradeStarted;
+  presentPrice?: HistoricalPrice;
+  presentHoldings?: HistoricalTradeStarted[];
+  presentLedger: HistoricalLedger;
+  historicalLedgers?: HistoricalLedger[];
+  handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 
-// TODO Replace Table with Grommet
 const TradeHistory: React.FC<Props> = (
   {
-    pastTrades,
-    playerLedger,
-    visibleTrade,
-    currentPrice,
-    handleTrade,
+    historicalHoldings,
+    presentLedger,
+    combinedHoldings,
+    presentPrice,
+    handleOrder,
   },
 ) =>
 {
-  if (!currentPrice)
+  if (!presentPrice)
   {
     return <Spinner Container={StyledContainer} />;
   }
@@ -54,16 +53,16 @@ const TradeHistory: React.FC<Props> = (
         <TradeHeader />
         <StyledBody>
           <TradeRowsOpened
-            totalShareCount={playerLedger.totalCount}
-            visibleTrade={visibleTrade}
-            currentPrice={currentPrice}
-            handleTrade={handleTrade}
+            totalShareCount={presentLedger.totalCount}
+            combinedHoldings={combinedHoldings}
+            presentPrice={presentPrice}
+            handleOrder={handleOrder}
           />
-          <TradeRowsClosed pastTrades={pastTrades} />
+          <TradeRowsClosed historicalHoldings={historicalHoldings} />
         </StyledBody>
         <TradeFooter
-          pastTrades={pastTrades}
-          playerLedger={playerLedger}
+          historicalHoldings={historicalHoldings}
+          presentLedger={presentLedger}
         />
       </StyledTable>
     </StyledContainer>

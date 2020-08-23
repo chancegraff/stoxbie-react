@@ -95,10 +95,10 @@ const setNextPrices = (
   prices: HistoricalPrice[],
   priceIndexes: number[],
   {
-    setPastPrices,
+    setHistoricalPrices,
     setNextPriceIndexes,
   }: {
-    setPastPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
+    setHistoricalPrices: DispatchSetStateAction<HistoricalPrice[] | undefined>;
     setNextPriceIndexes: DispatchSetStateAction<number[] | undefined>;
   },
 ) =>
@@ -115,7 +115,7 @@ const setNextPrices = (
     ...nextPriceIndexes,
   );
 
-  setPastPrices(
+  setHistoricalPrices(
     nextPrices,
   );
   setNextPriceIndexes(
@@ -195,32 +195,25 @@ const TradeView: React.FC<Props> = (
     height = 1,
   } = useResizeObserver();
   const [
-    pastPrices,
-    setPastPrices,
-  ] = useState<HistoricalPrice[]>();
-  const [
     nextPriceIndexes,
     setNextPriceIndexes,
   ] = useState<number[]>();
   const [
-    pastTrades,
-    setPastTrades,
+    historicalPrices,
+    setHistoricalPrices,
+  ] = useState<HistoricalPrice[]>();
+  const [
+    historicalHoldings,
+    setHistoricalHoldings,
   ] = useCookie<HistoricalTradeFinished[]>(
-    "pastTrades",
+    "historicalHoldings",
     [],
   );
   const [
-    currentTrades,
-    setCurrentTrades,
-  ] = useCookie<HistoricalTradeStarted[]>(
-    "currentTrades",
-    [],
-  );
-  const [
-    playerLedger,
-    setPlayerLedger,
+    historicalLedgers,
+    setHistoricalLedgers,
   ] = useCookie<HistoricalLedger[]>(
-    "playerLedger",
+    "historicalLedgers",
     [
       {
         totalBalance: 10000,
@@ -230,104 +223,111 @@ const TradeView: React.FC<Props> = (
       },
     ],
   );
-  const currentPrice = useMemo(
+  const [
+    presentHoldings,
+    setPresentHoldings,
+  ] = useCookie<HistoricalTradeStarted[]>(
+    "presentHoldings",
+    [],
+  );
+  const presentPrice = useMemo(
     () =>
     {
-      return pastPrices && pastPrices[pastPrices.length - 1];
+      return historicalPrices && historicalPrices[historicalPrices.length - 1];
     },
     [
-      pastPrices,
+      historicalPrices,
     ],
   );
-  const currentLedger = useMemo(
+  const presentLedger = useMemo(
     () =>
     {
       const [
         nextLedger,
-      ] = playerLedger;
+      ] = historicalLedgers;
 
       return nextLedger;
     },
     [
-      playerLedger,
+      historicalLedgers,
     ],
   );
-  const visibleTrade = useMemo(
+  const combinedHoldings = useMemo(
     () =>
     {
-      if (currentTrades.length > 0)
+      if (presentHoldings.length > 0)
       {
         const [
-          newestOpenedTrade,
-        ] = currentTrades;
-        const highestOpenedTrade = currentTrades.reduceRight(
+          newestOpenedHolding,
+        ] = presentHoldings;
+        const highestOpenedHolding = presentHoldings.reduceRight(
           (
-            previousTrade,
-            nextTrade,
+            previousHolding,
+            nextHolding,
           ) =>
           {
-            return previousTrade.openPrice > nextTrade.openPrice
-              ? previousTrade
-              : nextTrade;
+            return previousHolding.openPrice > nextHolding.openPrice
+              ? previousHolding
+              : nextHolding;
           },
-          newestOpenedTrade,
+          newestOpenedHolding,
         );
 
-        return highestOpenedTrade;
+        return highestOpenedHolding;
       }
     },
     [
-      currentTrades,
+      presentHoldings,
     ],
   );
-  const updateCurrentTrades = useCallback(
+  const updatePresentHoldings = useCallback(
     (
       nextTrades: HistoricalTradeStarted[],
     ) =>
     {
-      setCurrentTrades(
+      setPresentHoldings(
         nextTrades,
         30,
       );
     },
     [
-      setCurrentTrades,
+      setPresentHoldings,
     ],
   );
-  const updatePastTrades = useCallback(
+  const updateHistoricalHoldings = useCallback(
     (
       nextTrades: HistoricalTradeFinished[],
     ) =>
     {
-      setPastTrades(
+      setHistoricalHoldings(
         [
           ...nextTrades,
-          ...pastTrades,
+          ...historicalHoldings,
         ],
         30,
       );
     },
     [
-      pastTrades,
-      setPastTrades,
+      historicalHoldings,
+      setHistoricalHoldings,
     ],
   );
-  const updatePlayerLedger = useCallback(
+  const updateHistoricalLedgers = useCallback(
     (
       nextLedger: HistoricalLedger,
     ) =>
     {
-      setPlayerLedger(
+      setHistoricalLedgers(
         [
           nextLedger,
-          ...playerLedger,
+          ...historicalLedgers,
         ],
         30,
       );
     },
     [
-      playerLedger,
-      setPlayerLedger,
+      historicalLedgers,
+      setHistoricalLedgers,
     ],
   );
   const openTrade = useCallback(
@@ -342,43 +342,43 @@ const TradeView: React.FC<Props> = (
           ticker,
         };
         const {
-          ...nextPlayerLedger
-        } = currentLedger;
+          ...nextHistoricalLedgers
+        } = presentLedger;
         const {
           totalBalance: previousTotalBalance,
           totalChange: previousTotalChange,
           totalReturns: previousTotalReturns,
           totalCount: previousTotalCount,
-        } = currentLedger;
+        } = presentLedger;
         const openedTrade = getOpenedTrade(
           nextTrade,
           sharePrice,
           shareCount,
         );
 
-        nextPlayerLedger.totalBalance = previousTotalBalance - (openedTrade.openPrice * openedTrade.openCount);
-        nextPlayerLedger.totalChange = previousTotalChange;
-        nextPlayerLedger.totalReturns = previousTotalReturns;
-        nextPlayerLedger.totalCount = previousTotalCount + openedTrade.openCount;
-        const nextCurrentTrades = [
+        nextHistoricalLedgers.totalBalance = previousTotalBalance - (openedTrade.openPrice * openedTrade.openCount);
+        nextHistoricalLedgers.totalChange = previousTotalChange;
+        nextHistoricalLedgers.totalReturns = previousTotalReturns;
+        nextHistoricalLedgers.totalCount = previousTotalCount + openedTrade.openCount;
+        const nextPresentHoldings = [
           openedTrade,
-          ...currentTrades,
+          ...presentHoldings,
         ];
 
-        updateCurrentTrades(
-          nextCurrentTrades,
+        updatePresentHoldings(
+          nextPresentHoldings,
         );
-        updatePlayerLedger(
-          nextPlayerLedger,
+        updateHistoricalLedgers(
+          nextHistoricalLedgers,
         );
       }
     },
     [
       ticker,
-      currentTrades,
-      currentLedger,
-      updateCurrentTrades,
-      updatePlayerLedger,
+      presentHoldings,
+      presentLedger,
+      updatePresentHoldings,
+      updateHistoricalLedgers,
     ],
   );
   const closeTrade = useCallback(
@@ -387,18 +387,18 @@ const TradeView: React.FC<Props> = (
       shareCount: number,
     ) =>
     {
-      if (currentTrades.length > 0)
+      if (presentHoldings.length > 0)
       {
         const {
-          ...nextPlayerLedger
-        } = currentLedger;
+          ...nextHistoricalLedgers
+        } = presentLedger;
         const [
-          ...nextCurrentTrades
-        ] = currentTrades;
-        const nextPastTrades: HistoricalTradeFinished[] = [];
+          ...nextPresentHoldings
+        ] = presentHoldings;
+        const nextHistoricalHoldings: HistoricalTradeFinished[] = [];
         const [
-          ...sortedCurrentTrades
-        ] = currentTrades.sort(
+          ...sortedPresentHoldings
+        ] = presentHoldings.sort(
           (
             previousTrade,
             nextTrade,
@@ -413,17 +413,17 @@ const TradeView: React.FC<Props> = (
 
         while (
           remainingOrderShareCount > 0 &&
-            sortedCurrentTrades.length > 0
+            sortedPresentHoldings.length > 0
         )
         {
           const {
             totalBalance: previousTotalBalance,
             totalReturns: previousTotalReturns,
             totalCount: previousTotalCount,
-          } = nextPlayerLedger;
+          } = nextHistoricalLedgers;
 
           // Fill as much of the order as we can with the lowest-opened trade
-          const lowestTrade = sortedCurrentTrades.shift() as HistoricalTradeStarted;
+          const lowestTrade = sortedPresentHoldings.shift() as HistoricalTradeStarted;
           const countPossible = Math.min(
             lowestTrade.openCount,
             remainingOrderShareCount,
@@ -435,23 +435,23 @@ const TradeView: React.FC<Props> = (
           );
 
           // Add closed trade to front of collection
-          nextPastTrades.unshift(
+          nextHistoricalHoldings.unshift(
             closedTrade,
           );
 
           // Update ledger values and remaining shares in order
           remainingOrderShareCount -= countPossible;
-          nextPlayerLedger.totalBalance = previousTotalBalance + (closedTrade.closePrice * closedTrade.closeCount);
-          nextPlayerLedger.totalReturns = previousTotalReturns + closedTrade.changeBalance;
-          nextPlayerLedger.totalChange = nextPlayerLedger.totalReturns / nextPlayerLedger.totalBalance;
-          nextPlayerLedger.totalCount = previousTotalCount - closedTrade.closeCount;
+          nextHistoricalLedgers.totalBalance = previousTotalBalance + (closedTrade.closePrice * closedTrade.closeCount);
+          nextHistoricalLedgers.totalReturns = previousTotalReturns + closedTrade.changeBalance;
+          nextHistoricalLedgers.totalChange = nextHistoricalLedgers.totalReturns / nextHistoricalLedgers.totalBalance;
+          nextHistoricalLedgers.totalCount = previousTotalCount - closedTrade.closeCount;
 
           // Remove the closed trade from current trades
-          const lowestTradeIndex = nextCurrentTrades.indexOf(
+          const lowestTradeIndex = nextPresentHoldings.indexOf(
             lowestTrade,
           );
 
-          nextCurrentTrades.splice(
+          nextPresentHoldings.splice(
             lowestTradeIndex,
             1,
           );
@@ -469,7 +469,7 @@ const TradeView: React.FC<Props> = (
               openCount: remainingTradeShareCount,
             };
 
-            nextCurrentTrades.splice(
+            nextPresentHoldings.splice(
               lowestTradeIndex,
               0,
               nextTrade,
@@ -478,23 +478,23 @@ const TradeView: React.FC<Props> = (
         }
 
         // Update state values
-        updateCurrentTrades(
-          nextCurrentTrades,
+        updatePresentHoldings(
+          nextPresentHoldings,
         );
-        updatePastTrades(
-          nextPastTrades,
+        updateHistoricalHoldings(
+          nextHistoricalHoldings,
         );
-        updatePlayerLedger(
-          nextPlayerLedger,
+        updateHistoricalLedgers(
+          nextHistoricalLedgers,
         );
       }
     },
     [
-      currentTrades,
-      currentLedger,
-      updatePlayerLedger,
-      updateCurrentTrades,
-      updatePastTrades,
+      presentHoldings,
+      presentLedger,
+      updateHistoricalLedgers,
+      updatePresentHoldings,
+      updateHistoricalHoldings,
     ],
   );
   const handleLoad = useCallback(
@@ -515,14 +515,14 @@ const TradeView: React.FC<Props> = (
           priceIndexes,
           {
             setNextPriceIndexes,
-            setPastPrices,
+            setHistoricalPrices,
           },
         );
       }
     },
     [],
   );
-  const handleTrade = useCallback(
+  const handleOrder = useCallback(
     (
       sharePrice: number,
       shareCount: number,
@@ -531,7 +531,7 @@ const TradeView: React.FC<Props> = (
       const currentTradeType = shareCount / Math.abs(
         shareCount,
       );
-      const previousTradeOpposite = visibleTrade && visibleTrade.openModifier * -1;
+      const previousTradeOpposite = combinedHoldings && combinedHoldings.openModifier * -1;
 
       if (currentTradeType === previousTradeOpposite)
       {
@@ -549,7 +549,7 @@ const TradeView: React.FC<Props> = (
       }
     },
     [
-      visibleTrade,
+      combinedHoldings,
       openTrade,
       closeTrade,
     ],
@@ -571,7 +571,7 @@ const TradeView: React.FC<Props> = (
           nextPriceIndexes,
           {
             setNextPriceIndexes,
-            setPastPrices,
+            setHistoricalPrices,
           },
         );
       }
@@ -585,7 +585,7 @@ const TradeView: React.FC<Props> = (
   useEffect(
     () =>
     {
-      if (!pastPrices)
+      if (!historicalPrices)
       {
         handleLoad(
           prices,
@@ -594,7 +594,7 @@ const TradeView: React.FC<Props> = (
       }
     },
     [
-      pastPrices,
+      historicalPrices,
       handleLoad,
       prices,
       date,
@@ -605,7 +605,7 @@ const TradeView: React.FC<Props> = (
     {
       return handleUnloadCreator(
         [
-          setPastPrices,
+          setHistoricalPrices,
           setNextPriceIndexes,
         ],
       );
@@ -651,7 +651,7 @@ const TradeView: React.FC<Props> = (
           <AspectRatioBox>
             <AspectRatioItem ref={ref}>
               <StockChart
-                prices={pastPrices}
+                prices={historicalPrices}
                 resolution={
                   [
                     width,
@@ -672,21 +672,21 @@ const TradeView: React.FC<Props> = (
         >
           <TimeControl
             handleContinue={handleContinue}
-            currentPrice={currentPrice}
+            presentPrice={presentPrice}
           />
           <TradeControl
-            currentLedger={currentLedger}
-            currentPrice={currentPrice}
-            handleTrade={handleTrade}
+            presentLedger={presentLedger}
+            presentPrice={presentPrice}
+            handleOrder={handleOrder}
           />
           <TradeHistory
-            currentPrice={currentPrice}
-            visibleTrade={visibleTrade}
-            handleTrade={handleTrade}
-            pastTrades={pastTrades}
-            playerLedger={currentLedger}
-            pastLedgers={playerLedger}
-            currentTrades={currentTrades}
+            historicalLedgers={historicalLedgers}
+            historicalHoldings={historicalHoldings}
+            presentPrice={presentPrice}
+            presentLedger={presentLedger}
+            presentHoldings={presentHoldings}
+            combinedHoldings={combinedHoldings}
+            handleOrder={handleOrder}
           />
         </Box>
       </Grid>

@@ -17,41 +17,41 @@ import {
 } from "./TradeHistory.styled";
 
 type Props = {
-  pastTrades: HistoricalTradeFinished[];
-  playerLedger: HistoricalLedger;
+  historicalHoldings: HistoricalTradeFinished[];
+  presentLedger: HistoricalLedger;
 };
 
 const TradeFooter: React.FC<Props> = (
   {
-    pastTrades,
-    playerLedger,
+    historicalHoldings,
+    presentLedger,
   },
 ) =>
 {
   const safeChange = useMemo(
     () =>
     {
-      if (pastTrades.length > 0)
+      if (historicalHoldings.length > 0)
       {
         return formatPercentage(
-          playerLedger.totalChange,
+          presentLedger.totalChange,
         );
       }
     },
     [
-      playerLedger,
-      pastTrades,
+      presentLedger,
+      historicalHoldings,
     ],
   );
   const safeBalance = useMemo(
     () =>
     {
       return formatCurrency(
-        playerLedger.totalBalance,
+        presentLedger.totalBalance,
       );
     },
     [
-      playerLedger,
+      presentLedger,
     ],
   );
 

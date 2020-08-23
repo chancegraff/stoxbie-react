@@ -6,28 +6,28 @@ import {
 import TradeRow from "components/TradeHistory/TradeRow";
 
 type Props = {
-  pastTrades: HistoricalTradeFinished[];
+  historicalHoldings: HistoricalTradeFinished[];
 };
 
 const TradeRowsClosed: React.FC<Props> = (
   {
-    pastTrades,
+    historicalHoldings,
   },
 ) =>
 {
   return (
     <>
       {
-        pastTrades.map(
+        historicalHoldings.map(
           (
-            pastTrade,
+            holding,
             index,
           ) =>
           {
             return (
               <TradeRow
                 key={index}
-                trade={pastTrade}
+                holding={holding}
               />
             );
           },

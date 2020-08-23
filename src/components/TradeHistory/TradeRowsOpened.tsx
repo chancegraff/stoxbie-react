@@ -10,21 +10,21 @@ import TradeRow from "components/TradeHistory/TradeRow";
 
 type Props = {
   totalShareCount: number;
-  visibleTrade?: HistoricalTradeStarted;
-  currentPrice: HistoricalPrice;
-  handleTrade: (sharePrice: number, shareCount: number) => void;
+  combinedHoldings?: HistoricalTradeStarted;
+  presentPrice: HistoricalPrice;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 
 const TradeRowsOpened: React.FC<Props> = (
   {
     totalShareCount,
-    visibleTrade,
-    currentPrice,
-    handleTrade,
+    combinedHoldings,
+    presentPrice,
+    handleOrder,
   },
 ) =>
 {
-  if (!visibleTrade)
+  if (!combinedHoldings)
   {
     return null;
   }
@@ -32,9 +32,9 @@ const TradeRowsOpened: React.FC<Props> = (
   return (
     <TradeRow
       totalShareCount={totalShareCount}
-      handleTrade={handleTrade}
-      sharePrice={currentPrice.close}
-      trade={visibleTrade}
+      handleOrder={handleOrder}
+      sharePrice={presentPrice.close}
+      holding={combinedHoldings}
     />
   );
 };
