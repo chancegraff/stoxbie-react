@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  forwardRef,
+} from "react";
 import {
   Box,
   Button,
@@ -61,28 +63,32 @@ border-radius: 0px;
 }
 `;
 
-export const StyledButton: React.FC<JSXButtonProps> = (
+export const StyledButton: React.FC<JSXButtonProps> = forwardRef(
+  (
+    {
+      children,
+      ...props
+    },
+    ref,
+  ) =>
   {
-    children,
-    ...props
-  },
-) =>
-{
-  return (
-    <GroupedButton
-      primary={true}
-      fill="horizontal"
-      {...props}
-    >
-      <Box
-        align="center"
-        justify="center"
+    return (
+      <GroupedButton
+        primary={true}
         fill="horizontal"
+        {...props}
+        ref={ref}
       >
-        <StyledText>
-          {children}
-        </StyledText>
-      </Box>
-    </GroupedButton>
-  );
-};
+        <Box
+          align="center"
+          justify="center"
+          fill="horizontal"
+        >
+          <StyledText>
+            {children}
+          </StyledText>
+        </Box>
+      </GroupedButton>
+    );
+  },
+);
