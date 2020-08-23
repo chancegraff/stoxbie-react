@@ -4,6 +4,7 @@ import {
   ButtonProps,
   GridProps,
   ImageProps,
+  TextInputProps,
   TextProps,
   ThemeType,
 } from "grommet";
@@ -32,6 +33,31 @@ declare module "grommet" {
 
   declare type JSXRangeInputProps = RangeInputProps & JSX.IntrinsicElements["input"];
   declare const RangeInput: React.FC<JSXRangeInputProps>;
+
+  declare type Value<P> = P;
+  declare type Suggestion<P> = {
+    label?: React.ReactNode;
+    value?: Value<P>;
+  };
+
+  declare type SelectEvent<P> = {
+    target: React.RefObject<P>["current"];
+    suggestion: Suggestion<P>;
+  };
+
+  declare type TextInputSelectProp<P> = {
+    onSelect: (
+      (
+        event: {
+          target: React.RefObject<P>["current"];
+          suggestion: Suggestion<P>;
+        }
+      ) => void
+    );
+  };
+
+  declare type JSXTextInputProps<P> = Omit<TextInputProps, "onSelect"> & TextInputSelectProp<P> & Omit<JSX.IntrinsicElements["input"], "onSelect" | "size" | "placeholder">;
+  declare const TextInput: React.FC<JSXTextInputProps<P>>;
 
   declare interface ThemeProps extends DeepRequired<ThemeType> {}
 }

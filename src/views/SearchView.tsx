@@ -1,4 +1,10 @@
-import React from "react";
+import React, {
+  useCallback,
+  useState,
+} from "react";
+import {
+  AsyncStates,
+} from "async-types";
 import {
   Box,
   Heading,
@@ -7,22 +13,69 @@ import {
 import {
   Search,
 } from "iex-cloud";
+import {
+  useDebouncedCallback,
+} from "use-debounce";
 
+import {
+  DEBOUNCE_INPUT_MS,
+} from "utils/Constants";
 import PageContent from "templates/PageContent";
-import TickerInput from "components/StockSearch/TickerInput";
+import StockInput from "components/StockSearch/StockInput";
 
 type Props = {
-  handleSearch: (
-    nextValue: string,
-    setOptions: React.Dispatch<React.SetStateAction<Search[]>>,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => void;
+  handleSearch: (nextValue: string) => Promise<Search[]>;
 };
 
 const SearchView: React.FC<Props> = (
-  props,
+  {
+    handleSearch,
+  },
 ) =>
 {
+  const [
+    searchResults,
+    setSearchResults,
+  ] = useState<Search[]>(
+    [],
+  );
+  const [
+    searchState,
+    setSearchState,
+  ] = useState<AsyncStates>(
+    "idling",
+  );
+
+  const [
+    handleSearchLazily,
+  ] = useDebouncedCallback(
+    useCallback(
+      async (
+        nextValue: string,
+      ) =>
+      {
+        setSearchState(
+          "loading",
+        );
+
+        const options = await handleSearch(
+          nextValue,
+        );
+
+        setSearchResults(
+          options,
+        );
+        setSearchState(
+          "idling",
+        );
+      },
+      [
+        handleSearch,
+      ],
+    ),
+    DEBOUNCE_INPUT_MS,
+  );
+
   return (
     <PageContent>
       <Heading
@@ -49,7 +102,11 @@ const SearchView: React.FC<Props> = (
         Select the stock ticker to trade.
       </Text>
       <Box>
-        <TickerInput handleSearch={props.handleSearch} />
+        <StockInput
+          handleSearch={handleSearchLazily}
+          searchState={searchState}
+          searchResults={searchResults}
+        />
       </Box>
     </PageContent>
   );

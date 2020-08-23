@@ -44,7 +44,7 @@ export default {
     light: "#CFCFCF",
   },
   control: "brand",
-  focus: "",
+  focus: "none",
   "active-background": "background-contrast",
   "active-text": "text-strong",
   "selected-background": "brand",

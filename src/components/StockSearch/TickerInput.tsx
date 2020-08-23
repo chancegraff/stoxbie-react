@@ -1,4 +1,5 @@
 import React, {
+  DispatchSetStateAction,
   useCallback, useState,
 } from "react";
 import {
@@ -27,8 +28,8 @@ import {
 type Props = {
   handleSearch: (
     nextValue: string,
-    setOptions: React.Dispatch<React.SetStateAction<Search[]>>,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setOptions: DispatchSetStateAction<Search[]>,
+    setLoading: DispatchSetStateAction<boolean>,
   ) => void;
 };
 
