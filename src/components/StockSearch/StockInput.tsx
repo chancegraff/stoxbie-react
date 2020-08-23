@@ -10,6 +10,7 @@ import {
   AsyncStates,
 } from "async-types";
 import {
+  DropStates,
   SelectEvent,
 } from "grommet";
 import {
@@ -19,6 +20,7 @@ import {
 import {
   StyledContainer,
   StyledTextInput,
+  StyledTheme,
 } from "./StockInput.styled";
 import StockSymbol from "./StockSymbol";
 
@@ -43,6 +45,12 @@ const StockInput: React.FC<Props> = (
     setValue,
   ] = useState(
     "",
+  );
+  const [
+    dropState,
+    setDropState,
+  ] = useState<DropStates>(
+    "closed",
   );
 
   const suggestions = useMemo(
@@ -113,16 +121,38 @@ const StockInput: React.FC<Props> = (
       history,
     ],
   );
+  const handleDropOpen = useCallback(
+    () =>
+    {
+      setDropState(
+        "opened",
+      );
+    },
+    [],
+  );
+  const handleDropClose = useCallback(
+    () =>
+    {
+      setDropState(
+        "closed",
+      );
+    },
+    [],
+  );
 
   return (
-    <StyledContainer>
-      <StyledTextInput
-        value={value}
-        suggestions={suggestions}
-        onChange={handleChange}
-        onSelect={handleSelect}
-      />
-    </StyledContainer>
+    <StyledTheme>
+      <StyledContainer dropState={dropState}>
+        <StyledTextInput
+          value={value}
+          suggestions={suggestions}
+          onChange={handleChange}
+          onSelect={handleSelect}
+          onSuggestionsOpen={handleDropOpen}
+          onSuggestionsClose={handleDropClose}
+        />
+      </StyledContainer>
+    </StyledTheme>
   );
 };
 

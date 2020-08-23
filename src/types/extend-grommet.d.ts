@@ -66,5 +66,7 @@ declare module "grommet" {
   declare type JSXTextInputProps<P> = Omit<TextInputProps, "onSelect"> & TextInputSelectProp<P> & Omit<JSX.IntrinsicElements["input"], "onSelect" | "size" | "placeholder">;
   declare const TextInput: React.FC<JSXTextInputProps<P>>;
 
+  declare type DropStates = "opened" | "closed";
+
   declare interface ThemeProps extends DeepRequired<ThemeType> {}
 }

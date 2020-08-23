@@ -13,6 +13,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   return (
     <Box
       align="baseline"
+      pad="4px 8px"
       {...props}
     />
   );
