@@ -17,6 +17,7 @@ import {
 } from "iex-cloud";
 
 import {
+  StyledContainer,
   StyledTextInput,
 } from "./StockInput.styled";
 import StockSymbol from "./StockSymbol";
@@ -114,12 +115,14 @@ const StockInput: React.FC<Props> = (
   );
 
   return (
-    <StyledTextInput
-      value={value}
-      suggestions={suggestions}
-      onChange={handleChange}
-      onSelect={handleSelect}
-    />
+    <StyledContainer>
+      <StyledTextInput
+        value={value}
+        suggestions={suggestions}
+        onChange={handleChange}
+        onSelect={handleSelect}
+      />
+    </StyledContainer>
   );
 };
 

@@ -25,7 +25,7 @@ export const StyledTopText: React.FC<JSXTextProps> = (
   return (
     <Text
       size="medium"
-      color="text"
+      color="text-strong"
       {...props}
     />
   );

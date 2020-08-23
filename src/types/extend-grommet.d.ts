@@ -1,4 +1,7 @@
 import {
+  Ref,
+} from "react";
+import {
   AvatarProps,
   BoxProps,
   ButtonProps,
@@ -13,25 +16,29 @@ import {
 } from "util-types";
 
 declare module "grommet" {
-  declare type JSXBoxProps = BoxProps & Omit<JSX.IntrinsicElements["div"]>;
+  declare type JSXProps<P, E> = {
+    ref?: Ref<P | undefined>;
+  } & Omit<E, "ref">;
+
+  declare type JSXBoxProps = BoxProps & JSXProps<HTMLDivElement, JSX.IntrinsicElements["div"]>;
   declare const Box: React.FC<JSXBoxProps>;
 
-  declare type JSXImageProps = ImageProps & Omit<JSX.IntrinsicElements["img"]>;
+  declare type JSXImageProps = ImageProps & JSXProps<HTMLImageElement, JSX.IntrinsicElements["img"]>;
   declare const Image: React.FC<JSXImageProps>;
 
-  declare type JSXTextProps = TextProps & JSX.IntrinsicElements["span"];
+  declare type JSXTextProps = TextProps & JSXProps<HTMLSpanElement, JSX.IntrinsicElements["span"]>;
   declare const Text: React.FC<JSXTextProps>;
 
-  declare type JSXAvatarProps = AvatarProps & JSX.IntrinsicElements["div"];
+  declare type JSXAvatarProps = AvatarProps & JSXProps<HTMLDivElement, JSX.IntrinsicElements["div"]>;
   declare const Avatar: React.FC<JSXAvatarProps>;
 
-  declare type JSXButtonProps = ButtonProps & Omit<JSX.IntrinsicElements["button"], "color">;
+  declare type JSXButtonProps = ButtonProps & JSXProps<HTMLButtonElement, Omit<JSX.IntrinsicElements["button"], "color">>;
   declare const Button: React.FC<JSXButtonProps>;
 
-  declare type JSXGridProps = GridProps & JSX.IntrinsicElements["div"];
+  declare type JSXGridProps = GridProps & JSXProps<HTMLDivElement, JSX.IntrinsicElements["div"]>;
   declare const Grid: React.FC<JSXGridProps>;
 
-  declare type JSXRangeInputProps = RangeInputProps & JSX.IntrinsicElements["input"];
+  declare type JSXRangeInputProps = RangeInputProps & JSXProps<HTMLInputElement, JSX.IntrinsicElements["input"]>;
   declare const RangeInput: React.FC<JSXRangeInputProps>;
 
   declare type Value<P> = P;
