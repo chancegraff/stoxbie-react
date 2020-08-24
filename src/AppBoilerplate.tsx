@@ -13,13 +13,13 @@ const AppBoilerplate: React.FC<PropsHasChildren> = (
 ) =>
 {
   return (
-    <BrowserRouter>
-      <BaseUI>
-        <Grommet>
+    <Grommet>
+      <BrowserRouter>
+        <BaseUI>
           {props.children}
-        </Grommet>
-      </BaseUI>
-    </BrowserRouter>
+        </BaseUI>
+      </BrowserRouter>
+    </Grommet>
   );
 };
 

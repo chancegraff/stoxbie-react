@@ -1,5 +1,7 @@
 import React from "react";
 
+import HistoricalRow from "./HistoricalRow";
+import PresentRow from "./PresentRow";
 import {
   StyledTableBody,
 } from "./TableBody.styled";
@@ -12,7 +14,10 @@ const TableBody: React.FC<Props> = (
 ) =>
 {
   return (
-    <StyledTableBody></StyledTableBody>
+    <StyledTableBody>
+      <PresentRow />
+      <HistoricalRow />
+    </StyledTableBody>
   );
 };
 
