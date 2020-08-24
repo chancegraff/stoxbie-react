@@ -8,7 +8,7 @@ import {
 } from "grommet/utils";
 import styled from "styled-components";
 
-import TickItem from "components/HoldingControls/TickItem";
+import TickItem from "components/ShareSlider/TickItem";
 
 export const StyledContainer: React.FC<JSXBoxProps> = (
   props,

@@ -10,10 +10,10 @@ import {
   JSXIconProps,
 } from "grommet-icons";
 
-import ActionEnhancer from "./ActionEnhancer";
+import StateIcon from "./StateIcon";
 import {
   StyledButton,
-} from "./ChangeHoldings.styled";
+} from "./SubmitOrder.styled";
 
 type Props = JSXButtonProps & {
   Icon?: React.ComponentType<JSXIconProps>;
@@ -57,7 +57,7 @@ const HoldingAction: React.FC<Props> = (
       if (Icon)
       {
         return (
-          <ActionEnhancer
+          <StateIcon
             isActive={isActive}
             Icon={Checkmark}
           />

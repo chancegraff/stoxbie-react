@@ -10,14 +10,14 @@ import {
 } from "trade-types";
 
 import Spinner from "components/Grommet/Spinner";
-import ChooseShares from "components/HoldingControls/ChooseShares";
+import ChooseShares from "components/ShareSlider/ChooseShares";
 
 import {
   StyledBuyAction,
   StyledContainer,
   StyledGrid,
   StyledSellAction,
-} from "./OrderShares.styled";
+} from "./OrderForm.styled";
 
 type Props = {
   presentPrice?: HistoricalPrice;
@@ -25,7 +25,7 @@ type Props = {
   handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 
-const TradeControl: React.FC<Props> = (
+const OrderForm: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
@@ -105,4 +105,4 @@ const TradeControl: React.FC<Props> = (
   );
 };
 
-export default TradeControl;
+export default OrderForm;

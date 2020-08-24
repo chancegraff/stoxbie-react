@@ -35,7 +35,7 @@ import {
 } from "templates/AspectRatio";
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
-import OrderShares from "components/HoldingControls/OrderShares";
+import OrderForm from "components/HoldingControls/OrderForm";
 import HoldingsTable from "components/OrderHistory/HoldingsTable";
 import ForwardTime from "components/TimeControls/ForwardTime";
 import StockChart from "components/VX/StockChart";
@@ -674,7 +674,7 @@ const TradeView: React.FC<Props> = (
             handleContinue={handleContinue}
             presentPrice={presentPrice}
           />
-          <OrderShares
+          <OrderForm
             presentLedger={presentLedger}
             presentPrice={presentPrice}
             handleOrder={handleOrder}

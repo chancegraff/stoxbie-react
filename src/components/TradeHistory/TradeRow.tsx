@@ -13,7 +13,7 @@ import {
   formatCount,
   formatCurrency,
 } from "utils/Utilities";
-import ChangeHoldings from "components/HoldingControls/ChangeHoldings";
+import SubmitOrder from "components/HoldingControls/SubmitOrder";
 
 import {
   RightAlignedCell,
@@ -89,7 +89,7 @@ const TradeRow: React.FC<Props> = (
         const shareModifier = (holding.openModifier * -1) as -1 | 1;
 
         return (
-          <ChangeHoldings
+          <SubmitOrder
             handleOrder={handleOrder}
             shareCount={totalShareCount}
             sharePrice={sharePrice}
@@ -98,7 +98,7 @@ const TradeRow: React.FC<Props> = (
             size="small"
           >
             Exit
-          </ChangeHoldings>
+          </SubmitOrder>
         );
       }
     },

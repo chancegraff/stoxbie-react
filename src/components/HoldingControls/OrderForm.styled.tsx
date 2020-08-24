@@ -12,9 +12,9 @@ import {
   PartialBy,
 } from "util-types";
 
-import ChangeHoldings, {
+import SubmitOrder, {
   ActionProps,
-} from "./ChangeHoldings";
+} from "./SubmitOrder";
 
 export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
@@ -69,7 +69,7 @@ export const StyledGrid: React.FC<JSXGridProps> = (
   );
 };
 
-const StyledChangeHoldings: React.FC<ActionProps> = (
+const StyledSubmitOrder: React.FC<ActionProps> = (
   {
     gridArea,
     ...props
@@ -78,7 +78,7 @@ const StyledChangeHoldings: React.FC<ActionProps> = (
 {
   return (
     <Box gridArea={gridArea}>
-      <ChangeHoldings
+      <SubmitOrder
         Icon={Checkmark}
         primary={true}
         size="medium"
@@ -93,13 +93,13 @@ export const StyledBuyAction: React.FC<PartialBy<ActionProps, "shareModifier">> 
 ) =>
 {
   return (
-    <StyledChangeHoldings
+    <StyledSubmitOrder
       {...props}
       shareModifier={1}
       gridArea="buy"
     >
       Buy
-    </StyledChangeHoldings>
+    </StyledSubmitOrder>
   );
 };
 
@@ -108,12 +108,12 @@ export const StyledSellAction: React.FC<PartialBy<ActionProps, "shareModifier">>
 ) =>
 {
   return (
-    <StyledChangeHoldings
+    <StyledSubmitOrder
       {...props}
       shareModifier={-1}
       gridArea="sell"
     >
       Sell
-    </StyledChangeHoldings>
+    </StyledSubmitOrder>
   );
 };

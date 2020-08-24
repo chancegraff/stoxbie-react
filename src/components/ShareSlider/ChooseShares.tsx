@@ -16,7 +16,7 @@ import {
 import {
   usePrevious,
 } from "utils/Utilities";
-import TickBar from "components/HoldingControls/TickBar";
+import TickBar from "components/ShareSlider/TickBar";
 
 import {
   StyledContainer,
@@ -30,7 +30,7 @@ type Props = {
   setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const ShareSlider: React.FC<Props> = (
+const ChooseShares: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
@@ -155,4 +155,4 @@ const ShareSlider: React.FC<Props> = (
   );
 };
 
-export default ShareSlider;
+export default ChooseShares;
