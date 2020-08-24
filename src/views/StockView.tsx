@@ -10,7 +10,7 @@ import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
 import StockLogo from "components/StockSearch/StockLogo";
 import StockName from "components/StockSearch/StockName";
-import TradeStart from "components/TradeControl/TradeStart";
+import ChooseDate from "components/TimeControls/ChooseDate";
 
 type Props = {
   logo?: Logo;
@@ -68,7 +68,7 @@ const StockView: React.FC<Props> = (
             }
           }
         >
-          <TradeStart handleStart={props.handleStart} />
+          <ChooseDate handleStart={props.handleStart} />
         </Box>
       </Box>
     </PageContent>

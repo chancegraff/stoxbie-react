@@ -6,14 +6,14 @@ import {
 
 import {
   StyledContainer,
-} from "./TradeActionEnhancer.styled";
+} from "./ActionEnhancer.styled";
 
 type Props = {
   isActive: boolean;
   Icon: React.ComponentType<JSXIconProps>;
 };
 
-const TradeActionEnhancer: React.FC<Props> = (
+const ActionEnhancer: React.FC<Props> = (
   {
     isActive,
     Icon = Checkmark,
@@ -32,4 +32,4 @@ const TradeActionEnhancer: React.FC<Props> = (
   );
 };
 
-export default TradeActionEnhancer;
+export default ActionEnhancer;

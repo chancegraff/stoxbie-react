@@ -16,7 +16,7 @@ import DatePicker from "components/BaseUI/DatePicker";
 import {
   StyledButton,
   StyledContainer,
-} from "./TradeStart.styled";
+} from "./ChooseDate.styled";
 
 type Props = {
   handleStart: (date: string) => void;

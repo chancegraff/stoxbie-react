@@ -35,10 +35,10 @@ import {
 } from "templates/AspectRatio";
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
-import StockChart from "components/StockSearch/StockChart";
-import TimeControl from "components/TradeControl/TimeControl";
-import TradeControl from "components/TradeControl/TradeControl";
-import TradeHistory from "components/TradeHistory/TradeHistory";
+import OrderShares from "components/HoldingControls/OrderShares";
+import HoldingsTable from "components/OrderHistory/HoldingsTable";
+import ForwardTime from "components/TimeControls/ForwardTime";
+import StockChart from "components/VX/StockChart";
 
 type Props = {
   date?: Date;
@@ -670,24 +670,23 @@ const TradeView: React.FC<Props> = (
             }
           }
         >
-          <TimeControl
+          <ForwardTime
             handleContinue={handleContinue}
             presentPrice={presentPrice}
           />
-          <TradeControl
+          <OrderShares
             presentLedger={presentLedger}
             presentPrice={presentPrice}
             handleOrder={handleOrder}
           />
-          <TradeHistory
-            historicalLedgers={historicalLedgers}
+          {/* <TradeHistory
             historicalHoldings={historicalHoldings}
             presentPrice={presentPrice}
             presentLedger={presentLedger}
-            presentHoldings={presentHoldings}
             combinedHoldings={combinedHoldings}
             handleOrder={handleOrder}
-          />
+          /> */}
+          <HoldingsTable />
         </Box>
       </Grid>
     </PageContent>

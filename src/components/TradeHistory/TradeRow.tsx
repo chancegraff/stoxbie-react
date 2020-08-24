@@ -13,7 +13,7 @@ import {
   formatCount,
   formatCurrency,
 } from "utils/Utilities";
-import TradeAction from "components/TradeControl/TradeAction";
+import HoldingAction from "components/HoldingControls/HoldingAction";
 
 import {
   RightAlignedCell,
@@ -89,7 +89,7 @@ const TradeRow: React.FC<Props> = (
         const shareModifier = (holding.openModifier * -1) as -1 | 1;
 
         return (
-          <TradeAction
+          <HoldingAction
             handleOrder={handleOrder}
             shareCount={totalShareCount}
             sharePrice={sharePrice}
@@ -98,7 +98,7 @@ const TradeRow: React.FC<Props> = (
             size="small"
           >
             Exit
-          </TradeAction>
+          </HoldingAction>
         );
       }
     },

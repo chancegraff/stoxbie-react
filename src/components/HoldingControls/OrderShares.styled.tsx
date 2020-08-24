@@ -12,9 +12,9 @@ import {
   PartialBy,
 } from "util-types";
 
-import TradeAction, {
-  TradeActionProps,
-} from "./TradeAction";
+import HoldingAction, {
+  ActionProps,
+} from "./HoldingAction";
 
 export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
@@ -69,7 +69,7 @@ export const StyledGrid: React.FC<JSXGridProps> = (
   );
 };
 
-const StyledTradeAction: React.FC<TradeActionProps> = (
+const StyledHoldingAction: React.FC<ActionProps> = (
   {
     gridArea,
     ...props
@@ -78,7 +78,7 @@ const StyledTradeAction: React.FC<TradeActionProps> = (
 {
   return (
     <Box gridArea={gridArea}>
-      <TradeAction
+      <HoldingAction
         Icon={Checkmark}
         primary={true}
         size="medium"
@@ -88,32 +88,32 @@ const StyledTradeAction: React.FC<TradeActionProps> = (
   );
 };
 
-export const StyledBuyAction: React.FC<PartialBy<TradeActionProps, "shareModifier">> = (
+export const StyledBuyAction: React.FC<PartialBy<ActionProps, "shareModifier">> = (
   props,
 ) =>
 {
   return (
-    <StyledTradeAction
+    <StyledHoldingAction
       {...props}
       shareModifier={1}
       gridArea="buy"
     >
       Buy
-    </StyledTradeAction>
+    </StyledHoldingAction>
   );
 };
 
-export const StyledSellAction: React.FC<PartialBy<TradeActionProps, "shareModifier">> = (
+export const StyledSellAction: React.FC<PartialBy<ActionProps, "shareModifier">> = (
   props,
 ) =>
 {
   return (
-    <StyledTradeAction
+    <StyledHoldingAction
       {...props}
       shareModifier={-1}
       gridArea="sell"
     >
       Sell
-    </StyledTradeAction>
+    </StyledHoldingAction>
   );
 };

@@ -16,11 +16,11 @@ import {
 import {
   usePrevious,
 } from "utils/Utilities";
-import TickBar from "components/TradeControl/TickBar";
+import TickBar from "components/HoldingControls/TickBar";
 
 import {
   StyledContainer,
-} from "./TradeSlider.styled";
+} from "./ShareSlider.styled";
 
 type Props = {
   presentPrice: HistoricalPrice;
@@ -30,7 +30,7 @@ type Props = {
   setShareAmount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const TradeSlider: React.FC<Props> = (
+const ShareSlider: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
@@ -155,4 +155,4 @@ const TradeSlider: React.FC<Props> = (
   );
 };
 
-export default TradeSlider;
+export default ShareSlider;

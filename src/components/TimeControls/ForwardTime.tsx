@@ -13,7 +13,7 @@ import {
   StyledButton,
   StyledContainer,
   StyledText,
-} from "./TimeControl.styled";
+} from "./ForwardTime.styled";
 
 type Props = {
   presentPrice?: HistoricalPrice;

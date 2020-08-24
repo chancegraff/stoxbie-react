@@ -10,10 +10,10 @@ import {
   JSXIconProps,
 } from "grommet-icons";
 
+import ActionEnhancer from "./ActionEnhancer";
 import {
   StyledButton,
-} from "./TradeAction.styled";
-import TradeActionCheck from "./TradeActionEnhancer";
+} from "./HoldingAction.styled";
 
 type Props = JSXButtonProps & {
   Icon?: React.ComponentType<JSXIconProps>;
@@ -25,9 +25,9 @@ type Props = JSXButtonProps & {
   handleToggle?: () => void;
 };
 
-export type TradeActionProps = Props;
+export type ActionProps = Props;
 
-const TradeAction: React.FC<Props> = (
+const HoldingAction: React.FC<Props> = (
   {
     children,
     handleOrder,
@@ -57,7 +57,7 @@ const TradeAction: React.FC<Props> = (
       if (Icon)
       {
         return (
-          <TradeActionCheck
+          <ActionEnhancer
             isActive={isActive}
             Icon={Checkmark}
           />
@@ -110,4 +110,4 @@ const TradeAction: React.FC<Props> = (
   );
 };
 
-export default TradeAction;
+export default HoldingAction;

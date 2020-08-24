@@ -23,12 +23,12 @@ import {
 } from "./TradeHistory.styled";
 
 type Props = {
+  // historicalLedgers?: HistoricalLedger[];
   historicalHoldings: HistoricalTradeFinished[];
-  combinedHoldings?: HistoricalTradeStarted;
-  presentPrice?: HistoricalPrice;
-  presentHoldings?: HistoricalTradeStarted[];
   presentLedger: HistoricalLedger;
-  historicalLedgers?: HistoricalLedger[];
+  presentPrice?: HistoricalPrice;
+  // presentHoldings?: HistoricalTradeStarted[];
+  combinedHoldings?: HistoricalTradeStarted;
   handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 
@@ -36,8 +36,8 @@ const TradeHistory: React.FC<Props> = (
   {
     historicalHoldings,
     presentLedger,
-    combinedHoldings,
     presentPrice,
+    combinedHoldings,
     handleOrder,
   },
 ) =>

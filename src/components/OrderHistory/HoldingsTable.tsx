@@ -6,7 +6,7 @@ import {
 type Props = {
 };
 
-const TradeTable: React.FC<Props> = (
+const HoldingsTable: React.FC<Props> = (
   props,
 ) =>
 {
@@ -17,4 +17,4 @@ const TradeTable: React.FC<Props> = (
   );
 };
 
-export default TradeTable;
+export default HoldingsTable;
