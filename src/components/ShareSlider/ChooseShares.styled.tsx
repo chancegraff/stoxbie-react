@@ -11,6 +11,7 @@ export const StyledContainer: React.FC<BoxProps> = (
   return (
     <Box
       fill="horizontal"
+      flex="grow"
       {...props}
     />
   );

@@ -4,6 +4,7 @@ import {
 } from "trade-types";
 
 import {
+  StyledContainer,
   StyledTable,
   StyledTheme,
 } from "./HoldingTable.styled";
@@ -23,11 +24,15 @@ const HoldingTable: React.FC<Props> = (
 {
   return (
     <StyledTheme>
-      <StyledTable>
-        <TableHeader />
-        <TableBody />
-        <TableFooter />
-      </StyledTable>
+      <StyledContainer>
+        <StyledTable>
+          <TableHeader />
+          <TableBody
+            historicalHoldings={historicalHoldings}
+          />
+          <TableFooter />
+        </StyledTable>
+      </StyledContainer>
     </StyledTheme>
   );
 };

@@ -22,7 +22,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Box
-      wrap={true}
+      direction="column"
       align="center"
       justify="center"
       margin={
@@ -45,6 +45,11 @@ export const StyledGrid: React.FC<JSXGridProps> = (
       responsive={true}
       fill="horizontal"
       gap="small"
+      margin={
+        {
+          top: "xsmall",
+        }
+      }
       rows={
         [
           "auto",

@@ -7,6 +7,9 @@ import {
   ResponsiveContext,
 } from "grommet";
 import {
+  normalizeColor,
+} from "grommet/utils";
+import {
   HistoricalPrice,
 } from "iex-cloud";
 import {
@@ -50,9 +53,10 @@ const StockChart: React.FC<Props> = (
     () =>
     {
       return {
-        fill: theme.dark
-          ? theme.global.colors["text-xweak"].dark
-          : theme.global.colors["text-xweak"].light,
+        fill: normalizeColor(
+          theme.global.colors["text-xweak"],
+          theme,
+        ),
         strokeWidth: 0,
         fontSize: theme.text.xsmall.size,
         fontFamily: theme.global.font.family,

@@ -60,7 +60,7 @@ declare module "grommet" {
   declare type IntrinsicTableBody = JSX.IntrinsicElements["tbody"];
   declare type IntrinsicTableFoot = JSX.IntrinsicElements["tfoot"];
   declare type IntrinsicTableRow = JSX.IntrinsicElements["tr"];
-  declare type IntrinsicTableCell = JSX.IntrinsicElements["td"];
+  declare type IntrinsicTableCell = Omit<JSX.IntrinsicElements["td"], "align">;
   declare type IntrinsicTextInput = Omit<IntrinsicInput, "onSelect" | "size" | "placeholder">;
 
   declare type JSXBoxProps = BoxProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
@@ -75,7 +75,7 @@ declare module "grommet" {
   declare type JSXTableBodyProps = TableBodyProps & JSXProps<HTMLTableBodyElement, IntrinsicTableBody>;
   declare type JSXTableFooterProps = TableFooterProps & JSXProps<HTMLTableFooterElement, IntrinsicTableFoot>;
   declare type JSXTableRowProps = TableRowProps & JSXProps<HTMLTableRowElement, IntrinsicTableRow>;
-  declare type JSXTableCellProps = TableCellProps & JSXProps<HTMLTableCellElement, IntrinsicTableCell>;
+  declare type JSXTableCellProps = TableCellProps & JSXBoxProps & JSXProps<HTMLTableCellElement, IntrinsicTableCell>;
   declare type JSXTextInputProps<P> = Omit<TextInputProps, "onSelect"> & TextInputSelectProp<P> & JSXProps<HTMLInputElement, IntrinsicTextInput>;
 
   /* eslint-disable newline-after-var */

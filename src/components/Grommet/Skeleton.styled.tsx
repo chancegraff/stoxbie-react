@@ -18,7 +18,7 @@ export const StyledBox: React.FC<JSXBoxProps> = (
 {
   return (
     <ShimmeringBox
-      fill={true}
+      flex="grow"
       background={
         {
           dark: "linear-gradient(to right, #181818 0%, #000000 25%, #181818 50%)",

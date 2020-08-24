@@ -1,6 +1,10 @@
 import React from "react";
 import {
-  JSXTableProps, Table, ThemeContext,
+  Box,
+  JSXBoxProps,
+  JSXTableProps,
+  Table,
+  ThemeContext,
 } from "grommet";
 import styled from "styled-components";
 
@@ -12,40 +16,20 @@ export const StyledTheme: React.FC = (
     <ThemeContext.Extend
       value={
         {
-          global: {
-            font: {
-              size: "12px",
-              height: "16px",
-            },
-          },
-          text: {
-            medium: {
-              size: "12px",
-              height: "16px",
-            },
-          },
-          paragraph: {
-            medium: {
-              size: "12px",
-              height: "16px",
-            },
-          },
           table: {
-            font: {
-              size: "12px",
-              height: "16px",
-            },
             header: {
               background: {
                 color: "background-front",
               },
-              font: {
-                size: "12px",
-                height: "16px",
-              },
               border: undefined,
             },
-            body: {},
+            body: {
+              fill: "vertical",
+              border: {
+                side: "vertical",
+                color: "background-contrast",
+              },
+            },
             footer: {},
             // body: {
             //   align: 'center',
@@ -73,6 +57,18 @@ export const StyledTheme: React.FC = (
           },
         }
       }
+      {...props}
+    />
+  );
+};
+
+export const StyledContainer: React.FC<JSXBoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      fill="vertical"
       {...props}
     />
   );

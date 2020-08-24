@@ -16,7 +16,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Box
-      fill={true}
+      flex="grow"
       align="center"
       justify="start"
       direction="row"
@@ -34,7 +34,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
 export const StyledTickItem = styled(
   TickItem,
 )`
-fill: ${
+color: ${
   (
     props,
   ) =>
