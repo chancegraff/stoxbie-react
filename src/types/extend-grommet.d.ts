@@ -7,6 +7,10 @@ import {
   ButtonProps,
   GridProps,
   ImageProps,
+  TableBodyProps,
+  TableFooterProps,
+  TableHeaderProps,
+  TableProps,
   TextInputProps,
   TextProps,
   ThemeType,
@@ -16,6 +20,8 @@ import {
 } from "util-types";
 
 declare module "grommet" {
+  declare type DropStates = "opened" | "closed";
+
   declare type JSXProps<P, E> = {
     ref?: Ref<P | undefined>;
   } & Omit<E, "ref">;
@@ -41,6 +47,18 @@ declare module "grommet" {
   declare type JSXRangeInputProps = RangeInputProps & JSXProps<HTMLInputElement, JSX.IntrinsicElements["input"]>;
   declare const RangeInput: React.FC<JSXRangeInputProps>;
 
+  declare type JSXTableProps = TableProps & JSXProps<HTMLTableElement, JSX.IntrinsicElements["table"]>;
+  declare const Table: React.FC<JSXTableProps>;
+
+  declare type JSXTableHeaderProps = TableHeaderProps & JSXProps<HTMLTableHeaderElement, JSX.IntrinsicElements["thead"]>;
+  declare const TableHeader: React.FC<JSXTableHeaderProps>;
+
+  declare type JSXTableBodyProps = TableBodyProps & JSXProps<HTMLTableBodyElement, JSX.IntrinsicElements["tbody"]>;
+  declare const TableBody: React.FC<JSXTableBodyProps>;
+
+  declare type JSXTableFooterProps = TableFooterProps & JSXProps<HTMLTableFooterElement, JSX.IntrinsicElements["tfoot"]>;
+  declare const TableFooter: React.FC<JSXTableFooterProps>;
+
   declare type Value<P> = P;
   declare type Suggestion<P> = {
     label?: React.ReactNode;
@@ -65,8 +83,6 @@ declare module "grommet" {
 
   declare type JSXTextInputProps<P> = Omit<TextInputProps, "onSelect"> & TextInputSelectProp<P> & Omit<JSX.IntrinsicElements["input"], "onSelect" | "size" | "placeholder">;
   declare const TextInput: React.FC<JSXTextInputProps<P>>;
-
-  declare type DropStates = "opened" | "closed";
 
   declare interface ThemeProps extends DeepRequired<ThemeType> {}
 }

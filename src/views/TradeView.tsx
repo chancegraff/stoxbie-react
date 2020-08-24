@@ -36,7 +36,7 @@ import {
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
 import OrderForm from "components/HoldingControls/OrderForm";
-import HoldingsTable from "components/OrderHistory/HoldingsTable";
+import HoldingTable from "components/HoldingHistory/HoldingTable";
 import ForwardTime from "components/TimeControls/ForwardTime";
 import StockChart from "components/VX/StockChart";
 
@@ -688,7 +688,9 @@ const TradeView: React.FC<Props> = (
             combinedHoldings={combinedHoldings}
             handleOrder={handleOrder}
           /> */}
-          <HoldingsTable />
+          <HoldingTable
+            historicalHoldings={historicalHoldings}
+          />
         </Box>
       </Grid>
     </PageContent>
