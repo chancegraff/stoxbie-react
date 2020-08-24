@@ -194,6 +194,7 @@ const TradeView: React.FC<Props> = (
     width = 1,
     height = 1,
   } = useResizeObserver();
+
   const [
     nextPriceIndexes,
     setNextPriceIndexes,
@@ -202,6 +203,7 @@ const TradeView: React.FC<Props> = (
     historicalPrices,
     setHistoricalPrices,
   ] = useState<HistoricalPrice[]>();
+
   const [
     historicalHoldings,
     setHistoricalHoldings,

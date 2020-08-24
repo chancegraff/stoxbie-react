@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import {
@@ -9,6 +10,9 @@ import {
   HistoricalLedger,
 } from "trade-types";
 
+import {
+  handleUnloadCreator,
+} from "utils/Utilities";
 import Spinner from "components/Grommet/Spinner";
 import ChooseShares from "components/ShareSlider/ChooseShares";
 
@@ -69,6 +73,19 @@ const OrderForm: React.FC<Props> = (
     [
       shareModifier,
     ],
+  );
+
+  useEffect(
+    () =>
+    {
+      return handleUnloadCreator(
+        [
+          setShareAmount,
+          setShareModifier,
+        ],
+      );
+    },
+    [],
   );
 
   if (!presentPrice || !presentLedger)

@@ -12,6 +12,8 @@ const HoldingsTable: React.FC<Props> = (
 {
   return (
     <DataTable
+      columns={[]}
+      data={[]}
       step={10}
     />
   );

@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -16,6 +17,10 @@ import {
 import {
   Search,
 } from "iex-cloud";
+
+import {
+  handleUnloadCreator,
+} from "utils/Utilities";
 
 import {
   StyledContainer,
@@ -135,6 +140,19 @@ const StockInput: React.FC<Props> = (
     {
       setDropState(
         "closed",
+      );
+    },
+    [],
+  );
+
+  useEffect(
+    () =>
+    {
+      return handleUnloadCreator(
+        [
+          setValue,
+          setDropState,
+        ],
       );
     },
     [],

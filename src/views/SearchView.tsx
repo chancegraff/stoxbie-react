@@ -1,6 +1,7 @@
 import React, {
   useCallback,
   useState,
+  useEffect,
 } from "react";
 import {
   AsyncStates,
@@ -22,6 +23,7 @@ import {
 } from "utils/Constants";
 import PageContent from "templates/PageContent";
 import SearchInput from "components/StockSearch/SearchInput";
+import { handleUnloadCreator } from "utils/Utilities";
 
 type Props = {
   handleSearch: (nextValue: string) => Promise<Search[]>;
@@ -74,6 +76,19 @@ const SearchView: React.FC<Props> = (
       ],
     ),
     DEBOUNCE_INPUT_MS,
+  );
+
+  useEffect(
+    () =>
+    {
+      return handleUnloadCreator(
+        [
+          setSearchResults,
+          setSearchState,
+        ],
+      );
+    },
+    [],
   );
 
   return (
