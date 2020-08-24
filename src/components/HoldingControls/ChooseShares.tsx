@@ -20,7 +20,7 @@ import TickBar from "components/HoldingControls/TickBar";
 
 import {
   StyledContainer,
-} from "./ShareSlider.styled";
+} from "./ChooseShares.styled";
 
 type Props = {
   presentPrice: HistoricalPrice;

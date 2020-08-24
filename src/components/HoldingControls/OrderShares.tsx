@@ -10,7 +10,7 @@ import {
 } from "trade-types";
 
 import Spinner from "components/Grommet/Spinner";
-import ShareSlider from "components/HoldingControls/ShareSlider";
+import ChooseShares from "components/HoldingControls/ChooseShares";
 
 import {
   StyledBuyAction,
@@ -78,7 +78,7 @@ const TradeControl: React.FC<Props> = (
 
   return (
     <StyledContainer>
-      <ShareSlider
+      <ChooseShares
         presentLedger={presentLedger}
         presentPrice={presentPrice}
         shareCount={shareCount}

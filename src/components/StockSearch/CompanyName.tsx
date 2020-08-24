@@ -9,7 +9,7 @@ import {
   StyledLargeText,
   StyledSmallSkeleton,
   StyledSmallText,
-} from "./StockName.styled";
+} from "./CompanyName.styled";
 
 type Props = {
   company?: Company;

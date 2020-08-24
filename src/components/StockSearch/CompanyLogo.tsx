@@ -7,7 +7,7 @@ import {
   StyledAvatar,
   StyledContainer,
   StyledSkeleton,
-} from "./StockLogo.styled";
+} from "./CompanyLogo.styled";
 
 type Props = {
   logo?: Logo;

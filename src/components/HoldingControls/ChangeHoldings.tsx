@@ -13,7 +13,7 @@ import {
 import ActionEnhancer from "./ActionEnhancer";
 import {
   StyledButton,
-} from "./HoldingAction.styled";
+} from "./ChangeHoldings.styled";
 
 type Props = JSXButtonProps & {
   Icon?: React.ComponentType<JSXIconProps>;

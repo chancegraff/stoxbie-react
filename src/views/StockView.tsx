@@ -8,8 +8,8 @@ import {
 
 import PageContent from "templates/PageContent";
 import PageError from "templates/PageError";
-import StockLogo from "components/StockSearch/StockLogo";
-import StockName from "components/StockSearch/StockName";
+import CompanyLogo from "components/StockSearch/CompanyLogo";
+import CompanyName from "components/StockSearch/CompanyName";
 import ChooseDate from "components/TimeControls/ChooseDate";
 
 type Props = {
@@ -40,7 +40,7 @@ const StockView: React.FC<Props> = (
         width="100%"
       >
         <Box>
-          <StockLogo logo={props.logo} />
+          <CompanyLogo logo={props.logo} />
         </Box>
         <Box
           margin={
@@ -54,7 +54,7 @@ const StockView: React.FC<Props> = (
             }
           }
         >
-          <StockName company={props.company} />
+          <CompanyName company={props.company} />
         </Box>
         <Box
           margin={

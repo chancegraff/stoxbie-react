@@ -21,7 +21,7 @@ import {
   DEBOUNCE_INPUT_MS,
 } from "utils/Constants";
 import PageContent from "templates/PageContent";
-import StockInput from "components/StockSearch/StockInput";
+import SearchInput from "components/StockSearch/SearchInput";
 
 type Props = {
   handleSearch: (nextValue: string) => Promise<Search[]>;
@@ -102,7 +102,7 @@ const SearchView: React.FC<Props> = (
         Select the stock ticker to trade.
       </Text>
       <Box>
-        <StockInput
+        <SearchInput
           handleSearch={handleSearchLazily}
           searchState={searchState}
           searchResults={searchResults}

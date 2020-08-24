@@ -7,7 +7,7 @@ import {
   StyledBottomText,
   StyledContainer,
   StyledTopText,
-} from "./StockSymbol.styled";
+} from "./SearchResult.styled";
 
 type Props = {
   searchResult: Search;

@@ -21,8 +21,8 @@ import {
   StyledContainer,
   StyledTextInput,
   StyledTheme,
-} from "./StockInput.styled";
-import StockSymbol from "./StockSymbol";
+} from "./SearchInput.styled";
+import SearchResult from "./SearchResult";
 
 type Props = {
   handleSearch: (nextValue: string) => void;
@@ -62,7 +62,7 @@ const StockInput: React.FC<Props> = (
         ) =>
         {
           return {
-            label: <StockSymbol searchResult={searchResult} />,
+            label: <SearchResult searchResult={searchResult} />,
             value: searchResult,
           };
         },
