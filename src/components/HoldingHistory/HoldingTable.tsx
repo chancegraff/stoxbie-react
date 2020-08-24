@@ -5,6 +5,7 @@ import {
 
 import {
   StyledTable,
+  StyledTheme,
 } from "./HoldingTable.styled";
 import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
@@ -21,11 +22,13 @@ const HoldingTable: React.FC<Props> = (
 ) =>
 {
   return (
-    <StyledTable>
-      <TableHeader />
-      <TableBody />
-      <TableFooter />
-    </StyledTable>
+    <StyledTheme>
+      <StyledTable>
+        <TableHeader />
+        <TableBody />
+        <TableFooter />
+      </StyledTable>
+    </StyledTheme>
   );
 };
 

@@ -8,6 +8,7 @@ import {
   GridProps,
   ImageProps,
   TableBodyProps,
+  TableCellProps,
   TableFooterProps,
   TableHeaderProps,
   TableProps,
@@ -18,7 +19,7 @@ import {
 } from "grommet";
 import {
   DeepRequired,
-} from "util-types";
+} from "ts-essentials";
 
 declare module "grommet" {
   declare type DropStates = "opened" | "closed";
@@ -59,6 +60,7 @@ declare module "grommet" {
   declare type IntrinsicTableBody = JSX.IntrinsicElements["tbody"];
   declare type IntrinsicTableFoot = JSX.IntrinsicElements["tfoot"];
   declare type IntrinsicTableRow = JSX.IntrinsicElements["tr"];
+  declare type IntrinsicTableCell = JSX.IntrinsicElements["td"];
   declare type IntrinsicTextInput = Omit<IntrinsicInput, "onSelect" | "size" | "placeholder">;
 
   declare type JSXBoxProps = BoxProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
@@ -73,6 +75,7 @@ declare module "grommet" {
   declare type JSXTableBodyProps = TableBodyProps & JSXProps<HTMLTableBodyElement, IntrinsicTableBody>;
   declare type JSXTableFooterProps = TableFooterProps & JSXProps<HTMLTableFooterElement, IntrinsicTableFoot>;
   declare type JSXTableRowProps = TableRowProps & JSXProps<HTMLTableRowElement, IntrinsicTableRow>;
+  declare type JSXTableCellProps = TableCellProps & JSXProps<HTMLTableCellElement, IntrinsicTableCell>;
   declare type JSXTextInputProps<P> = Omit<TextInputProps, "onSelect"> & TextInputSelectProp<P> & JSXProps<HTMLInputElement, IntrinsicTextInput>;
 
   /* eslint-disable newline-after-var */
@@ -89,7 +92,8 @@ declare module "grommet" {
   declare const TableBody: React.FC<JSXTableBodyProps>;
   declare const TableFooter: React.FC<JSXTableFooterProps>;
   declare const TableRow: React.FC<JSXTableRowProps>;
+  declare const TableCell: React.FC<JSXTableCellProps>;
   /* eslint-enable newline-after-var */
 
-  declare interface ThemeProps extends DeepRequired<ThemeType> {}
+  declare interface RequiredThemeProps extends DeepRequired<ThemeType> {}
 }

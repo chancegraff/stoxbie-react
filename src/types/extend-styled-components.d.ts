@@ -1,11 +1,11 @@
 import {
-  ThemeProps,
+  RequiredThemeProps,
 } from "grommet";
 
 import "styled-components";
 
 declare module "styled-components" {
-  type ThemeType = ThemeProps & {
+  type ThemeType = RequiredThemeProps & {
     name: string;
     rounding: number;
     spacing: number;

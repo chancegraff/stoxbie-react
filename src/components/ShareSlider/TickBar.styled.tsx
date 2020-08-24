@@ -41,7 +41,7 @@ fill: ${
   {
     return normalizeColor(
       props.theme.global.colors["text-xweak"],
-      props.theme.dark,
+      props.theme,
     );
   }
 };
