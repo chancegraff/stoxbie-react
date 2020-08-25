@@ -12,6 +12,7 @@ const Grommet: React.FC = (
   return (
     <GrommetProvider
       full={true}
+      cssVars={true}
       theme={Theme}
       themeMode="dark"
     >

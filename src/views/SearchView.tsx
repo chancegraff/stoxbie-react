@@ -1,7 +1,7 @@
 import React, {
   useCallback,
-  useState,
   useEffect,
+  useState,
 } from "react";
 import {
   AsyncStates,
@@ -21,9 +21,11 @@ import {
 import {
   DEBOUNCE_INPUT_MS,
 } from "utils/Constants";
+import {
+  handleUnloadCreator,
+} from "utils/Utilities";
 import PageContent from "templates/PageContent";
 import SearchInput from "components/StockSearch/SearchInput";
-import { handleUnloadCreator } from "utils/Utilities";
 
 type Props = {
   handleSearch: (nextValue: string) => Promise<Search[]>;
@@ -96,23 +98,13 @@ const SearchView: React.FC<Props> = (
       <Heading
         level="1"
         size="large"
-        margin={
-          {
-            vertical: "large",
-          }
-        }
       >
         Ticker Search
       </Heading>
       <Text
-        size="medium"
+        size="small"
         color="text-xweak"
-        margin={
-          {
-            top: "none",
-            bottom: "xsmall",
-          }
-        }
+        margin="small"
       >
         Select the stock ticker to trade.
       </Text>

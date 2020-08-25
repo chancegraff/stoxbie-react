@@ -5,18 +5,18 @@ export default {
     maxWidth: "288px",
   },
   small: {
-    size: "15px",
-    height: "19px",
+    size: "14px",
+    height: "18px",
     maxWidth: "360px",
   },
   medium: {
-    size: "18px",
-    height: "22px",
+    size: "16px",
+    height: "20px",
     maxWidth: "432px",
   },
   large: {
-    size: "24px",
-    height: "28px",
+    size: "20px",
+    height: "24px",
     maxWidth: "576px",
   },
   xlarge: {

@@ -61,17 +61,22 @@ const StockInput: React.FC<Props> = (
   const suggestions = useMemo(
     () =>
     {
-      return searchResults.map(
-        (
-          searchResult,
-        ) =>
-        {
-          return {
-            label: <SearchResult searchResult={searchResult} />,
-            value: searchResult,
-          };
-        },
-      );
+      if (searchResults)
+      {
+        return searchResults.map(
+          (
+            searchResult,
+          ) =>
+          {
+            return {
+              label: <SearchResult searchResult={searchResult} />,
+              value: searchResult,
+            };
+          },
+        );
+      }
+
+      return [];
     },
     [
       searchResults,
