@@ -28,7 +28,7 @@ const HoldingTable: React.FC<Props> = (
         <StyledTable>
           <TableHeader />
           <TableBody
-            historicalHoldings={historicalHoldings.concat(historicalHoldings, historicalHoldings, historicalHoldings)}
+            historicalHoldings={historicalHoldings}
           />
           <TableFooter />
         </StyledTable>
