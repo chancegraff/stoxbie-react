@@ -25,6 +25,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
       direction="column"
       align="center"
       justify="center"
+      flex="grow"
       margin={
         {
           vertical: "24px",

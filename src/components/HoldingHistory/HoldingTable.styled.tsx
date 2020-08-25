@@ -62,13 +62,20 @@ export const StyledTheme: React.FC = (
   );
 };
 
+const RelativeContainer: React.FC<JSXBoxProps> = styled(
+  Box,
+)`
+position: relative;
+`;
+
 export const StyledContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
   return (
-    <Box
+    <RelativeContainer
       fill="vertical"
+      overflow="auto"
       {...props}
     />
   );

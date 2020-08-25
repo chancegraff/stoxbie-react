@@ -7,13 +7,21 @@ import {
   TableHeader,
   TableRow,
 } from "grommet";
+import styled from "styled-components";
+
+const StickyHeader: React.FC<JSXTableHeaderProps> = styled(
+  TableHeader,
+)`
+position: sticky;
+top: 0;
+`;
 
 export const StyledTableHeader: React.FC<JSXTableHeaderProps> = (
   props,
 ) =>
 {
   return (
-    <TableHeader
+    <StickyHeader
       {...props}
     />
   );
