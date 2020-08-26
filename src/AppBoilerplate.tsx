@@ -5,18 +5,18 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 
-import Grommet from "services/Grommet";
+import AppTheme from "./AppTheme";
 
 const AppBoilerplate: React.FC<PropsHasChildren> = (
   props,
 ) =>
 {
   return (
-    <Grommet>
+    <AppTheme>
       <BrowserRouter>
         {props.children}
       </BrowserRouter>
-    </Grommet>
+    </AppTheme>
   );
 };
 

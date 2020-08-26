@@ -24,9 +24,9 @@ import {
 import {
   handleUnloadCreator,
 } from "utils/Utilities";
-import ScrollToTop from "services/ScrollToTop";
 import StockView from "views/StockView";
 import PageError from "components/PageTemplates/PageError";
+import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
@@ -165,11 +165,11 @@ const StockRoutes: React.FC = () =>
   return (
     <Switch>
       <Route path={`${match.path}/:ticker`}>
-        <ScrollToTop />
+        <PageScrollToTop />
         <ViewRoute />
       </Route>
       <Route path={match.path}>
-        <ScrollToTop />
+        <PageScrollToTop />
         <PageError>
           Please select a stock to view.
         </PageError>

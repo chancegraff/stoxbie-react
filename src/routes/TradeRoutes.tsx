@@ -22,9 +22,9 @@ import {
   handleUnloadCreator,
   parseDate,
 } from "utils/Utilities";
-import ScrollToTop from "services/ScrollToTop";
 import TradeView from "views/TradeView";
 import PageError from "components/PageTemplates/PageError";
+import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
 // import defPrices from "../views/TradeView/tests/prices";
 
@@ -165,7 +165,7 @@ const TradeRoutes: React.FC<Props> = () =>
   return (
     <Switch>
       <Route path={`${match.path}/:ticker/:date`}>
-        <ScrollToTop />
+        <PageScrollToTop />
         <TradeRoute />
       </Route>
       <Route path={`${match.path}/:ticker`}>
