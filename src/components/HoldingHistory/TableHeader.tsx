@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-  StyledTableHeadCell,
+  StyledTableCell,
   StyledTableHeader,
   StyledTableRow,
 } from "./TableHeader.styled";
@@ -16,18 +16,18 @@ const TableHeader: React.FC<Props> = (
   return (
     <StyledTableHeader>
       <StyledTableRow>
-        <StyledTableHeadCell>
+        <StyledTableCell>
           Shares
-        </StyledTableHeadCell>
-        <StyledTableHeadCell>
+        </StyledTableCell>
+        <StyledTableCell>
           Open
-        </StyledTableHeadCell>
-        <StyledTableHeadCell>
+        </StyledTableCell>
+        <StyledTableCell>
           Close
-        </StyledTableHeadCell>
-        <StyledTableHeadCell>
+        </StyledTableCell>
+        <StyledTableCell>
           Equity
-        </StyledTableHeadCell>
+        </StyledTableCell>
       </StyledTableRow>
     </StyledTableHeader>
   );

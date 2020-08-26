@@ -51,7 +51,10 @@ const HoldingTable: React.FC<Props> = (
             />
           </PresentBody>
           <HistoricalBody historicalHoldings={historicalHoldings} />
-          <TableFooter />
+          <TableFooter
+            historicalHoldings={historicalHoldings}
+            presentLedger={presentLedger}
+          />
         </StyledTable>
       </StyledContainer>
     </StyledTheme>

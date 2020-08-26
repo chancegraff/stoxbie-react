@@ -38,7 +38,7 @@ export const StyledTableRow: React.FC<JSXTableRowProps> = (
   );
 };
 
-export const StyledTableHeadCell: React.FC<JSXTableCellProps> = (
+export const StyledTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {
