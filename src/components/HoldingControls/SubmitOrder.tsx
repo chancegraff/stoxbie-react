@@ -17,25 +17,25 @@ import {
 
 type Props = JSXButtonProps & {
   Icon?: React.ComponentType<JSXIconProps>;
-  sharePrice: number;
-  shareCount: number;
-  shareModifier: 1 | -1;
-  activeModifier?: 1 | -1;
-  handleOrder: (sharePrice: number, shareCount: number) => void;
+  presentPriceClose: number;
+  orderShareCount: number;
+  orderDirection: 1 | -1;
+  submitDirection?: 1 | -1;
+  handleSubmit: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
 
-export type ActionProps = Props;
+export type SubmitOrderProps = Props;
 
-const HoldingAction: React.FC<Props> = (
+const SubmitOrder: React.FC<Props> = (
   {
     children,
-    handleOrder,
+    handleSubmit,
     handleToggle,
-    sharePrice,
-    shareCount,
-    shareModifier,
-    activeModifier = shareModifier,
+    presentPriceClose,
+    orderShareCount,
+    orderDirection,
+    submitDirection = orderDirection,
     Icon,
     ...props
   },
@@ -44,11 +44,11 @@ const HoldingAction: React.FC<Props> = (
   const isActive = useMemo(
     () =>
     {
-      return shareModifier === activeModifier;
+      return submitDirection === orderDirection;
     },
     [
-      shareModifier,
-      activeModifier,
+      submitDirection,
+      orderDirection,
     ],
   );
   const endEnhancer = useMemo(
@@ -73,14 +73,14 @@ const HoldingAction: React.FC<Props> = (
   const handleClick = useCallback(
     () =>
     {
-      if (shareCount > 0 && isActive)
+      if (orderShareCount > 0 && isActive)
       {
         const count = Math.abs(
-          shareCount,
-        ) * shareModifier;
+          orderShareCount,
+        ) * orderDirection;
 
-        handleOrder(
-          sharePrice,
+        handleSubmit(
+          presentPriceClose,
           count,
         );
       }
@@ -90,12 +90,12 @@ const HoldingAction: React.FC<Props> = (
       }
     },
     [
-      handleOrder,
+      handleSubmit,
       handleToggle,
       isActive,
-      sharePrice,
-      shareCount,
-      shareModifier,
+      presentPriceClose,
+      orderShareCount,
+      orderDirection,
     ],
   );
 
@@ -103,11 +103,11 @@ const HoldingAction: React.FC<Props> = (
     <StyledButton
       icon={endEnhancer}
       label={children}
-      value={shareModifier}
+      value={submitDirection}
       onClick={handleClick}
       {...props}
     />
   );
 };
 
-export default HoldingAction;
+export default SubmitOrder;

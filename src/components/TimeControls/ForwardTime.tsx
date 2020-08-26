@@ -16,7 +16,7 @@ import {
 } from "./ForwardTime.styled";
 
 type Props = {
-  presentPrice?: HistoricalPrice;
+  presentPrice: HistoricalPrice | undefined;
   handleContinue: () => void;
 };
 

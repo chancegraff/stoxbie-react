@@ -3,8 +3,9 @@ import {
   MemoryRouter,
   Route,
 } from "react-router-dom";
-
-import BaseUI from "services/BaseUI";
+import {
+  Grommet,
+} from "grommet";
 
 const Boilerplate = (
   {
@@ -15,7 +16,7 @@ const Boilerplate = (
 ) =>
 {
   return (
-    <BaseUI>
+    <Grommet>
       <MemoryRouter
         initialEntries={
           [
@@ -27,7 +28,7 @@ const Boilerplate = (
           {children}
         </Route>
       </MemoryRouter>
-    </BaseUI>
+    </Grommet>
   );
 };
 

@@ -41,10 +41,10 @@ import ForwardTime from "components/TimeControls/ForwardTime";
 import StockChart from "components/VX/StockChart";
 
 type Props = {
-  date?: Date;
+  date: Date | undefined;
+  prices: HistoricalPrice[] | undefined;
+  ticker: string | undefined;
   error?: string;
-  prices?: HistoricalPrice[];
-  ticker?: string;
 };
 
 const getPriceIndexes = (
@@ -133,14 +133,14 @@ const getOpenedTrade = (
   const openCount = Math.abs(
     shareCount,
   );
-  const openModifier = (shareCount / openCount) as -1 | 1;
+  const openDirection = (shareCount / openCount) as -1 | 1;
   const openDate = new Date();
   const openBalance = openCount * openPrice;
   const currentTrade = {
     ...previousTrade,
     openPrice,
     openCount,
-    openModifier,
+    openDirection,
     openBalance,
     openDate,
   };
@@ -158,12 +158,12 @@ const getClosedTrade = (
   const closeCount = Math.abs(
     shareCount,
   );
-  const closeModifier = (shareCount / closeCount) as -1 | 1;
+  const closeDirection = (shareCount / closeCount) as -1 | 1;
   const closeDate = new Date();
   const closeBalance = closeCount * shareClose;
-  const changePrice = (closePrice - previousTrade.openPrice) * previousTrade.openModifier;
+  const changePrice = (closePrice - previousTrade.openPrice) * previousTrade.openDirection;
   const pricePaid = closeCount * previousTrade.openPrice;
-  const changeBalance = (closeBalance - pricePaid) * previousTrade.openModifier;
+  const changeBalance = (closeBalance - pricePaid) * previousTrade.openDirection;
   const changePercent = changeBalance / pricePaid;
   const currentTrade = {
     ...previousTrade,
@@ -172,7 +172,7 @@ const getClosedTrade = (
     changePrice,
     closePrice,
     closeCount,
-    closeModifier,
+    closeDirection,
     closeBalance,
     closeDate,
   };
@@ -254,7 +254,7 @@ const TradeView: React.FC<Props> = (
       historicalLedgers,
     ],
   );
-  const combinedHoldings = useMemo(
+  const summarizedHoldings = useMemo(
     () =>
     {
       if (presentHoldings.length > 0)
@@ -524,7 +524,7 @@ const TradeView: React.FC<Props> = (
     },
     [],
   );
-  const handleOrder = useCallback(
+  const handleSubmit = useCallback(
     (
       sharePrice: number,
       shareCount: number,
@@ -533,7 +533,7 @@ const TradeView: React.FC<Props> = (
       const currentTradeType = shareCount / Math.abs(
         shareCount,
       );
-      const previousTradeOpposite = combinedHoldings && combinedHoldings.openModifier * -1;
+      const previousTradeOpposite = summarizedHoldings && summarizedHoldings.openDirection * -1;
 
       if (currentTradeType === previousTradeOpposite)
       {
@@ -551,7 +551,7 @@ const TradeView: React.FC<Props> = (
       }
     },
     [
-      combinedHoldings,
+      summarizedHoldings,
       openTrade,
       closeTrade,
     ],
@@ -679,17 +679,14 @@ const TradeView: React.FC<Props> = (
           <OrderForm
             presentLedger={presentLedger}
             presentPrice={presentPrice}
-            handleOrder={handleOrder}
+            handleSubmit={handleSubmit}
           />
-          {/* <TradeHistory
-            historicalHoldings={historicalHoldings}
+          <HoldingTable
             presentPrice={presentPrice}
             presentLedger={presentLedger}
-            combinedHoldings={combinedHoldings}
-            handleOrder={handleOrder}
-          /> */}
-          <HoldingTable
             historicalHoldings={historicalHoldings}
+            summarizedHoldings={summarizedHoldings}
+            handleSubmit={handleSubmit}
           />
         </Box>
       </Grid>

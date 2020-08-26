@@ -12,7 +12,7 @@ import {
 } from "./CompanyName.styled";
 
 type Props = {
-  company?: Company;
+  company: Company | undefined;
 };
 
 const StockName: React.FC<Props> = (

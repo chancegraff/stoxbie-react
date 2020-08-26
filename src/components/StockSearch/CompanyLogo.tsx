@@ -10,7 +10,7 @@ import {
 } from "./CompanyLogo.styled";
 
 type Props = {
-  logo?: Logo;
+  logo: Logo | undefined;
 };
 
 const StockLogo: React.FC<Props> = (

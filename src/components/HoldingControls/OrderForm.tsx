@@ -24,28 +24,28 @@ import {
 } from "./OrderForm.styled";
 
 type Props = {
-  presentPrice?: HistoricalPrice;
-  presentLedger?: HistoricalLedger;
-  handleOrder: (sharePrice: number, shareCount: number) => void;
+  presentPrice: HistoricalPrice | undefined;
+  presentLedger: HistoricalLedger | undefined;
+  handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 
 const OrderForm: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
-    handleOrder,
+    handleSubmit,
   },
 ) =>
 {
   const [
-    shareCount,
-    setShareAmount,
+    orderShareCount,
+    setOrderShareCount,
   ] = useState<number>(
     0,
   );
   const [
-    shareModifier,
-    setShareModifier,
+    orderDirection,
+    setOrderDirection,
   ] = useState<1 | -1>(
     1,
   );
@@ -53,25 +53,25 @@ const OrderForm: React.FC<Props> = (
   const handleToggle = useCallback(
     () =>
     {
-      setShareAmount(
+      setOrderShareCount(
         0,
       );
 
-      if (shareModifier > 0)
+      if (orderDirection > 0)
       {
-        setShareModifier(
+        setOrderDirection(
           -1,
         );
       }
       else
       {
-        setShareModifier(
+        setOrderDirection(
           1,
         );
       }
     },
     [
-      shareModifier,
+      orderDirection,
     ],
   );
 
@@ -80,8 +80,8 @@ const OrderForm: React.FC<Props> = (
     {
       return handleUnloadCreator(
         [
-          setShareAmount,
-          setShareModifier,
+          setOrderShareCount,
+          setOrderDirection,
         ],
       );
     },
@@ -98,24 +98,24 @@ const OrderForm: React.FC<Props> = (
       <ChooseShares
         presentLedger={presentLedger}
         presentPrice={presentPrice}
-        shareCount={shareCount}
-        shareModifier={shareModifier}
-        setShareAmount={setShareAmount}
+        orderDirection={orderDirection}
+        orderShareCount={orderShareCount}
+        setOrderShareCount={setOrderShareCount}
       />
       <StyledGrid>
         <StyledBuyAction
           handleToggle={handleToggle}
-          handleOrder={handleOrder}
-          shareCount={shareCount}
-          sharePrice={presentPrice.close}
-          activeModifier={shareModifier}
+          handleSubmit={handleSubmit}
+          presentPriceClose={presentPrice.close}
+          orderDirection={orderDirection}
+          orderShareCount={orderShareCount}
         />
         <StyledSellAction
           handleToggle={handleToggle}
-          handleOrder={handleOrder}
-          shareCount={shareCount}
-          sharePrice={presentPrice.close}
-          activeModifier={shareModifier}
+          handleSubmit={handleSubmit}
+          presentPriceClose={presentPrice.close}
+          orderDirection={orderDirection}
+          orderShareCount={orderShareCount}
         />
       </StyledGrid>
     </StyledContainer>

@@ -5,7 +5,6 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 
-import BaseUI from "services/BaseUI";
 import Grommet from "services/Grommet";
 
 const AppBoilerplate: React.FC<PropsHasChildren> = (
@@ -15,9 +14,7 @@ const AppBoilerplate: React.FC<PropsHasChildren> = (
   return (
     <Grommet>
       <BrowserRouter>
-        <BaseUI>
-          {props.children}
-        </BaseUI>
+        {props.children}
       </BrowserRouter>
     </Grommet>
   );

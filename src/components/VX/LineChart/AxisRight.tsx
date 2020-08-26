@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useContext,
+} from "react";
 import {
   AxisRight as DefaultAxisRight,
 } from "@vx/axis";
@@ -6,8 +8,11 @@ import {
   TextProps,
 } from "@vx/text/lib/Text";
 import {
-  useStyletron,
-} from "baseui/dist";
+  normalizeColor,
+} from "grommet/utils";
+import {
+  ThemeContext,
+} from "styled-components";
 
 import {
   ScaleY,
@@ -31,10 +36,9 @@ const AxisRight: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
+  const theme = useContext(
+    ThemeContext,
+  );
 
   return (
     <DefaultAxisRight
@@ -44,10 +48,20 @@ const AxisRight: React.FC<Props> = (
       labelProps={labelProps}
       left={xMax}
       scale={yScale}
-      stroke={theme.colors.mono400}
+      stroke={
+        normalizeColor(
+          theme.global.colors["text-strong"],
+          theme,
+        )
+      }
       tickLabelProps={tickLabelProps}
       tickLength={5}
-      tickStroke={theme.colors.mono400}
+      tickStroke={
+        normalizeColor(
+          theme.global.colors["text-strong"],
+          theme,
+        )
+      }
     />
   );
 };

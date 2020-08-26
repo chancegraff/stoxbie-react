@@ -11,7 +11,6 @@ import {
   formatDate,
   oneYearAgo,
 } from "utils/Utilities";
-import DatePicker from "components/BaseUI/DatePicker";
 
 import {
   StyledButton,
@@ -97,11 +96,14 @@ const TradeStart: React.FC<Props> = (
       <StyledButton onClick={handleFiveYearStart}>
         5Y
       </StyledButton>
-      <DatePicker onChange={handleCustomYearStart}>
+      <StyledButton>
+        <Schedule size="14px" />
+      </StyledButton>
+      {/* <DatePicker onChange={handleCustomYearStart}>
         <StyledButton>
           <Schedule size="14px" />
         </StyledButton>
-      </DatePicker>
+      </DatePicker> */}
     </StyledContainer>
   );
 };

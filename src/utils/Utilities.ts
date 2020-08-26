@@ -75,7 +75,7 @@ export const handleUnloadCreator = (
 };
 
 export const usePrevious = <P>(
-  value?: P,
+  value: P | undefined,
 ): P | undefined =>
 {
   const ref = useRef<P>();

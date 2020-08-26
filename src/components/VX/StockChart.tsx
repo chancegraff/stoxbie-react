@@ -27,7 +27,7 @@ import LineChart, {
 
 type Props = {
   resolution: Resolution;
-  prices?: HistoricalPrice[];
+  prices: HistoricalPrice[] | undefined;
   padding?: Padding;
 };
 

@@ -8,12 +8,9 @@ import {
 import {
   Checkmark,
 } from "grommet-icons";
-import {
-  PartialBy,
-} from "util-types";
 
 import SubmitOrder, {
-  ActionProps,
+  SubmitOrderProps,
 } from "./SubmitOrder";
 
 export const StyledContainer: React.FC<JSXBoxProps> = (
@@ -75,7 +72,7 @@ export const StyledGrid: React.FC<JSXGridProps> = (
   );
 };
 
-const StyledSubmitOrder: React.FC<ActionProps> = (
+const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
   {
     gridArea,
     ...props
@@ -94,14 +91,14 @@ const StyledSubmitOrder: React.FC<ActionProps> = (
   );
 };
 
-export const StyledBuyAction: React.FC<PartialBy<ActionProps, "shareModifier">> = (
+export const StyledBuyAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
   props,
 ) =>
 {
   return (
     <StyledSubmitOrder
       {...props}
-      shareModifier={1}
+      submitDirection={1}
       gridArea="buy"
     >
       Buy
@@ -109,14 +106,14 @@ export const StyledBuyAction: React.FC<PartialBy<ActionProps, "shareModifier">> 
   );
 };
 
-export const StyledSellAction: React.FC<PartialBy<ActionProps, "shareModifier">> = (
+export const StyledSellAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
   props,
 ) =>
 {
   return (
     <StyledSubmitOrder
       {...props}
-      shareModifier={-1}
+      submitDirection={-1}
       gridArea="sell"
     >
       Sell

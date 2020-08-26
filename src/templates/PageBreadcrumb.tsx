@@ -6,10 +6,8 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import {
-  Breadcrumbs,
-} from "baseui/dist/breadcrumbs";
-import {
   Box,
+  JSXBoxProps,
   ThemeContext,
 } from "grommet";
 
@@ -20,6 +18,19 @@ import {
 import Anchor from "components/Grommet/Anchor";
 
 type Props = unknown;
+
+const Breadcrumbs: React.FC<JSXBoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      direction="row"
+      justify="between"
+      {...props}
+    />
+  );
+};
 
 const StockBreadcrumb: React.FC = () =>
 {
@@ -87,25 +98,23 @@ const BreadcrumbContainer: React.FC<Props> = () =>
   );
 
   return (
-    <Box>
-      <ThemeContext.Extend
-        value={
-          {
-            anchor: {
-              color: "text",
-              fontWeight: "semibold",
-              textDecoration: "underline",
-              hover: {
-                textDecoration: "none",
-              },
+    <ThemeContext.Extend
+      value={
+        {
+          anchor: {
+            color: "text",
+            fontWeight: "semibold",
+            textDecoration: "underline",
+            hover: {
+              textDecoration: "none",
             },
-          }
+          },
         }
-      >
-        {stockView && <StockBreadcrumb />}
-        {tradeView && <TradeBreadcrumb />}
-      </ThemeContext.Extend>
-    </Box>
+      }
+    >
+      {stockView && <StockBreadcrumb />}
+      {tradeView && <TradeBreadcrumb />}
+    </ThemeContext.Extend>
   );
 };
 

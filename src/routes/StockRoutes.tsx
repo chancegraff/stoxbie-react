@@ -36,7 +36,7 @@ const ViewRoute: React.FC = () =>
   const {
     ticker = "",
   } = useParams<{
-    ticker?: string;
+    ticker: string | undefined;
   }>();
   const history = useHistory();
 
@@ -89,7 +89,7 @@ const ViewRoute: React.FC = () =>
 
   const handleLoad = useCallback(
     async (
-      nextTicker?: string,
+      nextTicker: string | undefined,
     ) =>
     {
       if (nextTicker)

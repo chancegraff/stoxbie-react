@@ -25,18 +25,18 @@ import {
 type Props = {
   presentPrice: HistoricalPrice;
   presentLedger: HistoricalLedger;
-  shareCount: number;
-  shareModifier: number;
-  setShareAmount: React.Dispatch<React.SetStateAction<number>>;
+  orderDirection: number;
+  orderShareCount: number;
+  setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const ChooseShares: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
-    shareCount,
-    shareModifier,
-    setShareAmount,
+    orderDirection,
+    orderShareCount,
+    setOrderShareCount,
   },
 ) =>
 {
@@ -90,14 +90,14 @@ const ChooseShares: React.FC<Props> = (
   const maxValue = useMemo(
     () =>
     {
-      return shareModifier > 0
+      return orderDirection > 0
         ? maxPurchasable
         : maxSaleable > 0
           ? maxSaleable
           : maxPurchasable;
     },
     [
-      shareModifier,
+      orderDirection,
       maxPurchasable,
       maxSaleable,
     ],
@@ -111,7 +111,7 @@ const ChooseShares: React.FC<Props> = (
         value: nextPurchaseAmount,
       } = event.target;
 
-      setShareAmount(
+      setOrderShareCount(
         parseInt(
           nextPurchaseAmount,
           10,
@@ -119,7 +119,7 @@ const ChooseShares: React.FC<Props> = (
       );
     },
     [
-      setShareAmount,
+      setOrderShareCount,
     ],
   );
 
@@ -128,7 +128,7 @@ const ChooseShares: React.FC<Props> = (
     {
       if (hasPriceChanged || hasBalanceChanged)
       {
-        setShareAmount(
+        setOrderShareCount(
           0,
         );
       }
@@ -136,7 +136,7 @@ const ChooseShares: React.FC<Props> = (
     [
       hasPriceChanged,
       hasBalanceChanged,
-      setShareAmount,
+      setOrderShareCount,
     ],
   );
 
@@ -144,12 +144,12 @@ const ChooseShares: React.FC<Props> = (
     <StyledContainer>
       <RangeInput
         max={maxValue}
-        value={shareCount}
+        value={orderShareCount}
         onChange={handleChange}
       />
       <TickBar
         maxValue={maxValue}
-        setShareAmount={setShareAmount}
+        setOrderShareCount={setOrderShareCount}
       />
     </StyledContainer>
   );

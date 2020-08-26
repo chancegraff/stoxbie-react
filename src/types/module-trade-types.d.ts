@@ -8,7 +8,7 @@ declare module "trade-types" {
     openCount: number;
     openBalance: number;
     openDate: Date;
-    openModifier: -1 | 1;
+    openDirection: -1 | 1;
   };
 
   declare type HistoricalTradeClose = {
@@ -16,7 +16,7 @@ declare module "trade-types" {
     closeCount: number;
     closeBalance: number;
     closeDate: Date;
-    closeModifier: -1 | 1;
+    closeDirection: -1 | 1;
   };
 
   declare type HistoricalTradeChange = {

@@ -13,8 +13,8 @@ import CompanyName from "components/StockSearch/CompanyName";
 import ChooseDate from "components/TimeControls/ChooseDate";
 
 type Props = {
-  logo?: Logo;
-  company?: Company;
+  logo: Logo | undefined;
+  company: Company | undefined;
   error?: string;
   handleStart: (date: string) => void;
 };

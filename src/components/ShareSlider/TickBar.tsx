@@ -14,13 +14,13 @@ import {
 
 type Props = {
   maxValue: number;
-  setShareAmount: React.Dispatch<React.SetStateAction<number>>;
+  setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TickBar: React.FC<Props> = (
   {
     maxValue,
-    setShareAmount,
+    setOrderShareCount,
   },
 ) =>
 {
@@ -90,13 +90,13 @@ const TickBar: React.FC<Props> = (
           10,
         );
 
-        setShareAmount(
+        setOrderShareCount(
           tickValue,
         );
       }
     },
     [
-      setShareAmount,
+      setOrderShareCount,
     ],
   );
 

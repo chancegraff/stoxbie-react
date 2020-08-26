@@ -36,8 +36,8 @@ const TradeRoute: React.FC = () =>
     ticker = "",
     date = "",
   } = useParams<{
-    ticker?: string;
-    date?: string;
+    ticker: string | undefined;
+    date: string | undefined;
   }>();
   const [
     prices,
@@ -87,7 +87,7 @@ const TradeRoute: React.FC = () =>
 
   const handleLoad = useCallback(
     async (
-      nextTicker?: string,
+      nextTicker: string | undefined,
     ) =>
     {
       if (nextTicker)

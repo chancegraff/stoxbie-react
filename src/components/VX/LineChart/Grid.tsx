@@ -1,10 +1,15 @@
-import React from "react";
+import React, {
+  useContext,
+} from "react";
 import {
   Grid as DefaultGrid,
 } from "@vx/grid";
 import {
-  useStyletron,
-} from "baseui/dist";
+  normalizeColor,
+} from "grommet/utils";
+import {
+  ThemeContext,
+} from "styled-components";
 
 import {
   Max,
@@ -25,10 +30,9 @@ const Grid: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
+  const theme = useContext(
+    ThemeContext,
+  );
   const [
     xMax,
     yMax,
@@ -43,7 +47,12 @@ const Grid: React.FC<Props> = (
       height={yMax}
       numTicksColumns={10}
       numTicksRows={13}
-      stroke={theme.colors.mono500}
+      stroke={
+        normalizeColor(
+          theme.global.colors["text-xweak"],
+          theme,
+        )
+      }
       width={xMax}
       xScale={xScale}
       yScale={yScale}
