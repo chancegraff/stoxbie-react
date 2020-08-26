@@ -23,8 +23,8 @@ import {
   parseDate,
 } from "utils/Utilities";
 import ScrollToTop from "services/ScrollToTop";
-import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
+import PageError from "components/PageTemplates/PageError";
 
 // import defPrices from "../views/TradeView/tests/prices";
 

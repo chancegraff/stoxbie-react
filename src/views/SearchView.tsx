@@ -24,7 +24,7 @@ import {
 import {
   handleUnloadCreator,
 } from "utils/Utilities";
-import PageContent from "templates/PageContent";
+import PageContent from "components/PageTemplates/PageContent";
 import SearchInput from "components/StockSearch/SearchInput";
 
 type Props = {

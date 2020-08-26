@@ -30,11 +30,11 @@ import {
 } from "utils/Utilities";
 import {
   AspectRatioBox, AspectRatioItem,
-} from "templates/AspectRatio";
-import PageContent from "templates/PageContent";
-import PageError from "templates/PageError";
+} from "components/Grommet/AspectRatio";
 import OrderForm from "components/HoldingControls/OrderForm";
 import HoldingTable from "components/HoldingHistory/HoldingTable";
+import PageContent from "components/PageTemplates/PageContent";
+import PageError from "components/PageTemplates/PageError";
 import ForwardTime from "components/TimeControls/ForwardTime";
 import StockChart from "components/VX/StockChart";
 

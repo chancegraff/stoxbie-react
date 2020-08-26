@@ -6,7 +6,7 @@ import {
   Heading,
 } from "grommet";
 
-import PageContent from "templates/PageContent";
+import PageContent from "components/PageTemplates/PageContent";
 
 const Error: React.FC<PropsHasChildren> = (
   props,

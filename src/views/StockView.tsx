@@ -6,8 +6,8 @@ import {
   Company, Logo,
 } from "iex-cloud";
 
-import PageContent from "templates/PageContent";
-import PageError from "templates/PageError";
+import PageContent from "components/PageTemplates/PageContent";
+import PageError from "components/PageTemplates/PageError";
 import CompanyLogo from "components/StockSearch/CompanyLogo";
 import CompanyName from "components/StockSearch/CompanyName";
 import ChooseDate from "components/TimeControls/ChooseDate";

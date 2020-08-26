@@ -25,8 +25,8 @@ import {
   handleUnloadCreator,
 } from "utils/Utilities";
 import ScrollToTop from "services/ScrollToTop";
-import PageError from "templates/PageError";
 import StockView from "views/StockView";
+import PageError from "components/PageTemplates/PageError";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
