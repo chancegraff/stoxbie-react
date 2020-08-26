@@ -5,6 +5,8 @@ import {
   AvatarProps,
   BoxProps,
   ButtonProps,
+  CalendarProps,
+  DropButtonProps,
   GridProps,
   ImageProps,
   TableBodyProps,
@@ -46,6 +48,14 @@ declare module "grommet" {
     );
   };
 
+  declare type CalendarSelectProp<P> = {
+    onSelect?: (
+      (
+        select: P
+      ) => any
+    );
+  }
+
   declare type JSXProps<P, E> = {
     ref?: Ref<P | undefined>;
   } & Omit<E, "ref">;
@@ -61,6 +71,7 @@ declare module "grommet" {
   declare type IntrinsicTableFoot = JSX.IntrinsicElements["tfoot"];
   declare type IntrinsicTableRow = JSX.IntrinsicElements["tr"];
   declare type IntrinsicTableCell = Omit<JSX.IntrinsicElements["td"], "align">;
+  declare type IntrinsicCalendar = Omit<JSX.IntrinsicElements["div"], "onSelect">;
   declare type IntrinsicTextInput = Omit<IntrinsicInput, "onSelect" | "size" | "placeholder">;
 
   declare type JSXBoxProps = BoxProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
@@ -68,6 +79,7 @@ declare module "grommet" {
   declare type JSXTextProps = TextProps & JSXProps<HTMLSpanElement, IntrinsicSpan>;
   declare type JSXAvatarProps = AvatarProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
   declare type JSXButtonProps = ButtonProps & JSXProps<HTMLButtonElement, IntrinsicButton>;
+  declare type JSXDropButtonProps = DropButtonProps & ButtonProps & JSXProps<HTMLButtonElement, IntrinsicButton>;
   declare type JSXGridProps = GridProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
   declare type JSXRangeInputProps = RangeInputProps & JSXProps<HTMLInputElement, IntrinsicInput>;
   declare type JSXTableProps = TableProps & JSXProps<HTMLTableElement, IntrinsicTable>;
@@ -76,14 +88,17 @@ declare module "grommet" {
   declare type JSXTableFooterProps = TableFooterProps & JSXProps<HTMLTableFooterElement, IntrinsicTableFoot>;
   declare type JSXTableRowProps = TableRowProps & JSXProps<HTMLTableRowElement, IntrinsicTableRow>;
   declare type JSXTableCellProps = TableCellProps & JSXBoxProps & JSXProps<HTMLTableCellElement, IntrinsicTableCell>;
+  declare type JSXCalendarProps<P> = Omit<CalendarProps, "onSelect"> & CalendarSelectProp<P> & JSXProps<HTMLDivElement, IntrinsicCalendar>;
   declare type JSXTextInputProps<P> = Omit<TextInputProps, "onSelect"> & TextInputSelectProp<P> & JSXProps<HTMLInputElement, IntrinsicTextInput>;
 
   /* eslint-disable newline-after-var */
   declare const Box: React.FC<JSXBoxProps>;
+  declare const Calendar: React.FC<JSXCalendarProps>;
   declare const Image: React.FC<JSXImageProps>;
   declare const Text: React.FC<JSXTextProps>;
   declare const Avatar: React.FC<JSXAvatarProps>;
   declare const Button: React.FC<JSXButtonProps>;
+  declare const DropButton: React.FC<JSXDropButtonProps>;
   declare const Grid: React.FC<JSXGridProps>;
   declare const RangeInput: React.FC<JSXRangeInputProps>;
   declare const TextInput: React.FC<JSXTextInputProps<P>>;

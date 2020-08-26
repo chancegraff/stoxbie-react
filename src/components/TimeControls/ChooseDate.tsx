@@ -14,7 +14,10 @@ import {
 
 import {
   StyledButton,
+  StyledButtonChild,
+  StyledButtonText,
   StyledContainer,
+  StyledDropCalendar,
 } from "./ChooseDate.styled";
 
 type Props = {
@@ -70,14 +73,12 @@ const TradeStart: React.FC<Props> = (
   );
   const handleCustomYearStart = useCallback(
     (
-      {
-        date,
-      },
+      nextDate,
     ) =>
     {
       return handleYearStart(
         formatDate(
-          date,
+          nextDate,
           DateFormats.URL,
         ),
       );
@@ -90,19 +91,24 @@ const TradeStart: React.FC<Props> = (
   return (
     <StyledContainer>
       <StyledButton onClick={handleOneYearStart}>
-        1Y
+        <StyledButtonChild>
+          <StyledButtonText>
+            1Y
+          </StyledButtonText>
+        </StyledButtonChild>
       </StyledButton>
       <StyledButton onClick={handleFiveYearStart}>
-        5Y
+        <StyledButtonChild>
+          <StyledButtonText>
+            5Y
+          </StyledButtonText>
+        </StyledButtonChild>
       </StyledButton>
-      <StyledButton>
-        <Schedule size="14px" />
-      </StyledButton>
-      {/* <DatePicker onChange={handleCustomYearStart}>
-        <StyledButton>
+      <StyledDropCalendar handleSelect={handleCustomYearStart}>
+        <StyledButtonChild>
           <Schedule size="14px" />
-        </StyledButton>
-      </DatePicker> */}
+        </StyledButtonChild>
+      </StyledDropCalendar>
     </StyledContainer>
   );
 };

@@ -64,7 +64,7 @@ const StockView: React.FC<Props> = (
           }
           height={
             {
-              min: "52px",
+              min: "62px",
             }
           }
         >
