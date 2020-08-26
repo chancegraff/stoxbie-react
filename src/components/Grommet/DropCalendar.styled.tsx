@@ -14,6 +14,8 @@ export const StyledCalendar: React.FC<JSXCalendarProps<string>> = (
 {
   return (
     <Calendar
+      margin="small"
+      showAdjacentDays={false}
       size="small"
       {...props}
     />

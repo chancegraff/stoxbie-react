@@ -2,6 +2,9 @@ import React, {
   forwardRef,
 } from "react";
 import {
+  subYears,
+} from "date-fns";
+import {
   Box,
   Button,
   JSXBoxProps,
@@ -14,6 +17,12 @@ import styled from "styled-components";
 import DropCalendar, {
   DropCalendarProps,
 } from "components/Grommet/DropCalendar";
+
+const today = new Date();
+const tenYearsAgo = subYears(
+  today,
+  10,
+);
 
 const GroupedContainer: React.FC<JSXBoxProps> = styled(
   Box,
@@ -69,7 +78,8 @@ export const StyledDropCalendar: React.FC<DropCalendarProps> = (
 {
   return (
     <DropCalendar
-      max={new Date().toISOString()}
+      min={tenYearsAgo.toISOString()}
+      max={today.toISOString()}
       plain={true}
       fill="horizontal"
       dropProps={
