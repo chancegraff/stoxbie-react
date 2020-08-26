@@ -1,6 +1,7 @@
 import React, {
   PropsHasChildren,
   useCallback,
+  useMemo,
   useState,
 } from "react";
 import {
@@ -14,6 +15,8 @@ import {
 
 type DropButtonProps = Omit<JSXDropButtonProps, "open" | "dropContent" | "onOpen" | "onClose">;
 type Props = PropsHasChildren & DropButtonProps & {
+  min?: string;
+  max?: string;
   handleSelect: (date: string) => void;
 };
 
@@ -21,6 +24,8 @@ export type DropCalendarProps = Props;
 
 const DropCalendar: React.FC<Props> = (
   {
+    min,
+    max,
     handleSelect,
     ...props
   },
@@ -31,6 +36,23 @@ const DropCalendar: React.FC<Props> = (
     setDropState,
   ] = useState<"closed" | "opened">(
     "closed",
+  );
+
+  const bounds = useMemo(
+    () =>
+    {
+      if (min && max)
+      {
+        return [
+          min,
+          max,
+        ];
+      }
+    },
+    [
+      min,
+      max,
+    ],
   );
 
   const handleClick = useCallback(
@@ -59,12 +81,14 @@ const DropCalendar: React.FC<Props> = (
     {
       return (
         <StyledCalendar
+          bounds={bounds}
           onSelect={handleSelect}
         />
       );
     },
     [
       handleSelect,
+      bounds,
     ],
   );
 

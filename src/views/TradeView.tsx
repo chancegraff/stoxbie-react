@@ -22,11 +22,9 @@ import {
   HistoricalTradeFinished,
   HistoricalTradeStarted,
 } from "trade-types";
+import createPersistedState from "use-persisted-state";
 import useResizeObserver from "use-resize-observer";
 
-import {
-  useCookie,
-} from "utils/Cookies";
 import {
   handleUnloadCreator,
 } from "utils/Utilities";
@@ -180,6 +178,23 @@ const getClosedTrade = (
   return currentTrade;
 };
 
+const useHistoricalHoldingsState = createPersistedState(
+  "historicalHoldings",
+);
+const useHistoricalLedgersState = createPersistedState(
+  "historicalLedgers",
+);
+const usePresentHoldingsState = createPersistedState(
+  "presentHoldings",
+);
+
+const initialLedger = {
+  totalBalance: 10000,
+  totalChange: 0,
+  totalReturns: 0,
+  totalCount: 0,
+};
+
 const TradeView: React.FC<Props> = (
   {
     prices,
@@ -207,31 +222,24 @@ const TradeView: React.FC<Props> = (
   const [
     historicalHoldings,
     setHistoricalHoldings,
-  ] = useCookie<HistoricalTradeFinished[]>(
-    "historicalHoldings",
+  ] = useHistoricalHoldingsState<HistoricalTradeFinished[]>(
     [],
   );
   const [
     historicalLedgers,
     setHistoricalLedgers,
-  ] = useCookie<HistoricalLedger[]>(
-    "historicalLedgers",
+  ] = useHistoricalLedgersState<HistoricalLedger[]>(
     [
-      {
-        totalBalance: 10000,
-        totalChange: 0,
-        totalReturns: 0,
-        totalCount: 0,
-      },
+      initialLedger,
     ],
   );
   const [
     presentHoldings,
     setPresentHoldings,
-  ] = useCookie<HistoricalTradeStarted[]>(
-    "presentHoldings",
+  ] = usePresentHoldingsState<HistoricalTradeStarted[]>(
     [],
   );
+
   const presentPrice = useMemo(
     () =>
     {
@@ -289,7 +297,6 @@ const TradeView: React.FC<Props> = (
     {
       setPresentHoldings(
         nextTrades,
-        30,
       );
     },
     [
@@ -306,7 +313,6 @@ const TradeView: React.FC<Props> = (
           ...nextTrades,
           ...historicalHoldings,
         ],
-        30,
       );
     },
     [
@@ -324,7 +330,6 @@ const TradeView: React.FC<Props> = (
           nextLedger,
           ...historicalLedgers,
         ],
-        30,
       );
     },
     [

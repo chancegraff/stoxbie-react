@@ -13,8 +13,8 @@
     "@types/styled-components": "^5.1.2",
     "@types/styletron-engine-atomic": "^1.1.0",
     "@types/styletron-react": "^5.0.2",
+    "@types/use-persisted-state": "^0.3.0",
     "@vx/vx": "0.0.198",
-    "baseui": "github:chancegraff/baseweb#v9.89.1",
     "chancegraff-react-scripts": "^4.0.3",
     "d3-array": "^2.4.0",
     "date-fns": "^2.15.0",
@@ -33,6 +33,7 @@
     "ts-essentials": "^7.0.0",
     "typescript": "^3.9.7",
     "use-debounce": "^3.4.3",
+    "use-persisted-state": "^0.3.0",
     "use-resize-observer": "^6.1.0"
   },
   "scripts": {
@@ -67,7 +68,6 @@
     "eslint": "^7.7.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-formatter-github": "^1.0.11",
-    "eslint-plugin-baseui": "^9.85.2",
     "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",

@@ -87,6 +87,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
 const SmallTable: React.FC<JSXTableProps> = styled(
   Table,
 )`
+min-width: 308px;
 font-size: ${
   (
     props,

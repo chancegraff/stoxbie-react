@@ -69,8 +69,17 @@ export const StyledDropCalendar: React.FC<DropCalendarProps> = (
 {
   return (
     <DropCalendar
+      max={new Date().toISOString()}
       plain={true}
       fill="horizontal"
+      dropProps={
+        {
+          align: {
+            top: "bottom",
+            left: "right",
+          },
+        }
+      }
       {...props}
     />
   );
