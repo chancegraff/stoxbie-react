@@ -1,6 +1,4 @@
-/**
- * TODO Fix these so that they take in and return an array of current and past trades
- */
+// TODO Fix these so that they take in and return an array of current and past trades
 
 export const calculateClose = (
   sharePrice,

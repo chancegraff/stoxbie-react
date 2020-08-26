@@ -21,7 +21,6 @@ type Props = {
   handleStart: (date: string) => void;
 };
 
-// TODO Replace DatePicker with Grommet
 const TradeStart: React.FC<Props> = (
   {
     handleStart,
