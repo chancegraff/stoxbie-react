@@ -9,19 +9,12 @@ import {
 } from "grommet";
 import styled from "styled-components";
 
-const StickyHeader: React.FC<JSXTableHeaderProps> = styled(
-  TableHeader,
-)`
-position: sticky;
-top: 0;
-`;
-
 export const StyledTableHeader: React.FC<JSXTableHeaderProps> = (
   props,
 ) =>
 {
   return (
-    <StickyHeader
+    <TableHeader
       {...props}
     />
   );
@@ -38,12 +31,20 @@ export const StyledTableRow: React.FC<JSXTableRowProps> = (
   );
 };
 
+const StickyTableCell: React.FC<JSXTableHeaderProps> = styled(
+  TableCell,
+)`
+position: sticky;
+top: 0;
+`;
+
 export const StyledTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {
   return (
-    <TableCell
+    <StickyTableCell
+      plain={true}
       scope="col"
       {...props}
     />
