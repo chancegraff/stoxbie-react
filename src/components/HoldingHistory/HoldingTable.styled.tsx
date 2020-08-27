@@ -69,6 +69,7 @@ const RelativeContainer: React.FC<JSXBoxProps> = styled(
   Box,
 )`
 position: relative;
+padding: 0 2px;
 `;
 
 export const StyledContainer: React.FC<JSXBoxProps> = (

@@ -469,6 +469,12 @@
             "error",
             "always"
         ],
+        "wrap-params/destructured-imports": [
+            "error",
+            {
+                "minProperties": 1
+            }
+        ],
         "wrap-params/destructured-objects": [
             "error",
             {

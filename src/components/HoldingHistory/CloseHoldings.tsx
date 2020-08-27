@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useCallback, useState,
+} from "react";
 import {
   HistoricalPrice,
 } from "iex-cloud";
@@ -7,7 +9,12 @@ import {
   HistoricalTradeStarted,
 } from "trade-types";
 
+import HoverIcon from "components/Grommet/HoverIcon";
+
 import {
+  StyledClosedIcon,
+  StyledContainer,
+  StyledOpenedIcon,
   StyledSubmitOrder,
 } from "./CloseHoldings.styled";
 
@@ -27,6 +34,32 @@ const CloseHoldings: React.FC<Props> = (
   },
 ) =>
 {
+  const [
+    hoverState,
+    setHoverState,
+  ] = useState<"idling" | "hovering">(
+    "idling",
+  );
+
+  const handleMouseOver = useCallback(
+    () =>
+    {
+      setHoverState(
+        "hovering",
+      );
+    },
+    [],
+  );
+  const handleMouseOut = useCallback(
+    () =>
+    {
+      setHoverState(
+        "idling",
+      );
+    },
+    [],
+  );
+
   if (!summarizedHoldings || !presentPrice || !presentLedger)
   {
     return null;
@@ -38,7 +71,18 @@ const CloseHoldings: React.FC<Props> = (
       orderDirection={(summarizedHoldings.openDirection * -1) as 1 | -1}
       orderShareCount={presentLedger.totalCount}
       handleSubmit={handleSubmit}
-    />
+    >
+      <StyledContainer
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      >
+        <HoverIcon
+          hoverState={hoverState}
+          MouseOverIcon={StyledClosedIcon}
+          MouseOutIcon={StyledOpenedIcon}
+        />
+      </StyledContainer>
+    </StyledSubmitOrder>
   );
 };
 

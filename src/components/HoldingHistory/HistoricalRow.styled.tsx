@@ -5,13 +5,22 @@ import {
   TableCell,
   TableRow,
 } from "grommet";
+import styled from "styled-components";
+
+const HoverableTableRow: React.FC<JSXTableRowProps> = styled(
+  TableRow,
+)`
+&:hover {
+  cursor: default;
+}
+`;
 
 export const StyledTableRow: React.FC<JSXTableRowProps> = (
   props,
 ) =>
 {
   return (
-    <TableRow
+    <HoverableTableRow
       {...props}
     />
   );
@@ -24,6 +33,13 @@ export const StyledTableCell: React.FC<JSXTableCellProps> = (
   return (
     <TableCell
       align="end"
+      border={
+        {
+          color: "background",
+          side: "all",
+          size: "1px",
+        }
+      }
       {...props}
     />
   );
