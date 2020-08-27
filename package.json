@@ -1,6 +1,6 @@
 {
-  "name": "stocks",
-  "version": "0.1.0",
+  "name": "stoxbie",
+  "version": "0.0.16",
   "private": true,
   "dependencies": {
     "@types/classnames": "^2.2.10",
@@ -40,7 +40,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom-fourteen",
-    "eject": "react-scripts eject",
     "format": "eslint --fix src",
     "check": "eslint --format github src"
   },
