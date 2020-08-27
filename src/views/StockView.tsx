@@ -6,7 +6,8 @@ import {
   Box,
 } from "grommet";
 import {
-  Company, Logo,
+  Company,
+  Logo,
 } from "iex-cloud";
 
 import PageContent from "components/PageTemplates/PageContent";

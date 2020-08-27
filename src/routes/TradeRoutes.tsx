@@ -5,8 +5,11 @@ import React, {
   useState,
 } from "react";
 import {
-  Route, RouteProps,
-  Switch, useParams, useRouteMatch,
+  Route,
+  RouteProps,
+  Switch,
+  useParams,
+  useRouteMatch,
 } from "react-router-dom";
 import {
   HistoricalPrice,

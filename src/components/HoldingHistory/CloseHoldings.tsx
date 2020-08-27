@@ -1,5 +1,6 @@
 import React, {
-  useCallback, useState,
+  useCallback,
+  useState,
 } from "react";
 import {
   HistoricalPrice,

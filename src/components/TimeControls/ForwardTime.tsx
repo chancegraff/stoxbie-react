@@ -6,7 +6,8 @@ import {
 } from "iex-cloud";
 
 import {
-  DateFormats, formatDate,
+  DateFormats,
+  formatDate,
 } from "utils/Utilities";
 
 import {

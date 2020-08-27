@@ -2,7 +2,8 @@ import React, {
   useMemo,
 } from "react";
 import {
-  Redirect, RouteProps,
+  Redirect,
+  RouteProps,
   useLocation,
   useRouteMatch,
 } from "react-router-dom";

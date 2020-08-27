@@ -1,9 +1,12 @@
 import React from "react";
 import {
-  Box, JSXBoxProps,
+  Box,
+  JSXBoxProps,
 } from "grommet";
 import {
-  Catalog, CatalogOption, JSXIconProps,
+  Catalog,
+  CatalogOption,
+  JSXIconProps,
 } from "grommet-icons";
 import {
   normalizeColor,

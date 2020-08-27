@@ -32,7 +32,8 @@ import {
   handleUnloadCreator,
 } from "utils/Utilities";
 import {
-  AspectRatioBox, AspectRatioItem,
+  AspectRatioBox,
+  AspectRatioItem,
 } from "components/Grommet/AspectRatio";
 import OrderForm from "components/HoldingControls/OrderForm";
 import HoldingTable from "components/HoldingHistory/HoldingTable";
