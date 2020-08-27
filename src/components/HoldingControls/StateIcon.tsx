@@ -27,7 +27,10 @@ const StateIcon: React.FC<Props> = (
 
   return (
     <StyledContainer>
-      <Icon data-testid="check" />
+      <Icon
+        size="12px"
+        data-testid="check"
+      />
     </StyledContainer>
   );
 };
