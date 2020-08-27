@@ -8,12 +8,16 @@ import {
 } from "react-router-dom";
 import {
   Anchor as DefaultAnchor,
-  AnchorProps,
+  AnchorProps as DefaultAnchorProps,
 } from "grommet";
 
-const Anchor: React.FC<LinkProps & AnchorProps & {
+type Props = LinkProps & DefaultAnchorProps & {
   to: string;
-}> = (
+};
+
+export type AnchorProps = Props;
+
+const Anchor: React.FC<Props> = (
   {
     children,
     to,

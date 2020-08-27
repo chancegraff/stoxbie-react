@@ -1,7 +1,14 @@
-import React from "react";
+import React, {
+  useMemo,
+} from "react";
 import {
   useParams,
 } from "react-router-dom";
+
+import {
+  DateFormats,
+  formatParsedDate,
+} from "utils/Utilities";
 
 import {
   DateBreadcrumb,
@@ -21,6 +28,23 @@ const PageBreadcrumbs: React.FC = () =>
     date: string;
   } = useParams();
 
+  const legibleDate = useMemo(
+    () =>
+    {
+      if (date)
+      {
+        return formatParsedDate(
+          date,
+          DateFormats.URL,
+          DateFormats.Full,
+        );
+      }
+    },
+    [
+      date,
+    ],
+  );
+
   return (
     <StyledTheme>
       <StyledContainer>
@@ -29,7 +53,7 @@ const PageBreadcrumbs: React.FC = () =>
           {ticker}
         </TickerBreadcrumb>
         <DateBreadcrumb>
-          {date}
+          {legibleDate}
         </DateBreadcrumb>
       </StyledContainer>
     </StyledTheme>

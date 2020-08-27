@@ -7,11 +7,14 @@ import {
 import {
   Box,
   JSXBoxProps,
+  JSXTextProps,
   Text,
   ThemeContext,
 } from "grommet";
 
-import Anchor from "components/Grommet/Anchor";
+import Anchor, {
+  AnchorProps,
+} from "components/Grommet/Anchor";
 
 export const StyledTheme: React.FC = (
   props,
@@ -22,8 +25,7 @@ export const StyledTheme: React.FC = (
       value={
         {
           anchor: {
-            color: "text",
-            fontWeight: "semibold",
+            fontWeight: "700",
             textDecoration: "underline",
             hover: {
               textDecoration: "none",
@@ -49,12 +51,48 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
+const StyledAnchor: React.FC<AnchorProps> = (
+  props,
+) =>
+{
+  return (
+    <Anchor
+      size="medium"
+      color="text"
+      margin={
+        {
+          right: "medium",
+        }
+      }
+      {...props}
+    />
+  );
+};
+
+const StyledText: React.FC<JSXTextProps> = (
+  props,
+) =>
+{
+  return (
+    <Text
+      size="medium"
+      weight={700}
+      margin={
+        {
+          right: "medium",
+        }
+      }
+      {...props}
+    />
+  );
+};
+
 export const RootBreadcrumb: React.FC = () =>
 {
   return (
-    <Anchor to="/">
+    <StyledAnchor to="/">
       Ticker Search
-    </Anchor>
+    </StyledAnchor>
   );
 };
 
@@ -75,16 +113,16 @@ export const TickerBreadcrumb: React.FC<PropsHasChildren> = (
   if (match)
   {
     return (
-      <Text>
+      <StyledText>
         {children}
-      </Text>
+      </StyledText>
     );
   }
 
   return (
-    <Anchor to={`/stock/${children}`}>
+    <StyledAnchor to={`/stock/${children}`}>
       {children}
-    </Anchor>
+    </StyledAnchor>
   );
 };
 
@@ -108,8 +146,8 @@ export const DateBreadcrumb: React.FC<PropsHasChildren> = (
   }
 
   return (
-    <Text>
+    <StyledText>
       {`Trading from ${children}`}
-    </Text>
+    </StyledText>
   );
 };
