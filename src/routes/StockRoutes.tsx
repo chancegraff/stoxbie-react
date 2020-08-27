@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import {
   Route,
+  RouteProps,
   Switch,
   useHistory,
   useParams,
@@ -31,7 +32,7 @@ import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
 
-const ViewRoute: React.FC = () =>
+const ViewRoute: React.FC<RouteProps> = () =>
 {
   const {
     ticker = "",
@@ -158,7 +159,7 @@ const ViewRoute: React.FC = () =>
   );
 };
 
-const StockRoutes: React.FC = () =>
+const StockRoutes: React.FC<RouteProps> = () =>
 {
   const match = useRouteMatch();
 

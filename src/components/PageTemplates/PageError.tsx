@@ -1,34 +1,77 @@
 import React, {
-  PropsHasChildren,
+  useMemo,
 } from "react";
 import {
-  Box,
+  Redirect, RouteProps,
+  useLocation,
+  useRouteMatch,
+} from "react-router-dom";
+import {
   Heading,
 } from "grommet";
 
+import {
+  DEFAULT_ERROR_MESSAGE,
+} from "utils/Constants";
 import PageContent from "components/PageTemplates/PageContent";
 
-const Error: React.FC<PropsHasChildren> = (
-  props,
+type Props = RouteProps;
+
+const Error: React.FC<Props> = (
+  {
+    children,
+  },
 ) =>
 {
-  return (
-    <PageContent>
-      <Box
-        width={
+  const location = useLocation<string>();
+  const match = useRouteMatch(
+    {
+      path: "/oops",
+    },
+  );
+
+  const message = useMemo(
+    () =>
+    {
+      if (!match)
+      {
+        return;
+      }
+      else if (!location || !location.state)
+      {
+        return DEFAULT_ERROR_MESSAGE;
+      }
+
+      return location.state;
+    },
+    [
+      match,
+      location,
+    ],
+  );
+
+  if (!match)
+  {
+    return (
+      <Redirect
+        to={
           {
-            min: "60%",
-            max: "100%",
+            pathname: "/oops",
+            state: children,
           }
         }
+      />
+    );
+  }
+
+  return (
+    <PageContent>
+      <Heading
+        size="medium"
+        level="1"
       >
-        <Heading
-          size="medium"
-          level="1"
-        >
-          {props.children}
-        </Heading>
-      </Box>
+        {message}
+      </Heading>
     </PageContent>
   );
 };

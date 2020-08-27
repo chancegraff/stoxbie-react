@@ -6,6 +6,9 @@ import React, {
   useState,
 } from "react";
 import {
+  RouteProps,
+} from "react-router-dom";
+import {
   closestIndexTo,
   parseISO,
 } from "date-fns";
@@ -38,7 +41,7 @@ import PageError from "components/PageTemplates/PageError";
 import ForwardTime from "components/TimeControls/ForwardTime";
 import StockChart from "components/VX/StockChart";
 
-type Props = {
+type Props = RouteProps &{
   date: Date | undefined;
   prices: HistoricalPrice[] | undefined;
   ticker: string | undefined;

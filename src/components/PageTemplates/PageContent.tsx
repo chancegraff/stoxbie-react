@@ -7,7 +7,7 @@ import {
 
 import AppCopyright from "components/AppBranding/AppCopyright";
 import AppLogo from "components/AppBranding/AppLogo";
-import PageBreadcrumb from "components/PageTemplates/PageBreadcrumb";
+import PageBreadcrumbs from "components/PageTemplates/PageBreadcrumbs";
 
 type Props = unknown;
 const pad = {
@@ -32,7 +32,7 @@ const ContentContainer: React.FC<Props> = (
         }
       >
         <AppLogo />
-        <PageBreadcrumb />
+        <PageBreadcrumbs />
       </Header>
       <Main
         height="auto !important"

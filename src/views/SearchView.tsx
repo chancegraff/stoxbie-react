@@ -4,6 +4,9 @@ import React, {
   useState,
 } from "react";
 import {
+  RouteProps,
+} from "react-router-dom";
+import {
   AsyncStates,
 } from "async-types";
 import {
@@ -27,7 +30,7 @@ import {
 import PageContent from "components/PageTemplates/PageContent";
 import SearchInput from "components/StockSearch/SearchInput";
 
-type Props = {
+type Props = RouteProps & {
   handleSearch: (nextValue: string) => Promise<Search[]>;
 };
 

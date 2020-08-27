@@ -1,5 +1,8 @@
 import React from "react";
 import {
+  RouteProps,
+} from "react-router-dom";
+import {
   Box,
 } from "grommet";
 import {
@@ -12,7 +15,7 @@ import CompanyLogo from "components/StockSearch/CompanyLogo";
 import CompanyName from "components/StockSearch/CompanyName";
 import ChooseDate from "components/TimeControls/ChooseDate";
 
-type Props = {
+type Props = RouteProps & {
   logo: Logo | undefined;
   company: Company | undefined;
   error?: string;

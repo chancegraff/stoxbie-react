@@ -5,7 +5,8 @@ import React, {
   useState,
 } from "react";
 import {
-  Route, Switch, useParams, useRouteMatch,
+  Route, RouteProps,
+  Switch, useParams, useRouteMatch,
 } from "react-router-dom";
 import {
   HistoricalPrice,
@@ -28,9 +29,9 @@ import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
 // import defPrices from "../views/TradeView/tests/prices";
 
-type Props = unknown;
+type Props = RouteProps;
 
-const TradeRoute: React.FC = () =>
+const TradeRoute: React.FC<RouteProps> = () =>
 {
   const {
     ticker = "",

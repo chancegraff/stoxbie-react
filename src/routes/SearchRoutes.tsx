@@ -2,12 +2,15 @@ import React, {
   useCallback,
 } from "react";
 import {
+  RouteProps,
+} from "react-router-dom";
+import {
   search,
 } from "iex-cloud";
 
 import SearchView from "views/SearchView";
 
-type Props = unknown;
+type Props = RouteProps;
 
 const SearchRoutes: React.FC<Props> = () =>
 {
