@@ -1,13 +1,15 @@
 import React, {
-  useCallback, useEffect, useMemo, useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
 import {
-  Route, Switch, useParams, useRouteMatch,
+  Route, RouteProps,
+  Switch, useParams, useRouteMatch,
 } from "react-router-dom";
 import {
   HistoricalPrice,
-} from "iex";
-import {
   historicalPrices,
 } from "iex-cloud";
 
@@ -21,22 +23,22 @@ import {
   handleUnloadCreator,
   parseDate,
 } from "utils/Utilities";
-import ScrollToTop from "services/ScrollToTop";
-import PageError from "templates/PageError";
 import TradeView from "views/TradeView";
+import PageError from "components/PageTemplates/PageError";
+import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
 // import defPrices from "../views/TradeView/tests/prices";
 
-type Props = unknown;
+type Props = RouteProps;
 
-const TradeRoute: React.FC = () =>
+const TradeRoute: React.FC<RouteProps> = () =>
 {
   const {
     ticker = "",
     date = "",
   } = useParams<{
-    ticker?: string;
-    date?: string;
+    ticker: string | undefined;
+    date: string | undefined;
   }>();
   const [
     prices,
@@ -86,7 +88,7 @@ const TradeRoute: React.FC = () =>
 
   const handleLoad = useCallback(
     async (
-      nextTicker?: string,
+      nextTicker: string | undefined,
     ) =>
     {
       if (nextTicker)
@@ -164,7 +166,7 @@ const TradeRoutes: React.FC<Props> = () =>
   return (
     <Switch>
       <Route path={`${match.path}/:ticker/:date`}>
-        <ScrollToTop />
+        <PageScrollToTop />
         <TradeRoute />
       </Route>
       <Route path={`${match.path}/:ticker`}>

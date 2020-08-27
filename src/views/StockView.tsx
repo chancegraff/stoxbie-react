@@ -1,20 +1,23 @@
 import React from "react";
 import {
+  RouteProps,
+} from "react-router-dom";
+import {
   Box,
 } from "grommet";
 import {
   Company, Logo,
 } from "iex-cloud";
 
-import PageContent from "templates/PageContent";
-import PageError from "templates/PageError";
-import StockLogo from "components/StockSearch/StockLogo";
-import StockName from "components/StockSearch/StockName";
-import TradeStart from "components/TradeControl/TradeStart";
+import PageContent from "components/PageTemplates/PageContent";
+import PageError from "components/PageTemplates/PageError";
+import CompanyLogo from "components/StockSearch/CompanyLogo";
+import CompanyName from "components/StockSearch/CompanyName";
+import ChooseDate from "components/TimeControls/ChooseDate";
 
-type Props = {
-  logo?: Logo;
-  company?: Company;
+type Props = RouteProps & {
+  logo: Logo | undefined;
+  company: Company | undefined;
   error?: string;
   handleStart: (date: string) => void;
 };
@@ -40,7 +43,7 @@ const StockView: React.FC<Props> = (
         width="100%"
       >
         <Box>
-          <StockLogo logo={props.logo} />
+          <CompanyLogo logo={props.logo} />
         </Box>
         <Box
           margin={
@@ -54,7 +57,7 @@ const StockView: React.FC<Props> = (
             }
           }
         >
-          <StockName company={props.company} />
+          <CompanyName company={props.company} />
         </Box>
         <Box
           margin={
@@ -64,11 +67,11 @@ const StockView: React.FC<Props> = (
           }
           height={
             {
-              min: "52px",
+              min: "62px",
             }
           }
         >
-          <TradeStart handleStart={props.handleStart} />
+          <ChooseDate handleStart={props.handleStart} />
         </Box>
       </Box>
     </PageContent>

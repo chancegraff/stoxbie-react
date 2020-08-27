@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useContext,
 } from "react";
 import {
   AxisBottom as DefaultAxisBottom,
@@ -8,8 +9,11 @@ import {
   TextProps,
 } from "@vx/text/lib/Text";
 import {
-  useStyletron,
-} from "baseui/dist";
+  normalizeColor,
+} from "grommet/utils";
+import {
+  ThemeContext,
+} from "styled-components";
 
 import {
   DateFormats,
@@ -38,10 +42,9 @@ const AxisBottom: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
+  const theme = useContext(
+    ThemeContext,
+  );
   const tickFormat = useCallback(
     (
       tick: Date,
@@ -67,12 +70,22 @@ const AxisBottom: React.FC<Props> = (
       labelProps={labelProps}
       numTicks={12}
       scale={xScale}
-      stroke={theme.colors.mono400}
+      stroke={
+        normalizeColor(
+          theme.global.colors["text-xweak"],
+          theme,
+        )
+      }
       tickComponent={TimeLabel}
       tickFormat={tickFormat}
       tickLabelProps={tickLabelProps}
       tickLength={5}
-      tickStroke={theme.colors.mono400}
+      tickStroke={
+        normalizeColor(
+          theme.global.colors["text-xweak"],
+          theme,
+        )
+      }
       top={yMax}
     />
   );

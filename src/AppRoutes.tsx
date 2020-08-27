@@ -7,6 +7,7 @@ import {
 import SearchRoutes from "routes/SearchRoutes";
 import StockRoutes from "routes/StockRoutes";
 import TradeRoutes from "routes/TradeRoutes";
+import PageError from "components/PageTemplates/PageError";
 
 const AppRoutes: React.FC = () =>
 {
@@ -17,6 +18,9 @@ const AppRoutes: React.FC = () =>
       </Route>
       <Route path="/stock">
         <StockRoutes />
+      </Route>
+      <Route path="/oops">
+        <PageError />
       </Route>
       <Route path="/">
         <SearchRoutes />

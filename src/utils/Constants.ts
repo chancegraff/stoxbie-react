@@ -4,6 +4,8 @@ export const URL_DATE_FORMAT = "'m'MM'd'dd'y'y";
 export const IEX_DATE_FORMAT = "y-MM-dd";
 export const TRADE_DATE_OUTPUTS = "[m]MM[d]DD[y]YYYY";
 
+export const DEFAULT_ERROR_MESSAGE = "There was a problem, please try again.";
+
 export const FETCH_ERROR_MESSAGE =
   "There was a problem attempting to load trading information for the stock you requested.";
 

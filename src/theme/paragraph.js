@@ -1,17 +1,17 @@
 export default {
   small: {
-    size: "15px",
-    height: "21px",
+    size: "12px",
+    height: "18px",
     maxWidth: "360px",
   },
   medium: {
-    size: "18px",
-    height: "24px",
+    size: "16px",
+    height: "22px",
     maxWidth: "432px",
   },
   large: {
-    size: "24px",
-    height: "30px",
+    size: "20px",
+    height: "26px",
     maxWidth: "576px",
   },
   xlarge: {

@@ -13,6 +13,7 @@ import colors from "./colors";
 import control from "./control";
 import drop from "./drop";
 import edgeSize from "./edgeSize";
+import elevation from "./elevation";
 import font from "./font";
 import heading from "./heading";
 import layer from "./layer";
@@ -25,6 +26,7 @@ const global = {
   font,
   control,
   drop,
+  elevation,
   borderSize,
   breakpoints,
   edgeSize,

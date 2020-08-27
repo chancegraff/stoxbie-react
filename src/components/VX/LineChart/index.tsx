@@ -6,11 +6,16 @@ import {
   TextProps,
 } from "@vx/text/lib/Text";
 import {
-  styled,
-} from "baseui/dist";
+  normalizeColor,
+} from "grommet/utils";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  Padding,
+  Resolution,
+} from "style-types";
+import styled from "styled-components";
 
 import withShared from "components/VX/Shared";
 import {
@@ -27,7 +32,6 @@ import AxisBottom from "./AxisBottom";
 import AxisRight from "./AxisRight";
 import Grid from "./Grid";
 import LinePath from "./LinePath";
-// import LinePoints from "./LinePoints";
 
 export type AxisLabelProps = Partial<TextProps>;
 export type TickLabelProps = () => Partial<TextProps>;
@@ -45,17 +49,19 @@ type Props = {
 
 const Rect = styled(
   "rect",
+)`
+fill: ${
   (
-    {
-      $theme,
-    },
+    props,
   ) =>
   {
-    return {
-      fill: $theme.colors.backgroundSecondary,
-    };
-  },
-);
+    return normalizeColor(
+      props.theme.global.colors["background-contrast"],
+      props.theme,
+    );
+  }
+};
+`;
 
 const displayNone = {
   display: "none",
@@ -128,13 +134,6 @@ const LineChart: React.FC<Props> = (
           xMax={xMax}
           yScale={yScale}
         />
-        {/* <LinePoints
-        prices={prices}
-        xScale={xScale}
-        yScale={yScale}
-        xSelector={xSelector}
-        ySelector={ySelector}
-      /> */}
         <LinePath
           prices={prices}
           xScale={xScale}

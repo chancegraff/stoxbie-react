@@ -39,12 +39,16 @@ export default {
     dark: "#909090",
     light: "#6F6F6F",
   },
+  "text-xxweak": {
+    dark: "#303030",
+    light: "#CFCFCF",
+  },
   border: {
     dark: "#404040",
     light: "#CFCFCF",
   },
   control: "brand",
-  focus: "",
+  focus: "none",
   "active-background": "background-contrast",
   "active-text": "text-strong",
   "selected-background": "brand",

@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useContext,
+} from "react";
 import {
   curveLinear,
 } from "@vx/curve";
@@ -6,14 +8,18 @@ import {
   LinePath as DefaultLinePath,
 } from "@vx/shape";
 import {
-  useStyletron,
-} from "baseui/dist";
+  normalizeColor,
+} from "grommet/utils";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
+import {
+  ThemeContext,
+} from "styled-components";
 
 import {
-  ScaleX, ScaleY,
+  ScaleX,
+  ScaleY,
 } from "components/VX/Shared/Scale";
 
 type Props = {
@@ -34,17 +40,21 @@ const LinePath: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    ,
-    theme,
-  ] = useStyletron();
+  const theme = useContext(
+    ThemeContext,
+  );
 
   return (
     <DefaultLinePath
       curve={curveLinear}
       data={prices}
       shapeRendering="geometricPrecision"
-      stroke={theme.colors.contentPrimary}
+      stroke={
+        normalizeColor(
+          theme.global.colors["text-strong"],
+          theme,
+        )
+      }
       strokeWidth={1}
       x={
         (

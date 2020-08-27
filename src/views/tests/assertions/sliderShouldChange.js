@@ -7,7 +7,7 @@ const sliderShouldChange = (
   return expect(
     TradeSlider(),
   ).toHaveAttribute(
-    "aria-valuenow",
+    "value",
     count,
   );
 };

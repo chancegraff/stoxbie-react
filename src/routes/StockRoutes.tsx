@@ -1,8 +1,12 @@
 import React, {
-  useCallback, useEffect, useMemo, useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from "react";
 import {
   Route,
+  RouteProps,
   Switch,
   useHistory,
   useParams,
@@ -21,19 +25,19 @@ import {
 import {
   handleUnloadCreator,
 } from "utils/Utilities";
-import ScrollToTop from "services/ScrollToTop";
-import PageError from "templates/PageError";
 import StockView from "views/StockView";
+import PageError from "components/PageTemplates/PageError";
+import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
 
-const ViewRoute: React.FC = () =>
+const ViewRoute: React.FC<RouteProps> = () =>
 {
   const {
     ticker = "",
   } = useParams<{
-    ticker?: string;
+    ticker: string | undefined;
   }>();
   const history = useHistory();
 
@@ -86,7 +90,7 @@ const ViewRoute: React.FC = () =>
 
   const handleLoad = useCallback(
     async (
-      nextTicker?: string,
+      nextTicker: string | undefined,
     ) =>
     {
       if (nextTicker)
@@ -155,18 +159,18 @@ const ViewRoute: React.FC = () =>
   );
 };
 
-const StockRoutes: React.FC = () =>
+const StockRoutes: React.FC<RouteProps> = () =>
 {
   const match = useRouteMatch();
 
   return (
     <Switch>
       <Route path={`${match.path}/:ticker`}>
-        <ScrollToTop />
+        <PageScrollToTop />
         <ViewRoute />
       </Route>
       <Route path={match.path}>
-        <ScrollToTop />
+        <PageScrollToTop />
         <PageError>
           Please select a stock to view.
         </PageError>

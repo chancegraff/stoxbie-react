@@ -1,51 +1,34 @@
-import React, {
-  Ref,
-} from "react";
+import React from "react";
 import {
-  Box, BoxProps,
+  JSXBoxProps,
 } from "grommet";
-import styled from "styled-components";
 
-export type SkeletonProps = PropsWithChildren & BoxProps & {
-  ref?: Ref<HTMLDivElement>;
-  on: boolean;
+import {
+  StyledBox,
+  StyledContainer,
+} from "./Skeleton.styled";
+
+export type JSXSkeletonProps = JSXBoxProps & {
+  Container?: React.FC<JSXBoxProps> | "off";
 };
 
-const ShimmeringBox = styled(
-  Box,
-)`
-  animation : shimmer 2s infinite;
-  background-size: 2000px;
-`;
-
-const Skeleton: React.FC<SkeletonProps> = (
+const Skeleton: React.FC<JSXSkeletonProps> = (
   {
-    ref,
-    children,
-    on,
+    Container = StyledContainer,
     ...props
   },
 ) =>
 {
-  return on === false
-    ? (
-      <>
-        {children}
-      </>
-    )
-    : (
-      <ShimmeringBox
-        ref={ref}
-        fill={true}
-        background={
-          {
-            dark: "linear-gradient(to right, #181818 0%, #000000 25%, #181818 50%)",
-            light: "linear-gradient(to right, #F8F8F8 0%, #FFFFFF 25%, #F8F8F8 50%)",
-          }
-        }
-        {...props}
-      />
-    );
+  if (Container === "off")
+  {
+    return <StyledBox {...props} />;
+  }
+
+  return (
+    <Container>
+      <StyledBox {...props} />
+    </Container>
+  );
 };
 
 export default Skeleton;

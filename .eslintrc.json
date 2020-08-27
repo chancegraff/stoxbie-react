@@ -33,20 +33,18 @@
     "overrides": [
         {
             "files": [
-                "**/**.ts",
-                "**/**.tsx"
+                "*.ts",
+                "*.tsx",
+                "*.*.ts",
+                "*.*.tsx"
             ],
             "extends": [
                 "plugin:@typescript-eslint/recommended",
-                "plugin:@typescript-eslint/recommended-requiring-type-checking",
                 "plugin:@typescript-eslint/eslint-recommended"
             ],
             "plugins": [
                 "@typescript-eslint"
             ],
-            "parserOptions": {
-                "project": "../tsconfig.json"
-            },
             "rules": {
                 "@typescript-eslint/no-explicit-any": "off",
                 "@typescript-eslint/explicit-function-return-type": "off",
@@ -55,13 +53,28 @@
                 "@typescript-eslint/member-delimiter-style": "error",
                 "@typescript-eslint/no-floating-promises": "off",
                 "@typescript-eslint/no-unsafe-assignment": "off",
-                "@typescript-eslint/no-unsafe-call": "off"
+                "@typescript-eslint/no-unsafe-call": "off",
+                "@typescript-eslint/no-empty-interface": "off",
+                "indent": "off",
+                "@typescript-eslint/indent": [
+                    "error",
+                    2,
+                    {
+                        "ignoredNodes": [
+                            "TemplateLiteral > *"
+                        ]
+                    }
+                ],
+                "init-declarations": "off",
+                "@typescript-eslint/init-declarations": [
+                    "error"
+                ]
             }
         },
         {
             "files": [
-                "**/**.js",
-                "**/**.test.js"
+                "*.js",
+                "*.*.js"
             ],
             "extends": [
                 "plugin:jest/recommended"
@@ -89,7 +102,6 @@
     "ignorePatterns": [
         "node_modules",
         "eslint",
-        "mocks",
         "setupTests.js"
     ],
     "rules": {
@@ -398,10 +410,16 @@
         "wrap-regex": "error",
         "yield-star-spacing": "error",
         "yoda": "error",
-
         "react/prop-types": 0,
         "react/display-name": 0,
         "react/jsx-closing-bracket-location": "error",
+        "react/jsx-indent": [
+            "error",
+            2,
+            {
+                "indentLogicalExpressions": true
+            }
+        ],
         "react/jsx-sort-props": [
             "error",
             {

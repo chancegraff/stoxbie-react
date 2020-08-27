@@ -12,7 +12,7 @@ import {
 } from "d3-scale";
 import {
   HistoricalPrice,
-} from "iex";
+} from "iex-cloud";
 
 import {
   Max, MaxX, MaxY,
@@ -152,38 +152,36 @@ const withScale = <P extends React.PropsWithChildren<Props>>(
         props.max,
       ],
     );
-    const xScale: ScaleTime<number,
- number> = useMemo(
-   () =>
-   {
-     return xScaleCreator(
-       props.prices,
-       select.xSelector,
-       maxs.xMax,
-     );
-   },
-   [
-     props.prices,
-     select,
-     maxs,
-   ],
- );
-    const yScale: ScaleLinear<number,
- number> = useMemo(
-   () =>
-   {
-     return yScaleCreator(
-       props.prices,
-       select.ySelector,
-       maxs.yMax,
-     );
-   },
-   [
-     props.prices,
-     select,
-     maxs,
-   ],
- );
+    const xScale: ScaleTime<number, number> = useMemo(
+      () =>
+      {
+        return xScaleCreator(
+          props.prices,
+          select.xSelector,
+          maxs.xMax,
+        );
+      },
+      [
+        props.prices,
+        select,
+        maxs,
+      ],
+    );
+    const yScale: ScaleLinear<number, number> = useMemo(
+      () =>
+      {
+        return yScaleCreator(
+          props.prices,
+          select.ySelector,
+          maxs.yMax,
+        );
+      },
+      [
+        props.prices,
+        select,
+        maxs,
+      ],
+    );
 
     return (
       <WrappedChart

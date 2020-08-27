@@ -5,7 +5,7 @@ import {
 const TickerInput = () =>
 {
   return screen.getByRole(
-    "combobox",
+    "search",
   );
 };
 

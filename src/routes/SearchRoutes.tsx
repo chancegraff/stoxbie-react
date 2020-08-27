@@ -1,27 +1,22 @@
-import React from "react";
+import React, {
+  useCallback,
+} from "react";
 import {
-  Search, search,
+  RouteProps,
+} from "react-router-dom";
+import {
+  search,
 } from "iex-cloud";
-import {
-  useDebouncedCallback,
-} from "use-debounce";
 
-import {
-  DEBOUNCE_INPUT_MS,
-} from "utils/Constants";
 import SearchView from "views/SearchView";
 
-type Props = unknown;
+type Props = RouteProps;
 
 const SearchRoutes: React.FC<Props> = () =>
 {
-  const [
-    handleSearch,
-  ] = useDebouncedCallback(
+  const handleSearch = useCallback(
     async (
       nextValue: string,
-      setOptions: React.Dispatch<React.SetStateAction<Search[]>>,
-      setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
     ) =>
     {
       const [
@@ -30,17 +25,14 @@ const SearchRoutes: React.FC<Props> = () =>
         nextValue,
       );
 
-      setOptions(
-        options,
-      );
-      setIsLoading(
-        false,
-      );
+      return options;
     },
-    DEBOUNCE_INPUT_MS,
+    [],
   );
 
-  return <SearchView handleSearch={handleSearch} />;
+  return (
+    <SearchView handleSearch={handleSearch}/>
+  );
 };
 
 export default SearchRoutes;
