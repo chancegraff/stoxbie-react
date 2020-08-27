@@ -38,7 +38,6 @@ type Props = {
 const StockInput: React.FC<Props> = (
   {
     handleSearch,
-    searchState,
     searchResults,
   },
 ) =>

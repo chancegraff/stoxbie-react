@@ -6,12 +6,7 @@ import {
   StyledTableRow,
 } from "./TableHeader.styled";
 
-type Props = {
-};
-
-const TableHeader: React.FC<Props> = (
-  props,
-) =>
+const TableHeader: React.FC = () =>
 {
   return (
     <StyledTableHeader>
