@@ -49,7 +49,7 @@ const Grid: React.FC<Props> = (
       numTicksRows={13}
       stroke={
         normalizeColor(
-          theme.global.colors["text-xweak"],
+          theme.global.colors["text-xxweak"],
           theme,
         )
       }

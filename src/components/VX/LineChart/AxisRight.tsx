@@ -50,7 +50,7 @@ const AxisRight: React.FC<Props> = (
       scale={yScale}
       stroke={
         normalizeColor(
-          theme.global.colors["text-strong"],
+          theme.global.colors["text-xweak"],
           theme,
         )
       }
@@ -58,7 +58,7 @@ const AxisRight: React.FC<Props> = (
       tickLength={5}
       tickStroke={
         normalizeColor(
-          theme.global.colors["text-strong"],
+          theme.global.colors["text-xweak"],
           theme,
         )
       }

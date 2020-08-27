@@ -39,6 +39,10 @@ export default {
     dark: "#909090",
     light: "#6F6F6F",
   },
+  "text-xxweak": {
+    dark: "#303030",
+    light: "#CFCFCF",
+  },
   border: {
     dark: "#404040",
     light: "#CFCFCF",
