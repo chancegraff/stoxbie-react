@@ -167,6 +167,7 @@ const StockInput: React.FC<Props> = (
     <StyledTheme>
       <StyledContainer dropState={dropState}>
         <StyledTextInput
+          role="search"
           value={value}
           suggestions={suggestions}
           onChange={handleChange}

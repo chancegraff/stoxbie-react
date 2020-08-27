@@ -62,7 +62,7 @@ const PresentRow: React.FC<Props> = (
   );
 
   return (
-    <StyledTableRow>
+    <StyledTableRow role="row">
       <StyledTableCell>
         {shareCount}
       </StyledTableCell>

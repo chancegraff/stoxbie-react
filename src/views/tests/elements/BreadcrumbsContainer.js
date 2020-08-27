@@ -4,8 +4,8 @@ import {
 
 const BreadcrumbsContainer = () =>
 {
-  return screen.getByLabelText(
-    "Breadcrumbs navigation",
+  return screen.getByTestId(
+    "breadcrumbs",
   );
 };
 

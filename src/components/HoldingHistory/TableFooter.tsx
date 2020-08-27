@@ -61,7 +61,7 @@ const TableFooter: React.FC<Props> = (
 
   return (
     <StyledTableFooter>
-      <StyledTableRow>
+      <StyledTableRow role="footerRow">
         <StyledTableCell>
           Change
         </StyledTableCell>

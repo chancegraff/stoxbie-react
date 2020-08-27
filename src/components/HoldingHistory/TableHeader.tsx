@@ -15,7 +15,7 @@ const TableHeader: React.FC<Props> = (
 {
   return (
     <StyledTableHeader>
-      <StyledTableRow>
+      <StyledTableRow role="headerRow">
         <StyledTableCell>
           Shares
         </StyledTableCell>

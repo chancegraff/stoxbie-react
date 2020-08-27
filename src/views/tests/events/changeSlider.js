@@ -2,14 +2,14 @@ import {
   fireEvent,
 } from "@testing-library/react";
 
-import TradeSliderInput from "views/tests/elements/TradeSliderInput";
+import TradeSlider from "../elements/TradeSlider";
 
 const changeSlider = (
   value,
 ) =>
 {
   fireEvent.change(
-    TradeSliderInput(),
+    TradeSlider(),
     {
       target: {
         value,

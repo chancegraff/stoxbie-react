@@ -143,6 +143,7 @@ const ChooseShares: React.FC<Props> = (
   return (
     <StyledContainer>
       <RangeInput
+        role="slider"
         max={maxValue}
         value={orderShareCount}
         onChange={handleChange}

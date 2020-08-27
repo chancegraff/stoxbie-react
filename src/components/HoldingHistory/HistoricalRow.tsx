@@ -97,7 +97,7 @@ const HistoricalRow: React.FC<Props> = (
   );
 
   return (
-    <StyledTableRow>
+    <StyledTableRow role="row">
       <StyledTableCell>
         {shares}
       </StyledTableCell>

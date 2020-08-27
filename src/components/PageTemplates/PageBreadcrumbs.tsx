@@ -47,7 +47,7 @@ const PageBreadcrumbs: React.FC = () =>
 
   return (
     <StyledTheme>
-      <StyledContainer>
+      <StyledContainer data-testid="breadcrumbs">
         <RootBreadcrumb />
         <TickerBreadcrumb>
           {ticker}
