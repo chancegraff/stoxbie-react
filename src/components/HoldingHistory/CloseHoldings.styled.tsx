@@ -77,7 +77,7 @@ export const StyledClosedIcon: React.FC<JSXIconProps> = (
 {
   return (
     <CatalogOption
-      size="12px"
+      size="10px"
       {...props}
     />
   );

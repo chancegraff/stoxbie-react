@@ -1,7 +1,4 @@
-import React, {
-  useCallback,
-  useState,
-} from "react";
+import React from "react";
 import {
   HistoricalPrice,
 } from "iex-cloud";
@@ -10,6 +7,9 @@ import {
   HistoricalTradeStarted,
 } from "trade-types";
 
+import {
+  useHover,
+} from "utils/Hooks";
 import HoverIcon from "components/Grommet/HoverIcon";
 
 import {
@@ -35,31 +35,11 @@ const CloseHoldings: React.FC<Props> = (
   },
 ) =>
 {
-  const [
+  const {
     hoverState,
-    setHoverState,
-  ] = useState<"idling" | "hovering">(
-    "idling",
-  );
-
-  const handleMouseOver = useCallback(
-    () =>
-    {
-      setHoverState(
-        "hovering",
-      );
-    },
-    [],
-  );
-  const handleMouseOut = useCallback(
-    () =>
-    {
-      setHoverState(
-        "idling",
-      );
-    },
-    [],
-  );
+    handleMouseOver,
+    handleMouseOut,
+  } = useHover();
 
   if (!summarizedHoldings || !presentPrice || !presentLedger)
   {

@@ -3,8 +3,12 @@ import {
   JSXIconProps,
 } from "grommet-icons";
 
+import {
+  HoverState,
+} from "utils/Hooks";
+
 type Props = {
-  hoverState: "idling" | "hovering";
+  hoverState: HoverState;
   MouseOutIcon: React.FC<JSXIconProps>;
   MouseOverIcon: React.FC<JSXIconProps>;
 };
@@ -17,7 +21,7 @@ const HoverIcon: React.FC<Props> = (
   },
 ) =>
 {
-  if (hoverState === "idling")
+  if (hoverState === HoverState.Idling)
   {
     return <MouseOutIcon />;
   }

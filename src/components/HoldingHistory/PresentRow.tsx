@@ -7,6 +7,9 @@ import {
 } from "trade-types";
 
 import {
+  useHover,
+} from "utils/Hooks";
+import {
   formatCount,
   formatCurrency,
 } from "utils/Utilities";
@@ -27,6 +30,12 @@ const PresentRow: React.FC<Props> = (
   },
 ) =>
 {
+  const {
+    hoverState,
+    handleMouseOver,
+    handleMouseOut,
+  } = useHover();
+
   const shareCount = useMemo(
     () =>
     {
@@ -62,7 +71,11 @@ const PresentRow: React.FC<Props> = (
   );
 
   return (
-    <StyledTableRow role="row">
+    <StyledTableRow
+      role="row"
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+    >
       <StyledTableCell>
         {shareCount}
       </StyledTableCell>
@@ -75,6 +88,7 @@ const PresentRow: React.FC<Props> = (
       <StyledTableCell>
         {totalBalance}
       </StyledTableCell>
+
     </StyledTableRow>
   );
 };
