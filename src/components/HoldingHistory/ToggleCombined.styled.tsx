@@ -7,8 +7,8 @@ import {
 } from "grommet";
 import {
   JSXIconProps,
-  Layer,
   Stop,
+  Subtract,
 } from "grommet-icons";
 import styled from "styled-components";
 
@@ -68,7 +68,7 @@ export const StyledOpenedIcon: React.FC<JSXIconProps> = (
 ) =>
 {
   return (
-    <Layer size="12px" />
+    <Stop size="12px" />
   );
 };
 
@@ -77,6 +77,6 @@ export const StyledClosedIcon: React.FC<JSXIconProps> = (
 ) =>
 {
   return (
-    <Stop size="12px" />
+    <Subtract size="12px" />
   );
 };

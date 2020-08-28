@@ -54,7 +54,7 @@ const PresentBody: React.FC<Props> = (
         {children}
       </PresentRow>
       <ToggleCombined
-        presentRow={presentRowRef.current}
+        rowToTarget={presentRowRef.current}
         rowHoverState={rowHoverState}
       />
     </StyledTableBody>

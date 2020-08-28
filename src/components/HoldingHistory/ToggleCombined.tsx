@@ -14,13 +14,13 @@ import {
 } from "./ToggleCombined.styled";
 
 type Props = {
-  presentRow: HTMLTableRowElement | undefined;
+  rowToTarget: HTMLTableRowElement | undefined;
   rowHoverState: HoverState;
 };
 
 const ToggleCombined: React.FC<Props> = (
   {
-    presentRow,
+    rowToTarget,
     rowHoverState,
   },
 ) =>
@@ -31,13 +31,13 @@ const ToggleCombined: React.FC<Props> = (
     handleMouseLeaveButton,
   ] = useHover();
 
-  if (!presentRow || rowHoverState === HoverState.Idling)
+  if (!rowToTarget || rowHoverState === HoverState.Idling)
   {
     return null;
   }
 
   return (
-    <StyledDrop target={presentRow}>
+    <StyledDrop target={rowToTarget}>
       <StyledContainer
         onMouseEnter={handleMouseEnterButton}
         onMouseLeave={handleMouseLeaveButton}

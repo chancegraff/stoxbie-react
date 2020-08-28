@@ -79,7 +79,12 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   return (
     <RelativeContainer
       fill="vertical"
-      overflow="auto"
+      overflow={
+        {
+          vertical: "auto",
+          horizontal: "hidden",
+        }
+      }
       {...props}
     />
   );
