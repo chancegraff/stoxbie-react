@@ -35,11 +35,11 @@ const CloseHoldings: React.FC<Props> = (
   },
 ) =>
 {
-  const {
+  const [
     hoverState,
-    handleMouseOver,
-    handleMouseOut,
-  } = useHover();
+    handleMouseEnter,
+    handleMouseLeave,
+  ] = useHover();
 
   if (!summarizedHoldings || !presentPrice || !presentLedger)
   {
@@ -54,8 +54,8 @@ const CloseHoldings: React.FC<Props> = (
       handleSubmit={handleSubmit}
     >
       <StyledContainer
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <HoverIcon
           hoverState={hoverState}

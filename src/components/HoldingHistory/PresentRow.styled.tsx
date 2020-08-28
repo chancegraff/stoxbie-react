@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  forwardRef,
+} from "react";
 import {
   JSXTableCellProps,
   JSXTableRowProps,
@@ -32,16 +34,20 @@ box-shadow: ${
 }
 `;
 
-export const StyledTableRow: React.FC<JSXTableRowProps> = (
-  props,
-) =>
-{
-  return (
-    <HoverableTableRow
-      {...props}
-    />
-  );
-};
+export const StyledTableRow: React.FC<JSXTableRowProps> = forwardRef(
+  (
+    props,
+    ref,
+  ) =>
+  {
+    return (
+      <HoverableTableRow
+        ref={ref}
+        {...props}
+      />
+    );
+  },
+);
 
 export const StyledTableCell: React.FC<JSXTableCellProps> = (
   props,

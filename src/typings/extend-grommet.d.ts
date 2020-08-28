@@ -7,6 +7,7 @@ import {
   ButtonProps,
   CalendarProps,
   DropButtonProps,
+  DropProps,
   GridProps,
   ImageProps,
   TableBodyProps,
@@ -21,6 +22,7 @@ import {
 } from "grommet";
 import {
   DeepRequired,
+  MarkRequired,
 } from "ts-essentials";
 
 declare module "grommet" {
@@ -75,6 +77,7 @@ declare module "grommet" {
   declare type IntrinsicTextInput = Omit<IntrinsicInput, "onSelect" | "size" | "placeholder">;
 
   declare type JSXBoxProps = BoxProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
+  declare type JSXDropProps = MarkRequired<DropProps, "target"> & JSXProps<HTMLDivElement, IntrinsicDiv>;
   declare type JSXImageProps = ImageProps & JSXProps<HTMLImageElement, IntrinsicImage>;
   declare type JSXTextProps = TextProps & JSXProps<HTMLSpanElement, IntrinsicSpan>;
   declare type JSXAvatarProps = AvatarProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
@@ -93,6 +96,7 @@ declare module "grommet" {
 
   /* eslint-disable newline-after-var */
   declare const Box: React.FC<JSXBoxProps>;
+  declare const Drop: React.FC<JSXDropProps>;
   declare const Calendar: React.FC<JSXCalendarProps>;
   declare const Image: React.FC<JSXImageProps>;
   declare const Text: React.FC<JSXTextProps>;

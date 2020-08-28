@@ -8,15 +8,15 @@ export enum HoverState {
   Hovering,
 }
 
-export type HandleMouseOver = () => void;
+export type HandleMouseEnter = () => void;
 
-export type HandleMouseOut = () => void;
+export type HandleMouseLeave = () => void;
 
-export const useHover = (): {
-  hoverState: HoverState;
-  handleMouseOver: HandleMouseOver;
-  handleMouseOut: HandleMouseOut;
-} =>
+export const useHover = (): [
+  HoverState,
+  HandleMouseEnter,
+  HandleMouseLeave,
+] =>
 {
   const [
     hoverState,
@@ -25,16 +25,7 @@ export const useHover = (): {
     HoverState.Idling,
   );
 
-  const handleMouseOver = useCallback(
-    () =>
-    {
-      setHoverState(
-        HoverState.Hovering,
-      );
-    },
-    [],
-  );
-  const handleMouseOut = useCallback(
+  const handleMouseLeave = useCallback(
     () =>
     {
       setHoverState(
@@ -43,10 +34,19 @@ export const useHover = (): {
     },
     [],
   );
+  const handleMouseEnter = useCallback(
+    () =>
+    {
+      setHoverState(
+        HoverState.Hovering,
+      );
+    },
+    [],
+  );
 
-  return {
+  return [
     hoverState,
-    handleMouseOver,
-    handleMouseOut,
-  };
+    handleMouseEnter,
+    handleMouseLeave,
+  ];
 };

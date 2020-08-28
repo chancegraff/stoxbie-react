@@ -22,7 +22,7 @@ import {
 } from "use-debounce";
 
 import {
-  DEBOUNCE_INPUT_MS,
+  DEBOUNCE_MEDIUM_MS,
 } from "utils/Constants";
 import {
   handleUnloadCreator,
@@ -80,7 +80,7 @@ const SearchView: React.FC<Props> = (
         handleSearch,
       ],
     ),
-    DEBOUNCE_INPUT_MS,
+    DEBOUNCE_MEDIUM_MS,
   );
 
   useEffect(

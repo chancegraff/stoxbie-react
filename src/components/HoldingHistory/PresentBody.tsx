@@ -6,18 +6,27 @@ import {
 } from "trade-types";
 
 import {
+  HandleMouseEnter,
+  HoverState,
+} from "utils/Hooks";
+
+import {
   StyledTableBody,
 } from "./PresentBody.styled";
 import PresentRow from "./PresentRow";
 
 type Props = PropsHasChildren & {
   summarizedHoldings: HistoricalTradeStarted | undefined;
+  hoverState: HoverState;
+  handleMouseEnter: HandleMouseEnter;
 };
 
 const PresentBody: React.FC<Props> = (
   {
     children,
     summarizedHoldings,
+    hoverState,
+    handleMouseEnter,
   },
 ) =>
 {
@@ -27,8 +36,11 @@ const PresentBody: React.FC<Props> = (
   }
 
   return (
-    <StyledTableBody>
-      <PresentRow summarizedHoldings={summarizedHoldings}>
+    <StyledTableBody onMouseEnter={handleMouseEnter}>
+      <PresentRow
+        summarizedHoldings={summarizedHoldings}
+        hoverState={hoverState}
+      >
         {children}
       </PresentRow>
     </StyledTableBody>

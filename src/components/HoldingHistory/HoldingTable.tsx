@@ -7,6 +7,16 @@ import {
   HistoricalTradeFinished,
   HistoricalTradeStarted,
 } from "trade-types";
+import {
+  useDebouncedCallback,
+} from "use-debounce/lib";
+
+import {
+  DEBOUNCE_MEDIUM_MS,
+} from "../../utils/Constants";
+import {
+  useHover,
+} from "../../utils/Hooks";
 
 import CloseHoldings from "./CloseHoldings";
 import HistoricalBody from "./HistoricalBody";
@@ -37,12 +47,29 @@ const HoldingTable: React.FC<Props> = (
   },
 ) =>
 {
+  const [
+    hoverState,
+    handleMouseEnter,
+    handleMouseLeave,
+  ] = useHover();
+
+  const [
+    debouncedMouseLeave,
+  ] = useDebouncedCallback(
+    handleMouseLeave,
+    DEBOUNCE_MEDIUM_MS,
+  );
+
   return (
     <StyledTheme>
-      <StyledContainer>
+      <StyledContainer onMouseLeave={debouncedMouseLeave}>
         <StyledTable>
           <TableHeader />
-          <PresentBody summarizedHoldings={summarizedHoldings}>
+          <PresentBody
+            summarizedHoldings={summarizedHoldings}
+            hoverState={hoverState}
+            handleMouseEnter={handleMouseEnter}
+          >
             <CloseHoldings
               presentPrice={presentPrice}
               presentLedger={presentLedger}

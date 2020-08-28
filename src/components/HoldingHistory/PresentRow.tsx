@@ -1,13 +1,14 @@
 import React, {
   PropsHasChildren,
   useMemo,
+  useRef,
 } from "react";
 import {
   HistoricalTradeStarted,
 } from "trade-types";
 
 import {
-  useHover,
+  HoverState,
 } from "utils/Hooks";
 import {
   formatCount,
@@ -18,23 +19,22 @@ import {
   StyledTableCell,
   StyledTableRow,
 } from "./PresentRow.styled";
+import ToggleCombined from "./ToggleCombined";
 
 type Props = PropsHasChildren & {
   summarizedHoldings: HistoricalTradeStarted;
+  hoverState: HoverState;
 };
 
 const PresentRow: React.FC<Props> = (
   {
     children,
     summarizedHoldings,
+    hoverState,
   },
 ) =>
 {
-  const {
-    hoverState,
-    handleMouseOver,
-    handleMouseOut,
-  } = useHover();
+  const presentRowRef = useRef<HTMLTableRowElement>();
 
   const shareCount = useMemo(
     () =>
@@ -72,9 +72,8 @@ const PresentRow: React.FC<Props> = (
 
   return (
     <StyledTableRow
+      ref={presentRowRef}
       role="row"
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
     >
       <StyledTableCell>
         {shareCount}
@@ -88,7 +87,10 @@ const PresentRow: React.FC<Props> = (
       <StyledTableCell>
         {totalBalance}
       </StyledTableCell>
-
+      <ToggleCombined
+        hoverState={hoverState}
+        presentRow={presentRowRef.current}
+      />
     </StyledTableRow>
   );
 };
