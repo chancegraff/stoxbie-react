@@ -2,7 +2,9 @@ import React from "react";
 
 import {
   HoverState,
+  useHover,
 } from "utils/Hooks";
+import HoverIcon from "components/Grommet/HoverIcon";
 
 import {
   StyledClosedIcon,
@@ -12,26 +14,39 @@ import {
 } from "./ToggleCombined.styled";
 
 type Props = {
-  hoverState: HoverState;
   presentRow: HTMLTableRowElement | undefined;
+  rowHoverState: HoverState;
 };
 
 const ToggleCombined: React.FC<Props> = (
   {
-    hoverState,
     presentRow,
+    rowHoverState,
   },
 ) =>
 {
-  if (!presentRow || hoverState === HoverState.Idling)
+  const [
+    buttonHoverState,
+    handleMouseEnterButton,
+    handleMouseLeaveButton,
+  ] = useHover();
+
+  if (!presentRow || rowHoverState === HoverState.Idling)
   {
     return null;
   }
 
   return (
     <StyledDrop target={presentRow}>
-      <StyledContainer>
-        <StyledClosedIcon />
+      <StyledContainer
+        onMouseEnter={handleMouseEnterButton}
+        onMouseLeave={handleMouseLeaveButton}
+      >
+        <HoverIcon
+          hoverState={buttonHoverState}
+          MouseIdlingIcon={StyledClosedIcon}
+          MouseHoveringIcon={StyledOpenedIcon}
+        />
       </StyledContainer>
     </StyledDrop>
   );

@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useCallback,
+} from "react";
 import {
   HistoricalPrice,
 } from "iex-cloud";
@@ -13,10 +15,10 @@ import {
 
 import {
   DEBOUNCE_MEDIUM_MS,
-} from "../../utils/Constants";
+} from "utils/Constants";
 import {
   useHover,
-} from "../../utils/Hooks";
+} from "utils/Hooks";
 
 import CloseHoldings from "./CloseHoldings";
 import HistoricalBody from "./HistoricalBody";
@@ -48,30 +50,40 @@ const HoldingTable: React.FC<Props> = (
 ) =>
 {
   const [
-    hoverState,
-    handleMouseEnter,
-    handleMouseLeave,
+    rowHoverState,
+    handleMouseEnterRow,
+    handleMouseLeaveRow,
   ] = useHover();
 
   const [
-    debouncedMouseLeave,
+    debouncedMouseLeaveRow,
+    cancelMouseLeaveRow,
   ] = useDebouncedCallback(
-    handleMouseLeave,
+    handleMouseLeaveRow,
     DEBOUNCE_MEDIUM_MS,
+  );
+  const debouncedMouseEnterRow = useCallback(
+    () =>
+    {
+      cancelMouseLeaveRow();
+      handleMouseEnterRow();
+    },
+    [
+      cancelMouseLeaveRow,
+      handleMouseEnterRow,
+    ],
   );
 
   return (
     <StyledTheme>
-      <StyledContainer
-        onScroll={handleMouseLeave}
-        onMouseLeave={debouncedMouseLeave}
-      >
+      <StyledContainer onScroll={handleMouseLeaveRow}>
         <StyledTable>
           <TableHeader />
           <PresentBody
             summarizedHoldings={summarizedHoldings}
-            hoverState={hoverState}
-            handleMouseEnter={handleMouseEnter}
+            rowHoverState={rowHoverState}
+            handleMouseEnterRow={debouncedMouseEnterRow}
+            handleMouseLeaveRow={debouncedMouseLeaveRow}
           >
             <CloseHoldings
               presentPrice={presentPrice}

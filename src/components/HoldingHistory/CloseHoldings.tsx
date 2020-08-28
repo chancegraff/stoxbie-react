@@ -59,8 +59,8 @@ const CloseHoldings: React.FC<Props> = (
       >
         <HoverIcon
           hoverState={hoverState}
-          MouseOverIcon={StyledClosedIcon}
-          MouseOutIcon={StyledOpenedIcon}
+          MouseIdlingIcon={StyledOpenedIcon}
+          MouseHoveringIcon={StyledClosedIcon}
         />
       </StyledContainer>
     </StyledSubmitOrder>

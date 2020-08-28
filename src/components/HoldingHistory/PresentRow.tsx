@@ -1,15 +1,12 @@
 import React, {
+  forwardRef,
   PropsHasChildren,
   useMemo,
-  useRef,
 } from "react";
 import {
   HistoricalTradeStarted,
 } from "trade-types";
 
-import {
-  HoverState,
-} from "utils/Hooks";
 import {
   formatCount,
   formatCurrency,
@@ -19,80 +16,74 @@ import {
   StyledTableCell,
   StyledTableRow,
 } from "./PresentRow.styled";
-import ToggleCombined from "./ToggleCombined";
 
 type Props = PropsHasChildren & {
   summarizedHoldings: HistoricalTradeStarted;
-  hoverState: HoverState;
 };
 
-const PresentRow: React.FC<Props> = (
+const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
+  (
+    {
+      children,
+      summarizedHoldings,
+    },
+    tableRowRef,
+  ) =>
   {
-    children,
-    summarizedHoldings,
-    hoverState,
+    const shareCount = useMemo(
+      () =>
+      {
+        return formatCount(
+          summarizedHoldings.openCount,
+        );
+      },
+      [
+        summarizedHoldings,
+      ],
+    );
+    const openPrice = useMemo(
+      () =>
+      {
+        return formatCurrency(
+          summarizedHoldings.openPrice,
+        );
+      },
+      [
+        summarizedHoldings,
+      ],
+    );
+    const totalBalance = useMemo(
+      () =>
+      {
+        return formatCurrency(
+          summarizedHoldings.openCount * summarizedHoldings.openPrice,
+        );
+      },
+      [
+        summarizedHoldings,
+      ],
+    );
+
+    return (
+      <StyledTableRow
+        ref={tableRowRef}
+        role="row"
+      >
+        <StyledTableCell>
+          {shareCount}
+        </StyledTableCell>
+        <StyledTableCell>
+          {openPrice}
+        </StyledTableCell>
+        <StyledTableCell>
+          {children}
+        </StyledTableCell>
+        <StyledTableCell>
+          {totalBalance}
+        </StyledTableCell>
+      </StyledTableRow>
+    );
   },
-) =>
-{
-  const presentRowRef = useRef<HTMLTableRowElement>();
-
-  const shareCount = useMemo(
-    () =>
-    {
-      return formatCount(
-        summarizedHoldings.openCount,
-      );
-    },
-    [
-      summarizedHoldings,
-    ],
-  );
-  const openPrice = useMemo(
-    () =>
-    {
-      return formatCurrency(
-        summarizedHoldings.openPrice,
-      );
-    },
-    [
-      summarizedHoldings,
-    ],
-  );
-  const totalBalance = useMemo(
-    () =>
-    {
-      return formatCurrency(
-        summarizedHoldings.openCount * summarizedHoldings.openPrice,
-      );
-    },
-    [
-      summarizedHoldings,
-    ],
-  );
-
-  return (
-    <StyledTableRow
-      ref={presentRowRef}
-      role="row"
-    >
-      <StyledTableCell>
-        {shareCount}
-      </StyledTableCell>
-      <StyledTableCell>
-        {openPrice}
-      </StyledTableCell>
-      <StyledTableCell>
-        {children}
-      </StyledTableCell>
-      <StyledTableCell>
-        {totalBalance}
-      </StyledTableCell>
-      <ToggleCombined
-        hoverState={hoverState}
-        presentRow={presentRowRef.current}
-      />
-    </StyledTableRow>
-  );
-};
+);
 
 export default PresentRow;

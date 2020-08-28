@@ -37,6 +37,10 @@ const HoverableContainer: React.FC<JSXBoxProps> = styled(
 &:hover {
   cursor: pointer;
 }
+
+& > * {
+  pointer-events: none;
+}
 `;
 
 export const StyledContainer: React.FC<JSXBoxProps> = (

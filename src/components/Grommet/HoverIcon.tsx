@@ -9,25 +9,25 @@ import {
 
 type Props = {
   hoverState: HoverState;
-  MouseOutIcon: React.FC<JSXIconProps>;
-  MouseOverIcon: React.FC<JSXIconProps>;
+  MouseIdlingIcon: React.FC<JSXIconProps>;
+  MouseHoveringIcon: React.FC<JSXIconProps>;
 };
 
 const HoverIcon: React.FC<Props> = (
   {
     hoverState,
-    MouseOutIcon,
-    MouseOverIcon,
+    MouseIdlingIcon,
+    MouseHoveringIcon,
   },
 ) =>
 {
   if (hoverState === HoverState.Idling)
   {
-    return <MouseOutIcon />;
+    return <MouseIdlingIcon />;
   }
 
   return (
-    <MouseOverIcon />
+    <MouseHoveringIcon />
   );
 };
 

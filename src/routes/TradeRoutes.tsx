@@ -30,8 +30,6 @@ import TradeView from "views/TradeView";
 import PageError from "components/PageTemplates/PageError";
 import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
-// import defPrices from "../views/TradeView/tests/prices";
-
 type Props = RouteProps;
 
 const TradeRoute: React.FC<RouteProps> = () =>

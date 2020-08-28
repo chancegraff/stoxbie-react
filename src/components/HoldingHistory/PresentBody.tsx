@@ -1,5 +1,6 @@
 import React, {
   PropsHasChildren,
+  useRef,
 } from "react";
 import {
   HistoricalTradeStarted,
@@ -7,6 +8,7 @@ import {
 
 import {
   HandleMouseEnter,
+  HandleMouseLeave,
   HoverState,
 } from "utils/Hooks";
 
@@ -14,35 +16,47 @@ import {
   StyledTableBody,
 } from "./PresentBody.styled";
 import PresentRow from "./PresentRow";
+import ToggleCombined from "./ToggleCombined";
 
 type Props = PropsHasChildren & {
   summarizedHoldings: HistoricalTradeStarted | undefined;
-  hoverState: HoverState;
-  handleMouseEnter: HandleMouseEnter;
+  rowHoverState: HoverState;
+  handleMouseEnterRow: HandleMouseEnter;
+  handleMouseLeaveRow: HandleMouseLeave;
 };
 
 const PresentBody: React.FC<Props> = (
   {
     children,
     summarizedHoldings,
-    hoverState,
-    handleMouseEnter,
+    rowHoverState,
+    handleMouseEnterRow,
+    handleMouseLeaveRow,
   },
 ) =>
 {
+  const presentRowRef = useRef<HTMLTableRowElement>();
+
   if (!summarizedHoldings)
   {
     return null;
   }
 
   return (
-    <StyledTableBody onMouseEnter={handleMouseEnter}>
+    <StyledTableBody
+      onMouseEnter={handleMouseEnterRow}
+      onMouseLeave={handleMouseLeaveRow}
+    >
       <PresentRow
+        ref={presentRowRef}
         summarizedHoldings={summarizedHoldings}
-        hoverState={hoverState}
       >
         {children}
       </PresentRow>
+      <ToggleCombined
+        presentRow={presentRowRef.current}
+        rowHoverState={rowHoverState}
+      />
     </StyledTableBody>
   );
 };
