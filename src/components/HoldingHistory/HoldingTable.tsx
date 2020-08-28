@@ -62,7 +62,10 @@ const HoldingTable: React.FC<Props> = (
 
   return (
     <StyledTheme>
-      <StyledContainer onMouseLeave={debouncedMouseLeave}>
+      <StyledContainer
+        onScroll={handleMouseLeave}
+        onMouseLeave={debouncedMouseLeave}
+      >
         <StyledTable>
           <TableHeader />
           <PresentBody
