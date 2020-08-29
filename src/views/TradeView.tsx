@@ -266,7 +266,7 @@ const TradeView: React.FC<Props> = (
       historicalLedgers,
     ],
   );
-  const summarizedHoldings = useMemo(
+  const highestPresentHolding = useMemo(
     () =>
     {
       if (presentHoldings.length > 0)
@@ -274,7 +274,8 @@ const TradeView: React.FC<Props> = (
         const [
           newestOpenedHolding,
         ] = presentHoldings;
-        const highestOpenedHolding = presentHoldings.reduceRight(
+
+        return presentHoldings.reduceRight(
           (
             previousHolding,
             nextHolding,
@@ -286,8 +287,6 @@ const TradeView: React.FC<Props> = (
           },
           newestOpenedHolding,
         );
-
-        return highestOpenedHolding;
       }
     },
     [
@@ -542,7 +541,7 @@ const TradeView: React.FC<Props> = (
       const currentTradeType = shareCount / Math.abs(
         shareCount,
       );
-      const previousTradeOpposite = summarizedHoldings && summarizedHoldings.openDirection * -1;
+      const previousTradeOpposite = highestPresentHolding && highestPresentHolding.openDirection * -1;
 
       if (currentTradeType === previousTradeOpposite)
       {
@@ -560,7 +559,7 @@ const TradeView: React.FC<Props> = (
       }
     },
     [
-      summarizedHoldings,
+      highestPresentHolding,
       openTrade,
       closeTrade,
     ],
@@ -693,8 +692,9 @@ const TradeView: React.FC<Props> = (
           <HoldingTable
             presentPrice={presentPrice}
             presentLedger={presentLedger}
+            presentHoldings={presentHoldings}
             historicalHoldings={historicalHoldings}
-            summarizedHoldings={summarizedHoldings}
+            highestPresentHolding={highestPresentHolding}
             handleSubmit={handleSubmit}
           />
         </Box>

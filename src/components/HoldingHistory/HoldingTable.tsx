@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useState,
 } from "react";
 import {
   HistoricalPrice,
@@ -14,13 +15,14 @@ import {
 } from "use-debounce/lib";
 
 import {
+  CombinedBodyState,
   DEBOUNCE_MEDIUM_MS,
 } from "utils/Constants";
 import {
   useHover,
 } from "utils/Hooks";
 
-import CloseHoldings from "./CloseHoldings";
+import CombinedBody from "./CombinedBody";
 import HistoricalBody from "./HistoricalBody";
 import {
   StyledContainer,
@@ -34,8 +36,9 @@ import TableHeader from "./TableHeader";
 type Props = {
   presentPrice: HistoricalPrice | undefined;
   presentLedger: HistoricalLedger | undefined;
+  presentHoldings: HistoricalTradeStarted[];
   historicalHoldings: HistoricalTradeFinished[];
-  summarizedHoldings: HistoricalTradeStarted | undefined;
+  highestPresentHolding: HistoricalTradeStarted | undefined;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 
@@ -43,8 +46,9 @@ const HoldingTable: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
+    presentHoldings,
     historicalHoldings,
-    summarizedHoldings,
+    highestPresentHolding,
     handleSubmit,
   },
 ) =>
@@ -56,12 +60,20 @@ const HoldingTable: React.FC<Props> = (
   ] = useHover();
 
   const [
+    combinedBodyState,
+    setCombinedBodyState,
+  ] = useState<CombinedBodyState>(
+    CombinedBodyState.Retracting,
+  );
+
+  const [
     debouncedMouseLeaveRow,
     cancelMouseLeaveRow,
   ] = useDebouncedCallback(
     handleMouseLeaveRow,
     DEBOUNCE_MEDIUM_MS,
   );
+
   const debouncedMouseEnterRow = useCallback(
     () =>
     {
@@ -73,6 +85,42 @@ const HoldingTable: React.FC<Props> = (
       handleMouseEnterRow,
     ],
   );
+  const handleExtendCombined = useCallback(
+    () =>
+    {
+      setCombinedBodyState(
+        CombinedBodyState.Extending,
+      );
+    },
+    [],
+  );
+  const handleRetractCombined = useCallback(
+    () =>
+    {
+      setCombinedBodyState(
+        CombinedBodyState.Retracting,
+      );
+    },
+    [],
+  );
+  const handleToggleCombined = useCallback(
+    () =>
+    {
+      if (combinedBodyState === CombinedBodyState.Retracting)
+      {
+        handleExtendCombined();
+      }
+      else
+      {
+        handleRetractCombined();
+      }
+    },
+    [
+      combinedBodyState,
+      handleExtendCombined,
+      handleRetractCombined,
+    ],
+  );
 
   return (
     <StyledTheme>
@@ -80,18 +128,23 @@ const HoldingTable: React.FC<Props> = (
         <StyledTable>
           <TableHeader />
           <PresentBody
-            summarizedHoldings={summarizedHoldings}
+            highestPresentHolding={highestPresentHolding}
+            presentPrice={presentPrice}
+            presentLedger={presentLedger}
             rowHoverState={rowHoverState}
+            combinedBodyState={combinedBodyState}
+            handleSubmit={handleSubmit}
+            handleToggleCombined={handleToggleCombined}
             handleMouseEnterRow={debouncedMouseEnterRow}
             handleMouseLeaveRow={debouncedMouseLeaveRow}
-          >
-            <CloseHoldings
-              presentPrice={presentPrice}
-              presentLedger={presentLedger}
-              summarizedHoldings={summarizedHoldings}
-              handleSubmit={handleSubmit}
-            />
-          </PresentBody>
+          />
+          <CombinedBody
+            combinedBodyState={combinedBodyState}
+            presentHoldings={presentHoldings}
+            presentLedger={presentLedger}
+            presentPrice={presentPrice}
+            handleSubmit={handleSubmit}
+          />
           <HistoricalBody historicalHoldings={historicalHoldings} />
           <TableFooter
             historicalHoldings={historicalHoldings}

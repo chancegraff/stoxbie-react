@@ -20,9 +20,9 @@ import {
 } from "./CloseHoldings.styled";
 
 type Props = {
-  presentPrice: HistoricalPrice | undefined;
-  presentLedger: HistoricalLedger | undefined;
-  summarizedHoldings: HistoricalTradeStarted | undefined;
+  presentPrice: HistoricalPrice;
+  presentLedger: HistoricalLedger;
+  presentHolding: HistoricalTradeStarted;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 
@@ -30,7 +30,7 @@ const CloseHoldings: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
-    summarizedHoldings,
+    presentHolding,
     handleSubmit,
   },
 ) =>
@@ -41,7 +41,7 @@ const CloseHoldings: React.FC<Props> = (
     handleMouseLeave,
   ] = useHover();
 
-  if (!summarizedHoldings || !presentPrice || !presentLedger)
+  if (!presentHolding || !presentPrice || !presentLedger)
   {
     return null;
   }
@@ -49,7 +49,7 @@ const CloseHoldings: React.FC<Props> = (
   return (
     <StyledSubmitOrder
       presentPriceClose={presentPrice.close}
-      orderDirection={(summarizedHoldings.openDirection * -1) as 1 | -1}
+      orderDirection={(presentHolding.openDirection * -1) as 1 | -1}
       orderShareCount={presentLedger.totalCount}
       handleSubmit={handleSubmit}
     >

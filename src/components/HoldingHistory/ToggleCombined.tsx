@@ -1,5 +1,10 @@
-import React from "react";
+import React, {
+  useMemo,
+} from "react";
 
+import {
+  CombinedBodyState,
+} from "utils/Constants";
 import {
   HoverState,
   useHover,
@@ -7,21 +12,25 @@ import {
 import HoverIcon from "components/Grommet/HoverIcon";
 
 import {
-  StyledClosedIcon,
   StyledContainer,
   StyledDrop,
-  StyledOpenedIcon,
+  StyledStopIcon,
+  StyledSubtractIcon,
 } from "./ToggleCombined.styled";
 
 type Props = {
   rowToTarget: HTMLTableRowElement | undefined;
   rowHoverState: HoverState;
+  handleToggleCombined: () => void;
+  combinedBodyState: CombinedBodyState;
 };
 
 const ToggleCombined: React.FC<Props> = (
   {
     rowToTarget,
     rowHoverState,
+    handleToggleCombined,
+    combinedBodyState,
   },
 ) =>
 {
@@ -31,7 +40,50 @@ const ToggleCombined: React.FC<Props> = (
     handleMouseLeaveButton,
   ] = useHover();
 
-  if (!rowToTarget || rowHoverState === HoverState.Idling)
+  const IdlingIcon = useMemo(
+    () =>
+    {
+      if (
+        combinedBodyState === CombinedBodyState.Extending &&
+        buttonHoverState === HoverState.Idling
+      )
+      {
+        return StyledStopIcon;
+      }
+
+      return StyledSubtractIcon;
+    },
+    [
+      combinedBodyState,
+      buttonHoverState,
+    ],
+  );
+  const HoveringIcon = useMemo(
+    () =>
+    {
+      switch (true)
+      {
+        case (
+          combinedBodyState === CombinedBodyState.Retracting &&
+          buttonHoverState === HoverState.Hovering
+        ):
+        {
+          return StyledSubtractIcon;
+        }
+        default:
+        {
+          return StyledStopIcon;
+        }
+      }
+    },
+    [
+      combinedBodyState,
+      buttonHoverState,
+    ],
+  );
+
+  if (!rowToTarget ||
+ rowHoverState === HoverState.Idling)
   {
     return null;
   }
@@ -39,13 +91,14 @@ const ToggleCombined: React.FC<Props> = (
   return (
     <StyledDrop target={rowToTarget}>
       <StyledContainer
+        onClick={handleToggleCombined}
         onMouseEnter={handleMouseEnterButton}
         onMouseLeave={handleMouseLeaveButton}
       >
         <HoverIcon
           hoverState={buttonHoverState}
-          MouseIdlingIcon={StyledClosedIcon}
-          MouseHoveringIcon={StyledOpenedIcon}
+          MouseIdlingIcon={IdlingIcon}
+          MouseHoveringIcon={HoveringIcon}
         />
       </StyledContainer>
     </StyledDrop>

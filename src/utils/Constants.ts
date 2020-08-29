@@ -20,3 +20,8 @@ export const TICKER_ERROR_MESSAGE =
 export const SLIDER_TICK_COUNT = 7;
 
 export const TICKER_INPUT_PLACERHOLDER = "Search for company by name or ticker...";
+
+export enum CombinedBodyState {
+  Extending = "extending",
+  Retracting = "retracting",
+}

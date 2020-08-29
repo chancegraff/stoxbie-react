@@ -34,11 +34,10 @@ export const StyledDrop: React.FC<JSXDropProps> = (
 const HoverableContainer: React.FC<JSXBoxProps> = styled(
   Box,
 )`
-&:hover {
-  cursor: pointer;
-}
+cursor: pointer;
 
 & > * {
+  cursor: pointer;
   pointer-events: none;
 }
 `;
@@ -63,7 +62,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledOpenedIcon: React.FC<JSXIconProps> = (
+export const StyledStopIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {
@@ -72,7 +71,7 @@ export const StyledOpenedIcon: React.FC<JSXIconProps> = (
   );
 };
 
-export const StyledClosedIcon: React.FC<JSXIconProps> = (
+export const StyledSubtractIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {

@@ -1,9 +1,12 @@
 import React, {
   forwardRef,
-  PropsHasChildren,
   useMemo,
 } from "react";
 import {
+  HistoricalPrice,
+} from "iex-cloud";
+import {
+  HistoricalLedger,
   HistoricalTradeStarted,
 } from "trade-types";
 
@@ -12,55 +15,62 @@ import {
   formatCurrency,
 } from "utils/Utilities";
 
+import CloseHoldings from "./CloseHoldings";
 import {
   StyledTableCell,
   StyledTableRow,
 } from "./PresentRow.styled";
 
-type Props = PropsHasChildren & {
-  summarizedHoldings: HistoricalTradeStarted;
+type Props = {
+  presentHolding: HistoricalTradeStarted;
+  presentLedger: HistoricalLedger;
+  presentPrice: HistoricalPrice;
+  handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 
 const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
   (
     {
-      children,
-      summarizedHoldings,
+      presentHolding,
+      presentLedger,
+      presentPrice,
+      handleSubmit,
     },
     tableRowRef,
   ) =>
   {
-    const shareCount = useMemo(
+    const shares = useMemo(
       () =>
       {
         return formatCount(
-          summarizedHoldings.openCount,
+          presentLedger.totalCount,
         );
       },
       [
-        summarizedHoldings,
+        presentLedger,
       ],
     );
-    const openPrice = useMemo(
+    const open = useMemo(
       () =>
       {
         return formatCurrency(
-          summarizedHoldings.openPrice,
+          presentHolding.openPrice,
         );
       },
       [
-        summarizedHoldings,
+        presentHolding,
       ],
     );
-    const totalBalance = useMemo(
+    const balance = useMemo(
       () =>
       {
         return formatCurrency(
-          summarizedHoldings.openCount * summarizedHoldings.openPrice,
+          presentHolding.openPrice * presentLedger.totalCount,
         );
       },
       [
-        summarizedHoldings,
+        presentHolding,
+        presentLedger,
       ],
     );
 
@@ -70,16 +80,21 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
         role="row"
       >
         <StyledTableCell>
-          {shareCount}
+          {shares}
         </StyledTableCell>
         <StyledTableCell>
-          {openPrice}
+          {open}
         </StyledTableCell>
         <StyledTableCell>
-          {children}
+          <CloseHoldings
+            presentLedger={presentLedger}
+            presentPrice={presentPrice}
+            presentHolding={presentHolding}
+            handleSubmit={handleSubmit}
+          />
         </StyledTableCell>
         <StyledTableCell>
-          {totalBalance}
+          {balance}
         </StyledTableCell>
       </StyledTableRow>
     );
