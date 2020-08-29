@@ -6,9 +6,6 @@ import {
   Table,
   ThemeContext,
 } from "grommet";
-import {
-  normalizeColor,
-} from "grommet/utils";
 import styled from "styled-components";
 
 export const StyledTheme: React.FC = (
@@ -110,20 +107,6 @@ line-height: ${
     return props.theme.text.small.height;
   }
 };
-
-& tbody tr:nth-of-type(odd) {
-  background-color: ${
-    (
-      props,
-    ) =>
-    {
-      return normalizeColor(
-        props.theme.global.colors["background-contrast"],
-        props.theme,
-      );
-    }
-  };
-}
 `;
 
 export const StyledTable: React.FC<JSXTableProps> = (

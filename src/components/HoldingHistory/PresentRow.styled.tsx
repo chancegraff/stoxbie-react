@@ -15,17 +15,15 @@ import styled from "styled-components";
 const HoverableTableRow: React.FC<JSXTableRowProps> = styled(
   TableRow,
 )`
-box-shadow: ${
+color: ${
   (
     props,
   ) =>
   {
-    const color = normalizeColor(
-      props.theme.global.colors.background,
+    return normalizeColor(
+      props.theme.global.colors["text-strong"],
       props.theme,
     );
-
-    return `0px 0px 0px 2px ${color}`;
   }
 };
 
@@ -64,7 +62,7 @@ export const StyledTableCell: React.FC<JSXTableCellProps> = (
       background={
         {
           color: "brand",
-          opacity: "weak",
+          opacity: "medium",
         }
       }
       {...props}

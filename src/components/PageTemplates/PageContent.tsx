@@ -21,7 +21,12 @@ const ContentContainer: React.FC<Props> = (
   return (
     <Main >
       <Header
-        background="background-front"
+        background={
+          {
+            color: "brand",
+            opacity: 0.1,
+          }
+        }
         justify="start"
         gap="large"
         pad={

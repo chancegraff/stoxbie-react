@@ -67,7 +67,10 @@ export const StyledExtendingIcon: React.FC<JSXIconProps> = (
 ) =>
 {
   return (
-    <Stop size="12px" />
+    <Stop
+      size="12px"
+      {...props}
+    />
   );
 };
 
@@ -76,6 +79,9 @@ export const StyledRetractingIcon: React.FC<JSXIconProps> = (
 ) =>
 {
   return (
-    <Subtract size="12px" />
+    <Subtract
+      size="12px"
+      {...props}
+    />
   );
 };

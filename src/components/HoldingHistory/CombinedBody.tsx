@@ -11,8 +11,10 @@ import {
   CombinedBodyState,
 } from "utils/Constants";
 
+import CloseHoldings from "./CloseHoldings";
 import {
   StyledTableBody,
+  StyledTableCell,
 } from "./CombinedBody.styled";
 import PresentRow from "./PresentRow";
 
@@ -34,10 +36,6 @@ const CombinedBody: React.FC<Props> = (
   },
 ) =>
 {
-  const [
-    presentHolding,
-  ] = presentHoldings;
-
   if (
     combinedBodyState === CombinedBodyState.Retracting ||
     !presentLedger ||
@@ -49,12 +47,34 @@ const CombinedBody: React.FC<Props> = (
 
   return (
     <StyledTableBody>
-      <PresentRow
-        presentLedger={presentLedger}
-        presentPrice={presentPrice}
-        presentHolding={presentHolding}
-        handleSubmit={handleSubmit}
-      />
+      {
+        presentHoldings.map(
+          (
+            presentHolding,
+          ) =>
+          {
+            const {
+              openDate,
+              openCount,
+            } = presentHolding;
+
+            return (
+              <PresentRow
+                key={`${openDate}-${openCount}`}
+                presentHolding={presentHolding}
+                TableCell={StyledTableCell}
+              >
+                <CloseHoldings
+                  presentHolding={presentHolding}
+                  presentLedger={presentLedger}
+                  presentPrice={presentPrice}
+                  handleSubmit={handleSubmit}
+                />
+              </PresentRow>
+            );
+          },
+        )
+      }
     </StyledTableBody>
   );
 };

@@ -1,9 +1,12 @@
 import React, {
   forwardRef,
+  PropsHasChildren,
   useMemo,
 } from "react";
 import {
-  HistoricalPrice,
+  JSXTableCellProps,
+} from "grommet";
+import {
 } from "iex-cloud";
 import {
   HistoricalLedger,
@@ -15,26 +18,24 @@ import {
   formatCurrency,
 } from "utils/Utilities";
 
-import CloseHoldings from "./CloseHoldings";
 import {
   StyledTableCell,
   StyledTableRow,
 } from "./PresentRow.styled";
 
-type Props = {
+type Props = PropsHasChildren & {
   presentHolding: HistoricalTradeStarted;
-  presentLedger: HistoricalLedger;
-  presentPrice: HistoricalPrice;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  presentLedger?: HistoricalLedger;
+  TableCell?: React.FC<JSXTableCellProps>;
 };
 
 const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
   (
     {
+      children,
       presentHolding,
       presentLedger,
-      presentPrice,
-      handleSubmit,
+      TableCell = StyledTableCell,
     },
     tableRowRef,
   ) =>
@@ -42,12 +43,20 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
     const shares = useMemo(
       () =>
       {
+        if (presentLedger)
+        {
+          return formatCount(
+            presentLedger.totalCount,
+          );
+        }
+
         return formatCount(
-          presentLedger.totalCount,
+          presentHolding.openCount,
         );
       },
       [
         presentLedger,
+        presentHolding,
       ],
     );
     const open = useMemo(
@@ -64,13 +73,20 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
     const balance = useMemo(
       () =>
       {
+        if (presentLedger)
+        {
+          return formatCurrency(
+            presentHolding.openPrice * presentLedger.totalCount,
+          );
+        }
+
         return formatCurrency(
-          presentHolding.openPrice * presentLedger.totalCount,
+          presentHolding.openPrice * presentHolding.openCount,
         );
       },
       [
-        presentHolding,
         presentLedger,
+        presentHolding,
       ],
     );
 
@@ -79,23 +95,18 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
         ref={tableRowRef}
         role="row"
       >
-        <StyledTableCell>
+        <TableCell>
           {shares}
-        </StyledTableCell>
-        <StyledTableCell>
+        </TableCell>
+        <TableCell>
           {open}
-        </StyledTableCell>
-        <StyledTableCell>
-          <CloseHoldings
-            presentLedger={presentLedger}
-            presentPrice={presentPrice}
-            presentHolding={presentHolding}
-            handleSubmit={handleSubmit}
-          />
-        </StyledTableCell>
-        <StyledTableCell>
+        </TableCell>
+        <TableCell>
+          {children}
+        </TableCell>
+        <TableCell>
           {balance}
-        </StyledTableCell>
+        </TableCell>
       </StyledTableRow>
     );
   },

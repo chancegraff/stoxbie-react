@@ -18,6 +18,7 @@ import {
   HoverState,
 } from "utils/Hooks";
 
+import CloseHoldings from "./CloseHoldings";
 import {
   StyledTableBody,
 } from "./PresentBody.styled";
@@ -71,11 +72,16 @@ const PresentBody: React.FC<Props> = (
       />
       <PresentRow
         ref={presentRowRef}
-        presentLedger={presentLedger}
-        presentPrice={presentPrice}
         presentHolding={highestPresentHolding}
-        handleSubmit={handleSubmit}
-      />
+        presentLedger={presentLedger}
+      >
+        <CloseHoldings
+          presentHolding={highestPresentHolding}
+          presentLedger={presentLedger}
+          presentPrice={presentPrice}
+          handleSubmit={handleSubmit}
+        />
+      </PresentRow>
     </StyledTableBody>
   );
 };
