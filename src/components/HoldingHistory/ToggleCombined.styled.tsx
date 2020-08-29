@@ -62,7 +62,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledStopIcon: React.FC<JSXIconProps> = (
+export const StyledExtendingIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {
@@ -71,7 +71,7 @@ export const StyledStopIcon: React.FC<JSXIconProps> = (
   );
 };
 
-export const StyledSubtractIcon: React.FC<JSXIconProps> = (
+export const StyledRetractingIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {

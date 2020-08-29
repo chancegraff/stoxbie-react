@@ -1,5 +1,8 @@
 import React, {
+  useCallback,
+  useEffect,
   useMemo,
+  useState,
 } from "react";
 
 import {
@@ -14,8 +17,8 @@ import HoverIcon from "components/Grommet/HoverIcon";
 import {
   StyledContainer,
   StyledDrop,
-  StyledStopIcon,
-  StyledSubtractIcon,
+  StyledExtendingIcon,
+  StyledRetractingIcon,
 } from "./ToggleCombined.styled";
 
 type Props = {
@@ -39,51 +42,85 @@ const ToggleCombined: React.FC<Props> = (
     handleMouseEnterButton,
     handleMouseLeaveButton,
   ] = useHover();
+  const [
+    hasClicked,
+    setHasClicked,
+  ] = useState(
+    false,
+  );
 
   const IdlingIcon = useMemo(
     () =>
     {
-      if (
-        combinedBodyState === CombinedBodyState.Extending &&
-        buttonHoverState === HoverState.Idling
-      )
+      if (combinedBodyState === CombinedBodyState.Extending)
       {
-        return StyledStopIcon;
+        return StyledExtendingIcon;
       }
 
-      return StyledSubtractIcon;
+      return StyledRetractingIcon;
     },
     [
       combinedBodyState,
-      buttonHoverState,
     ],
   );
   const HoveringIcon = useMemo(
     () =>
     {
-      switch (true)
+      const extendedWithoutClick = !hasClicked &&
+      (
+        combinedBodyState === CombinedBodyState.Extending
+      );
+      const retractedWithClick = hasClicked &&
+      (
+        combinedBodyState === CombinedBodyState.Retracting
+      );
+
+      if (buttonHoverState === HoverState.Hovering &&
+        (
+          extendedWithoutClick ||
+          retractedWithClick
+        )
+      )
       {
-        case (
-          combinedBodyState === CombinedBodyState.Retracting &&
-          buttonHoverState === HoverState.Hovering
-        ):
-        {
-          return StyledSubtractIcon;
-        }
-        default:
-        {
-          return StyledStopIcon;
-        }
+        return StyledRetractingIcon;
       }
+
+      return StyledExtendingIcon;
     },
     [
       combinedBodyState,
+      buttonHoverState,
+      hasClicked,
+    ],
+  );
+
+  const handleClick = useCallback(
+    () =>
+    {
+      setHasClicked(
+        true,
+      );
+      handleToggleCombined();
+    },
+    [
+      handleToggleCombined,
+    ],
+  );
+
+  useEffect(
+    () =>
+    {
+      setHasClicked(
+        false,
+      );
+    },
+    [
       buttonHoverState,
     ],
   );
 
   if (!rowToTarget ||
- rowHoverState === HoverState.Idling)
+      rowHoverState === HoverState.Idling)
   {
     return null;
   }
@@ -91,7 +128,7 @@ const ToggleCombined: React.FC<Props> = (
   return (
     <StyledDrop target={rowToTarget}>
       <StyledContainer
-        onClick={handleToggleCombined}
+        onClick={handleClick}
         onMouseEnter={handleMouseEnterButton}
         onMouseLeave={handleMouseLeaveButton}
       >
