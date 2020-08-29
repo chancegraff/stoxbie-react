@@ -32,7 +32,8 @@ const TableFooter: React.FC<Props> = (
   const change = useMemo(
     () =>
     {
-      if (presentLedger && historicalHoldings.length > 0)
+      if (presentLedger &&
+          historicalHoldings.length > 0)
       {
         return formatPercentage(
           presentLedger.totalChange,

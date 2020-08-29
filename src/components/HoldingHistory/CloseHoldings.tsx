@@ -41,7 +41,8 @@ const CloseHoldings: React.FC<Props> = (
     handleMouseLeave,
   ] = useHover();
 
-  if (!presentHolding || !presentPrice || !presentLedger)
+  if (!presentHolding ||
+      !presentPrice || !presentLedger)
   {
     return null;
   }

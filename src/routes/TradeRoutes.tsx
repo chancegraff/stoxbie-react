@@ -55,7 +55,7 @@ const TradeRoute: React.FC<RouteProps> = () =>
     {
       const parsedDate = parseDate(
         date,
-        DateFormats.URL,
+        DateFormats.Url,
       );
 
       if (parsedDate.getTime())
@@ -92,33 +92,35 @@ const TradeRoute: React.FC<RouteProps> = () =>
       nextTicker: string | undefined,
     ) =>
     {
-      if (nextTicker)
+      if (!nextTicker)
       {
-        const nextPrices = await historicalPrices(
-          nextTicker,
-          "max",
-          undefined,
-          {
-            chartByDay: true,
-          },
+        return;
+      }
+
+      const nextPrices = await historicalPrices(
+        nextTicker,
+        "max",
+        undefined,
+        {
+          chartByDay: true,
+        },
+      );
+
+      if (nextPrices)
+      {
+        const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
+
+        setPrices(
+          [
+            ...typedPrices,
+          ],
         );
-
-        if (nextPrices)
-        {
-          const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
-
-          setPrices(
-            [
-              ...typedPrices,
-            ],
-          );
-        }
-        else
-        {
-          setError(
-            FETCH_ERROR_MESSAGE,
-          );
-        }
+      }
+      else
+      {
+        setError(
+          FETCH_ERROR_MESSAGE,
+        );
       }
     },
     [],

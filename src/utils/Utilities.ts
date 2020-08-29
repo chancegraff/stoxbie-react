@@ -148,8 +148,8 @@ export const formatPercentage = (
 
 export enum DateFormats {
   Full = "MMMM do, y",
-  IEX = "y-MM-dd",
-  URL = "'m'MM'd'dd'y'y",
+  Iex = "y-MM-dd",
+  Url = "'m'MM'd'dd'y'y",
   TickLarge = "MMM ''yy",
   TickSmall = "MMM",
   TickYear = "y",
@@ -163,8 +163,8 @@ export const formatDate = (
   return format(
     typeof date === "string"
       ? parseISO(
-        date,
-      )
+          date,
+        )
       : date,
     dateFormat,
   );

@@ -59,7 +59,8 @@ const sellShares = async (
 
   let tradeRow = secondTradeRow;
 
-  if (!secondTradeRow || trade.TotalShares === 0)
+  if (!secondTradeRow ||
+      trade.TotalShares === 0)
   {
     tradeRow = firstTradeRow;
   }

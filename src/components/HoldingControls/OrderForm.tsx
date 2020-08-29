@@ -88,7 +88,8 @@ const OrderForm: React.FC<Props> = (
     [],
   );
 
-  if (!presentPrice || !presentLedger)
+  if (!presentPrice ||
+      !presentLedger)
   {
     return <Spinner Container={StyledContainer} />;
   }

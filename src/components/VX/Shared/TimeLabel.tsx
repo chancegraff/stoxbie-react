@@ -55,23 +55,25 @@ const MobileTimeLabel: React.FC<Props> = (
   const formattedValueAsDate = useMemo(
     () =>
     {
-      if (formattedValue)
+      if (!formattedValue)
       {
-        const yearPattern = new RegExp(
-          /^[\w]+ '[\d]+$/,
-        );
-        const yearMatch = yearPattern.test(
-          formattedValue.toString(),
-        );
+        return;
+      }
 
-        if (yearMatch)
-        {
-          return formatParsedDate(
-            formattedValue.toString(),
-            DateFormats.TickLarge,
-            DateFormats.TickYear,
-          );
-        }
+      const yearPattern = new RegExp(
+        /^[\w]+ '[\d]+$/,
+      );
+      const yearMatch = yearPattern.test(
+        formattedValue.toString(),
+      );
+
+      if (yearMatch)
+      {
+        return formatParsedDate(
+          formattedValue.toString(),
+          DateFormats.TickLarge,
+          DateFormats.TickYear,
+        );
       }
     },
     [

@@ -73,7 +73,8 @@ const SubmitOrder: React.FC<Props> = (
   const handleClick = useCallback(
     () =>
     {
-      if (orderShareCount > 0 && isActive)
+      if (orderShareCount > 0 &&
+          isActive)
       {
         const count = Math.abs(
           orderShareCount,
@@ -84,7 +85,8 @@ const SubmitOrder: React.FC<Props> = (
           count,
         );
       }
-      else if (!isActive && handleToggle)
+      else if (!isActive &&
+               handleToggle)
       {
         handleToggle();
       }

@@ -11,8 +11,8 @@ const setItem = <P extends unknown>(
   const now = new Date();
   const valueAsString = value
     ? JSON.stringify(
-      value,
-    )
+        value,
+      )
     : "undefined";
 
   now.setTime(
@@ -44,14 +44,15 @@ const getItem = <P extends unknown>(
 
       return itemKey === storedItemKey
         ? decodeURIComponent(
-          storedItemValue,
-        )
+            storedItemValue,
+          )
         : total;
     },
     "",
   );
 
-  return itemValueAsString === "" || itemValueAsString === "undefined"
+  return itemValueAsString === "" ||
+         itemValueAsString === "undefined"
     ? undefined
     : JSON.parse(
       itemValueAsString,

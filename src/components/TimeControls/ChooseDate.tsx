@@ -49,7 +49,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           oneYearAgo,
-          DateFormats.URL,
+          DateFormats.Url,
         ),
       );
     },
@@ -63,7 +63,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           fiveYearsAgo,
-          DateFormats.URL,
+          DateFormats.Url,
         ),
       );
     },
@@ -79,7 +79,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           nextDate,
-          DateFormats.URL,
+          DateFormats.Url,
         ),
       );
     },

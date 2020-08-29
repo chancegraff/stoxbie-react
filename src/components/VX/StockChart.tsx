@@ -85,7 +85,8 @@ const StockChart: React.FC<Props> = (
     ],
   );
 
-  if (!prices || !prices.length)
+  if (!prices ||
+      !prices.length)
   {
     return <Spinner />;
   }

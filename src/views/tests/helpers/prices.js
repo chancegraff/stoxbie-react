@@ -434,7 +434,7 @@ export const getIndexByDate = (
 {
   const iexStartDate = formatDate(
     startDate,
-    DateFormats.IEX,
+    DateFormats.Iex,
   );
 
   return prices.findIndex(

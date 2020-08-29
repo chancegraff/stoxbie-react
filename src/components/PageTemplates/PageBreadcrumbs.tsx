@@ -35,7 +35,7 @@ const PageBreadcrumbs: React.FC = () =>
       {
         return formatParsedDate(
           date,
-          DateFormats.URL,
+          DateFormats.Url,
           DateFormats.Full,
         );
       }

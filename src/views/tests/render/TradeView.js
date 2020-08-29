@@ -20,7 +20,7 @@ import prices, {
 
 const urlDate = formatDate(
   tradeViewStartDate,
-  DateFormats.URL,
+  DateFormats.Url,
 );
 
 const dayOnePrice = getPrice(

@@ -47,7 +47,10 @@ const TimeControl: React.FC<Props> = (
   return (
     <StyledContainer>
       <StyledText>
-        {`Today is ${safeDate || "..."}`}
+        {
+`Today is ${safeDate ||
+                     "..."}`
+        }
       </StyledText>
       <StyledButton onClick={handleContinue} />
     </StyledContainer>

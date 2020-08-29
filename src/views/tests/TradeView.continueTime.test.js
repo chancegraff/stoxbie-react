@@ -37,7 +37,7 @@ it(
       TimeControlDate(
         formatParsedDate(
           dayOnePrice.date,
-          DateFormats.IEX,
+          DateFormats.Iex,
           DateFormats.Full,
         ),
       ),
@@ -49,7 +49,7 @@ it(
       TimeControlDate(
         formatParsedDate(
           dayTwoPrice.date,
-          DateFormats.IEX,
+          DateFormats.Iex,
           DateFormats.Full,
         ),
       ),

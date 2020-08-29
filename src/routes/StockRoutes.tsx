@@ -93,30 +93,33 @@ const ViewRoute: React.FC<RouteProps> = () =>
       nextTicker: string | undefined,
     ) =>
     {
-      if (nextTicker)
+      if (!nextTicker)
       {
-        const nextCompany = await getCompany(
-          nextTicker,
-        );
-        const nextLogo = await getLogo(
-          nextTicker,
-        ).catch();
+        return;
+      }
 
-        if (!nextCompany || !nextLogo)
-        {
-          setError(
-            ERROR_MESSAGE,
-          );
-        }
-        else
-        {
-          setLogo(
-            nextLogo,
-          );
-          setCompany(
-            nextCompany,
-          );
-        }
+      const nextCompany = await getCompany(
+        nextTicker,
+      );
+      const nextLogo = await getLogo(
+        nextTicker,
+      ).catch();
+
+      if (!nextCompany ||
+          !nextLogo)
+      {
+        setError(
+          ERROR_MESSAGE,
+        );
+      }
+      else
+      {
+        setLogo(
+          nextLogo,
+        );
+        setCompany(
+          nextCompany,
+        );
       }
     },
     [],

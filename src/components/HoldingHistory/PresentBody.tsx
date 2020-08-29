@@ -52,7 +52,8 @@ const PresentBody: React.FC<Props> = (
 {
   const presentRowRef = useRef<HTMLTableRowElement>();
 
-  if (!highestPresentHolding || !presentLedger || !presentPrice)
+  if (!highestPresentHolding ||
+      !presentLedger || !presentPrice)
   {
     return null;
   }

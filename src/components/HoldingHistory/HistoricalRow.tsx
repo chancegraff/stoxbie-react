@@ -28,18 +28,9 @@ const HistoricalRow: React.FC<Props> = (
   const shares = useMemo(
     () =>
     {
-      if (historicalHolding.closeCount)
-      {
-        return formatCount(
-          historicalHolding.closeCount,
-        );
-      }
-      else if (historicalHolding.openCount)
-      {
-        return formatCount(
-          historicalHolding.openCount,
-        );
-      }
+      return formatCount(
+        historicalHolding.closeCount,
+      );
     },
     [
       historicalHolding,
@@ -48,12 +39,9 @@ const HistoricalRow: React.FC<Props> = (
   const open = useMemo(
     () =>
     {
-      if (historicalHolding.openPrice)
-      {
-        return formatCurrency(
-          historicalHolding.openPrice,
-        );
-      }
+      return formatCurrency(
+        historicalHolding.openPrice,
+      );
     },
     [
       historicalHolding,
@@ -62,14 +50,11 @@ const HistoricalRow: React.FC<Props> = (
   const close = useMemo(
     () =>
     {
-      if (historicalHolding.closePrice)
-      {
-        const abbreviatedClose = formatCurrency(
-          historicalHolding.closePrice,
-        );
+      const abbreviatedClose = formatCurrency(
+        historicalHolding.closePrice,
+      );
 
-        return abbreviatedClose;
-      }
+      return abbreviatedClose;
     },
     [
       historicalHolding,
@@ -78,18 +63,9 @@ const HistoricalRow: React.FC<Props> = (
   const balance = useMemo(
     () =>
     {
-      if (historicalHolding.closeCount && historicalHolding.closePrice)
-      {
-        return formatCurrency(
-          historicalHolding.closeCount * historicalHolding.closePrice,
-        );
-      }
-      else if (historicalHolding.openCount && historicalHolding.openPrice)
-      {
-        return formatCurrency(
-          historicalHolding.openCount * historicalHolding.openPrice,
-        );
-      }
+      return formatCurrency(
+        historicalHolding.closeCount * historicalHolding.closePrice,
+      );
     },
     [
       historicalHolding,

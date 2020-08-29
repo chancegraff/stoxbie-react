@@ -58,7 +58,8 @@ const buyShares = async (
   tradeRowShouldHaveText(
     openedTrade,
     formatCount(
-      trade.CloseCount || trade.OpenCount,
+      trade.CloseCount ||
+      trade.OpenCount,
     ),
   );
 

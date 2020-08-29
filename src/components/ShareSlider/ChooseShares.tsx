@@ -126,7 +126,8 @@ const ChooseShares: React.FC<Props> = (
   useEffect(
     () =>
     {
-      if (hasPriceChanged || hasBalanceChanged)
+      if (hasPriceChanged ||
+          hasBalanceChanged)
       {
         setOrderShareCount(
           0,

@@ -38,7 +38,8 @@ const Error: React.FC<Props> = (
       {
         return;
       }
-      else if (!location || !location.state)
+      else if (!location ||
+               !location.state)
       {
         return DEFAULT_ERROR_MESSAGE;
       }

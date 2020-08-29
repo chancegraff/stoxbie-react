@@ -41,7 +41,8 @@ const DropCalendar: React.FC<Props> = (
   const bounds = useMemo(
     () =>
     {
-      if (min && max)
+      if (min &&
+          max)
       {
         return [
           min,
