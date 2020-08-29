@@ -23,7 +23,8 @@
         "react",
         "react-hooks",
         "simple-import-sort",
-        "wrap-params"
+        "wrap-params",
+        "@shopify/eslint-plugin"
     ],
     "settings": {
         "react": {
@@ -55,16 +56,6 @@
                 "@typescript-eslint/no-unsafe-assignment": "off",
                 "@typescript-eslint/no-unsafe-call": "off",
                 "@typescript-eslint/no-empty-interface": "off",
-                "indent": "off",
-                "@typescript-eslint/indent": [
-                    "error",
-                    2,
-                    {
-                        "ignoredNodes": [
-                            "TemplateLiteral > *"
-                        ]
-                    }
-                ],
                 "init-declarations": "off",
                 "@typescript-eslint/init-declarations": [
                     "error"
@@ -179,7 +170,14 @@
         "implicit-arrow-linebreak": "off",
         "indent": [
             "error",
-            2
+            2,
+            {
+                "SwitchCase": 1,
+                "offsetTernaryExpressions": true,
+                "ignoredNodes": [
+                    "TemplateLiteral > *"
+                ]
+            }
         ],
         "indent-legacy": "off",
         "init-declarations": "error",
@@ -235,12 +233,7 @@
         "no-extra-label": "error",
         "no-extra-parens": [
             "error",
-            "all",
-            {
-                "returnAssign": false,
-                "nestedBinaryExpressions": false,
-                "ignoreJSX": "multi-line"
-            }
+            "functions"
         ],
         "no-floating-decimal": "error",
         "no-implicit-coercion": "error",
@@ -487,6 +480,14 @@
                 "minProperties": 1
             }
         ],
+        "wrap-params/logical-expressions": "error",
+        "@shopify/binary-assignment-parens": [
+            "error",
+            "always"
+        ],
+        "@shopify/jsx-no-complex-expressions": "error",
+        "@shopify/prefer-early-return": "error",
+        "@shopify/typescript/prefer-pascal-case-enums": "error",
         "simple-import-sort/sort": [
             "error",
             {
