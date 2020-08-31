@@ -2,11 +2,12 @@ import React from "react";
 import {
   Search,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledBottomText,
-  StyledContainer,
-  StyledTopText,
+  GrommetBottomText,
+  GrommetContainer,
+  GrommetTopText,
 } from "./SearchResult.styled";
 
 type Props = {
@@ -22,14 +23,14 @@ const StockSymbol: React.FC<Props> = (
 ) =>
 {
   return (
-    <StyledContainer>
-      <StyledTopText>
+    <GrommetContainer css="">
+      <GrommetTopText css="">
         {searchResult.symbol}
-      </StyledTopText>
-      <StyledBottomText>
+      </GrommetTopText>
+      <GrommetBottomText css="">
         {searchResult.securityName}
-      </StyledBottomText>
-    </StyledContainer>
+      </GrommetBottomText>
+    </GrommetContainer>
   );
 };
 

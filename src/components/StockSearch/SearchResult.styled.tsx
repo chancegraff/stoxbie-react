@@ -6,7 +6,7 @@ import {
   Text,
 } from "grommet";
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -19,7 +19,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledTopText: React.FC<JSXTextProps> = (
+export const GrommetTopText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {
@@ -32,7 +32,7 @@ export const StyledTopText: React.FC<JSXTextProps> = (
   );
 };
 
-export const StyledBottomText: React.FC<JSXTextProps> = (
+export const GrommetBottomText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {

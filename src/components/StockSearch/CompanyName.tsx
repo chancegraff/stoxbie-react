@@ -2,13 +2,14 @@ import React from "react";
 import {
   Company,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledContainer,
-  StyledLargeSkeleton,
-  StyledLargeText,
-  StyledSmallSkeleton,
-  StyledSmallText,
+  GrommetContainer,
+  GrommetLargeText,
+  GrommetSmallText,
+  StoxbieLargeSkeleton,
+  StoxbieSmallSkeleton,
 } from "./CompanyName.styled";
 
 type Props = {
@@ -22,22 +23,28 @@ const StockName: React.FC<Props> = (
   if (!props.company)
   {
     return (
-      <StyledContainer>
-        <StyledLargeSkeleton Container="off" />
-        <StyledSmallSkeleton Container="off" />
-      </StyledContainer>
+      <GrommetContainer css="">
+        <StoxbieLargeSkeleton
+          css=""
+          Container="off"
+        />
+        <StoxbieSmallSkeleton
+          css=""
+          Container="off"
+        />
+      </GrommetContainer>
     );
   }
 
   return (
-    <StyledContainer>
-      <StyledLargeText>
+    <GrommetContainer css="">
+      <GrommetLargeText css="">
         {props.company?.companyName}
-      </StyledLargeText>
-      <StyledSmallText>
+      </GrommetLargeText>
+      <GrommetSmallText css="">
         {props.company?.symbol}
-      </StyledSmallText>
-    </StyledContainer>
+      </GrommetSmallText>
+    </GrommetContainer>
   );
 };
 

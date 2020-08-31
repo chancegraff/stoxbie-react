@@ -10,7 +10,7 @@ import Skeleton, {
   JSXSkeletonProps,
 } from "components/Grommet/Skeleton";
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const GrommetContainer: React.FC<BoxProps> = (
   props,
 ) =>
 {
@@ -23,7 +23,7 @@ export const StyledContainer: React.FC<BoxProps> = (
   );
 };
 
-export const StyledSkeleton: React.FC<JSXSkeletonProps> = (
+export const StoxbieSkeleton: React.FC<JSXSkeletonProps> = (
   props,
 ) =>
 {
@@ -35,7 +35,7 @@ export const StyledSkeleton: React.FC<JSXSkeletonProps> = (
   );
 };
 
-export const StyledAvatar: React.FC<AvatarProps> = (
+export const GrommetAvatar: React.FC<AvatarProps> = (
   props,
 ) =>
 {

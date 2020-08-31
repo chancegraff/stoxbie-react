@@ -2,11 +2,12 @@ import React from "react";
 import {
   Logo,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledAvatar,
-  StyledContainer,
-  StyledSkeleton,
+  GrommetAvatar,
+  GrommetContainer,
+  StoxbieSkeleton,
 } from "./CompanyLogo.styled";
 
 type Props = {
@@ -19,13 +20,21 @@ const StockLogo: React.FC<Props> = (
 {
   if (!props.logo)
   {
-    return <StyledSkeleton Container={StyledContainer} />;
+    return (
+      <StoxbieSkeleton
+        css=""
+        Container={GrommetContainer}
+      />
+    );
   }
 
   return (
-    <StyledContainer>
-      <StyledAvatar src={props?.logo?.url} />
-    </StyledContainer>
+    <GrommetContainer css="">
+      <GrommetAvatar
+        css=""
+        src={props?.logo?.url}
+      />
+    </GrommetContainer>
   );
 };
 
