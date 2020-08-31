@@ -11,18 +11,24 @@
 # production
 /build
 
-# misc
+# mac
 .DS_Store
+
+# env
+.env
+.env.*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.env
-.env.*
-.vscode
-eslint
+# vscode
+/.vscode
+
+# packages
+/eslint
