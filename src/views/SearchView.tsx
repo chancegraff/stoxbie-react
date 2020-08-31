@@ -7,6 +7,9 @@ import {
   RouteProps,
 } from "react-router-dom";
 import {
+  Search,
+} from "@chancey/iex-cloud";
+import {
   AsyncStates,
 } from "async-types";
 import {
@@ -14,9 +17,6 @@ import {
   Heading,
   Text,
 } from "grommet";
-import {
-  Search,
-} from "iex-cloud";
 import {
   useDebouncedCallback,
 } from "use-debounce";

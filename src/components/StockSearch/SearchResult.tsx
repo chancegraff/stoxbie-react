@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Search,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   StyledBottomText,

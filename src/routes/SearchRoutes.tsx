@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import {
   search,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import SearchView from "views/SearchView";
 

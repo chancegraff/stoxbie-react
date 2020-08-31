@@ -8,7 +8,7 @@ import {
 import {
   Company,
   Logo,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import PageContent from "components/PageTemplates/PageContent";
 import PageError from "components/PageTemplates/PageError";

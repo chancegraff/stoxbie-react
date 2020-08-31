@@ -16,7 +16,7 @@ import {
 } from "grommet";
 import {
   Search,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   handleUnloadCreator,

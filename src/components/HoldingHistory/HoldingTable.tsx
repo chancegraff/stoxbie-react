@@ -4,7 +4,7 @@ import React, {
 } from "react";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 import {
   HistoricalLedger,
   HistoricalTradeFinished,

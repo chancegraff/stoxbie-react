@@ -15,9 +15,8 @@ const AppTheme: React.FC = (
       cssVars={true}
       theme={Theme}
       themeMode="dark"
-    >
-      {props.children}
-    </GrommetProvider>
+      {...props}
+    />
   );
 };
 

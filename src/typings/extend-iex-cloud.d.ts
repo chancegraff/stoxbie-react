@@ -1,6 +1,6 @@
-import "iex-cloud";
+import "@chancey/iex-cloud";
 
-declare module "iex-cloud" {
+declare module "@chancey/iex-cloud" {
   declare type HistoricalPrice = {
     readonly symbol?: string;
     /** Formatted as YYYY-MM-DD */

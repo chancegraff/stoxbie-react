@@ -9,7 +9,7 @@ import {
 } from "grommet";
 import {
   Search,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   TICKER_INPUT_PLACERHOLDER,

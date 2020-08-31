@@ -18,7 +18,7 @@ import {
 } from "grommet";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 import {
   HistoricalLedger,
   HistoricalTrade,

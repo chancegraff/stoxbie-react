@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Logo,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   StyledAvatar,

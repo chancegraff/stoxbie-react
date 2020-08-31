@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Company,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   StyledContainer,

@@ -17,7 +17,7 @@ import {
   company as getCompany,
   Logo,
   logo as getLogo,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   TICKER_ERROR_MESSAGE,

@@ -7,7 +7,7 @@ import {
   JSXTableCellProps,
 } from "grommet";
 import {
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 import {
   HistoricalLedger,
   HistoricalTradeStarted,

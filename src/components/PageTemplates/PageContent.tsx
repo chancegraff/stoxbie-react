@@ -1,64 +1,36 @@
 import React from "react";
-import {
-  Footer,
-  Header,
-  Main,
-} from "grommet";
 
 import AppCopyright from "components/AppBranding/AppCopyright";
 import AppLogo from "components/AppBranding/AppLogo";
 import PageBreadcrumbs from "components/PageTemplates/PageBreadcrumbs";
 
-type Props = unknown;
-const pad = {
-  horizontal: "xlarge",
-};
+import {
+  StyledContainer,
+  StyledFooter,
+  StyledHeader,
+  StyledMain,
+} from "./PageContent.styled";
 
-const ContentContainer: React.FC<Props> = (
+const PageContent: React.FC = (
   props,
 ) =>
 {
   return (
-    <Main >
-      <Header
-        background={
-          {
-            color: "brand",
-            opacity: 0.1,
-          }
-        }
-        justify="start"
-        gap="large"
-        pad={
-          {
-            ...pad,
-            vertical: "medium",
-          }
-        }
-      >
+    <StyledContainer>
+      <StyledHeader>
         <AppLogo />
         <PageBreadcrumbs />
-      </Header>
-      <Main
-        height="auto !important"
-        overflow="visible"
-        flex="grow"
-        pad={
-          {
-            ...pad,
-            vertical: "medium",
-          }
-        }
-      >
+      </StyledHeader>
+      <StyledMain>
         {props.children}
-      </Main>
-      <Footer
-        pad={pad}
-      >
+      </StyledMain>
+      <StyledFooter>
         <AppCopyright />
-      </Footer>
-    </Main>
+      </StyledFooter>
+    </StyledContainer>
   );
 };
 
-export default ContentContainer;
+PageContent.displayName = "PageContent";
+
+export default PageContent;

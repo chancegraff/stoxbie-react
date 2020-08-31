@@ -1,3 +1,8 @@
+import {
+  CSSProp,
+  DefaultTheme,
+} from "styled-components";
+
 import "react";
 
 declare module "react" {
@@ -10,4 +15,8 @@ declare module "react" {
   };
 
   declare type DispatchSetStateAction<P> = Dispatch<SetStateAction<P>>;
+
+  interface Attributes {
+    css?: CSSProp<DefaultTheme>;
+  }
 }

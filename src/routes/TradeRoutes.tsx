@@ -14,7 +14,7 @@ import {
 import {
   HistoricalPrice,
   historicalPrices,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   DATE_ERROR_MESSAGE,

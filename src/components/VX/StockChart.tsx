@@ -11,7 +11,7 @@ import {
 } from "grommet/utils";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 import {
   Padding,
   Resolution,

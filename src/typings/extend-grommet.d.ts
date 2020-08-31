@@ -1,4 +1,4 @@
-import {
+import React, {
   Ref,
 } from "react";
 import {
@@ -96,6 +96,9 @@ declare module "grommet" {
 
   /* eslint-disable newline-after-var */
   declare const Box: React.FC<JSXBoxProps>;
+  declare const Header: React.FC<JSXBoxProps>;
+  declare const Main: React.FC<JSXBoxProps>;
+  declare const Footer: React.FC<JSXBoxProps>;
   declare const Drop: React.FC<JSXDropProps>;
   declare const Calendar: React.FC<JSXCalendarProps>;
   declare const Image: React.FC<JSXImageProps>;

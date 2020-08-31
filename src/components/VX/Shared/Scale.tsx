@@ -15,7 +15,7 @@ import {
 } from "d3-scale";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
   Max,
