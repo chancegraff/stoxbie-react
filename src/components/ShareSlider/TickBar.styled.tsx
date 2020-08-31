@@ -10,7 +10,7 @@ import styled from "styled-components/macro";
 
 import TickItem from "components/ShareSlider/TickItem";
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -31,7 +31,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledTickItem = styled(
+export const StoxbieTickItem = styled(
   TickItem,
 )`
 color: ${

@@ -4,11 +4,12 @@ import React, {
   useMemo,
 } from "react";
 import {
-  RangeInput,
-} from "grommet";
-import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import {
+  RangeInput,
+} from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
 } from "trade-types";
@@ -19,7 +20,7 @@ import {
 import TickBar from "components/ShareSlider/TickBar";
 
 import {
-  StyledContainer,
+  GrommetContainer,
 } from "./ChooseShares.styled";
 
 type Props = {
@@ -142,18 +143,20 @@ const ChooseShares: React.FC<Props> = (
   );
 
   return (
-    <StyledContainer>
+    <GrommetContainer css="">
       <RangeInput
+        css=""
         role="slider"
         max={maxValue}
         value={orderShareCount}
         onChange={handleChange}
       />
       <TickBar
+        css=""
         maxValue={maxValue}
         setOrderShareCount={setOrderShareCount}
       />
-    </StyledContainer>
+    </GrommetContainer>
   );
 };
 

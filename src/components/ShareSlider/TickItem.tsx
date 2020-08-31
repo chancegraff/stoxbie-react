@@ -2,9 +2,10 @@ import React, {
   PropsHasChildren,
   PropsHasClass,
 } from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledTick,
+  GrommetTick,
 } from "./TickItem.styled";
 
 type Props = PropsHasChildren & PropsHasClass & {
@@ -20,8 +21,9 @@ const TickItem: React.FC<Props> = (
 ) =>
 {
   return (
-    <StyledTick
+    <GrommetTick
       className={className}
+      css=""
       {...props}
     />
   );

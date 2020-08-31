@@ -13,7 +13,7 @@ const StyledBox = styled(
 }
 `;
 
-export const StyledTick: React.FC<JSXBoxProps> = (
+export const GrommetTick: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

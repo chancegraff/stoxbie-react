@@ -4,7 +4,7 @@ import {
   BoxProps,
 } from "grommet";
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const GrommetContainer: React.FC<BoxProps> = (
   props,
 ) =>
 {

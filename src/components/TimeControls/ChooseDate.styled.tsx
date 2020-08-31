@@ -38,7 +38,7 @@ const GroupedContainer: React.FC<JSXBoxProps> = styled(
 }
 `;
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -55,7 +55,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledButton: React.FC<JSXButtonProps> = forwardRef(
+export const GrommetButton: React.FC<JSXButtonProps> = forwardRef(
   (
     props,
     ref,
@@ -72,7 +72,7 @@ export const StyledButton: React.FC<JSXButtonProps> = forwardRef(
   },
 );
 
-export const StyledDropCalendar: React.FC<DropCalendarProps> = (
+export const StoxbieDropCalendar: React.FC<DropCalendarProps> = (
   props,
 ) =>
 {
@@ -95,7 +95,7 @@ export const StyledDropCalendar: React.FC<DropCalendarProps> = (
   );
 };
 
-export const ButtonChildHover: React.FC<JSXBoxProps> = styled(
+export const ButtonChild: React.FC<JSXBoxProps> = styled(
   Box,
 )`
 &:hover {
@@ -109,12 +109,12 @@ export const ButtonChildHover: React.FC<JSXBoxProps> = styled(
 }
 `;
 
-export const StyledButtonChild: React.FC<JSXBoxProps> = (
+export const GrommetButtonChild: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
   return (
-    <ButtonChildHover
+    <ButtonChild
       fill={true}
       flex="grow"
       align="center"
@@ -127,7 +127,7 @@ export const StyledButtonChild: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledButtonText: React.FC<JSXTextProps> = (
+export const GrommetButtonText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {

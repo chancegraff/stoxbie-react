@@ -11,9 +11,9 @@ import {
 } from "utils/Utilities";
 
 import {
-  StyledButton,
-  StyledContainer,
-  StyledText,
+  GrommetButton,
+  GrommetContainer,
+  GrommetText,
 } from "./ForwardTime.styled";
 
 type Props = {
@@ -45,15 +45,18 @@ const TimeControl: React.FC<Props> = (
   );
 
   return (
-    <StyledContainer>
-      <StyledText>
+    <GrommetContainer css="">
+      <GrommetText css="">
         {
-`Today is ${safeDate ||
-                     "..."}`
+          `Today is ${safeDate ||
+                      "..."}`
         }
-      </StyledText>
-      <StyledButton onClick={handleContinue} />
-    </StyledContainer>
+      </GrommetText>
+      <GrommetButton
+        css=""
+        onClick={handleContinue}
+      />
+    </GrommetContainer>
   );
 };
 
