@@ -13,7 +13,7 @@ import {
 } from "grommet/utils";
 import {
   ThemeContext,
-} from "styled-components";
+} from "styled-components/macro";
 
 import {
   DateFormats,

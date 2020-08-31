@@ -5,7 +5,7 @@ import {
   Box,
   JSXBoxProps,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const StyledItem = styled(
   Box,

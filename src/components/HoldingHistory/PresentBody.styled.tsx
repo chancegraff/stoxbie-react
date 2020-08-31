@@ -3,7 +3,7 @@ import {
   JSXTableBodyProps,
   TableBody,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const BorderlessBody: React.FC<JSXTableBodyProps> = styled(
   TableBody,

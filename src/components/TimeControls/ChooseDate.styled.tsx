@@ -12,7 +12,7 @@ import {
   JSXTextProps,
   Text,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import DropCalendar, {
   DropCalendarProps,

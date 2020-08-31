@@ -18,7 +18,7 @@ import {
 } from "style-types";
 import {
   ThemeContext,
-} from "styled-components";
+} from "styled-components/macro";
 
 import Spinner from "components/Grommet/Spinner";
 import LineChart, {

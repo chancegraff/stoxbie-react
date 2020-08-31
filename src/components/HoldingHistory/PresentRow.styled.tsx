@@ -10,7 +10,7 @@ import {
 import {
   normalizeColor,
 } from "grommet/utils";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const HoverableTableRow: React.FC<JSXTableRowProps> = styled(
   TableRow,

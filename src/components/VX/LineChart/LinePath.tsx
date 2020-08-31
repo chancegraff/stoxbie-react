@@ -15,7 +15,7 @@ import {
 } from "@chancey/iex-cloud";
 import {
   ThemeContext,
-} from "styled-components";
+} from "styled-components/macro";
 
 import {
   ScaleX,

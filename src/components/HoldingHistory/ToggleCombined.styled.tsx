@@ -10,7 +10,7 @@ import {
   Stop,
   Subtract,
 } from "grommet-icons";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const StyledDrop: React.FC<JSXDropProps> = (
   props,

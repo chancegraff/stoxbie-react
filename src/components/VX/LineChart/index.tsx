@@ -15,7 +15,7 @@ import {
   Padding,
   Resolution,
 } from "style-types";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import withShared from "components/VX/Shared";
 import {

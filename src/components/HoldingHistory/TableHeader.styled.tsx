@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const StyledTableHeader: React.FC<JSXTableHeaderProps> = (
   props,

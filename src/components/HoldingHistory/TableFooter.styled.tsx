@@ -7,7 +7,7 @@ import {
   TableFooter,
   TableRow,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const StyledTableFooter: React.FC<JSXTableFooterProps> = (
   props,

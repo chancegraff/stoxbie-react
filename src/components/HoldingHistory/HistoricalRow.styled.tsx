@@ -5,7 +5,7 @@ import {
   TableCell,
   TableRow,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const HoverableTableRow: React.FC<JSXTableRowProps> = styled(
   TableRow,

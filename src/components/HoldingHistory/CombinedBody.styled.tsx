@@ -11,7 +11,7 @@ import {
 import {
   getRGBA,
 } from "grommet/utils/colors";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const BorderlessBody: React.FC<JSXTableBodyProps> = styled(
   TableBody,
