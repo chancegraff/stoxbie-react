@@ -5,9 +5,8 @@ import {
   JSXBoxProps,
   Main,
 } from "grommet";
-import styled from "styled-components/macro";
 
-const Container: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -18,11 +17,7 @@ const Container: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledContainer = styled(
-  Container,
-)``;
-
-export const StyledHeader: React.FC<JSXBoxProps> = (
+export const GrommetHeader: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -47,7 +42,7 @@ export const StyledHeader: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledMain: React.FC<JSXBoxProps> = (
+export const GrommetMain: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -67,7 +62,7 @@ export const StyledMain: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledFooter: React.FC<JSXBoxProps> = (
+export const GrommetFooter: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

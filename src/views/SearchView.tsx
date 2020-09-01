@@ -12,11 +12,7 @@ import {
 import {
   AsyncStates,
 } from "async-types";
-import {
-  Box,
-  Heading,
-  Text,
-} from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   useDebouncedCallback,
 } from "use-debounce";
@@ -25,10 +21,18 @@ import {
   DEBOUNCE_MEDIUM_MS,
 } from "utils/Constants";
 import {
+  useScrollToTop,
+} from "utils/Hooks";
+import {
   handleUnloadCreator,
 } from "utils/Utilities";
 import PageContent from "components/PageTemplates/PageContent";
 import SearchInput from "components/StockSearch/SearchInput";
+
+import {
+  GrommetHeading,
+  GrommetText,
+} from "./SearchView.styled";
 
 type Props = RouteProps & {
   handleSearch: (nextValue: string) => Promise<Search[]>;
@@ -96,28 +100,18 @@ const SearchView: React.FC<Props> = (
     [],
   );
 
+  useScrollToTop();
+
   return (
-    <PageContent>
-      <Heading
-        level="1"
-        size="large"
-      >
-        Ticker Search
-      </Heading>
-      <Text
-        size="small"
-        color="text-xweak"
-        margin="small"
-      >
-        Select the stock ticker to trade.
-      </Text>
-      <Box>
-        <SearchInput
-          handleSearch={handleSearchLazily}
-          searchState={searchState}
-          searchResults={searchResults}
-        />
-      </Box>
+    <PageContent css="">
+      <GrommetHeading css="" />
+      <GrommetText css="" />
+      <SearchInput
+        css=""
+        handleSearch={handleSearchLazily}
+        searchState={searchState}
+        searchResults={searchResults}
+      />
     </PageContent>
   );
 };

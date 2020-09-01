@@ -1,33 +1,43 @@
-import React from "react";
+import React, {
+  PropsHasChildren,
+  PropsHasClass,
+} from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import AppCopyright from "components/AppBranding/AppCopyright";
 import AppLogo from "components/AppBranding/AppLogo";
 import PageBreadcrumbs from "components/PageTemplates/PageBreadcrumbs";
 
 import {
-  StyledContainer,
-  StyledFooter,
-  StyledHeader,
-  StyledMain,
+  GrommetContainer,
+  GrommetFooter,
+  GrommetHeader,
+  GrommetMain,
 } from "./PageContent.styled";
 
-const PageContent: React.FC = (
-  props,
+const PageContent: React.FC<PropsHasClass & PropsHasChildren> = (
+  {
+    className,
+    children,
+  },
 ) =>
 {
   return (
-    <StyledContainer>
-      <StyledHeader>
-        <AppLogo />
-        <PageBreadcrumbs />
-      </StyledHeader>
-      <StyledMain>
-        {props.children}
-      </StyledMain>
-      <StyledFooter>
-        <AppCopyright />
-      </StyledFooter>
-    </StyledContainer>
+    <GrommetContainer
+      className={className}
+      css=""
+    >
+      <GrommetHeader css="">
+        <AppLogo css="" />
+        <PageBreadcrumbs css="" />
+      </GrommetHeader>
+      <GrommetMain css="">
+        {children}
+      </GrommetMain>
+      <GrommetFooter css="">
+        <AppCopyright css="" />
+      </GrommetFooter>
+    </GrommetContainer>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   DropButtonProps,
   DropProps,
   GridProps,
+  HeadingProps,
   ImageProps,
   TableBodyProps,
   TableCellProps,
@@ -75,11 +76,18 @@ declare module "grommet" {
   declare type IntrinsicTableCell = Omit<JSX.IntrinsicElements["td"], "align">;
   declare type IntrinsicCalendar = Omit<JSX.IntrinsicElements["div"], "onSelect">;
   declare type IntrinsicTextInput = Omit<IntrinsicInput, "onSelect" | "size" | "placeholder">;
+  declare type IntrinsicHeading = Omit<JSX.IntrinsicElements["h1"], "color">
+    | Omit<JSX.IntrinsicElements["h2"], "color">
+    | Omit<JSX.IntrinsicElements["h3"], "color">
+    | Omit<JSX.IntrinsicElements["h4"], "color">
+    | Omit<JSX.IntrinsicElements["h5"], "color">
+    | Omit<JSX.IntrinsicElements["h6"], "color">;
 
   declare type JSXBoxProps = BoxProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
   declare type JSXDropProps = MarkRequired<DropProps, "target"> & JSXProps<HTMLDivElement, IntrinsicDiv>;
   declare type JSXImageProps = ImageProps & JSXProps<HTMLImageElement, IntrinsicImage>;
   declare type JSXTextProps = TextProps & JSXProps<HTMLSpanElement, IntrinsicSpan>;
+  declare type JSXHeadingProps = HeadingProps & JSXProps<HTMLHeadingElement, IntrinsicHeading>;
   declare type JSXAvatarProps = AvatarProps & JSXProps<HTMLDivElement, IntrinsicDiv>;
   declare type JSXButtonProps = ButtonProps & JSXProps<HTMLButtonElement, IntrinsicButton>;
   declare type JSXDropButtonProps = DropButtonProps & ButtonProps & JSXProps<HTMLButtonElement, IntrinsicButton>;
@@ -103,6 +111,7 @@ declare module "grommet" {
   declare const Calendar: React.FC<JSXCalendarProps>;
   declare const Image: React.FC<JSXImageProps>;
   declare const Text: React.FC<JSXTextProps>;
+  declare const Heading: React.FC<JSXHeadingProps>;
   declare const Avatar: React.FC<JSXAvatarProps>;
   declare const Button: React.FC<JSXButtonProps>;
   declare const DropButton: React.FC<JSXDropButtonProps>;

@@ -7,14 +7,19 @@ import {
   useLocation,
   useRouteMatch,
 } from "react-router-dom";
-import {
-  Heading,
-} from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   DEFAULT_ERROR_MESSAGE,
 } from "utils/Constants";
+import {
+  useScrollToTop,
+} from "utils/Hooks";
 import PageContent from "components/PageTemplates/PageContent";
+
+import {
+  GrommetHeading,
+} from "./PageError.styled";
 
 type Props = RouteProps;
 
@@ -52,6 +57,8 @@ const Error: React.FC<Props> = (
     ],
   );
 
+  useScrollToTop();
+
   if (!match)
   {
     return (
@@ -67,13 +74,10 @@ const Error: React.FC<Props> = (
   }
 
   return (
-    <PageContent>
-      <Heading
-        size="medium"
-        level="1"
-      >
+    <PageContent css="">
+      <GrommetHeading css="">
         {message}
-      </Heading>
+      </GrommetHeading>
     </PageContent>
   );
 };

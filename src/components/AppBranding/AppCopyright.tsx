@@ -1,27 +1,37 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   getYear,
 } from "date-fns";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledContainer,
-  StyledText,
+  GrommetContainer,
+  GrommetText,
 } from "./AppCopyright.styled";
 
-type Props = unknown;
+type Props = PropsHasClass;
 
 const currentYear = getYear(
   new Date(),
 );
 
-const FooterName: React.FC<Props> = () =>
+const FooterName: React.FC<Props> = (
+  {
+    className,
+  },
+) =>
 {
   return (
-    <StyledContainer>
-      <StyledText>
+    <GrommetContainer
+      className={className}
+      css=""
+    >
+      <GrommetText css="">
         {`© ${currentYear} Chance Technologies, LLC`}
-      </StyledText>
-    </StyledContainer>
+      </GrommetText>
+    </GrommetContainer>
   );
 };
 
