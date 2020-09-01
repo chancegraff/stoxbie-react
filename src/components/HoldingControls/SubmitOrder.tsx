@@ -14,7 +14,7 @@ import styled from "styled-components/macro"; // eslint-disable-line @typescript
 
 import StateIcon from "./StateIcon";
 import {
-  StyledButton,
+  GrommetButton,
 } from "./SubmitOrder.styled";
 
 type Props = JSXButtonProps & PropsHasClass & {
@@ -105,9 +105,9 @@ const SubmitOrder: React.FC<Props> = (
   );
 
   return (
-    <StyledButton
-      css=""
+    <GrommetButton
       className={className}
+      css=""
       icon={endEnhancer}
       label={children}
       value={submitDirection}

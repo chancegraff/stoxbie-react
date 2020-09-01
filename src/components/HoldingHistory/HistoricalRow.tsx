@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useMemo,
 } from "react";
 import {
@@ -11,16 +12,17 @@ import {
 } from "utils/Utilities";
 
 import {
-  StyledTableCell,
-  StyledTableRow,
+  GrommetTableCell,
+  GrommetTableRow,
 } from "./HistoricalRow.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   historicalHolding: HistoricalTradeFinished;
 };
 
 const HistoricalRow: React.FC<Props> = (
   {
+    className,
     historicalHolding,
   },
 ) =>
@@ -73,20 +75,24 @@ const HistoricalRow: React.FC<Props> = (
   );
 
   return (
-    <StyledTableRow role="row">
-      <StyledTableCell>
+    <GrommetTableRow
+      className={className}
+      css=""
+      role="row"
+    >
+      <GrommetTableCell css="">
         {shares}
-      </StyledTableCell>
-      <StyledTableCell>
+      </GrommetTableCell>
+      <GrommetTableCell css="">
         {open}
-      </StyledTableCell>
-      <StyledTableCell>
+      </GrommetTableCell>
+      <GrommetTableCell css="">
         {close}
-      </StyledTableCell>
-      <StyledTableCell>
+      </GrommetTableCell>
+      <GrommetTableCell css="">
         {balance}
-      </StyledTableCell>
-    </StyledTableRow>
+      </GrommetTableCell>
+    </GrommetTableRow>
   );
 };
 

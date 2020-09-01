@@ -4,7 +4,6 @@ import React, {
 import {
   JSXIconProps,
 } from "grommet-icons";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   HoverState,
@@ -29,7 +28,6 @@ const HoverIcon: React.FC<Props> = (
   {
     return (
       <MouseIdlingIcon
-        css=""
         className={className}
       />
     );
@@ -37,7 +35,6 @@ const HoverIcon: React.FC<Props> = (
 
   return (
     <MouseHoveringIcon
-      css=""
       className={className}
     />
   );

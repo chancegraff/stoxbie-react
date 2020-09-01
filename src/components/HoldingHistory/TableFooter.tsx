@@ -14,9 +14,9 @@ import {
 } from "utils/Utilities";
 
 import {
-  StyledTableCell,
-  StyledTableFooter,
-  StyledTableRow,
+  GrommetTableCell,
+  GrommetTableFooter,
+  GrommetTableRow,
 } from "./TableFooter.styled";
 
 type Props = PropsHasClass & {
@@ -64,28 +64,28 @@ const TableFooter: React.FC<Props> = (
   );
 
   return (
-    <StyledTableFooter
+    <GrommetTableFooter
       css=""
       className={className}
     >
-      <StyledTableRow
+      <GrommetTableRow
         css=""
         role="footerRow"
       >
-        <StyledTableCell css="">
+        <GrommetTableCell css="">
           Change
-        </StyledTableCell>
-        <StyledTableCell css="">
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           {change}
-        </StyledTableCell>
-        <StyledTableCell css="">
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           Balance
-        </StyledTableCell>
-        <StyledTableCell css="">
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           {balance}
-        </StyledTableCell>
-      </StyledTableRow>
-    </StyledTableFooter>
+        </GrommetTableCell>
+      </GrommetTableRow>
+    </GrommetTableFooter>
   );
 };
 

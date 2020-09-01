@@ -9,25 +9,23 @@ import {
 } from "grommet";
 import styled from "styled-components/macro";
 
-export const StyledTableHeader: React.FC<JSXTableHeaderProps> = (
+export const GrommetTableHeader: React.FC<JSXTableHeaderProps> = (
   props,
 ) =>
 {
   return (
     <TableHeader
-      css=""
       {...props}
     />
   );
 };
 
-export const StyledTableRow: React.FC<JSXTableRowProps> = (
+export const GrommetTableRow: React.FC<JSXTableRowProps> = (
   props,
 ) =>
 {
   return (
     <TableRow
-      css=""
       {...props}
     />
   );
@@ -40,7 +38,7 @@ position: sticky;
 top: 0;
 `;
 
-export const StyledTableCell: React.FC<JSXTableCellProps> = (
+export const GrommetTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {

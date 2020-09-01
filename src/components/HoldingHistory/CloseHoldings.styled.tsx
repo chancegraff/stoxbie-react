@@ -17,13 +17,12 @@ import SubmitOrder, {
   SubmitOrderProps,
 } from "components/HoldingControls/SubmitOrder";
 
-export const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
+export const StoxbieSubmitOrder: React.FC<SubmitOrderProps> = (
   props,
 ) =>
 {
   return (
     <SubmitOrder
-      css=""
       size="small"
       fill={true}
       plain={true}
@@ -56,7 +55,7 @@ const HoverableContainer: React.FC<JSXBoxProps> = styled(
 }
 `;
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -72,26 +71,24 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledClosedIcon: React.FC<JSXIconProps> = (
+export const GrommetClosedIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {
   return (
     <CatalogOption
-      css=""
       size="10px"
       {...props}
     />
   );
 };
 
-export const StyledOpenedIcon: React.FC<JSXIconProps> = (
+export const GrommetOpenedIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {
   return (
     <Catalog
-      css=""
       size="12px"
       {...props}
     />

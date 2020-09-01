@@ -1,20 +1,24 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   Checkmark,
   JSXIconProps,
 } from "grommet-icons";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledContainer,
+  GrommetContainer,
 } from "./StateIcon.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   isActive: boolean;
   Icon: React.ComponentType<JSXIconProps>;
 };
 
 const StateIcon: React.FC<Props> = (
   {
+    className,
     isActive,
     Icon = Checkmark,
   },
@@ -22,16 +26,24 @@ const StateIcon: React.FC<Props> = (
 {
   if (!isActive)
   {
-    return <StyledContainer />;
+    return (
+      <GrommetContainer
+        className={className}
+        css=""
+      />
+    );
   }
 
   return (
-    <StyledContainer>
+    <GrommetContainer
+      className={className}
+      css=""
+    >
       <Icon
         size="12px"
         data-testid="check"
       />
-    </StyledContainer>
+    </GrommetContainer>
   );
 };
 

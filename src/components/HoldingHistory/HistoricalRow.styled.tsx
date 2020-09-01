@@ -15,7 +15,7 @@ const HoverableTableRow: React.FC<JSXTableRowProps> = styled(
 }
 `;
 
-export const StyledTableRow: React.FC<JSXTableRowProps> = (
+export const GrommetTableRow: React.FC<JSXTableRowProps> = (
   props,
 ) =>
 {
@@ -26,13 +26,12 @@ export const StyledTableRow: React.FC<JSXTableRowProps> = (
   );
 };
 
-export const StyledTableCell: React.FC<JSXTableCellProps> = (
+export const GrommetTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {
   return (
     <TableCell
-      css=""
       align="end"
       border={
         {

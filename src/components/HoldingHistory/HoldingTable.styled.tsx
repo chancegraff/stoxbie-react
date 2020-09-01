@@ -8,13 +8,12 @@ import {
 } from "grommet";
 import styled from "styled-components/macro";
 
-export const StyledTheme: React.FC = (
+export const GrommetTheme: React.FC = (
   props,
 ) =>
 {
   return (
     <ThemeContext.Extend
-      css=""
       value={
         {
           table: {
@@ -70,7 +69,7 @@ position: relative;
 padding: 0 2px;
 `;
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -110,7 +109,7 @@ line-height: ${
 };
 `;
 
-export const StyledTable: React.FC<JSXTableProps> = (
+export const GrommetTable: React.FC<JSXTableProps> = (
   props,
 ) =>
 {

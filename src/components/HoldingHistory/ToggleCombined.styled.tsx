@@ -12,7 +12,7 @@ import {
 } from "grommet-icons";
 import styled from "styled-components/macro";
 
-export const StyledDrop: React.FC<JSXDropProps> = (
+export const GrommetDrop: React.FC<JSXDropProps> = (
   props,
 ) =>
 {
@@ -42,7 +42,7 @@ cursor: pointer;
 }
 `;
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -62,26 +62,24 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledExtendingIcon: React.FC<JSXIconProps> = (
+export const GrommetExtendingIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {
   return (
     <Stop
-      css=""
       size="12px"
       {...props}
     />
   );
 };
 
-export const StyledRetractingIcon: React.FC<JSXIconProps> = (
+export const GrommetRetractingIcon: React.FC<JSXIconProps> = (
   props,
 ) =>
 {
   return (
     <Subtract
-      css=""
       size="12px"
       {...props}
     />

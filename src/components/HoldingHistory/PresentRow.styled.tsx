@@ -2,9 +2,7 @@ import React, {
   forwardRef,
 } from "react";
 import {
-  JSXTableCellProps,
   JSXTableRowProps,
-  TableCell,
   TableRow,
 } from "grommet";
 import {
@@ -32,7 +30,7 @@ color: ${
 }
 `;
 
-export const StyledTableRow: React.FC<JSXTableRowProps> = forwardRef(
+export const GrommetTableRow: React.FC<JSXTableRowProps> = forwardRef(
   (
     props,
     ref,
@@ -46,27 +44,3 @@ export const StyledTableRow: React.FC<JSXTableRowProps> = forwardRef(
     );
   },
 );
-
-export const StyledTableCell: React.FC<JSXTableCellProps> = (
-  props,
-) =>
-{
-  return (
-    <TableCell
-      css=""
-      border={
-        {
-          size: "0",
-        }
-      }
-      align="end"
-      background={
-        {
-          color: "brand",
-          opacity: "medium",
-        }
-      }
-      {...props}
-    />
-  );
-};

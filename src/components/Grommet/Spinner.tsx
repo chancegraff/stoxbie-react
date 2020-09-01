@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   JSXBoxProps,
 } from "grommet";
@@ -8,16 +10,17 @@ import {
 } from "svg-loaders-react";
 
 import {
-  StyledContainer,
+  GrommetContainer,
 } from "./Spinner.styled";
 
-type Props = JSX.IntrinsicElements["svg"] & {
+type Props = PropsHasClass & JSX.IntrinsicElements["svg"] & {
   Container?: React.FC<JSXBoxProps> | "off";
 };
 
 const Spinner: React.FC<Props> = (
   {
-    Container = StyledContainer,
+    className,
+    Container = GrommetContainer,
     ...props
   },
 ) =>
@@ -26,6 +29,7 @@ const Spinner: React.FC<Props> = (
   {
     return (
       <Oval
+        className={className}
         css=""
         {...props}
       />
@@ -33,7 +37,10 @@ const Spinner: React.FC<Props> = (
   }
 
   return (
-    <Container fill={true}>
+    <Container
+      className={className}
+      fill={true}
+    >
       <Oval
         css=""
         {...props}

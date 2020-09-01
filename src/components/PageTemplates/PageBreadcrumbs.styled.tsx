@@ -1,6 +1,4 @@
-import React, {
-  PropsHasChildren,
-} from "react";
+import React from "react";
 import {
   useRouteMatch,
 } from "react-router-dom";

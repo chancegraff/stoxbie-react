@@ -7,7 +7,7 @@ import {
 } from "grommet";
 import styled from "styled-components/macro";
 
-const StyledItem = styled(
+const GrommetItem = styled(
   Box,
 )`
 position: absolute;
@@ -24,7 +24,7 @@ export const AspectRatioItem = forwardRef<HTMLElement, JSXBoxProps>(
   ) =>
   {
     return (
-      <StyledItem
+      <GrommetItem
         ref={ref}
         css=""
         fill={true}
@@ -36,7 +36,7 @@ export const AspectRatioItem = forwardRef<HTMLElement, JSXBoxProps>(
   },
 );
 
-const StyledBox = styled(
+const GrommetBox = styled(
   Box,
 )`
 position: relative;
@@ -49,7 +49,7 @@ export const AspectRatioBox = forwardRef<HTMLElement, JSXBoxProps>(
   ) =>
   {
     return (
-      <StyledBox
+      <GrommetBox
         ref={ref}
         css=""
         height="0"

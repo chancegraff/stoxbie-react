@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useMemo,
 } from "react";

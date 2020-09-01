@@ -16,10 +16,10 @@ import {
 import HoverIcon from "components/Grommet/HoverIcon";
 
 import {
-  StyledClosedIcon,
-  StyledContainer,
-  StyledOpenedIcon,
-  StyledSubmitOrder,
+  GrommetClosedIcon,
+  GrommetContainer,
+  GrommetOpenedIcon,
+  StoxbieSubmitOrder,
 } from "./CloseHoldings.styled";
 
 type Props = PropsHasClass & {
@@ -52,7 +52,7 @@ const CloseHoldings: React.FC<Props> = (
   }
 
   return (
-    <StyledSubmitOrder
+    <StoxbieSubmitOrder
       css=""
       className={className}
       presentPriceClose={presentPrice.close}
@@ -60,7 +60,7 @@ const CloseHoldings: React.FC<Props> = (
       orderShareCount={presentLedger.totalCount}
       handleSubmit={handleSubmit}
     >
-      <StyledContainer
+      <GrommetContainer
         css=""
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -68,11 +68,11 @@ const CloseHoldings: React.FC<Props> = (
         <HoverIcon
           css=""
           hoverState={hoverState}
-          MouseIdlingIcon={StyledOpenedIcon}
-          MouseHoveringIcon={StyledClosedIcon}
+          MouseIdlingIcon={GrommetOpenedIcon}
+          MouseHoveringIcon={GrommetClosedIcon}
         />
-      </StyledContainer>
-    </StyledSubmitOrder>
+      </GrommetContainer>
+    </StoxbieSubmitOrder>
   );
 };
 

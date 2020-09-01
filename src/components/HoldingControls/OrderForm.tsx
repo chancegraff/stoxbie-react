@@ -19,10 +19,10 @@ import Spinner from "components/Grommet/Spinner";
 import ChooseShares from "components/ShareSlider/ChooseShares";
 
 import {
-  StyledBuyAction,
-  StyledContainer,
-  StyledGrid,
-  StyledSellAction,
+  GrommetContainer,
+  GrommetGrid,
+  StoxbieBuyAction,
+  StoxbieSellAction,
 } from "./OrderForm.styled";
 
 type Props = PropsHasClass & {
@@ -98,15 +98,15 @@ const OrderForm: React.FC<Props> = (
       <Spinner
         css=""
         className={className}
-        Container={StyledContainer}
+        Container={GrommetContainer}
       />
     );
   }
 
   return (
-    <StyledContainer
-      css=""
+    <GrommetContainer
       className={className}
+      css=""
     >
       <ChooseShares
         css=""
@@ -116,8 +116,8 @@ const OrderForm: React.FC<Props> = (
         orderShareCount={orderShareCount}
         setOrderShareCount={setOrderShareCount}
       />
-      <StyledGrid css="">
-        <StyledBuyAction
+      <GrommetGrid css="">
+        <StoxbieBuyAction
           css=""
           handleToggle={handleToggle}
           handleSubmit={handleSubmit}
@@ -125,7 +125,7 @@ const OrderForm: React.FC<Props> = (
           orderDirection={orderDirection}
           orderShareCount={orderShareCount}
         />
-        <StyledSellAction
+        <StoxbieSellAction
           css=""
           handleToggle={handleToggle}
           handleSubmit={handleSubmit}
@@ -133,8 +133,8 @@ const OrderForm: React.FC<Props> = (
           orderDirection={orderDirection}
           orderShareCount={orderShareCount}
         />
-      </StyledGrid>
-    </StyledContainer>
+      </GrommetGrid>
+    </GrommetContainer>
   );
 };
 

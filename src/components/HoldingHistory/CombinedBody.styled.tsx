@@ -65,7 +65,7 @@ border-top: ${
 }
 `;
 
-export const StyledTableBody: React.FC<JSXTableBodyProps> = (
+export const GrommetTableBody: React.FC<JSXTableBodyProps> = (
   props,
 ) =>
 {
@@ -76,13 +76,12 @@ export const StyledTableBody: React.FC<JSXTableBodyProps> = (
   );
 };
 
-export const StyledTableCell: React.FC<JSXTableCellProps> = (
+export const GrommetTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {
   return (
     <TableCell
-      css=""
       border={
         {
           size: "0",

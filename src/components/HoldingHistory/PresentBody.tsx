@@ -22,7 +22,8 @@ import {
 
 import CloseHoldings from "./CloseHoldings";
 import {
-  StyledTableBody,
+  GrommetTableBody,
+  GrommetTableCell,
 } from "./PresentBody.styled";
 import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
@@ -63,7 +64,7 @@ const PresentBody: React.FC<Props> = (
   }
 
   return (
-    <StyledTableBody
+    <GrommetTableBody
       css=""
       className={className}
       onMouseEnter={handleMouseEnterRow}
@@ -82,15 +83,41 @@ const PresentBody: React.FC<Props> = (
         presentHolding={highestPresentHolding}
         presentLedger={presentLedger}
       >
-        <CloseHoldings
-          css=""
-          presentHolding={highestPresentHolding}
-          presentLedger={presentLedger}
-          presentPrice={presentPrice}
-          handleSubmit={handleSubmit}
-        />
+        {
+          (
+            {
+              shares,
+              open,
+              balance,
+            },
+          ) =>
+          {
+            return (
+              <>
+                <GrommetTableCell>
+                  {shares}
+                </GrommetTableCell>
+                <GrommetTableCell>
+                  {open}
+                </GrommetTableCell>
+                <GrommetTableCell>
+                  <CloseHoldings
+                    css=""
+                    presentHolding={highestPresentHolding}
+                    presentLedger={presentLedger}
+                    presentPrice={presentPrice}
+                    handleSubmit={handleSubmit}
+                  />
+                </GrommetTableCell>
+                <GrommetTableCell>
+                  {balance}
+                </GrommetTableCell>
+              </>
+            );
+          }
+        }
       </PresentRow>
-    </StyledTableBody>
+    </GrommetTableBody>
   );
 };
 

@@ -16,10 +16,10 @@ import {
 import HoverIcon from "components/Grommet/HoverIcon";
 
 import {
-  StyledContainer,
-  StyledDrop,
-  StyledExtendingIcon,
-  StyledRetractingIcon,
+  GrommetContainer,
+  GrommetDrop,
+  GrommetExtendingIcon,
+  GrommetRetractingIcon,
 } from "./ToggleCombined.styled";
 
 type Props = PropsHasClass & {
@@ -56,10 +56,10 @@ const ToggleCombined: React.FC<Props> = (
     {
       if (combinedBodyState === CombinedBodyState.Extending)
       {
-        return StyledExtendingIcon;
+        return GrommetExtendingIcon;
       }
 
-      return StyledRetractingIcon;
+      return GrommetRetractingIcon;
     },
     [
       combinedBodyState,
@@ -84,10 +84,10 @@ const ToggleCombined: React.FC<Props> = (
         )
       )
       {
-        return StyledRetractingIcon;
+        return GrommetRetractingIcon;
       }
 
-      return StyledExtendingIcon;
+      return GrommetExtendingIcon;
     },
     [
       combinedBodyState,
@@ -128,12 +128,12 @@ const ToggleCombined: React.FC<Props> = (
   }
 
   return (
-    <StyledDrop
+    <GrommetDrop
       css=""
       className={className}
       target={rowToTarget}
     >
-      <StyledContainer
+      <GrommetContainer
         css=""
         onClick={handleClick}
         onMouseEnter={handleMouseEnterButton}
@@ -145,8 +145,8 @@ const ToggleCombined: React.FC<Props> = (
           MouseIdlingIcon={IdlingIcon}
           MouseHoveringIcon={HoveringIcon}
         />
-      </StyledContainer>
-    </StyledDrop>
+      </GrommetContainer>
+    </GrommetDrop>
   );
 };
 

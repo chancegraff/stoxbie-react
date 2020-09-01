@@ -1,32 +1,45 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   JSXBoxProps,
 } from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledBox,
-  StyledContainer,
+  GrommetBox,
+  GrommetContainer,
 } from "./Skeleton.styled";
 
-export type JSXSkeletonProps = JSXBoxProps & {
+export type JSXSkeletonProps = PropsHasClass & JSXBoxProps & {
   Container?: React.FC<JSXBoxProps> | "off";
 };
 
 const Skeleton: React.FC<JSXSkeletonProps> = (
   {
-    Container = StyledContainer,
+    className,
+    Container = GrommetContainer,
     ...props
   },
 ) =>
 {
   if (Container === "off")
   {
-    return <StyledBox {...props} />;
+    return (
+      <GrommetBox
+        className={className}
+        css=""
+        {...props}
+      />
+    );
   }
 
   return (
-    <Container>
-      <StyledBox {...props} />
+    <Container className={className}>
+      <GrommetBox
+        css=""
+        {...props}
+      />
     </Container>
   );
 };

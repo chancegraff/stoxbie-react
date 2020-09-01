@@ -1,14 +1,11 @@
 import React, {
   forwardRef,
-  PropsHasChildren,
   PropsHasClass,
+  PropsHasFunctionChild,
   useMemo,
 } from "react";
 import {
 } from "@chancey/iex-cloud";
-import {
-  JSXTableCellProps,
-} from "grommet";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
@@ -21,14 +18,12 @@ import {
 } from "utils/Utilities";
 
 import {
-  StyledTableCell,
-  StyledTableRow,
+  GrommetTableRow,
 } from "./PresentRow.styled";
 
-type Props = PropsHasChildren & PropsHasClass & {
+type Props = PropsHasFunctionChild & PropsHasClass & {
   presentHolding: HistoricalTradeStarted;
   presentLedger?: HistoricalLedger;
-  TableCell?: React.FC<JSXTableCellProps>;
 };
 
 const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
@@ -38,7 +33,6 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
       className,
       presentHolding,
       presentLedger,
-      TableCell = StyledTableCell,
     },
     tableRowRef,
   ) =>
@@ -94,25 +88,22 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
     );
 
     return (
-      <StyledTableRow
+      <GrommetTableRow
         ref={tableRowRef}
         className={className}
         css=""
         role="row"
       >
-        <TableCell>
-          {shares}
-        </TableCell>
-        <TableCell>
-          {open}
-        </TableCell>
-        <TableCell>
-          {children}
-        </TableCell>
-        <TableCell>
-          {balance}
-        </TableCell>
-      </StyledTableRow>
+        {
+          children(
+            {
+              shares,
+              open,
+              balance,
+            },
+          )
+        }
+      </GrommetTableRow>
     );
   },
 );

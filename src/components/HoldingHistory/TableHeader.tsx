@@ -1,30 +1,43 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledTableCell,
-  StyledTableHeader,
-  StyledTableRow,
+  GrommetTableCell,
+  GrommetTableHeader,
+  GrommetTableRow,
 } from "./TableHeader.styled";
 
-const TableHeader: React.FC = () =>
+const TableHeader: React.FC<PropsHasClass> = (
+  {
+    className,
+  },
+) =>
 {
   return (
-    <StyledTableHeader>
-      <StyledTableRow role="headerRow">
-        <StyledTableCell>
+    <GrommetTableHeader
+      className={className}
+      css=""
+    >
+      <GrommetTableRow
+        role="headerRow"
+        css=""
+      >
+        <GrommetTableCell css="">
           Shares
-        </StyledTableCell>
-        <StyledTableCell>
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           Open
-        </StyledTableCell>
-        <StyledTableCell>
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           Close
-        </StyledTableCell>
-        <StyledTableCell>
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           Equity
-        </StyledTableCell>
-      </StyledTableRow>
-    </StyledTableHeader>
+        </GrommetTableCell>
+      </GrommetTableRow>
+    </GrommetTableHeader>
   );
 };
 

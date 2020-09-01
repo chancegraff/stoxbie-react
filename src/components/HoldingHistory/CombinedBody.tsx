@@ -16,8 +16,8 @@ import {
 
 import CloseHoldings from "./CloseHoldings";
 import {
-  StyledTableBody,
-  StyledTableCell,
+  GrommetTableBody,
+  GrommetTableCell,
 } from "./CombinedBody.styled";
 import PresentRow from "./PresentRow";
 
@@ -50,7 +50,7 @@ const CombinedBody: React.FC<Props> = (
   }
 
   return (
-    <StyledTableBody
+    <GrommetTableBody
       css=""
       className={className}
     >
@@ -70,21 +70,46 @@ const CombinedBody: React.FC<Props> = (
                 key={`${openDate}-${openCount}`}
                 css=""
                 presentHolding={presentHolding}
-                TableCell={StyledTableCell}
               >
-                <CloseHoldings
-                  css=""
-                  presentHolding={presentHolding}
-                  presentLedger={presentLedger}
-                  presentPrice={presentPrice}
-                  handleSubmit={handleSubmit}
-                />
+                {
+                  (
+                    {
+                      shares,
+                      open,
+                      balance,
+                    },
+                  ) =>
+                  {
+                    return (
+                      <>
+                        <GrommetTableCell>
+                          {shares}
+                        </GrommetTableCell>
+                        <GrommetTableCell>
+                          {open}
+                        </GrommetTableCell>
+                        <GrommetTableCell>
+                          <CloseHoldings
+                            css=""
+                            presentHolding={presentHolding}
+                            presentLedger={presentLedger}
+                            presentPrice={presentPrice}
+                            handleSubmit={handleSubmit}
+                          />
+                        </GrommetTableCell>
+                        <GrommetTableCell>
+                          {balance}
+                        </GrommetTableCell>
+                      </>
+                    );
+                  }
+                }
               </PresentRow>
             );
           },
         )
       }
-    </StyledTableBody>
+    </GrommetTableBody>
   );
 };
 

@@ -27,9 +27,9 @@ import {
 import CombinedBody from "./CombinedBody";
 import HistoricalBody from "./HistoricalBody";
 import {
-  StyledContainer,
-  StyledTable,
-  StyledTheme,
+  GrommetContainer,
+  GrommetTable,
+  GrommetTheme,
 } from "./HoldingTable.styled";
 import PresentBody from "./PresentBody";
 import TableFooter from "./TableFooter";
@@ -126,13 +126,13 @@ const HoldingTable: React.FC<Props> = (
   );
 
   return (
-    <StyledTheme css="">
-      <StyledContainer
+    <GrommetTheme css="">
+      <GrommetContainer
         css=""
         className={className}
         onScroll={handleMouseLeaveRow}
       >
-        <StyledTable css="">
+        <GrommetTable css="">
           <TableHeader css="" />
           <PresentBody
             css=""
@@ -163,9 +163,9 @@ const HoldingTable: React.FC<Props> = (
             historicalHoldings={historicalHoldings}
             presentLedger={presentLedger}
           />
-        </StyledTable>
-      </StyledContainer>
-    </StyledTheme>
+        </GrommetTable>
+      </GrommetContainer>
+    </GrommetTheme>
   );
 };
 

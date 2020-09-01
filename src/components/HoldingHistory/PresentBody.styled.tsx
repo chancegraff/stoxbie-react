@@ -1,7 +1,9 @@
 import React from "react";
 import {
   JSXTableBodyProps,
+  JSXTableCellProps,
   TableBody,
+  TableCell,
 } from "grommet";
 import styled from "styled-components/macro";
 
@@ -17,12 +19,35 @@ const BorderlessBody: React.FC<JSXTableBodyProps> = styled(
 }
 `;
 
-export const StyledTableBody: React.FC<JSXTableBodyProps> = (
+export const GrommetTableBody: React.FC<JSXTableBodyProps> = (
   props,
 ) =>
 {
   return (
     <BorderlessBody
+      {...props}
+    />
+  );
+};
+
+export const GrommetTableCell: React.FC<JSXTableCellProps> = (
+  props,
+) =>
+{
+  return (
+    <TableCell
+      border={
+        {
+          size: "0",
+        }
+      }
+      align="end"
+      background={
+        {
+          color: "brand",
+          opacity: "medium",
+        }
+      }
       {...props}
     />
   );

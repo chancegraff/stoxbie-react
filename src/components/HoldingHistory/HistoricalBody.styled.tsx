@@ -46,7 +46,7 @@ color: ${
 }
 `;
 
-export const StyledTableBody: React.FC<JSXTableBodyProps> = (
+export const GrommetTableBody: React.FC<JSXTableBodyProps> = (
   props,
 ) =>
 {

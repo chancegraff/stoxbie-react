@@ -7,7 +7,7 @@ import {
 } from "trade-types";
 
 import {
-  StyledTableBody,
+  GrommetTableBody,
 } from "./HistoricalBody.styled";
 import HistoricalRow from "./HistoricalRow";
 
@@ -23,7 +23,7 @@ const HistoricalBody: React.FC<Props> = (
 ) =>
 {
   return (
-    <StyledTableBody
+    <GrommetTableBody
       className={className}
       css=""
     >
@@ -48,7 +48,7 @@ const HistoricalBody: React.FC<Props> = (
           },
         )
       }
-    </StyledTableBody>
+    </GrommetTableBody>
   );
 };
 

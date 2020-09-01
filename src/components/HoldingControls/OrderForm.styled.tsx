@@ -8,19 +8,17 @@ import {
 import {
   Checkmark,
 } from "grommet-icons";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import SubmitOrder, {
   SubmitOrderProps,
 } from "./SubmitOrder";
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
   return (
     <Box
-      css=""
       direction="column"
       align="center"
       justify="center"
@@ -36,13 +34,12 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledGrid: React.FC<JSXGridProps> = (
+export const GrommetGrid: React.FC<JSXGridProps> = (
   props,
 ) =>
 {
   return (
     <Grid
-      css=""
       responsive={true}
       fill="horizontal"
       gap="small"
@@ -75,7 +72,7 @@ export const StyledGrid: React.FC<JSXGridProps> = (
   );
 };
 
-const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
+const StoxbieSubmitOrder: React.FC<SubmitOrderProps> = (
   {
     gridArea,
     ...props
@@ -84,7 +81,6 @@ const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
 {
   return (
     <Box
-      css=""
       gridArea={gridArea}
     >
       <SubmitOrder
@@ -97,34 +93,32 @@ const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
   );
 };
 
-export const StyledBuyAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
+export const StoxbieBuyAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
   props,
 ) =>
 {
   return (
-    <StyledSubmitOrder
+    <StoxbieSubmitOrder
       {...props}
-      css=""
       submitDirection={1}
       gridArea="buy"
     >
       Buy
-    </StyledSubmitOrder>
+    </StoxbieSubmitOrder>
   );
 };
 
-export const StyledSellAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
+export const StoxbieSellAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
   props,
 ) =>
 {
   return (
-    <StyledSubmitOrder
+    <StoxbieSubmitOrder
       {...props}
-      css=""
       submitDirection={-1}
       gridArea="sell"
     >
       Sell
-    </StyledSubmitOrder>
+    </StoxbieSubmitOrder>
   );
 };
