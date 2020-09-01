@@ -36,11 +36,7 @@ import PageError from "components/PageTemplates/PageError";
 
 type Props = RouteProps & PropsHasClass;
 
-const TradeRoute: React.FC<Props> = (
-  {
-    className,
-  },
-) =>
+const TradeRoute: React.FC<Props> = () =>
 {
   const {
     ticker = "",
@@ -164,7 +160,6 @@ const TradeRoute: React.FC<Props> = (
 
   return (
     <TradeView
-      className={className}
       css=""
       date={safeDate}
       error={error}
@@ -174,35 +169,22 @@ const TradeRoute: React.FC<Props> = (
   );
 };
 
-const TradeRoutes: React.FC<Props> = (
-  {
-    className,
-  },
-) =>
+const TradeRoutes: React.FC<Props> = () =>
 {
   const match = useRouteMatch();
 
   return (
     <Switch>
       <Route path={`${match.path}/:ticker/:date`}>
-        <TradeRoute
-          className={className}
-          css=""
-        />
+        <TradeRoute css="" />
       </Route>
       <Route path={`${match.path}/:ticker`}>
-        <PageError
-          className={className}
-          css=""
-        >
+        <PageError css="">
           Please select a date to trade from.
         </PageError>
       </Route>
       <Route path={match.path}>
-        <PageError
-          className={className}
-          css=""
-        >
+        <PageError css="">
           Please select a stock to trade with.
         </PageError>
       </Route>

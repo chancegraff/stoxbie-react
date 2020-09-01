@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   Company,
 } from "@chancey/iex-cloud";
@@ -14,24 +12,20 @@ import {
   StoxbieSmallSkeleton,
 } from "./CompanyName.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   company: Company | undefined;
 };
 
 const StockName: React.FC<Props> = (
   {
     company,
-    className,
   },
 ) =>
 {
   if (!company)
   {
     return (
-      <GrommetContainer
-        className={className}
-        css=""
-      >
+      <GrommetContainer css="">
         <StoxbieLargeSkeleton
           css=""
           Container="off"
@@ -45,10 +39,7 @@ const StockName: React.FC<Props> = (
   }
 
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       <GrommetLargeText css="">
         {company.companyName}
       </GrommetLargeText>

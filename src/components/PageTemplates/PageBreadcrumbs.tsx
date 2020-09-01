@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useMemo,
 } from "react";
 import {
@@ -26,16 +25,11 @@ import {
   StoxbieTickerBreadcrumb,
 } from "./PageBreadcrumbs.styled";
 
-type Props = JSXTextProps & Omit<AnchorProps, "to"> & PropsHasClass;
+type Props = JSXTextProps & Omit<AnchorProps, "to">;
 
 export type BreadcrumbProps = Props;
 
-const PageBreadcrumbs: React.FC<Props> = (
-  {
-    className,
-    ...props
-  },
-) =>
+const PageBreadcrumbs: React.FC<Props> = () =>
 {
   const {
     ticker,
@@ -64,10 +58,7 @@ const PageBreadcrumbs: React.FC<Props> = (
 
   return (
     <GrommetTheme css="">
-      <GrommetContainer
-        className={className}
-        css=""
-      >
+      <GrommetContainer css="">
         <StoxbieRootBreadcrumb css="">
           Ticker Search
         </StoxbieRootBreadcrumb>

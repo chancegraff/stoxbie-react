@@ -57,7 +57,9 @@ export const GrommetSidebarContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Box
+      fill="vertical"
       gridArea="trades"
+      overflow="hidden"
       {...props}
     />
   );

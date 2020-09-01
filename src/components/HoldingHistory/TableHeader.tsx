@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
@@ -9,17 +7,10 @@ import {
   GrommetTableRow,
 } from "./TableHeader.styled";
 
-const TableHeader: React.FC<PropsHasClass> = (
-  {
-    className,
-  },
-) =>
+const TableHeader: React.FC<unknown> = () =>
 {
   return (
-    <GrommetTableHeader
-      className={className}
-      css=""
-    >
+    <GrommetTableHeader css="">
       <GrommetTableRow
         role="headerRow"
         css=""

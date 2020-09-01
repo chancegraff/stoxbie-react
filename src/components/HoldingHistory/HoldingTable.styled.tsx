@@ -31,29 +31,6 @@ export const GrommetTheme: React.FC = (
               },
             },
             footer: {},
-            // body: {
-            //   align: 'center',
-            //   pad: { horizontal: 'large', vertical: 'xsmall' },
-            //   border: 'horizontal',
-            // },
-            // extend: () => `font-family: Arial`,
-            // footer: {
-            //   align: 'start',
-            //   border: undefined,
-            //   pad: { horizontal: 'large', vertical: 'small' },
-            //   verticalAlign: 'bottom',
-            // },
-            // header: {
-            //   align: 'center',
-            //   border: 'bottom',
-            //   fill: 'horizontal',
-            //   pad: { horizontal: 'large', vertical: 'xsmall' },
-            //   verticalAlign: 'bottom',
-            //   background: {
-            //     color: 'accent-1',
-            //     opacity: 'strong',
-            //   },
-            // },
           },
         }
       }

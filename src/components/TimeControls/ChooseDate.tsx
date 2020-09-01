@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
 } from "react";
 import {
@@ -21,13 +20,12 @@ import {
   StoxbieDropCalendar,
 } from "./ChooseDate.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   handleStart: (date: string) => void;
 };
 
 const TradeStart: React.FC<Props> = (
   {
-    className,
     handleStart,
   },
 ) =>
@@ -91,10 +89,7 @@ const TradeStart: React.FC<Props> = (
   );
 
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       <GrommetButton
         css=""
         onClick={handleOneYearStart}

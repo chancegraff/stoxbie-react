@@ -1,6 +1,5 @@
 import React, {
   forwardRef,
-  PropsHasClass,
   PropsHasFunctionChild,
   useMemo,
 } from "react";
@@ -21,7 +20,7 @@ import {
   GrommetTableRow,
 } from "./PresentRow.styled";
 
-type Props = PropsHasFunctionChild & PropsHasClass & {
+type Props = PropsHasFunctionChild & {
   presentHolding: HistoricalTradeStarted;
   presentLedger?: HistoricalLedger;
 };
@@ -30,7 +29,6 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
   (
     {
       children,
-      className,
       presentHolding,
       presentLedger,
     },
@@ -90,7 +88,6 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
     return (
       <GrommetTableRow
         ref={tableRowRef}
-        className={className}
         css=""
         role="row"
       >

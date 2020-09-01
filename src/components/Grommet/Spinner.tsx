@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   JSXBoxProps,
 } from "grommet";
@@ -13,13 +11,13 @@ import {
   GrommetContainer,
 } from "./Spinner.styled";
 
-type Props = PropsHasClass & JSX.IntrinsicElements["svg"] & {
+type Props = JSX.IntrinsicElements["svg"] & {
   Container?: React.FC<JSXBoxProps> | "off";
 };
 
+// TODO Don't pass components
 const Spinner: React.FC<Props> = (
   {
-    className,
     Container = GrommetContainer,
     ...props
   },
@@ -29,7 +27,6 @@ const Spinner: React.FC<Props> = (
   {
     return (
       <Oval
-        className={className}
         css=""
         {...props}
       />
@@ -38,7 +35,6 @@ const Spinner: React.FC<Props> = (
 
   return (
     <Container
-      className={className}
       fill={true}
     >
       <Oval

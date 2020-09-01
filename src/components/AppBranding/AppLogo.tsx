@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 
 import logo from "theme/logo.png";
 import Anchor from "components/Grommet/Anchor";
@@ -12,20 +10,15 @@ import {
   GrommetTheme,
 } from "./AppLogo.styled";
 
-type Props = PropsHasClass;
+type Props = unknown;
 
-const AppLogo: React.FC<Props> = (
-  {
-    className,
-  },
-) =>
+const AppLogo: React.FC<Props> = () =>
 {
   return (
     <GrommetTheme
       css=""
     >
       <Anchor
-        className={className}
         css=""
         to="/"
       >

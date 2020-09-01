@@ -9,15 +9,11 @@ import styled from "styled-components/macro"; // eslint-disable-line @typescript
 import Theme from "theme";
 
 const AppTheme: React.FC<PropsHasClass> = (
-  {
-    className,
-    ...props
-  },
+  props,
 ) =>
 {
   return (
     <GrommetProvider
-      className={className}
       css=""
       full={true}
       cssVars={true}

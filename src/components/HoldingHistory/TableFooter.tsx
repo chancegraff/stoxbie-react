@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useMemo,
 } from "react";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -19,14 +18,13 @@ import {
   GrommetTableRow,
 } from "./TableFooter.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   presentLedger: HistoricalLedger | undefined;
   historicalHoldings: HistoricalTradeFinished[];
 };
 
 const TableFooter: React.FC<Props> = (
   {
-    className,
     presentLedger,
     historicalHoldings,
   },
@@ -64,10 +62,7 @@ const TableFooter: React.FC<Props> = (
   );
 
   return (
-    <GrommetTableFooter
-      css=""
-      className={className}
-    >
+    <GrommetTableFooter css="">
       <GrommetTableRow
         css=""
         role="footerRow"

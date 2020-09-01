@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   JSXIconProps,
 } from "grommet-icons";
@@ -9,15 +7,15 @@ import {
   HoverState,
 } from "utils/Hooks";
 
-type Props = PropsHasClass & {
+type Props = {
   hoverState: HoverState;
   MouseIdlingIcon: React.FC<JSXIconProps>;
   MouseHoveringIcon: React.FC<JSXIconProps>;
 };
 
+// TODO Don't pass components
 const HoverIcon: React.FC<Props> = (
   {
-    className,
     hoverState,
     MouseIdlingIcon,
     MouseHoveringIcon,
@@ -27,16 +25,12 @@ const HoverIcon: React.FC<Props> = (
   if (hoverState === HoverState.Idling)
   {
     return (
-      <MouseIdlingIcon
-        className={className}
-      />
+      <MouseIdlingIcon />
     );
   }
 
   return (
-    <MouseHoveringIcon
-      className={className}
-    />
+    <MouseHoveringIcon />
   );
 };
 

@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   JSXBoxProps,
 } from "grommet";
@@ -11,13 +9,13 @@ import {
   GrommetContainer,
 } from "./Skeleton.styled";
 
-export type JSXSkeletonProps = PropsHasClass & JSXBoxProps & {
+export type JSXSkeletonProps = JSXBoxProps & {
   Container?: React.FC<JSXBoxProps> | "off";
 };
 
+// TODO Don't pass components
 const Skeleton: React.FC<JSXSkeletonProps> = (
   {
-    className,
     Container = GrommetContainer,
     ...props
   },
@@ -27,7 +25,6 @@ const Skeleton: React.FC<JSXSkeletonProps> = (
   {
     return (
       <GrommetBox
-        className={className}
         css=""
         {...props}
       />
@@ -35,7 +32,7 @@ const Skeleton: React.FC<JSXSkeletonProps> = (
   }
 
   return (
-    <Container className={className}>
+    <Container>
       <GrommetBox
         css=""
         {...props}

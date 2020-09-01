@@ -1,6 +1,5 @@
 import React, {
   PropsHasChildren,
-  PropsHasClass,
 } from "react";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
@@ -15,18 +14,14 @@ import {
   GrommetMain,
 } from "./PageContent.styled";
 
-const PageContent: React.FC<PropsHasClass & PropsHasChildren> = (
+const PageContent: React.FC<PropsHasChildren> = (
   {
-    className,
     children,
   },
 ) =>
 {
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       <GrommetHeader css="">
         <AppLogo css="" />
         <PageBreadcrumbs css="" />

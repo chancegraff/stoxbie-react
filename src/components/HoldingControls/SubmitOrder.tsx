@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useMemo,
 } from "react";
@@ -17,7 +16,7 @@ import {
   GrommetButton,
 } from "./SubmitOrder.styled";
 
-type Props = JSXButtonProps & PropsHasClass & {
+type Props = JSXButtonProps & {
   Icon?: React.ComponentType<JSXIconProps>;
   presentPriceClose: number;
   orderShareCount: number;
@@ -31,7 +30,6 @@ export type SubmitOrderProps = Props;
 
 const SubmitOrder: React.FC<Props> = (
   {
-    className,
     children,
     handleSubmit,
     handleToggle,
@@ -106,7 +104,6 @@ const SubmitOrder: React.FC<Props> = (
 
   return (
     <GrommetButton
-      className={className}
       css=""
       icon={endEnhancer}
       label={children}

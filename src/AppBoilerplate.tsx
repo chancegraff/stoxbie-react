@@ -1,6 +1,5 @@
 import React, {
   PropsHasChildren,
-  PropsHasClass,
 } from "react";
 import {
   BrowserRouter,
@@ -9,16 +8,15 @@ import styled from "styled-components/macro"; // eslint-disable-line @typescript
 
 import AppTheme from "./AppTheme";
 
-const AppBoilerplate: React.FC<PropsHasChildren & PropsHasClass> = (
+const AppBoilerplate: React.FC<PropsHasChildren> = (
   {
-    className,
     children,
   },
 ) =>
 {
   return (
-    <AppTheme className={className}>
-      <BrowserRouter>
+    <AppTheme css="">
+      <BrowserRouter css="">
         {children}
       </BrowserRouter>
     </AppTheme>

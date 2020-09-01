@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useEffect,
   useState,
@@ -25,7 +24,7 @@ import {
   StoxbieSellAction,
 } from "./OrderForm.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   presentPrice: HistoricalPrice | undefined;
   presentLedger: HistoricalLedger | undefined;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
@@ -33,7 +32,6 @@ type Props = PropsHasClass & {
 
 const OrderForm: React.FC<Props> = (
   {
-    className,
     presentPrice,
     presentLedger,
     handleSubmit,
@@ -97,17 +95,13 @@ const OrderForm: React.FC<Props> = (
     return (
       <Spinner
         css=""
-        className={className}
         Container={GrommetContainer}
       />
     );
   }
 
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       <ChooseShares
         css=""
         presentLedger={presentLedger}

@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
@@ -22,7 +20,7 @@ import {
   StoxbieSubmitOrder,
 } from "./CloseHoldings.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   presentPrice: HistoricalPrice;
   presentLedger: HistoricalLedger;
   presentHolding: HistoricalTradeStarted;
@@ -31,7 +29,6 @@ type Props = PropsHasClass & {
 
 const CloseHoldings: React.FC<Props> = (
   {
-    className,
     presentPrice,
     presentLedger,
     presentHolding,
@@ -54,7 +51,6 @@ const CloseHoldings: React.FC<Props> = (
   return (
     <StoxbieSubmitOrder
       css=""
-      className={className}
       presentPriceClose={presentPrice.close}
       orderDirection={(presentHolding.openDirection * -1) as 1 | -1}
       orderShareCount={presentLedger.totalCount}

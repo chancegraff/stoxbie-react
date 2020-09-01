@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useMemo,
 } from "react";
@@ -14,14 +13,13 @@ import {
   StoxbieTickItem,
 } from "./TickBar.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   maxValue: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TickBar: React.FC<Props> = (
   {
-    className,
     maxValue,
     setOrderShareCount,
   },
@@ -104,10 +102,7 @@ const TickBar: React.FC<Props> = (
   );
 
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       {
         tickRange.map(
           (

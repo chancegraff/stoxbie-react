@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useState,
 } from "react";
@@ -35,7 +34,7 @@ import PresentBody from "./PresentBody";
 import TableFooter from "./TableFooter";
 import TableHeader from "./TableHeader";
 
-type Props = PropsHasClass & {
+type Props = {
   presentPrice: HistoricalPrice | undefined;
   presentLedger: HistoricalLedger | undefined;
   presentHoldings: HistoricalTradeStarted[];
@@ -46,7 +45,6 @@ type Props = PropsHasClass & {
 
 const HoldingTable: React.FC<Props> = (
   {
-    className,
     presentPrice,
     presentLedger,
     presentHoldings,
@@ -129,7 +127,6 @@ const HoldingTable: React.FC<Props> = (
     <GrommetTheme css="">
       <GrommetContainer
         css=""
-        className={className}
         onScroll={handleMouseLeaveRow}
       >
         <GrommetTable css="">

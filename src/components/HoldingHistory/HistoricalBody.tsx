@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalTradeFinished,
@@ -11,22 +9,18 @@ import {
 } from "./HistoricalBody.styled";
 import HistoricalRow from "./HistoricalRow";
 
-type Props = PropsHasClass & {
+type Props = {
   historicalHoldings: HistoricalTradeFinished[];
 };
 
 const HistoricalBody: React.FC<Props> = (
   {
-    className,
     historicalHoldings,
   },
 ) =>
 {
   return (
-    <GrommetTableBody
-      className={className}
-      css=""
-    >
+    <GrommetTableBody css="">
       {
         historicalHoldings.map(
           (

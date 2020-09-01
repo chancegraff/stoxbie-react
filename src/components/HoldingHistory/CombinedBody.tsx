@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
@@ -21,7 +19,7 @@ import {
 } from "./CombinedBody.styled";
 import PresentRow from "./PresentRow";
 
-type Props = PropsHasClass & {
+type Props = {
   combinedBodyState: CombinedBodyState;
   presentHoldings: HistoricalTradeStarted[];
   presentLedger: HistoricalLedger | undefined;
@@ -31,7 +29,6 @@ type Props = PropsHasClass & {
 
 const CombinedBody: React.FC<Props> = (
   {
-    className,
     combinedBodyState,
     presentHoldings,
     presentLedger,
@@ -50,10 +47,7 @@ const CombinedBody: React.FC<Props> = (
   }
 
   return (
-    <GrommetTableBody
-      css=""
-      className={className}
-    >
+    <GrommetTableBody css="">
       {
         presentHoldings.map(
           (

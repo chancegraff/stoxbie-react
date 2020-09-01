@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
@@ -39,7 +37,7 @@ export type AxisLabelProps = Partial<TextProps>;
 export type TickLabelProps = () => Partial<TextProps>;
 export type Label = TickLabelProps;
 
-type Props = PropsHasClass & {
+type Props = {
   prices: HistoricalPrice[];
   resolution: Resolution;
   padding: Padding;
@@ -71,7 +69,6 @@ const displayNone = {
 
 const LineChart: React.FC<Props> = (
   {
-    className,
     prices,
     resolution: [
       width,
@@ -99,7 +96,6 @@ const LineChart: React.FC<Props> = (
 {
   return (
     <svg
-      className={className}
       css=""
       height={height}
       width={width}

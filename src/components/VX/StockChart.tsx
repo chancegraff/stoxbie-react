@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useContext,
   useMemo,
@@ -26,7 +25,7 @@ import LineChart, {
   Label,
 } from "components/VX/LineChart";
 
-type Props = PropsHasClass & {
+type Props = {
   resolution: Resolution;
   prices: HistoricalPrice[] | undefined;
   padding?: Padding;
@@ -34,7 +33,6 @@ type Props = PropsHasClass & {
 
 const StockChart: React.FC<Props> = (
   {
-    className,
     prices,
     resolution,
     padding = [
@@ -95,7 +93,6 @@ const StockChart: React.FC<Props> = (
 
   return (
     <LineChart
-      className={className}
       css=""
       label={label}
       padding={responsivePadding}

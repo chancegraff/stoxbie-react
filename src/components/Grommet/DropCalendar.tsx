@@ -1,6 +1,5 @@
 import React, {
   PropsHasChildren,
-  PropsHasClass,
   useCallback,
   useMemo,
   useState,
@@ -16,7 +15,7 @@ import {
 } from "./DropCalendar.styled";
 
 type DropButtonProps = Omit<JSXDropButtonProps, "open" | "dropContent" | "onOpen" | "onClose">;
-type Props = PropsHasChildren & PropsHasClass & DropButtonProps & {
+type Props = PropsHasChildren & DropButtonProps & {
   min?: string;
   max?: string;
   handleSelect: (date: string) => void;

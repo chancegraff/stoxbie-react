@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
 } from "react";
 import {
@@ -13,7 +12,7 @@ import {
 } from "grommet";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
-type Props = LinkProps & DefaultAnchorProps & PropsHasClass & {
+type Props = LinkProps & DefaultAnchorProps & {
   to: string;
 };
 
@@ -21,7 +20,6 @@ export type AnchorProps = Props;
 
 const Anchor: React.FC<Props> = (
   {
-    className,
     children,
     to,
     ...props
@@ -48,7 +46,6 @@ const Anchor: React.FC<Props> = (
   return (
     <Link
       css=""
-      className={className}
       component={DefaultAnchor}
       to={to}
       onClick={handleClick}

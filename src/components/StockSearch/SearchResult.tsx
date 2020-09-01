@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   Search,
 } from "@chancey/iex-cloud";
@@ -12,7 +10,7 @@ import {
   GrommetTopText,
 } from "./SearchResult.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   searchResult: Search;
   focus?: boolean;
   hover?: boolean;
@@ -20,16 +18,12 @@ type Props = PropsHasClass & {
 
 const StockSymbol: React.FC<Props> = (
   {
-    className,
     searchResult,
   },
 ) =>
 {
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       <GrommetTopText css="">
         {searchResult.symbol}
       </GrommetTopText>

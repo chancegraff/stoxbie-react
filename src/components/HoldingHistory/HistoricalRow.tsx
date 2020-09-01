@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useMemo,
 } from "react";
 import {
@@ -16,13 +15,12 @@ import {
   GrommetTableRow,
 } from "./HistoricalRow.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   historicalHolding: HistoricalTradeFinished;
 };
 
 const HistoricalRow: React.FC<Props> = (
   {
-    className,
     historicalHolding,
   },
 ) =>
@@ -76,7 +74,6 @@ const HistoricalRow: React.FC<Props> = (
 
   return (
     <GrommetTableRow
-      className={className}
       css=""
       role="row"
     >

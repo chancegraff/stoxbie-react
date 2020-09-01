@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   getYear,
 } from "date-fns";
@@ -11,23 +9,16 @@ import {
   GrommetText,
 } from "./AppCopyright.styled";
 
-type Props = PropsHasClass;
+type Props = unknown;
 
 const currentYear = getYear(
   new Date(),
 );
 
-const FooterName: React.FC<Props> = (
-  {
-    className,
-  },
-) =>
+const FooterName: React.FC<Props> = () =>
 {
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       <GrommetText css="">
         {`© ${currentYear} Chance Technologies, LLC`}
       </GrommetText>

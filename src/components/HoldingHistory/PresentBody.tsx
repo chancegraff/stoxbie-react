@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useRef,
 } from "react";
 import {
@@ -28,7 +27,7 @@ import {
 import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
-type Props = PropsHasClass & {
+type Props = {
   highestPresentHolding: HistoricalTradeStarted | undefined;
   presentLedger: HistoricalLedger | undefined;
   presentPrice: HistoricalPrice | undefined;
@@ -42,7 +41,6 @@ type Props = PropsHasClass & {
 
 const PresentBody: React.FC<Props> = (
   {
-    className,
     highestPresentHolding,
     presentLedger,
     presentPrice,
@@ -66,7 +64,6 @@ const PresentBody: React.FC<Props> = (
   return (
     <GrommetTableBody
       css=""
-      className={className}
       onMouseEnter={handleMouseEnterRow}
       onMouseLeave={handleMouseLeaveRow}
     >

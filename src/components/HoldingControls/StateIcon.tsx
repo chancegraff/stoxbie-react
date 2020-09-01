@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   Checkmark,
   JSXIconProps,
@@ -11,14 +9,13 @@ import {
   GrommetContainer,
 } from "./StateIcon.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   isActive: boolean;
   Icon: React.ComponentType<JSXIconProps>;
 };
 
 const StateIcon: React.FC<Props> = (
   {
-    className,
     isActive,
     Icon = Checkmark,
   },
@@ -27,18 +24,12 @@ const StateIcon: React.FC<Props> = (
   if (!isActive)
   {
     return (
-      <GrommetContainer
-        className={className}
-        css=""
-      />
+      <GrommetContainer css="" />
     );
   }
 
   return (
-    <GrommetContainer
-      className={className}
-      css=""
-    >
+    <GrommetContainer css="">
       <Icon
         size="12px"
         data-testid="check"

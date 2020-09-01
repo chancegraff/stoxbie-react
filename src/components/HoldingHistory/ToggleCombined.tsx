@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -22,7 +21,7 @@ import {
   GrommetRetractingIcon,
 } from "./ToggleCombined.styled";
 
-type Props = PropsHasClass & {
+type Props = {
   rowToTarget: HTMLTableRowElement | undefined;
   rowHoverState: HoverState;
   handleToggleCombined: () => void;
@@ -31,7 +30,6 @@ type Props = PropsHasClass & {
 
 const ToggleCombined: React.FC<Props> = (
   {
-    className,
     rowToTarget,
     rowHoverState,
     handleToggleCombined,
@@ -130,7 +128,6 @@ const ToggleCombined: React.FC<Props> = (
   return (
     <GrommetDrop
       css=""
-      className={className}
       target={rowToTarget}
     >
       <GrommetContainer

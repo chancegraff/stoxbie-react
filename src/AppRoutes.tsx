@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   Route,
   Switch,
@@ -12,37 +10,21 @@ import StockRoutes from "routes/StockRoutes";
 import TradeRoutes from "routes/TradeRoutes";
 import PageError from "components/PageTemplates/PageError";
 
-const AppRoutes: React.FC<PropsHasClass> = (
-  {
-    className,
-  },
-) =>
+const AppRoutes: React.FC<unknown> = () =>
 {
   return (
     <Switch>
       <Route path="/trade">
-        <TradeRoutes
-          className={className}
-          css=""
-        />
+        <TradeRoutes css="" />
       </Route>
       <Route path="/stock">
-        <StockRoutes
-          className={className}
-          css=""
-        />
+        <StockRoutes css="" />
       </Route>
       <Route path="/oops">
-        <PageError
-          className={className}
-          css=""
-        />
+        <PageError css="" />
       </Route>
       <Route path="/">
-        <SearchRoutes
-          className={className}
-          css=""
-        />
+        <SearchRoutes css="" />
       </Route>
     </Switch>
   );

@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -33,11 +32,7 @@ import PageError from "components/PageTemplates/PageError";
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
 
-const ViewRoute: React.FC<RouteProps & PropsHasClass> = (
-  {
-    className,
-  },
-) =>
+const ViewRoute: React.FC<RouteProps> = () =>
 {
   const {
     ticker = "",
@@ -159,7 +154,6 @@ const ViewRoute: React.FC<RouteProps & PropsHasClass> = (
 
   return (
     <StockView
-      className={className}
       css=""
       company={company}
       error={error}
@@ -169,27 +163,17 @@ const ViewRoute: React.FC<RouteProps & PropsHasClass> = (
   );
 };
 
-const StockRoutes: React.FC<RouteProps & PropsHasClass> = (
-  {
-    className,
-  },
-) =>
+const StockRoutes: React.FC<RouteProps> = () =>
 {
   const match = useRouteMatch();
 
   return (
     <Switch>
       <Route path={`${match.path}/:ticker`}>
-        <ViewRoute
-          className={className}
-          css=""
-        />
+        <ViewRoute css="" />
       </Route>
       <Route path={match.path}>
-        <PageError
-          className={className}
-          css=""
-        >
+        <PageError css="">
           Please select a stock to view.
         </PageError>
       </Route>

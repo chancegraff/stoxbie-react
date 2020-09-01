@@ -1,6 +1,4 @@
-import React, {
-  PropsHasClass,
-} from "react";
+import React from "react";
 import {
   RouteProps,
 } from "react-router-dom";
@@ -23,7 +21,7 @@ import {
   GrommetContainer,
 } from "./StockView.styled";
 
-type Props = RouteProps & PropsHasClass & {
+type Props = RouteProps & {
   logo: Logo | undefined;
   company: Company | undefined;
   error?: string;
@@ -32,7 +30,6 @@ type Props = RouteProps & PropsHasClass & {
 
 const StockView: React.FC<Props> = (
   {
-    className,
     logo,
     company,
     error,
@@ -45,20 +42,14 @@ const StockView: React.FC<Props> = (
   if (error)
   {
     return (
-      <PageError
-        className={className}
-        css=""
-      >
+      <PageError css="">
         {error}
       </PageError>
     );
   }
 
   return (
-    <PageContent
-      className={className}
-      css=""
-    >
+    <PageContent css="">
       <GrommetContainer css="">
         <CompanyLogo
           css=""

@@ -1,6 +1,5 @@
 import React, {
   DispatchSetStateAction,
-  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -49,7 +48,7 @@ import {
   GrommetSidebarContainer,
 } from "./TradeView.styled";
 
-type Props = RouteProps & PropsHasClass & {
+type Props = RouteProps & {
   date: Date | undefined;
   prices: HistoricalPrice[] | undefined;
   ticker: string | undefined;
@@ -208,7 +207,6 @@ const initialLedger = {
 
 const TradeView: React.FC<Props> = (
   {
-    className,
     prices,
     date,
     error,
@@ -654,10 +652,7 @@ const TradeView: React.FC<Props> = (
   }
 
   return (
-    <PageContent
-      className={className}
-      css=""
-    >
+    <PageContent css="">
       <GrommetGrid css="">
         <GrommetContentContainer css="">
           <AspectRatioBox css="">

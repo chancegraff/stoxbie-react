@@ -105,10 +105,7 @@ const SearchView: React.FC<Props> = (
   useScrollToTop();
 
   return (
-    <PageContent
-      className={className}
-      css=""
-    >
+    <PageContent css="">
       <GrommetHeading css="" />
       <GrommetText css="" />
       <SearchInput

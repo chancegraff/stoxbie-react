@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useMemo,
 } from "react";
 import {
@@ -22,11 +21,10 @@ import {
   GrommetHeading,
 } from "./PageError.styled";
 
-type Props = RouteProps & PropsHasClass;
+type Props = RouteProps;
 
 const Error: React.FC<Props> = (
   {
-    className,
     children,
   },
 ) =>
@@ -76,10 +74,7 @@ const Error: React.FC<Props> = (
   }
 
   return (
-    <PageContent
-      className={className}
-      css=""
-    >
+    <PageContent css="">
       <GrommetHeading css="">
         {message}
       </GrommetHeading>
