@@ -94,13 +94,13 @@ const PresentBody: React.FC<Props> = (
           {
             return (
               <>
-                <GrommetTableCell>
+                <GrommetTableCell css="">
                   {shares}
                 </GrommetTableCell>
-                <GrommetTableCell>
+                <GrommetTableCell css="">
                   {open}
                 </GrommetTableCell>
-                <GrommetTableCell>
+                <GrommetTableCell css="">
                   <CloseHoldings
                     css=""
                     presentHolding={highestPresentHolding}
@@ -109,7 +109,7 @@ const PresentBody: React.FC<Props> = (
                     handleSubmit={handleSubmit}
                   />
                 </GrommetTableCell>
-                <GrommetTableCell>
+                <GrommetTableCell css="">
                   {balance}
                 </GrommetTableCell>
               </>
