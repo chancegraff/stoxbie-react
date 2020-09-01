@@ -2,6 +2,7 @@ import React from "react";
 import {
   JSXBoxProps,
 } from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   Oval,
 } from "svg-loaders-react";
@@ -23,12 +24,20 @@ const Spinner: React.FC<Props> = (
 {
   if (Container === "off")
   {
-    return <Oval {...props} />;
+    return (
+      <Oval
+        css=""
+        {...props}
+      />
+    );
   }
 
   return (
     <Container fill={true}>
-      <Oval {...props} />
+      <Oval
+        css=""
+        {...props}
+      />
     </Container>
   );
 };

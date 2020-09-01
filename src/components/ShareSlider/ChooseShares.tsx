@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -23,7 +24,7 @@ import {
   GrommetContainer,
 } from "./ChooseShares.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   presentPrice: HistoricalPrice;
   presentLedger: HistoricalLedger;
   orderDirection: number;
@@ -33,6 +34,7 @@ type Props = {
 
 const ChooseShares: React.FC<Props> = (
   {
+    className,
     presentPrice,
     presentLedger,
     orderDirection,
@@ -143,7 +145,10 @@ const ChooseShares: React.FC<Props> = (
   );
 
   return (
-    <GrommetContainer css="">
+    <GrommetContainer
+      className={className}
+      css=""
+    >
       <RangeInput
         css=""
         role="slider"

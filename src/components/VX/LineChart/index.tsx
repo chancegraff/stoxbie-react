@@ -1,4 +1,9 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
+import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
 import {
   Group,
 } from "@vx/group";
@@ -8,9 +13,6 @@ import {
 import {
   normalizeColor,
 } from "grommet/utils";
-import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
 import {
   Padding,
   Resolution,
@@ -37,7 +39,7 @@ export type AxisLabelProps = Partial<TextProps>;
 export type TickLabelProps = () => Partial<TextProps>;
 export type Label = TickLabelProps;
 
-type Props = {
+type Props = PropsHasClass & {
   prices: HistoricalPrice[];
   resolution: Resolution;
   padding: Padding;
@@ -69,6 +71,7 @@ const displayNone = {
 
 const LineChart: React.FC<Props> = (
   {
+    className,
     prices,
     resolution: [
       width,
@@ -96,6 +99,8 @@ const LineChart: React.FC<Props> = (
 {
   return (
     <svg
+      className={className}
+      css=""
       height={height}
       width={width}
       role="linechart"

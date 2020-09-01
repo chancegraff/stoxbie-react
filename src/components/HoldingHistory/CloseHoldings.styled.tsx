@@ -23,6 +23,7 @@ export const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
 {
   return (
     <SubmitOrder
+      css=""
       size="small"
       fill={true}
       plain={true}
@@ -77,6 +78,7 @@ export const StyledClosedIcon: React.FC<JSXIconProps> = (
 {
   return (
     <CatalogOption
+      css=""
       size="10px"
       {...props}
     />
@@ -89,6 +91,7 @@ export const StyledOpenedIcon: React.FC<JSXIconProps> = (
 {
   return (
     <Catalog
+      css=""
       size="12px"
       {...props}
     />

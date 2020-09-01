@@ -14,6 +14,7 @@ export const StyledTheme: React.FC = (
 {
   return (
     <ThemeContext.Extend
+      css=""
       value={
         {
           table: {

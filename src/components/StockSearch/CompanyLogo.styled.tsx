@@ -1,16 +1,16 @@
 import React from "react";
 import {
   Avatar,
-  AvatarProps,
   Box,
-  BoxProps,
+  JSXAvatarProps,
+  JSXBoxProps,
 } from "grommet";
 
 import Skeleton, {
   JSXSkeletonProps,
 } from "components/Grommet/Skeleton";
 
-export const GrommetContainer: React.FC<BoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -35,7 +35,7 @@ export const StoxbieSkeleton: React.FC<JSXSkeletonProps> = (
   );
 };
 
-export const GrommetAvatar: React.FC<AvatarProps> = (
+export const GrommetAvatar: React.FC<JSXAvatarProps> = (
   props,
 ) =>
 {

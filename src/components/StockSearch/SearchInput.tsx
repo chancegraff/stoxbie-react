@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -30,7 +31,7 @@ import {
 } from "./SearchInput.styled";
 import SearchResult from "./SearchResult";
 
-type Props = {
+type Props = PropsHasClass & {
   handleSearch: (nextValue: string) => void;
   searchState: AsyncStates;
   searchResults: Search[];
@@ -38,6 +39,7 @@ type Props = {
 
 const StockInput: React.FC<Props> = (
   {
+    className,
     handleSearch,
     searchResults,
   },
@@ -172,6 +174,7 @@ const StockInput: React.FC<Props> = (
     <GrommetTheme css="">
       <GrommetContainer
         css=""
+        className={className}
         dropState={dropState}
       >
         <GrommetTextInput

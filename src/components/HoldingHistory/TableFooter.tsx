@@ -1,6 +1,8 @@
 import React, {
+  PropsHasClass,
   useMemo,
 } from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
   HistoricalTradeFinished,
@@ -17,13 +19,14 @@ import {
   StyledTableRow,
 } from "./TableFooter.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   presentLedger: HistoricalLedger | undefined;
   historicalHoldings: HistoricalTradeFinished[];
 };
 
 const TableFooter: React.FC<Props> = (
   {
+    className,
     presentLedger,
     historicalHoldings,
   },
@@ -61,18 +64,24 @@ const TableFooter: React.FC<Props> = (
   );
 
   return (
-    <StyledTableFooter>
-      <StyledTableRow role="footerRow">
-        <StyledTableCell>
+    <StyledTableFooter
+      css=""
+      className={className}
+    >
+      <StyledTableRow
+        css=""
+        role="footerRow"
+      >
+        <StyledTableCell css="">
           Change
         </StyledTableCell>
-        <StyledTableCell>
+        <StyledTableCell css="">
           {change}
         </StyledTableCell>
-        <StyledTableCell>
+        <StyledTableCell css="">
           Balance
         </StyledTableCell>
-        <StyledTableCell>
+        <StyledTableCell css="">
           {balance}
         </StyledTableCell>
       </StyledTableRow>

@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
 } from "react";
 import {
@@ -7,12 +8,17 @@ import {
 import {
   search,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import SearchView from "views/SearchView";
 
-type Props = RouteProps;
+type Props = RouteProps & PropsHasClass;
 
-const SearchRoutes: React.FC<Props> = () =>
+const SearchRoutes: React.FC<Props> = (
+  {
+    className,
+  },
+) =>
 {
   const handleSearch = useCallback(
     async (
@@ -31,7 +37,10 @@ const SearchRoutes: React.FC<Props> = () =>
   );
 
   return (
-    <SearchView handleSearch={handleSearch}/>
+    <SearchView
+      className={className}
+      handleSearch={handleSearch}
+    />
   );
 };
 

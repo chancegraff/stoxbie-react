@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useMemo,
 } from "react";
@@ -9,13 +10,14 @@ import {
   Checkmark,
   JSXIconProps,
 } from "grommet-icons";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import StateIcon from "./StateIcon";
 import {
   StyledButton,
 } from "./SubmitOrder.styled";
 
-type Props = JSXButtonProps & {
+type Props = JSXButtonProps & PropsHasClass & {
   Icon?: React.ComponentType<JSXIconProps>;
   presentPriceClose: number;
   orderShareCount: number;
@@ -29,6 +31,7 @@ export type SubmitOrderProps = Props;
 
 const SubmitOrder: React.FC<Props> = (
   {
+    className,
     children,
     handleSubmit,
     handleToggle,
@@ -103,6 +106,8 @@ const SubmitOrder: React.FC<Props> = (
 
   return (
     <StyledButton
+      css=""
+      className={className}
       icon={endEnhancer}
       label={children}
       value={submitDirection}

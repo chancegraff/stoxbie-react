@@ -8,6 +8,7 @@ import {
 import {
   Checkmark,
 } from "grommet-icons";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import SubmitOrder, {
   SubmitOrderProps,
@@ -19,6 +20,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Box
+      css=""
       direction="column"
       align="center"
       justify="center"
@@ -40,6 +42,7 @@ export const StyledGrid: React.FC<JSXGridProps> = (
 {
   return (
     <Grid
+      css=""
       responsive={true}
       fill="horizontal"
       gap="small"
@@ -80,7 +83,10 @@ const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
 ) =>
 {
   return (
-    <Box gridArea={gridArea}>
+    <Box
+      css=""
+      gridArea={gridArea}
+    >
       <SubmitOrder
         Icon={Checkmark}
         primary={true}
@@ -98,6 +104,7 @@ export const StyledBuyAction: React.FC<Omit<SubmitOrderProps, "submitDirection">
   return (
     <StyledSubmitOrder
       {...props}
+      css=""
       submitDirection={1}
       gridArea="buy"
     >
@@ -113,6 +120,7 @@ export const StyledSellAction: React.FC<Omit<SubmitOrderProps, "submitDirection"
   return (
     <StyledSubmitOrder
       {...props}
+      css=""
       submitDirection={-1}
       gridArea="sell"
     >

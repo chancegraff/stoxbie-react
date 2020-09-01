@@ -7,6 +7,7 @@ import {
   JSXCalendarProps,
   JSXDropButtonProps,
 } from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 export const StyledCalendar: React.FC<JSXCalendarProps<string>> = (
   props,
@@ -14,6 +15,7 @@ export const StyledCalendar: React.FC<JSXCalendarProps<string>> = (
 {
   return (
     <Calendar
+      css=""
       margin="small"
       showAdjacentDays={false}
       size="small"
@@ -31,6 +33,7 @@ export const StyledDropButton: React.FC<JSXDropButtonProps> = forwardRef(
     return (
       <DropButton
         ref={ref}
+        css=""
         {...props}
       />
     );

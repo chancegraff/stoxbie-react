@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -18,6 +19,7 @@ import {
   Logo,
   logo as getLogo,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   TICKER_ERROR_MESSAGE,
@@ -27,12 +29,15 @@ import {
 } from "utils/Utilities";
 import StockView from "views/StockView";
 import PageError from "components/PageTemplates/PageError";
-import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
 
-const ViewRoute: React.FC<RouteProps> = () =>
+const ViewRoute: React.FC<RouteProps & PropsHasClass> = (
+  {
+    className,
+  },
+) =>
 {
   const {
     ticker = "",
@@ -154,6 +159,8 @@ const ViewRoute: React.FC<RouteProps> = () =>
 
   return (
     <StockView
+      className={className}
+      css=""
       company={company}
       error={error}
       handleStart={handleStart}
@@ -162,19 +169,27 @@ const ViewRoute: React.FC<RouteProps> = () =>
   );
 };
 
-const StockRoutes: React.FC<RouteProps> = () =>
+const StockRoutes: React.FC<RouteProps & PropsHasClass> = (
+  {
+    className,
+  },
+) =>
 {
   const match = useRouteMatch();
 
   return (
     <Switch>
       <Route path={`${match.path}/:ticker`}>
-        <PageScrollToTop />
-        <ViewRoute />
+        <ViewRoute
+          className={className}
+          css=""
+        />
       </Route>
       <Route path={match.path}>
-        <PageScrollToTop />
-        <PageError>
+        <PageError
+          className={className}
+          css=""
+        >
           Please select a stock to view.
         </PageError>
       </Route>

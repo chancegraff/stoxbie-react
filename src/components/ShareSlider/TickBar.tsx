@@ -13,13 +13,14 @@ import {
   StoxbieTickItem,
 } from "./TickBar.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   maxValue: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TickBar: React.FC<Props> = (
   {
+    className,
     maxValue,
     setOrderShareCount,
   },
@@ -102,7 +103,10 @@ const TickBar: React.FC<Props> = (
   );
 
   return (
-    <GrommetContainer css="">
+    <GrommetContainer
+      className={className}
+      css=""
+    >
       {
         tickRange.map(
           (

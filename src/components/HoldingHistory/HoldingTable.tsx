@@ -1,10 +1,12 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useState,
 } from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
   HistoricalTradeFinished,
@@ -33,7 +35,7 @@ import PresentBody from "./PresentBody";
 import TableFooter from "./TableFooter";
 import TableHeader from "./TableHeader";
 
-type Props = {
+type Props = PropsHasClass & {
   presentPrice: HistoricalPrice | undefined;
   presentLedger: HistoricalLedger | undefined;
   presentHoldings: HistoricalTradeStarted[];
@@ -44,6 +46,7 @@ type Props = {
 
 const HoldingTable: React.FC<Props> = (
   {
+    className,
     presentPrice,
     presentLedger,
     presentHoldings,
@@ -123,11 +126,16 @@ const HoldingTable: React.FC<Props> = (
   );
 
   return (
-    <StyledTheme>
-      <StyledContainer onScroll={handleMouseLeaveRow}>
-        <StyledTable>
-          <TableHeader />
+    <StyledTheme css="">
+      <StyledContainer
+        css=""
+        className={className}
+        onScroll={handleMouseLeaveRow}
+      >
+        <StyledTable css="">
+          <TableHeader css="" />
           <PresentBody
+            css=""
             highestPresentHolding={highestPresentHolding}
             presentPrice={presentPrice}
             presentLedger={presentLedger}
@@ -139,14 +147,19 @@ const HoldingTable: React.FC<Props> = (
             handleMouseLeaveRow={debouncedMouseLeaveRow}
           />
           <CombinedBody
+            css=""
             combinedBodyState={combinedBodyState}
             presentHoldings={presentHoldings}
             presentLedger={presentLedger}
             presentPrice={presentPrice}
             handleSubmit={handleSubmit}
           />
-          <HistoricalBody historicalHoldings={historicalHoldings} />
+          <HistoricalBody
+            css=""
+            historicalHoldings={historicalHoldings}
+          />
           <TableFooter
+            css=""
             historicalHoldings={historicalHoldings}
             presentLedger={presentLedger}
           />

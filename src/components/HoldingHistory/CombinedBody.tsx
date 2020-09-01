@@ -1,7 +1,10 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
   HistoricalTradeStarted,
@@ -18,7 +21,7 @@ import {
 } from "./CombinedBody.styled";
 import PresentRow from "./PresentRow";
 
-type Props = {
+type Props = PropsHasClass & {
   combinedBodyState: CombinedBodyState;
   presentHoldings: HistoricalTradeStarted[];
   presentLedger: HistoricalLedger | undefined;
@@ -28,6 +31,7 @@ type Props = {
 
 const CombinedBody: React.FC<Props> = (
   {
+    className,
     combinedBodyState,
     presentHoldings,
     presentLedger,
@@ -46,7 +50,10 @@ const CombinedBody: React.FC<Props> = (
   }
 
   return (
-    <StyledTableBody>
+    <StyledTableBody
+      css=""
+      className={className}
+    >
       {
         presentHoldings.map(
           (
@@ -61,10 +68,12 @@ const CombinedBody: React.FC<Props> = (
             return (
               <PresentRow
                 key={`${openDate}-${openCount}`}
+                css=""
                 presentHolding={presentHolding}
                 TableCell={StyledTableCell}
               >
                 <CloseHoldings
+                  css=""
                   presentHolding={presentHolding}
                   presentLedger={presentLedger}
                   presentPrice={presentPrice}

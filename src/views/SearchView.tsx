@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useState,
@@ -34,12 +35,13 @@ import {
   GrommetText,
 } from "./SearchView.styled";
 
-type Props = RouteProps & {
+type Props = RouteProps & PropsHasClass & {
   handleSearch: (nextValue: string) => Promise<Search[]>;
 };
 
 const SearchView: React.FC<Props> = (
   {
+    className,
     handleSearch,
   },
 ) =>
@@ -103,7 +105,10 @@ const SearchView: React.FC<Props> = (
   useScrollToTop();
 
   return (
-    <PageContent css="">
+    <PageContent
+      className={className}
+      css=""
+    >
       <GrommetHeading css="" />
       <GrommetText css="" />
       <SearchInput

@@ -26,6 +26,7 @@ export const AspectRatioItem = forwardRef<HTMLElement, JSXBoxProps>(
     return (
       <StyledItem
         ref={ref}
+        css=""
         fill={true}
         justify="center"
         align="center"
@@ -50,6 +51,7 @@ export const AspectRatioBox = forwardRef<HTMLElement, JSXBoxProps>(
     return (
       <StyledBox
         ref={ref}
+        css=""
         height="0"
         pad={
           {

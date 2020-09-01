@@ -36,6 +36,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Box
+      css=""
       fill={true}
       {...props}
     />

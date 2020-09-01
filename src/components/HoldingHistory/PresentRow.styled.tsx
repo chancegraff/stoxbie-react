@@ -53,6 +53,7 @@ export const StyledTableCell: React.FC<JSXTableCellProps> = (
 {
   return (
     <TableCell
+      css=""
       border={
         {
           size: "0",

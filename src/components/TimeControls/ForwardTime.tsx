@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useMemo,
 } from "react";
 import {
@@ -16,13 +17,14 @@ import {
   GrommetText,
 } from "./ForwardTime.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   presentPrice: HistoricalPrice | undefined;
   handleContinue: () => void;
 };
 
 const TimeControl: React.FC<Props> = (
   {
+    className,
     handleContinue,
     presentPrice,
   },
@@ -45,7 +47,10 @@ const TimeControl: React.FC<Props> = (
   );
 
   return (
-    <GrommetContainer css="">
+    <GrommetContainer
+      className={className}
+      css=""
+    >
       <GrommetText css="">
         {
           `Today is ${safeDate ||

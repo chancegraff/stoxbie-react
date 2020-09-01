@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useState,
@@ -6,6 +7,7 @@ import React, {
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
 } from "trade-types";
@@ -23,7 +25,7 @@ import {
   StyledSellAction,
 } from "./OrderForm.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   presentPrice: HistoricalPrice | undefined;
   presentLedger: HistoricalLedger | undefined;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
@@ -31,6 +33,7 @@ type Props = {
 
 const OrderForm: React.FC<Props> = (
   {
+    className,
     presentPrice,
     presentLedger,
     handleSubmit,
@@ -91,20 +94,31 @@ const OrderForm: React.FC<Props> = (
   if (!presentPrice ||
       !presentLedger)
   {
-    return <Spinner Container={StyledContainer} />;
+    return (
+      <Spinner
+        css=""
+        className={className}
+        Container={StyledContainer}
+      />
+    );
   }
 
   return (
-    <StyledContainer>
+    <StyledContainer
+      css=""
+      className={className}
+    >
       <ChooseShares
+        css=""
         presentLedger={presentLedger}
         presentPrice={presentPrice}
         orderDirection={orderDirection}
         orderShareCount={orderShareCount}
         setOrderShareCount={setOrderShareCount}
       />
-      <StyledGrid>
+      <StyledGrid css="">
         <StyledBuyAction
+          css=""
           handleToggle={handleToggle}
           handleSubmit={handleSubmit}
           presentPriceClose={presentPrice.close}
@@ -112,6 +126,7 @@ const OrderForm: React.FC<Props> = (
           orderShareCount={orderShareCount}
         />
         <StyledSellAction
+          css=""
           handleToggle={handleToggle}
           handleSubmit={handleSubmit}
           presentPriceClose={presentPrice.close}

@@ -1,8 +1,12 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useContext,
   useMemo,
 } from "react";
+import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
 import {
   ResponsiveContext,
 } from "grommet";
@@ -10,13 +14,10 @@ import {
   normalizeColor,
 } from "grommet/utils";
 import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
-import {
   Padding,
   Resolution,
 } from "style-types";
-import {
+import styled, { // eslint-disable-line @typescript-eslint/no-unused-vars
   ThemeContext,
 } from "styled-components/macro";
 
@@ -25,7 +26,7 @@ import LineChart, {
   Label,
 } from "components/VX/LineChart";
 
-type Props = {
+type Props = PropsHasClass & {
   resolution: Resolution;
   prices: HistoricalPrice[] | undefined;
   padding?: Padding;
@@ -33,6 +34,7 @@ type Props = {
 
 const StockChart: React.FC<Props> = (
   {
+    className,
     prices,
     resolution,
     padding = [
@@ -93,6 +95,8 @@ const StockChart: React.FC<Props> = (
 
   return (
     <LineChart
+      className={className}
+      css=""
       label={label}
       padding={responsivePadding}
       prices={prices}

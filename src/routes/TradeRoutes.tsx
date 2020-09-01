@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -15,6 +16,7 @@ import {
   HistoricalPrice,
   historicalPrices,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   DATE_ERROR_MESSAGE,
@@ -22,17 +24,23 @@ import {
   TICKER_ERROR_MESSAGE,
 } from "utils/Constants";
 import {
+  useScrollToTop,
+} from "utils/Hooks";
+import {
   DateFormats,
   handleUnloadCreator,
   parseDate,
 } from "utils/Utilities";
 import TradeView from "views/TradeView";
 import PageError from "components/PageTemplates/PageError";
-import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
-type Props = RouteProps;
+type Props = RouteProps & PropsHasClass;
 
-const TradeRoute: React.FC<RouteProps> = () =>
+const TradeRoute: React.FC<Props> = (
+  {
+    className,
+  },
+) =>
 {
   const {
     ticker = "",
@@ -152,8 +160,12 @@ const TradeRoute: React.FC<RouteProps> = () =>
     [],
   );
 
+  useScrollToTop();
+
   return (
     <TradeView
+      className={className}
+      css=""
       date={safeDate}
       error={error}
       prices={prices}
@@ -162,23 +174,35 @@ const TradeRoute: React.FC<RouteProps> = () =>
   );
 };
 
-const TradeRoutes: React.FC<Props> = () =>
+const TradeRoutes: React.FC<Props> = (
+  {
+    className,
+  },
+) =>
 {
   const match = useRouteMatch();
 
   return (
     <Switch>
       <Route path={`${match.path}/:ticker/:date`}>
-        <PageScrollToTop />
-        <TradeRoute />
+        <TradeRoute
+          className={className}
+          css=""
+        />
       </Route>
       <Route path={`${match.path}/:ticker`}>
-        <PageError>
+        <PageError
+          className={className}
+          css=""
+        >
           Please select a date to trade from.
         </PageError>
       </Route>
       <Route path={match.path}>
-        <PageError>
+        <PageError
+          className={className}
+          css=""
+        >
           Please select a stock to trade with.
         </PageError>
       </Route>

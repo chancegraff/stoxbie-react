@@ -1,13 +1,16 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   JSXIconProps,
 } from "grommet-icons";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   HoverState,
 } from "utils/Hooks";
 
-type Props = {
+type Props = PropsHasClass & {
   hoverState: HoverState;
   MouseIdlingIcon: React.FC<JSXIconProps>;
   MouseHoveringIcon: React.FC<JSXIconProps>;
@@ -15,6 +18,7 @@ type Props = {
 
 const HoverIcon: React.FC<Props> = (
   {
+    className,
     hoverState,
     MouseIdlingIcon,
     MouseHoveringIcon,
@@ -23,11 +27,19 @@ const HoverIcon: React.FC<Props> = (
 {
   if (hoverState === HoverState.Idling)
   {
-    return <MouseIdlingIcon />;
+    return (
+      <MouseIdlingIcon
+        css=""
+        className={className}
+      />
+    );
   }
 
   return (
-    <MouseHoveringIcon />
+    <MouseHoveringIcon
+      css=""
+      className={className}
+    />
   );
 };
 

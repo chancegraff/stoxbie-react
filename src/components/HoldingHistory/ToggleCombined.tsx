@@ -1,4 +1,5 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -21,7 +22,7 @@ import {
   StyledRetractingIcon,
 } from "./ToggleCombined.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   rowToTarget: HTMLTableRowElement | undefined;
   rowHoverState: HoverState;
   handleToggleCombined: () => void;
@@ -30,6 +31,7 @@ type Props = {
 
 const ToggleCombined: React.FC<Props> = (
   {
+    className,
     rowToTarget,
     rowHoverState,
     handleToggleCombined,
@@ -126,13 +128,19 @@ const ToggleCombined: React.FC<Props> = (
   }
 
   return (
-    <StyledDrop target={rowToTarget}>
+    <StyledDrop
+      css=""
+      className={className}
+      target={rowToTarget}
+    >
       <StyledContainer
+        css=""
         onClick={handleClick}
         onMouseEnter={handleMouseEnterButton}
         onMouseLeave={handleMouseLeaveButton}
       >
         <HoverIcon
+          css=""
           hoverState={buttonHoverState}
           MouseIdlingIcon={IdlingIcon}
           MouseHoveringIcon={HoveringIcon}

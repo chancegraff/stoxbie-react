@@ -1,4 +1,7 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalTradeFinished,
 } from "trade-types";
@@ -8,18 +11,22 @@ import {
 } from "./HistoricalBody.styled";
 import HistoricalRow from "./HistoricalRow";
 
-type Props = {
+type Props = PropsHasClass & {
   historicalHoldings: HistoricalTradeFinished[];
 };
 
 const HistoricalBody: React.FC<Props> = (
   {
+    className,
     historicalHoldings,
   },
 ) =>
 {
   return (
-    <StyledTableBody>
+    <StyledTableBody
+      className={className}
+      css=""
+    >
       {
         historicalHoldings.map(
           (
@@ -34,6 +41,7 @@ const HistoricalBody: React.FC<Props> = (
             return (
               <HistoricalRow
                 key={`${openDate}-${closeDate}`}
+                css=""
                 historicalHolding={historicalHolding}
               />
             );

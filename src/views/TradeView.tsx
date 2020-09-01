@@ -1,5 +1,6 @@
 import React, {
   DispatchSetStateAction,
+  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
@@ -9,16 +10,13 @@ import {
   RouteProps,
 } from "react-router-dom";
 import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
   closestIndexTo,
   parseISO,
 } from "date-fns";
-import {
-  Box,
-  Grid,
-} from "grommet";
-import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
   HistoricalTrade,
@@ -28,6 +26,9 @@ import {
 import createPersistedState from "use-persisted-state";
 import useResizeObserver from "use-resize-observer";
 
+import {
+  useScrollToTop,
+} from "utils/Hooks";
 import {
   handleUnloadCreator,
 } from "utils/Utilities";
@@ -42,7 +43,13 @@ import PageError from "components/PageTemplates/PageError";
 import ForwardTime from "components/TimeControls/ForwardTime";
 import StockChart from "components/VX/StockChart";
 
-type Props = RouteProps &{
+import {
+  GrommetContentContainer,
+  GrommetGrid,
+  GrommetSidebarContainer,
+} from "./TradeView.styled";
+
+type Props = RouteProps & PropsHasClass & {
   date: Date | undefined;
   prices: HistoricalPrice[] | undefined;
   ticker: string | undefined;
@@ -201,6 +208,7 @@ const initialLedger = {
 
 const TradeView: React.FC<Props> = (
   {
+    className,
     prices,
     date,
     error,
@@ -633,6 +641,9 @@ const TradeView: React.FC<Props> = (
     },
     [],
   );
+
+  useScrollToTop();
+
   if (error)
   {
     return (
@@ -643,35 +654,19 @@ const TradeView: React.FC<Props> = (
   }
 
   return (
-    <PageContent>
-      <Grid
-        responsive={true}
-        fill={true}
-        gap="medium"
-        columns={
-          [
-            "flex",
-            "auto",
-          ]
-        }
-        rows={
-          [
-            "auto",
-          ]
-        }
-        areas={
-          [
-            [
-              "chart",
-              "trades",
-            ],
-          ]
-        }
-      >
-        <Box gridArea="chart">
-          <AspectRatioBox>
-            <AspectRatioItem ref={ref}>
+    <PageContent
+      className={className}
+      css=""
+    >
+      <GrommetGrid css="">
+        <GrommetContentContainer css="">
+          <AspectRatioBox css="">
+            <AspectRatioItem
+              ref={ref}
+              css=""
+            >
               <StockChart
+                css=""
                 prices={historicalPrices}
                 resolution={
                   [
@@ -682,25 +677,21 @@ const TradeView: React.FC<Props> = (
               />
             </AspectRatioItem>
           </AspectRatioBox>
-        </Box>
-        <Box
-          gridArea="trades"
-          height={
-            {
-              max: `${height}px`,
-            }
-          }
-        >
+        </GrommetContentContainer>
+        <GrommetSidebarContainer css="">
           <ForwardTime
+            css=""
             handleContinue={handleContinue}
             presentPrice={presentPrice}
           />
           <OrderForm
+            css=""
             presentLedger={presentLedger}
             presentPrice={presentPrice}
             handleSubmit={handleSubmit}
           />
           <HoldingTable
+            css=""
             presentPrice={presentPrice}
             presentLedger={presentLedger}
             presentHoldings={presentHoldings}
@@ -708,8 +699,8 @@ const TradeView: React.FC<Props> = (
             highestPresentHolding={highestPresentHolding}
             handleSubmit={handleSubmit}
           />
-        </Box>
-      </Grid>
+        </GrommetSidebarContainer>
+      </GrommetGrid>
     </PageContent>
   );
 };

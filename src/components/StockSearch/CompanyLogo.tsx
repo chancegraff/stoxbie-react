@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   Logo,
 } from "@chancey/iex-cloud";
@@ -10,29 +12,37 @@ import {
   StoxbieSkeleton,
 } from "./CompanyLogo.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   logo: Logo | undefined;
 };
 
 const StockLogo: React.FC<Props> = (
-  props,
+  {
+    logo,
+    className,
+  },
 ) =>
 {
-  if (!props.logo)
+  if (!logo)
   {
     return (
-      <StoxbieSkeleton
+      <GrommetContainer
+        className={className}
         css=""
-        Container={GrommetContainer}
-      />
+      >
+        <StoxbieSkeleton Container={GrommetContainer} />
+      </GrommetContainer>
     );
   }
 
   return (
-    <GrommetContainer css="">
+    <GrommetContainer
+      className={className}
+      css=""
+    >
       <GrommetAvatar
         css=""
-        src={props?.logo?.url}
+        src={logo.url}
       />
     </GrommetContainer>
   );

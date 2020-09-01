@@ -1,22 +1,29 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   RouteProps,
 } from "react-router-dom";
 import {
-  Box,
-} from "grommet";
-import {
   Company,
   Logo,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
+import {
+  useScrollToTop,
+} from "utils/Hooks";
 import PageContent from "components/PageTemplates/PageContent";
 import PageError from "components/PageTemplates/PageError";
 import CompanyLogo from "components/StockSearch/CompanyLogo";
 import CompanyName from "components/StockSearch/CompanyName";
 import ChooseDate from "components/TimeControls/ChooseDate";
 
-type Props = RouteProps & {
+import {
+  GrommetContainer,
+} from "./StockView.styled";
+
+type Props = RouteProps & PropsHasClass & {
   logo: Logo | undefined;
   company: Company | undefined;
   error?: string;
@@ -24,57 +31,48 @@ type Props = RouteProps & {
 };
 
 const StockView: React.FC<Props> = (
-  props,
+  {
+    className,
+    logo,
+    company,
+    error,
+    handleStart,
+  },
 ) =>
 {
-  if (props.error)
+  useScrollToTop();
+
+  if (error)
   {
     return (
-      <PageError>
-        {props.error}
+      <PageError
+        className={className}
+        css=""
+      >
+        {error}
       </PageError>
     );
   }
 
   return (
-    <PageContent>
-      <Box
-        direction="row"
-        align="end"
-        width="100%"
-      >
-        <Box>
-          <CompanyLogo logo={props.logo} />
-        </Box>
-        <Box
-          margin={
-            {
-              left: "12px",
-            }
-          }
-          height={
-            {
-              min: "68px",
-            }
-          }
-        >
-          <CompanyName company={props.company} />
-        </Box>
-        <Box
-          margin={
-            {
-              left: "18px",
-            }
-          }
-          height={
-            {
-              min: "62px",
-            }
-          }
-        >
-          <ChooseDate handleStart={props.handleStart} />
-        </Box>
-      </Box>
+    <PageContent
+      className={className}
+      css=""
+    >
+      <GrommetContainer css="">
+        <CompanyLogo
+          css=""
+          logo={logo}
+        />
+        <CompanyName
+          css=""
+          company={company}
+        />
+        <ChooseDate
+          css=""
+          handleStart={handleStart}
+        />
+      </GrommetContainer>
     </PageContent>
   );
 };

@@ -1,29 +1,48 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   Route,
   Switch,
 } from "react-router-dom";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import SearchRoutes from "routes/SearchRoutes";
 import StockRoutes from "routes/StockRoutes";
 import TradeRoutes from "routes/TradeRoutes";
 import PageError from "components/PageTemplates/PageError";
 
-const AppRoutes: React.FC = () =>
+const AppRoutes: React.FC<PropsHasClass> = (
+  {
+    className,
+  },
+) =>
 {
   return (
     <Switch>
       <Route path="/trade">
-        <TradeRoutes />
+        <TradeRoutes
+          className={className}
+          css=""
+        />
       </Route>
       <Route path="/stock">
-        <StockRoutes />
+        <StockRoutes
+          className={className}
+          css=""
+        />
       </Route>
       <Route path="/oops">
-        <PageError />
+        <PageError
+          className={className}
+          css=""
+        />
       </Route>
       <Route path="/">
-        <SearchRoutes />
+        <SearchRoutes
+          className={className}
+          css=""
+        />
       </Route>
     </Switch>
   );

@@ -1,7 +1,10 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
   HistoricalTradeStarted,
@@ -19,7 +22,7 @@ import {
   StyledSubmitOrder,
 } from "./CloseHoldings.styled";
 
-type Props = {
+type Props = PropsHasClass & {
   presentPrice: HistoricalPrice;
   presentLedger: HistoricalLedger;
   presentHolding: HistoricalTradeStarted;
@@ -28,6 +31,7 @@ type Props = {
 
 const CloseHoldings: React.FC<Props> = (
   {
+    className,
     presentPrice,
     presentLedger,
     presentHolding,
@@ -49,16 +53,20 @@ const CloseHoldings: React.FC<Props> = (
 
   return (
     <StyledSubmitOrder
+      css=""
+      className={className}
       presentPriceClose={presentPrice.close}
       orderDirection={(presentHolding.openDirection * -1) as 1 | -1}
       orderShareCount={presentLedger.totalCount}
       handleSubmit={handleSubmit}
     >
       <StyledContainer
+        css=""
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <HoverIcon
+          css=""
           hoverState={hoverState}
           MouseIdlingIcon={StyledOpenedIcon}
           MouseHoveringIcon={StyledClosedIcon}

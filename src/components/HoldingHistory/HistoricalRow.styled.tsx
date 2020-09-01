@@ -32,6 +32,7 @@ export const StyledTableCell: React.FC<JSXTableCellProps> = (
 {
   return (
     <TableCell
+      css=""
       align="end"
       border={
         {

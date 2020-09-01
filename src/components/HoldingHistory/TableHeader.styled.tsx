@@ -15,6 +15,7 @@ export const StyledTableHeader: React.FC<JSXTableHeaderProps> = (
 {
   return (
     <TableHeader
+      css=""
       {...props}
     />
   );
@@ -26,6 +27,7 @@ export const StyledTableRow: React.FC<JSXTableRowProps> = (
 {
   return (
     <TableRow
+      css=""
       {...props}
     />
   );
