@@ -27,8 +27,13 @@ it(
       SEARCH_INPUT_VALUE,
     );
 
-    searchInputShouldChange(
-      SEARCH_INPUT_VALUE,
+    await waitFor(
+      () =>
+      {
+        return searchInputShouldChange(
+          SEARCH_INPUT_VALUE,
+        );
+      },
     );
 
     await waitFor(
