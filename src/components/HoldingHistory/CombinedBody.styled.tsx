@@ -82,6 +82,7 @@ export const GrommetTableCell: React.FC<JSXTableCellProps> = (
 {
   return (
     <TableCell
+      fill={true}
       border={
         {
           size: "0",
