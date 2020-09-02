@@ -9,7 +9,7 @@ import {
 import SearchView from "views/SearchView";
 
 export const renderSearchView = (
-  props: any,
+  handleSearch: any,
 ) =>
 {
   return render(
@@ -17,7 +17,7 @@ export const renderSearchView = (
       path="/"
       route="/"
     >
-      <SearchView {...props} />
+      <SearchView handleSearch={handleSearch} />
     </Boilerplate>,
   );
 };

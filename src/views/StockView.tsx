@@ -21,14 +21,14 @@ import {
   GrommetContainer,
 } from "./StockView.styled";
 
-type Props = RouteProps & {
+export type StockViewProps = RouteProps & {
   logo: Logo | undefined;
   company: Company | undefined;
   error?: string;
   handleStart: (date: string) => void;
 };
 
-const StockView: React.FC<Props> = (
+const StockView: React.FC<StockViewProps> = (
   {
     logo,
     company,

@@ -17,16 +17,15 @@ import {
 } from "utils/tests/Renderers";
 
 const SEARCH_INPUT_VALUE = "netflix";
-const handleSearch = jest.fn();
 
 it(
   "types into the input",
   async () =>
   {
+    const handleSearch = jest.fn();
+
     renderSearchView(
-      {
-        handleSearch,
-      },
+      handleSearch,
     );
 
     changeInput(

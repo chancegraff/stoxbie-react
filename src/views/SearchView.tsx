@@ -34,11 +34,11 @@ import {
   GrommetText,
 } from "./SearchView.styled";
 
-type Props = RouteProps & {
+export type SearchViewProps = RouteProps & {
   handleSearch: (nextValue: string) => Promise<Search[]>;
 };
 
-const SearchView: React.FC<Props> = (
+const SearchView: React.FC<SearchViewProps> = (
   {
     handleSearch,
   },

@@ -48,7 +48,7 @@ import {
   GrommetSidebarContainer,
 } from "./TradeView.styled";
 
-type Props = RouteProps & {
+export type TradeViewProps = RouteProps & {
   date: Date | undefined;
   prices: HistoricalPrice[] | undefined;
   ticker: string | undefined;
@@ -205,7 +205,7 @@ const initialLedger = {
   totalCount: 0,
 };
 
-const TradeView: React.FC<Props> = (
+const TradeView: React.FC<TradeViewProps> = (
   {
     prices,
     date,
