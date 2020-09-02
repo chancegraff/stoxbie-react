@@ -1,14 +1,18 @@
 import {
-  screen,
+  within,
 } from "@testing-library/react";
 
-const BreadcrumbsTicker = (
+import BreadcrumbsContainer from "./BreadcrumbsContainer";
+
+const BuyButtonCheck = (
   ticker,
 ) =>
 {
-  return screen.getByText(
+  return within(
+    BreadcrumbsContainer(),
+  ).getByText(
     ticker,
   );
 };
 
-export default BreadcrumbsTicker;
+export default BuyButtonCheck;

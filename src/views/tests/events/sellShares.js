@@ -47,9 +47,14 @@ const sellShares = async (
 
   const tradeRows = TableTradeRows();
 
-  tradeRowsShouldHaveLength(
-    tradeRows,
-    tradeRowsLength,
+  await waitFor(
+    () =>
+    {
+      return tradeRowsShouldHaveLength(
+        tradeRows,
+        tradeRowsLength,
+      );
+    },
   );
 
   const [

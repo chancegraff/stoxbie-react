@@ -13,6 +13,7 @@ it(
     await buyShares(
       {
         TotalShares: 200,
+        TotalEquity: 640,
         OpenPrice: 3.2,
         OpenCount: 200,
         ClosePrice: undefined,
@@ -33,6 +34,7 @@ it(
     await sellShares(
       {
         TotalShares: 0,
+        TotalEquity: 0,
         OpenPrice: 3.2,
         OpenCount: 200,
         ClosePrice: 3.79,

@@ -59,7 +59,7 @@ const buyShares = async (
     openedTrade,
     formatCount(
       trade.CloseCount ||
-      trade.OpenCount,
+      trade.TotalShares,
     ),
   );
 
@@ -77,6 +77,7 @@ const buyShares = async (
   tradeRowShouldHaveText(
     openedTrade,
     formatCurrency(
+      trade.TotalEquity ||
       trade.OpenCount * trade.OpenPrice,
     ),
   );

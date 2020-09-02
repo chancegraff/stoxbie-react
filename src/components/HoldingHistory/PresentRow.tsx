@@ -68,19 +68,11 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
     const balance = useMemo(
       () =>
       {
-        if (presentLedger)
-        {
-          return formatCurrency(
-            presentHolding.openPrice * presentLedger.totalCount,
-          );
-        }
-
         return formatCurrency(
           presentHolding.openPrice * presentHolding.openCount,
         );
       },
       [
-        presentLedger,
         presentHolding,
       ],
     );

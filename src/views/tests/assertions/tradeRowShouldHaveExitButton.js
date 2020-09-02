@@ -9,8 +9,8 @@ const tradeRowShouldHaveExitButton = (
   return expect(
     within(
       tradeRow,
-    ).getByText(
-      "Exit",
+    ).getByLabelText(
+      "Catalog",
     ),
   ).toBeInTheDocument();
 };

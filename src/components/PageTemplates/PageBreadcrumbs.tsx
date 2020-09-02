@@ -58,7 +58,10 @@ const PageBreadcrumbs: React.FC<Props> = () =>
 
   return (
     <GrommetTheme css="">
-      <GrommetContainer css="">
+      <GrommetContainer
+        css=""
+        data-testid="breadcrumbs"
+      >
         <StoxbieRootBreadcrumb css="">
           Ticker Search
         </StoxbieRootBreadcrumb>

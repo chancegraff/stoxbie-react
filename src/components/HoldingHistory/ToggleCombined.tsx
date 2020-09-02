@@ -119,8 +119,12 @@ const ToggleCombined: React.FC<Props> = (
     ],
   );
 
-  if (!rowToTarget ||
-      rowHoverState === HoverState.Idling)
+  if (
+    (
+      !rowToTarget ||
+      rowHoverState === HoverState.Idling
+    )
+  )
   {
     return null;
   }

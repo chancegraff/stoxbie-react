@@ -1,4 +1,5 @@
 import React, {
+  useMemo,
   useRef,
 } from "react";
 import {
@@ -18,6 +19,9 @@ import {
   HandleMouseLeave,
   HoverState,
 } from "utils/Hooks";
+import {
+  formatCurrency,
+} from "utils/Utilities";
 
 import CloseHoldings from "./CloseHoldings";
 import {
@@ -31,6 +35,7 @@ type Props = {
   highestPresentHolding: HistoricalTradeStarted | undefined;
   presentLedger: HistoricalLedger | undefined;
   presentPrice: HistoricalPrice | undefined;
+  presentHoldings: HistoricalTradeStarted[];
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
@@ -44,6 +49,7 @@ const PresentBody: React.FC<Props> = (
     highestPresentHolding,
     presentLedger,
     presentPrice,
+    presentHoldings,
     rowHoverState,
     combinedBodyState,
     handleSubmit,
@@ -54,9 +60,62 @@ const PresentBody: React.FC<Props> = (
 ) =>
 {
   const presentRowRef = useRef<HTMLTableRowElement>();
+  const totalEquity = useMemo(
+    () =>
+    {
+      const rawValue = presentHoldings.reduce(
+        (
+          previousValue,
+          holding,
+        ) =>
+        {
+          return previousValue + holding.openBalance;
+        },
+        0,
+      );
 
-  if (!highestPresentHolding ||
-      !presentLedger || !presentPrice)
+      return formatCurrency(
+        rawValue,
+      );
+    },
+    [
+      presentHoldings,
+    ],
+  );
+  const toggleCombined = useMemo(
+    () =>
+    {
+      if (presentHoldings.length <= 1)
+      {
+        return null;
+      }
+
+      return (
+        <ToggleCombined
+          css=""
+          rowToTarget={presentRowRef.current}
+          rowHoverState={rowHoverState}
+          handleToggleCombined={handleToggleCombined}
+          combinedBodyState={combinedBodyState}
+        />
+      );
+    },
+    [
+      presentHoldings,
+      rowHoverState,
+      handleToggleCombined,
+      combinedBodyState,
+      presentRowRef,
+    ],
+  );
+
+  if (
+    (
+      !highestPresentHolding ||
+      !presentLedger ||
+      !presentPrice
+    )
+  )
   {
     return null;
   }
@@ -67,13 +126,7 @@ const PresentBody: React.FC<Props> = (
       onMouseEnter={handleMouseEnterRow}
       onMouseLeave={handleMouseLeaveRow}
     >
-      <ToggleCombined
-        css=""
-        rowToTarget={presentRowRef.current}
-        rowHoverState={rowHoverState}
-        handleToggleCombined={handleToggleCombined}
-        combinedBodyState={combinedBodyState}
-      />
+      {toggleCombined}
       <PresentRow
         ref={presentRowRef}
         css=""
@@ -107,7 +160,7 @@ const PresentBody: React.FC<Props> = (
                   />
                 </GrommetTableCell>
                 <GrommetTableCell css="">
-                  {balance}
+                  {totalEquity}
                 </GrommetTableCell>
               </>
             );

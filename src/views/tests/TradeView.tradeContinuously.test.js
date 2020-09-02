@@ -17,7 +17,8 @@ it(
     await buyShares(
       {
         TotalShares: 200,
-        OpenPrice: 3.2,
+        TotalEquity: 640,
+        OpenPrice: 3.20,
         OpenCount: 200,
         ClosePrice: undefined,
         CloseCount: undefined,
@@ -41,13 +42,14 @@ it(
     await sellShares(
       {
         TotalShares: 150,
-        OpenPrice: 3.2,
+        TotalEquity: 450.50,
+        OpenPrice: 3.20,
         OpenCount: 200,
         ClosePrice: 3.79,
         CloseCount: 50,
         ChangeBalance: 29.50,
         ChangePercent: 0.184375,
-        LedgerBalance: 9549.5,
+        LedgerBalance: 9549.50,
         LedgerReturns: 29.50,
         LedgerChange: 0.0031517094,
       },
@@ -59,20 +61,21 @@ it(
     clickBuy();
 
     // Day 3: Buy 100 shares @ 3.67
-    // (100)  3.67 / -    / -   / -       <<
+    // (250)  3.67 / -    / -   / -       <<
     // (150)  3.2  / -    / -   / -       xx
     // (50)   3.2  / 3.79 / 18% / 29.50
     //                      0%  / 9182.50
     await buyShares(
       {
         TotalShares: 250,
+        TotalEquity: 847,
         OpenPrice: 3.67,
         OpenCount: 100,
         ClosePrice: undefined,
         CloseCount: undefined,
         ChangeBalance: undefined,
         ChangePercent: undefined,
-        LedgerBalance: 9182.5,
+        LedgerBalance: 9182.50,
         LedgerReturns: 29.50,
         LedgerChange: 0.0031517094,
       },
@@ -91,14 +94,15 @@ it(
     await sellShares(
       {
         TotalShares: 100,
-        OpenPrice: 3.2,
+        TotalEquity: 250.50,
+        OpenPrice: 3.20,
         OpenCount: 150,
         ClosePrice: 3.78,
         CloseCount: 150,
         ChangeBalance: 87,
         ChangePercent: 0.18125,
-        LedgerBalance: 9749.5,
-        LedgerReturns: 116.5,
+        LedgerBalance: 9749.50,
+        LedgerReturns: 116.50,
         LedgerChange: 0.0126871766948,
       },
       3,
@@ -114,6 +118,7 @@ it(
     await sellShares(
       {
         TotalShares: 0,
+        TotalEquity: 0,
         OpenPrice: 3.67,
         OpenCount: 100,
         ClosePrice: 3.79,

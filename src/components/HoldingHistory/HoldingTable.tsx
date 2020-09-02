@@ -151,6 +151,7 @@ const HoldingTable: React.FC<Props> = (
             highestPresentHolding={highestPresentHolding}
             presentPrice={presentPrice}
             presentLedger={presentLedger}
+            presentHoldings={presentHoldings}
             rowHoverState={rowHoverState}
             combinedBodyState={combinedBodyState}
             handleSubmit={handleSubmit}
