@@ -47,21 +47,49 @@ border-top: ${
   border-right: 0px;
 }
 
-& tr:nth-of-type(odd) td {
-  background-color: ${
-    (
-      props,
-    ) =>
-    {
-      return getRGBA(
-        normalizeColor(
-          props.theme.global.colors.brand,
+& tr {
+  &:nth-of-type(odd) td {
+    background-color: ${
+      (
+        props,
+      ) =>
+      {
+        return getRGBA(
+          normalizeColor(
+            props.theme.global.colors.brand,
+            props.theme,
+          ),
+          0.1,
+        );
+      }
+    };
+  }
+
+  &:hover td div,
+  &:hover td div svg {
+    color: ${
+      (
+        props,
+      ) =>
+      {
+        return normalizeColor(
+          props.theme.global.colors["text-strong"],
           props.theme,
-        ),
-        0.1,
-      );
-    }
-  };
+        );
+      }
+    };
+    stroke: ${
+      (
+        props,
+      ) =>
+      {
+        return normalizeColor(
+          props.theme.global.colors["text-strong"],
+          props.theme,
+        );
+      }
+    };
+  }
 }
 `;
 
@@ -76,12 +104,42 @@ export const GrommetTableBody: React.FC<JSXTableBodyProps> = (
   );
 };
 
+const WeakCell: React.FC<JSXTableCellProps> = styled(
+  TableCell,
+)`
+color: ${
+  (
+    props,
+  ) =>
+  {
+    return normalizeColor(
+      props.theme.global.colors["text-weak"],
+      props.theme,
+    );
+  }
+};
+
+& svg {
+  stroke: ${
+    (
+      props,
+    ) =>
+    {
+      return normalizeColor(
+        props.theme.global.colors["text-weak"],
+        props.theme,
+      );
+    }
+  };
+}
+`;
+
 export const GrommetTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {
   return (
-    <TableCell
+    <WeakCell
       fill={true}
       border={
         {
