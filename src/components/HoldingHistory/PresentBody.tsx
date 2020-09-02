@@ -138,7 +138,6 @@ const PresentBody: React.FC<Props> = (
             {
               shares,
               open,
-              balance,
             },
           ) =>
           {

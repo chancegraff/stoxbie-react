@@ -2,6 +2,9 @@ import React, {
   useMemo,
 } from "react";
 import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
   scaleLinear,
   scaleTime,
 } from "@vx/scale";
@@ -13,9 +16,6 @@ import {
   ScaleLinear,
   ScaleTime,
 } from "d3-scale";
-import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
 
 import {
   Max,

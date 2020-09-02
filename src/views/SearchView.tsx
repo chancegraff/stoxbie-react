@@ -1,5 +1,4 @@
 import React, {
-  PropsHasClass,
   useCallback,
   useEffect,
   useState,
@@ -35,13 +34,12 @@ import {
   GrommetText,
 } from "./SearchView.styled";
 
-type Props = RouteProps & PropsHasClass & {
+type Props = RouteProps & {
   handleSearch: (nextValue: string) => Promise<Search[]>;
 };
 
 const SearchView: React.FC<Props> = (
   {
-    className,
     handleSearch,
   },
 ) =>
