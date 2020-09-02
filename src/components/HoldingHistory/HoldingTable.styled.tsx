@@ -24,13 +24,11 @@ export const GrommetTheme: React.FC = (
               border: undefined,
             },
             body: {
-              fill: "vertical",
               border: {
                 side: "vertical",
                 color: "background-contrast",
               },
             },
-            footer: {},
           },
         }
       }
@@ -43,7 +41,6 @@ const RelativeContainer: React.FC<JSXBoxProps> = styled(
   Box,
 )`
 position: relative;
-padding: 0 2px;
 `;
 
 export const GrommetContainer: React.FC<JSXBoxProps> = (
@@ -52,11 +49,12 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <RelativeContainer
+      pad="0 2px"
       fill="vertical"
       overflow={
         {
           vertical: "auto",
-          horizontal: "hidden",
+          horizontal: "visible",
         }
       }
       {...props}

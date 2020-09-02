@@ -22,7 +22,7 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
       direction="column"
       align="center"
       justify="center"
-      flex="grow"
+      flex={false}
       margin={
         {
           vertical: "24px",

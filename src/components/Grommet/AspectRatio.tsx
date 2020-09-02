@@ -53,6 +53,7 @@ export const AspectRatioBox = forwardRef<HTMLElement, JSXBoxProps>(
         ref={ref}
         css=""
         height="0"
+        fill="horizontal"
         pad={
           {
             bottom: "67.5%",

@@ -12,6 +12,7 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Main
+      fill={true}
       {...props}
     />
   );
@@ -50,7 +51,6 @@ export const GrommetMain: React.FC<JSXBoxProps> = (
     <Main
       height="auto !important"
       overflow="visible"
-      flex="grow"
       pad={
         {
           horizontal: "xlarge",

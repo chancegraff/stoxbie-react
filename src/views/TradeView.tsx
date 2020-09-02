@@ -673,7 +673,14 @@ const TradeView: React.FC<Props> = (
             </AspectRatioItem>
           </AspectRatioBox>
         </GrommetContentContainer>
-        <GrommetSidebarContainer css="">
+        <GrommetSidebarContainer
+          css=""
+          height={
+            {
+              max: `${height}px`,
+            }
+          }
+        >
           <ForwardTime
             css=""
             handleContinue={handleContinue}
