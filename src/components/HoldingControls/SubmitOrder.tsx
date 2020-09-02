@@ -6,7 +6,6 @@ import {
   JSXButtonProps,
 } from "grommet";
 import {
-  Checkmark,
   JSXIconProps,
 } from "grommet-icons";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -31,6 +30,7 @@ export type SubmitOrderProps = Props;
 const SubmitOrder: React.FC<Props> = (
   {
     children,
+    disabled,
     handleSubmit,
     handleToggle,
     presentPriceClose,
@@ -45,9 +45,13 @@ const SubmitOrder: React.FC<Props> = (
   const isActive = useMemo(
     () =>
     {
-      return submitDirection === orderDirection;
+      return (
+        !disabled &&
+        submitDirection === orderDirection
+      );
     },
     [
+      disabled,
       submitDirection,
       orderDirection,
     ],
@@ -60,7 +64,7 @@ const SubmitOrder: React.FC<Props> = (
         return (
           <StateIcon
             isActive={isActive}
-            Icon={Checkmark}
+            Icon={Icon}
           />
         );
       }
@@ -105,6 +109,7 @@ const SubmitOrder: React.FC<Props> = (
   return (
     <GrommetButton
       css=""
+      disabled={disabled}
       icon={endEnhancer}
       label={children}
       value={submitDirection}

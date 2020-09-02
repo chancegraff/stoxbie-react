@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useMemo,
+} from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
@@ -21,14 +23,16 @@ import {
 } from "./CloseHoldings.styled";
 
 type Props = {
+  disabled?: boolean;
   presentPrice: HistoricalPrice;
-  presentLedger: HistoricalLedger;
+  presentLedger?: HistoricalLedger;
   presentHolding: HistoricalTradeStarted;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 
 const CloseHoldings: React.FC<Props> = (
   {
+    disabled,
     presentPrice,
     presentLedger,
     presentHolding,
@@ -42,18 +46,29 @@ const CloseHoldings: React.FC<Props> = (
     handleMouseLeave,
   ] = useHover();
 
-  if (!presentHolding ||
-      !presentPrice || !presentLedger)
-  {
-    return null;
-  }
+  const orderShareCount = useMemo(
+    () =>
+    {
+      if (presentLedger)
+      {
+        return presentLedger.totalCount;
+      }
+
+      return presentHolding.openCount;
+    },
+    [
+      presentLedger,
+      presentHolding,
+    ],
+  );
 
   return (
     <StoxbieSubmitOrder
       css=""
+      disabled={disabled}
       presentPriceClose={presentPrice.close}
       orderDirection={(presentHolding.openDirection * -1) as 1 | -1}
-      orderShareCount={presentLedger.totalCount}
+      orderShareCount={orderShareCount}
       handleSubmit={handleSubmit}
     >
       <GrommetContainer
@@ -63,6 +78,7 @@ const CloseHoldings: React.FC<Props> = (
       >
         <HoverIcon
           css=""
+          disabled={disabled}
           hoverState={hoverState}
           MouseIdlingIcon={GrommetOpenedIcon}
           MouseHoveringIcon={GrommetClosedIcon}

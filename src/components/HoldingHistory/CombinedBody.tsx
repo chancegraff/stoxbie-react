@@ -85,9 +85,9 @@ const CombinedBody: React.FC<Props> = (
                         <GrommetTableCell css="">
                           <CloseHoldings
                             css=""
-                            presentHolding={presentHolding}
-                            presentLedger={presentLedger}
+                            disabled={true}
                             presentPrice={presentPrice}
+                            presentHolding={presentHolding}
                             handleSubmit={handleSubmit}
                           />
                         </GrommetTableCell>

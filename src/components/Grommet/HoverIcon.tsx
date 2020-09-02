@@ -8,6 +8,7 @@ import {
 } from "utils/Hooks";
 
 type Props = {
+  disabled?: boolean;
   hoverState: HoverState;
   MouseIdlingIcon: React.FC<JSXIconProps>;
   MouseHoveringIcon: React.FC<JSXIconProps>;
@@ -16,13 +17,19 @@ type Props = {
 // TODO Don't pass components
 const HoverIcon: React.FC<Props> = (
   {
+    disabled,
     hoverState,
     MouseIdlingIcon,
     MouseHoveringIcon,
   },
 ) =>
 {
-  if (hoverState === HoverState.Idling)
+  if (
+    (
+      disabled ||
+      hoverState === HoverState.Idling
+    )
+  )
   {
     return (
       <MouseIdlingIcon />

@@ -127,7 +127,10 @@ const HoldingTable: React.FC<Props> = (
   useEffect(
     () =>
     {
-      handleRetractCombined();
+      if (!presentHoldings.length)
+      {
+        handleRetractCombined();
+      }
     },
     [
       presentHoldings,
