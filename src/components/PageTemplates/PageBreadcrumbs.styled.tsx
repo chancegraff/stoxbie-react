@@ -96,8 +96,9 @@ export const StoxbieRootBreadcrumb: React.FC<BreadcrumbProps> = (
   const match = useRouteMatch(
     {
       path: "/",
-      strict: true,
-      sensitive: true,
+      exact: true,
+      strict: false,
+      sensitive: false,
     },
   );
 
