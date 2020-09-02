@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import {
@@ -119,6 +120,17 @@ const HoldingTable: React.FC<Props> = (
     [
       combinedBodyState,
       handleExtendCombined,
+      handleRetractCombined,
+    ],
+  );
+
+  useEffect(
+    () =>
+    {
+      handleRetractCombined();
+    },
+    [
+      presentHoldings,
       handleRetractCombined,
     ],
   );
