@@ -28,13 +28,15 @@ const HistoricalBody: React.FC<Props> = (
           ) =>
           {
             const {
+              openCount,
               openDate,
+              closeCount,
               closeDate,
             } = historicalHolding;
 
             return (
               <HistoricalRow
-                key={`${openDate}-${closeDate}`}
+                key={`${openDate}:${openCount}-${closeDate}:${closeCount}`}
                 css=""
                 historicalHolding={historicalHolding}
               />

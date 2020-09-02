@@ -64,8 +64,7 @@
         },
         {
             "files": [
-                "*.js",
-                "*.*.js"
+                "tests"
             ],
             "extends": [
                 "plugin:jest/recommended"
@@ -92,8 +91,7 @@
     ],
     "ignorePatterns": [
         "node_modules",
-        "eslint",
-        "setupTests.js"
+        "eslint"
     ],
     "rules": {
         "accessor-pairs": "error",

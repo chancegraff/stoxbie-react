@@ -71,6 +71,7 @@ export const GrommetTextInput: React.FC<JSXTextInputProps<Search>> = (
       plain={true}
       autoFocus={true}
       focusIndicator={false}
+      role="search"
       type="search"
       placeholder={TICKER_INPUT_PLACERHOLDER}
       // dropProps={

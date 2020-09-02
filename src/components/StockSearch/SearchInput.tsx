@@ -176,7 +176,6 @@ const StockInput: React.FC<Props> = (
       >
         <GrommetTextInput
           css=""
-          role="search"
           value={value}
           suggestions={suggestions}
           onChange={handleChange}

@@ -1,2 +1,2 @@
-export * from "./Hooks/useHover";
-export * from "./Hooks/useScrollToTop";
+export * from "./hooks/useHover";
+export * from "./hooks/useScrollToTop";
