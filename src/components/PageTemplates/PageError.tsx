@@ -14,7 +14,7 @@ import {
 } from "utils/Constants";
 import {
   useScrollToTop,
-} from "utils/hooks";
+} from "utils/hooks/useScrollToTop";
 import PageContent from "components/PageTemplates/PageContent";
 
 import {

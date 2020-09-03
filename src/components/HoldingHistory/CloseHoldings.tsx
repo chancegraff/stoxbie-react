@@ -12,7 +12,7 @@ import {
 
 import {
   useHover,
-} from "utils/hooks";
+} from "utils/hooks/useHover";
 import HoverIcon from "components/Grommet/HoverIcon";
 
 import {

@@ -18,7 +18,7 @@ import {
   HandleMouseEnter,
   HandleMouseLeave,
   HoverState,
-} from "utils/hooks";
+} from "utils/hooks/useHover";
 import {
   formatCurrency,
 } from "utils/Utilities";
