@@ -8,7 +8,7 @@ on:
 
 jobs:
   jest:
-    name: Run Jest
+    name: Jest
     runs-on: ubuntu-latest
 
     steps:
