@@ -1,6 +1,6 @@
 import {
   TickerInput,
-} from "utils/tests/Components";
+} from "utils/Components";
 
 export const searchInputShouldChange = (
   value: string,

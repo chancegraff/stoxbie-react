@@ -1,6 +1,6 @@
 import {
   BuyButtonCheck,
-} from "utils/tests/Components";
+} from "utils/Components";
 
 export const buyButtonShouldChange = (
   active: boolean,

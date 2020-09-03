@@ -5,7 +5,7 @@ import {
 
 import {
   Boilerplate,
-} from "utils/tests";
+} from "utils/Tests";
 import SearchView from "views/SearchView";
 
 export const renderSearchView = (

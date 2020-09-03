@@ -4,7 +4,7 @@ import {
 
 import {
   BreadcrumbsContainer,
-} from "utils/tests/Components";
+} from "utils/Components";
 
 export const BreadcrumbsTicker = (
   ticker: string,

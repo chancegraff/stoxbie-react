@@ -4,7 +4,7 @@ import {
 
 import {
   TableFooter,
-} from "utils/tests/Components";
+} from "utils/Components";
 
 export const ledgerChangeShouldChange = (
   changePercent: string,

@@ -4,7 +4,7 @@ import {
 
 import {
   ContinueButton,
-} from "utils/tests/Components";
+} from "utils/Components";
 
 export const clickContinue = (
   times = 1,

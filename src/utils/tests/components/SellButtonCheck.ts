@@ -4,7 +4,7 @@ import {
 
 import {
   SellButton,
-} from "utils/tests/Components";
+} from "utils/Components";
 
 export const SellButtonCheck = () =>
 {

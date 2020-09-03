@@ -5,16 +5,16 @@ import {
 import {
   mockShouldChange,
   searchInputShouldChange,
-} from "utils/tests/Assertions";
+} from "utils/Assertions";
 import {
   TickerInput,
-} from "utils/tests/Components";
+} from "utils/Components";
 import {
   changeInput,
-} from "utils/tests/Events";
+} from "utils/Events";
 import {
   renderSearchView,
-} from "utils/tests/Renderers";
+} from "utils/Renderers";
 
 const SEARCH_INPUT_VALUE = "netflix";
 

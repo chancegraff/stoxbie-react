@@ -1,7 +1,7 @@
 import {
   buyButtonShouldChange,
   sellButtonShouldChange,
-} from "utils/tests/Assertions";
+} from "utils/Assertions";
 
 export enum TradeTypes {
   Buying = "buy",

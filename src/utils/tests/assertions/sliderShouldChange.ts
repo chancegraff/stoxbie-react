@@ -1,6 +1,6 @@
 import {
   TradeSlider,
-} from "utils/tests/Components";
+} from "utils/Components";
 
 export const sliderShouldChange = (
   count: string,

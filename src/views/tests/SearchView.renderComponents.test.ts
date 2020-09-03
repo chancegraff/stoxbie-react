@@ -1,12 +1,12 @@
 import {
   componentShouldRender,
-} from "utils/tests/Assertions";
+} from "utils/Assertions";
 import {
   TickerInput,
-} from "utils/tests/Components";
+} from "utils/Components";
 import {
   renderSearchView,
-} from "utils/tests/Renderers";
+} from "utils/Renderers";
 
 it(
   "renders search view",

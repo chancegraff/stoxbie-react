@@ -8,12 +8,12 @@ import {
 
 import {
   Boilerplate,
-} from "utils/tests";
+} from "utils/Tests";
 import {
   getPrice,
   prices,
   tradeViewStartDate,
-} from "utils/tests/Helpers";
+} from "utils/Helpers";
 import {
   DateFormats,
   formatDate,
