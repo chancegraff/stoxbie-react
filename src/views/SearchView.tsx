@@ -60,30 +60,25 @@ const SearchView: React.FC<SearchViewProps> = (
   const [
     handleSearchLazily,
   ] = useDebouncedCallback(
-    useCallback(
-      async (
-        nextValue: string,
-      ) =>
-      {
-        setSearchState(
-          "loading",
-        );
+    async (
+      nextValue: string,
+    ) =>
+    {
+      setSearchState(
+        "loading",
+      );
 
-        const options = await handleSearch(
-          nextValue,
-        );
+      const options = await handleSearch(
+        nextValue,
+      );
 
-        setSearchResults(
-          options,
-        );
-        setSearchState(
-          "idling",
-        );
-      },
-      [
-        handleSearch,
-      ],
-    ),
+      setSearchResults(
+        options,
+      );
+      setSearchState(
+        "idling",
+      );
+    },
     DEBOUNCE_MEDIUM_MS,
   );
 
