@@ -25,7 +25,7 @@ import {
 } from "utils/Constants";
 import {
   useScrollToTop,
-} from "utils/Hooks";
+} from "utils/hooks";
 import {
   DateFormats,
   handleUnloadCreator,
