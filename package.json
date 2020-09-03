@@ -2,6 +2,11 @@
   "name": "stoxbie",
   "version": "0.0.17",
   "private": true,
+  "jest": {
+    "testMatch": [
+      "**/specs/**/*.[jt]s?(x)"
+    ]
+  },
   "dependencies": {
     "@chancey/eslint-plugin-wrap-params": "^1.0.0",
     "@chancey/iex-cloud": "^2.2.3",
