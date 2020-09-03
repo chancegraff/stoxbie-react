@@ -22,24 +22,14 @@ import {
   HistoricalTradeStarted,
 } from "trade-types";
 import createPersistedState from "use-persisted-state";
-import useResizeObserver from "use-resize-observer";
 
 import {
+  useError,
   useScrollToTop,
+  useUnload,
 } from "utils/Hooks";
-import {
-  handleUnloadCreator,
-} from "utils/Utilities";
-import PageError from "components/PageTemplates/PageError";
 
 import TradeViewDisplay from "./TradeViewDisplay";
-
-export type TradeViewProps = RouteProps & {
-  date: Date | undefined;
-  prices: HistoricalPrice[] | undefined;
-  ticker: string | undefined;
-  error?: string;
-};
 
 const getPriceIndexes = (
   prices: HistoricalPrice[],
@@ -191,7 +181,14 @@ const initialLedger = {
   totalCount: 0,
 };
 
-const TradeViewLogic: React.FC<TradeViewProps> = (
+type Props = RouteProps & {
+  date: Date | undefined;
+  prices: HistoricalPrice[] | undefined;
+  ticker: string | undefined;
+  error?: string;
+};
+
+const TradeViewLogic: React.FC<Props> = (
   {
     prices,
     date,
@@ -200,12 +197,6 @@ const TradeViewLogic: React.FC<TradeViewProps> = (
   },
 ) =>
 {
-  const {
-    ref: aspectRatioRef,
-    width: chartWidth = 1,
-    height: chartHeight = 1,
-  } = useResizeObserver();
-
   const [
     nextPriceIndexes,
     setNextPriceIndexes,
@@ -613,29 +604,15 @@ const TradeViewLogic: React.FC<TradeViewProps> = (
       date,
     ],
   );
-  useEffect(
-    () =>
-    {
-      return handleUnloadCreator(
-        [
-          setHistoricalPrices,
-          setNextPriceIndexes,
-        ],
-      );
-    },
-    [],
-  );
 
   useScrollToTop();
-
-  if (error)
-  {
-    return (
-      <PageError>
-        {error}
-      </PageError>
-    );
-  }
+  useUnload(
+    setHistoricalPrices,
+    setNextPriceIndexes,
+  );
+  useError(
+    error,
+  );
 
   return (
     <TradeViewDisplay
