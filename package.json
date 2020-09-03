@@ -41,7 +41,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom-fourteen",
     "format": "eslint --fix ./src",
-    "check": "eslint --format github ./src"
+    "check": "eslint --format mo ./src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -71,6 +71,7 @@
     "eslint": "^7.7.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-formatter-github": "^1.0.11",
+    "eslint-formatter-mo": "^1.0.0",
     "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
@@ -78,6 +79,7 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-testing-library": "^3.8.0",
     "jest-environment-jsdom-fourteen": "^1.0.1"
   }
 }
