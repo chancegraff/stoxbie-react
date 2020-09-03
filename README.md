@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/chancegraff/stoxbie-react/badge?s=8fd09b8082e941ddc4f625817c5affbb5ffaa834)](https://www.codefactor.io/repository/github/chancegraff/stoxbie-react)
+
 ## Available Scripts
 
 In the project directory, you can run:
