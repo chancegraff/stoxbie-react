@@ -3,19 +3,19 @@ import {
 } from "@testing-library/react";
 
 import {
-  TableTradeRows,
-} from "tests/Components";
-import {
-  changeSlider,
-  clickSell,
-} from "tests/Events";
-import {
   ledgerBalanceShouldChange,
   ledgerChangeShouldChange,
   sliderShouldChange,
   tradeRowShouldHaveText,
   tradeRowsShouldHaveLength,
 } from "tests/Assertions";
+import {
+  TableTradeRows,
+} from "tests/Components";
+import {
+  changeSlider,
+  clickSell,
+} from "tests/Events";
 import {
   formatCount,
   formatCurrency,
