@@ -10,7 +10,7 @@ import styled from "styled-components/macro"; // eslint-disable-line @typescript
 
 import {
   useScrollToTop,
-} from "utils/hooks/useScrollToTop";
+} from "utils/Hooks";
 import PageContent from "components/PageTemplates/PageContent";
 import PageError from "components/PageTemplates/PageError";
 import CompanyLogo from "components/StockSearch/CompanyLogo";
