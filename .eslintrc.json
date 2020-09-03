@@ -64,7 +64,8 @@
         },
         {
             "files": [
-                "tests"
+                "tests/**",
+                "mocks/**"
             ],
             "extends": [
                 "plugin:jest/recommended"
