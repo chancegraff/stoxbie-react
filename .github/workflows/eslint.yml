@@ -31,5 +31,5 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: NPM
-      run: npm run check
+    - name: Lint
+      uses: bradennapier/eslint-plus-action@v3.4.2
