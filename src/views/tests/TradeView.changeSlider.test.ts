@@ -4,13 +4,13 @@ import {
 
 import {
   sliderShouldChange,
-} from "utils/Assertions";
+} from "tests/Assertions";
 import {
   changeSlider,
-} from "utils/Events";
+} from "tests/Events";
 import {
   renderTradeView,
-} from "utils/Renderers";
+} from "tests/Renderers";
 
 it(
   "changes share slider",

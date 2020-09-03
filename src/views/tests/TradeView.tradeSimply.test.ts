@@ -1,14 +1,14 @@
 import {
   buyShares,
   sellShares,
-} from "utils/E2E";
+} from "tests/E2E";
 import {
   clickContinue,
   clickSell,
-} from "utils/Events";
+} from "tests/Events";
 import {
   renderTradeView,
-} from "utils/Renderers";
+} from "tests/Renderers";
 
 it(
   "conducts a simple trade",

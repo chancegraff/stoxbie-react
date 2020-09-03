@@ -1,6 +1,6 @@
 import {
   componentsShouldRender,
-} from "utils/Assertions";
+} from "tests/Assertions";
 import {
   BreadcrumbsContainer,
   BreadcrumbsTicker,
@@ -14,14 +14,14 @@ import {
   TableHeaderOpen,
   TableHeaderShares,
   TradeSlider,
-} from "utils/Components";
+} from "tests/Components";
 import {
   getPrice,
   tradeViewStartDate,
-} from "utils/Helpers";
+} from "tests/Helpers";
 import {
   renderTradeView,
-} from "utils/Renderers";
+} from "tests/Renderers";
 import {
   formatCurrency,
 } from "utils/Utilities";

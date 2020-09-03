@@ -4,20 +4,20 @@ import {
 
 import {
   componentShouldRender,
-} from "utils/Assertions";
+} from "tests/Assertions";
 import {
   TimeControlDate,
-} from "utils/Components";
+} from "tests/Components";
 import {
   clickContinue,
-} from "utils/Events";
+} from "tests/Events";
 import {
   getPriceRange,
   tradeViewStartDate,
-} from "utils/Helpers";
+} from "tests/Helpers";
 import {
   renderTradeView,
-} from "utils/Renderers";
+} from "tests/Renderers";
 import {
   DateFormats,
   formatParsedDate,

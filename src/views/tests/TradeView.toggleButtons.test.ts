@@ -1,14 +1,14 @@
 import {
   TradeTypes,
   tradeTypeShouldChange,
-} from "utils/Assertions";
+} from "tests/Assertions";
 import {
   clickBuy,
   clickSell,
-} from "utils/Events";
+} from "tests/Events";
 import {
   renderTradeView,
-} from "utils/Renderers";
+} from "tests/Renderers";
 
 it(
   "toggles trade buttons",

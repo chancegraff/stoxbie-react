@@ -65,9 +65,8 @@
         },
         {
             "files": [
-                "*.js",
-                "tests/**",
-                "mocks/*.js"
+                "tests/**/*.ts",
+                "mocks/**/*.ts"
             ],
             "env": {
                 "jest": true

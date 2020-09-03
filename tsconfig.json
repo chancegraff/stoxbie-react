@@ -19,7 +19,8 @@
     "checkJs": false,
     "sourceMap": true,
     "types": [
-      "jest"
+      "jest",
+      "node"
     ],
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
