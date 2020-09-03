@@ -1,6 +1,6 @@
 version = 1
 
-test_patterns = ["tests/**/*.*.test.ts"]
+test_patterns = ["specs/*.ts"]
 
 exclude_patterns = ["node_modues"]
 
