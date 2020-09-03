@@ -1,0 +1,19 @@
+version = 1
+
+test_patterns = ["tests/**/*.*.test.ts"]
+
+exclude_patterns = ["node_modues"]
+
+[[analyzers]]
+name = "javascript"
+enabled = true
+
+  [analyzers.meta]
+  module_system = "es-modules"
+  environment = [
+    "browser",
+    "jest"
+  ]
+  plugins = ["react"]
+  style_guide = "standard"
+  dialect = "typescript"
