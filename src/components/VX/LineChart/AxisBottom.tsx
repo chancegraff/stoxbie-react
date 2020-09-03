@@ -13,7 +13,7 @@ import {
 } from "grommet/utils";
 import {
   ThemeContext,
-} from "styled-components";
+} from "styled-components/macro";
 
 import {
   DateFormats,
@@ -52,9 +52,9 @@ const AxisBottom: React.FC<Props> = (
     {
       return tick.getMonth() % 12 === 0
         ? formatDate(
-          tick,
-          DateFormats.TickLarge,
-        )
+            tick,
+            DateFormats.TickLarge,
+          )
         : formatDate(
           tick,
           DateFormats.TickSmall,

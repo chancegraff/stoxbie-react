@@ -1,7 +1,9 @@
-import React from "react";
+import React, {
+  PropsHasClass,
+} from "react";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 import {
   Padding,
   Resolution,
@@ -20,7 +22,7 @@ import withSelect, {
   Select,
 } from "components/VX/Shared/Select";
 
-type BaseProps = {
+type BaseProps = PropsHasClass & {
   prices: HistoricalPrice[];
   resolution: Resolution;
   padding: Padding;

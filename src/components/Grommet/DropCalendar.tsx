@@ -7,10 +7,11 @@ import React, {
 import {
   JSXDropButtonProps,
 } from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledCalendar,
-  StyledDropButton,
+  GrommetCalendar,
+  GrommetDropButton,
 } from "./DropCalendar.styled";
 
 type DropButtonProps = Omit<JSXDropButtonProps, "open" | "dropContent" | "onOpen" | "onClose">;
@@ -41,7 +42,8 @@ const DropCalendar: React.FC<Props> = (
   const bounds = useMemo(
     () =>
     {
-      if (min && max)
+      if (min &&
+          max)
       {
         return [
           min,
@@ -80,7 +82,7 @@ const DropCalendar: React.FC<Props> = (
     () =>
     {
       return (
-        <StyledCalendar
+        <GrommetCalendar
           bounds={bounds}
           onSelect={handleSelect}
         />
@@ -93,7 +95,7 @@ const DropCalendar: React.FC<Props> = (
   );
 
   return (
-    <StyledDropButton
+    <GrommetDropButton
       {...props}
       open={dropState === "opened"}
       dropContent={<Calendar />}

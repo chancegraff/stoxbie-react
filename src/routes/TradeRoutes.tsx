@@ -1,17 +1,22 @@
 import React, {
+  PropsHasClass,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
 import {
-  Route, RouteProps,
-  Switch, useParams, useRouteMatch,
+  Route,
+  RouteProps,
+  Switch,
+  useParams,
+  useRouteMatch,
 } from "react-router-dom";
 import {
   HistoricalPrice,
   historicalPrices,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   DATE_ERROR_MESSAGE,
@@ -19,19 +24,19 @@ import {
   TICKER_ERROR_MESSAGE,
 } from "utils/Constants";
 import {
+  useScrollToTop,
+} from "utils/Hooks";
+import {
   DateFormats,
   handleUnloadCreator,
   parseDate,
 } from "utils/Utilities";
 import TradeView from "views/TradeView";
 import PageError from "components/PageTemplates/PageError";
-import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
-// import defPrices from "../views/TradeView/tests/prices";
+type Props = RouteProps & PropsHasClass;
 
-type Props = RouteProps;
-
-const TradeRoute: React.FC<RouteProps> = () =>
+const TradeRoute: React.FC<Props> = () =>
 {
   const {
     ticker = "",
@@ -54,7 +59,7 @@ const TradeRoute: React.FC<RouteProps> = () =>
     {
       const parsedDate = parseDate(
         date,
-        DateFormats.URL,
+        DateFormats.Url,
       );
 
       if (parsedDate.getTime())
@@ -91,33 +96,35 @@ const TradeRoute: React.FC<RouteProps> = () =>
       nextTicker: string | undefined,
     ) =>
     {
-      if (nextTicker)
+      if (!nextTicker)
       {
-        const nextPrices = await historicalPrices(
-          nextTicker,
-          "max",
-          undefined,
-          {
-            chartByDay: true,
-          },
+        return;
+      }
+
+      const nextPrices = await historicalPrices(
+        nextTicker,
+        "max",
+        undefined,
+        {
+          chartByDay: true,
+        },
+      );
+
+      if (nextPrices)
+      {
+        const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
+
+        setPrices(
+          [
+            ...typedPrices,
+          ],
         );
-
-        if (nextPrices)
-        {
-          const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
-
-          setPrices(
-            [
-              ...typedPrices,
-            ],
-          );
-        }
-        else
-        {
-          setError(
-            FETCH_ERROR_MESSAGE,
-          );
-        }
+      }
+      else
+      {
+        setError(
+          FETCH_ERROR_MESSAGE,
+        );
       }
     },
     [],
@@ -149,8 +156,11 @@ const TradeRoute: React.FC<RouteProps> = () =>
     [],
   );
 
+  useScrollToTop();
+
   return (
     <TradeView
+      css=""
       date={safeDate}
       error={error}
       prices={prices}
@@ -166,16 +176,15 @@ const TradeRoutes: React.FC<Props> = () =>
   return (
     <Switch>
       <Route path={`${match.path}/:ticker/:date`}>
-        <PageScrollToTop />
-        <TradeRoute />
+        <TradeRoute css="" />
       </Route>
       <Route path={`${match.path}/:ticker`}>
-        <PageError>
+        <PageError css="">
           Please select a date to trade from.
         </PageError>
       </Route>
       <Route path={match.path}>
-        <PageError>
+        <PageError css="">
           Please select a stock to trade with.
         </PageError>
       </Route>

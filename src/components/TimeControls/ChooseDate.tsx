@@ -13,11 +13,11 @@ import {
 } from "utils/Utilities";
 
 import {
-  StyledButton,
-  StyledButtonChild,
-  StyledButtonText,
-  StyledContainer,
-  StyledDropCalendar,
+  GrommetButton,
+  GrommetButtonChild,
+  GrommetButtonText,
+  GrommetContainer,
+  StoxbieDropCalendar,
 } from "./ChooseDate.styled";
 
 type Props = {
@@ -49,7 +49,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           oneYearAgo,
-          DateFormats.URL,
+          DateFormats.Url,
         ),
       );
     },
@@ -63,7 +63,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           fiveYearsAgo,
-          DateFormats.URL,
+          DateFormats.Url,
         ),
       );
     },
@@ -79,7 +79,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           nextDate,
-          DateFormats.URL,
+          DateFormats.Url,
         ),
       );
     },
@@ -89,27 +89,39 @@ const TradeStart: React.FC<Props> = (
   );
 
   return (
-    <StyledContainer>
-      <StyledButton onClick={handleOneYearStart}>
-        <StyledButtonChild>
-          <StyledButtonText>
+    <GrommetContainer css="">
+      <GrommetButton
+        css=""
+        onClick={handleOneYearStart}
+      >
+        <GrommetButtonChild css="">
+          <GrommetButtonText css="">
             1Y
-          </StyledButtonText>
-        </StyledButtonChild>
-      </StyledButton>
-      <StyledButton onClick={handleFiveYearStart}>
-        <StyledButtonChild>
-          <StyledButtonText>
+          </GrommetButtonText>
+        </GrommetButtonChild>
+      </GrommetButton>
+      <GrommetButton
+        css=""
+        onClick={handleFiveYearStart}
+      >
+        <GrommetButtonChild css="">
+          <GrommetButtonText css="">
             5Y
-          </StyledButtonText>
-        </StyledButtonChild>
-      </StyledButton>
-      <StyledDropCalendar handleSelect={handleCustomYearStart}>
-        <StyledButtonChild>
-          <Schedule size="14px" />
-        </StyledButtonChild>
-      </StyledDropCalendar>
-    </StyledContainer>
+          </GrommetButtonText>
+        </GrommetButtonChild>
+      </GrommetButton>
+      <StoxbieDropCalendar
+        css=""
+        handleSelect={handleCustomYearStart}
+      >
+        <GrommetButtonChild css="">
+          <Schedule
+            css=""
+            size="14px"
+          />
+        </GrommetButtonChild>
+      </StoxbieDropCalendar>
+    </GrommetContainer>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 export type SelectX = (price: HistoricalPrice) => number;
 export type SelectY = (price: HistoricalPrice) => number;

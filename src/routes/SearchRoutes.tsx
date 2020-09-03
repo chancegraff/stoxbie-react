@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 import {
   search,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import SearchView from "views/SearchView";
 
@@ -31,7 +32,7 @@ const SearchRoutes: React.FC<Props> = () =>
   );
 
   return (
-    <SearchView handleSearch={handleSearch}/>
+    <SearchView handleSearch={handleSearch} />
   );
 };
 

@@ -13,7 +13,7 @@ import SubmitOrder, {
   SubmitOrderProps,
 } from "./SubmitOrder";
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -22,7 +22,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
       direction="column"
       align="center"
       justify="center"
-      flex="grow"
+      flex={false}
       margin={
         {
           vertical: "24px",
@@ -34,7 +34,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledGrid: React.FC<JSXGridProps> = (
+export const GrommetGrid: React.FC<JSXGridProps> = (
   props,
 ) =>
 {
@@ -72,7 +72,7 @@ export const StyledGrid: React.FC<JSXGridProps> = (
   );
 };
 
-const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
+const StoxbieSubmitOrder: React.FC<SubmitOrderProps> = (
   {
     gridArea,
     ...props
@@ -80,7 +80,9 @@ const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
 ) =>
 {
   return (
-    <Box gridArea={gridArea}>
+    <Box
+      gridArea={gridArea}
+    >
       <SubmitOrder
         Icon={Checkmark}
         primary={true}
@@ -91,32 +93,32 @@ const StyledSubmitOrder: React.FC<SubmitOrderProps> = (
   );
 };
 
-export const StyledBuyAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
+export const StoxbieBuyAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
   props,
 ) =>
 {
   return (
-    <StyledSubmitOrder
+    <StoxbieSubmitOrder
       {...props}
       submitDirection={1}
       gridArea="buy"
     >
       Buy
-    </StyledSubmitOrder>
+    </StoxbieSubmitOrder>
   );
 };
 
-export const StyledSellAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
+export const StoxbieSellAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
   props,
 ) =>
 {
   return (
-    <StyledSubmitOrder
+    <StoxbieSubmitOrder
       {...props}
       submitDirection={-1}
       gridArea="sell"
     >
       Sell
-    </StyledSubmitOrder>
+    </StoxbieSubmitOrder>
   );
 };

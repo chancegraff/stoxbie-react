@@ -1,5 +1,8 @@
 import React from "react";
 import {
+  Search,
+} from "@chancey/iex-cloud";
+import {
   Box,
   DropStates,
   JSXBoxProps,
@@ -7,15 +10,12 @@ import {
   TextInput,
   ThemeContext,
 } from "grommet";
-import {
-  Search,
-} from "iex-cloud";
 
 import {
   TICKER_INPUT_PLACERHOLDER,
 } from "utils/Constants";
 
-export const StyledTheme: React.FC = (
+export const GrommetTheme: React.FC = (
   props,
 ) =>
 {
@@ -37,7 +37,7 @@ export const StyledTheme: React.FC = (
   );
 };
 
-export const StyledContainer: React.FC<JSXBoxProps & { dropState: DropStates }> = (
+export const GrommetContainer: React.FC<JSXBoxProps & { dropState: DropStates }> = (
   {
     dropState,
     ...props
@@ -62,7 +62,7 @@ export const StyledContainer: React.FC<JSXBoxProps & { dropState: DropStates }> 
   );
 };
 
-export const StyledTextInput: React.FC<JSXTextInputProps<Search>> = (
+export const GrommetTextInput: React.FC<JSXTextInputProps<Search>> = (
   props,
 ) =>
 {
@@ -71,6 +71,7 @@ export const StyledTextInput: React.FC<JSXTextInputProps<Search>> = (
       plain={true}
       autoFocus={true}
       focusIndicator={false}
+      role="search"
       type="search"
       placeholder={TICKER_INPUT_PLACERHOLDER}
       // dropProps={

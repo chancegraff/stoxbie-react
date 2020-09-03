@@ -3,7 +3,7 @@ import {
   Box,
   JSXBoxProps,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const ShimmeringBox = styled(
   Box,
@@ -12,7 +12,7 @@ const ShimmeringBox = styled(
   background-size: 2000px;
 `;
 
-export const StyledBox: React.FC<JSXBoxProps> = (
+export const GrommetBox: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -30,7 +30,7 @@ export const StyledBox: React.FC<JSXBoxProps> = (
   );
 };
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

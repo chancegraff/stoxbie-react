@@ -7,9 +7,9 @@ import {
   TableFooter,
   TableRow,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
-export const StyledTableFooter: React.FC<JSXTableFooterProps> = (
+export const GrommetTableFooter: React.FC<JSXTableFooterProps> = (
   props,
 ) =>
 {
@@ -20,7 +20,7 @@ export const StyledTableFooter: React.FC<JSXTableFooterProps> = (
   );
 };
 
-export const StyledTableRow: React.FC<JSXTableRowProps> = (
+export const GrommetTableRow: React.FC<JSXTableRowProps> = (
   props,
 ) =>
 {
@@ -38,7 +38,7 @@ position: sticky;
 bottom: 0;
 `;
 
-export const StyledTableCell: React.FC<JSXTableCellProps> = (
+export const GrommetTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {

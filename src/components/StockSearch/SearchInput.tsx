@@ -8,24 +8,25 @@ import {
   useHistory,
 } from "react-router-dom";
 import {
+  Search,
+} from "@chancey/iex-cloud";
+import {
   AsyncStates,
 } from "async-types";
 import {
   DropStates,
   SelectEvent,
 } from "grommet";
-import {
-  Search,
-} from "iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   handleUnloadCreator,
 } from "utils/Utilities";
 
 import {
-  StyledContainer,
-  StyledTextInput,
-  StyledTheme,
+  GrommetContainer,
+  GrommetTextInput,
+  GrommetTheme,
 } from "./SearchInput.styled";
 import SearchResult from "./SearchResult";
 
@@ -68,7 +69,12 @@ const StockInput: React.FC<Props> = (
           ) =>
           {
             return {
-              label: <SearchResult searchResult={searchResult} />,
+              label: (
+                <SearchResult
+                  css=""
+                  searchResult={searchResult}
+                />
+              ),
               value: searchResult,
             };
           },
@@ -163,10 +169,13 @@ const StockInput: React.FC<Props> = (
   );
 
   return (
-    <StyledTheme>
-      <StyledContainer dropState={dropState}>
-        <StyledTextInput
-          role="search"
+    <GrommetTheme css="">
+      <GrommetContainer
+        css=""
+        dropState={dropState}
+      >
+        <GrommetTextInput
+          css=""
           value={value}
           suggestions={suggestions}
           onChange={handleChange}
@@ -174,8 +183,8 @@ const StockInput: React.FC<Props> = (
           onSuggestionsOpen={handleDropOpen}
           onSuggestionsClose={handleDropClose}
         />
-      </StyledContainer>
-    </StyledTheme>
+      </GrommetContainer>
+    </GrommetTheme>
   );
 };
 

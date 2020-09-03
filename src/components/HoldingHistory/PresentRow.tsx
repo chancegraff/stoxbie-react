@@ -1,8 +1,13 @@
 import React, {
-  PropsHasChildren,
+  forwardRef,
+  PropsHasFunctionChild,
   useMemo,
 } from "react";
 import {
+} from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import {
+  HistoricalLedger,
   HistoricalTradeStarted,
 } from "trade-types";
 
@@ -12,71 +17,84 @@ import {
 } from "utils/Utilities";
 
 import {
-  StyledTableCell,
-  StyledTableRow,
+  GrommetTableRow,
 } from "./PresentRow.styled";
 
-type Props = PropsHasChildren & {
-  summarizedHoldings: HistoricalTradeStarted;
+type Props = PropsHasFunctionChild & {
+  presentHolding: HistoricalTradeStarted;
+  presentLedger?: HistoricalLedger;
 };
 
-const PresentRow: React.FC<Props> = (
+const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
+  (
+    {
+      children,
+      presentHolding,
+      presentLedger,
+    },
+    tableRowRef,
+  ) =>
   {
-    children,
-    summarizedHoldings,
-  },
-) =>
-{
-  const shareCount = useMemo(
-    () =>
-    {
-      return formatCount(
-        summarizedHoldings.openCount,
-      );
-    },
-    [
-      summarizedHoldings,
-    ],
-  );
-  const openPrice = useMemo(
-    () =>
-    {
-      return formatCurrency(
-        summarizedHoldings.openPrice,
-      );
-    },
-    [
-      summarizedHoldings,
-    ],
-  );
-  const totalBalance = useMemo(
-    () =>
-    {
-      return formatCurrency(
-        summarizedHoldings.openCount * summarizedHoldings.openPrice,
-      );
-    },
-    [
-      summarizedHoldings,
-    ],
-  );
+    const shares = useMemo(
+      () =>
+      {
+        if (presentLedger)
+        {
+          return formatCount(
+            presentLedger.totalCount,
+          );
+        }
 
-  return (
-    <StyledTableRow role="row">
-      <StyledTableCell>
-        {shareCount}
-      </StyledTableCell>
-      <StyledTableCell>
-        {openPrice}
-      </StyledTableCell>
-      <StyledTableCell>
-        {children}
-      </StyledTableCell>
-      <StyledTableCell>
-        {totalBalance}
-      </StyledTableCell>
-    </StyledTableRow>
-  );
-};
+        return formatCount(
+          presentHolding.openCount,
+        );
+      },
+      [
+        presentLedger,
+        presentHolding,
+      ],
+    );
+    const open = useMemo(
+      () =>
+      {
+        return formatCurrency(
+          presentHolding.openPrice,
+        );
+      },
+      [
+        presentHolding,
+      ],
+    );
+    const balance = useMemo(
+      () =>
+      {
+        return formatCurrency(
+          presentHolding.openPrice * presentHolding.openCount,
+        );
+      },
+      [
+        presentHolding,
+      ],
+    );
+
+    return (
+      <GrommetTableRow
+        ref={tableRowRef}
+        css=""
+        role="row"
+      >
+        {
+          children(
+            {
+              shares,
+              open,
+              balance,
+            },
+          )
+        }
+      </GrommetTableRow>
+    );
+  },
+);
 
 export default PresentRow;

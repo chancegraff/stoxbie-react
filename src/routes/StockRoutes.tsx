@@ -17,7 +17,8 @@ import {
   company as getCompany,
   Logo,
   logo as getLogo,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   TICKER_ERROR_MESSAGE,
@@ -27,7 +28,6 @@ import {
 } from "utils/Utilities";
 import StockView from "views/StockView";
 import PageError from "components/PageTemplates/PageError";
-import PageScrollToTop from "components/PageTemplates/PageScrollToTop";
 
 const ERROR_MESSAGE =
   "There was a problem attempting to load company information about the stock you requested.";
@@ -93,30 +93,33 @@ const ViewRoute: React.FC<RouteProps> = () =>
       nextTicker: string | undefined,
     ) =>
     {
-      if (nextTicker)
+      if (!nextTicker)
       {
-        const nextCompany = await getCompany(
-          nextTicker,
-        );
-        const nextLogo = await getLogo(
-          nextTicker,
-        ).catch();
+        return;
+      }
 
-        if (!nextCompany || !nextLogo)
-        {
-          setError(
-            ERROR_MESSAGE,
-          );
-        }
-        else
-        {
-          setLogo(
-            nextLogo,
-          );
-          setCompany(
-            nextCompany,
-          );
-        }
+      const nextCompany = await getCompany(
+        nextTicker,
+      );
+      const nextLogo = await getLogo(
+        nextTicker,
+      ).catch();
+
+      if (!nextCompany ||
+          !nextLogo)
+      {
+        setError(
+          ERROR_MESSAGE,
+        );
+      }
+      else
+      {
+        setLogo(
+          nextLogo,
+        );
+        setCompany(
+          nextCompany,
+        );
       }
     },
     [],
@@ -151,6 +154,7 @@ const ViewRoute: React.FC<RouteProps> = () =>
 
   return (
     <StockView
+      css=""
       company={company}
       error={error}
       handleStart={handleStart}
@@ -166,12 +170,10 @@ const StockRoutes: React.FC<RouteProps> = () =>
   return (
     <Switch>
       <Route path={`${match.path}/:ticker`}>
-        <PageScrollToTop />
-        <ViewRoute />
+        <ViewRoute css="" />
       </Route>
       <Route path={match.path}>
-        <PageScrollToTop />
-        <PageError>
+        <PageError css="">
           Please select a stock to view.
         </PageError>
       </Route>

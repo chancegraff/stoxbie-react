@@ -5,7 +5,8 @@ import React, {
 } from "react";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
 } from "trade-types";
@@ -17,10 +18,10 @@ import Spinner from "components/Grommet/Spinner";
 import ChooseShares from "components/ShareSlider/ChooseShares";
 
 import {
-  StyledBuyAction,
-  StyledContainer,
-  StyledGrid,
-  StyledSellAction,
+  GrommetContainer,
+  GrommetGrid,
+  StoxbieBuyAction,
+  StoxbieSellAction,
 } from "./OrderForm.styled";
 
 type Props = {
@@ -88,37 +89,46 @@ const OrderForm: React.FC<Props> = (
     [],
   );
 
-  if (!presentPrice || !presentLedger)
+  if (!presentPrice ||
+      !presentLedger)
   {
-    return <Spinner Container={StyledContainer} />;
+    return (
+      <Spinner
+        css=""
+        Container={GrommetContainer}
+      />
+    );
   }
 
   return (
-    <StyledContainer>
+    <GrommetContainer css="">
       <ChooseShares
+        css=""
         presentLedger={presentLedger}
         presentPrice={presentPrice}
         orderDirection={orderDirection}
         orderShareCount={orderShareCount}
         setOrderShareCount={setOrderShareCount}
       />
-      <StyledGrid>
-        <StyledBuyAction
+      <GrommetGrid css="">
+        <StoxbieBuyAction
+          css=""
           handleToggle={handleToggle}
           handleSubmit={handleSubmit}
           presentPriceClose={presentPrice.close}
           orderDirection={orderDirection}
           orderShareCount={orderShareCount}
         />
-        <StyledSellAction
+        <StoxbieSellAction
+          css=""
           handleToggle={handleToggle}
           handleSubmit={handleSubmit}
           presentPriceClose={presentPrice.close}
           orderDirection={orderDirection}
           orderShareCount={orderShareCount}
         />
-      </StyledGrid>
-    </StyledContainer>
+      </GrommetGrid>
+    </GrommetContainer>
   );
 };
 

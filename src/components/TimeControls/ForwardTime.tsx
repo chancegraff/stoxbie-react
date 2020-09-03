@@ -3,16 +3,17 @@ import React, {
 } from "react";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
 
 import {
-  DateFormats, formatDate,
+  DateFormats,
+  formatDate,
 } from "utils/Utilities";
 
 import {
-  StyledButton,
-  StyledContainer,
-  StyledText,
+  GrommetButton,
+  GrommetContainer,
+  GrommetText,
 } from "./ForwardTime.styled";
 
 type Props = {
@@ -44,12 +45,18 @@ const TimeControl: React.FC<Props> = (
   );
 
   return (
-    <StyledContainer>
-      <StyledText>
-        {`Today is ${safeDate || "..."}`}
-      </StyledText>
-      <StyledButton onClick={handleContinue} />
-    </StyledContainer>
+    <GrommetContainer css="">
+      <GrommetText css="">
+        {
+          `Today is ${safeDate ||
+                      "..."}`
+        }
+      </GrommetText>
+      <GrommetButton
+        css=""
+        onClick={handleContinue}
+      />
+    </GrommetContainer>
   );
 };
 

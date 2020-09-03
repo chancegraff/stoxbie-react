@@ -1,6 +1,4 @@
-import React, {
-  PropsHasChildren,
-} from "react";
+import React from "react";
 import {
   useRouteMatch,
 } from "react-router-dom";
@@ -16,7 +14,11 @@ import Anchor, {
   AnchorProps,
 } from "components/Grommet/Anchor";
 
-export const StyledTheme: React.FC = (
+import {
+  BreadcrumbProps,
+} from "./PageBreadcrumbs";
+
+export const GrommetTheme: React.FC = (
   props,
 ) =>
 {
@@ -38,7 +40,7 @@ export const StyledTheme: React.FC = (
   );
 };
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
@@ -51,7 +53,7 @@ export const StyledContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-const StyledAnchor: React.FC<AnchorProps> = (
+const StoxbieAnchor: React.FC<AnchorProps> = (
   props,
 ) =>
 {
@@ -69,7 +71,7 @@ const StyledAnchor: React.FC<AnchorProps> = (
   );
 };
 
-const StyledText: React.FC<JSXTextProps> = (
+const MediumText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {
@@ -87,19 +89,34 @@ const StyledText: React.FC<JSXTextProps> = (
   );
 };
 
-export const RootBreadcrumb: React.FC = () =>
+export const StoxbieRootBreadcrumb: React.FC<BreadcrumbProps> = (
+  props,
+) =>
 {
+  const match = useRouteMatch(
+    {
+      path: "/",
+      exact: true,
+      strict: false,
+      sensitive: false,
+    },
+  );
+
+  if (match)
+  {
+    return null;
+  }
+
   return (
-    <StyledAnchor to="/">
-      Ticker Search
-    </StyledAnchor>
+    <StoxbieAnchor
+      to="/"
+      {...props}
+    />
   );
 };
 
-export const TickerBreadcrumb: React.FC<PropsHasChildren> = (
-  {
-    children,
-  },
+export const StoxbieTickerBreadcrumb: React.FC<BreadcrumbProps> = (
+  props,
 ) =>
 {
   const match = useRouteMatch(
@@ -113,23 +130,20 @@ export const TickerBreadcrumb: React.FC<PropsHasChildren> = (
   if (match)
   {
     return (
-      <StyledText>
-        {children}
-      </StyledText>
+      <MediumText {...props} />
     );
   }
 
   return (
-    <StyledAnchor to={`/stock/${children}`}>
-      {children}
-    </StyledAnchor>
+    <StoxbieAnchor
+      to={`/stock/${props.children}`}
+      {...props}
+    />
   );
 };
 
-export const DateBreadcrumb: React.FC<PropsHasChildren> = (
-  {
-    children,
-  },
+export const StoxbieDateBreadcrumb: React.FC<BreadcrumbProps> = (
+  props,
 ) =>
 {
   const match = useRouteMatch(
@@ -140,14 +154,10 @@ export const DateBreadcrumb: React.FC<PropsHasChildren> = (
     },
   );
 
-  if (!match)
+  if (match)
   {
-    return null;
+    return <MediumText {...props}/>;
   }
 
-  return (
-    <StyledText>
-      {`Trading from ${children}`}
-    </StyledText>
-  );
+  return null;
 };

@@ -2,23 +2,30 @@ import React, {
   useMemo,
 } from "react";
 import {
-  scaleLinear, scaleTime,
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
+  scaleLinear,
+  scaleTime,
 } from "@vx/scale";
 import {
-  extent, max,
+  extent,
+  max,
 } from "d3-array";
 import {
-  ScaleLinear, ScaleTime,
+  ScaleLinear,
+  ScaleTime,
 } from "d3-scale";
-import {
-  HistoricalPrice,
-} from "iex-cloud";
 
 import {
-  Max, MaxX, MaxY,
+  Max,
+  MaxX,
+  MaxY,
 } from "./Max";
 import {
-  Select, SelectX, SelectY,
+  Select,
+  SelectX,
+  SelectY,
 } from "./Select";
 
 export type ScaleX = ScaleTime<number, number>;

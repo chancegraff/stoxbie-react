@@ -1,10 +1,11 @@
 import React from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalTradeFinished,
 } from "trade-types";
 
 import {
-  StyledTableBody,
+  GrommetTableBody,
 } from "./HistoricalBody.styled";
 import HistoricalRow from "./HistoricalRow";
 
@@ -19,7 +20,7 @@ const HistoricalBody: React.FC<Props> = (
 ) =>
 {
   return (
-    <StyledTableBody>
+    <GrommetTableBody css="">
       {
         historicalHoldings.map(
           (
@@ -27,20 +28,23 @@ const HistoricalBody: React.FC<Props> = (
           ) =>
           {
             const {
+              openCount,
               openDate,
+              closeCount,
               closeDate,
             } = historicalHolding;
 
             return (
               <HistoricalRow
-                key={`${openDate}-${closeDate}`}
+                key={`${openDate}:${openCount}-${closeDate}:${closeCount}`}
+                css=""
                 historicalHolding={historicalHolding}
               />
             );
           },
         )
       }
-    </StyledTableBody>
+    </GrommetTableBody>
   );
 };
 

@@ -1,5 +1,8 @@
 import React from "react";
 import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
   Group,
 } from "@vx/group";
 import {
@@ -9,13 +12,10 @@ import {
   normalizeColor,
 } from "grommet/utils";
 import {
-  HistoricalPrice,
-} from "iex-cloud";
-import {
   Padding,
   Resolution,
 } from "style-types";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import withShared from "components/VX/Shared";
 import {
@@ -96,6 +96,7 @@ const LineChart: React.FC<Props> = (
 {
   return (
     <svg
+      css=""
       height={height}
       width={width}
       role="linechart"

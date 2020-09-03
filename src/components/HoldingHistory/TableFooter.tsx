@@ -1,6 +1,7 @@
 import React, {
   useMemo,
 } from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
   HistoricalTradeFinished,
@@ -12,9 +13,9 @@ import {
 } from "utils/Utilities";
 
 import {
-  StyledTableCell,
-  StyledTableFooter,
-  StyledTableRow,
+  GrommetTableCell,
+  GrommetTableFooter,
+  GrommetTableRow,
 } from "./TableFooter.styled";
 
 type Props = {
@@ -32,7 +33,8 @@ const TableFooter: React.FC<Props> = (
   const change = useMemo(
     () =>
     {
-      if (presentLedger && historicalHoldings.length > 0)
+      if (presentLedger &&
+          historicalHoldings.length > 0)
       {
         return formatPercentage(
           presentLedger.totalChange,
@@ -60,22 +62,25 @@ const TableFooter: React.FC<Props> = (
   );
 
   return (
-    <StyledTableFooter>
-      <StyledTableRow role="footerRow">
-        <StyledTableCell>
+    <GrommetTableFooter css="">
+      <GrommetTableRow
+        css=""
+        role="footerRow"
+      >
+        <GrommetTableCell css="">
           Change
-        </StyledTableCell>
-        <StyledTableCell>
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           {change}
-        </StyledTableCell>
-        <StyledTableCell>
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           Balance
-        </StyledTableCell>
-        <StyledTableCell>
+        </GrommetTableCell>
+        <GrommetTableCell css="">
           {balance}
-        </StyledTableCell>
-      </StyledTableRow>
-    </StyledTableFooter>
+        </GrommetTableCell>
+      </GrommetTableRow>
+    </GrommetTableFooter>
   );
 };
 

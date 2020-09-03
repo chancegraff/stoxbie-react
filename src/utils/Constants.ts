@@ -1,4 +1,6 @@
-export const DEBOUNCE_INPUT_MS = 500;
+export const DEBOUNCE_SHORT_MS = 500;
+export const DEBOUNCE_MEDIUM_MS = 1000;
+export const DEBOUNCE_LONG_MS = 2000;
 export const TRADE_DATE_FORMAT = "[m]MM[d]DD[y]YYYY";
 export const URL_DATE_FORMAT = "'m'MM'd'dd'y'y";
 export const IEX_DATE_FORMAT = "y-MM-dd";
@@ -18,3 +20,8 @@ export const TICKER_ERROR_MESSAGE =
 export const SLIDER_TICK_COUNT = 7;
 
 export const TICKER_INPUT_PLACERHOLDER = "Search for company by name or ticker...";
+
+export enum CombinedBodyState {
+  Extending = "extending",
+  Retracting = "retracting",
+}

@@ -1,6 +1,6 @@
 import {
   createGlobalStyle,
-} from "styled-components";
+} from "styled-components/macro";
 
 // Catamaran
 import CatamaranBlack from "./Catamaran/Catamaran-Black.ttf";

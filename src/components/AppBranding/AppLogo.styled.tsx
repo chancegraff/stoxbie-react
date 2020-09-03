@@ -10,9 +10,9 @@ import {
   Text,
   ThemeContext,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
-export const ExtendedTheme: React.FC<PropsHasChildren> = (
+export const GrommetTheme: React.FC<PropsHasChildren> = (
   props,
 ) =>
 {
@@ -48,7 +48,7 @@ const LogoText = styled(
   text-transform: uppercase;
 `;
 
-export const StyledText: React.FC<JSXTextProps> = (
+export const GrommetText: React.FC<JSXTextProps> = (
   props,
 ) =>
 {
@@ -66,7 +66,7 @@ const InvertedImage = styled(
   filter: invert(1);
 `;
 
-export const StyledImage: React.FC<JSXImageProps> = (
+export const GrommetImage: React.FC<JSXImageProps> = (
   props,
 ) =>
 {
@@ -83,7 +83,7 @@ export const StyledImage: React.FC<JSXImageProps> = (
   );
 };
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

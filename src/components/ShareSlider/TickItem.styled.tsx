@@ -3,7 +3,7 @@ import {
   Box,
   JSXBoxProps,
 } from "grommet";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const StyledBox = styled(
   Box,
@@ -13,7 +13,7 @@ const StyledBox = styled(
 }
 `;
 
-export const StyledTick: React.FC<JSXBoxProps> = (
+export const GrommetTick: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

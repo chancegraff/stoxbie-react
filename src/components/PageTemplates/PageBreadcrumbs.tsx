@@ -4,21 +4,32 @@ import React, {
 import {
   useParams,
 } from "react-router-dom";
+import {
+  JSXTextProps,
+} from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   DateFormats,
   formatParsedDate,
 } from "utils/Utilities";
+import {
+  AnchorProps,
+} from "components/Grommet/Anchor";
 
 import {
-  DateBreadcrumb,
-  RootBreadcrumb,
-  StyledContainer,
-  StyledTheme,
-  TickerBreadcrumb,
+  GrommetContainer,
+  GrommetTheme,
+  StoxbieDateBreadcrumb,
+  StoxbieRootBreadcrumb,
+  StoxbieTickerBreadcrumb,
 } from "./PageBreadcrumbs.styled";
 
-const PageBreadcrumbs: React.FC = () =>
+type Props = JSXTextProps & Omit<AnchorProps, "to">;
+
+export type BreadcrumbProps = Props;
+
+const PageBreadcrumbs: React.FC<Props> = () =>
 {
   const {
     ticker,
@@ -35,7 +46,7 @@ const PageBreadcrumbs: React.FC = () =>
       {
         return formatParsedDate(
           date,
-          DateFormats.URL,
+          DateFormats.Url,
           DateFormats.Full,
         );
       }
@@ -46,17 +57,22 @@ const PageBreadcrumbs: React.FC = () =>
   );
 
   return (
-    <StyledTheme>
-      <StyledContainer data-testid="breadcrumbs">
-        <RootBreadcrumb />
-        <TickerBreadcrumb>
+    <GrommetTheme css="">
+      <GrommetContainer
+        css=""
+        data-testid="breadcrumbs"
+      >
+        <StoxbieRootBreadcrumb css="">
+          Ticker Search
+        </StoxbieRootBreadcrumb>
+        <StoxbieTickerBreadcrumb css="">
           {ticker}
-        </TickerBreadcrumb>
-        <DateBreadcrumb>
+        </StoxbieTickerBreadcrumb>
+        <StoxbieDateBreadcrumb css="">
           {legibleDate}
-        </DateBreadcrumb>
-      </StyledContainer>
-    </StyledTheme>
+        </StoxbieDateBreadcrumb>
+      </GrommetContainer>
+    </GrommetTheme>
   );
 };
 

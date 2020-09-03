@@ -1,10 +1,10 @@
 import React from "react";
 import {
   Box,
-  BoxProps,
+  JSXBoxProps,
 } from "grommet";
 
-export const StyledContainer: React.FC<BoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {

@@ -4,7 +4,7 @@ import {
   JSXButtonProps,
 } from "grommet";
 
-export const StyledButton: React.FC<JSXButtonProps> = (
+export const GrommetButton: React.FC<JSXButtonProps> = (
   props,
 ) =>
 {

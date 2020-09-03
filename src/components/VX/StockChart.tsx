@@ -4,21 +4,21 @@ import React, {
   useMemo,
 } from "react";
 import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
   ResponsiveContext,
 } from "grommet";
 import {
   normalizeColor,
 } from "grommet/utils";
 import {
-  HistoricalPrice,
-} from "iex-cloud";
-import {
   Padding,
   Resolution,
 } from "style-types";
-import {
+import styled, { // eslint-disable-line @typescript-eslint/no-unused-vars
   ThemeContext,
-} from "styled-components";
+} from "styled-components/macro";
 
 import Spinner from "components/Grommet/Spinner";
 import LineChart, {
@@ -85,13 +85,15 @@ const StockChart: React.FC<Props> = (
     ],
   );
 
-  if (!prices || !prices.length)
+  if (!prices ||
+      !prices.length)
   {
     return <Spinner />;
   }
 
   return (
     <LineChart
+      css=""
       label={label}
       padding={responsivePadding}
       prices={prices}

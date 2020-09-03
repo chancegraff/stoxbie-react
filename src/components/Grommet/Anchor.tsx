@@ -10,6 +10,7 @@ import {
   Anchor as DefaultAnchor,
   AnchorProps as DefaultAnchorProps,
 } from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 type Props = LinkProps & DefaultAnchorProps & {
   to: string;
@@ -44,6 +45,7 @@ const Anchor: React.FC<Props> = (
 
   return (
     <Link
+      css=""
       component={DefaultAnchor}
       to={to}
       onClick={handleClick}

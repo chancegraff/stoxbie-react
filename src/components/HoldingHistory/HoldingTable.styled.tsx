@@ -6,12 +6,9 @@ import {
   Table,
   ThemeContext,
 } from "grommet";
-import {
-  normalizeColor,
-} from "grommet/utils";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
-export const StyledTheme: React.FC = (
+export const GrommetTheme: React.FC = (
   props,
 ) =>
 {
@@ -27,36 +24,11 @@ export const StyledTheme: React.FC = (
               border: undefined,
             },
             body: {
-              fill: "vertical",
               border: {
                 side: "vertical",
                 color: "background-contrast",
               },
             },
-            footer: {},
-            // body: {
-            //   align: 'center',
-            //   pad: { horizontal: 'large', vertical: 'xsmall' },
-            //   border: 'horizontal',
-            // },
-            // extend: () => `font-family: Arial`,
-            // footer: {
-            //   align: 'start',
-            //   border: undefined,
-            //   pad: { horizontal: 'large', vertical: 'small' },
-            //   verticalAlign: 'bottom',
-            // },
-            // header: {
-            //   align: 'center',
-            //   border: 'bottom',
-            //   fill: 'horizontal',
-            //   pad: { horizontal: 'large', vertical: 'xsmall' },
-            //   verticalAlign: 'bottom',
-            //   background: {
-            //     color: 'accent-1',
-            //     opacity: 'strong',
-            //   },
-            // },
           },
         }
       }
@@ -71,14 +43,20 @@ const RelativeContainer: React.FC<JSXBoxProps> = styled(
 position: relative;
 `;
 
-export const StyledContainer: React.FC<JSXBoxProps> = (
+export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
   return (
     <RelativeContainer
+      pad="0 2px"
       fill="vertical"
-      overflow="auto"
+      overflow={
+        {
+          vertical: "auto",
+          horizontal: "visible",
+        }
+      }
       {...props}
     />
   );
@@ -104,23 +82,9 @@ line-height: ${
     return props.theme.text.small.height;
   }
 };
-
-& tbody tr:nth-of-type(odd) {
-  background-color: ${
-    (
-      props,
-    ) =>
-    {
-      return normalizeColor(
-        props.theme.global.colors["background-contrast"],
-        props.theme,
-      );
-    }
-  };
-}
 `;
 
-export const StyledTable: React.FC<JSXTableProps> = (
+export const GrommetTable: React.FC<JSXTableProps> = (
   props,
 ) =>
 {

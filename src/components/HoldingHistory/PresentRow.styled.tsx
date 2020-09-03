@@ -1,36 +1,46 @@
-import React from "react";
+import React, {
+  forwardRef,
+} from "react";
 import {
-  JSXTableCellProps,
   JSXTableRowProps,
-  TableCell,
   TableRow,
 } from "grommet";
+import {
+  normalizeColor,
+} from "grommet/utils";
+import styled from "styled-components/macro";
 
-export const StyledTableRow: React.FC<JSXTableRowProps> = (
-  props,
-) =>
-{
-  return (
-    <TableRow
-      {...props}
-    />
-  );
+const HoverableTableRow: React.FC<JSXTableRowProps> = styled(
+  TableRow,
+)`
+color: ${
+  (
+    props,
+  ) =>
+  {
+    return normalizeColor(
+      props.theme.global.colors["text-strong"],
+      props.theme,
+    );
+  }
 };
 
-export const StyledTableCell: React.FC<JSXTableCellProps> = (
-  props,
-) =>
-{
-  return (
-    <TableCell
-      align="end"
-      background={
-        {
-          color: "brand",
-          opacity: "weak",
-        }
-      }
-      {...props}
-    />
-  );
-};
+&:hover {
+  cursor: default;
+}
+`;
+
+export const GrommetTableRow: React.FC<JSXTableRowProps> = forwardRef(
+  (
+    props,
+    ref,
+  ) =>
+  {
+    return (
+      <HoverableTableRow
+        ref={ref}
+        {...props}
+      />
+    );
+  },
+);

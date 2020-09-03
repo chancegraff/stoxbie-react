@@ -1,44 +1,90 @@
-import React from "react";
+import React, {
+  useMemo,
+} from "react";
 import {
   HistoricalPrice,
-} from "iex-cloud";
+} from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   HistoricalLedger,
   HistoricalTradeStarted,
 } from "trade-types";
 
 import {
-  StyledSubmitOrder,
+  useHover,
+} from "utils/Hooks";
+import HoverIcon from "components/Grommet/HoverIcon";
+
+import {
+  GrommetClosedIcon,
+  GrommetContainer,
+  GrommetOpenedIcon,
+  StoxbieSubmitOrder,
 } from "./CloseHoldings.styled";
 
 type Props = {
-  presentPrice: HistoricalPrice | undefined;
-  presentLedger: HistoricalLedger | undefined;
-  summarizedHoldings: HistoricalTradeStarted | undefined;
+  disabled?: boolean;
+  presentPrice: HistoricalPrice;
+  presentLedger?: HistoricalLedger;
+  presentHolding: HistoricalTradeStarted;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 
 const CloseHoldings: React.FC<Props> = (
   {
+    disabled,
     presentPrice,
     presentLedger,
-    summarizedHoldings,
+    presentHolding,
     handleSubmit,
   },
 ) =>
 {
-  if (!summarizedHoldings || !presentPrice || !presentLedger)
-  {
-    return null;
-  }
+  const [
+    hoverState,
+    handleMouseEnter,
+    handleMouseLeave,
+  ] = useHover();
+
+  const orderShareCount = useMemo(
+    () =>
+    {
+      if (presentLedger)
+      {
+        return presentLedger.totalCount;
+      }
+
+      return presentHolding.openCount;
+    },
+    [
+      presentLedger,
+      presentHolding,
+    ],
+  );
 
   return (
-    <StyledSubmitOrder
+    <StoxbieSubmitOrder
+      css=""
+      disabled={disabled}
       presentPriceClose={presentPrice.close}
-      orderDirection={(summarizedHoldings.openDirection * -1) as 1 | -1}
-      orderShareCount={presentLedger.totalCount}
+      orderDirection={(presentHolding.openDirection * -1) as 1 | -1}
+      orderShareCount={orderShareCount}
       handleSubmit={handleSubmit}
-    />
+    >
+      <GrommetContainer
+        css=""
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <HoverIcon
+          css=""
+          disabled={disabled}
+          hoverState={hoverState}
+          MouseIdlingIcon={GrommetOpenedIcon}
+          MouseHoveringIcon={GrommetClosedIcon}
+        />
+      </GrommetContainer>
+    </StoxbieSubmitOrder>
   );
 };
 

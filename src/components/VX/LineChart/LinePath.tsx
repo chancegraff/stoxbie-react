@@ -2,6 +2,9 @@ import React, {
   useContext,
 } from "react";
 import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
   curveLinear,
 } from "@vx/curve";
 import {
@@ -11,11 +14,8 @@ import {
   normalizeColor,
 } from "grommet/utils";
 import {
-  HistoricalPrice,
-} from "iex-cloud";
-import {
   ThemeContext,
-} from "styled-components";
+} from "styled-components/macro";
 
 import {
   ScaleX,

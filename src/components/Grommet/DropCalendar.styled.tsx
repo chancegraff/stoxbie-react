@@ -8,7 +8,7 @@ import {
   JSXDropButtonProps,
 } from "grommet";
 
-export const StyledCalendar: React.FC<JSXCalendarProps<string>> = (
+export const GrommetCalendar: React.FC<JSXCalendarProps<string>> = (
   props,
 ) =>
 {
@@ -22,7 +22,7 @@ export const StyledCalendar: React.FC<JSXCalendarProps<string>> = (
   );
 };
 
-export const StyledDropButton: React.FC<JSXDropButtonProps> = forwardRef(
+export const GrommetDropButton: React.FC<JSXDropButtonProps> = forwardRef(
   (
     props,
     ref,

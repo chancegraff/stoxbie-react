@@ -4,17 +4,20 @@ import React, {
 import {
   BrowserRouter,
 } from "react-router-dom";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import AppTheme from "./AppTheme";
 
 const AppBoilerplate: React.FC<PropsHasChildren> = (
-  props,
+  {
+    children,
+  },
 ) =>
 {
   return (
-    <AppTheme>
-      <BrowserRouter>
-        {props.children}
+    <AppTheme css="">
+      <BrowserRouter css="">
+        {children}
       </BrowserRouter>
     </AppTheme>
   );

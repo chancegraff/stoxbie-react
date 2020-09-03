@@ -1,6 +1,6 @@
 import {
   createGlobalStyle,
-} from "styled-components";
+} from "styled-components/macro";
 
 // TODO Replace with keyframes() from styled-components
 export default createGlobalStyle`

@@ -3,9 +3,10 @@ import {
   Checkmark,
   JSXIconProps,
 } from "grommet-icons";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledContainer,
+  GrommetContainer,
 } from "./StateIcon.styled";
 
 type Props = {
@@ -22,16 +23,18 @@ const StateIcon: React.FC<Props> = (
 {
   if (!isActive)
   {
-    return <StyledContainer />;
+    return (
+      <GrommetContainer css="" />
+    );
   }
 
   return (
-    <StyledContainer>
+    <GrommetContainer css="">
       <Icon
         size="12px"
         data-testid="check"
       />
-    </StyledContainer>
+    </GrommetContainer>
   );
 };
 

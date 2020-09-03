@@ -2,10 +2,11 @@ import React from "react";
 import {
   getYear,
 } from "date-fns";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  StyledContainer,
-  StyledText,
+  GrommetContainer,
+  GrommetText,
 } from "./AppCopyright.styled";
 
 type Props = unknown;
@@ -17,11 +18,11 @@ const currentYear = getYear(
 const FooterName: React.FC<Props> = () =>
 {
   return (
-    <StyledContainer>
-      <StyledText>
+    <GrommetContainer css="">
+      <GrommetText css="">
         {`© ${currentYear} Chance Technologies, LLC`}
-      </StyledText>
-    </StyledContainer>
+      </GrommetText>
+    </GrommetContainer>
   );
 };
 

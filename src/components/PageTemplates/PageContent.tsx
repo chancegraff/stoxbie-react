@@ -1,59 +1,41 @@
-import React from "react";
-import {
-  Footer,
-  Header,
-  Main,
-} from "grommet";
+import React, {
+  PropsHasChildren,
+} from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import AppCopyright from "components/AppBranding/AppCopyright";
 import AppLogo from "components/AppBranding/AppLogo";
 import PageBreadcrumbs from "components/PageTemplates/PageBreadcrumbs";
 
-type Props = unknown;
-const pad = {
-  horizontal: "xlarge",
-};
+import {
+  GrommetContainer,
+  GrommetFooter,
+  GrommetHeader,
+  GrommetMain,
+} from "./PageContent.styled";
 
-const ContentContainer: React.FC<Props> = (
-  props,
+const PageContent: React.FC<PropsHasChildren> = (
+  {
+    children,
+  },
 ) =>
 {
   return (
-    <Main >
-      <Header
-        background="background-front"
-        justify="start"
-        gap="large"
-        pad={
-          {
-            ...pad,
-            vertical: "medium",
-          }
-        }
-      >
-        <AppLogo />
-        <PageBreadcrumbs />
-      </Header>
-      <Main
-        height="auto !important"
-        overflow="visible"
-        flex="grow"
-        pad={
-          {
-            ...pad,
-            vertical: "medium",
-          }
-        }
-      >
-        {props.children}
-      </Main>
-      <Footer
-        pad={pad}
-      >
-        <AppCopyright />
-      </Footer>
-    </Main>
+    <GrommetContainer css="">
+      <GrommetHeader css="">
+        <AppLogo css="" />
+        <PageBreadcrumbs css="" />
+      </GrommetHeader>
+      <GrommetMain css="">
+        {children}
+      </GrommetMain>
+      <GrommetFooter css="">
+        <AppCopyright css="" />
+      </GrommetFooter>
+    </GrommetContainer>
   );
 };
 
-export default ContentContainer;
+PageContent.displayName = "PageContent";
+
+export default PageContent;

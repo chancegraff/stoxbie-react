@@ -2,14 +2,15 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   SLIDER_TICK_COUNT,
 } from "utils/Constants";
 
 import {
-  StyledContainer,
-  StyledTickItem,
+  GrommetContainer,
+  StoxbieTickItem,
 } from "./TickBar.styled";
 
 type Props = {
@@ -101,7 +102,7 @@ const TickBar: React.FC<Props> = (
   );
 
   return (
-    <StyledContainer>
+    <GrommetContainer css="">
       {
         tickRange.map(
           (
@@ -114,8 +115,9 @@ const TickBar: React.FC<Props> = (
             if (nextTickValue)
             {
               return (
-                <StyledTickItem
+                <StoxbieTickItem
                   key={index}
+                  css=""
                   margin={tickMargin}
                   onClick={handleClick}
                 >
@@ -124,7 +126,7 @@ const TickBar: React.FC<Props> = (
                       (nextTickValue + tickValue) / 2,
                     )
                   }
-                </StyledTickItem>
+                </StoxbieTickItem>
               );
             }
 
@@ -132,7 +134,7 @@ const TickBar: React.FC<Props> = (
           },
         )
       }
-    </StyledContainer>
+    </GrommetContainer>
   );
 };
 

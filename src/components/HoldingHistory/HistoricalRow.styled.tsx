@@ -5,25 +5,42 @@ import {
   TableCell,
   TableRow,
 } from "grommet";
+import styled from "styled-components/macro";
 
-export const StyledTableRow: React.FC<JSXTableRowProps> = (
+const HoverableTableRow: React.FC<JSXTableRowProps> = styled(
+  TableRow,
+)`
+&:hover {
+  cursor: default;
+}
+`;
+
+export const GrommetTableRow: React.FC<JSXTableRowProps> = (
   props,
 ) =>
 {
   return (
-    <TableRow
+    <HoverableTableRow
       {...props}
     />
   );
 };
 
-export const StyledTableCell: React.FC<JSXTableCellProps> = (
+export const GrommetTableCell: React.FC<JSXTableCellProps> = (
   props,
 ) =>
 {
   return (
     <TableCell
+      fill={true}
       align="end"
+      border={
+        {
+          color: "background",
+          side: "all",
+          size: "1px",
+        }
+      }
       {...props}
     />
   );
