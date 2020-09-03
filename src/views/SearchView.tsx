@@ -1,3 +1,3 @@
 export {
   default,
-} from "./SearchView/ViewLogic";
+} from "./SearchView/SearchViewLogic";

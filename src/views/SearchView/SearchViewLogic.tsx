@@ -26,13 +26,13 @@ import {
   handleUnloadCreator,
 } from "utils/Utilities";
 
-import ViewDisplay from "./ViewDisplay";
+import SearchViewDisplay from "./SearchViewDisplay";
 
 type Props = RouteProps & {
   handleSearch: (nextValue: string) => Promise<Search[]>;
 };
 
-const ViewLogic: React.FC<Props> = (
+const SearchViewLogic: React.FC<Props> = (
   {
     handleSearch,
   },
@@ -92,7 +92,7 @@ const ViewLogic: React.FC<Props> = (
   useScrollToTop();
 
   return (
-    <ViewDisplay
+    <SearchViewDisplay
       handleSearch={handleSearchLazily}
       searchState={searchState}
       searchResults={searchResults}
@@ -100,4 +100,4 @@ const ViewLogic: React.FC<Props> = (
   );
 };
 
-export default ViewLogic;
+export default SearchViewLogic;

@@ -16,7 +16,7 @@ import SearchInput from "components/StockSearch/SearchInput";
 import {
   GrommetHeading,
   GrommetText,
-} from "./ViewStyles";
+} from "./SearchViewStyles";
 
 type Props = RouteProps & {
   handleSearch: (nextValue: string) => void;
@@ -24,7 +24,7 @@ type Props = RouteProps & {
   searchResults: Search[];
 };
 
-const ViewDisplay: React.FC<Props> = (
+const SearchViewDisplay: React.FC<Props> = (
   {
     handleSearch,
     searchState,
@@ -46,4 +46,4 @@ const ViewDisplay: React.FC<Props> = (
   );
 };
 
-export default ViewDisplay;
+export default SearchViewDisplay;
