@@ -27,7 +27,7 @@ import useResizeObserver from "use-resize-observer";
 
 import {
   useScrollToTop,
-} from "utils/dicks/useScrollToTop";
+} from "utils/hooks/useScrollToTop";
 import {
   handleUnloadCreator,
 } from "utils/Utilities";

@@ -21,7 +21,7 @@ import {
 } from "utils/Constants";
 import {
   useScrollToTop,
-} from "utils/dicks/useScrollToTop";
+} from "utils/hooks/useScrollToTop";
 import {
   handleUnloadCreator,
 } from "utils/Utilities";

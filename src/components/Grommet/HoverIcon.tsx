@@ -5,7 +5,7 @@ import {
 
 import {
   HoverState,
-} from "utils/dicks/useHover";
+} from "utils/hooks/useHover";
 
 type Props = {
   disabled?: boolean;

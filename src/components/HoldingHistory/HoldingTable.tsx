@@ -22,7 +22,7 @@ import {
 } from "utils/Constants";
 import {
   useHover,
-} from "utils/dicks/useHover";
+} from "utils/hooks/useHover";
 
 import CombinedBody from "./CombinedBody";
 import HistoricalBody from "./HistoricalBody";

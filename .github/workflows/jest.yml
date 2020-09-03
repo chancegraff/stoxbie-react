@@ -30,5 +30,8 @@ jobs:
     - name: Clean Install
       run: npm ci
 
+    - name: Clear Cache
+      run: npm run clear
+
     - name: Test
       run: npm test
