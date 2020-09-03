@@ -11,7 +11,7 @@ import {
 import {
   HoverState,
   useHover,
-} from "utils/hooks/useHover";
+} from "utils/dicks/useHover";
 import HoverIcon from "components/Grommet/HoverIcon";
 
 import {
