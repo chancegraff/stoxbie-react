@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-
 
     - name: Clean Install
-    - run: npm ci
+      run: npm ci
 
     - name: Test
       run: npm test

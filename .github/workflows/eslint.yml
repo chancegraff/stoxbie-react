@@ -28,7 +28,7 @@ jobs:
           ${{ runner.os }}-
 
     - name: Clean Install
-    - run: npm ci
+      run: npm ci
 
     - name: Lint
       uses: bradennapier/eslint-plus-action@v3.4.2
