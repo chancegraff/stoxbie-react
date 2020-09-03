@@ -13,7 +13,8 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "impliedStrict": true
         },
         "ecmaVersion": 11,
         "sourceType": "module"
@@ -93,7 +94,10 @@
     ],
     "ignorePatterns": [
         "node_modules",
-        "eslint"
+        "eslint",
+        ".git",
+        ".github",
+        ".vscode"
     ],
     "rules": {
         "accessor-pairs": "error",

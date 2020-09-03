@@ -40,8 +40,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom-fourteen",
-    "format": "eslint --fix src",
-    "check": "eslint --format github src"
+    "format": "eslint --fix ./src",
+    "check": "eslint --format github ./src"
   },
   "eslintConfig": {
     "extends": "react-app"
