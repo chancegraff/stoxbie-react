@@ -9,10 +9,10 @@ import {
 import {
   RangeInput,
 } from "grommet";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-} from "trade-types";
+  Ledger,
+} from "holding-types";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   usePrevious,
@@ -25,7 +25,7 @@ import {
 
 type Props = {
   presentPrice: HistoricalPrice;
-  presentLedger: HistoricalLedger;
+  presentLedger: Ledger;
   orderDirection: number;
   orderShareCount: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
@@ -60,7 +60,7 @@ const ChooseShares: React.FC<Props> = (
   const hasBalanceChanged = useMemo(
     () =>
     {
-      return presentLedger.totalBalance !== previousLedger?.totalBalance;
+      return presentLedger.balance !== previousLedger?.balance;
     },
     [
       presentLedger,
@@ -71,7 +71,7 @@ const ChooseShares: React.FC<Props> = (
     () =>
     {
       return Math.floor(
-        presentLedger.totalBalance / presentPrice.close,
+        presentLedger.balance / presentPrice.close,
       );
     },
     [
@@ -82,7 +82,7 @@ const ChooseShares: React.FC<Props> = (
   const maxSaleable = useMemo(
     () =>
     {
-      return presentLedger.totalCount;
+      return presentLedger.amounts.holding;
     },
     [
       presentLedger,

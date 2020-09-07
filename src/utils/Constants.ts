@@ -1,3 +1,7 @@
+import {
+  HistoricalLedger,
+} from "trade-types";
+
 export const DEBOUNCE_SHORT_MS = 500;
 export const DEBOUNCE_MEDIUM_MS = 1000;
 export const DEBOUNCE_LONG_MS = 2000;
@@ -25,3 +29,11 @@ export enum CombinedBodyState {
   Extending = "extending",
   Retracting = "retracting",
 }
+
+export const PRESENT_HOLDINGS_STATE_KEY = "presentHoldings";
+export const PRESENT_LEDGERS_STATE_KEY = "presentLedgers";
+export const PRESENT_PRICES_STATE_KEY = "presentPrices";
+
+export const HISTORICAL_HOLDINGS_STATE_KEY = "historicalHoldings";
+export const HISTORICAL_LEDGERS_STATE_KEY = "historicalLedgers";
+export const HISTORICAL_PRICES_STATE_KEY = "historicalPrices";

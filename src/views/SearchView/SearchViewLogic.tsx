@@ -3,9 +3,6 @@ import React, {
   useState,
 } from "react";
 import {
-  RouteProps,
-} from "react-router-dom";
-import {
   Search,
 } from "@chancey/iex-cloud";
 import {
@@ -28,7 +25,7 @@ import {
 
 import SearchViewDisplay from "./SearchViewDisplay";
 
-type Props = RouteProps & {
+type Props = {
   handleSearch: (nextValue: string) => Promise<Search[]>;
 };
 

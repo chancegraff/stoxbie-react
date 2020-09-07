@@ -21,7 +21,7 @@ type Props = JSXButtonProps & {
   orderShareCount: number;
   orderDirection: 1 | -1;
   submitDirection?: 1 | -1;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
   handleToggle?: () => void;
 };
 
@@ -31,7 +31,7 @@ const SubmitOrder: React.FC<Props> = (
   {
     children,
     disabled,
-    handleSubmit,
+    handleOrder,
     handleToggle,
     presentPriceClose,
     orderShareCount,
@@ -85,7 +85,7 @@ const SubmitOrder: React.FC<Props> = (
           orderShareCount,
         ) * orderDirection;
 
-        handleSubmit(
+        handleOrder(
           presentPriceClose,
           count,
         );
@@ -97,7 +97,7 @@ const SubmitOrder: React.FC<Props> = (
       }
     },
     [
-      handleSubmit,
+      handleOrder,
       handleToggle,
       isActive,
       presentPriceClose,

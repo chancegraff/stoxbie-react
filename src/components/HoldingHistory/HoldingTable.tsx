@@ -6,12 +6,15 @@ import React, {
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeFinished,
-  HistoricalTradeStarted,
-} from "trade-types";
+  ClosedHolding,
+  Ledger,
+  OpenedHolding,
+} from "holding-types";
+import {
+  List,
+} from "immutable";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   useDebouncedCallback,
 } from "use-debounce/lib";
@@ -37,11 +40,11 @@ import TableHeader from "./TableHeader";
 
 type Props = {
   presentPrice: HistoricalPrice | undefined;
-  presentLedger: HistoricalLedger | undefined;
-  presentHoldings: HistoricalTradeStarted[];
-  historicalHoldings: HistoricalTradeFinished[];
-  highestPresentHolding: HistoricalTradeStarted | undefined;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  presentLedger: Ledger;
+  presentHoldings: List<OpenedHolding>;
+  historicalHoldings: List<ClosedHolding>;
+  highestPresentHolding: OpenedHolding | undefined;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 
 const HoldingTable: React.FC<Props> = (
@@ -51,7 +54,7 @@ const HoldingTable: React.FC<Props> = (
     presentHoldings,
     historicalHoldings,
     highestPresentHolding,
-    handleSubmit,
+    handleOrder,
   },
 ) =>
 {
@@ -127,7 +130,7 @@ const HoldingTable: React.FC<Props> = (
   useEffect(
     () =>
     {
-      if (!presentHoldings.length)
+      if (presentHoldings.isEmpty())
       {
         handleRetractCombined();
       }
@@ -154,7 +157,7 @@ const HoldingTable: React.FC<Props> = (
             presentHoldings={presentHoldings}
             rowHoverState={rowHoverState}
             combinedBodyState={combinedBodyState}
-            handleSubmit={handleSubmit}
+            handleOrder={handleOrder}
             handleToggleCombined={handleToggleCombined}
             handleMouseEnterRow={debouncedMouseEnterRow}
             handleMouseLeaveRow={debouncedMouseLeaveRow}
@@ -165,7 +168,7 @@ const HoldingTable: React.FC<Props> = (
             presentHoldings={presentHoldings}
             presentLedger={presentLedger}
             presentPrice={presentPrice}
-            handleSubmit={handleSubmit}
+            handleOrder={handleOrder}
           />
           <HistoricalBody
             css=""

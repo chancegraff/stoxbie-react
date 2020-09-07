@@ -6,10 +6,10 @@ import React, {
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-} from "trade-types";
+  Ledger,
+} from "holding-types";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   handleUnloadCreator,
@@ -26,15 +26,15 @@ import {
 
 type Props = {
   presentPrice: HistoricalPrice | undefined;
-  presentLedger: HistoricalLedger | undefined;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  presentLedger: Ledger;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 
 const OrderForm: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
-    handleSubmit,
+    handleOrder,
   },
 ) =>
 {
@@ -89,8 +89,7 @@ const OrderForm: React.FC<Props> = (
     [],
   );
 
-  if (!presentPrice ||
-      !presentLedger)
+  if (!presentPrice)
   {
     return (
       <Spinner
@@ -114,7 +113,7 @@ const OrderForm: React.FC<Props> = (
         <StoxbieBuyAction
           css=""
           handleToggle={handleToggle}
-          handleSubmit={handleSubmit}
+          handleOrder={handleOrder}
           presentPriceClose={presentPrice.close}
           orderDirection={orderDirection}
           orderShareCount={orderShareCount}
@@ -122,7 +121,7 @@ const OrderForm: React.FC<Props> = (
         <StoxbieSellAction
           css=""
           handleToggle={handleToggle}
-          handleSubmit={handleSubmit}
+          handleOrder={handleOrder}
           presentPriceClose={presentPrice.close}
           orderDirection={orderDirection}
           orderShareCount={orderShareCount}

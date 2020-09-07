@@ -1,6 +1,6 @@
 {
   "name": "stoxbie",
-  "version": "0.0.17",
+  "version": "0.1.0",
   "private": true,
   "jest": {
     "testMatch": [
@@ -19,6 +19,7 @@
     "@tsconfig/node12": "^1.0.7",
     "@types/classnames": "^2.2.10",
     "@types/d3-array": "^2.0.0",
+    "@types/immutable": "^3.8.7",
     "@types/jest": "^26.0.13",
     "@types/node": "^14.6.3",
     "@types/react": "^16.9.43",
@@ -48,12 +49,14 @@
     "eslint-plugin-testing-library": "^3.8.0",
     "grommet": "^2.15.0",
     "grommet-icons": "^4.4.0",
+    "immutable": "^4.0.0-rc.12",
     "jest-environment-jsdom-fourteen": "^1.0.1",
     "node-sass": "^4.14.1",
     "numbro": "^2.3.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
+    "recoil": "0.0.10",
     "styled-components": "^5.1.1",
     "styletron-engine-atomic": "^1.4.6",
     "styletron-react": "^5.2.7",

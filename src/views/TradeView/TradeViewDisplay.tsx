@@ -3,15 +3,24 @@ import {
   RouteProps,
 } from "react-router-dom";
 import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
+  useRecoilState,
+  useRecoilValue,
+} from "recoil";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
-import {
-  HistoricalLedger,
-  HistoricalTradeFinished,
-  HistoricalTradeStarted,
-} from "trade-types";
 
+import {
+  useScrollToTop,
+} from "utils/Hooks";
+import {
+  historicalHoldingsState,
+  historicalPricesState,
+  presentHoldingsState,
+} from "store/Atoms";
+import {
+  highestPresentHoldingState,
+  presentLedgerState,
+  presentPriceState,
+} from "store/Selectors";
 import {
   AspectRatioBox,
   AspectRatioItem,
@@ -29,42 +38,58 @@ import {
 } from "./TradeViewStyles";
 
 type Props = RouteProps & {
-  aspectRatioRef: React.RefObject<HTMLElement>;
+  chartRef: React.RefObject<HTMLDivElement>;
   chartWidth: number;
   chartHeight: number;
-  historicalPrices: HistoricalPrice[] | undefined;
-  historicalHoldings: HistoricalTradeFinished[];
-  presentPrice: HistoricalPrice | undefined;
-  presentLedger: HistoricalLedger | undefined;
-  presentHoldings: HistoricalTradeStarted[];
-  highestPresentHolding: HistoricalTradeStarted | undefined;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
   handleContinue: () => void;
 };
 
 const TradeViewDisplay: React.FC<Props> = (
   {
-    aspectRatioRef,
+    chartRef,
     chartWidth,
     chartHeight,
-    historicalPrices,
-    historicalHoldings,
-    presentPrice,
-    presentLedger,
-    presentHoldings,
-    highestPresentHolding,
-    handleSubmit,
+    handleOrder,
     handleContinue,
   },
 ) =>
 {
+  const [
+    historicalHoldings,
+  ] = useRecoilState(
+    historicalHoldingsState,
+  );
+  const [
+    historicalPrices,
+  ] = useRecoilState(
+    historicalPricesState,
+  );
+  const [
+    presentHoldings,
+  ] = useRecoilState(
+    presentHoldingsState,
+  );
+
+  const presentPrice = useRecoilValue(
+    presentPriceState,
+  );
+  const presentLedger = useRecoilValue(
+    presentLedgerState,
+  );
+  const highestPresentHolding = useRecoilValue(
+    highestPresentHoldingState,
+  );
+
+  useScrollToTop();
+
   return (
     <PageContent css="">
       <GrommetGrid css="">
         <GrommetContentContainer css="">
           <AspectRatioBox css="">
             <AspectRatioItem
-              ref={aspectRatioRef}
+              ref={chartRef}
               css=""
             >
               <StockChart
@@ -97,7 +122,7 @@ const TradeViewDisplay: React.FC<Props> = (
             css=""
             presentLedger={presentLedger}
             presentPrice={presentPrice}
-            handleSubmit={handleSubmit}
+            handleOrder={handleOrder}
           />
           <HoldingTable
             css=""
@@ -106,7 +131,7 @@ const TradeViewDisplay: React.FC<Props> = (
             presentHoldings={presentHoldings}
             historicalHoldings={historicalHoldings}
             highestPresentHolding={highestPresentHolding}
-            handleSubmit={handleSubmit}
+            handleOrder={handleOrder}
           />
         </GrommetSidebarContainer>
       </GrommetGrid>

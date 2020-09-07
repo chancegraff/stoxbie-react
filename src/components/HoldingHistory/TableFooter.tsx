@@ -1,11 +1,14 @@
 import React, {
   useMemo,
 } from "react";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeFinished,
-} from "trade-types";
+  ClosedHolding,
+  Ledger,
+} from "holding-types";
+import {
+  List,
+} from "immutable";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   formatCurrency,
@@ -19,8 +22,8 @@ import {
 } from "./TableFooter.styled";
 
 type Props = {
-  presentLedger: HistoricalLedger | undefined;
-  historicalHoldings: HistoricalTradeFinished[];
+  presentLedger: Ledger;
+  historicalHoldings: List<ClosedHolding>;
 };
 
 const TableFooter: React.FC<Props> = (
@@ -33,11 +36,10 @@ const TableFooter: React.FC<Props> = (
   const change = useMemo(
     () =>
     {
-      if (presentLedger &&
-          historicalHoldings.length > 0)
+      if (!historicalHoldings.isEmpty())
       {
         return formatPercentage(
-          presentLedger.totalChange,
+          presentLedger.returns.percent,
         );
       }
     },
@@ -52,7 +54,7 @@ const TableFooter: React.FC<Props> = (
       if (presentLedger)
       {
         return formatCurrency(
-          presentLedger.totalBalance,
+          presentLedger.balance,
         );
       }
     },

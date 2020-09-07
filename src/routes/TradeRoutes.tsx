@@ -13,9 +13,17 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import {
-  HistoricalPrice,
-  historicalPrices,
+  historicalPrices as fetchHistoricalPrices,
 } from "@chancey/iex-cloud";
+import {
+  isValid,
+} from "date-fns";
+import {
+  fromJS,
+} from "immutable";
+import {
+  useSetRecoilState,
+} from "recoil";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
@@ -31,6 +39,9 @@ import {
   handleUnloadCreator,
   parseDate,
 } from "utils/Utilities";
+import {
+  historicalPricesState,
+} from "store/Atoms";
 import TradeView from "views/TradeView";
 import PageError from "components/PageTemplates/PageError";
 
@@ -45,10 +56,9 @@ const TradeRoute: React.FC<Props> = () =>
     ticker: string | undefined;
     date: string | undefined;
   }>();
-  const [
-    prices,
-    setPrices,
-  ] = useState<HistoricalPrice[]>();
+  const setHistoricalPrices = useSetRecoilState(
+    historicalPricesState,
+  );
   const [
     error,
     setError,
@@ -57,17 +67,31 @@ const TradeRoute: React.FC<Props> = () =>
   const safeDate = useMemo(
     () =>
     {
-      const parsedDate = parseDate(
+      if (!date)
+      {
+        setError(
+          DATE_ERROR_MESSAGE,
+        );
+
+        return new Date();
+      }
+
+      if (
+        !isValid(
+          date,
+        )
+      )
+      {
+        setError(
+          DATE_ERROR_MESSAGE,
+        );
+
+        return new Date();
+      }
+
+      return parseDate(
         date,
         DateFormats.Url,
-      );
-
-      if (parsedDate.getTime())
-      {
-        return parsedDate;
-      }
-      setError(
-        DATE_ERROR_MESSAGE,
       );
     },
     [
@@ -78,13 +102,16 @@ const TradeRoute: React.FC<Props> = () =>
   const safeTicker = useMemo(
     () =>
     {
-      if (ticker)
+      if (!ticker)
       {
-        return ticker;
+        setError(
+          TICKER_ERROR_MESSAGE,
+        );
+
+        return "";
       }
-      setError(
-        TICKER_ERROR_MESSAGE,
-      );
+
+      return ticker;
     },
     [
       ticker,
@@ -93,15 +120,10 @@ const TradeRoute: React.FC<Props> = () =>
 
   const handleLoad = useCallback(
     async (
-      nextTicker: string | undefined,
+      nextTicker: string,
     ) =>
     {
-      if (!nextTicker)
-      {
-        return;
-      }
-
-      const nextPrices = await historicalPrices(
+      const awaitedPrices = await fetchHistoricalPrices(
         nextTicker,
         "max",
         undefined,
@@ -110,24 +132,26 @@ const TradeRoute: React.FC<Props> = () =>
         },
       );
 
-      if (nextPrices)
-      {
-        const typedPrices = (nextPrices as unknown) as readonly HistoricalPrice[];
-
-        setPrices(
-          [
-            ...typedPrices,
-          ],
-        );
-      }
-      else
+      if (!awaitedPrices)
       {
         setError(
           FETCH_ERROR_MESSAGE,
         );
+
+        return;
       }
+
+      const historicalPrices = fromJS(
+        awaitedPrices,
+      );
+
+      setHistoricalPrices(
+        historicalPrices,
+      );
     },
-    [],
+    [
+      setHistoricalPrices,
+    ],
   );
 
   useEffect(
@@ -148,7 +172,6 @@ const TradeRoute: React.FC<Props> = () =>
     {
       return handleUnloadCreator(
         [
-          setPrices,
           setError,
         ],
       );
@@ -163,7 +186,6 @@ const TradeRoute: React.FC<Props> = () =>
       css=""
       date={safeDate}
       error={error}
-      prices={prices}
       ticker={safeTicker}
     />
   );

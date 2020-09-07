@@ -1,8 +1,11 @@
 import React from "react";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalTradeFinished,
-} from "trade-types";
+  ClosedHolding,
+} from "holding-types";
+import {
+  List,
+} from "immutable";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   GrommetTableBody,
@@ -10,7 +13,7 @@ import {
 import HistoricalRow from "./HistoricalRow";
 
 type Props = {
-  historicalHoldings: HistoricalTradeFinished[];
+  historicalHoldings: List<ClosedHolding>;
 };
 
 const HistoricalBody: React.FC<Props> = (
@@ -28,15 +31,13 @@ const HistoricalBody: React.FC<Props> = (
           ) =>
           {
             const {
-              openCount,
-              openDate,
-              closeCount,
-              closeDate,
+              open,
+              close,
             } = historicalHolding;
 
             return (
               <HistoricalRow
-                key={`${openDate}:${openCount}-${closeDate}:${closeCount}`}
+                key={`${open.date}:${open.amount}-${close.date}:${close.amount}`}
                 css=""
                 historicalHolding={historicalHolding}
               />

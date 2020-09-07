@@ -4,11 +4,12 @@ import React, {
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeStarted,
-} from "trade-types";
+  Ledger,
+  OpenedHolding,
+  OppositeTradeDirection,
+} from "holding-types";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   useHover,
@@ -25,8 +26,8 @@ import {
 type Props = {
   disabled?: boolean;
   presentPrice: HistoricalPrice;
-  presentLedger?: HistoricalLedger;
-  presentHolding: HistoricalTradeStarted;
+  presentLedger?: Ledger;
+  presentHolding: OpenedHolding;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 
@@ -51,10 +52,10 @@ const CloseHoldings: React.FC<Props> = (
     {
       if (presentLedger)
       {
-        return presentLedger.totalCount;
+        return presentLedger.amounts.holding;
       }
 
-      return presentHolding.openCount;
+      return presentHolding.open.amount;
     },
     [
       presentLedger,
@@ -67,7 +68,11 @@ const CloseHoldings: React.FC<Props> = (
       css=""
       disabled={disabled}
       presentPriceClose={presentPrice.close}
-      orderDirection={(presentHolding.openDirection * -1) as 1 | -1}
+      orderDirection={
+        OppositeTradeDirection(
+          presentHolding.open.direction,
+        )
+      }
       orderShareCount={orderShareCount}
       handleSubmit={handleSubmit}
     >

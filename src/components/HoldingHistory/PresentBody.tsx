@@ -5,11 +5,14 @@ import React, {
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeStarted,
-} from "trade-types";
+  Ledger,
+  OpenedHolding,
+} from "holding-types";
+import {
+  List,
+} from "immutable";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
   CombinedBodyState,
@@ -32,13 +35,13 @@ import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
 type Props = {
-  highestPresentHolding: HistoricalTradeStarted | undefined;
-  presentLedger: HistoricalLedger | undefined;
+  highestPresentHolding: OpenedHolding | undefined;
+  presentLedger: Ledger | undefined;
   presentPrice: HistoricalPrice | undefined;
-  presentHoldings: HistoricalTradeStarted[];
+  presentHoldings: List<OpenedHolding>;
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  handleOrder: (sharePrice: number, shareCount: number) => void;
   handleMouseEnterRow: HandleMouseEnter;
   handleMouseLeaveRow: HandleMouseLeave;
   handleToggleCombined: () => void;
@@ -52,7 +55,7 @@ const PresentBody: React.FC<Props> = (
     presentHoldings,
     rowHoverState,
     combinedBodyState,
-    handleSubmit,
+    handleOrder,
     handleMouseEnterRow,
     handleMouseLeaveRow,
     handleToggleCombined,
@@ -69,7 +72,7 @@ const PresentBody: React.FC<Props> = (
           holding,
         ) =>
         {
-          return previousValue + holding.openBalance;
+          return previousValue + holding.open.balance;
         },
         0,
       );
@@ -85,7 +88,7 @@ const PresentBody: React.FC<Props> = (
   const toggleCombined = useMemo(
     () =>
     {
-      if (presentHoldings.length <= 1)
+      if (presentHoldings.count() <= 1)
       {
         return null;
       }
@@ -138,6 +141,9 @@ const PresentBody: React.FC<Props> = (
             {
               shares,
               open,
+            }: {
+              shares: string;
+              open: string;
             },
           ) =>
           {
@@ -155,7 +161,7 @@ const PresentBody: React.FC<Props> = (
                     presentHolding={highestPresentHolding}
                     presentLedger={presentLedger}
                     presentPrice={presentPrice}
-                    handleSubmit={handleSubmit}
+                    handleOrder={handleOrder}
                   />
                 </GrommetTableCell>
                 <GrommetTableCell css="">
