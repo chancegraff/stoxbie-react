@@ -4,7 +4,7 @@ import {
 } from "@chancey/iex-cloud";
 import {
   Ledger,
-  OpenedHolding,
+  PresentHoldingType,
 } from "holding-types";
 import {
   List,
@@ -24,7 +24,7 @@ import PresentRow from "./PresentRow";
 
 type Props = {
   combinedBodyState: CombinedBodyState;
-  presentHoldings: List<OpenedHolding>;
+  presentHoldings: List<PresentHoldingType>;
   presentLedger: Ledger | undefined;
   presentPrice: HistoricalPrice | undefined;
   handleOrder: (sharePrice: number, shareCount: number) => void;

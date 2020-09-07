@@ -1,5 +1,5 @@
 import {
-  ClosedHolding,
+  HistoricalHoldingType,
 } from "holding-types";
 import {
   List,
@@ -15,9 +15,9 @@ import {
 /**
  * @description All historical holdings
  */
-export const historicalHoldingsState = atom<List<ClosedHolding>>(
+export const historicalHoldingsState = atom<List<HistoricalHoldingType>>(
   {
     key: HISTORICAL_HOLDINGS_STATE_KEY,
-    default: List<ClosedHolding>(),
+    default: List<HistoricalHoldingType>(),
   },
 );

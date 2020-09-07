@@ -7,7 +7,7 @@ import {
 } from "@chancey/iex-cloud";
 import {
   Ledger,
-  OpenedHolding,
+  PresentHoldingType,
 } from "holding-types";
 import {
   List,
@@ -35,10 +35,10 @@ import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
 type Props = {
-  highestPresentHolding: OpenedHolding | undefined;
+  highestPresentHolding: PresentHoldingType | undefined;
   presentLedger: Ledger | undefined;
   presentPrice: HistoricalPrice | undefined;
-  presentHoldings: List<OpenedHolding>;
+  presentHoldings: List<PresentHoldingType>;
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
   handleOrder: (sharePrice: number, shareCount: number) => void;

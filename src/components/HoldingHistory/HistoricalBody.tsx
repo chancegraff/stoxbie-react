@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  ClosedHolding,
+  HistoricalHoldingType,
 } from "holding-types";
 import {
   List,
@@ -13,7 +13,7 @@ import {
 import HistoricalRow from "./HistoricalRow";
 
 type Props = {
-  historicalHoldings: List<ClosedHolding>;
+  historicalHoldings: List<HistoricalHoldingType>;
 };
 
 const HistoricalBody: React.FC<Props> = (

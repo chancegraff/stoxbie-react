@@ -3,6 +3,8 @@ declare module "holding-types" {
     [key in K]: T;
   }
 
+  declare type ValueTypeKeys = "dollars" | "values" | "days";
+
   declare type DollarType = ValueType<"dollars", number>;
 
   declare type AmountType = ValueType<"values", number>;
@@ -10,7 +12,7 @@ declare module "holding-types" {
   declare type DateType = ValueType<"days", number>;
 
   declare type PercentType = {
-    percent: number;
+    percent?: number;
   }
 
   declare type DirectionType = -1 | 1;
@@ -63,33 +65,40 @@ declare module "holding-types" {
     price: number;
   }
 
-  declare type OpenOrder = Order;
+  declare type PresentOrderType = Order;
 
-  declare type CloseOrder = Order;
+  declare type HistoricalOrderType = Order;
+
+  declare type ChangeAmountType = PercentType & AmountType;
+  declare type ChangeDollarType = PercentType & DollarType;
+  declare type ChangeDateType = PercentType & DateType;
+  declare type ChangeType = ChangeAmountType | ChangeDollarType | ChangeDateType;
 
   declare type Change = {
-    amount: PercentType & AmountType;
-    balance: PercentType & DollarType;
-    date: PercentType & DateType;
-    price: PercentType & DollarType;
+    amount: ChangeAmountType;
+    balance: ChangeDollarType;
+    date: ChangeDateType;
+    price: ChangeDollarType;
   };
 
   declare type Holding = {
     ticker: string;
-    open: OpenOrder;
-    close: CloseOrder;
+    present: PresentOrderType;
+    historical: HistoricalOrderType;
     change: Change;
   }
 
-  declare type OpenedHolding = Omit<Holding, "close" | "change">;
+  declare type PresentHoldingType = Omit<Holding, "historical" | "change">;
 
-  declare type ClosedHolding = Holding;
+  declare type UnfinishedHistoricalHoldingType = Omit<Holding, "change">;
+
+  declare type HistoricalHoldingType = Holding;
 
   declare type Returns = PercentType & DollarType;
 
   declare type Amounts = {
-    opened: number;
-    closed: number;
+    present: number;
+    historical: number;
     holding: number;
   }
 
@@ -103,8 +112,8 @@ declare module "holding-types" {
   declare const DefaultLedger: Ledger = {
     balance: 10000,
     amounts: {
-      opened: 0,
-      closed: 0,
+      present: 0,
+      historical: 0,
       holding: 0,
     },
     change: {

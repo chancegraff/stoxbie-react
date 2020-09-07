@@ -14,21 +14,21 @@ import {
   presentLedgerState,
 } from "store/Selectors";
 
-type PresentLedgerFromOrderHook = {
-  presentLedgerFromOrder: (order: Order | undefined) => Ledger | undefined;
+type PresentLedgerHook = {
+  PresentLedger: (order: Order | undefined) => Ledger | undefined;
 };
 
 /**
  * @description Creates a new present ledger from amount and returns it
  * @returns {Ledger | undefined} New ledger created from amount
  */
-export const usePresentLedgerFromOrder = (): PresentLedgerFromOrderHook =>
+export const usePresentLedger = (): PresentLedgerHook =>
 {
   const presentLedger = useRecoilValue(
     presentLedgerState,
   );
 
-  const presentLedgerFromOrder = useCallback(
+  const PresentLedger = useCallback(
     (
       order: Order | undefined,
     ): Ledger | undefined =>
@@ -41,8 +41,8 @@ export const usePresentLedgerFromOrder = (): PresentLedgerFromOrderHook =>
       const {
         balance: previousBalance,
         amounts: {
-          opened: previousOpenedAmount,
-          closed: previousClosedAmount,
+          present: previousPresentAmount,
+          historical: previousHistoricalAmount,
           holding: previousHoldingAmount,
         },
       } = presentLedger;
@@ -55,8 +55,8 @@ export const usePresentLedgerFromOrder = (): PresentLedgerFromOrderHook =>
             ...presentLedger,
             balance: previousBalance + order.balance,
             amounts: {
-              closed: previousClosedAmount + order.amount,
-              opened: previousOpenedAmount,
+              present: previousPresentAmount,
+              historical: previousHistoricalAmount + order.amount,
               holding: previousHoldingAmount - order.amount,
             },
           };
@@ -67,8 +67,8 @@ export const usePresentLedgerFromOrder = (): PresentLedgerFromOrderHook =>
             ...presentLedger,
             balance: previousBalance - order.balance,
             amounts: {
-              closed: previousClosedAmount,
-              opened: previousOpenedAmount + order.amount,
+              present: previousPresentAmount + order.amount,
+              historical: previousHistoricalAmount,
               holding: previousHoldingAmount + order.amount,
             },
           };
@@ -81,6 +81,6 @@ export const usePresentLedgerFromOrder = (): PresentLedgerFromOrderHook =>
   );
 
   return {
-    presentLedgerFromOrder,
+    PresentLedger,
   };
 };

@@ -2,8 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  Direction,
-  OpenedHolding,
   Order,
 } from "holding-types";
 

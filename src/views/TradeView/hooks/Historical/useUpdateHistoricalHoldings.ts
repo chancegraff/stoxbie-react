@@ -2,12 +2,8 @@ import {
   useCallback,
 } from "react";
 import {
-  ClosedHolding,
-  Holding,
+  HistoricalHoldingType,
 } from "holding-types";
-import {
-  List,
-} from "immutable";
 import {
   useRecoilState,
 } from "recoil";
@@ -16,16 +12,15 @@ import {
   historicalHoldingsState,
 } from "store/Atoms";
 
-type CreateHistoricalHoldingHook = {
-  historicalHoldings: List<Holding>;
-  createHistoricalHolding: (holding: ClosedHolding) => void;
+type UpdateHistoricalHoldingsHook = {
+  updateHistoricalHoldings: (historicalHolding: HistoricalHoldingType) => void;
 };
 
 /**
  * @description Creates a new historical holding and adds it to state
- * @returns {CreateHistoricalHoldingHook} Callback to create historical holding
+ * @returns {void} Nothing
  */
-export const useCreateHistoricalHolding = (): CreateHistoricalHoldingHook =>
+export const useUpdateHistoricalHoldings = (): UpdateHistoricalHoldingsHook =>
 {
   const [
     historicalHoldings,
@@ -34,14 +29,14 @@ export const useCreateHistoricalHolding = (): CreateHistoricalHoldingHook =>
     historicalHoldingsState,
   );
 
-  const createHistoricalHolding = useCallback(
+  const updateHistoricalHoldings = useCallback(
     (
-      holding: ClosedHolding,
+      historicalHolding: HistoricalHoldingType,
     ) =>
     {
       setHistoricalHoldings(
         historicalHoldings.unshift(
-          holding,
+          historicalHolding,
         ),
       );
     },
@@ -52,7 +47,6 @@ export const useCreateHistoricalHolding = (): CreateHistoricalHoldingHook =>
   );
 
   return {
-    historicalHoldings,
-    createHistoricalHolding,
+    updateHistoricalHoldings,
   };
 };

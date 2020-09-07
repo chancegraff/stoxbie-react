@@ -5,8 +5,7 @@ import {
   Amount,
   Balance,
   Direction,
-  OpenedHolding,
-  OpenOrder,
+  PresentOrderType,
 } from "holding-types";
 import {
   useRecoilValue,
@@ -16,24 +15,24 @@ import {
   presentPriceState,
 } from "store/Selectors";
 
-type OpenOrderFromAmountHook = {
-  openOrderFromAmount: (amount: number) => OpenOrder | undefined;
+type PresentOrderHook = {
+  PresentOrder: (amount: number) => PresentOrderType | undefined;
 };
 
 /**
  * @description Creates a new open order from amount and returns it
- * @returns {OpenOrder | undefined} New open order
+ * @returns {PresentOrderType | undefined} New open order
  */
-export const useOpenOrderFromAmount = (): OpenOrderFromAmountHook =>
+export const usePresentOrder = (): PresentOrderHook =>
 {
   const presentPrice = useRecoilValue(
     presentPriceState,
   );
 
-  const openOrderFromAmount = useCallback(
+  const PresentOrder = useCallback(
     (
       amount: number,
-    ): OpenOrder | undefined =>
+    ): PresentOrderType | undefined =>
     {
       if (!presentPrice)
       {
@@ -65,6 +64,6 @@ export const useOpenOrderFromAmount = (): OpenOrderFromAmountHook =>
   );
 
   return {
-    openOrderFromAmount,
+    PresentOrder,
   };
 };

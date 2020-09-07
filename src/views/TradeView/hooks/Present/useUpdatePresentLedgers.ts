@@ -5,9 +5,6 @@ import {
   Ledger,
 } from "holding-types";
 import {
-  List,
-} from "immutable";
-import {
   useRecoilState,
 } from "recoil";
 

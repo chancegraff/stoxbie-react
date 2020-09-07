@@ -2,7 +2,7 @@ import React, {
   useMemo,
 } from "react";
 import {
-  ClosedHolding,
+  HistoricalHoldingType,
   Ledger,
 } from "holding-types";
 import {
@@ -23,7 +23,7 @@ import {
 
 type Props = {
   presentLedger: Ledger;
-  historicalHoldings: List<ClosedHolding>;
+  historicalHoldings: List<HistoricalHoldingType>;
 };
 
 const TableFooter: React.FC<Props> = (

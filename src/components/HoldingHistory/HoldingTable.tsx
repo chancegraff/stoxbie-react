@@ -7,9 +7,9 @@ import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
 import {
-  ClosedHolding,
+  HistoricalHoldingType,
   Ledger,
-  OpenedHolding,
+  PresentHoldingType,
 } from "holding-types";
 import {
   List,
@@ -41,9 +41,9 @@ import TableHeader from "./TableHeader";
 type Props = {
   presentPrice: HistoricalPrice | undefined;
   presentLedger: Ledger;
-  presentHoldings: List<OpenedHolding>;
-  historicalHoldings: List<ClosedHolding>;
-  highestPresentHolding: OpenedHolding | undefined;
+  presentHoldings: List<PresentHoldingType>;
+  historicalHoldings: List<HistoricalHoldingType>;
+  highestPresentHolding: PresentHoldingType | undefined;
   handleOrder: (sharePrice: number, shareCount: number) => void;
 };
 

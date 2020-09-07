@@ -2,7 +2,7 @@ import React, {
   useMemo,
 } from "react";
 import {
-  ClosedHolding,
+  HistoricalHoldingType,
 } from "holding-types";
 
 import {
@@ -16,7 +16,7 @@ import {
 } from "./HistoricalRow.styled";
 
 type Props = {
-  historicalHolding: ClosedHolding;
+  historicalHolding: HistoricalHoldingType;
 };
 
 const HistoricalRow: React.FC<Props> = (

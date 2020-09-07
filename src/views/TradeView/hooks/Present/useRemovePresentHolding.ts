@@ -2,7 +2,7 @@ import {
   useCallback,
 } from "react";
 import {
-  OpenedHolding,
+  PresentHoldingType,
 } from "holding-types";
 import {
   useRecoilState,
@@ -13,7 +13,7 @@ import {
 } from "store/Atoms";
 
 type RemovePresentHoldingHook = {
-  removePresentHolding: (holding: OpenedHolding) => void;
+  removePresentHolding: (holding: PresentHoldingType) => void;
 };
 
 /**
@@ -31,7 +31,7 @@ export const useRemovePresentHolding = (): RemovePresentHoldingHook =>
 
   const removePresentHolding = useCallback(
     (
-      holding: OpenedHolding,
+      holding: PresentHoldingType,
     ) =>
     {
       setPresentHoldings(

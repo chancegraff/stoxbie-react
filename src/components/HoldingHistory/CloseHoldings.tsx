@@ -6,7 +6,7 @@ import {
 } from "@chancey/iex-cloud";
 import {
   Ledger,
-  OpenedHolding,
+  PresentHoldingType,
   OppositeTradeDirection,
 } from "holding-types";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -27,7 +27,7 @@ type Props = {
   disabled?: boolean;
   presentPrice: HistoricalPrice;
   presentLedger?: Ledger;
-  presentHolding: OpenedHolding;
+  presentHolding: PresentHoldingType;
   handleSubmit: (sharePrice: number, shareCount: number) => void;
 };
 

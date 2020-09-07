@@ -3,20 +3,17 @@ import {
 } from "react";
 
 import {
-  useOpenOrderFromAmount,
-} from "./useOpenOrderFromAmount";
+  usePresentHolding,
+} from "./Present/usePresentHolding";
 import {
-  usePresentHoldingFromOrder,
-} from "./usePresentHoldingFromOrder";
-import {
-  usePresentLedgerFromOrder,
-} from "./usePresentLedgerFromOrder";
+  usePresentLedger,
+} from "./Present/usePresentLedger";
 import {
   useUpdatePresentHoldings,
-} from "./useUpdatePresentHoldings";
+} from "./Present/useUpdatePresentHoldings";
 import {
   useUpdatePresentLedgers,
-} from "./useUpdatePresentLedgers";
+} from "./Present/useUpdatePresentLedgers";
 
 type OpenHoldingHook = {
   openHolding: (orderAmount: number) => void;
@@ -29,14 +26,11 @@ type OpenHoldingHook = {
 export const useOpenHolding = (): OpenHoldingHook =>
 {
   const {
-    openOrderFromAmount,
-  } = useOpenOrderFromAmount();
+    PresentHolding,
+  } = usePresentHolding();
   const {
-    presentHoldingFromOrder,
-  } = usePresentHoldingFromOrder();
-  const {
-    presentLedgerFromOrder,
-  } = usePresentLedgerFromOrder();
+    PresentLedger,
+  } = usePresentLedger();
   const {
     updatePresentHoldings,
   } = useUpdatePresentHoldings();
@@ -49,33 +43,34 @@ export const useOpenHolding = (): OpenHoldingHook =>
       amount: number,
     ) =>
     {
-      const openOrder = openOrderFromAmount(
+      const holding = PresentHolding(
         amount,
       );
-      const presentHolding = presentHoldingFromOrder(
-        openOrder,
-      );
-      const presentLedger = presentLedgerFromOrder(
-        openOrder,
+
+      if (!holding)
+      {
+        return;
+      }
+
+      const ledger = PresentLedger(
+        holding.present,
       );
 
-      if (!presentHolding ||
-          !presentLedger)
+      if (!ledger)
       {
         return;
       }
 
       updatePresentHoldings(
-        presentHolding,
+        holding,
       );
       updatePresentLedgers(
-        presentLedger,
+        ledger,
       );
     },
     [
-      openOrderFromAmount,
-      presentHoldingFromOrder,
-      presentLedgerFromOrder,
+      PresentHolding,
+      PresentLedger,
       updatePresentHoldings,
       updatePresentLedgers,
     ],
