@@ -3,13 +3,13 @@ import {
   RouteProps,
 } from "react-router-dom";
 import {
-  Holding,
-} from "holding-types";
-import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import {
+  PresentHolding,
+} from "trade-types";
 
 import {
   useScrollToTop,
@@ -45,7 +45,7 @@ type Props = RouteProps & {
   chartWidth: number;
   chartHeight: number;
   handleOpen: (orderAmount: number) => void;
-  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
+  handleClose: (present: PresentHolding) => void;
   handleContinue: () => void;
 };
 

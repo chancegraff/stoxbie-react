@@ -2,12 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  Amount,
-  Balance,
-  Direction,
-  PresentOrderType,
-} from "holding-types";
-import {
   useRecoilValue,
 } from "recoil";
 

@@ -2,9 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  Ledger,
-} from "holding-types";
-import {
   useRecoilState,
 } from "recoil";
 

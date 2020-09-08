@@ -5,11 +5,6 @@ import {
   differenceInBusinessDays,
 } from "date-fns";
 import {
-  Change,
-  HistoricalHoldingType,
-  UnfinishedHistoricalHoldingType,
-} from "holding-types";
-import {
   useRecoilValue,
 } from "recoil";
 
@@ -18,12 +13,12 @@ import {
 } from "store/Selectors";
 
 type ChangeHook = {
-  Change: (unfinishedHolding: UnfinishedHistoricalHoldingType | undefined) => HistoricalHoldingType | undefined;
+  Change: (unfinishedHolding: UnfinishedHistoricalHolding | undefined) => HistoricalHolding | undefined;
 };
 
 /**
  * @description Creates a change attribute for an existing historical holding
- * @returns {HistoricalHoldingType | undefined} Historical holding with change attribute added to it
+ * @returns {HistoricalHolding | undefined} Historical holding with change attribute added to it
  */
 export const useChange = (): ChangeHook =>
 {
@@ -33,8 +28,8 @@ export const useChange = (): ChangeHook =>
 
   const Change = useCallback(
     (
-      unfinishedHolding: UnfinishedHistoricalHoldingType | undefined,
-    ): HistoricalHoldingType | undefined =>
+      unfinishedHolding: UnfinishedHistoricalHolding | undefined,
+    ): HistoricalHolding | undefined =>
     {
       if (!unfinishedHolding ||
           !presentPrice)

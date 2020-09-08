@@ -1,11 +1,6 @@
 import {
   useCallback,
 } from "react";
-import {
-  HistoricalHoldingType,
-  PresentHoldingType,
-  UnfinishedHistoricalHoldingType,
-} from "holding-types";
 
 import {
   useChange,
@@ -15,12 +10,12 @@ import {
 } from "./useHistoricalOrder";
 
 type HistoricalHoldingHook = {
-  HistoricalHolding: (presentHolding: PresentHoldingType | undefined) => HistoricalHoldingType | undefined;
+  HistoricalHolding: (presentHolding: PresentHolding | undefined) => HistoricalHolding | undefined;
 };
 
 /**
  * @description Creates a historical holding from an existing order
- * @returns {HistoricalHoldingType | undefined} New historical holding
+ * @returns {HistoricalHolding | undefined} New historical holding
  */
 export const useHistoricalHolding = (): HistoricalHoldingHook =>
 {
@@ -33,8 +28,8 @@ export const useHistoricalHolding = (): HistoricalHoldingHook =>
 
   const HistoricalHolding = useCallback(
     (
-      holding: PresentHoldingType | undefined,
-    ): HistoricalHoldingType | undefined =>
+      holding: PresentHolding | undefined,
+    ): HistoricalHolding | undefined =>
     {
       if (!holding)
       {
@@ -54,7 +49,7 @@ export const useHistoricalHolding = (): HistoricalHoldingHook =>
         return;
       }
 
-      const unfinishedHolding: UnfinishedHistoricalHoldingType = {
+      const unfinishedHolding: UnfinishedHistoricalHolding = {
         ...holding,
         historical,
       };

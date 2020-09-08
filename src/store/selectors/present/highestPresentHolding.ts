@@ -1,7 +1,4 @@
 import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
-import {
   selector,
 } from "recoil";
 
@@ -30,7 +27,7 @@ export const highestPresentHoldingState = selector(
           holding,
         ) =>
         {
-          return holding.open.price;
+          return holding.orders.present.price;
         },
       );
     },

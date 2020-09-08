@@ -1,38 +1,73 @@
 declare module "trade-types" {
-  declare type HistoricalTradeBase = {
+  /**
+   * Ledger
+   */
+  declare type Amounts = {
+    present: number;
+    historical: number;
+    holding: number;
+  };
+
+  declare type Changes = {
+    amount: {
+      values: number;
+    };
+    balance: {
+      percent: number;
+      dollars: number;
+    };
+    date: {
+      days: number;
+    };
+    price: {
+      dollars: number;
+    };
+  };
+
+  declare type Returns = {
+    percent: number;
+    dollars: number;
+  };
+
+  declare type Ledger = {
+    balance: number;
+    amounts: Amounts;
+    changes: Changes;
+    returns: Returns;
+  };
+
+  /**
+   * Holding
+   */
+  export enum Directions {
+    Buy = 1,
+    Sell = -1,
+  }
+
+  declare type Order = {
+    amount: number;
+    balance: number;
+    date: Date;
+    direction: Directions;
+    price: number;
+  };
+
+  declare type PresentOrder = Order;
+
+  declare type HistoricalOrder = Order;
+
+  declare type Orders = {
+    present: PresentOrder;
+    historical: HistoricalOrder;
+  };
+
+  declare type Holding = {
     ticker: string;
+    orders: Orders;
+    change: Changes;
   };
 
-  declare type HistoricalTradeOpen = {
-    openPrice: number;
-    openCount: number;
-    openBalance: number;
-    openDate: Date;
-    openDirection: -1 | 1;
-  };
+  declare type PresentHolding = Omit<Holding, "historical" | "change">;
 
-  declare type HistoricalTradeClose = {
-    closePrice: number;
-    closeCount: number;
-    closeBalance: number;
-    closeDate: Date;
-    closeDirection: -1 | 1;
-  };
-
-  declare type HistoricalTradeChange = {
-    changePrice: number;
-    changePercent: number;
-    changeBalance: number;
-  }
-
-  declare type HistoricalLedger = {
-    totalBalance: number;
-    totalReturns: number;
-    totalChange: number;
-    totalCount: number;
-  }
-
-  declare type HistoricalTrade = HistoricalTradeBase & Partial<HistoricalTradeOpen & HistoricalTradeClose & HistoricalTradeChange>;
-  declare type HistoricalTradeStarted = HistoricalTradeBase & HistoricalTradeOpen & Partial<HistoricalTradeClose & HistoricalTradeChange>;
-  declare type HistoricalTradeFinished = HistoricalTradeBase & HistoricalTradeOpen & HistoricalTradeClose & HistoricalTradeChange;
+  declare type HistoricalHolding = Holding;
 }

@@ -2,10 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  Order,
-  PresentHoldingType,
-} from "holding-types";
-import {
   useRecoilValue,
 } from "recoil";
 
@@ -18,12 +14,12 @@ import {
 } from "./usePresentOrder";
 
 type PresentHoldingHook = {
-  PresentHolding: (amount: number) => PresentHoldingType | undefined;
+  PresentHolding: (amount: number) => PresentHolding | undefined;
 };
 
 /**
  * @description Creates a new present holding from order and returns it
- * @returns {PresentHoldingType | undefined} New holding created from order
+ * @returns {PresentHolding | undefined} New holding created from order
  */
 export const usePresentHolding = (): PresentHoldingHook =>
 {
@@ -38,7 +34,7 @@ export const usePresentHolding = (): PresentHoldingHook =>
   const PresentHolding = useCallback(
     (
       amount: number,
-    ): PresentHoldingType | undefined =>
+    ): PresentHolding | undefined =>
     {
       if (!presentPrice)
       {
@@ -58,7 +54,7 @@ export const usePresentHolding = (): PresentHoldingHook =>
         symbol: ticker,
       } = presentPrice;
 
-      const holding: PresentHoldingType = {
+      const holding: PresentHolding = {
         ticker,
         present,
       };

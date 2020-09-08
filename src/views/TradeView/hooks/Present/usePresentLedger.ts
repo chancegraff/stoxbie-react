@@ -2,11 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  Directions,
-  Ledger,
-  Order,
-} from "holding-types";
-import {
   useRecoilValue,
 } from "recoil";
 

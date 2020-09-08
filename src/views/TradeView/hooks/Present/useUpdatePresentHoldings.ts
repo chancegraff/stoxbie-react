@@ -2,9 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  PresentHoldingType,
-} from "holding-types";
-import {
   useRecoilState,
 } from "recoil";
 
@@ -13,7 +10,7 @@ import {
 } from "store/Atoms";
 
 type UpdatePresentHoldingsHook = {
-  updatePresentHoldings: (holding: PresentHoldingType) => void;
+  updatePresentHoldings: (holding: PresentHolding) => void;
 };
 
 /**
@@ -31,7 +28,7 @@ export const useUpdatePresentHoldings = (): UpdatePresentHoldingsHook =>
 
   const updatePresentHoldings = useCallback(
     (
-      holding: PresentHoldingType,
+      holding: PresentHolding,
     ) =>
     {
       setPresentHoldings(

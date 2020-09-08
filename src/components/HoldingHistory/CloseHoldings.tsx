@@ -1,11 +1,10 @@
 import React, {
   useCallback,
 } from "react";
-import {
-  Holding,
-  PresentHoldingType,
-} from "holding-types";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import {
+  PresentHolding,
+} from "trade-types";
 
 import {
   useHover,
@@ -20,8 +19,8 @@ import {
 } from "./CloseHoldings.styled";
 
 type Props = {
-  presentHolding: PresentHoldingType;
-  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
+  presentHolding: PresentHolding;
+  handleClose: (present: PresentHolding) => void;
 };
 
 const CloseHoldings: React.FC<Props> = (

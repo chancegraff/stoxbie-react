@@ -1,12 +1,12 @@
 import {
-  Ledger,
-} from "holding-types";
-import {
   List,
 } from "immutable";
 import {
   atom,
 } from "recoil";
+import {
+  Ledger,
+} from "trade-types";
 
 import {
   PRESENT_LEDGERS_STATE_KEY,

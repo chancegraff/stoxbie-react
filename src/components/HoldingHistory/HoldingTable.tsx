@@ -7,15 +7,14 @@ import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
 import {
-  HistoricalHoldingType,
-  Holding,
-  Ledger,
-  PresentHoldingType,
-} from "holding-types";
-import {
   List,
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import {
+  HistoricalHolding,
+  Ledger,
+  PresentHolding,
+} from "trade-types";
 import {
   useDebouncedCallback,
 } from "use-debounce/lib";
@@ -42,10 +41,10 @@ import TableHeader from "./TableHeader";
 type Props = {
   presentPrice: HistoricalPrice | undefined;
   presentLedger: Ledger;
-  presentHoldings: List<PresentHoldingType>;
-  historicalHoldings: List<HistoricalHoldingType>;
-  highestPresentHolding: PresentHoldingType | undefined;
-  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
+  presentHoldings: List<PresentHolding>;
+  historicalHoldings: List<HistoricalHolding>;
+  highestPresentHolding: PresentHolding | undefined;
+  handleClose: (present: PresentHolding) => void;
 };
 
 const HoldingTable: React.FC<Props> = (

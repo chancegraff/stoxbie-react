@@ -1,13 +1,14 @@
 import React, {
+  useCallback,
   useState,
 } from "react";
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   Ledger,
-} from "holding-types";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+} from "trade-types";
 
 import Spinner from "components/Grommet/Spinner";
 import ChooseShares from "components/ShareSlider/ChooseShares";
@@ -38,6 +39,22 @@ const OrderForm: React.FC<Props> = (
     0,
   );
 
+  const handleSubmit = useCallback(
+    () =>
+    {
+      if (orderShareCount !== 0)
+      {
+        handleOpen(
+          orderShareCount,
+        );
+      }
+    },
+    [
+      orderShareCount,
+      handleOpen,
+    ],
+  );
+
   if (!presentPrice)
   {
     return (
@@ -59,8 +76,7 @@ const OrderForm: React.FC<Props> = (
       />
       <StoxbieSubmitOrder
         css=""
-        orderShareCount={orderShareCount}
-        handleSubmit={handleOpen}
+        handleSubmit={handleSubmit}
       />
     </GrommetContainer>
   );

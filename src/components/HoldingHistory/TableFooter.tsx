@@ -2,13 +2,13 @@ import React, {
   useMemo,
 } from "react";
 import {
-  HistoricalHoldingType,
-  Ledger,
-} from "holding-types";
-import {
   List,
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import {
+  HistoricalHolding,
+  Ledger,
+} from "trade-types";
 
 import {
   formatCurrency,
@@ -23,7 +23,7 @@ import {
 
 type Props = {
   presentLedger: Ledger;
-  historicalHoldings: List<HistoricalHoldingType>;
+  historicalHoldings: List<HistoricalHolding>;
 };
 
 const TableFooter: React.FC<Props> = (

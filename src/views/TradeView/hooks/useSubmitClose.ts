@@ -1,9 +1,6 @@
 import {
   useCallback,
 } from "react";
-import {
-  PresentHoldingType,
-} from "holding-types";
 
 import {
   useHistoricalHolding,
@@ -22,7 +19,7 @@ import {
 } from "./Present/useUpdatePresentLedgers";
 
 export type SubmitCloseHook = {
-  submitClose: (present: PresentHoldingType) => void;
+  submitClose: (present: PresentHolding) => void;
 }
 
 /**
@@ -49,7 +46,7 @@ export const useSubmitClose = (): SubmitCloseHook =>
 
   const submitClose = useCallback(
     (
-      present: PresentHoldingType,
+      present: PresentHolding,
     ) =>
     {
       const holding = HistoricalHolding(

@@ -2,8 +2,8 @@ import React, {
   useMemo,
 } from "react";
 import {
-  HistoricalHoldingType,
-} from "holding-types";
+  HistoricalHolding,
+} from "trade-types";
 
 import {
   formatCount,
@@ -16,7 +16,7 @@ import {
 } from "./HistoricalRow.styled";
 
 type Props = {
-  historicalHolding: HistoricalHoldingType;
+  historicalHolding: HistoricalHolding;
 };
 
 const HistoricalRow: React.FC<Props> = (
@@ -29,7 +29,7 @@ const HistoricalRow: React.FC<Props> = (
     () =>
     {
       return formatCount(
-        historicalHolding.close.amount,
+        historicalHolding.orders.historical.amount,
       );
     },
     [
@@ -40,7 +40,7 @@ const HistoricalRow: React.FC<Props> = (
     () =>
     {
       return formatCurrency(
-        historicalHolding.open.price,
+        historicalHolding.orders.present.price,
       );
     },
     [
@@ -51,7 +51,7 @@ const HistoricalRow: React.FC<Props> = (
     () =>
     {
       const abbreviatedClose = formatCurrency(
-        historicalHolding.close.price,
+        historicalHolding.orders.historical.price,
       );
 
       return abbreviatedClose;
@@ -64,7 +64,7 @@ const HistoricalRow: React.FC<Props> = (
     () =>
     {
       return formatCurrency(
-        historicalHolding.close.amount * historicalHolding.close.price,
+        historicalHolding.orders.historical.amount * historicalHolding.orders.historical.price,
       );
     },
     [

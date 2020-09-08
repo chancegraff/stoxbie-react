@@ -9,10 +9,10 @@ import {
 import {
   RangeInput,
 } from "grommet";
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   Ledger,
-} from "holding-types";
-import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+} from "trade-types";
 
 import {
   usePrevious,
@@ -128,7 +128,7 @@ const ChooseShares: React.FC<Props> = (
       />
       <TickBar
         css=""
-        maxValue={purchasable}
+        ceiling={purchasable}
         setOrderShareCount={setOrderShareCount}
       />
     </GrommetContainer>

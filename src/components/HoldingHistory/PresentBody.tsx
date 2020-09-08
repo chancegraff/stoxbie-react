@@ -6,14 +6,13 @@ import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
 import {
-  Holding,
-  Ledger,
-  PresentHoldingType,
-} from "holding-types";
-import {
   List,
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import {
+  Ledger,
+  PresentHolding,
+} from "trade-types";
 
 import {
   CombinedBodyState,
@@ -36,13 +35,13 @@ import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
 type Props = {
-  representativeHolding: PresentHoldingType | undefined;
+  representativeHolding: PresentHolding | undefined;
   presentLedger: Ledger | undefined;
   presentPrice: HistoricalPrice | undefined;
-  presentHoldings: List<PresentHoldingType>;
+  presentHoldings: List<PresentHolding>;
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
-  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
+  handleClose: (present: PresentHolding) => void;
   handleMouseEnterRow: HandleMouseEnter;
   handleMouseLeaveRow: HandleMouseLeave;
   handleToggleCombined: () => void;
@@ -73,7 +72,7 @@ const PresentBody: React.FC<Props> = (
           holding,
         ) =>
         {
-          return previousValue + holding.present.balance;
+          return previousValue + holding.orders.present.balance;
         },
         0,
       );
