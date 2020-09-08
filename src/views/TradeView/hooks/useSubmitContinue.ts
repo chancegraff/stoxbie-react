@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import {
-  addDays,
+  addBusinessDays,
 } from "date-fns";
 
 import {
@@ -39,7 +39,7 @@ export const useSubmitContinue = (
       }
 
       const nextDate = formatDate(
-        addDays(
+        addBusinessDays(
           date,
           1,
         ),
