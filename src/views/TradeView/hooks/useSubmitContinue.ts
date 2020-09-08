@@ -3,6 +3,7 @@ import {
 } from "react";
 import {
   useHistory,
+  useLocation,
 } from "react-router-dom";
 import {
   addDays,
@@ -26,6 +27,7 @@ export const useSubmitContinue = (
   date: Date | undefined,
 ): SubmitContinueHook =>
 {
+  const location = useLocation();
   const history = useHistory();
 
   const submitContinue = useCallback(
@@ -44,12 +46,25 @@ export const useSubmitContinue = (
         DateFormats.Url,
       );
 
+      const pathnames = location.pathname
+        .split(
+          "/",
+        )
+        .slice(
+          0,
+          -1,
+        )
+        .join(
+          "/",
+        );
+
       history.push(
-        `/${nextDate}`,
+        `${pathnames}/${nextDate}`,
       );
     },
     [
       history,
+      location,
       date,
     ],
   );
