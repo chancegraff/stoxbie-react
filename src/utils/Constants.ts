@@ -1,7 +1,3 @@
-import {
-  HistoricalLedger,
-} from "trade-types";
-
 export const DEBOUNCE_SHORT_MS = 500;
 export const DEBOUNCE_MEDIUM_MS = 1000;
 export const DEBOUNCE_LONG_MS = 2000;

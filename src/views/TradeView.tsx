@@ -30,7 +30,6 @@ const TradeView: React.FC<Props> = (
   return (
     <TradeViewLogic
       date={date}
-      ticker={ticker}
     />
   );
 };
