@@ -1,12 +1,8 @@
 import React, {
   useMemo,
 } from "react";
-import {
-  List,
-} from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalHoldingType,
   LedgerType,
 } from "trade-types";
 
@@ -23,28 +19,22 @@ import {
 
 type Props = {
   presentLedger: LedgerType;
-  historicalHoldings: List<HistoricalHoldingType>;
 };
 
 const TableFooter: React.FC<Props> = (
   {
     presentLedger,
-    historicalHoldings,
   },
 ) =>
 {
   const change = useMemo(
     () =>
     {
-      if (!historicalHoldings.isEmpty())
-      {
-        return formatPercentage(
-          presentLedger.returns.percent,
-        );
-      }
+      return formatPercentage(
+        presentLedger.returns.percent,
+      );
     },
     [
-      historicalHoldings,
       presentLedger,
     ],
   );

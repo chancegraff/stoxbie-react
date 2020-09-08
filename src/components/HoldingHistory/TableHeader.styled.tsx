@@ -7,6 +7,9 @@ import {
   TableHeader,
   TableRow,
 } from "grommet";
+import {
+  normalizeColor,
+} from "grommet/utils";
 import styled from "styled-components/macro";
 
 export const GrommetTableHeader: React.FC<JSXTableHeaderProps> = (
@@ -36,6 +39,17 @@ const StickyTableCell: React.FC<JSXTableHeaderProps> = styled(
 )`
 position: sticky;
 top: 0;
+color: ${
+  (
+    props,
+  ) =>
+  {
+    return normalizeColor(
+      props.theme.global.colors["text-xweak"],
+      props.theme,
+    );
+  }
+};
 `;
 
 export const GrommetTableCell: React.FC<JSXTableCellProps> = (

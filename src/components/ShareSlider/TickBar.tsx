@@ -21,8 +21,6 @@ type Props = {
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const widthPercent = 100 / (SLIDER_TICK_COUNT * 2 + 1);
-
 const TickBar: React.FC<Props> = (
   {
     ceiling,
@@ -38,13 +36,6 @@ const TickBar: React.FC<Props> = (
     [
       ceiling,
     ],
-  );
-  const tickMargin = useMemo(
-    () =>
-    {
-      return `0 calc(calc(${widthPercent}% - 14px) / 2)`;
-    },
-    [],
   );
 
   const {
@@ -88,17 +79,13 @@ const TickBar: React.FC<Props> = (
             index,
           ) =>
           {
-            const {
-              current,
-              next,
-            } = tickValue(
+            const current = tickValue(
               valuesPerTick,
             );
 
             const math = index < SLIDER_TICK_COUNT
               ? Math.floor
               : Math.ceil;
-            const child = current;
 
             return (
               <StoxbieTickItem
@@ -108,7 +95,7 @@ const TickBar: React.FC<Props> = (
               >
                 {
                   math(
-                    child,
+                    current,
                   )
                 }
               </StoxbieTickItem>

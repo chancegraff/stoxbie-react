@@ -10,13 +10,6 @@ const SliderValues = Array(
   SLIDER_TICK_COUNT,
 );
 
-const ReversedIndex = (
-  index: number,
-) =>
-{
-  return SliderValues.length - index;
-};
-
 const TickValuesByDirection = (
   direction: number,
 ) =>
@@ -30,17 +23,7 @@ const TickValuesByDirection = (
       tickValue: number,
     ) =>
     {
-      const currentIndex = ReversedIndex(
-        index,
-      );
-      const nextIndex = ReversedIndex(
-        index + 1,
-      );
-
-      return {
-        current: tickValue * currentIndex * direction,
-        next: tickValue * nextIndex * direction,
-      };
+      return tickValue * (SliderValues.length - index) * direction;
     };
   };
 };
@@ -67,10 +50,7 @@ export const useTickRange = () =>
         ...minRange,
         () =>
         {
-          return {
-            current: 0,
-            next: 0,
-          };
+          return 0;
         },
         ...maxRange.reverse(),
       ];

@@ -53,11 +53,7 @@ export const GrommetTableCell: React.FC<JSXTableCellProps> = (
           size: "0",
         }
       }
-      background={
-        {
-          color: "background-front",
-        }
-      }
+      background="background-front"
       {...props}
     />
   );

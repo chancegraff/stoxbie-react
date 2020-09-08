@@ -176,7 +176,6 @@ const HoldingTable: React.FC<Props> = (
           />
           <TableFooter
             css=""
-            historicalHoldings={historicalHoldings}
             presentLedger={presentLedger}
           />
         </GrommetTable>
