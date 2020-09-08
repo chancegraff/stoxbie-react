@@ -10,8 +10,8 @@ import {
 import TradeViewLogic from "./TradeView/TradeViewLogic";
 
 type Props = RouteProps & {
-  date: Date;
-  ticker: string;
+  date: string | undefined;
+  ticker: string | undefined;
   error: string | undefined;
 };
 

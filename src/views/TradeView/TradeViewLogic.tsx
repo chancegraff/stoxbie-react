@@ -1,4 +1,11 @@
-import React from "react";
+import React, {
+  useMemo,
+} from "react";
+
+import {
+  DateFormats,
+  parseDate,
+} from "utils/Utilities";
 
 import TradeViewDisplay from "./TradeViewDisplay";
 import {
@@ -10,7 +17,7 @@ import {
 } from "./TradeViewHooks";
 
 type Props = {
-  date: Date;
+  date: string | undefined;
 };
 
 /**
@@ -32,6 +39,24 @@ const TradeViewLogic: React.FC<Props> = (
     chartHeight,
   } = useAspectRatio<HTMLDivElement>();
 
+  const parsedDate = useMemo(
+    () =>
+    {
+      if (!date)
+      {
+        return;
+      }
+
+      return parseDate(
+        date,
+        DateFormats.Url,
+      );
+    },
+    [
+      date,
+    ],
+  );
+
   const {
     submitClose,
   } = useSubmitClose();
@@ -41,11 +66,11 @@ const TradeViewLogic: React.FC<Props> = (
   const {
     submitContinue,
   } = useSubmitContinue(
-    date,
+    parsedDate,
   );
 
   useEffectPresentPrices(
-    date,
+    parsedDate,
   );
 
   return (

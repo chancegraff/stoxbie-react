@@ -1,7 +1,4 @@
 import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
-import {
   selector,
 } from "recoil";
 
@@ -25,7 +22,7 @@ export const presentPriceState = selector(
         presentPricesState,
       );
 
-      return presentPrices.last<HistoricalPrice | undefined>();
+      return presentPrices.last<undefined>();
     },
   },
 );

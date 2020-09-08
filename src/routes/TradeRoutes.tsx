@@ -2,7 +2,6 @@ import React, {
   PropsHasClass,
   useCallback,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import {
@@ -16,10 +15,7 @@ import {
   historicalPrices as fetchHistoricalPrices,
 } from "@chancey/iex-cloud";
 import {
-  isValid,
-} from "date-fns";
-import {
-  fromJS,
+  List,
 } from "immutable";
 import {
   useSetRecoilState,
@@ -35,9 +31,7 @@ import {
   useScrollToTop,
 } from "utils/Hooks";
 import {
-  DateFormats,
   handleUnloadCreator,
-  parseDate,
 } from "utils/Utilities";
 import {
   historicalPricesState,
@@ -50,8 +44,8 @@ type Props = RouteProps & PropsHasClass;
 const TradeRoute: React.FC<Props> = () =>
 {
   const {
-    ticker = "",
-    date = "",
+    ticker,
+    date,
   } = useParams<{
     ticker: string | undefined;
     date: string | undefined;
@@ -63,60 +57,6 @@ const TradeRoute: React.FC<Props> = () =>
     error,
     setError,
   ] = useState<string>();
-
-  const safeDate = useMemo(
-    () =>
-    {
-      if (!date)
-      {
-        setError(
-          DATE_ERROR_MESSAGE,
-        );
-
-        return new Date();
-      }
-
-      if (
-        !isValid(
-          date,
-        )
-      )
-      {
-        setError(
-          DATE_ERROR_MESSAGE,
-        );
-
-        return new Date();
-      }
-
-      return parseDate(
-        date,
-        DateFormats.Url,
-      );
-    },
-    [
-      date,
-    ],
-  );
-
-  const safeTicker = useMemo(
-    () =>
-    {
-      if (!ticker)
-      {
-        setError(
-          TICKER_ERROR_MESSAGE,
-        );
-
-        return "";
-      }
-
-      return ticker;
-    },
-    [
-      ticker,
-    ],
-  );
 
   const handleLoad = useCallback(
     async (
@@ -141,7 +81,7 @@ const TradeRoute: React.FC<Props> = () =>
         return;
       }
 
-      const historicalPrices = fromJS(
+      const historicalPrices = List(
         awaitedPrices,
       );
 
@@ -157,13 +97,18 @@ const TradeRoute: React.FC<Props> = () =>
   useEffect(
     () =>
     {
+      if (!ticker)
+      {
+        return;
+      }
+
       handleLoad(
-        safeTicker,
+        ticker,
       );
     },
     [
       handleLoad,
-      safeTicker,
+      ticker,
     ],
   );
 
@@ -181,12 +126,26 @@ const TradeRoute: React.FC<Props> = () =>
 
   useScrollToTop();
 
+  if (!date)
+  {
+    setError(
+      DATE_ERROR_MESSAGE,
+    );
+  }
+
+  if (!ticker)
+  {
+    setError(
+      TICKER_ERROR_MESSAGE,
+    );
+  }
+
   return (
     <TradeView
       css=""
-      date={safeDate}
+      date={date}
       error={error}
-      ticker={safeTicker}
+      ticker={ticker}
     />
   );
 };

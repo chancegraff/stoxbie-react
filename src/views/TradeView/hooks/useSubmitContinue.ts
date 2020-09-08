@@ -19,11 +19,11 @@ type SubmitContinueHook = {
 
 /**
  * @description Moves time forward to next day
- * @param {Date} date Current date to move from
+ * @param {Date | undefined} date Current date to move from
  * @returns {SubmitContinueHook} Callback to move time forward
  */
 export const useSubmitContinue = (
-  date: Date,
+  date: Date | undefined,
 ): SubmitContinueHook =>
 {
   const history = useHistory();
@@ -31,6 +31,11 @@ export const useSubmitContinue = (
   const submitContinue = useCallback(
     () =>
     {
+      if (!date)
+      {
+        return;
+      }
+
       const nextDate = formatDate(
         addDays(
           date,

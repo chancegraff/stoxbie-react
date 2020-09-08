@@ -9,7 +9,6 @@ import {
 import Boilerplate from "tests/Boilerplate";
 import {
   getPrice,
-  prices,
   tradeViewStartDate,
 } from "tests/Helpers";
 import {
@@ -37,11 +36,7 @@ export const renderTradeView = () =>
       >
         <TradeView
           error={undefined}
-          date={
-            parseISO(
-              dayOnePrice.date,
-            )
-          }
+          date={dayOnePrice.date}
           ticker={dayOnePrice.symbol}
         />
       </Boilerplate>

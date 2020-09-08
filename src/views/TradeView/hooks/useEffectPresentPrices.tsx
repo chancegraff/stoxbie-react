@@ -2,9 +2,6 @@ import {
   useEffect,
 } from "react";
 import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
-import {
   differenceInBusinessDays,
   isBefore,
 } from "date-fns";
@@ -25,11 +22,11 @@ import {
 
 /**
  * @description Updates presentPrices in state when date URL param changes
- * @param {Date} date End date of historical prices to set present prices from
+ * @param {Date | undefined} date End date of historical prices to set present prices from
  * @returns {void} Nothing
  */
 export const useEffectPresentPrices = (
-  date: Date,
+  date: Date | undefined,
 ): void =>
 {
   const previousDate = usePrevious(
@@ -63,6 +60,7 @@ export const useEffectPresentPrices = (
        * date has not changed and present prices has already loaded
        */
       if (
+        !date ||
         !historicalPricesHasLoaded ||
         (
           dateHasSameValue &&
@@ -76,15 +74,20 @@ export const useEffectPresentPrices = (
       /**
        * @summary Get the last historical price and parse its date
        */
+      const lastPrice = historicalPrices.last<undefined>();
+
+      if (!lastPrice)
+      {
+        return;
+      }
+
       const {
         date: lastDateAsString,
-      } = historicalPrices.last<HistoricalPrice>();
+      } = lastPrice;
       const lastDate = parseDate(
         lastDateAsString,
         DateFormats.Iex,
       );
-
-      debugger;
 
       /**
        * @summary Get the indexes difference between last date and end date
