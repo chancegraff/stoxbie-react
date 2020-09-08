@@ -1,13 +1,9 @@
 import React, {
-  useMemo,
+  useCallback,
 } from "react";
 import {
-  HistoricalPrice,
-} from "@chancey/iex-cloud";
-import {
-  Ledger,
+  Holding,
   PresentHoldingType,
-  OppositeTradeDirection,
 } from "holding-types";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
@@ -24,20 +20,14 @@ import {
 } from "./CloseHoldings.styled";
 
 type Props = {
-  disabled?: boolean;
-  presentPrice: HistoricalPrice;
-  presentLedger?: Ledger;
   presentHolding: PresentHoldingType;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
 };
 
 const CloseHoldings: React.FC<Props> = (
   {
-    disabled,
-    presentPrice,
-    presentLedger,
     presentHolding,
-    handleSubmit,
+    handleClose,
   },
 ) =>
 {
@@ -47,33 +37,22 @@ const CloseHoldings: React.FC<Props> = (
     handleMouseLeave,
   ] = useHover();
 
-  const orderShareCount = useMemo(
+  const handleSubmit = useCallback(
     () =>
     {
-      if (presentLedger)
-      {
-        return presentLedger.amounts.holding;
-      }
-
-      return presentHolding.open.amount;
+      handleClose(
+        presentHolding,
+      );
     },
     [
-      presentLedger,
       presentHolding,
+      handleClose,
     ],
   );
 
   return (
     <StoxbieSubmitOrder
       css=""
-      disabled={disabled}
-      presentPriceClose={presentPrice.close}
-      orderDirection={
-        OppositeTradeDirection(
-          presentHolding.open.direction,
-        )
-      }
-      orderShareCount={orderShareCount}
       handleSubmit={handleSubmit}
     >
       <GrommetContainer
@@ -83,7 +62,6 @@ const CloseHoldings: React.FC<Props> = (
       >
         <HoverIcon
           css=""
-          disabled={disabled}
           hoverState={hoverState}
           MouseIdlingIcon={GrommetOpenedIcon}
           MouseHoveringIcon={GrommetClosedIcon}

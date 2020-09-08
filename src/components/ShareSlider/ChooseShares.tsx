@@ -26,7 +26,6 @@ import {
 type Props = {
   presentPrice: HistoricalPrice;
   presentLedger: Ledger;
-  orderDirection: number;
   orderShareCount: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -35,7 +34,6 @@ const ChooseShares: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
-    orderDirection,
     orderShareCount,
     setOrderShareCount,
   },
@@ -67,7 +65,7 @@ const ChooseShares: React.FC<Props> = (
       previousLedger,
     ],
   );
-  const maxPurchasable = useMemo(
+  const purchasable = useMemo(
     () =>
     {
       return Math.floor(
@@ -77,30 +75,6 @@ const ChooseShares: React.FC<Props> = (
     [
       presentPrice,
       presentLedger,
-    ],
-  );
-  const maxSaleable = useMemo(
-    () =>
-    {
-      return presentLedger.amounts.holding;
-    },
-    [
-      presentLedger,
-    ],
-  );
-  const maxValue = useMemo(
-    () =>
-    {
-      return orderDirection > 0
-        ? maxPurchasable
-        : maxSaleable > 0
-          ? maxSaleable
-          : maxPurchasable;
-    },
-    [
-      orderDirection,
-      maxPurchasable,
-      maxSaleable,
     ],
   );
   const handleChange = useCallback(
@@ -147,13 +121,14 @@ const ChooseShares: React.FC<Props> = (
       <RangeInput
         css=""
         role="slider"
-        max={maxValue}
+        min={purchasable}
+        max={purchasable * -1}
         value={orderShareCount}
         onChange={handleChange}
       />
       <TickBar
         css=""
-        maxValue={maxValue}
+        maxValue={purchasable}
         setOrderShareCount={setOrderShareCount}
       />
     </GrommetContainer>

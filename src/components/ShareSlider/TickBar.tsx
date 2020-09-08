@@ -14,63 +14,82 @@ import {
 } from "./TickBar.styled";
 
 type Props = {
-  maxValue: number;
+  ceiling: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TickBar: React.FC<Props> = (
   {
-    maxValue,
+    ceiling,
     setOrderShareCount,
   },
 ) =>
 {
-  const percentWidthPerShare = useMemo(
+  const percentPerValue = useMemo(
     () =>
     {
-      return 100 / maxValue;
+      return 100 / ceiling;
     },
     [
-      maxValue,
+      ceiling,
     ],
   );
-  const sharesPerTick = useMemo(
+  const valuesPerTick = useMemo(
     () =>
     {
-      return maxValue / SLIDER_TICK_COUNT;
+      return ceiling / SLIDER_TICK_COUNT;
     },
     [
-      maxValue,
+      ceiling,
     ],
   );
   const tickRange = useMemo(
     () =>
     {
-      return Array.from(
+      const maxRange = Array.from(
         Array(
-          SLIDER_TICK_COUNT + 1,
+          SLIDER_TICK_COUNT / 2 + 1,
         ),
         (
           element,
           index,
         ) =>
         {
-          return sharesPerTick * index;
+          return valuesPerTick * index;
         },
       );
+
+      const minRange = Array.from(
+        Array(
+          SLIDER_TICK_COUNT / 2 + 1,
+        ),
+        (
+          element,
+          index,
+        ) =>
+        {
+          return valuesPerTick * index * -1;
+        },
+      );
+
+      return [
+        ...minRange,
+        0,
+        ...maxRange,
+      ];
     },
     [
-      sharesPerTick,
+      valuesPerTick,
     ],
   );
   const tickMargin = useMemo(
     () =>
     {
-      return `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`;
+      return `0 calc(calc(${percentPerValue * valuesPerTick}% - 14px) / 2)`;
     },
     [
-      percentWidthPerShare,
-      sharesPerTick,
+      percentPerValue,
+      valuesPerTick,
     ],
   );
   const handleClick = useCallback(

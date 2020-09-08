@@ -1,13 +1,8 @@
 import React from "react";
 import {
   Box,
-  Grid,
   JSXBoxProps,
-  JSXGridProps,
 } from "grommet";
-import {
-  Checkmark,
-} from "grommet-icons";
 
 import SubmitOrder, {
   SubmitOrderProps,
@@ -34,45 +29,7 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
   );
 };
 
-export const GrommetGrid: React.FC<JSXGridProps> = (
-  props,
-) =>
-{
-  return (
-    <Grid
-      responsive={true}
-      fill="horizontal"
-      gap="small"
-      margin={
-        {
-          top: "xsmall",
-        }
-      }
-      rows={
-        [
-          "auto",
-        ]
-      }
-      columns={
-        [
-          "auto",
-          "auto",
-        ]
-      }
-      areas={
-        [
-          [
-            "buy",
-            "sell",
-          ],
-        ]
-      }
-      {...props}
-    />
-  );
-};
-
-const StoxbieSubmitOrder: React.FC<SubmitOrderProps> = (
+export const StoxbieSubmitOrder: React.FC<SubmitOrderProps> = (
   {
     gridArea,
     ...props
@@ -84,41 +41,12 @@ const StoxbieSubmitOrder: React.FC<SubmitOrderProps> = (
       gridArea={gridArea}
     >
       <SubmitOrder
-        Icon={Checkmark}
         primary={true}
         size="medium"
         {...props}
-      />
+      >
+        Order
+      </SubmitOrder>
     </Box>
-  );
-};
-
-export const StoxbieBuyAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
-  props,
-) =>
-{
-  return (
-    <StoxbieSubmitOrder
-      {...props}
-      submitDirection={1}
-      gridArea="buy"
-    >
-      Buy
-    </StoxbieSubmitOrder>
-  );
-};
-
-export const StoxbieSellAction: React.FC<Omit<SubmitOrderProps, "submitDirection">> = (
-  props,
-) =>
-{
-  return (
-    <StoxbieSubmitOrder
-      {...props}
-      submitDirection={-1}
-      gridArea="sell"
-    >
-      Sell
-    </StoxbieSubmitOrder>
   );
 };

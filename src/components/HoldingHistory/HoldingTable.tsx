@@ -8,6 +8,7 @@ import {
 } from "@chancey/iex-cloud";
 import {
   HistoricalHoldingType,
+  Holding,
   Ledger,
   PresentHoldingType,
 } from "holding-types";
@@ -44,7 +45,7 @@ type Props = {
   presentHoldings: List<PresentHoldingType>;
   historicalHoldings: List<HistoricalHoldingType>;
   highestPresentHolding: PresentHoldingType | undefined;
-  handleOrder: (sharePrice: number, shareCount: number) => void;
+  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
 };
 
 const HoldingTable: React.FC<Props> = (
@@ -54,7 +55,7 @@ const HoldingTable: React.FC<Props> = (
     presentHoldings,
     historicalHoldings,
     highestPresentHolding,
-    handleOrder,
+    handleClose,
   },
 ) =>
 {
@@ -151,13 +152,13 @@ const HoldingTable: React.FC<Props> = (
           <TableHeader css="" />
           <PresentBody
             css=""
-            highestPresentHolding={highestPresentHolding}
+            representativeHolding={highestPresentHolding}
             presentPrice={presentPrice}
             presentLedger={presentLedger}
             presentHoldings={presentHoldings}
             rowHoverState={rowHoverState}
             combinedBodyState={combinedBodyState}
-            handleOrder={handleOrder}
+            handleClose={handleClose}
             handleToggleCombined={handleToggleCombined}
             handleMouseEnterRow={debouncedMouseEnterRow}
             handleMouseLeaveRow={debouncedMouseLeaveRow}
@@ -168,7 +169,7 @@ const HoldingTable: React.FC<Props> = (
             presentHoldings={presentHoldings}
             presentLedger={presentLedger}
             presentPrice={presentPrice}
-            handleOrder={handleOrder}
+            handleClose={handleClose}
           />
           <HistoricalBody
             css=""

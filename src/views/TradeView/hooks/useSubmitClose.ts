@@ -21,15 +21,15 @@ import {
   useUpdatePresentLedgers,
 } from "./Present/useUpdatePresentLedgers";
 
-export type CloseHoldingHook = {
-  closeHolding: (present: PresentHoldingType) => void;
+export type SubmitCloseHook = {
+  submitClose: (present: PresentHoldingType) => void;
 }
 
 /**
- * @description Closes an existing holding and updates the ledger
+ * @description Creates historical holding, removes present holding, updates the ledger
  * @returns {void} Nothing
  */
-export const useCloseHolding = (): CloseHoldingHook =>
+export const useSubmitClose = (): SubmitCloseHook =>
 {
   const {
     HistoricalHolding,
@@ -47,7 +47,7 @@ export const useCloseHolding = (): CloseHoldingHook =>
     updatePresentLedgers,
   } = useUpdatePresentLedgers();
 
-  const closeHolding = useCallback(
+  const submitClose = useCallback(
     (
       present: PresentHoldingType,
     ) =>
@@ -90,6 +90,6 @@ export const useCloseHolding = (): CloseHoldingHook =>
   );
 
   return {
-    closeHolding,
+    submitClose,
   };
 };

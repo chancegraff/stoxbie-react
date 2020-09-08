@@ -2,11 +2,6 @@ import React from "react";
 import {
   RouteProps,
 } from "react-router-dom";
-import {
-  Company,
-  HistoricalPrice,
-  Logo,
-} from "@chancey/iex-cloud";
 
 import {
   useError,

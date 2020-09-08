@@ -15,15 +15,15 @@ import {
   useUpdatePresentLedgers,
 } from "./Present/useUpdatePresentLedgers";
 
-type OpenHoldingHook = {
-  openHolding: (orderAmount: number) => void;
+type SubmitOpenHook = {
+  submitOpen: (orderAmount: number) => void;
 };
 
 /**
- * @description Creates a new present holding and updates the ledger
+ * @description Creates present holding, updates the ledger
  * @returns {void} Nothing
  */
-export const useOpenHolding = (): OpenHoldingHook =>
+export const useSubmitOpen = (): SubmitOpenHook =>
 {
   const {
     PresentHolding,
@@ -38,7 +38,7 @@ export const useOpenHolding = (): OpenHoldingHook =>
     updatePresentLedgers,
   } = useUpdatePresentLedgers();
 
-  const openHolding = useCallback(
+  const submitOpen = useCallback(
     (
       amount: number,
     ) =>
@@ -77,6 +77,6 @@ export const useOpenHolding = (): OpenHoldingHook =>
   );
 
   return {
-    openHolding,
+    submitOpen,
   };
 };

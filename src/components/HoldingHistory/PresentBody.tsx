@@ -6,6 +6,7 @@ import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
 import {
+  Holding,
   Ledger,
   PresentHoldingType,
 } from "holding-types";
@@ -35,13 +36,13 @@ import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
 type Props = {
-  highestPresentHolding: PresentHoldingType | undefined;
+  representativeHolding: PresentHoldingType | undefined;
   presentLedger: Ledger | undefined;
   presentPrice: HistoricalPrice | undefined;
   presentHoldings: List<PresentHoldingType>;
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
-  handleOrder: (sharePrice: number, shareCount: number) => void;
+  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
   handleMouseEnterRow: HandleMouseEnter;
   handleMouseLeaveRow: HandleMouseLeave;
   handleToggleCombined: () => void;
@@ -49,13 +50,13 @@ type Props = {
 
 const PresentBody: React.FC<Props> = (
   {
-    highestPresentHolding,
+    representativeHolding,
     presentLedger,
     presentPrice,
     presentHoldings,
     rowHoverState,
     combinedBodyState,
-    handleOrder,
+    handleClose,
     handleMouseEnterRow,
     handleMouseLeaveRow,
     handleToggleCombined,
@@ -72,7 +73,7 @@ const PresentBody: React.FC<Props> = (
           holding,
         ) =>
         {
-          return previousValue + holding.open.balance;
+          return previousValue + holding.present.balance;
         },
         0,
       );
@@ -114,7 +115,7 @@ const PresentBody: React.FC<Props> = (
 
   if (
     (
-      !highestPresentHolding ||
+      !representativeHolding ||
       !presentLedger ||
       !presentPrice
     )
@@ -133,7 +134,7 @@ const PresentBody: React.FC<Props> = (
       <PresentRow
         ref={presentRowRef}
         css=""
-        presentHolding={highestPresentHolding}
+        presentHolding={representativeHolding}
         presentLedger={presentLedger}
       >
         {
@@ -158,10 +159,8 @@ const PresentBody: React.FC<Props> = (
                 <GrommetTableCell css="">
                   <CloseHoldings
                     css=""
-                    presentHolding={highestPresentHolding}
-                    presentLedger={presentLedger}
-                    presentPrice={presentPrice}
-                    handleOrder={handleOrder}
+                    presentHolding={representativeHolding}
+                    handleClose={handleClose}
                   />
                 </GrommetTableCell>
                 <GrommetTableCell css="">

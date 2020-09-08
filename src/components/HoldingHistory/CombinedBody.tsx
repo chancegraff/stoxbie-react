@@ -3,6 +3,7 @@ import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
 import {
+  Holding,
   Ledger,
   PresentHoldingType,
 } from "holding-types";
@@ -27,7 +28,7 @@ type Props = {
   presentHoldings: List<PresentHoldingType>;
   presentLedger: Ledger | undefined;
   presentPrice: HistoricalPrice | undefined;
-  handleOrder: (sharePrice: number, shareCount: number) => void;
+  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
 };
 
 const CombinedBody: React.FC<Props> = (
@@ -36,7 +37,7 @@ const CombinedBody: React.FC<Props> = (
     presentHoldings,
     presentLedger,
     presentPrice,
-    handleOrder,
+    handleClose,
   },
 ) =>
 {
@@ -58,7 +59,7 @@ const CombinedBody: React.FC<Props> = (
           ) =>
           {
             const {
-              open: {
+              present: {
                 amount,
                 date,
               },
@@ -94,10 +95,8 @@ const CombinedBody: React.FC<Props> = (
                         <GrommetTableCell css="">
                           <CloseHoldings
                             css=""
-                            disabled={true}
-                            presentPrice={presentPrice}
                             presentHolding={presentHolding}
-                            handleOrder={handleOrder}
+                            handleClose={handleClose}
                           />
                         </GrommetTableCell>
                         <GrommetTableCell css="">

@@ -4,13 +4,13 @@ import TradeViewDisplay from "./TradeViewDisplay";
 import {
   useAspectRatio,
   useEffectPresentPrices,
+  useSubmitClose,
   useSubmitContinue,
-  useSubmitOrder,
+  useSubmitOpen,
 } from "./TradeViewHooks";
 
 type Props = {
   date: Date;
-  ticker: string;
 };
 
 /**
@@ -23,7 +23,6 @@ type Props = {
 const TradeViewLogic: React.FC<Props> = (
   {
     date,
-    ticker,
   },
 ) =>
 {
@@ -32,9 +31,13 @@ const TradeViewLogic: React.FC<Props> = (
     chartWidth,
     chartHeight,
   } = useAspectRatio<HTMLDivElement>();
+
   const {
-    submitOrder,
-  } = useSubmitOrder();
+    submitClose,
+  } = useSubmitClose();
+  const {
+    submitOpen,
+  } = useSubmitOpen();
   const {
     submitContinue,
   } = useSubmitContinue(
@@ -50,7 +53,8 @@ const TradeViewLogic: React.FC<Props> = (
       chartRef={chartRef}
       chartWidth={chartWidth}
       chartHeight={chartHeight}
-      handleOrder={submitOrder}
+      handleOpen={submitOpen}
+      handleClose={submitClose}
       handleContinue={submitContinue}
     />
   );

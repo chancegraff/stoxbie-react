@@ -3,6 +3,9 @@ import {
   RouteProps,
 } from "react-router-dom";
 import {
+  Holding,
+} from "holding-types";
+import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
@@ -41,7 +44,8 @@ type Props = RouteProps & {
   chartRef: React.RefObject<HTMLDivElement>;
   chartWidth: number;
   chartHeight: number;
-  handleOrder: (sharePrice: number, shareCount: number) => void;
+  handleOpen: (orderAmount: number) => void;
+  handleClose: (present: Pick<Holding, "ticker" | "present">) => void;
   handleContinue: () => void;
 };
 
@@ -50,7 +54,8 @@ const TradeViewDisplay: React.FC<Props> = (
     chartRef,
     chartWidth,
     chartHeight,
-    handleOrder,
+    handleOpen,
+    handleClose,
     handleContinue,
   },
 ) =>
@@ -122,7 +127,7 @@ const TradeViewDisplay: React.FC<Props> = (
             css=""
             presentLedger={presentLedger}
             presentPrice={presentPrice}
-            handleOrder={handleOrder}
+            handleOpen={handleOpen}
           />
           <HoldingTable
             css=""
@@ -131,7 +136,7 @@ const TradeViewDisplay: React.FC<Props> = (
             presentHoldings={presentHoldings}
             historicalHoldings={historicalHoldings}
             highestPresentHolding={highestPresentHolding}
-            handleOrder={handleOrder}
+            handleClose={handleClose}
           />
         </GrommetSidebarContainer>
       </GrommetGrid>
