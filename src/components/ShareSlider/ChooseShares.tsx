@@ -121,8 +121,8 @@ const ChooseShares: React.FC<Props> = (
       <RangeInput
         css=""
         role="slider"
-        min={purchasable}
-        max={purchasable * -1}
+        max={purchasable}
+        min={purchasable * -1}
         value={orderShareCount}
         onChange={handleChange}
       />
