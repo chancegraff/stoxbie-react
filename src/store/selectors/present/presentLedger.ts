@@ -4,7 +4,7 @@ import {
 
 import {
   DEFAULT_LEDGER,
-  PRESENT_LEDGERS_STATE_KEY,
+  PRESENT_LEDGER_SELECTOR_KEY,
 } from "utils/Constants";
 import {
   presentLedgersState,
@@ -12,7 +12,7 @@ import {
 
 export const presentLedgerState = selector(
   {
-    key: PRESENT_LEDGERS_STATE_KEY,
+    key: PRESENT_LEDGER_SELECTOR_KEY,
     get: (
       {
         get,

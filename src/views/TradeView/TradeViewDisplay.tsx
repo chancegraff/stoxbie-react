@@ -20,7 +20,7 @@ import {
   presentHoldingsState,
 } from "store/Atoms";
 import {
-  highestPresentHoldingState,
+  presentHoldingState,
   presentLedgerState,
   presentPriceState,
 } from "store/Selectors";
@@ -82,8 +82,8 @@ const TradeViewDisplay: React.FC<Props> = (
   const presentLedger = useRecoilValue(
     presentLedgerState,
   );
-  const highestPresentHolding = useRecoilValue(
-    highestPresentHoldingState,
+  const presentHolding = useRecoilValue(
+    presentHoldingState,
   );
 
   useScrollToTop();
@@ -135,7 +135,7 @@ const TradeViewDisplay: React.FC<Props> = (
             presentLedger={presentLedger}
             presentHoldings={presentHoldings}
             historicalHoldings={historicalHoldings}
-            highestPresentHolding={highestPresentHolding}
+            presentHolding={presentHolding}
             handleClose={handleClose}
           />
         </GrommetSidebarContainer>

@@ -38,6 +38,10 @@ export const HISTORICAL_HOLDINGS_STATE_KEY = "historicalHoldings";
 export const HISTORICAL_LEDGERS_STATE_KEY = "historicalLedgers";
 export const HISTORICAL_PRICES_STATE_KEY = "historicalPrices";
 
+export const PRESENT_PRICE_SELECTOR_KEY = "presentPrice";
+export const PRESENT_LEDGER_SELECTOR_KEY = "presentLedger";
+export const PRESENT_HOLDING_SELECTOR_KEY = "presentHolding";
+
 export const DEFAULT_LEDGER: LedgerType = {
   balance: 10000,
   amounts: {

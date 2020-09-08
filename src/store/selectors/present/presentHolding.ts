@@ -3,15 +3,15 @@ import {
 } from "recoil";
 
 import {
-  PRESENT_HOLDINGS_STATE_KEY,
+  PRESENT_HOLDING_SELECTOR_KEY,
 } from "utils/Constants";
 import {
   presentHoldingsState,
 } from "store/Atoms";
 
-export const highestPresentHoldingState = selector(
+export const presentHoldingState = selector(
   {
-    key: PRESENT_HOLDINGS_STATE_KEY,
+    key: PRESENT_HOLDING_SELECTOR_KEY,
     get: (
       {
         get,

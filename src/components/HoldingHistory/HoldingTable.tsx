@@ -43,7 +43,7 @@ type Props = {
   presentLedger: LedgerType;
   presentHoldings: List<PresentHoldingType>;
   historicalHoldings: List<HistoricalHoldingType>;
-  highestPresentHolding: PresentHoldingType | undefined;
+  presentHolding: PresentHoldingType | undefined;
   handleClose: (present: PresentHoldingType) => void;
 };
 
@@ -53,7 +53,7 @@ const HoldingTable: React.FC<Props> = (
     presentLedger,
     presentHoldings,
     historicalHoldings,
-    highestPresentHolding,
+    presentHolding,
     handleClose,
   },
 ) =>
@@ -151,7 +151,7 @@ const HoldingTable: React.FC<Props> = (
           <TableHeader css="" />
           <PresentBody
             css=""
-            representativeHolding={highestPresentHolding}
+            presentHolding={presentHolding}
             presentPrice={presentPrice}
             presentLedger={presentLedger}
             presentHoldings={presentHoldings}

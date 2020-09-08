@@ -35,7 +35,7 @@ import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
 type Props = {
-  representativeHolding: PresentHoldingType | undefined;
+  presentHolding: PresentHoldingType | undefined;
   presentLedger: LedgerType | undefined;
   presentPrice: HistoricalPrice | undefined;
   presentHoldings: List<PresentHoldingType>;
@@ -49,7 +49,7 @@ type Props = {
 
 const PresentBody: React.FC<Props> = (
   {
-    representativeHolding,
+    presentHolding,
     presentLedger,
     presentPrice,
     presentHoldings,
@@ -114,7 +114,7 @@ const PresentBody: React.FC<Props> = (
 
   if (
     (
-      !representativeHolding ||
+      !presentHolding ||
       !presentLedger ||
       !presentPrice
     )
@@ -133,7 +133,7 @@ const PresentBody: React.FC<Props> = (
       <PresentRow
         ref={presentRowRef}
         css=""
-        presentHolding={representativeHolding}
+        presentHolding={presentHolding}
         presentLedger={presentLedger}
       >
         {
@@ -158,7 +158,7 @@ const PresentBody: React.FC<Props> = (
                 <GrommetTableCell css="">
                   <CloseHoldings
                     css=""
-                    presentHolding={representativeHolding}
+                    presentHolding={presentHolding}
                     handleClose={handleClose}
                   />
                 </GrommetTableCell>

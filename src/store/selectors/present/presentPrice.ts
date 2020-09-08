@@ -6,7 +6,7 @@ import {
 } from "recoil";
 
 import {
-  PRESENT_PRICES_STATE_KEY,
+  PRESENT_PRICE_SELECTOR_KEY,
 } from "utils/Constants";
 import {
   presentPricesState,
@@ -14,7 +14,7 @@ import {
 
 export const presentPriceState = selector(
   {
-    key: PRESENT_PRICES_STATE_KEY,
+    key: PRESENT_PRICE_SELECTOR_KEY,
     get: (
       {
         get,
