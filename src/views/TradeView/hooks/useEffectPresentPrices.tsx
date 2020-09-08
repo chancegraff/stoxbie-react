@@ -53,9 +53,7 @@ export const useEffectPresentPrices = (
        * @summary Get boolean checks here to improve readability below
        */
       const historicalPricesHasLoaded = !historicalPrices.isEmpty();
-      const presentPricesHasLoaded = Boolean(
-        presentPrices,
-      );
+      const presentPricesHasLoaded = !presentPrices.isEmpty();
       const dateHasSameValue = (
         date === previousDate
       );
@@ -85,6 +83,8 @@ export const useEffectPresentPrices = (
         lastDateAsString,
         DateFormats.Iex,
       );
+
+      debugger;
 
       /**
        * @summary Get the indexes difference between last date and end date

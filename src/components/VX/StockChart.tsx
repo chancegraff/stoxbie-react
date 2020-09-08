@@ -98,7 +98,7 @@ const StockChart: React.FC<Props> = (
       css=""
       label={label}
       padding={responsivePadding}
-      prices={prices.toArray()}
+      prices={prices.toJS()}
       resolution={resolution}
     />
   );

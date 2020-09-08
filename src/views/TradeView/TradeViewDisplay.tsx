@@ -16,8 +16,8 @@ import {
 } from "utils/Hooks";
 import {
   historicalHoldingsState,
-  historicalPricesState,
   presentHoldingsState,
+  presentPricesState,
 } from "store/Atoms";
 import {
   presentHoldingState,
@@ -66,9 +66,9 @@ const TradeViewDisplay: React.FC<Props> = (
     historicalHoldingsState,
   );
   const [
-    historicalPrices,
+    presentPrices,
   ] = useRecoilState(
-    historicalPricesState,
+    presentPricesState,
   );
   const [
     presentHoldings,
@@ -99,7 +99,7 @@ const TradeViewDisplay: React.FC<Props> = (
             >
               <StockChart
                 css=""
-                prices={historicalPrices}
+                prices={presentPrices}
                 resolution={
                   [
                     chartWidth,
