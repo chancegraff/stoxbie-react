@@ -2,13 +2,13 @@ declare module "trade-types" {
   /**
    * Ledger
    */
-  declare type Amounts = {
+  declare type AmountsType = {
     present: number;
     historical: number;
     holding: number;
   };
 
-  declare type Changes = {
+  declare type ChangesType = {
     amount: {
       values: number;
     };
@@ -24,50 +24,51 @@ declare module "trade-types" {
     };
   };
 
-  declare type Returns = {
+  declare type ReturnsType = {
     percent: number;
     dollars: number;
   };
 
-  declare type Ledger = {
+  declare type LedgerType = {
     balance: number;
-    amounts: Amounts;
-    changes: Changes;
-    returns: Returns;
+    amounts: AmountsType;
+    changes: ChangesType;
+    returns: ReturnsType;
   };
 
   /**
    * Holding
    */
-  export enum Directions {
-    Buy = 1,
-    Sell = -1,
-  }
+  declare type DirectionType = -1 | 1;
 
-  declare type Order = {
+  declare type OrderType = {
     amount: number;
     balance: number;
     date: Date;
-    direction: Directions;
+    direction: DirectionType;
     price: number;
   };
 
-  declare type PresentOrder = Order;
+  declare type PresentOrderType = Order;
 
-  declare type HistoricalOrder = Order;
+  declare type HistoricalOrderType = Order;
 
-  declare type Orders = {
-    present: PresentOrder;
-    historical: HistoricalOrder;
+  declare type OrdersType = {
+    present: PresentOrderType;
+    historical: HistoricalOrderType;
   };
 
-  declare type Holding = {
+  declare type HoldingType = {
     ticker: string;
-    orders: Orders;
-    change: Changes;
+    orders: OrdersType;
+    changes: ChangesType;
   };
 
-  declare type PresentHolding = Omit<Holding, "historical" | "change">;
+  declare type PresentHoldingType = Omit<HoldingType, "changes" | "orders"> & {
+    orders: Omit<OrdersType, "historical">;
+  };
 
-  declare type HistoricalHolding = Holding;
+  declare type UnfinishedHistoricalHoldingType = Omit<HoldingType, "changes">;
+
+  declare type HistoricalHoldingType = HoldingType;
 }

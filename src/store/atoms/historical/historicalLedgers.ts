@@ -5,7 +5,7 @@ import {
   atom,
 } from "recoil";
 import {
-  Ledger,
+  LedgerType,
 } from "trade-types";
 
 import {
@@ -15,9 +15,9 @@ import {
 /**
  * @description All historical ledgers
  */
-export const historicalLedgersState = atom<List<Ledger>>(
+export const historicalLedgersState = atom<List<LedgerType>>(
   {
     key: HISTORICAL_LEDGERS_STATE_KEY,
-    default: List<Ledger>(),
+    default: List<LedgerType>(),
   },
 );

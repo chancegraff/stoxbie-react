@@ -11,9 +11,9 @@ import {
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalHolding,
-  Ledger,
-  PresentHolding,
+  HistoricalHoldingType,
+  LedgerType,
+  PresentHoldingType,
 } from "trade-types";
 import {
   useDebouncedCallback,
@@ -40,11 +40,11 @@ import TableHeader from "./TableHeader";
 
 type Props = {
   presentPrice: HistoricalPrice | undefined;
-  presentLedger: Ledger;
-  presentHoldings: List<PresentHolding>;
-  historicalHoldings: List<HistoricalHolding>;
-  highestPresentHolding: PresentHolding | undefined;
-  handleClose: (present: PresentHolding) => void;
+  presentLedger: LedgerType;
+  presentHoldings: List<PresentHoldingType>;
+  historicalHoldings: List<HistoricalHoldingType>;
+  highestPresentHolding: PresentHoldingType | undefined;
+  handleClose: (present: PresentHoldingType) => void;
 };
 
 const HoldingTable: React.FC<Props> = (

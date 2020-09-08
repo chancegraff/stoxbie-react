@@ -7,7 +7,7 @@ import {
 } from "@chancey/iex-cloud";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  Ledger,
+  LedgerType,
 } from "trade-types";
 
 import Spinner from "components/Grommet/Spinner";
@@ -20,7 +20,7 @@ import {
 
 type Props = {
   presentPrice: HistoricalPrice | undefined;
-  presentLedger: Ledger;
+  presentLedger: LedgerType;
   handleOpen: (orderAmount: number) => void;
 };
 

@@ -4,7 +4,16 @@ import {
 import {
   useRecoilValue,
 } from "recoil";
+import {
+  HistoricalOrderType,
+  PresentOrderType,
+} from "trade-types";
 
+import {
+  Amount,
+  Balance,
+  OppositeDirection,
+} from "utils/Holdings";
 import {
   presentPriceState,
 } from "store/Selectors";

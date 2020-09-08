@@ -36,12 +36,12 @@ export const renderTradeView = () =>
         route={`/trade/${dayOnePrice.symbol}/${urlDate}`}
       >
         <TradeView
+          error={undefined}
           date={
             parseISO(
               dayOnePrice.date,
             )
           }
-          prices={prices}
           ticker={dayOnePrice.symbol}
         />
       </Boilerplate>

@@ -7,8 +7,8 @@ import {
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  Ledger,
-  PresentHolding,
+  LedgerType,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -24,10 +24,10 @@ import PresentRow from "./PresentRow";
 
 type Props = {
   combinedBodyState: CombinedBodyState;
-  presentHoldings: List<PresentHolding>;
-  presentLedger: Ledger | undefined;
+  presentHoldings: List<PresentHoldingType>;
+  presentLedger: LedgerType | undefined;
   presentPrice: HistoricalPrice | undefined;
-  handleClose: (present: PresentHolding) => void;
+  handleClose: (present: PresentHoldingType) => void;
 };
 
 const CombinedBody: React.FC<Props> = (

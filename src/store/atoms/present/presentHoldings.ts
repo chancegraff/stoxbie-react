@@ -5,7 +5,7 @@ import {
   atom,
 } from "recoil";
 import {
-  PresentHolding,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -15,9 +15,9 @@ import {
 /**
  * @description All present holdings
  */
-export const presentHoldingsState = atom<List<PresentHolding>>(
+export const presentHoldingsState = atom<List<PresentHoldingType>>(
   {
     key: PRESENT_HOLDINGS_STATE_KEY,
-    default: List<PresentHolding>(),
+    default: List<PresentHoldingType>(),
   },
 );

@@ -7,8 +7,8 @@ import {
 } from "@chancey/iex-cloud";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  Ledger,
-  PresentHolding,
+  LedgerType,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -25,8 +25,8 @@ type Props = PropsHasFunctionChild<{
   open: string;
   balance: string;
 }> & {
-  presentHolding: PresentHolding;
-  presentLedger?: Ledger;
+  presentHolding: PresentHoldingType;
+  presentLedger?: LedgerType;
 };
 
 const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(

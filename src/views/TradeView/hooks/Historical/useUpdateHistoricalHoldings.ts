@@ -4,13 +4,16 @@ import {
 import {
   useRecoilState,
 } from "recoil";
+import {
+  HistoricalHoldingType,
+} from "trade-types";
 
 import {
   historicalHoldingsState,
 } from "store/Atoms";
 
 type UpdateHistoricalHoldingsHook = {
-  updateHistoricalHoldings: (historicalHolding: HistoricalHolding) => void;
+  updateHistoricalHoldings: (historicalHolding: HistoricalHoldingType) => void;
 };
 
 /**
@@ -28,7 +31,7 @@ export const useUpdateHistoricalHoldings = (): UpdateHistoricalHoldingsHook =>
 
   const updateHistoricalHoldings = useCallback(
     (
-      historicalHolding: HistoricalHolding,
+      historicalHolding: HistoricalHoldingType,
     ) =>
     {
       setHistoricalHoldings(

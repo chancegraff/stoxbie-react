@@ -7,13 +7,18 @@ import {
 import {
   useRecoilValue,
 } from "recoil";
+import {
+  ChangesType,
+  HistoricalHoldingType,
+  UnfinishedHistoricalHoldingType,
+} from "trade-types";
 
 import {
   presentPriceState,
 } from "store/Selectors";
 
 type ChangeHook = {
-  Change: (unfinishedHolding: UnfinishedHistoricalHolding | undefined) => HistoricalHolding | undefined;
+  Change: (unfinishedHolding: UnfinishedHistoricalHoldingType | undefined) => HistoricalHoldingType | undefined;
 };
 
 /**
@@ -28,8 +33,8 @@ export const useChange = (): ChangeHook =>
 
   const Change = useCallback(
     (
-      unfinishedHolding: UnfinishedHistoricalHolding | undefined,
-    ): HistoricalHolding | undefined =>
+      unfinishedHolding: UnfinishedHistoricalHoldingType | undefined,
+    ): HistoricalHoldingType | undefined =>
     {
       if (!unfinishedHolding ||
           !presentPrice)
@@ -42,15 +47,17 @@ export const useChange = (): ChangeHook =>
       } = presentPrice;
 
       const {
-        present,
-        historical,
+        orders: {
+          present,
+          historical,
+        },
       } = unfinishedHolding;
 
       const balance = {
         dollars: (historical.balance - (present.amount * present.price)) * present.direction,
       };
 
-      const change: Change = {
+      const changes: ChangesType = {
         amount: {
           values: present.amount - historical.amount,
         },
@@ -71,7 +78,7 @@ export const useChange = (): ChangeHook =>
 
       return {
         ...unfinishedHolding,
-        change,
+        changes,
       };
     },
     [

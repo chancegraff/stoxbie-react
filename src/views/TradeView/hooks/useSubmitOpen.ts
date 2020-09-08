@@ -52,8 +52,14 @@ export const useSubmitOpen = (): SubmitOpenHook =>
         return;
       }
 
+      const {
+        orders: {
+          present,
+        },
+      } = holding;
+
       const ledger = PresentLedger(
-        holding.present,
+        present,
       );
 
       if (!ledger)

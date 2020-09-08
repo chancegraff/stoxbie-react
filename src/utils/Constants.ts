@@ -1,3 +1,7 @@
+import {
+  LedgerType,
+} from "trade-types";
+
 export const DEBOUNCE_SHORT_MS = 500;
 export const DEBOUNCE_MEDIUM_MS = 1000;
 export const DEBOUNCE_LONG_MS = 2000;
@@ -33,3 +37,31 @@ export const PRESENT_PRICES_STATE_KEY = "presentPrices";
 export const HISTORICAL_HOLDINGS_STATE_KEY = "historicalHoldings";
 export const HISTORICAL_LEDGERS_STATE_KEY = "historicalLedgers";
 export const HISTORICAL_PRICES_STATE_KEY = "historicalPrices";
+
+export const DEFAULT_LEDGER: LedgerType = {
+  balance: 10000,
+  amounts: {
+    present: 0,
+    historical: 0,
+    holding: 0,
+  },
+  changes: {
+    amount: {
+      values: 0,
+    },
+    balance: {
+      percent: 0,
+      dollars: 0,
+    },
+    date: {
+      days: 0,
+    },
+    price: {
+      dollars: 0,
+    },
+  },
+  returns: {
+    percent: 0,
+    dollars: 0,
+  },
+};

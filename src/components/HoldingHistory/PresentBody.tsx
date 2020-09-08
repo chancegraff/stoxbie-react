@@ -10,8 +10,8 @@ import {
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  Ledger,
-  PresentHolding,
+  LedgerType,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -35,13 +35,13 @@ import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
 type Props = {
-  representativeHolding: PresentHolding | undefined;
-  presentLedger: Ledger | undefined;
+  representativeHolding: PresentHoldingType | undefined;
+  presentLedger: LedgerType | undefined;
   presentPrice: HistoricalPrice | undefined;
-  presentHoldings: List<PresentHolding>;
+  presentHoldings: List<PresentHoldingType>;
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
-  handleClose: (present: PresentHolding) => void;
+  handleClose: (present: PresentHoldingType) => void;
   handleMouseEnterRow: HandleMouseEnter;
   handleMouseLeaveRow: HandleMouseLeave;
   handleToggleCombined: () => void;

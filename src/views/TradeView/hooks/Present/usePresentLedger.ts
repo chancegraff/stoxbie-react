@@ -4,13 +4,20 @@ import {
 import {
   useRecoilValue,
 } from "recoil";
+import {
+  LedgerType,
+  OrderType,
+} from "trade-types";
 
+import {
+  OrderDirection,
+} from "utils/Enums";
 import {
   presentLedgerState,
 } from "store/Selectors";
 
 type PresentLedgerHook = {
-  PresentLedger: (order: Order | undefined) => Ledger | undefined;
+  PresentLedger: (order: OrderType | undefined) => LedgerType | undefined;
 };
 
 /**
@@ -25,8 +32,8 @@ export const usePresentLedger = (): PresentLedgerHook =>
 
   const PresentLedger = useCallback(
     (
-      order: Order | undefined,
-    ): Ledger | undefined =>
+      order: OrderType | undefined,
+    ): LedgerType | undefined =>
     {
       if (!order)
       {
@@ -44,7 +51,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
 
       switch (order.direction)
       {
-        case Directions.Sell:
+        case OrderDirection.Sell:
         {
           return {
             ...presentLedger,
@@ -56,7 +63,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
             },
           };
         }
-        case Directions.Buy:
+        case OrderDirection.Buy:
         {
           return {
             ...presentLedger,

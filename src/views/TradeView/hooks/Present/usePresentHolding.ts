@@ -4,6 +4,9 @@ import {
 import {
   useRecoilValue,
 } from "recoil";
+import {
+  PresentHoldingType,
+} from "trade-types";
 
 import {
   presentPriceState,
@@ -14,7 +17,7 @@ import {
 } from "./usePresentOrder";
 
 type PresentHoldingHook = {
-  PresentHolding: (amount: number) => PresentHolding | undefined;
+  PresentHolding: (amount: number) => PresentHoldingType | undefined;
 };
 
 /**
@@ -34,7 +37,7 @@ export const usePresentHolding = (): PresentHoldingHook =>
   const PresentHolding = useCallback(
     (
       amount: number,
-    ): PresentHolding | undefined =>
+    ): PresentHoldingType | undefined =>
     {
       if (!presentPrice)
       {
@@ -54,9 +57,11 @@ export const usePresentHolding = (): PresentHoldingHook =>
         symbol: ticker,
       } = presentPrice;
 
-      const holding: PresentHolding = {
+      const holding: PresentHoldingType = {
         ticker,
-        present,
+        orders: {
+          present,
+        },
       };
 
       return holding;

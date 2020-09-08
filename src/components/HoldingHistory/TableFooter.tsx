@@ -6,8 +6,8 @@ import {
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalHolding,
-  Ledger,
+  HistoricalHoldingType,
+  LedgerType,
 } from "trade-types";
 
 import {
@@ -22,8 +22,8 @@ import {
 } from "./TableFooter.styled";
 
 type Props = {
-  presentLedger: Ledger;
-  historicalHoldings: List<HistoricalHolding>;
+  presentLedger: LedgerType;
+  historicalHoldings: List<HistoricalHoldingType>;
 };
 
 const TableFooter: React.FC<Props> = (

@@ -11,7 +11,7 @@ import {
 } from "grommet";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  Ledger,
+  LedgerType,
 } from "trade-types";
 
 import {
@@ -25,7 +25,7 @@ import {
 
 type Props = {
   presentPrice: HistoricalPrice;
-  presentLedger: Ledger;
+  presentLedger: LedgerType;
   orderShareCount: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };

@@ -3,7 +3,7 @@ import React, {
 } from "react";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  PresentHolding,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -19,8 +19,8 @@ import {
 } from "./CloseHoldings.styled";
 
 type Props = {
-  presentHolding: PresentHolding;
-  handleClose: (present: PresentHolding) => void;
+  presentHolding: PresentHoldingType;
+  handleClose: (present: PresentHoldingType) => void;
 };
 
 const CloseHoldings: React.FC<Props> = (

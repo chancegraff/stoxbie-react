@@ -4,13 +4,16 @@ import {
 import {
   useRecoilState,
 } from "recoil";
+import {
+  LedgerType,
+} from "trade-types";
 
 import {
   presentLedgersState,
 } from "store/Atoms";
 
 type UpdatePresentLedgersHook = {
-  updatePresentLedgers: (ledger: Ledger) => void;
+  updatePresentLedgers: (ledger: LedgerType) => void;
 };
 
 /**
@@ -28,7 +31,7 @@ export const useUpdatePresentLedgers = (): UpdatePresentLedgersHook =>
 
   const updatePresentLedgers = useCallback(
     (
-      ledger: Ledger,
+      ledger: LedgerType,
     ) =>
     {
       setPresentLedgers(

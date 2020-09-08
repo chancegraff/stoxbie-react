@@ -8,7 +8,7 @@ import {
 } from "recoil";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  PresentHolding,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -45,7 +45,7 @@ type Props = RouteProps & {
   chartWidth: number;
   chartHeight: number;
   handleOpen: (orderAmount: number) => void;
-  handleClose: (present: PresentHolding) => void;
+  handleClose: (present: PresentHoldingType) => void;
   handleContinue: () => void;
 };
 

@@ -4,7 +4,7 @@ import {
 } from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalHolding,
+  HistoricalHoldingType,
 } from "trade-types";
 
 import {
@@ -13,7 +13,7 @@ import {
 import HistoricalRow from "./HistoricalRow";
 
 type Props = {
-  historicalHoldings: List<HistoricalHolding>;
+  historicalHoldings: List<HistoricalHoldingType>;
 };
 
 const HistoricalBody: React.FC<Props> = (

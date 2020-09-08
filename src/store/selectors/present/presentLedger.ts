@@ -1,11 +1,9 @@
 import {
-  DefaultLedger,
-} from "holding-types";
-import {
   selector,
 } from "recoil";
 
 import {
+  DEFAULT_LEDGER,
   PRESENT_LEDGERS_STATE_KEY,
 } from "utils/Constants";
 import {
@@ -26,7 +24,7 @@ export const presentLedgerState = selector(
       );
 
       return presentLedgers.first(
-        DefaultLedger,
+        DEFAULT_LEDGER,
       );
     },
   },
