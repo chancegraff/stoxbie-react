@@ -45,8 +45,8 @@ export const PRESENT_HOLDING_SELECTOR_KEY = "presentHolding";
 export const DEFAULT_LEDGER: LedgerType = {
   balance: 10000,
   amounts: {
-    present: 0,
-    historical: 0,
+    invested: 0,
+    shorted: 0,
     holding: 0,
   },
   changes: {

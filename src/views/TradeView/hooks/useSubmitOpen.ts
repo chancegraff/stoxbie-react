@@ -60,6 +60,7 @@ export const useSubmitOpen = (): SubmitOpenHook =>
 
       const ledger = PresentLedger(
         present,
+        holding,
       );
 
       if (!ledger)

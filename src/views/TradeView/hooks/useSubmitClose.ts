@@ -69,6 +69,7 @@ export const useSubmitClose = (): SubmitCloseHook =>
 
       const ledger = PresentLedger(
         historical,
+        holding,
       );
 
       if (!ledger)

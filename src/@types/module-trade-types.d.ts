@@ -3,8 +3,8 @@ declare module "trade-types" {
    * Ledger
    */
   declare type AmountsType = {
-    present: number;
-    historical: number;
+    invested: number;
+    shorted: number;
     holding: number;
   };
 
@@ -49,9 +49,9 @@ declare module "trade-types" {
     price: number;
   };
 
-  declare type PresentOrderType = Order;
+  declare type PresentOrderType = OrderType;
 
-  declare type HistoricalOrderType = Order;
+  declare type HistoricalOrderType = OrderType;
 
   declare type OrdersType = {
     present: PresentOrderType;

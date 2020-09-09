@@ -5,8 +5,10 @@ import {
   useRecoilValue,
 } from "recoil";
 import {
+  HistoricalHoldingType,
   LedgerType,
   OrderType,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -17,7 +19,7 @@ import {
 } from "store/Selectors";
 
 type PresentLedgerHook = {
-  PresentLedger: (order: OrderType | undefined) => LedgerType | undefined;
+  PresentLedger: (order: OrderType | undefined, holding: PresentHoldingType | HistoricalHoldingType | undefined) => LedgerType | undefined;
 };
 
 /**
@@ -30,55 +32,123 @@ export const usePresentLedger = (): PresentLedgerHook =>
     presentLedgerState,
   );
 
-  const PresentLedger = useCallback(
+  /**
+   * @summary Getting rid of shares
+   */
+  const LedgerAfterHistoricalOrder = useCallback(
     (
-      order: OrderType | undefined,
-    ): LedgerType | undefined =>
+      order: OrderType,
+    ) =>
     {
-      if (!order)
-      {
-        return;
-      }
-
       const {
         balance: previousBalance,
+        amounts,
         amounts: {
-          present: previousPresentAmount,
-          historical: previousHistoricalAmount,
           holding: previousHoldingAmount,
         },
       } = presentLedger;
 
-      switch (order.direction)
+      return {
+        ...presentLedger,
+        balance: previousBalance + order.balance,
+        amounts: {
+          ...amounts,
+          holding: previousHoldingAmount - order.amount,
+        },
+      };
+    },
+    [
+      presentLedger,
+    ],
+  );
+
+  /**
+   * @summary Getting more shares
+   */
+  const LedgerAfterPresentOrder = useCallback(
+    (
+      order: OrderType,
+    ) =>
+    {
+      const {
+        balance: previousBalance,
+        amounts,
+        amounts: {
+          invested: previousInvestedAmount,
+          shorted: previousShortedAmount,
+          holding: previousHoldingAmount,
+        },
+      } = presentLedger;
+
+      const nextLedger = {
+        ...presentLedger,
+        balance: previousBalance - order.balance,
+        amounts: {
+          ...amounts,
+          holding: previousHoldingAmount + order.amount,
+        },
+      };
+
+      if (order.direction === OrderDirection.Sell)
       {
-        case OrderDirection.Sell:
+        /**
+         * @summary Getting more shorted shares
+         */
+        nextLedger.amounts.shorted = previousShortedAmount + order.amount;
+      }
+      else
+      {
+        /**
+         * @summary Getting more invested shares
+         */
+        nextLedger.amounts.invested = previousInvestedAmount + order.amount;
+      }
+
+      return nextLedger;
+    },
+    [
+      presentLedger,
+    ],
+  );
+
+  const PresentLedger = useCallback(
+    (
+      order: OrderType | undefined,
+      holding: PresentHoldingType | HistoricalHoldingType | undefined,
+    ): LedgerType | undefined =>
+    {
+      if (
+        !holding ||
+        !order
+      )
+      {
+        return;
+      }
+
+      const holdingHasHistoricalOrder = "historical" in holding.orders;
+      const holdingType = holdingHasHistoricalOrder
+        ? "historical"
+        : "present";
+
+      switch (holdingType)
+      {
+        case "historical":
         {
-          return {
-            ...presentLedger,
-            balance: previousBalance + order.balance,
-            amounts: {
-              present: previousPresentAmount,
-              historical: previousHistoricalAmount + order.amount,
-              holding: previousHoldingAmount - order.amount,
-            },
-          };
+          return LedgerAfterHistoricalOrder(
+            order,
+          );
         }
-        case OrderDirection.Buy:
+        case "present":
         {
-          return {
-            ...presentLedger,
-            balance: previousBalance - order.balance,
-            amounts: {
-              present: previousPresentAmount + order.amount,
-              historical: previousHistoricalAmount,
-              holding: previousHoldingAmount + order.amount,
-            },
-          };
+          return LedgerAfterPresentOrder(
+            order,
+          );
         }
       }
     },
     [
-      presentLedger,
+      LedgerAfterHistoricalOrder,
+      LedgerAfterPresentOrder,
     ],
   );
 
