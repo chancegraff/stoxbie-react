@@ -11,6 +11,7 @@ import {
 import {
   HoverState,
   useHover,
+  useUnload,
 } from "utils/Hooks";
 import HoverIcon from "components/Grommet/HoverIcon";
 
@@ -117,6 +118,10 @@ const ToggleCombined: React.FC<Props> = (
     [
       buttonHoverState,
     ],
+  );
+
+  useUnload(
+    handleMouseLeaveButton,
   );
 
   if (
