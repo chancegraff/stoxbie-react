@@ -8,6 +8,9 @@ import {
 import {
   Grommet,
 } from "grommet";
+import {
+  RecoilRoot,
+} from "recoil";
 
 type Props = PropsHasChildren & {
   path: string;
@@ -24,17 +27,19 @@ const Boilerplate: React.FC<Props> = (
 {
   return (
     <Grommet>
-      <MemoryRouter
-        initialEntries={
-          [
-            route,
-          ]
-        }
-      >
-        <Route path={path}>
-          {children}
-        </Route>
-      </MemoryRouter>
+      <RecoilRoot>
+        <MemoryRouter
+          initialEntries={
+            [
+              route,
+            ]
+          }
+        >
+          <Route path={path}>
+            {children}
+          </Route>
+        </MemoryRouter>
+      </RecoilRoot>
     </Grommet>
   );
 };
