@@ -183,7 +183,7 @@
             2,
             {
                 "SwitchCase": 1,
-                "offsetTernaryExpressions": true,
+                "offsetTernaryExpressions": false,
                 "ignoredNodes": [
                     "TemplateLiteral > *"
                 ]

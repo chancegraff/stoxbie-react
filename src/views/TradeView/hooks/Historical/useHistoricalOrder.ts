@@ -10,6 +10,9 @@ import {
 } from "trade-types";
 
 import {
+  OrderDirection,
+} from "utils/Enums";
+import {
   Amount,
   Balance,
   OppositeDirection,
@@ -46,19 +49,27 @@ export const useHistoricalOrder = (): HistoricalOrderHook =>
         close: closePrice,
       } = presentPrice;
 
+      const amount = Amount(
+        present.amount,
+      );
+      const date = new Date();
+      const direction = OppositeDirection(
+        present.direction,
+      );
+      const price = closePrice;
+      const balance = Balance(
+        present.amount,
+        closePrice,
+      );
+
       return {
-        amount: Amount(
-          present.amount,
-        ),
-        balance: Balance(
-          present.amount,
-          closePrice,
-        ),
-        date: new Date(),
-        direction: OppositeDirection(
-          present.direction,
-        ),
-        price: closePrice,
+        amount,
+        balance: present.direction === OrderDirection.Buy
+          ? balance
+          : present.balance * 2 - balance,
+        date,
+        direction,
+        price,
       };
     },
     [
