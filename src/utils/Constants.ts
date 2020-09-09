@@ -65,6 +65,7 @@ export const DEFAULT_LEDGER: LedgerType = {
     },
   },
   returns: {
+    invested: 0,
     percent: 0,
     dollars: 0,
   },

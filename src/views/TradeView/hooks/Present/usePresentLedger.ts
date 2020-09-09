@@ -46,7 +46,22 @@ export const usePresentLedger = (): PresentLedgerHook =>
         amounts: {
           holding: previousHoldingAmount,
         },
+        returns,
+        returns: {
+          invested: previousReturnInvested,
+          dollars: previousReturnDollars,
+        },
       } = presentLedger;
+
+      /**
+       * Invested 4980.66
+       * Revenued 6437.22
+       * Profited 1456.56
+       * Profited / Invested = 29%
+       */
+
+      const historicalOrderSpent = order.balance;
+      const nextReturnDollars = previousReturnDollars + (historicalOrderSpent - previousBalance);
 
       return {
         ...presentLedger,
@@ -54,6 +69,11 @@ export const usePresentLedger = (): PresentLedgerHook =>
         amounts: {
           ...amounts,
           holding: previousHoldingAmount - order.amount,
+        },
+        returns: {
+          ...returns,
+          dollars: nextReturnDollars,
+          percent: nextReturnDollars / previousReturnInvested,
         },
       };
     },
@@ -78,6 +98,10 @@ export const usePresentLedger = (): PresentLedgerHook =>
           shorted: previousShortedAmount,
           holding: previousHoldingAmount,
         },
+        returns,
+        returns: {
+          invested: previousInvested,
+        },
       } = presentLedger;
 
       const nextLedger = {
@@ -86,6 +110,10 @@ export const usePresentLedger = (): PresentLedgerHook =>
         amounts: {
           ...amounts,
           holding: previousHoldingAmount + order.amount,
+        },
+        returns: {
+          ...returns,
+          invested: previousInvested + order.balance,
         },
       };
 

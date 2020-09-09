@@ -25,6 +25,7 @@ declare module "trade-types" {
   };
 
   declare type ReturnsType = {
+    invested: number;
     percent: number;
     dollars: number;
   };
