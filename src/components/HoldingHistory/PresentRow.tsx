@@ -50,7 +50,7 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
         }
 
         return formatCount(
-          presentHolding.orders.present.amount,
+          presentHolding.orders.present.amount * presentHolding.orders.present.direction,
         );
       },
       [
