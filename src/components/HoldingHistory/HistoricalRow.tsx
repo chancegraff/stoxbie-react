@@ -29,7 +29,7 @@ const HistoricalRow: React.FC<Props> = (
     () =>
     {
       return formatCount(
-        historicalHolding.orders.historical.amount,
+        historicalHolding.orders.present.amount * historicalHolding.orders.present.direction,
       );
     },
     [

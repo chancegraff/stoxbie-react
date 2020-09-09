@@ -38,6 +38,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
   const LedgerAfterHistoricalOrder = useCallback(
     (
       order: OrderType,
+      holding: PresentHoldingType | HistoricalHoldingType,
     ) =>
     {
       const {
@@ -53,8 +54,17 @@ export const usePresentLedger = (): PresentLedgerHook =>
         },
       } = presentLedger;
 
-      const historicalOrderSpent = order.balance;
-      const nextReturnDollars = previousReturnDollars + (historicalOrderSpent - previousBalance);
+      const {
+        balance: historicalOrderBalance,
+      } = order;
+      const {
+        orders: {
+          present: {
+            balance: presentOrderBalance,
+          },
+        },
+      } = holding;
+      const nextReturnDollars = previousReturnDollars + (historicalOrderBalance - presentOrderBalance);
 
       return {
         ...presentLedger,
@@ -157,6 +167,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
         {
           return LedgerAfterHistoricalOrder(
             order,
+            holding,
           );
         }
         case "present":
