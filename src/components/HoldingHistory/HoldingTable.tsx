@@ -130,7 +130,7 @@ const HoldingTable: React.FC<Props> = (
   useEffect(
     () =>
     {
-      if (presentHoldings.isEmpty())
+      if (presentHoldings.count() <= 1)
       {
         handleRetractCombined();
       }
