@@ -1,15 +1,30 @@
 import {
+  useCallback,
   useEffect,
 } from "react";
 import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
+  addBusinessDays,
   differenceInBusinessDays,
   isBefore,
+  isSameDay,
+  isSaturday,
+  isSunday,
 } from "date-fns";
+import {
+  isWeekend,
+  setDay,
+} from "date-fns/esm";
 import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
 
+import {
+  useRedirectToDate,
+} from "utils/Hooks";
 import {
   DateFormats,
   parseDate,
@@ -29,6 +44,10 @@ export const useEffectPresentPrices = (
   date: Date | undefined,
 ): void =>
 {
+  const {
+    redirectToDate,
+  } = useRedirectToDate();
+
   const previousDate = usePrevious(
     date,
   );
@@ -41,6 +60,59 @@ export const useEffectPresentPrices = (
     setPresentPrices,
   ] = useRecoilState(
     presentPricesState,
+  );
+
+  const updatePresentPrices = useCallback(
+    (
+      endIndex: number,
+    ) =>
+    {
+      /**
+       * @summary Set startIndex to 0 if otherwise
+       * smaller than is possible (ie, negative)
+       */
+      const startIndex = Math.max(
+        endIndex - 261,
+        0,
+      );
+
+      /**
+       * @summary Cut out the next present prices and set them
+       */
+      setPresentPrices(
+        historicalPrices.slice(
+          startIndex,
+          endIndex,
+        ),
+      );
+    },
+    [
+      setPresentPrices,
+      historicalPrices,
+    ],
+  );
+  const sliceHistoricalPrices = useCallback(
+    (
+      index: number,
+      difference: number,
+    ) =>
+    {
+      if (difference > 0)
+      {
+        return historicalPrices.slice(
+          index,
+          index + difference,
+        );
+      }
+
+      return historicalPrices.slice(
+        index + difference,
+        index,
+      );
+    },
+    [
+      historicalPrices,
+    ],
   );
 
   useEffect(
@@ -72,6 +144,49 @@ export const useEffectPresentPrices = (
       }
 
       /**
+       * @summary Forward to closest weekday if its a weekend
+       */
+      if (
+        isWeekend(
+          date,
+        )
+      )
+      {
+        /**
+         * @summary Redirect to Friday if it's Saturday
+         */
+        if (
+          isSaturday(
+            date,
+          )
+        )
+        {
+          return redirectToDate(
+            setDay(
+              date,
+              5,
+            ),
+          );
+        }
+        /**
+         * @summary Redirect to Monday if it's Sunday
+         */
+        else if (
+          isSunday(
+            date,
+          )
+        )
+        {
+          return redirectToDate(
+            setDay(
+              date,
+              1,
+            ),
+          );
+        }
+      }
+
+      /**
        * @summary Get the last historical price and parse its date
        */
       const lastPrice = historicalPrices.last<undefined>();
@@ -92,49 +207,101 @@ export const useEffectPresentPrices = (
       /**
        * @summary Get the indexes difference between last date and end date
        */
-      const endIndexDate = date;
       const endIndexesDifference = differenceInBusinessDays(
         lastDate,
-        endIndexDate,
+        date,
       );
 
       /**
        * @summary Stop if end index date is in the future
        */
       if (
-        isBefore(
-          endIndexDate,
+        !isBefore(
+          date,
           lastDate,
         )
       )
       {
-        /**
-         * @summary Get the indexes to splice from, and set startIndex
-         * to 0 if otherwise smaller than is possible (ie, negative)
+        return;
+      }
+
+      /**
+         * @summary Lazily get the price at the indexes
+         * we'll slice to (ie, the end) and convert its
+         * date attribute to a Date type
          */
-        const endIndex = historicalPrices.count() - endIndexesDifference;
-        const startIndex = Math.max(
-          endIndex - 261,
-          0,
+      const lazyEndIndex = historicalPrices.count() - endIndexesDifference;
+      const lastEndPrice = historicalPrices.get<HistoricalPrice>(
+        lazyEndIndex,
+        historicalPrices.first(),
+      );
+      const lazyEndDate = parseDate(
+        lastEndPrice.date,
+        DateFormats.Iex,
+      );
+
+      /**
+       * @summary Stop if this is already the correct date
+       */
+      if (
+        isSameDay(
+          date,
+          lazyEndDate,
+        )
+      )
+      {
+        updatePresentPrices(
+          lazyEndIndex,
         );
 
-        /**
-         * @summary Cut out the next present prices and set them
-         */
-        setPresentPrices(
-          historicalPrices.slice(
-            startIndex,
-            endIndex,
-          ),
-        );
+        return;
       }
+
+      /**
+       * @summary Determine the direction of the real value
+       */
+      const lazyIndexesDifference = differenceInBusinessDays(
+        date,
+        lazyEndDate,
+      );
+
+      /**
+       * @summary Select indexes of historical prices from
+       * lazy end index to maximum possible date, or vice
+       * versa if the value is negative
+       */
+      const indexRange = sliceHistoricalPrices(
+        lazyEndIndex,
+        lazyIndexesDifference,
+      );
+
+      /**
+       * @summary The last value is always the value we're
+       * searching form, so set the count as the index
+       */
+      const endIndexInRange = indexRange.count();
+
+      /**
+       * @summary Create the end index from the range, relative
+       * to the full array of historical prices
+       */
+      const endIndex = endIndexInRange + lazyEndIndex;
+
+      /**
+       * @summary Update the present prices!
+       */
+      updatePresentPrices(
+        endIndex,
+      );
     },
     [
       date,
-      previousDate,
       historicalPrices,
       presentPrices,
-      setPresentPrices,
+      previousDate,
+      redirectToDate,
+      sliceHistoricalPrices,
+      updatePresentPrices,
     ],
   );
 };

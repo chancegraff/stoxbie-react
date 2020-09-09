@@ -2,17 +2,12 @@ import {
   useCallback,
 } from "react";
 import {
-  useHistory,
-  useLocation,
-} from "react-router-dom";
-import {
   addBusinessDays,
 } from "date-fns";
 
 import {
-  DateFormats,
-  formatDate,
-} from "utils/Utilities";
+  useRedirectToDate,
+} from "utils/Hooks";
 
 type SubmitContinueHook = {
   submitContinue: () => void;
@@ -27,8 +22,9 @@ export const useSubmitContinue = (
   date: Date | undefined,
 ): SubmitContinueHook =>
 {
-  const location = useLocation();
-  const history = useHistory();
+  const {
+    redirectToDate,
+  } = useRedirectToDate();
 
   const submitContinue = useCallback(
     () =>
@@ -38,34 +34,18 @@ export const useSubmitContinue = (
         return;
       }
 
-      const nextDate = formatDate(
-        addBusinessDays(
-          date,
-          1,
-        ),
-        DateFormats.Url,
+      const nextDate = addBusinessDays(
+        date,
+        1,
       );
 
-      const pathnames = location.pathname
-        .split(
-          "/",
-        )
-        .slice(
-          0,
-          -1,
-        )
-        .join(
-          "/",
-        );
-
-      history.push(
-        `${pathnames}/${nextDate}`,
+      redirectToDate(
+        nextDate,
       );
     },
     [
-      history,
-      location,
       date,
+      redirectToDate,
     ],
   );
 

@@ -7,7 +7,7 @@ import {
 
 import {
   DateFormats,
-  formatDate,
+  formatParsedDate,
 } from "utils/Utilities";
 
 import {
@@ -31,13 +31,16 @@ const TimeControl: React.FC<Props> = (
   const safeDate = useMemo(
     () =>
     {
-      if (presentPrice)
+      if (!presentPrice)
       {
-        return formatDate(
-          presentPrice.date,
-          DateFormats.Full,
-        );
+        return;
       }
+
+      return formatParsedDate(
+        presentPrice.date,
+        DateFormats.Iex,
+        DateFormats.Full,
+      );
     },
     [
       presentPrice,
