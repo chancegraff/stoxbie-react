@@ -11,11 +11,9 @@ import {
   isSameDay,
   isSaturday,
   isSunday,
-} from "date-fns";
-import {
   isWeekend,
   setDay,
-} from "date-fns/esm";
+} from "date-fns";
 import {
   useRecoilState,
   useRecoilValue,
