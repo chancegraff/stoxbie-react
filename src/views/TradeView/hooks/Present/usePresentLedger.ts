@@ -53,13 +53,6 @@ export const usePresentLedger = (): PresentLedgerHook =>
         },
       } = presentLedger;
 
-      /**
-       * Invested 4980.66
-       * Revenued 6437.22
-       * Profited 1456.56
-       * Profited / Invested = 29%
-       */
-
       const historicalOrderSpent = order.balance;
       const nextReturnDollars = previousReturnDollars + (historicalOrderSpent - previousBalance);
 

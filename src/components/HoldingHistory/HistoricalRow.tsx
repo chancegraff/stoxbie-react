@@ -64,7 +64,7 @@ const HistoricalRow: React.FC<Props> = (
     () =>
     {
       return formatCurrency(
-        historicalHolding.orders.historical.amount * historicalHolding.orders.historical.price,
+        historicalHolding.orders.historical.balance,
       );
     },
     [
