@@ -47,7 +47,7 @@ export const useRedirectToDate = (): RedirectToDateHook =>
           "/",
         );
 
-      history.push(
+      history.replace(
         `${pathnames}/${nextDate}`,
       );
     },
