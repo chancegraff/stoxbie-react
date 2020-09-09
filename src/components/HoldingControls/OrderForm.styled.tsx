@@ -38,7 +38,13 @@ export const StoxbieSubmitOrder: React.FC<SubmitOrderProps> = (
 {
   return (
     <Box
+      fill={true}
       gridArea={gridArea}
+      margin={
+        {
+          top: "12px",
+        }
+      }
     >
       <SubmitOrder
         primary={true}
