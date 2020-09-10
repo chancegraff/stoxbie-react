@@ -2,9 +2,9 @@ import {
   screen,
 } from "@testing-library/react";
 
-export const SellButton = () =>
+export const OrderButton = () =>
 {
   return screen.getByText(
-    "Sell",
+    "Order",
   );
 };

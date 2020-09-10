@@ -1,11 +1,12 @@
 import {
+  pageShouldLoad,
+} from "tests/Assertions";
+import {
   buyShares,
   sellShares,
 } from "tests/E2E";
 import {
-  clickBuy,
   clickContinue,
-  clickSell,
 } from "tests/Events";
 import {
   renderTradeView,
@@ -16,6 +17,8 @@ it(
   async () =>
   {
     renderTradeView();
+
+    await pageShouldLoad();
 
     // Day 1: Buy 200 shares @ 3.2
     // (200) 3.2 / - / - / -    <<
@@ -38,8 +41,6 @@ it(
     );
 
     clickContinue();
-
-    clickSell();
 
     // Day 2: Sell 50/200 shares @ 3.79
     // (150)  3.2 / -    / -   / -
@@ -64,8 +65,6 @@ it(
 
     clickContinue();
 
-    clickBuy();
-
     // Day 3: Buy 100 shares @ 3.67
     // (250)  3.67 / -    / -   / -       <<
     // (150)  3.2  / -    / -   / -       xx
@@ -89,8 +88,6 @@ it(
     );
 
     clickContinue();
-
-    clickSell();
 
     // Day 4: Sell 150/250 shares @ 3.78
     // (100)  3.67 / -    / -   / -

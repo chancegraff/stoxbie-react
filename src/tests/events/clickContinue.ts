@@ -1,6 +1,4 @@
-import {
-  fireEvent,
-} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import {
   ContinueButton,
@@ -16,7 +14,7 @@ export const clickContinue = (
     ),
     () =>
     {
-      return fireEvent.click(
+      return userEvent.click(
         ContinueButton(),
       );
     },

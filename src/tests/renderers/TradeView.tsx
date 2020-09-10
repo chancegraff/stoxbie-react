@@ -35,7 +35,7 @@ export const renderTradeView = () =>
         <HistoricalPricesSetter>
           <TradeView
             error={undefined}
-            date={dayOnePrice.date}
+            date={urlDate}
           />
         </HistoricalPricesSetter>
       </Boilerplate>

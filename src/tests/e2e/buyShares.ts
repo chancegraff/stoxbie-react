@@ -14,7 +14,7 @@ import {
 } from "tests/Components";
 import {
   changeSlider,
-  clickBuy,
+  clickOrder,
 } from "tests/Events";
 import {
   formatCount,
@@ -39,7 +39,7 @@ export const buyShares = async (
     },
   );
 
-  clickBuy();
+  clickOrder();
 
   await waitFor(
     () =>

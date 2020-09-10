@@ -3,6 +3,7 @@ import {
 } from "@testing-library/react";
 
 import {
+  pageShouldLoad,
   sliderShouldChange,
 } from "tests/Assertions";
 import {
@@ -19,6 +20,8 @@ it(
     const shareCount = "200";
 
     renderTradeView();
+
+    await pageShouldLoad();
 
     changeSlider(
       shareCount,

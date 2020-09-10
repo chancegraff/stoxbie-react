@@ -15,6 +15,9 @@ import {
   setDay,
 } from "date-fns";
 import {
+  List,
+} from "immutable";
+import {
   useRecoilState,
   useRecoilValue,
 } from "recoil";
@@ -24,6 +27,7 @@ import {
 } from "utils/Hooks";
 import {
   DateFormats,
+  handleUnloadCreator,
   parseDate,
   usePrevious,
 } from "utils/Utilities";
@@ -73,6 +77,15 @@ export const useEffectPresentPrices = (
         0,
       );
 
+      console.log(
+        "\n\n\n\n",
+        "Made it",
+        "\n",
+        startIndex,
+        endIndex,
+        "\n\n\n\n",
+      );
+
       /**
        * @summary Cut out the next present prices and set them
        */
@@ -112,7 +125,7 @@ export const useEffectPresentPrices = (
     ],
   );
 
-  useEffect(
+  return useEffect(
     () =>
     {
       /**

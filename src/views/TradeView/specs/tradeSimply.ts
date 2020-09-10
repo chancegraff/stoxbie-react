@@ -1,10 +1,12 @@
 import {
+  pageShouldLoad,
+} from "tests/Assertions";
+import {
   buyShares,
   sellShares,
 } from "tests/E2E";
 import {
   clickContinue,
-  clickSell,
 } from "tests/Events";
 import {
   renderTradeView,
@@ -15,6 +17,8 @@ it(
   async () =>
   {
     renderTradeView();
+
+    await pageShouldLoad();
 
     await buyShares(
       {
@@ -34,8 +38,6 @@ it(
     );
 
     clickContinue();
-
-    clickSell();
 
     await sellShares(
       {

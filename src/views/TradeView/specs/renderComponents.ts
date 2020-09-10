@@ -1,13 +1,13 @@
 import {
   componentsShouldRender,
+  pageShouldLoad,
 } from "tests/Assertions";
 import {
   BreadcrumbsContainer,
   BreadcrumbsTicker,
-  BuyButton,
   ContinueButton,
   LineChart,
-  SellButton,
+  OrderButton,
   TableFooterDollarBalance,
   TableHeaderClose,
   TableHeaderEquity,
@@ -32,9 +32,11 @@ const dayOnePrice = getPrice(
 
 it(
   "renders trade view",
-  () =>
+  async () =>
   {
     renderTradeView();
+
+    await pageShouldLoad();
 
     componentsShouldRender(
       [
@@ -45,8 +47,7 @@ it(
         LineChart(),
         ContinueButton(),
         TradeSlider(),
-        BuyButton(),
-        SellButton(),
+        OrderButton(),
         TableHeaderShares(),
         TableHeaderOpen(),
         TableHeaderClose(),

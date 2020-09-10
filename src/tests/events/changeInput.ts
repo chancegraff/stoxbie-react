@@ -1,18 +1,12 @@
-import {
-  fireEvent,
-} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 export const changeInput = (
   input: any,
   value: string,
 ) =>
 {
-  fireEvent.change(
+  userEvent.type(
     input,
-    {
-      target: {
-        value,
-      },
-    },
+    value,
   );
 };

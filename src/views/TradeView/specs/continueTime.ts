@@ -4,6 +4,7 @@ import {
 
 import {
   componentShouldRender,
+  pageShouldLoad,
 } from "tests/Assertions";
 import {
   TimeControlDate,
@@ -36,9 +37,11 @@ const [
 
 it(
   "continues forward in time",
-  () =>
+  async () =>
   {
     renderTradeView();
+
+    await pageShouldLoad();
 
     componentShouldRender(
       TimeControlDate(
