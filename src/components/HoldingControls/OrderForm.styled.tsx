@@ -18,6 +18,11 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
       align="center"
       justify="center"
       flex={false}
+      height={
+        {
+          min: "96px",
+        }
+      }
       margin={
         {
           vertical: "24px",

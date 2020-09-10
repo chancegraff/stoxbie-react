@@ -147,7 +147,6 @@ const HoldingTable: React.FC<Props> = (
     return (
       <Spinner
         css=""
-        Container={GrommetContainer}
       />
     );
   }

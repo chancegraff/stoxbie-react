@@ -59,6 +59,11 @@ export const GrommetSidebarContainer: React.FC<JSXBoxProps> = (
     <Box
       gridArea="trades"
       fill="vertical"
+      width={
+        {
+          min: "312px",
+        }
+      }
       {...props}
     />
   );

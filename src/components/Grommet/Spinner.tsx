@@ -34,9 +34,7 @@ const Spinner: React.FC<Props> = (
   }
 
   return (
-    <Container
-      fill={true}
-    >
+    <Container>
       <Oval
         css=""
         {...props}

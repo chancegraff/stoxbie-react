@@ -10,6 +10,8 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Box
+      align="center"
+      justify="center"
       fill={true}
       {...props}
     />
