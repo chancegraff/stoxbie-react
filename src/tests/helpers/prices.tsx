@@ -1,9 +1,64 @@
+import React, {
+  PropsHasChildren,
+  useEffect,
+} from "react";
+import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
+  List,
+} from "immutable";
+import {
+  useRecoilState,
+} from "recoil";
+
 import {
   DateFormats,
   formatDate,
 } from "utils/Utilities";
+import {
+  historicalPricesState,
+} from "store/Atoms";
 
-export const prices = [
+export const HistoricalPricesSetter: React.FC<PropsHasChildren> = (
+  props,
+) =>
+{
+  const [
+    historicalPrices,
+    setHistoricalPrices,
+  ] = useRecoilState(
+    historicalPricesState,
+  );
+
+  useEffect(
+    () =>
+    {
+      if (!historicalPrices.isEmpty())
+      {
+        return;
+      }
+
+      setHistoricalPrices(
+        List(
+          prices,
+        ),
+      );
+    },
+    [
+      historicalPrices,
+      setHistoricalPrices,
+    ],
+  );
+
+  return (
+    <>
+      {props.children}
+    </>
+  );
+};
+
+export const prices: HistoricalPrice[] = [
   {
     date: "2003-12-01",
     uClose: 51.8,
@@ -16,7 +71,6 @@ export const prices = [
     high: 3.73,
     low: 3.68,
     volume: 18837809,
-    currency: "",
     change: 0.127,
     changePercent: 3.523,
     label: "Dec 1, 03",
@@ -35,7 +89,6 @@ export const prices = [
     high: 3.8,
     low: 3.63,
     volume: 16599712,
-    currency: "",
     change: 0.0149,
     changePercent: 0.3975,
     label: "Dec 2, 03",
@@ -54,7 +107,6 @@ export const prices = [
     high: 3.83,
     low: 3.58,
     volume: 18396265,
-    currency: "",
     change: -0.083,
     changePercent: -2.2604,
     label: "Dec 3, 03",
@@ -73,7 +125,6 @@ export const prices = [
     high: 3.78,
     low: 3.44,
     volume: 28969613,
-    currency: "",
     change: -0.1295,
     changePercent: -3.5742,
     label: "Dec 4, 03",
@@ -92,7 +143,6 @@ export const prices = [
     high: 3.61,
     low: 3.42,
     volume: 12962130,
-    currency: "",
     change: -0.0413,
     changePercent: -1.2316,
     label: "Dec 5, 03",
@@ -111,7 +161,6 @@ export const prices = [
     high: 3.58,
     low: 3.36,
     volume: 20859234,
-    currency: "",
     change: -0.0187,
     changePercent: -0.571,
     label: "Dec 8, 03",
@@ -130,7 +179,6 @@ export const prices = [
     high: 3.53,
     low: 3.31,
     volume: 14739480,
-    currency: "",
     change: -0.1286,
     changePercent: -3.8183,
     label: "Dec 9, 03",
@@ -149,7 +197,6 @@ export const prices = [
     high: 3.44,
     low: 3.3,
     volume: 26423515,
-    currency: "",
     change: -0.0284,
     changePercent: -0.8845,
     label: "Dec 10, 03",
@@ -168,7 +215,6 @@ export const prices = [
     high: 3.52,
     low: 3.29,
     volume: 18165498,
-    currency: "",
     change: 0.1713,
     changePercent: 5.4675,
     label: "Dec 11, 03",
@@ -187,7 +233,6 @@ export const prices = [
     high: 3.56,
     low: 3.3,
     volume: 11724642,
-    currency: "",
     change: -0.046,
     changePercent: -1.349,
     label: "Dec 12, 03",
@@ -206,7 +251,6 @@ export const prices = [
     high: 3.56,
     low: 3.26,
     volume: 14964135,
-    currency: "",
     change: -0.1083,
     changePercent: -3.2128,
     label: "Dec 15, 03",
@@ -225,7 +269,6 @@ export const prices = [
     high: 3.31,
     low: 3.17,
     volume: 19970492,
-    currency: "",
     change: -0.0376,
     changePercent: -1.1719,
     label: "Dec 16, 03",
@@ -244,7 +287,6 @@ export const prices = [
     high: 3.79,
     low: 3.09,
     volume: 65596517,
-    currency: "",
     change: 0.4084,
     changePercent: 12.8,
     label: "Dec 17, 03",
@@ -263,7 +305,6 @@ export const prices = [
     high: 3.8,
     low: 3.55,
     volume: 45332767,
-    currency: "",
     change: 0.0488,
     changePercent: 1.3556,
     label: "Dec 18, 03",
@@ -282,7 +323,6 @@ export const prices = [
     high: 3.7,
     low: 3.7,
     volume: 19005347,
-    currency: "",
     change: -0.007,
     changePercent: -0.195,
     label: "Dec 19, 03",
@@ -301,7 +341,6 @@ export const prices = [
     high: 3.85,
     low: 3.69,
     volume: 19601918,
-    currency: "",
     change: 0.0669,
     changePercent: 1.8195,
     label: "Dec 22, 03",
@@ -320,7 +359,6 @@ export const prices = [
     high: 4.15,
     low: 3.65,
     volume: 30372311,
-    currency: "",
     change: 0.212,
     changePercent: 5.6081,
     label: "Dec 23, 03",
@@ -339,7 +377,6 @@ export const prices = [
     high: 4.23,
     low: 3.94,
     volume: 28403036,
-    currency: "",
     change: 0.1524,
     changePercent: 4.0128,
     label: "Dec 24, 03",
@@ -358,7 +395,6 @@ export const prices = [
     high: 4.4,
     low: 4.23,
     volume: 12459766,
-    currency: "",
     change: 0.0901,
     changePercent: 2.23,
     label: "Dec 26, 03",
@@ -377,7 +413,6 @@ export const prices = [
     high: 4.35,
     low: 4.18,
     volume: 16662447,
-    currency: "",
     change: 0.0082,
     changePercent: 0.19,
     label: "Dec 29, 03",
@@ -396,7 +431,6 @@ export const prices = [
     high: 4.36,
     low: 4.23,
     volume: 15605813,
-    currency: "",
     change: -0.1092,
     changePercent: -2.6557,
     label: "Dec 30, 03",
@@ -415,7 +449,6 @@ export const prices = [
     high: 4.16,
     low: 3.97,
     volume: 17374049,
-    currency: "",
     change: -0.15,
     changePercent: -3.8655,
     label: "Dec 31, 03",

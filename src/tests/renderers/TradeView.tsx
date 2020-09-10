@@ -2,13 +2,11 @@ import React from "react";
 import {
   render,
 } from "@testing-library/react";
-import {
-  parseISO,
-} from "date-fns";
 
 import Boilerplate from "tests/Boilerplate";
 import {
   getPrice,
+  HistoricalPricesSetter,
   tradeViewStartDate,
 } from "tests/Helpers";
 import {
@@ -34,11 +32,12 @@ export const renderTradeView = () =>
         path="/trade/:ticker/:date"
         route={`/trade/${dayOnePrice.symbol}/${urlDate}`}
       >
-        <TradeView
-          error={undefined}
-          date={dayOnePrice.date}
-          ticker={dayOnePrice.symbol}
-        />
+        <HistoricalPricesSetter>
+          <TradeView
+            error={undefined}
+            date={dayOnePrice.date}
+          />
+        </HistoricalPricesSetter>
       </Boilerplate>
     ),
   );

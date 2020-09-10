@@ -145,7 +145,6 @@ const TradeRoute: React.FC<Props> = () =>
       css=""
       date={date}
       error={error}
-      ticker={ticker}
     />
   );
 };

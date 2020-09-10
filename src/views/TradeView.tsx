@@ -11,14 +11,12 @@ import TradeViewLogic from "./TradeView/TradeViewLogic";
 
 type Props = RouteProps & {
   date: string | undefined;
-  ticker: string | undefined;
   error: string | undefined;
 };
 
 const TradeView: React.FC<Props> = (
   {
     date,
-    ticker,
     error,
   },
 ) =>
