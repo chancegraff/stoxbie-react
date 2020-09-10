@@ -9,6 +9,7 @@ import {
   DateFormats,
   formatParsedDate,
 } from "utils/Utilities";
+import Spinner from "components/Grommet/Spinner";
 
 import {
   GrommetButton,
@@ -46,6 +47,16 @@ const TimeControl: React.FC<Props> = (
       presentPrice,
     ],
   );
+
+  if (!presentPrice)
+  {
+    return (
+      <Spinner
+        css=""
+        Container={GrommetContainer}
+      />
+    );
+  }
 
   return (
     <GrommetContainer css="">

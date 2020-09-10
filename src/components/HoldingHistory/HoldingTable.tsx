@@ -26,6 +26,7 @@ import {
 import {
   useHover,
 } from "utils/Hooks";
+import Spinner from "components/Grommet/Spinner";
 
 import CombinedBody from "./CombinedBody";
 import HistoricalBody from "./HistoricalBody";
@@ -140,6 +141,16 @@ const HoldingTable: React.FC<Props> = (
       handleRetractCombined,
     ],
   );
+
+  if (!presentPrice)
+  {
+    return (
+      <Spinner
+        css=""
+        Container={GrommetContainer}
+      />
+    );
+  }
 
   return (
     <GrommetTheme css="">
