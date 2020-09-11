@@ -1,13 +1,15 @@
 import {
+  waitFor,
+} from "@testing-library/dom";
+import {
   addBusinessDays,
 } from "date-fns";
 
 import {
   componentShouldRender,
-  pageShouldLoad,
 } from "tests/Assertions";
 import {
-  TimeControlDate,
+  ForwardTimeDate,
 } from "tests/Components";
 import {
   clickContinue,
@@ -37,14 +39,12 @@ const [
 
 it(
   "continues forward in time",
-  async () =>
+  () =>
   {
     renderTradeView();
 
-    await pageShouldLoad();
-
     componentShouldRender(
-      TimeControlDate(
+      ForwardTimeDate(
         formatParsedDate(
           dayOnePrice.date,
           DateFormats.Iex,
@@ -56,7 +56,7 @@ it(
     clickContinue();
 
     componentShouldRender(
-      TimeControlDate(
+      ForwardTimeDate(
         formatParsedDate(
           dayTwoPrice.date,
           DateFormats.Iex,

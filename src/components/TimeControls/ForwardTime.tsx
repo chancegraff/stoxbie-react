@@ -22,7 +22,7 @@ type Props = {
   handleContinue: () => void;
 };
 
-const TimeControl: React.FC<Props> = (
+const ForwardTime: React.FC<Props> = (
   {
     handleContinue,
     presentPrice,
@@ -74,4 +74,4 @@ const TimeControl: React.FC<Props> = (
   );
 };
 
-export default TimeControl;
+export default ForwardTime;

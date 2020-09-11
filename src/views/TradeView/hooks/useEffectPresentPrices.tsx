@@ -6,6 +6,9 @@ import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
 import {
+  logDOM,
+} from "@testing-library/dom";
+import {
   differenceInBusinessDays,
   isBefore,
   isSameDay,
@@ -14,9 +17,6 @@ import {
   isWeekend,
   setDay,
 } from "date-fns";
-import {
-  List,
-} from "immutable";
 import {
   useRecoilState,
   useRecoilValue,
@@ -27,7 +27,6 @@ import {
 } from "utils/Hooks";
 import {
   DateFormats,
-  handleUnloadCreator,
   parseDate,
   usePrevious,
 } from "utils/Utilities";
@@ -77,23 +76,33 @@ export const useEffectPresentPrices = (
         0,
       );
 
-      console.log(
-        "\n\n\n\n",
-        "Made it",
-        "\n",
-        startIndex,
-        endIndex,
-        "\n\n\n\n",
-      );
-
       /**
        * @summary Cut out the next present prices and set them
        */
-      setPresentPrices(
-        historicalPrices.slice(
-          startIndex,
-          endIndex,
+      const nextPrices = historicalPrices.slice(
+        startIndex,
+        endIndex,
+      );
+
+      console.log(
+        "updatePresentPrices",
+        JSON.stringify(
+          {
+            startIndex,
+            endIndex,
+            wouldveBeenNext: historicalPrices.slice(
+              endIndex - 1,
+              endIndex + 1,
+            ),
+            nextPrice: nextPrices.last(),
+          },
+          null,
+          2,
         ),
+      );
+
+      setPresentPrices(
+        nextPrices,
       );
     },
     [
@@ -125,7 +134,7 @@ export const useEffectPresentPrices = (
     ],
   );
 
-  return useEffect(
+  useEffect(
     () =>
     {
       /**
@@ -150,7 +159,7 @@ export const useEffectPresentPrices = (
         )
       )
       {
-        return undefined;
+        return;
       }
 
       /**
@@ -199,12 +208,7 @@ export const useEffectPresentPrices = (
       /**
        * @summary Get the last historical price and parse its date
        */
-      const lastPrice = historicalPrices.last<undefined>();
-
-      if (!lastPrice)
-      {
-        return;
-      }
+      const lastPrice = historicalPrices.last<HistoricalPrice>();
 
       const {
         date: lastDateAsString,
@@ -232,7 +236,9 @@ export const useEffectPresentPrices = (
         )
       )
       {
-        return;
+        throw new Error(
+          "Requested date is in the future",
+        );
       }
 
       /**
@@ -243,7 +249,7 @@ export const useEffectPresentPrices = (
       const lazyEndIndex = historicalPrices.count() - endIndexesDifference;
       const lastEndPrice = historicalPrices.get<HistoricalPrice>(
         lazyEndIndex,
-        historicalPrices.first(),
+        historicalPrices.last(),
       );
       const lazyEndDate = parseDate(
         lastEndPrice.date,
@@ -261,7 +267,7 @@ export const useEffectPresentPrices = (
       )
       {
         updatePresentPrices(
-          lazyEndIndex,
+          lazyEndIndex + 1,
         );
 
         return;
@@ -286,20 +292,50 @@ export const useEffectPresentPrices = (
       );
 
       /**
-       * @summary The last value is always the value we're
-       * searching form, so set the count as the index
+       * @summary Value is usually at end, so reverse the List
+       * and search it to get the real index
        */
-      const endIndexInRange = indexRange.count();
+      const reversedIndexRange = indexRange.reverse();
+      const endIndexInReversedRange = reversedIndexRange.findIndex(
+        (
+          historicalPrice,
+        ) =>
+        {
+          const historicalPriceDate = parseDate(
+            historicalPrice.date,
+            DateFormats.Iex,
+          );
+
+          return isSameDay(
+            date,
+            historicalPriceDate,
+          );
+        },
+      );
+
+      if (endIndexInReversedRange === -1)
+      {
+        throw new Error(
+          "End index not found in range",
+        );
+      }
+
+      /**
+       * @summary Calculate the end index given that the above
+       * value we've found is from the backwards array; if there
+       * are 500 items in the range, and the index in the reversed
+       * range is 100, that means the real index is at 400;
+       * 500 - 100 = 400, which is what we'll now calculate
+       */
+      const indexRangeLength = indexRange.count();
+      const endIndexInRange = indexRangeLength - endIndexInReversedRange;
 
       /**
        * @summary Create the end index from the range, relative
-       * to the full array of historical prices
+       * to the full array of historical prices and update the prices!
        */
       const endIndex = endIndexInRange + lazyEndIndex;
 
-      /**
-       * @summary Update the present prices!
-       */
       updatePresentPrices(
         endIndex,
       );

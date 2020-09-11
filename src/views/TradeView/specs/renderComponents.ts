@@ -32,11 +32,9 @@ const dayOnePrice = getPrice(
 
 it(
   "renders trade view",
-  async () =>
+  () =>
   {
     renderTradeView();
-
-    await pageShouldLoad();
 
     componentsShouldRender(
       [

@@ -2,7 +2,7 @@ import {
   screen,
 } from "@testing-library/react";
 
-export const TimeControlDate = (
+export const ForwardTimeDate = (
   currentDate: string,
 ) =>
 {

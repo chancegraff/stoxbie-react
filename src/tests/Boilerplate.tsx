@@ -6,11 +6,24 @@ import {
   Route,
 } from "react-router-dom";
 import {
+  HistoricalPrice,
+} from "@chancey/iex-cloud";
+import {
   Grommet,
 } from "grommet";
 import {
+  List,
+} from "immutable";
+import {
   RecoilRoot,
 } from "recoil";
+
+import {
+  prices,
+} from "tests/Helpers";
+import {
+  historicalPricesState,
+} from "store/Atoms";
 
 type Props = PropsHasChildren & {
   path: string;
@@ -27,7 +40,21 @@ const Boilerplate: React.FC<Props> = (
 {
   return (
     <Grommet>
-      <RecoilRoot>
+      <RecoilRoot
+        initializeState={
+          (
+            snap,
+          ) =>
+          {
+            return snap.set<List<HistoricalPrice>>(
+              historicalPricesState,
+              List(
+                prices,
+              ),
+            );
+          }
+        }
+      >
         <MemoryRouter
           initialEntries={
             [

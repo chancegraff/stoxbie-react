@@ -18,8 +18,6 @@ it(
   {
     renderTradeView();
 
-    await pageShouldLoad();
-
     // Day 1: Buy 200 shares @ 3.2
     // (200) 3.2 / - / - / -    <<
     //                 - / 9360

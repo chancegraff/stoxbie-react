@@ -4,19 +4,9 @@ import {
   ContinueButton,
 } from "tests/Components";
 
-export const clickContinue = (
-  times = 1,
-) =>
+export const clickContinue = () =>
 {
-  Array.from(
-    Array(
-      times,
-    ),
-    () =>
-    {
-      return userEvent.click(
-        ContinueButton(),
-      );
-    },
+  return userEvent.click(
+    ContinueButton(),
   );
 };

@@ -4,7 +4,7 @@ import {
 
 export const Spinners = () =>
 {
-  return screen.getAllByRole(
+  return screen.queryAllByRole(
     "spinner",
   );
 };

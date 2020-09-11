@@ -18,8 +18,6 @@ it(
   {
     renderTradeView();
 
-    await pageShouldLoad();
-
     await buyShares(
       {
         TotalShares: 200,

@@ -14,5 +14,5 @@ export * from "./components/TableHeaderOpen";
 export * from "./components/TableHeaderShares";
 export * from "./components/TableTradeRows";
 export * from "./components/TickerInput";
-export * from "./components/TimeControlDate";
+export * from "./components/ForwardTimeDate";
 export * from "./components/TradeSlider";

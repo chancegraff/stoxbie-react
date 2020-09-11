@@ -21,8 +21,6 @@ it(
 
     renderTradeView();
 
-    await pageShouldLoad();
-
     changeSlider(
       shareCount,
     );
