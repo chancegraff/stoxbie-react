@@ -6,7 +6,6 @@ import {
 import Boilerplate from "tests/Boilerplate";
 import {
   getPrice,
-  HistoricalPricesSetter,
   tradeViewStartDate,
 } from "tests/Helpers";
 import {
@@ -32,12 +31,10 @@ export const renderTradeView = () =>
         path="/trade/:ticker/:date"
         route={`/trade/${dayOnePrice.symbol}/${urlDate}`}
       >
-        <HistoricalPricesSetter>
-          <TradeView
-            error={undefined}
-            date={urlDate}
-          />
-        </HistoricalPricesSetter>
+        <TradeView
+          error={undefined}
+          date={urlDate}
+        />
       </Boilerplate>
     ),
   );
