@@ -1,7 +1,4 @@
 import {
-  waitFor,
-} from "@testing-library/dom";
-import {
   addBusinessDays,
 } from "date-fns";
 
@@ -9,7 +6,7 @@ import {
   componentShouldRender,
 } from "tests/Assertions";
 import {
-  ForwardTimeDate,
+  PriceDateText,
 } from "tests/Components";
 import {
   clickContinue,
@@ -44,7 +41,7 @@ it(
     renderTradeView();
 
     componentShouldRender(
-      ForwardTimeDate(
+      PriceDateText(
         formatParsedDate(
           dayOnePrice.date,
           DateFormats.Iex,
@@ -56,7 +53,7 @@ it(
     clickContinue();
 
     componentShouldRender(
-      ForwardTimeDate(
+      PriceDateText(
         formatParsedDate(
           dayTwoPrice.date,
           DateFormats.Iex,

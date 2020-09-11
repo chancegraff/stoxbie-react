@@ -4,6 +4,7 @@ import React, {
 import {
   MemoryRouter,
   Route,
+  Router,
 } from "react-router-dom";
 import {
   HistoricalPrice,
@@ -11,6 +12,9 @@ import {
 import {
   Grommet,
 } from "grommet";
+import {
+  createMemoryHistory,
+} from "history";
 import {
   List,
 } from "immutable";
@@ -38,6 +42,14 @@ const Boilerplate: React.FC<Props> = (
   },
 ) =>
 {
+  const history = createMemoryHistory(
+    {
+      initialEntries: [
+        route,
+      ],
+    },
+  );
+
   return (
     <Grommet>
       <RecoilRoot
@@ -55,17 +67,13 @@ const Boilerplate: React.FC<Props> = (
           }
         }
       >
-        <MemoryRouter
-          initialEntries={
-            [
-              route,
-            ]
-          }
+        <Router
+          history={history}
         >
           <Route path={path}>
             {children}
           </Route>
-        </MemoryRouter>
+        </Router>
       </RecoilRoot>
     </Grommet>
   );

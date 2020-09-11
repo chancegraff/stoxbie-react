@@ -6,9 +6,6 @@ import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
 import {
-  logDOM,
-} from "@testing-library/dom";
-import {
   differenceInBusinessDays,
   isBefore,
   isSameDay,
@@ -82,23 +79,6 @@ export const useEffectPresentPrices = (
       const nextPrices = historicalPrices.slice(
         startIndex,
         endIndex,
-      );
-
-      console.log(
-        "updatePresentPrices",
-        JSON.stringify(
-          {
-            startIndex,
-            endIndex,
-            wouldveBeenNext: historicalPrices.slice(
-              endIndex - 1,
-              endIndex + 1,
-            ),
-            nextPrice: nextPrices.last(),
-          },
-          null,
-          2,
-        ),
       );
 
       setPresentPrices(

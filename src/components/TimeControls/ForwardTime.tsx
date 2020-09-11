@@ -59,7 +59,10 @@ const ForwardTime: React.FC<Props> = (
   }
 
   return (
-    <GrommetContainer css="">
+    <GrommetContainer
+      css=""
+      data-testid="priceDate"
+    >
       <GrommetText css="">
         {
           `Today is ${safeDate ||

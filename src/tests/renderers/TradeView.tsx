@@ -31,10 +31,7 @@ export const renderTradeView = () =>
         path="/trade/:ticker/:date"
         route={`/trade/${dayOnePrice.symbol}/${urlDate}`}
       >
-        <TradeView
-          error={undefined}
-          date={urlDate}
-        />
+        <TradeView />
       </Boilerplate>
     ),
   );

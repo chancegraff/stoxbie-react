@@ -2,11 +2,11 @@ import {
   screen,
 } from "@testing-library/react";
 
-export const ForwardTimeDate = (
-  currentDate: string,
+export const PriceDateText = (
+  date: string,
 ) =>
 {
   return screen.getByText(
-    `Today is ${currentDate}`,
+    `Today is ${date}`,
   );
 };

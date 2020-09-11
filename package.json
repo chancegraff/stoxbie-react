@@ -50,6 +50,7 @@
     "eslint-plugin-testing-library": "^3.8.0",
     "grommet": "^2.15.0",
     "grommet-icons": "^4.4.0",
+    "history": "^5.0.0",
     "immutable": "^4.0.0-rc.12",
     "jest-environment-jsdom-fourteen": "^1.0.1",
     "node-sass": "^4.14.1",
