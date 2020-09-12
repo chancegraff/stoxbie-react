@@ -244,3 +244,18 @@ export const awakenEnvironment = <T extends unknown>(
     }
   }
 };
+
+export const captitalizeString = (
+  message: string,
+) =>
+{
+  const [
+    firstChar,
+    ...remainingString
+  ] = message;
+  const rejoinedString = remainingString.join(
+    "",
+  );
+
+  return `${firstChar.toUpperCase()}${rejoinedString}`;
+};

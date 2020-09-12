@@ -53,6 +53,7 @@
     "history": "^5.0.0",
     "immutable": "^4.0.0-rc.12",
     "jest-environment-jsdom-fourteen": "^1.0.1",
+    "logform": "^2.2.0",
     "node-sass": "^4.14.1",
     "numbro": "^2.3.1",
     "react": "^16.13.1",
@@ -67,7 +68,10 @@
     "typescript": "^4.0.2",
     "use-debounce": "^3.4.3",
     "use-persisted-state": "^0.3.0",
-    "use-resize-observer": "^6.1.0"
+    "use-resize-observer": "^6.1.0",
+    "winston": "^3.3.3",
+    "winston-transport": "^4.4.0",
+    "winston-transport-browserconsole": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

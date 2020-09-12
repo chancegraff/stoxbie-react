@@ -70,3 +70,5 @@ export const DEFAULT_LEDGER: LedgerType = {
     dollars: 0,
   },
 };
+
+export const LOGGER_SEPERATOR = "·";
