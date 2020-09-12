@@ -5,50 +5,38 @@ import {
 import {
   ledgerBalanceShouldChange,
   ledgerChangeShouldChange,
-  sliderShouldChange,
   tradeRowShouldHaveText,
   tradeRowsShouldHaveLength,
 } from "tests/Assertions";
 import {
+  ExitButtons,
+  TablePresentBody,
   TableTradeRows,
 } from "tests/Components";
 import {
-  changeSlider,
-  clickOrder,
-} from "tests/Events";
+  clickExit,
+} from "tests/events/clickExit";
 import {
   formatCount,
   formatCurrency,
   formatPercentage,
 } from "utils/Utilities";
 
-export const sellShares = async (
+export const exitShares = async (
   trade: any,
   tradeRowsLength: number,
 ) =>
 {
-  changeSlider(
-    trade.CloseCount,
+  const presentBody = TablePresentBody();
+
+  const [
+    exitButton,
+  ] = ExitButtons(
+    presentBody,
   );
 
-  await waitFor(
-    () =>
-    {
-      return sliderShouldChange(
-        `${trade.CloseCount}`,
-      );
-    },
-  );
-
-  clickOrder();
-
-  await waitFor(
-    () =>
-    {
-      return sliderShouldChange(
-        "0",
-      );
-    },
+  clickExit(
+    exitButton,
   );
 
   const tradeRows = TableTradeRows();
@@ -79,7 +67,7 @@ export const sellShares = async (
   tradeRowShouldHaveText(
     tradeRow,
     formatCount(
-      trade.CloseCount,
+      trade.OpenCount,
     ),
   );
 

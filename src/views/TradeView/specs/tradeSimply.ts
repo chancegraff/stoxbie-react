@@ -1,16 +1,46 @@
 import {
-  pageShouldLoad,
-} from "tests/Assertions";
+  addBusinessDays,
+} from "date-fns";
+
 import {
   buyShares,
-  sellShares,
+  exitShares,
 } from "tests/E2E";
 import {
   clickContinue,
 } from "tests/Events";
 import {
+  getPriceRange,
+  tradeViewStartDate,
+} from "tests/Helpers";
+import {
   renderTradeView,
 } from "tests/Renderers";
+
+const [
+  dayOnePrice,
+  dayTwoPrice,
+] = getPriceRange(
+  tradeViewStartDate,
+  addBusinessDays(
+    tradeViewStartDate,
+    1,
+  ),
+);
+
+const initialLedgerBalance = 10000;
+
+const openShares = 200;
+const openPrice = dayOnePrice.close;
+const openEquity = openPrice * openShares;
+const openBalance = initialLedgerBalance - openEquity;
+
+const closePrice = dayTwoPrice.close;
+const closeEquity = closePrice * openShares;
+const closeBalance = openBalance + closeEquity;
+
+const equityChange = closeEquity - openEquity;
+const ledgerChange = equityChange / openEquity;
 
 it(
   "conducts a simple trade",
@@ -20,16 +50,12 @@ it(
 
     await buyShares(
       {
-        TotalShares: 200,
-        TotalEquity: 640,
-        OpenPrice: 3.2,
-        OpenCount: 200,
+        TotalShares: openShares,
+        OpenPrice: openPrice,
+        OpenCount: openShares,
         ClosePrice: undefined,
         CloseCount: undefined,
-        ChangeBalance: undefined,
-        ChangePercent: undefined,
-        LedgerBalance: 9360,
-        LedgerReturns: undefined,
+        LedgerBalance: openBalance,
         LedgerChange: undefined,
       },
       1,
@@ -37,19 +63,15 @@ it(
 
     clickContinue();
 
-    await sellShares(
+    await exitShares(
       {
         TotalShares: 0,
-        TotalEquity: 0,
-        OpenPrice: 3.2,
-        OpenCount: 200,
-        ClosePrice: 3.79,
-        CloseCount: 200,
-        ChangeBalance: 118,
-        ChangePercent: 0.184375,
-        LedgerBalance: 10118,
-        LedgerReturns: 118,
-        LedgerChange: 0.012606837606838,
+        OpenPrice: openPrice,
+        OpenCount: openShares,
+        ClosePrice: closePrice,
+        CloseCount: openShares,
+        LedgerBalance: closeBalance,
+        LedgerChange: ledgerChange,
       },
       1,
     );

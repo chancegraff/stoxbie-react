@@ -126,6 +126,7 @@ const PresentBody: React.FC<Props> = (
   return (
     <GrommetTableBody
       css=""
+      data-testid="presentBody"
       onMouseEnter={handleMouseEnterRow}
       onMouseLeave={handleMouseLeaveRow}
     >

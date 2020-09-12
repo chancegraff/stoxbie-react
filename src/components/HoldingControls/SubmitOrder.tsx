@@ -26,6 +26,7 @@ const SubmitOrder: React.FC<Props> = (
     <GrommetButton
       css=""
       label={children}
+      data-testid="exit"
       onClick={handleSubmit}
       {...props}
     />

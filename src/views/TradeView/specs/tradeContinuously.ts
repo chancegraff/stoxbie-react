@@ -3,7 +3,7 @@ import {
 } from "tests/Assertions";
 import {
   buyShares,
-  sellShares,
+  exitShares,
 } from "tests/E2E";
 import {
   clickContinue,
@@ -44,7 +44,7 @@ it(
     // (150)  3.2 / -    / -   / -
     // (50)   3.2 / 3.79 / 18% / 29.50    <<
     //                     0%   / 9549.50
-    await sellShares(
+    await exitShares(
       {
         TotalShares: 150,
         TotalEquity: 450.50,
@@ -92,7 +92,7 @@ it(
     // (150)  3.2  / 3.78 / 18% / 87      <<
     // (50)   3.2  / 3.79 / 18% / 29.50
     //                      1%   / 9749.5
-    await sellShares(
+    await exitShares(
       {
         TotalShares: 100,
         TotalEquity: 250.50,
@@ -116,7 +116,7 @@ it(
     // (150)  3.2  / 3.78 / 18% / 87
     // (50)   3.2  / 3.79 / 18% / 29.50
     //                      1%   / 10128.5
-    await sellShares(
+    await exitShares(
       {
         TotalShares: 0,
         TotalEquity: 0,
