@@ -33,6 +33,10 @@ import {
 } from "store/Atoms";
 
 /**
+ * @bug There's an issue with some end indexes not being found properly that
+ * will get fixed by turning some part of this into a recursive function; see
+ * the trade page for NFLX/m11d10y2015 to get an example
+ *
  * @description Updates presentPrices in state when date URL param changes
  * @param {Date | undefined} date End date of historical prices to set present prices from
  * @returns {void} Nothing

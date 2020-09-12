@@ -13,6 +13,7 @@ import {
 import {
   awakenEnvironment,
   captitalizeString,
+  hashString,
 } from "utils/Utilities";
 
 enum ServiceColors {
@@ -68,19 +69,22 @@ const getLevelColorCode = (
   return LevelColors[level];
 };
 
-const getLabelColorCode = () =>
+const getLabelColorCode = (
+  label: string,
+) =>
 {
   const keys = Object.keys(
     ServiceColors,
   );
-  const randomIndex = Math.floor(
-    Math.random() * keys.length,
-  );
   const values = Object.values(
     ServiceColors,
   );
+  const charactersAsInt = hashString(
+    label,
+  );
+  const charactersAsIndex = charactersAsInt % keys.length;
 
-  return values[randomIndex];
+  return values[charactersAsIndex];
 };
 
 const getLevelKey = (
@@ -142,8 +146,6 @@ class Console extends Transport.default
 
   seperator = getSeperator()
 
-  labelColorCode = getLabelColorCode();
-
   levelMessage (
     info: TransformableInfo,
   )
@@ -172,7 +174,7 @@ class Console extends Transport.default
     info: TransformableInfo,
   )
   {
-    const labelFont = `color: ${this.labelColorCode}; font-weight: bolder;`;
+    const labelFont = `color: ${info.metadata.color}; font-weight: bolder;`;
     const labelMessage = getMessage(
       getKey(
         info.metadata.label,
@@ -249,6 +251,9 @@ export const createLogger = (
   label: string,
 ) =>
 {
+  const color = getLabelColorCode(
+    label,
+  );
   const transports: Transport[] | Transport = [];
   const awakened = awakenEnvironment<Transport>(
     new Console(
@@ -256,12 +261,6 @@ export const createLogger = (
         handleExceptions: true,
         level: "info",
         format: format.combine(
-          format.label(
-            {
-              label,
-            },
-          ),
-          format.timestamp(),
           format.metadata(),
         ),
       },
@@ -279,6 +278,10 @@ export const createLogger = (
     {
       transports,
       handleExceptions: true,
+      defaultMeta: {
+        label,
+        color,
+      },
     },
   );
 };

@@ -259,3 +259,36 @@ export const captitalizeString = (
 
   return `${firstChar.toUpperCase()}${rejoinedString}`;
 };
+
+export const hashString = (
+  input: string,
+) =>
+{
+  if (input.length === 0)
+  {
+    return 0;
+  }
+
+  const output = [
+    ...input,
+  ].reduce(
+    (
+      sum,
+      char,
+    ) =>
+    {
+      const code = char.charCodeAt(
+        0,
+      );
+
+      let result = ((sum << 5) - sum) + code;
+
+      result &= result;
+
+      return result;
+    },
+    0,
+  );
+
+  return output;
+};
