@@ -30,31 +30,21 @@ export const buyShares = async (
     trade.OpenCount,
   );
 
-  await waitFor(
-    () =>
-    {
-      return sliderShouldChange(
-        `${trade.OpenCount}`,
-      );
-    },
+  sliderShouldChange(
+    `${trade.OpenCount}`,
   );
 
   clickOrder();
 
-  await waitFor(
-    () =>
-    {
-      return sliderShouldChange(
-        "0",
-      );
-    },
+  sliderShouldChange(
+    "0",
   );
-
-  const tradeRows = TableTradeRows();
 
   await waitForElement(
     TableFooter,
   );
+
+  const tradeRows = TableTradeRows();
 
   const [
     openedTrade,
@@ -63,6 +53,7 @@ export const buyShares = async (
   tradeRowShouldHaveText(
     openedTrade,
     formatCount(
+      trade.TotalCount ||
       trade.OpenCount,
     ),
   );
@@ -81,6 +72,7 @@ export const buyShares = async (
   tradeRowShouldHaveText(
     openedTrade,
     formatCurrency(
+      trade.TotalBalance ||
       trade.OpenCount * trade.OpenPrice,
     ),
   );

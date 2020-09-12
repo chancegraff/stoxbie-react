@@ -24,6 +24,7 @@ import {
 
 export const exitShares = async (
   trade: any,
+  tradeRow?: HTMLElement,
 ) =>
 {
   const presentBody = TablePresentBody();

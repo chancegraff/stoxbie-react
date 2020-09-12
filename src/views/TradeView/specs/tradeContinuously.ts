@@ -23,27 +23,41 @@ import {
 const [
   dayOnePrice,
   dayTwoPrice,
+  dayThreePrice,
+  dayFourPrice,
+  dayFivePrice,
+  daySixPrice,
 ] = getPriceRange(
   tradeViewStartDate,
   addBusinessDays(
     tradeViewStartDate,
-    1,
+    5,
   ),
 );
 
 const initialLedgerBalance = 10000;
 
-const openShares = 200;
-const openPrice = dayOnePrice.close;
-const openEquity = openPrice * openShares;
-const openBalance = initialLedgerBalance - openEquity;
+const dayOneShares = 200;
+const dayOneClose = dayOnePrice.close;
+const dayOneEquity = dayOneClose * dayOneShares;
+const dayOneBalance = initialLedgerBalance - dayOneEquity;
 
-const closePrice = dayTwoPrice.close;
-const closeEquity = closePrice * openShares;
-const closeBalance = openBalance + closeEquity;
+const dayTwoShares = 50;
+const dayTwoClose = dayTwoPrice.close;
+const dayTwoEquity = dayTwoClose * dayTwoShares;
+const dayTwoBalance = dayOneBalance - dayTwoEquity;
 
-const equityChange = closeEquity - openEquity;
-const ledgerChange = equityChange / openEquity;
+const dayThreeShares = 100;
+const dayThreeClose = dayThreePrice.close;
+const dayThreeEquity = dayThreeClose * dayThreeShares;
+const dayThreeBalance = dayTwoBalance - dayThreeEquity;
+
+// const closePrice = dayTwoPrice.close;
+// const closeEquity = closePrice * openShares;
+// const closeBalance = openBalance + closeEquity;
+
+// const equityChange = closeEquity - openEquity;
+// const ledgerChange = equityChange / openEquity;
 
 it(
   "conducts a continuous trade",
@@ -51,17 +65,48 @@ it(
   {
     renderTradeView();
 
-    // Day 1: Buy 200 shares @ 3.2
-    // (200) 3.2 / - / - / -    <<
-    //                 - / 9360
+    // Day 1: Buy 200 shares
     await buyShares(
       {
-        TotalShares: openShares,
-        OpenPrice: openPrice,
-        OpenCount: openShares,
+        TotalCount: undefined,
+        TotalBalance: undefined,
+        OpenPrice: dayOneClose,
+        OpenCount: dayOneShares,
         ClosePrice: undefined,
         CloseCount: undefined,
-        LedgerBalance: openBalance,
+        LedgerBalance: dayOneBalance,
+        LedgerChange: undefined,
+      },
+    );
+
+    clickContinue();
+
+    // Day 2: Buy 50 shares
+    await buyShares(
+      {
+        TotalCount: dayOneShares + dayTwoShares,
+        TotalBalance: dayOneEquity + dayTwoEquity,
+        OpenPrice: dayTwoClose,
+        OpenCount: dayTwoShares,
+        ClosePrice: undefined,
+        CloseCount: undefined,
+        LedgerBalance: dayTwoBalance,
+        LedgerChange: undefined,
+      },
+    );
+
+    clickContinue();
+
+    // Day 3: Buy 100 shares
+    await buyShares(
+      {
+        TotalCount: dayOneShares + dayTwoShares + dayThreeShares,
+        TotalBalance: dayOneEquity + dayTwoEquity + dayThreeEquity,
+        OpenPrice: dayThreeClose,
+        OpenCount: dayThreeShares,
+        ClosePrice: undefined,
+        CloseCount: undefined,
+        LedgerBalance: dayThreeBalance,
         LedgerChange: undefined,
       },
     );
@@ -72,56 +117,11 @@ it(
       tradeRow,
     ] = TableTradeRows();
 
-    // Day 2: Sell 50/200 shares @ 3.79
-    // (150)  3.2 / -    / -   / -
-    // (50)   3.2 / 3.79 / 18% / 29.50    <<
-    //                     0%   / 9549.50
-    await exitShares(
-      {
-        TotalShares: 150,
-        TotalEquity: 450.50,
-        OpenPrice: 3.20,
-        OpenCount: 200,
-        ClosePrice: 3.79,
-        CloseCount: 50,
-        ChangeBalance: 29.50,
-        ChangePercent: 0.184375,
-        LedgerBalance: 9549.50,
-        LedgerReturns: 29.50,
-        LedgerChange: 0.0031517094,
-      },
-    );
+    /**
+     * @todo Toggle the combined rows and find the row with 50 shares
+     */
 
-    clickContinue();
-
-    // Day 3: Buy 100 shares @ 3.67
-    // (250)  3.67 / -    / -   / -       <<
-    // (150)  3.2  / -    / -   / -       xx
-    // (50)   3.2  / 3.79 / 18% / 29.50
-    //                      0%  / 9182.50
-    await buyShares(
-      {
-        TotalShares: 250,
-        TotalEquity: 847,
-        OpenPrice: 3.67,
-        OpenCount: 100,
-        ClosePrice: undefined,
-        CloseCount: undefined,
-        ChangeBalance: undefined,
-        ChangePercent: undefined,
-        LedgerBalance: 9182.50,
-        LedgerReturns: 29.50,
-        LedgerChange: 0.0031517094,
-      },
-    );
-
-    clickContinue();
-
-    // Day 4: Sell 150/250 shares @ 3.78
-    // (100)  3.67 / -    / -   / -
-    // (150)  3.2  / 3.78 / 18% / 87      <<
-    // (50)   3.2  / 3.79 / 18% / 29.50
-    //                      1%   / 9749.5
+    // Day 4: Sell 50 shares
     await exitShares(
       {
         TotalShares: 100,
@@ -136,16 +136,11 @@ it(
         LedgerReturns: 116.50,
         LedgerChange: 0.0126871766948,
       },
-      3,
     );
 
     clickContinue();
 
-    // Day 5: Sell 100/100 shares @ 3.79
-    // (100)  3.67 / 3.79 / 3%  / 12       <<
-    // (150)  3.2  / 3.78 / 18% / 87
-    // (50)   3.2  / 3.79 / 18% / 29.50
-    //                      1%   / 10128.5
+    // Day 5: Buy 100 shares
     await exitShares(
       {
         TotalShares: 0,
@@ -160,7 +155,25 @@ it(
         LedgerReturns: 128.5,
         LedgerChange: 0.013180163085286,
       },
-      3,
+    );
+
+    clickContinue();
+
+    // Day 6: Sell present shares
+    await exitShares(
+      {
+        TotalShares: 0,
+        TotalEquity: 0,
+        OpenPrice: 3.67,
+        OpenCount: 100,
+        ClosePrice: 3.79,
+        CloseCount: 100,
+        ChangeBalance: 12,
+        ChangePercent: 0.032697547683924,
+        LedgerBalance: 10128.5,
+        LedgerReturns: 128.5,
+        LedgerChange: 0.013180163085286,
+      },
     );
   },
 );
