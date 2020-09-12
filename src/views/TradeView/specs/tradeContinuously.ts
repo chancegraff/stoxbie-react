@@ -1,6 +1,10 @@
 import {
-  pageShouldLoad,
-} from "tests/Assertions";
+  addBusinessDays,
+} from "date-fns";
+
+import {
+  TableTradeRows,
+} from "tests/Components";
 import {
   buyShares,
   exitShares,
@@ -9,8 +13,37 @@ import {
   clickContinue,
 } from "tests/Events";
 import {
+  getPriceRange,
+  tradeViewStartDate,
+} from "tests/Helpers";
+import {
   renderTradeView,
 } from "tests/Renderers";
+
+const [
+  dayOnePrice,
+  dayTwoPrice,
+] = getPriceRange(
+  tradeViewStartDate,
+  addBusinessDays(
+    tradeViewStartDate,
+    1,
+  ),
+);
+
+const initialLedgerBalance = 10000;
+
+const openShares = 200;
+const openPrice = dayOnePrice.close;
+const openEquity = openPrice * openShares;
+const openBalance = initialLedgerBalance - openEquity;
+
+const closePrice = dayTwoPrice.close;
+const closeEquity = closePrice * openShares;
+const closeBalance = openBalance + closeEquity;
+
+const equityChange = closeEquity - openEquity;
+const ledgerChange = equityChange / openEquity;
 
 it(
   "conducts a continuous trade",
@@ -23,22 +56,21 @@ it(
     //                 - / 9360
     await buyShares(
       {
-        TotalShares: 200,
-        TotalEquity: 640,
-        OpenPrice: 3.20,
-        OpenCount: 200,
+        TotalShares: openShares,
+        OpenPrice: openPrice,
+        OpenCount: openShares,
         ClosePrice: undefined,
         CloseCount: undefined,
-        ChangeBalance: undefined,
-        ChangePercent: undefined,
-        LedgerBalance: 9360,
-        LedgerReturns: undefined,
+        LedgerBalance: openBalance,
         LedgerChange: undefined,
       },
-      1,
     );
 
     clickContinue();
+
+    const [
+      tradeRow,
+    ] = TableTradeRows();
 
     // Day 2: Sell 50/200 shares @ 3.79
     // (150)  3.2 / -    / -   / -
@@ -58,7 +90,6 @@ it(
         LedgerReturns: 29.50,
         LedgerChange: 0.0031517094,
       },
-      2,
     );
 
     clickContinue();
@@ -82,7 +113,6 @@ it(
         LedgerReturns: 29.50,
         LedgerChange: 0.0031517094,
       },
-      2,
     );
 
     clickContinue();

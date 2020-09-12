@@ -1,15 +1,15 @@
 import {
-  waitFor,
+  waitForElement,
 } from "@testing-library/react";
 
 import {
   ledgerBalanceShouldChange,
   ledgerChangeShouldChange,
   tradeRowShouldHaveText,
-  tradeRowsShouldHaveLength,
 } from "tests/Assertions";
 import {
   ExitButtons,
+  TableFooter,
   TablePresentBody,
   TableTradeRows,
 } from "tests/Components";
@@ -24,7 +24,6 @@ import {
 
 export const exitShares = async (
   trade: any,
-  tradeRowsLength: number,
 ) =>
 {
   const presentBody = TablePresentBody();
@@ -39,54 +38,48 @@ export const exitShares = async (
     exitButton,
   );
 
-  const tradeRows = TableTradeRows();
-
-  await waitFor(
-    () =>
-    {
-      return tradeRowsShouldHaveLength(
-        tradeRows,
-        tradeRowsLength,
-      );
-    },
+  await waitForElement(
+    TableFooter,
   );
+
+  const tradeRows = TableTradeRows();
 
   const [
     firstTradeRow,
     secondTradeRow,
   ] = tradeRows;
 
-  let tradeRow = secondTradeRow;
+  let closedRow = secondTradeRow;
 
   if (!secondTradeRow ||
       trade.TotalShares === 0)
   {
-    tradeRow = firstTradeRow;
+    closedRow = firstTradeRow;
   }
 
   tradeRowShouldHaveText(
-    tradeRow,
+    closedRow,
     formatCount(
       trade.OpenCount,
     ),
   );
 
   tradeRowShouldHaveText(
-    tradeRow,
+    closedRow,
     formatCurrency(
       trade.OpenPrice,
     ),
   );
 
   tradeRowShouldHaveText(
-    tradeRow,
+    closedRow,
     formatCurrency(
       trade.ClosePrice,
     ),
   );
 
   tradeRowShouldHaveText(
-    tradeRow,
+    closedRow,
     formatCurrency(
       trade.CloseCount * trade.ClosePrice,
     ),

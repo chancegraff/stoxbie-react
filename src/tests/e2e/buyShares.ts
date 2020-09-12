@@ -1,5 +1,6 @@
 import {
   waitFor,
+  waitForElement,
 } from "@testing-library/react";
 
 import {
@@ -7,9 +8,9 @@ import {
   sliderShouldChange,
   tradeRowShouldHaveExitButton,
   tradeRowShouldHaveText,
-  tradeRowsShouldHaveLength,
 } from "tests/Assertions";
 import {
+  TableFooter,
   TableTradeRows,
 } from "tests/Components";
 import {
@@ -23,7 +24,6 @@ import {
 
 export const buyShares = async (
   trade: any,
-  tradeRowsLength: number,
 ) =>
 {
   changeSlider(
@@ -52,14 +52,8 @@ export const buyShares = async (
 
   const tradeRows = TableTradeRows();
 
-  await waitFor(
-    () =>
-    {
-      return tradeRowsShouldHaveLength(
-        tradeRows,
-        tradeRowsLength,
-      );
-    },
+  await waitForElement(
+    TableFooter,
   );
 
   const [

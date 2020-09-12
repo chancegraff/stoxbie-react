@@ -58,7 +58,6 @@ it(
         LedgerBalance: openBalance,
         LedgerChange: undefined,
       },
-      1,
     );
 
     clickContinue();
@@ -73,7 +72,6 @@ it(
         LedgerBalance: closeBalance,
         LedgerChange: ledgerChange,
       },
-      1,
     );
   },
 );
