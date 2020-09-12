@@ -17,40 +17,19 @@ import {
 } from "utils/Utilities";
 
 enum ServiceColors {
-  Blue = "#0000ff",
-  Brown = "#a52a2a",
   DarkCyan = "#008b8b",
-  DarkGreen = "#006400",
   DarkKhaki = "#bdb76b",
-  DarkMagenta = "#8b008b",
-  DarkOliveGreen = "#556b2f",
-  DarkOrange = "#ff8c00",
-  DarkOrchid = "#9932cc",
   DarkSalmon = "#e9967a",
-  DarkViolet = "#9400d3",
-  Green = "#008000",
-  Indigo = "#4b0082",
-  Khaki = "#f0e68c",
   LightBlue = "#add8e6",
   LightGreen = "#90ee90",
   LightGrey = "#d3d3d3",
   LightPink = "#ffb6c1",
-  Lime = "#00ff00",
-  Magenta = "#ff00ff",
-  Maroon = "#800000",
-  Navy = "#000080",
-  Olive = "#808000",
-  Orange = "#ffa500",
-  Pink = "#ffc0cb",
-  Purple = "#800080",
-  Red = "#ff0000",
-  Yellow = "#ffff00",
 }
 
 enum LevelColors {
   Info = "#00ffff",
   Warn = "#ffd700",
-  Error = "#8b0000",
+  Error = "#ff2b00",
 }
 
 enum Levels {
