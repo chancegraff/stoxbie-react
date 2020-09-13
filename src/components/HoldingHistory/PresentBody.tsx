@@ -8,6 +8,9 @@ import {
 import {
   List,
 } from "immutable";
+import {
+  sumBy,
+} from "lodash";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
   LedgerType,
@@ -63,22 +66,43 @@ const PresentBody: React.FC<Props> = (
 ) =>
 {
   const presentRowRef = useRef<HTMLTableRowElement>();
+  /**
+   * @todo Convert this into a Recoil selector
+   */
   const totalEquity = useMemo(
     () =>
     {
-      const rawValue = presentHoldings.reduce(
+      const presentEquity = sumBy(
+        presentHoldings.toArray(),
         (
-          previousValue,
           holding,
         ) =>
         {
-          return previousValue + holding.orders.present.balance;
+          return holding.orders.present.balance;
         },
-        0,
+      );
+
+      console.log(
+        "PresentBody.tsx",
+        "presentEquity",
+        presentEquity,
+        " of ",
+        JSON.stringify(
+          presentHoldings.map(
+            (
+              holding,
+            ) =>
+            {
+              return holding.orders.present.balance;
+            },
+          ),
+          null,
+          2,
+        ),
       );
 
       return formatCurrency(
-        rawValue,
+        presentEquity,
       );
     },
     [

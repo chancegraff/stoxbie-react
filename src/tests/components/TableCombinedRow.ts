@@ -17,7 +17,7 @@ export const TableCombinedRow = (
     return undefined;
   }
 
-  return within(
+  const combinedRow = within(
     combinedBody,
   )
     .getByText(
@@ -26,4 +26,13 @@ export const TableCombinedRow = (
     .closest(
       "tr",
     );
+
+  if (!combinedRow)
+  {
+    throw new Error(
+      `Couldn't find combined row with string "${value}"`,
+    );
+  }
+
+  return combinedRow;
 };

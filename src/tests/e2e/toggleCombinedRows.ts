@@ -36,6 +36,10 @@ export const toggleCombinedRows = (
     }
   }
 
+  toggleCombinedShouldChange(
+    "hidden",
+  );
+
   hoverPresentRow();
 
   toggleCombinedShouldChange(
@@ -55,7 +59,7 @@ export const toggleCombinedRows = (
         "retracted",
       );
 
-      return "hidden";
+      return "retracted";
     }
     case "retracted":
     {
@@ -66,7 +70,7 @@ export const toggleCombinedRows = (
         "extended",
       );
 
-      return "visible";
+      return "extended";
     }
   }
 };
