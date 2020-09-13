@@ -16,6 +16,7 @@ export * from "./components/TableHeaderOpen";
 export * from "./components/TableHeaderShares";
 export * from "./components/TableCombinedBody";
 export * from "./components/TableCombinedRows";
+export * from "./components/TableCombinedRow";
 export * from "./components/TablePresentBody";
 export * from "./components/TablePresentRow";
 export * from "./components/TableTradeRows";

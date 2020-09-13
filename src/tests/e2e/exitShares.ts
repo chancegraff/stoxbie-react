@@ -1,4 +1,5 @@
 import {
+  logDOM,
   waitForElement,
 } from "@testing-library/react";
 
@@ -24,23 +25,24 @@ import {
 
 export const exitShares = async (
   trade: any,
-  tradeRow?: HTMLElement,
+  presentRow?: HTMLElement,
 ) =>
 {
-  const presentBody = TablePresentBody();
+  let buttonContainer = presentRow;
+
+  if (!buttonContainer)
+  {
+    buttonContainer = TablePresentBody();
+  }
 
   const [
     exitButton,
   ] = ExitButtons(
-    presentBody,
+    buttonContainer,
   );
 
   clickExit(
     exitButton,
-  );
-
-  await waitForElement(
-    TableFooter,
   );
 
   const tradeRows = TableTradeRows();
@@ -57,6 +59,10 @@ export const exitShares = async (
   {
     closedRow = firstTradeRow;
   }
+
+  await waitForElement(
+    TableFooter,
+  );
 
   tradeRowShouldHaveText(
     closedRow,

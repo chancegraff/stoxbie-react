@@ -3,6 +3,10 @@ import {
 } from "date-fns";
 
 import {
+  TableCombinedBody,
+  TableCombinedRow,
+} from "tests/Components";
+import {
   buyShares,
   exitShares,
   toggleCombinedRows,
@@ -113,9 +117,16 @@ it(
 
     toggleCombinedRows();
 
-    /**
-     * @todo Toggle the combined rows and find the row with 50 shares
-     */
+    const dayTwoTrade = TableCombinedRow(
+      `${dayTwoShares}`,
+    );
+
+    if (!dayTwoTrade)
+    {
+      throw new Error(
+        "Couldn't find day two trade row in combined body",
+      );
+    }
 
     // Day 4: Sell 50 shares
     await exitShares(
@@ -132,6 +143,7 @@ it(
         LedgerReturns: 116.50,
         LedgerChange: 0.0126871766948,
       },
+      dayTwoTrade,
     );
 
     clickContinue();

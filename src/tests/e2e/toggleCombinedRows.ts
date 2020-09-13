@@ -4,41 +4,9 @@ import {
   toggleCombinedShouldChange,
 } from "tests/Assertions";
 import {
-  TableCombinedBody,
-  TableToggleCombined,
-} from "tests/Components";
-import {
   clickToggleCombined,
   hoverPresentRow,
 } from "tests/Events";
-
-const RowsState = (
-  previousState?: "extended" | "retracted",
-) =>
-{
-  const combinedBody = TableCombinedBody();
-
-  return (
-    previousState === "retracted" ||
-    combinedBody
-  )
-    ? "extended"
-    : "retracted";
-};
-
-const CombinedState = (
-  previousState?: "visible" | "hidden",
-) =>
-{
-  const toggleCombined = TableToggleCombined();
-
-  return (
-    previousState === "hidden" ||
-    toggleCombined
-  )
-    ? "visible"
-    : "hidden";
-};
 
 export const toggleCombinedRows = (
   previousResult: "extended" | "retracted" = "retracted",
