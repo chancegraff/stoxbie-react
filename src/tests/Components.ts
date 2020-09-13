@@ -19,6 +19,7 @@ export * from "./components/TableCombinedRows";
 export * from "./components/TableCombinedRow";
 export * from "./components/TablePresentBody";
 export * from "./components/TablePresentRow";
+export * from "./components/TableHistoricalBody";
 export * from "./components/TableTradeRows";
 export * from "./components/TickerInput";
 export * from "./components/PriceDateContainer";

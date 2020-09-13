@@ -20,7 +20,7 @@ type HistoricalHoldingHook = {
 
 /**
  * @description Creates a historical holding from an existing order
- * @returns {HistoricalHolding | undefined} New historical holding
+ * @returns {HistoricalHoldingType | undefined} New historical holding
  */
 export const useHistoricalHolding = (): HistoricalHoldingHook =>
 {

@@ -57,7 +57,7 @@ const TableFooter: React.FC<Props> = (
     <GrommetTableFooter css="">
       <GrommetTableRow
         css=""
-        role="footerRow"
+        data-testid="footerRow"
       >
         <GrommetTableCell css="">
           Change

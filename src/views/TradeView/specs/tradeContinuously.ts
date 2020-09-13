@@ -54,12 +54,17 @@ const dayThreeClose = dayThreePrice.close;
 const dayThreeEquity = dayThreeClose * dayThreeShares;
 const dayThreeBalance = dayTwoBalance - dayThreeEquity;
 
-// const closePrice = dayTwoPrice.close;
-// const closeEquity = closePrice * openShares;
-// const closeBalance = openBalance + closeEquity;
-
-// const equityChange = closeEquity - openEquity;
-// const ledgerChange = equityChange / openEquity;
+const dayFourShares = dayTwoShares;
+const dayFourClose = dayFourPrice.close;
+const dayFourEquity = dayFourClose * dayFourShares;
+const dayFourBalance = dayThreeBalance + dayFourEquity;
+const equityChange = dayFourEquity - dayTwoEquity;
+const totalEquity = (
+  dayOneEquity +
+  dayTwoEquity +
+  dayThreeEquity
+);
+const dayFourChange = 0 + (equityChange / totalEquity);
 
 it(
   "conducts a continuous trade",
@@ -86,8 +91,14 @@ it(
     // Day 2: Buy 50 shares
     await buyShares(
       {
-        TotalCount: dayOneShares + dayTwoShares,
-        TotalBalance: dayOneEquity + dayTwoEquity,
+        TotalCount: (
+          dayOneShares +
+          dayTwoShares
+        ),
+        TotalBalance: (
+          dayOneEquity +
+          dayTwoEquity
+        ),
         OpenPrice: dayTwoClose,
         OpenCount: dayTwoShares,
         ClosePrice: undefined,
@@ -102,8 +113,16 @@ it(
     // Day 3: Buy 100 shares
     await buyShares(
       {
-        TotalCount: dayOneShares + dayTwoShares + dayThreeShares,
-        TotalBalance: dayOneEquity + dayTwoEquity + dayThreeEquity,
+        TotalCount: (
+          dayOneShares +
+          dayTwoShares +
+          dayThreeShares
+        ),
+        TotalBalance: (
+          dayOneEquity +
+          dayTwoEquity +
+          dayThreeEquity
+        ),
         OpenPrice: dayThreeClose,
         OpenCount: dayThreeShares,
         ClosePrice: undefined,
@@ -128,20 +147,27 @@ it(
       );
     }
 
-    // Day 4: Sell 50 shares
+    // Day 4: Sell day two's 50 shares
     await exitShares(
       {
-        TotalShares: 100,
-        TotalEquity: 250.50,
-        OpenPrice: 3.20,
-        OpenCount: 150,
-        ClosePrice: 3.78,
-        CloseCount: 150,
-        ChangeBalance: 87,
-        ChangePercent: 0.18125,
-        LedgerBalance: 9749.50,
-        LedgerReturns: 116.50,
-        LedgerChange: 0.0126871766948,
+        TotalCount: (
+          dayOneShares +
+          dayTwoShares +
+          dayThreeShares -
+          dayFourShares
+        ),
+        TotalBalance: (
+          dayOneEquity +
+          dayTwoEquity +
+          dayThreeEquity -
+          dayFourEquity
+        ),
+        OpenPrice: dayTwoClose,
+        OpenCount: dayTwoShares,
+        ClosePrice: dayFourClose,
+        CloseCount: dayFourShares,
+        LedgerBalance: dayFourBalance,
+        LedgerChange: dayFourChange,
       },
       dayTwoTrade,
     );

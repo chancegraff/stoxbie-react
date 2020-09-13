@@ -2,9 +2,9 @@ import {
   screen,
 } from "@testing-library/react";
 
-export const TableFooter = () =>
+export const TableHistoricalBody = () =>
 {
   return screen.getByTestId(
-    "footerRow",
+    "historicalBody",
   );
 };

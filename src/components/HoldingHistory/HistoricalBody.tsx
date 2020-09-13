@@ -23,7 +23,10 @@ const HistoricalBody: React.FC<Props> = (
 ) =>
 {
   return (
-    <GrommetTableBody css="">
+    <GrommetTableBody
+      css=""
+      data-testid="historicalBody"
+    >
       {
         historicalHoldings.map(
           (

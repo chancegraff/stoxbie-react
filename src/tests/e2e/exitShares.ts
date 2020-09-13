@@ -1,5 +1,4 @@
 import {
-  logDOM,
   waitForElement,
 } from "@testing-library/react";
 
@@ -11,6 +10,7 @@ import {
 import {
   ExitButtons,
   TableFooter,
+  TableHistoricalBody,
   TablePresentBody,
   TableTradeRows,
 } from "tests/Components";
@@ -45,7 +45,10 @@ export const exitShares = async (
     exitButton,
   );
 
-  const tradeRows = TableTradeRows();
+  const historicalBody = TableHistoricalBody();
+  const tradeRows = TableTradeRows(
+    historicalBody,
+  );
 
   const [
     firstTradeRow,

@@ -10,9 +10,11 @@ export const ledgerBalanceShouldChange = (
   balance: string,
 ) =>
 {
+  const tableFooter = TableFooter();
+
   return expect(
     within(
-      TableFooter(),
+      tableFooter,
     ).getByText(
       balance,
     ),

@@ -6,9 +6,11 @@ import {
 } from "recoil";
 import {
   HistoricalHoldingType,
+  HistoricalOrderType,
   LedgerType,
   OrderType,
   PresentHoldingType,
+  PresentOrderType,
 } from "trade-types";
 
 import {
@@ -37,8 +39,8 @@ export const usePresentLedger = (): PresentLedgerHook =>
    */
   const LedgerAfterHistoricalOrder = useCallback(
     (
-      order: OrderType,
-      holding: PresentHoldingType | HistoricalHoldingType,
+      order: HistoricalOrderType,
+      holding: HistoricalHoldingType,
     ) =>
     {
       const {
@@ -90,7 +92,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
    */
   const LedgerAfterPresentOrder = useCallback(
     (
-      order: OrderType,
+      order: PresentOrderType,
     ) =>
     {
       const {
@@ -167,7 +169,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
         {
           return LedgerAfterHistoricalOrder(
             order,
-            holding,
+            holding as HistoricalHoldingType,
           );
         }
         case "present":
