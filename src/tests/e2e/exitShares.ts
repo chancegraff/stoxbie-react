@@ -3,9 +3,9 @@ import {
 } from "@testing-library/react";
 
 import {
+  historicalRowShouldHaveText,
   ledgerBalanceShouldChange,
   ledgerChangeShouldChange,
-  tradeRowShouldHaveText,
 } from "tests/Assertions";
 import {
   ExitButtons,
@@ -67,28 +67,28 @@ export const exitShares = async (
     TableFooter,
   );
 
-  tradeRowShouldHaveText(
+  historicalRowShouldHaveText(
     closedRow,
     formatCount(
       trade.OpenCount,
     ),
   );
 
-  tradeRowShouldHaveText(
+  historicalRowShouldHaveText(
     closedRow,
     formatCurrency(
       trade.OpenPrice,
     ),
   );
 
-  tradeRowShouldHaveText(
+  historicalRowShouldHaveText(
     closedRow,
     formatCurrency(
       trade.ClosePrice,
     ),
   );
 
-  tradeRowShouldHaveText(
+  historicalRowShouldHaveText(
     closedRow,
     formatCurrency(
       trade.CloseCount * trade.ClosePrice,

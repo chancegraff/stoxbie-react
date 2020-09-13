@@ -1,13 +1,12 @@
 import {
-  waitFor,
   waitForElement,
 } from "@testing-library/react";
 
 import {
   ledgerBalanceShouldChange,
+  presentRowShouldHaveCloseButton,
+  presentRowShouldHaveText,
   sliderShouldChange,
-  tradeRowShouldHaveExitButton,
-  tradeRowShouldHaveText,
 } from "tests/Assertions";
 import {
   TableFooter,
@@ -50,7 +49,7 @@ export const buyShares = async (
     openedTrade,
   ] = tradeRows;
 
-  tradeRowShouldHaveText(
+  presentRowShouldHaveText(
     openedTrade,
     formatCount(
       trade.TotalCount ||
@@ -58,18 +57,18 @@ export const buyShares = async (
     ),
   );
 
-  tradeRowShouldHaveText(
+  presentRowShouldHaveText(
     openedTrade,
     formatCurrency(
       trade.OpenPrice,
     ),
   );
 
-  tradeRowShouldHaveExitButton(
+  presentRowShouldHaveCloseButton(
     openedTrade,
   );
 
-  tradeRowShouldHaveText(
+  presentRowShouldHaveText(
     openedTrade,
     formatCurrency(
       trade.TotalBalance ||
