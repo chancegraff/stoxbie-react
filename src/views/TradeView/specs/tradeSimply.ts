@@ -50,7 +50,6 @@ it(
 
     await buyShares(
       {
-        TotalShares: openShares,
         OpenPrice: openPrice,
         OpenCount: openShares,
         ClosePrice: undefined,
@@ -64,7 +63,6 @@ it(
 
     await exitShares(
       {
-        TotalShares: 0,
         OpenPrice: openPrice,
         OpenCount: openShares,
         ClosePrice: closePrice,

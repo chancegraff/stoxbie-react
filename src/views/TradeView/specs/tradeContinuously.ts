@@ -3,11 +3,9 @@ import {
 } from "date-fns";
 
 import {
-  TableTradeRows,
-} from "tests/Components";
-import {
   buyShares,
   exitShares,
+  toggleCombinedRows,
 } from "tests/E2E";
 import {
   clickContinue,
@@ -113,9 +111,7 @@ it(
 
     clickContinue();
 
-    const [
-      tradeRow,
-    ] = TableTradeRows();
+    toggleCombinedRows();
 
     /**
      * @todo Toggle the combined rows and find the row with 50 shares

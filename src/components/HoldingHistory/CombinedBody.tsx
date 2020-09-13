@@ -50,7 +50,10 @@ const CombinedBody: React.FC<Props> = (
   }
 
   return (
-    <GrommetTableBody css="">
+    <GrommetTableBody
+      css=""
+      data-testid="combinedBody"
+    >
       {
         presentHoldings.map(
           (

@@ -8,3 +8,6 @@ export * from "./assertions/sliderShouldChange";
 export * from "./assertions/tradeRowShouldHaveExitButton";
 export * from "./assertions/tradeRowShouldHaveText";
 export * from "./assertions/tradeRowsShouldHaveLength";
+export * from "./assertions/combinedBodyShouldChange";
+export * from "./assertions/combinedRowsShouldChange";
+export * from "./assertions/toggleCombinedShouldChange";

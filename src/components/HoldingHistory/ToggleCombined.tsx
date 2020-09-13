@@ -141,6 +141,7 @@ const ToggleCombined: React.FC<Props> = (
     >
       <GrommetContainer
         css=""
+        data-testid="toggleCombined"
         onClick={handleClick}
         onMouseEnter={handleMouseEnterButton}
         onMouseLeave={handleMouseLeaveButton}
