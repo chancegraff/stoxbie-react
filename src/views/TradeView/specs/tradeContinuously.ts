@@ -113,29 +113,20 @@ const dayThreeTrade = {
   LedgerChange: undefined,
 };
 
-console.log(
-  "dayThreeTrade.TotalBalance",
-  dayTwoTrade.TotalBalance,
-  " + ",
-  dayThreeEquity,
-  " = ",
-  dayTwoTrade.TotalBalance + dayThreeEquity,
-);
-
 // Day 4: Sell day two's 50 shares
 const dayFourShares = dayTwoShares;
 const dayFourClose = dayFourPrice.close;
 const dayFourEquity = dayFourClose * dayFourShares;
 const dayFourBalance = dayThreeBalance + dayFourEquity;
 
-const equityChange = dayFourEquity - dayTwoEquity;
+const dayFourEquityChange = dayFourEquity - dayTwoEquity;
 const totalEquityAfterDayFour = (
   dayOneEquity +
   dayTwoEquity +
   dayThreeEquity
 );
 
-const dayFourChange = 0 + (equityChange / totalEquityAfterDayFour);
+const dayFourChange = dayFourEquityChange / totalEquityAfterDayFour;
 
 const dayFourTrade = {
   TotalCount: (
@@ -183,15 +174,48 @@ const dayFiveTrade = {
   LedgerChange: undefined,
 };
 
-console.log(
-  "dayFiveTrade.TotalBalance",
-  dayFourTrade.TotalBalance,
-  " + ",
-  dayFiveEquity,
-  " = ",
-  dayFourTrade.TotalBalance + dayFiveEquity,
+// Day 6: Sell present shares
+const daySixShares = 400;
+const daySixClose = daySixPrice.close;
+const daySixEquity = daySixClose * daySixShares;
+const daySixBalance = dayFiveBalance + daySixEquity;
+
+const equityBeforeDaySix = (
+  dayOneEquity +
+  dayThreeEquity +
+  dayFiveEquity
+);
+const daySixEquityChange = daySixEquity - equityBeforeDaySix;
+
+const daySixChange = (
+  dayFourChange +
+  (
+    ( // Profit
+      daySixEquityChange
+    ) /
+    ( // Investment
+      equityBeforeDaySix
+    )
+  )
 );
 
+const daySixTrade = {
+  TotalCount: 0,
+  TotalBalance: undefined,
+  TotalPrice: undefined,
+  OpenPrice: undefined,
+  OpenCount: undefined,
+  ClosePrice: daySixClose,
+  CloseCount: daySixShares,
+  LedgerBalance: daySixBalance,
+  LedgerChange: daySixChange,
+};
+
+/**
+ * @todo Everything above is... not good,
+ * definitely needs to be refactored into
+ * actual code; for now this is temporary
+ */
 it(
   "conducts a continuous trade",
   () =>
@@ -231,7 +255,7 @@ it(
 
     clickContinue();
 
-    const combinedRowsState = toggleCombinedRows();
+    toggleCombinedRows();
 
     const dayTwoRow = TableCombinedRow(
       `${dayTwoShares}`,
@@ -260,20 +284,13 @@ it(
     clickContinue();
 
     // Day 6: Sell present shares
-    exitShares(
-      {
-        TotalShares: 0,
-        TotalEquity: 0,
-        OpenPrice: 3.67,
-        OpenCount: 100,
-        ClosePrice: 3.79,
-        CloseCount: 100,
-        ChangeBalance: 12,
-        ChangePercent: 0.032697547683924,
-        LedgerBalance: 10128.5,
-        LedgerReturns: 128.5,
-        LedgerChange: 0.013180163085286,
-      },
+    exitShares();
+
+    /**
+     * @todo Fix to handle selling multiple rows at once
+     */
+    historicalRowsShouldChange(
+      daySixTrade,
     );
   },
 );

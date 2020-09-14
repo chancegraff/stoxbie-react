@@ -44,11 +44,11 @@ const ledgerChange = equityChange / openEquity;
 
 it(
   "conducts a simple trade",
-  async () =>
+  () =>
   {
     renderTradeView();
 
-    await buyShares(
+    buyShares(
       {
         OpenPrice: openPrice,
         OpenCount: openShares,
@@ -61,7 +61,7 @@ it(
 
     clickContinue();
 
-    await exitShares(
+    exitShares(
       {
         OpenPrice: openPrice,
         OpenCount: openShares,

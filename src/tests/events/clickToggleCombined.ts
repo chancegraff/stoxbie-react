@@ -6,7 +6,14 @@ import {
 
 export const clickToggleCombined = () =>
 {
+  const toggleCombined = TableToggleCombined();
+
+  if (!toggleCombined)
+  {
+    return undefined;
+  }
+
   userEvent.click(
-    TableToggleCombined(),
+    toggleCombined,
   );
 };

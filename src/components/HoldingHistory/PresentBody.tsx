@@ -82,25 +82,6 @@ const PresentBody: React.FC<Props> = (
         },
       );
 
-      console.log(
-        "PresentBody.tsx",
-        "presentEquity",
-        presentEquity,
-        " of ",
-        JSON.stringify(
-          presentHoldings.map(
-            (
-              holding,
-            ) =>
-            {
-              return holding.orders.present.balance;
-            },
-          ),
-          null,
-          2,
-        ),
-      );
-
       return formatCurrency(
         presentEquity,
       );
