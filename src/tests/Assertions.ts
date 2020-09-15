@@ -1,4 +1,3 @@
-export * from "./assertions/pageShouldLoad";
 export * from "./assertions/componentShouldRender";
 export * from "./assertions/ledgerBalanceShouldChange";
 export * from "./assertions/ledgerChangeShouldChange";

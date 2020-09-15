@@ -1,6 +1,5 @@
 import {
   componentsShouldRender,
-  pageShouldLoad,
 } from "tests/Assertions";
 import {
   BreadcrumbsContainer,

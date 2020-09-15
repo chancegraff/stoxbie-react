@@ -3,7 +3,6 @@ import {
 } from "@testing-library/react";
 
 import {
-  pageShouldLoad,
   sliderShouldChange,
 } from "tests/Assertions";
 import {
