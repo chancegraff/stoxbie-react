@@ -1,4 +1,8 @@
 import {
+  logDOM,
+} from "@testing-library/react";
+
+import {
   ExitButtons,
   TablePresentBody,
 } from "tests/Components";
@@ -21,6 +25,11 @@ export const exitShares = (
     exitButton,
   ] = ExitButtons(
     buttonContainer,
+  );
+
+  logDOM(
+    buttonContainer,
+    999999999999999,
   );
 
   clickExit(

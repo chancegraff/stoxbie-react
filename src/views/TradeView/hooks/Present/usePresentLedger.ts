@@ -2,9 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  useRecoilValue,
-} from "recoil";
-import {
   HistoricalHoldingType,
   HistoricalOrderType,
   LedgerType,
@@ -16,12 +13,12 @@ import {
 import {
   OrderDirection,
 } from "utils/Enums";
-import {
-  presentLedgerState,
-} from "store/Selectors";
 
 type PresentLedgerHook = {
-  PresentLedger: (order: OrderType | undefined, holding: PresentHoldingType | HistoricalHoldingType | undefined) => LedgerType | undefined;
+  PresentLedger: (
+    ledger: LedgerType,
+    order: OrderType | undefined,
+    holding: PresentHoldingType | HistoricalHoldingType | undefined) => LedgerType | undefined;
 };
 
 /**
@@ -30,15 +27,12 @@ type PresentLedgerHook = {
  */
 export const usePresentLedger = (): PresentLedgerHook =>
 {
-  const presentLedger = useRecoilValue(
-    presentLedgerState,
-  );
-
   /**
    * @summary Getting rid of shares
    */
   const LedgerAfterHistoricalOrder = useCallback(
     (
+      presentLedger: LedgerType,
       order: HistoricalOrderType,
       holding: HistoricalHoldingType,
     ) =>
@@ -82,9 +76,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
         },
       };
     },
-    [
-      presentLedger,
-    ],
+    [],
   );
 
   /**
@@ -92,6 +84,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
    */
   const LedgerAfterPresentOrder = useCallback(
     (
+      presentLedger: LedgerType,
       order: PresentOrderType,
     ) =>
     {
@@ -139,13 +132,12 @@ export const usePresentLedger = (): PresentLedgerHook =>
 
       return nextLedger;
     },
-    [
-      presentLedger,
-    ],
+    [],
   );
 
   const PresentLedger = useCallback(
     (
+      ledger: LedgerType,
       order: OrderType | undefined,
       holding: PresentHoldingType | HistoricalHoldingType | undefined,
     ): LedgerType | undefined =>
@@ -168,6 +160,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
         case "historical":
         {
           return LedgerAfterHistoricalOrder(
+            ledger,
             order,
             holding as HistoricalHoldingType,
           );
@@ -175,6 +168,7 @@ export const usePresentLedger = (): PresentLedgerHook =>
         case "present":
         {
           return LedgerAfterPresentOrder(
+            ledger,
             order,
           );
         }

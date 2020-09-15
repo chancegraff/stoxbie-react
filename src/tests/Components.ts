@@ -22,6 +22,7 @@ export * from "./components/TablePresentRow";
 export * from "./components/TablePresentRows";
 export * from "./components/TableHistoricalBody";
 export * from "./components/TableHistoricalRows";
+export * from "./components/TableHistoricalRow";
 export * from "./components/TickerInput";
 export * from "./components/PriceDateContainer";
 export * from "./components/PriceDateText";

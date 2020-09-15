@@ -3,11 +3,14 @@ import {
 } from "date-fns";
 
 import {
-  historicalRowsShouldChange,
+  historicalRowShouldChange,
+  historicalRowsShouldHaveLength,
   presentRowShouldChange,
+  tableFooterShouldChange,
 } from "tests/Assertions";
 import {
   TableCombinedRow,
+  TableHistoricalRows,
 } from "tests/Components";
 import {
   buyShares,
@@ -85,8 +88,8 @@ const dayTwoTrade = {
   LedgerChange: undefined,
 };
 
-// Day 3: Buy 100 shares
-const dayThreeShares = 100;
+// Day 3: Buy 150 shares
+const dayThreeShares = 150;
 const dayThreeClose = dayThreePrice.close;
 const dayThreeEquity = dayThreeClose * dayThreeShares;
 const dayThreeBalance = dayTwoBalance - dayThreeEquity;
@@ -199,14 +202,36 @@ const daySixChange = (
   )
 );
 
-const daySixTrade = {
+const soldDayOneTrade = {
   TotalCount: 0,
-  TotalBalance: undefined,
+  TotalBalance: dayOneShares * daySixClose,
   TotalPrice: undefined,
-  OpenPrice: undefined,
-  OpenCount: undefined,
+  OpenPrice: dayOneClose,
+  OpenCount: dayOneShares,
   ClosePrice: daySixClose,
-  CloseCount: daySixShares,
+  CloseCount: dayOneShares,
+  LedgerBalance: daySixBalance,
+  LedgerChange: daySixChange,
+};
+const soldDayThreeTrade = {
+  TotalCount: 0,
+  TotalBalance: dayThreeShares * daySixClose,
+  TotalPrice: undefined,
+  OpenPrice: dayThreeClose,
+  OpenCount: dayThreeShares,
+  ClosePrice: daySixClose,
+  CloseCount: dayThreeShares,
+  LedgerBalance: daySixBalance,
+  LedgerChange: daySixChange,
+};
+const soldDayFiveTrade = {
+  TotalCount: 0,
+  TotalBalance: dayFiveShares * daySixClose,
+  TotalPrice: undefined,
+  OpenPrice: dayFiveClose,
+  OpenCount: dayFiveShares,
+  ClosePrice: daySixClose,
+  CloseCount: dayFiveShares,
   LedgerBalance: daySixBalance,
   LedgerChange: daySixChange,
 };
@@ -214,7 +239,7 @@ const daySixTrade = {
 /**
  * @todo Everything above is... not good,
  * definitely needs to be refactored into
- * actual code; for now this is temporary
+ * actual code; for now it is temporary
  */
 it(
   "conducts a continuous trade",
@@ -231,6 +256,13 @@ it(
       dayOneTrade,
     );
 
+    tableFooterShouldChange(
+      {
+        LedgerBalance: dayOneBalance,
+        LedgerChange: 0,
+      },
+    );
+
     clickContinue();
 
     // Day 2: Buy 50 shares
@@ -240,6 +272,13 @@ it(
 
     presentRowShouldChange(
       dayTwoTrade,
+    );
+
+    tableFooterShouldChange(
+      {
+        LedgerBalance: dayTwoBalance,
+        LedgerChange: 0,
+      },
     );
 
     clickContinue();
@@ -253,21 +292,40 @@ it(
       dayThreeTrade,
     );
 
+    tableFooterShouldChange(
+      {
+        LedgerBalance: dayThreeBalance,
+        LedgerChange: 0,
+      },
+    );
+
     clickContinue();
 
     toggleCombinedRows();
 
-    const dayTwoRow = TableCombinedRow(
+    const dayTwoPresentRow = TableCombinedRow(
       `${dayTwoShares}`,
     );
 
     // Day 4: Sell day two's 50 shares
     exitShares(
-      dayTwoRow,
+      dayTwoPresentRow,
     );
 
-    historicalRowsShouldChange(
+    const [
+      dayTwoRow,
+    ] = TableHistoricalRows();
+
+    historicalRowShouldChange(
+      dayTwoRow,
       dayFourTrade,
+    );
+
+    tableFooterShouldChange(
+      {
+        LedgerBalance: dayFourBalance,
+        LedgerChange: dayFourChange,
+      },
     );
 
     clickContinue();
@@ -281,16 +339,39 @@ it(
       dayFiveTrade,
     );
 
+    tableFooterShouldChange(
+      {
+        LedgerBalance: dayFiveBalance,
+        LedgerChange: dayFourChange,
+      },
+    );
+
     clickContinue();
 
     // Day 6: Sell present shares
     exitShares();
 
-    /**
-     * @todo Fix to handle selling multiple rows at once
-     */
-    historicalRowsShouldChange(
-      daySixTrade,
+    const historicalRows = TableHistoricalRows();
+
+    historicalRowsShouldHaveLength(
+      historicalRows,
+      4,
+    );
+
+    const [
+      dayThreeRow,
+    ] = historicalRows;
+
+    historicalRowShouldChange(
+      dayThreeRow,
+      soldDayThreeTrade,
+    );
+
+    tableFooterShouldChange(
+      {
+        LedgerBalance: daySixBalance,
+        LedgerChange: daySixChange,
+      },
     );
   },
 );

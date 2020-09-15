@@ -7,6 +7,7 @@ import {
 } from "@chancey/iex-cloud";
 import {
   differenceInBusinessDays,
+  isAfter,
   isBefore,
   isSameDay,
   isSaturday,
@@ -277,30 +278,87 @@ export const useEffectPresentPrices = (
 
       /**
        * @summary Value is usually at end, so reverse the List
-       * and search it to get the real index
+       * and search it to get the real index while saving the
+       * next value after the actual date if it's been passed
        */
       const reversedIndexRange = indexRange.reverse();
-      const endIndexInReversedRange = reversedIndexRange.findIndex(
-        (
-          historicalPrice,
-        ) =>
+      const indexRangeLength = indexRange.count();
+
+      /**
+       * @summary Hard loop so we can exit from it early if
+       * we want while also allowing us to chunk in triplets
+       */
+      let endIndexInReversedRange = 0;
+
+      for (; endIndexInReversedRange < indexRangeLength; endIndexInReversedRange += 3)
+      {
+        const historicalPrice = reversedIndexRange.get(
+          endIndexInReversedRange,
+        );
+
+        /**
+         * @summary Skip to the next value if we got undefined
+         * at this index (how would this happen?)
+         */
+        if (!historicalPrice)
         {
-          const historicalPriceDate = parseDate(
-            historicalPrice.date,
-            DateFormats.Iex,
-          );
+          continue;
+        }
 
-          return isSameDay(
+        const priceDate = parseDate(
+          historicalPrice.date,
+          DateFormats.Iex,
+        );
+
+        /**
+         * @summary Check that the price date hasn't passed the
+         * chosen date; if we've finally passed the chosen date,
+         * redirect to this date (which is the always the next
+         * value in the array)
+         */
+        if (
+          isAfter(
+            priceDate,
             date,
-            historicalPriceDate,
+          )
+        )
+        {
+          return redirectToDate(
+            priceDate,
           );
-        },
-      );
+        }
 
+        /**
+         * @summary Haven't passed value yet so check it and
+         * exit early if it matches
+         */
+        if (
+          isSameDay(
+            date,
+            priceDate,
+          )
+        )
+        {
+          break;
+        }
+      }
+
+      /**
+       * @summary Return an error if we have no value at all
+       */
       if (endIndexInReversedRange === -1)
       {
         throw new Error(
-          "End index not found in range",
+          `
+          End index not found for {date} in {range}\n
+          ${date}\n
+          ${JSON.stringify(
+            indexRange,
+            null,
+            2,
+          )}\n
+
+          `,
         );
       }
 
@@ -311,7 +369,6 @@ export const useEffectPresentPrices = (
        * range is 100, that means the real index is at 400;
        * 500 - 100 = 400, which is what we'll now calculate
        */
-      const indexRangeLength = indexRange.count();
       const endIndexInRange = indexRangeLength - endIndexInReversedRange;
 
       /**

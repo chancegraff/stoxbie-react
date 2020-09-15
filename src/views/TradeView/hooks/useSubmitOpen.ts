@@ -1,6 +1,13 @@
 import {
   useCallback,
 } from "react";
+import {
+  useRecoilValue,
+} from "recoil";
+
+import {
+  presentLedgerState,
+} from "store/Selectors";
 
 import {
   usePresentHolding,
@@ -25,6 +32,10 @@ type SubmitOpenHook = {
  */
 export const useSubmitOpen = (): SubmitOpenHook =>
 {
+  const presentLedger = useRecoilValue(
+    presentLedgerState,
+  );
+
   const {
     PresentHolding,
   } = usePresentHolding();
@@ -59,6 +70,7 @@ export const useSubmitOpen = (): SubmitOpenHook =>
       } = holding;
 
       const ledger = PresentLedger(
+        presentLedger,
         present,
         holding,
       );
@@ -76,6 +88,7 @@ export const useSubmitOpen = (): SubmitOpenHook =>
       );
     },
     [
+      presentLedger,
       PresentHolding,
       PresentLedger,
       updatePresentHoldings,

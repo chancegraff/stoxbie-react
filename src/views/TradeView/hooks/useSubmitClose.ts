@@ -2,8 +2,15 @@ import {
   useCallback,
 } from "react";
 import {
+  useRecoilValue,
+} from "recoil";
+import {
   PresentHoldingType,
 } from "trade-types";
+
+import {
+  presentLedgerState,
+} from "store/Selectors";
 
 import {
   useHistoricalHolding,
@@ -31,6 +38,10 @@ export type SubmitCloseHook = {
  */
 export const useSubmitClose = (): SubmitCloseHook =>
 {
+  const presentLedger = useRecoilValue(
+    presentLedgerState,
+  );
+
   const {
     HistoricalHolding,
   } = useHistoricalHolding();
@@ -58,7 +69,9 @@ export const useSubmitClose = (): SubmitCloseHook =>
 
       if (!holding)
       {
-        return;
+        throw new Error(
+          "Could not build historical holding while closing order",
+        );
       }
 
       const {
@@ -68,13 +81,16 @@ export const useSubmitClose = (): SubmitCloseHook =>
       } = holding;
 
       const ledger = PresentLedger(
+        presentLedger,
         historical,
         holding,
       );
 
       if (!ledger)
       {
-        return;
+        throw new Error(
+          "Could not build present ledger while closing order",
+        );
       }
 
       removePresentHolding(
@@ -88,6 +104,7 @@ export const useSubmitClose = (): SubmitCloseHook =>
       );
     },
     [
+      presentLedger,
       HistoricalHolding,
       PresentLedger,
       removePresentHolding,

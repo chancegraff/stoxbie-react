@@ -3,6 +3,13 @@ import {
 } from "date-fns";
 
 import {
+  historicalRowShouldChange,
+  presentRowShouldChange,
+} from "tests/Assertions";
+import {
+  TableHistoricalRows,
+} from "tests/Components";
+import {
   buyShares,
   exitShares,
 } from "tests/E2E";
@@ -42,6 +49,23 @@ const closeBalance = openBalance + closeEquity;
 const equityChange = closeEquity - openEquity;
 const ledgerChange = equityChange / openEquity;
 
+const dayOneTrade = {
+  OpenPrice: openPrice,
+  OpenCount: openShares,
+  ClosePrice: undefined,
+  CloseCount: undefined,
+  LedgerBalance: openBalance,
+  LedgerChange: undefined,
+};
+const dayTwoTrade = {
+  OpenPrice: openPrice,
+  OpenCount: openShares,
+  ClosePrice: closePrice,
+  CloseCount: openShares,
+  LedgerBalance: closeBalance,
+  LedgerChange: ledgerChange,
+};
+
 it(
   "conducts a simple trade",
   () =>
@@ -49,27 +73,24 @@ it(
     renderTradeView();
 
     buyShares(
-      {
-        OpenPrice: openPrice,
-        OpenCount: openShares,
-        ClosePrice: undefined,
-        CloseCount: undefined,
-        LedgerBalance: openBalance,
-        LedgerChange: undefined,
-      },
+      dayOneTrade,
+    );
+
+    presentRowShouldChange(
+      dayOneTrade,
     );
 
     clickContinue();
 
-    exitShares(
-      {
-        OpenPrice: openPrice,
-        OpenCount: openShares,
-        ClosePrice: closePrice,
-        CloseCount: openShares,
-        LedgerBalance: closeBalance,
-        LedgerChange: ledgerChange,
-      },
+    exitShares();
+
+    const [
+      historicalRow,
+    ] = TableHistoricalRows();
+
+    historicalRowShouldChange(
+      historicalRow,
+      dayTwoTrade,
     );
   },
 );

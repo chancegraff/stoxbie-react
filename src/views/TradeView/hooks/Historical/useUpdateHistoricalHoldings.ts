@@ -2,6 +2,9 @@ import {
   useCallback,
 } from "react";
 import {
+  List,
+} from "immutable";
+import {
   useRecoilState,
 } from "recoil";
 import {
@@ -13,7 +16,7 @@ import {
 } from "store/Atoms";
 
 type UpdateHistoricalHoldingsHook = {
-  updateHistoricalHoldings: (historicalHolding: HistoricalHoldingType) => void;
+  updateHistoricalHoldings: (historicalHolding: HistoricalHoldingType[] | HistoricalHoldingType) => void;
 };
 
 /**
@@ -31,12 +34,31 @@ export const useUpdateHistoricalHoldings = (): UpdateHistoricalHoldingsHook =>
 
   const updateHistoricalHoldings = useCallback(
     (
-      historicalHolding: HistoricalHoldingType,
+      historicalHolding: HistoricalHoldingType[] | HistoricalHoldingType,
     ) =>
     {
+      const nextHistoricalHoldings = [];
+
+      if (
+        Array.isArray(
+          historicalHolding,
+        )
+      )
+      {
+        nextHistoricalHoldings.unshift(
+          ...historicalHolding,
+        );
+      }
+      else
+      {
+        nextHistoricalHoldings.unshift(
+          historicalHolding,
+        );
+      }
+
       setHistoricalHoldings(
         historicalHoldings.unshift(
-          historicalHolding,
+          ...nextHistoricalHoldings,
         ),
       );
     },

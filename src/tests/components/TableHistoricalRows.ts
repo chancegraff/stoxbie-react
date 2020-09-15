@@ -10,11 +10,6 @@ export const TableHistoricalRows = () =>
 {
   const historicalBody = TableHistoricalBody();
 
-  if (!historicalBody)
-  {
-    return [];
-  }
-
   return within(
     historicalBody,
   ).queryAllByRole(
