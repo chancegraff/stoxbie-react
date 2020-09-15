@@ -46,6 +46,7 @@ type Props = {
   historicalHoldings: List<HistoricalHoldingType>;
   presentHolding: PresentHoldingType | undefined;
   handleClose: (present: PresentHoldingType) => void;
+  handleCloseAll: () => void;
 };
 
 const HoldingTable: React.FC<Props> = (
@@ -56,6 +57,7 @@ const HoldingTable: React.FC<Props> = (
     historicalHoldings,
     presentHolding,
     handleClose,
+    handleCloseAll,
   },
 ) =>
 {
@@ -167,7 +169,7 @@ const HoldingTable: React.FC<Props> = (
             presentHoldings={presentHoldings}
             rowHoverState={rowHoverState}
             combinedBodyState={combinedBodyState}
-            handleClose={handleClose}
+            handleCloseAll={handleCloseAll}
             handleToggleCombined={handleToggleCombined}
             handleMouseEnterRow={debouncedMouseEnterRow}
             handleMouseLeaveRow={debouncedMouseLeaveRow}

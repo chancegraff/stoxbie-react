@@ -46,6 +46,7 @@ type Props = RouteProps & {
   chartHeight: number;
   handleOpen: (orderAmount: number) => void;
   handleClose: (present: PresentHoldingType) => void;
+  handleCloseAll: () => void;
   handleContinue: () => void;
 };
 
@@ -56,6 +57,7 @@ const TradeViewDisplay: React.FC<Props> = (
     chartHeight,
     handleOpen,
     handleClose,
+    handleCloseAll,
     handleContinue,
   },
 ) =>
@@ -137,6 +139,7 @@ const TradeViewDisplay: React.FC<Props> = (
             historicalHoldings={historicalHoldings}
             presentHolding={presentHolding}
             handleClose={handleClose}
+            handleCloseAll={handleCloseAll}
           />
         </GrommetSidebarContainer>
       </GrommetGrid>

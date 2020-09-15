@@ -44,7 +44,7 @@ type Props = {
   presentHoldings: List<PresentHoldingType>;
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
-  handleClose: (present: PresentHoldingType) => void;
+  handleCloseAll: () => void;
   handleMouseEnterRow: HandleMouseEnter;
   handleMouseLeaveRow: HandleMouseLeave;
   handleToggleCombined: () => void;
@@ -58,7 +58,7 @@ const PresentBody: React.FC<Props> = (
     presentHoldings,
     rowHoverState,
     combinedBodyState,
-    handleClose,
+    handleCloseAll,
     handleMouseEnterRow,
     handleMouseLeaveRow,
     handleToggleCombined,
@@ -165,7 +165,7 @@ const PresentBody: React.FC<Props> = (
                   <CloseHoldings
                     css=""
                     presentHolding={presentHolding}
-                    handleClose={handleClose}
+                    handleClose={handleCloseAll}
                   />
                 </GrommetTableCell>
                 <GrommetTableCell css="">

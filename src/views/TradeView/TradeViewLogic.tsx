@@ -12,6 +12,7 @@ import {
   useAspectRatio,
   useEffectPresentPrices,
   useSubmitClose,
+  useSubmitCloseAll,
   useSubmitContinue,
   useSubmitOpen,
 } from "./TradeViewHooks";
@@ -61,6 +62,9 @@ const TradeViewLogic: React.FC<Props> = (
     submitClose,
   } = useSubmitClose();
   const {
+    submitCloseAll,
+  } = useSubmitCloseAll();
+  const {
     submitOpen,
   } = useSubmitOpen();
   const {
@@ -80,6 +84,7 @@ const TradeViewLogic: React.FC<Props> = (
       chartHeight={chartHeight}
       handleOpen={submitOpen}
       handleClose={submitClose}
+      handleCloseAll={submitCloseAll}
       handleContinue={submitContinue}
     />
   );
