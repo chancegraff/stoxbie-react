@@ -5,6 +5,7 @@ import {
 import {
   historicalRowShouldChange,
   presentRowShouldChange,
+  tableFooterShouldChange,
 } from "tests/Assertions";
 import {
   TableHistoricalRows,
@@ -37,33 +38,40 @@ const [
 
 const initialLedgerBalance = 10000;
 
-const openShares = 200;
-const openPrice = dayOnePrice.close;
-const openEquity = openPrice * openShares;
-const openBalance = initialLedgerBalance - openEquity;
-
-const closePrice = dayTwoPrice.close;
-const closeEquity = closePrice * openShares;
-const closeBalance = openBalance + closeEquity;
-
-const equityChange = closeEquity - openEquity;
-const ledgerChange = equityChange / openEquity;
-
+// Day 1: Buy 200 shares
+const dayOneShares = 200;
+const dayOneClose = dayOnePrice.close;
+const dayOneEquity = dayOneClose * dayOneShares;
+const dayOneBalance = initialLedgerBalance - dayOneEquity;
 const dayOneTrade = {
-  OpenPrice: openPrice,
-  OpenCount: openShares,
+  TotalCount: dayOneShares,
+  TotalBalance: undefined,
+  TotalPrice: dayOneClose,
+  OpenPrice: dayOneClose,
+  OpenCount: dayOneShares,
   ClosePrice: undefined,
   CloseCount: undefined,
-  LedgerBalance: openBalance,
+  LedgerBalance: dayOneBalance,
   LedgerChange: undefined,
 };
+
+// Day 2: Sell day one's 200 shares
+const dayTwoShares = dayOneShares;
+const dayTwoClose = dayTwoPrice.close;
+const dayTwoEquity = dayTwoClose * dayTwoShares;
+const dayTwoBalance = dayOneBalance + dayTwoEquity;
+const dayTwoProfit = dayTwoEquity - dayOneEquity;
+const dayTwoChange = dayTwoProfit / dayOneEquity;
 const dayTwoTrade = {
-  OpenPrice: openPrice,
-  OpenCount: openShares,
-  ClosePrice: closePrice,
-  CloseCount: openShares,
-  LedgerBalance: closeBalance,
-  LedgerChange: ledgerChange,
+  TotalCount: 0,
+  TotalBalance: undefined,
+  TotalPrice: dayTwoClose,
+  OpenPrice: dayOneClose,
+  OpenCount: dayOneShares,
+  ClosePrice: dayTwoClose,
+  CloseCount: dayTwoShares,
+  LedgerBalance: dayTwoBalance,
+  LedgerChange: dayTwoChange,
 };
 
 it(
@@ -72,6 +80,7 @@ it(
   {
     renderTradeView();
 
+    // Day 1: Buy 200 shares
     buyShares(
       dayOneTrade,
     );
@@ -80,17 +89,32 @@ it(
       dayOneTrade,
     );
 
+    tableFooterShouldChange(
+      {
+        LedgerBalance: dayOneBalance,
+        LedgerChange: 0,
+      },
+    );
+
     clickContinue();
 
+    // Day 2: Sell 200 shares
     exitShares();
 
     const [
-      historicalRow,
+      dayOneRow,
     ] = TableHistoricalRows();
 
     historicalRowShouldChange(
-      historicalRow,
+      dayOneRow,
       dayTwoTrade,
+    );
+
+    tableFooterShouldChange(
+      {
+        LedgerBalance: dayTwoBalance,
+        LedgerChange: dayTwoChange,
+      },
     );
   },
 );

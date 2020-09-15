@@ -122,14 +122,14 @@ const dayFourClose = dayFourPrice.close;
 const dayFourEquity = dayFourClose * dayFourShares;
 const dayFourBalance = dayThreeBalance + dayFourEquity;
 
-const dayFourEquityChange = dayFourEquity - dayTwoEquity;
+const dayFourProfit = dayFourEquity - dayTwoEquity;
 const totalEquityAfterDayFour = (
   dayOneEquity +
   dayTwoEquity +
   dayThreeEquity
 );
 
-const dayFourChange = dayFourEquityChange / totalEquityAfterDayFour;
+const dayFourChange = dayFourProfit / totalEquityAfterDayFour;
 
 const dayFourTrade = {
   TotalCount: (
