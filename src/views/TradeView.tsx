@@ -14,6 +14,7 @@ import {
   List,
 } from "immutable";
 import {
+  useRecoilState,
   useSetRecoilState,
 } from "recoil";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -47,7 +48,10 @@ const TradeView: React.FC<Props> = () =>
     ticker: string | undefined;
     date: string | undefined;
   }>();
-  const setHistoricalPrices = useSetRecoilState(
+  const [
+    historicalPrices,
+    setHistoricalPrices,
+  ] = useRecoilState(
     historicalPricesState,
   );
   const [
@@ -78,12 +82,12 @@ const TradeView: React.FC<Props> = () =>
         return;
       }
 
-      const historicalPrices = List(
+      const nextHistoricalPrices = List(
         awaitedPrices,
       );
 
       setHistoricalPrices(
-        historicalPrices,
+        nextHistoricalPrices,
       );
     },
     [
@@ -94,7 +98,10 @@ const TradeView: React.FC<Props> = () =>
   useEffect(
     () =>
     {
-      if (!ticker)
+      if (
+        !ticker ||
+        historicalPrices.count()
+      )
       {
         return;
       }
@@ -104,8 +111,9 @@ const TradeView: React.FC<Props> = () =>
       );
     },
     [
-      handleLoad,
       ticker,
+      historicalPrices,
+      handleLoad,
     ],
   );
 
