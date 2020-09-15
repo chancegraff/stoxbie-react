@@ -2,9 +2,6 @@ import {
   useCallback,
 } from "react";
 import {
-  List,
-} from "immutable";
-import {
   useRecoilState,
 } from "recoil";
 import {

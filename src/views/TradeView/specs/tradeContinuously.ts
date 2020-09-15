@@ -178,28 +178,29 @@ const dayFiveTrade = {
 };
 
 // Day 6: Sell present shares
-const daySixShares = 400;
+const daySixShares = (
+  dayOneShares +
+  dayThreeShares +
+  dayFiveShares
+);
 const daySixClose = daySixPrice.close;
 const daySixEquity = daySixClose * daySixShares;
 const daySixBalance = dayFiveBalance + daySixEquity;
 
-const equityBeforeDaySix = (
+const equityFromAllDays = (
   dayOneEquity +
+  dayTwoEquity +
   dayThreeEquity +
   dayFiveEquity
 );
-const daySixEquityChange = daySixEquity - equityBeforeDaySix;
+const returnsFromAllDays = (
+  daySixEquity +
+  dayTwoEquity
+) - equityFromAllDays;
 
 const daySixChange = (
-  dayFourChange +
-  (
-    ( // Profit
-      daySixEquityChange
-    ) /
-    ( // Investment
-      equityBeforeDaySix
-    )
-  )
+  returnsFromAllDays /
+  equityFromAllDays
 );
 
 const soldDayOneTrade = {
@@ -313,11 +314,11 @@ it(
     );
 
     const [
-      dayTwoRow,
+      firstDayTwoRow,
     ] = TableHistoricalRows();
 
     historicalRowShouldChange(
-      dayTwoRow,
+      firstDayTwoRow,
       dayFourTrade,
     );
 
@@ -359,12 +360,24 @@ it(
     );
 
     const [
+      dayFiveRow,
       dayThreeRow,
+      dayOneRow,
     ] = historicalRows;
+
+    historicalRowShouldChange(
+      dayFiveRow,
+      soldDayFiveTrade,
+    );
 
     historicalRowShouldChange(
       dayThreeRow,
       soldDayThreeTrade,
+    );
+
+    historicalRowShouldChange(
+      dayOneRow,
+      soldDayOneTrade,
     );
 
     tableFooterShouldChange(
