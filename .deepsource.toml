@@ -1,6 +1,6 @@
 version = 1
 
-test_patterns = ["tests/**/*.*.test.ts"]
+test_patterns = ["specs/*.ts"]
 
 exclude_patterns = ["node_modues"]
 
@@ -9,11 +9,13 @@ name = "javascript"
 enabled = true
 
   [analyzers.meta]
+  ecma_version = "2020"
   module_system = "es-modules"
   environment = [
     "browser",
     "jest"
   ]
+
   plugins = ["react"]
   style_guide = "standard"
   dialect = "typescript"

@@ -11,6 +11,7 @@ import {
 import {
   HoverState,
   useHover,
+  useUnload,
 } from "utils/Hooks";
 import HoverIcon from "components/Grommet/HoverIcon";
 
@@ -119,6 +120,10 @@ const ToggleCombined: React.FC<Props> = (
     ],
   );
 
+  useUnload(
+    handleMouseLeaveButton,
+  );
+
   if (
     (
       !rowToTarget ||
@@ -136,6 +141,7 @@ const ToggleCombined: React.FC<Props> = (
     >
       <GrommetContainer
         css=""
+        data-testid="toggleCombined"
         onClick={handleClick}
         onMouseEnter={handleMouseEnterButton}
         onMouseLeave={handleMouseLeaveButton}

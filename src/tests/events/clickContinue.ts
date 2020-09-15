@@ -1,24 +1,12 @@
-import {
-  fireEvent,
-} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import {
   ContinueButton,
 } from "tests/Components";
 
-export const clickContinue = (
-  times = 1,
-) =>
+export const clickContinue = () =>
 {
-  Array.from(
-    Array(
-      times,
-    ),
-    () =>
-    {
-      return fireEvent.click(
-        ContinueButton(),
-      );
-    },
+  return userEvent.click(
+    ContinueButton(),
   );
 };

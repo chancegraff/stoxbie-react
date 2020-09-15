@@ -163,8 +163,8 @@ export const formatDate = (
   return format(
     typeof date === "string"
       ? parseISO(
-          date,
-        )
+        date,
+      )
       : date,
     dateFormat,
   );
@@ -195,4 +195,100 @@ export const formatParsedDate = (
     ),
     outputFormat,
   );
+};
+
+/**
+ * @description Returns one of three variables given to it based
+ * on the current environment the application is being run in.
+ * Only lowLevel is required, but it will be returned exclusively
+ * in development mode. Production tries to return highLevel first
+ * before attempting to return midLevel instead. All other levels
+ * inbetween will try to return midLevel before trying to return
+ * highLevel last.
+ * @summary
+ *   |  Prod          ?  highLevel  ||  midLevel   |
+ *   |  !Prod & !Dev  ?  midLevel   ||  highLevel  |
+ *   |  Dev           ?  lowLevel   ||  undefined  |
+ * @param {unknown} lowLevel For development environment
+ * @param {unknown | undefined} midLevel For any environment between the two
+ * @param {unknown | undefined} highLevel For production environment
+ * @returns {unknown} Returns the variable that matches the environment
+ */
+export const awakenEnvironment = <T extends unknown>(
+  lowLevel: T,
+  midLevel?: T,
+  highLevel?: T,
+): T | undefined =>
+{
+  switch (process.env.NODE_ENV)
+  {
+    case "development":
+    {
+      return (
+        lowLevel
+      );
+    }
+    case "production":
+    {
+      return (
+        highLevel ||
+        midLevel
+      );
+    }
+    default:
+    {
+      return (
+        midLevel ||
+        highLevel
+      );
+    }
+  }
+};
+
+export const captitalizeString = (
+  message: string,
+) =>
+{
+  const [
+    firstChar,
+    ...remainingString
+  ] = message;
+  const rejoinedString = remainingString.join(
+    "",
+  );
+
+  return `${firstChar.toUpperCase()}${rejoinedString}`;
+};
+
+export const hashString = (
+  input: string,
+) =>
+{
+  if (input.length === 0)
+  {
+    return 0;
+  }
+
+  const output = [
+    ...input,
+  ].reduce(
+    (
+      sum,
+      char,
+    ) =>
+    {
+      const code = char.charCodeAt(
+        0,
+      );
+
+      let result = ((sum << 5) - sum) + code;
+
+      result &= result;
+
+      return result;
+    },
+    0,
+  );
+
+  return output;
 };

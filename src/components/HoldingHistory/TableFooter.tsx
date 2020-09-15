@@ -3,8 +3,7 @@ import React, {
 } from "react";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeFinished,
+  LedgerType,
 } from "trade-types";
 
 import {
@@ -19,30 +18,23 @@ import {
 } from "./TableFooter.styled";
 
 type Props = {
-  presentLedger: HistoricalLedger | undefined;
-  historicalHoldings: HistoricalTradeFinished[];
+  presentLedger: LedgerType;
 };
 
 const TableFooter: React.FC<Props> = (
   {
     presentLedger,
-    historicalHoldings,
   },
 ) =>
 {
   const change = useMemo(
     () =>
     {
-      if (presentLedger &&
-          historicalHoldings.length > 0)
-      {
-        return formatPercentage(
-          presentLedger.totalChange,
-        );
-      }
+      return formatPercentage(
+        presentLedger.returns.percent,
+      );
     },
     [
-      historicalHoldings,
       presentLedger,
     ],
   );
@@ -52,7 +44,7 @@ const TableFooter: React.FC<Props> = (
       if (presentLedger)
       {
         return formatCurrency(
-          presentLedger.totalBalance,
+          presentLedger.balance,
         );
       }
     },
@@ -65,7 +57,7 @@ const TableFooter: React.FC<Props> = (
     <GrommetTableFooter css="">
       <GrommetTableRow
         css=""
-        role="footerRow"
+        data-testid="footerRow"
       >
         <GrommetTableCell css="">
           Change

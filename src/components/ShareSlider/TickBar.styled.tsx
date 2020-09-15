@@ -18,12 +18,12 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
     <Box
       flex="grow"
       align="center"
-      justify="start"
+      justify="between"
       direction="row"
       pad={
         {
-          left: "14px",
-          right: "8px",
+          left: "4px",
+          right: "4px",
         }
       }
       {...props}

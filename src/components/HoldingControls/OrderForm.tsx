@@ -1,6 +1,5 @@
 import React, {
   useCallback,
-  useEffect,
   useState,
 } from "react";
 import {
@@ -8,33 +7,28 @@ import {
 } from "@chancey/iex-cloud";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
+  LedgerType,
 } from "trade-types";
 
-import {
-  handleUnloadCreator,
-} from "utils/Utilities";
 import Spinner from "components/Grommet/Spinner";
 import ChooseShares from "components/ShareSlider/ChooseShares";
 
 import {
   GrommetContainer,
-  GrommetGrid,
-  StoxbieBuyAction,
-  StoxbieSellAction,
+  StoxbieSubmitOrder,
 } from "./OrderForm.styled";
 
 type Props = {
   presentPrice: HistoricalPrice | undefined;
-  presentLedger: HistoricalLedger | undefined;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  presentLedger: LedgerType;
+  handleOpen: (orderAmount: number) => void;
 };
 
 const OrderForm: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
-    handleSubmit,
+    handleOpen,
   },
 ) =>
 {
@@ -44,53 +38,24 @@ const OrderForm: React.FC<Props> = (
   ] = useState<number>(
     0,
   );
-  const [
-    orderDirection,
-    setOrderDirection,
-  ] = useState<1 | -1>(
-    1,
-  );
 
-  const handleToggle = useCallback(
+  const handleSubmit = useCallback(
     () =>
     {
-      setOrderShareCount(
-        0,
-      );
-
-      if (orderDirection > 0)
+      if (orderShareCount !== 0)
       {
-        setOrderDirection(
-          -1,
-        );
-      }
-      else
-      {
-        setOrderDirection(
-          1,
+        handleOpen(
+          orderShareCount,
         );
       }
     },
     [
-      orderDirection,
+      orderShareCount,
+      handleOpen,
     ],
   );
 
-  useEffect(
-    () =>
-    {
-      return handleUnloadCreator(
-        [
-          setOrderShareCount,
-          setOrderDirection,
-        ],
-      );
-    },
-    [],
-  );
-
-  if (!presentPrice ||
-      !presentLedger)
+  if (!presentPrice)
   {
     return (
       <Spinner
@@ -106,28 +71,13 @@ const OrderForm: React.FC<Props> = (
         css=""
         presentLedger={presentLedger}
         presentPrice={presentPrice}
-        orderDirection={orderDirection}
         orderShareCount={orderShareCount}
         setOrderShareCount={setOrderShareCount}
       />
-      <GrommetGrid css="">
-        <StoxbieBuyAction
-          css=""
-          handleToggle={handleToggle}
-          handleSubmit={handleSubmit}
-          presentPriceClose={presentPrice.close}
-          orderDirection={orderDirection}
-          orderShareCount={orderShareCount}
-        />
-        <StoxbieSellAction
-          css=""
-          handleToggle={handleToggle}
-          handleSubmit={handleSubmit}
-          presentPriceClose={presentPrice.close}
-          orderDirection={orderDirection}
-          orderShareCount={orderShareCount}
-        />
-      </GrommetGrid>
+      <StoxbieSubmitOrder
+        css=""
+        handleSubmit={handleSubmit}
+      />
     </GrommetContainer>
   );
 };

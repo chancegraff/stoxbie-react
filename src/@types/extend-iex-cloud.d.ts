@@ -1,8 +1,38 @@
 import "@chancey/iex-cloud";
 
 declare module "@chancey/iex-cloud" {
+  export interface HistoricalPriceParams {
+    /** Will return adjusted data only with keys `date`, `close`, and `volume`. */
+    readonly chartCloseOnly: boolean;
+    /** Used only when range is `date` to return OHLCV data instead of minute bar data. */
+    readonly chartByDay: boolean;
+    /** If true, runs a polyline simplification using the Douglas-Peucker algorithm. This is useful if plotting sparkline charts. */
+    readonly chartSimplify: boolean;
+    /** If passed, chart data will return every Nth element as defined by `chartInterval`. */
+    readonly chartInterval: number;
+    /** If true, `changeOverTime` and `marketChangeOverTime` will be relative to previous day close instead of the first value. */
+    readonly changeFromClose: boolean;
+    /** If passed, chart data will return the last N elements from the time period defined by the range parameter. */
+    readonly chartLast: number;
+    /** Same format as the path parameter. This can be used for batch calls. */
+    readonly range: string;
+    /** Formatted as YYYYMMDD. This can be used for batch calls when range is 1d or date. */
+    readonly exactDate: string;
+    /** Can be `asc` or `desc` to sort results by date. Defaults to `desc`. */
+    readonly sort: string;
+    /** If true, current trading day data is appended. */
+    readonly includeToday: boolean;
+    readonly [key: string]: any;
+}
+  export declare type Range = "max" | "5y" | "2y" | "1y" | "ytd" | "6m" | "3m" | "1m" | "1mm" | "5d" | "5dm" | "date" | "dynamic" | string;
+  export declare const historicalPrices: (
+    symbol: string,
+    range?: Range,
+    date?: string,
+    params?: Partial<HistoricalPriceParams>,
+  ) => Promise<ReadonlyArray<HistoricalPrice>>;
   declare type HistoricalPrice = {
-    readonly symbol?: string;
+    readonly symbol: string;
     /** Formatted as YYYY-MM-DD */
     readonly date: string;
     /** Adjusted data for historical dates. Split adjusted only. */

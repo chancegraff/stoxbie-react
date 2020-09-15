@@ -6,11 +6,14 @@ import React, {
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import {
+  List,
+} from "immutable";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeFinished,
-  HistoricalTradeStarted,
+  HistoricalHoldingType,
+  LedgerType,
+  PresentHoldingType,
 } from "trade-types";
 import {
   useDebouncedCallback,
@@ -23,6 +26,7 @@ import {
 import {
   useHover,
 } from "utils/Hooks";
+import Spinner from "components/Grommet/Spinner";
 
 import CombinedBody from "./CombinedBody";
 import HistoricalBody from "./HistoricalBody";
@@ -37,11 +41,12 @@ import TableHeader from "./TableHeader";
 
 type Props = {
   presentPrice: HistoricalPrice | undefined;
-  presentLedger: HistoricalLedger | undefined;
-  presentHoldings: HistoricalTradeStarted[];
-  historicalHoldings: HistoricalTradeFinished[];
-  highestPresentHolding: HistoricalTradeStarted | undefined;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  presentLedger: LedgerType;
+  presentHoldings: List<PresentHoldingType>;
+  historicalHoldings: List<HistoricalHoldingType>;
+  presentHolding: PresentHoldingType | undefined;
+  handleClose: (present: PresentHoldingType) => void;
+  handleCloseAll: () => void;
 };
 
 const HoldingTable: React.FC<Props> = (
@@ -50,8 +55,9 @@ const HoldingTable: React.FC<Props> = (
     presentLedger,
     presentHoldings,
     historicalHoldings,
-    highestPresentHolding,
-    handleSubmit,
+    presentHolding,
+    handleClose,
+    handleCloseAll,
   },
 ) =>
 {
@@ -127,7 +133,7 @@ const HoldingTable: React.FC<Props> = (
   useEffect(
     () =>
     {
-      if (!presentHoldings.length)
+      if (presentHoldings.count() <= 1)
       {
         handleRetractCombined();
       }
@@ -137,6 +143,15 @@ const HoldingTable: React.FC<Props> = (
       handleRetractCombined,
     ],
   );
+
+  if (!presentPrice)
+  {
+    return (
+      <Spinner
+        css=""
+      />
+    );
+  }
 
   return (
     <GrommetTheme css="">
@@ -148,13 +163,13 @@ const HoldingTable: React.FC<Props> = (
           <TableHeader css="" />
           <PresentBody
             css=""
-            highestPresentHolding={highestPresentHolding}
+            presentHolding={presentHolding}
             presentPrice={presentPrice}
             presentLedger={presentLedger}
             presentHoldings={presentHoldings}
             rowHoverState={rowHoverState}
             combinedBodyState={combinedBodyState}
-            handleSubmit={handleSubmit}
+            handleCloseAll={handleCloseAll}
             handleToggleCombined={handleToggleCombined}
             handleMouseEnterRow={debouncedMouseEnterRow}
             handleMouseLeaveRow={debouncedMouseLeaveRow}
@@ -165,7 +180,7 @@ const HoldingTable: React.FC<Props> = (
             presentHoldings={presentHoldings}
             presentLedger={presentLedger}
             presentPrice={presentPrice}
-            handleSubmit={handleSubmit}
+            handleClose={handleClose}
           />
           <HistoricalBody
             css=""
@@ -173,7 +188,6 @@ const HoldingTable: React.FC<Props> = (
           />
           <TableFooter
             css=""
-            historicalHoldings={historicalHoldings}
             presentLedger={presentLedger}
           />
         </GrommetTable>

@@ -2,14 +2,10 @@ import React from "react";
 import {
   render,
 } from "@testing-library/react";
-import {
-  parseISO,
-} from "date-fns";
 
 import Boilerplate from "tests/Boilerplate";
 import {
   getPrice,
-  prices,
   tradeViewStartDate,
 } from "tests/Helpers";
 import {
@@ -35,15 +31,7 @@ export const renderTradeView = () =>
         path="/trade/:ticker/:date"
         route={`/trade/${dayOnePrice.symbol}/${urlDate}`}
       >
-        <TradeView
-          date={
-            parseISO(
-              dayOnePrice.date,
-            )
-          }
-          prices={prices}
-          ticker={dayOnePrice.symbol}
-        />
+        <TradeView />
       </Boilerplate>
     ),
   );

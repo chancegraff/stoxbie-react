@@ -5,10 +5,16 @@ import React, {
 import {
   HistoricalPrice,
 } from "@chancey/iex-cloud";
+import {
+  List,
+} from "immutable";
+import {
+  sumBy,
+} from "lodash";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeStarted,
+  LedgerType,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -32,13 +38,13 @@ import PresentRow from "./PresentRow";
 import ToggleCombined from "./ToggleCombined";
 
 type Props = {
-  highestPresentHolding: HistoricalTradeStarted | undefined;
-  presentLedger: HistoricalLedger | undefined;
+  presentHolding: PresentHoldingType | undefined;
+  presentLedger: LedgerType | undefined;
   presentPrice: HistoricalPrice | undefined;
-  presentHoldings: HistoricalTradeStarted[];
+  presentHoldings: List<PresentHoldingType>;
   rowHoverState: HoverState;
   combinedBodyState: CombinedBodyState;
-  handleSubmit: (sharePrice: number, shareCount: number) => void;
+  handleCloseAll: () => void;
   handleMouseEnterRow: HandleMouseEnter;
   handleMouseLeaveRow: HandleMouseLeave;
   handleToggleCombined: () => void;
@@ -46,13 +52,13 @@ type Props = {
 
 const PresentBody: React.FC<Props> = (
   {
-    highestPresentHolding,
+    presentHolding,
     presentLedger,
     presentPrice,
     presentHoldings,
     rowHoverState,
     combinedBodyState,
-    handleSubmit,
+    handleCloseAll,
     handleMouseEnterRow,
     handleMouseLeaveRow,
     handleToggleCombined,
@@ -60,22 +66,24 @@ const PresentBody: React.FC<Props> = (
 ) =>
 {
   const presentRowRef = useRef<HTMLTableRowElement>();
+  /**
+   * @todo Convert this into a Recoil selector
+   */
   const totalEquity = useMemo(
     () =>
     {
-      const rawValue = presentHoldings.reduce(
+      const presentEquity = sumBy(
+        presentHoldings.toArray(),
         (
-          previousValue,
           holding,
         ) =>
         {
-          return previousValue + holding.openBalance;
+          return holding.orders.present.balance;
         },
-        0,
       );
 
       return formatCurrency(
-        rawValue,
+        presentEquity,
       );
     },
     [
@@ -85,7 +93,7 @@ const PresentBody: React.FC<Props> = (
   const toggleCombined = useMemo(
     () =>
     {
-      if (presentHoldings.length <= 1)
+      if (presentHoldings.count() <= 1)
       {
         return null;
       }
@@ -111,7 +119,7 @@ const PresentBody: React.FC<Props> = (
 
   if (
     (
-      !highestPresentHolding ||
+      !presentHolding ||
       !presentLedger ||
       !presentPrice
     )
@@ -123,6 +131,7 @@ const PresentBody: React.FC<Props> = (
   return (
     <GrommetTableBody
       css=""
+      data-testid="presentBody"
       onMouseEnter={handleMouseEnterRow}
       onMouseLeave={handleMouseLeaveRow}
     >
@@ -130,7 +139,7 @@ const PresentBody: React.FC<Props> = (
       <PresentRow
         ref={presentRowRef}
         css=""
-        presentHolding={highestPresentHolding}
+        presentHolding={presentHolding}
         presentLedger={presentLedger}
       >
         {
@@ -138,6 +147,9 @@ const PresentBody: React.FC<Props> = (
             {
               shares,
               open,
+            }: {
+              shares: string;
+              open: string;
             },
           ) =>
           {
@@ -152,10 +164,8 @@ const PresentBody: React.FC<Props> = (
                 <GrommetTableCell css="">
                   <CloseHoldings
                     css=""
-                    presentHolding={highestPresentHolding}
-                    presentLedger={presentLedger}
-                    presentPrice={presentPrice}
-                    handleSubmit={handleSubmit}
+                    presentHolding={presentHolding}
+                    handleClose={handleCloseAll}
                   />
                 </GrommetTableCell>
                 <GrommetTableCell css="">

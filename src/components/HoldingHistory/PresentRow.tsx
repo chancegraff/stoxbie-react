@@ -7,8 +7,8 @@ import {
 } from "@chancey/iex-cloud";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
-  HistoricalTradeStarted,
+  LedgerType,
+  PresentHoldingType,
 } from "trade-types";
 
 import {
@@ -20,9 +20,13 @@ import {
   GrommetTableRow,
 } from "./PresentRow.styled";
 
-type Props = PropsHasFunctionChild & {
-  presentHolding: HistoricalTradeStarted;
-  presentLedger?: HistoricalLedger;
+type Props = PropsHasFunctionChild<{
+  shares: string;
+  open: string;
+  balance: string;
+}> & {
+  presentHolding: PresentHoldingType;
+  presentLedger?: LedgerType;
 };
 
 const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
@@ -41,12 +45,12 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
         if (presentLedger)
         {
           return formatCount(
-            presentLedger.totalCount,
+            presentLedger.amounts.holding,
           );
         }
 
         return formatCount(
-          presentHolding.openCount,
+          presentHolding.orders.present.amount * presentHolding.orders.present.direction,
         );
       },
       [
@@ -58,7 +62,7 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
       () =>
       {
         return formatCurrency(
-          presentHolding.openPrice,
+          presentHolding.orders.present.price,
         );
       },
       [
@@ -69,7 +73,7 @@ const PresentRow = forwardRef<HTMLTableRowElement | undefined, Props>(
       () =>
       {
         return formatCurrency(
-          presentHolding.openPrice * presentHolding.openCount,
+          presentHolding.orders.present.price * presentHolding.orders.present.amount,
         );
       },
       [

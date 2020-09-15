@@ -4,7 +4,7 @@ import {
 
 export const TableFooter = () =>
 {
-  return screen.getByRole(
+  return screen.getByTestId(
     "footerRow",
   );
 };

@@ -49,7 +49,6 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <RelativeContainer
-      pad="0 2px"
       fill="vertical"
       overflow={
         {
@@ -65,7 +64,7 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
 const SmallTable: React.FC<JSXTableProps> = styled(
   Table,
 )`
-min-width: 308px;
+min-width: 100%;
 font-size: ${
   (
     props,

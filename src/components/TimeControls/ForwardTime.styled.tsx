@@ -18,6 +18,11 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
       justify="center"
       direction="column"
       flex={false}
+      height={
+        {
+          min: "72px",
+        }
+      }
       {...props}
     />
   );

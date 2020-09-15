@@ -28,17 +28,17 @@ const Spinner: React.FC<Props> = (
     return (
       <Oval
         css=""
+        role="spinner"
         {...props}
       />
     );
   }
 
   return (
-    <Container
-      fill={true}
-    >
+    <Container>
       <Oval
         css=""
+        role="spinner"
         {...props}
       />
     </Container>

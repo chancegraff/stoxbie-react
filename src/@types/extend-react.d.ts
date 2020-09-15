@@ -14,8 +14,8 @@ declare module "react" {
     children: ReactNode;
   };
 
-  declare type PropsHasFunctionChild = {
-    children: (props: any) => ReactNode;
+  declare type PropsHasFunctionChild<T> = {
+    children: (props: T) => ReactNode;
   }
 
   declare type DispatchSetStateAction<P> = Dispatch<SetStateAction<P>>;

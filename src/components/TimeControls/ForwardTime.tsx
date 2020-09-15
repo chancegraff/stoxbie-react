@@ -7,8 +7,9 @@ import {
 
 import {
   DateFormats,
-  formatDate,
+  formatParsedDate,
 } from "utils/Utilities";
+import Spinner from "components/Grommet/Spinner";
 
 import {
   GrommetButton,
@@ -21,7 +22,7 @@ type Props = {
   handleContinue: () => void;
 };
 
-const TimeControl: React.FC<Props> = (
+const ForwardTime: React.FC<Props> = (
   {
     handleContinue,
     presentPrice,
@@ -31,21 +32,37 @@ const TimeControl: React.FC<Props> = (
   const safeDate = useMemo(
     () =>
     {
-      if (presentPrice)
+      if (!presentPrice)
       {
-        return formatDate(
-          presentPrice.date,
-          DateFormats.Full,
-        );
+        return;
       }
+
+      return formatParsedDate(
+        presentPrice.date,
+        DateFormats.Iex,
+        DateFormats.Full,
+      );
     },
     [
       presentPrice,
     ],
   );
 
+  if (!presentPrice)
+  {
+    return (
+      <Spinner
+        css=""
+        Container={GrommetContainer}
+      />
+    );
+  }
+
   return (
-    <GrommetContainer css="">
+    <GrommetContainer
+      css=""
+      data-testid="priceDate"
+    >
       <GrommetText css="">
         {
           `Today is ${safeDate ||
@@ -60,4 +77,4 @@ const TimeControl: React.FC<Props> = (
   );
 };
 
-export default TimeControl;
+export default ForwardTime;

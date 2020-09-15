@@ -23,8 +23,14 @@ const AppRoutes: React.FC<unknown> = () =>
       <Route path="/oops">
         <PageError css="" />
       </Route>
-      <Route path="/">
+      <Route
+        path="/"
+        exact={true}
+      >
         <SearchRoutes css="" />
+      </Route>
+      <Route path="/">
+        <PageError css="" />
       </Route>
     </Switch>
   );

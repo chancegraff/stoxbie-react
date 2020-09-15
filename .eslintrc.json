@@ -65,8 +65,9 @@
         },
         {
             "files": [
-                "tests/**/*.ts",
-                "mocks/**/*.ts"
+                "tests/**",
+                "mocks/**",
+                "specs/*.ts"
             ],
             "env": {
                 "jest": true
@@ -182,7 +183,7 @@
             2,
             {
                 "SwitchCase": 1,
-                "offsetTernaryExpressions": true,
+                "offsetTernaryExpressions": false,
                 "ignoredNodes": [
                     "TemplateLiteral > *"
                 ]
@@ -223,14 +224,14 @@
         "no-alert": "error",
         "no-array-constructor": "error",
         "no-await-in-loop": "error",
-        "no-bitwise": "error",
+        "no-bitwise": "off",
         "no-buffer-constructor": "error",
         "no-caller": "error",
         "no-catch-shadow": "error",
         "no-confusing-arrow": "off",
         "no-console": "error",
         "no-constructor-return": "error",
-        "no-continue": "error",
+        "no-continue": "off",
         "no-div-regex": "error",
         "no-duplicate-imports": "error",
         "no-else-return": "error",
@@ -520,8 +521,7 @@
                         "^(tests)(/.*|$)",
                         "^(utils)(/.*|$)",
                         "^(theme)(/.*|$)",
-                        "^(services)(/.*|$)",
-                        "^(templates)(/.*|$)",
+                        "^(store)(/.*|$)",
                         "^(routes)(/.*|$)",
                         "^(views)(/.*|$)",
                         "^(components)(/.*|$)"

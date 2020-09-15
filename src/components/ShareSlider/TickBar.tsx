@@ -9,70 +9,39 @@ import {
 } from "utils/Constants";
 
 import {
+  useTickRange,
+} from "./hooks/useTickRange";
+import {
   GrommetContainer,
   StoxbieTickItem,
 } from "./TickBar.styled";
 
 type Props = {
-  maxValue: number;
+  ceiling: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const TickBar: React.FC<Props> = (
   {
-    maxValue,
+    ceiling,
     setOrderShareCount,
   },
 ) =>
 {
-  const percentWidthPerShare = useMemo(
+  const valuesPerTick = useMemo(
     () =>
     {
-      return 100 / maxValue;
+      return ceiling / SLIDER_TICK_COUNT;
     },
     [
-      maxValue,
+      ceiling,
     ],
   );
-  const sharesPerTick = useMemo(
-    () =>
-    {
-      return maxValue / SLIDER_TICK_COUNT;
-    },
-    [
-      maxValue,
-    ],
-  );
-  const tickRange = useMemo(
-    () =>
-    {
-      return Array.from(
-        Array(
-          SLIDER_TICK_COUNT + 1,
-        ),
-        (
-          element,
-          index,
-        ) =>
-        {
-          return sharesPerTick * index;
-        },
-      );
-    },
-    [
-      sharesPerTick,
-    ],
-  );
-  const tickMargin = useMemo(
-    () =>
-    {
-      return `0 calc(calc(${percentWidthPerShare * sharesPerTick}% - 14px) / 2)`;
-    },
-    [
-      percentWidthPerShare,
-      sharesPerTick,
-    ],
-  );
+
+  const {
+    tickRange,
+  } = useTickRange();
+
   const handleClick = useCallback(
     (
       event: React.MouseEvent<HTMLDivElement>,
@@ -110,27 +79,27 @@ const TickBar: React.FC<Props> = (
             index,
           ) =>
           {
-            const nextTickValue = tickRange[index + 1];
+            const current = tickValue(
+              valuesPerTick,
+            );
 
-            if (nextTickValue)
-            {
-              return (
-                <StoxbieTickItem
-                  key={index}
-                  css=""
-                  margin={tickMargin}
-                  onClick={handleClick}
-                >
-                  {
-                    Math.round(
-                      (nextTickValue + tickValue) / 2,
-                    )
-                  }
-                </StoxbieTickItem>
-              );
-            }
+            const math = index < SLIDER_TICK_COUNT
+              ? Math.floor
+              : Math.ceil;
 
-            return null;
+            return (
+              <StoxbieTickItem
+                key={index}
+                css=""
+                onClick={handleClick}
+              >
+                {
+                  math(
+                    current,
+                  )
+                }
+              </StoxbieTickItem>
+            );
           },
         )
       }

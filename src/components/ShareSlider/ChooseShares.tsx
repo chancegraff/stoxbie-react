@@ -11,7 +11,7 @@ import {
 } from "grommet";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 import {
-  HistoricalLedger,
+  LedgerType,
 } from "trade-types";
 
 import {
@@ -25,8 +25,7 @@ import {
 
 type Props = {
   presentPrice: HistoricalPrice;
-  presentLedger: HistoricalLedger;
-  orderDirection: number;
+  presentLedger: LedgerType;
   orderShareCount: number;
   setOrderShareCount: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -35,7 +34,6 @@ const ChooseShares: React.FC<Props> = (
   {
     presentPrice,
     presentLedger,
-    orderDirection,
     orderShareCount,
     setOrderShareCount,
   },
@@ -60,47 +58,23 @@ const ChooseShares: React.FC<Props> = (
   const hasBalanceChanged = useMemo(
     () =>
     {
-      return presentLedger.totalBalance !== previousLedger?.totalBalance;
+      return presentLedger.balance !== previousLedger?.balance;
     },
     [
       presentLedger,
       previousLedger,
     ],
   );
-  const maxPurchasable = useMemo(
+  const purchasable = useMemo(
     () =>
     {
       return Math.floor(
-        presentLedger.totalBalance / presentPrice.close,
+        presentLedger.balance / presentPrice.close,
       );
     },
     [
       presentPrice,
       presentLedger,
-    ],
-  );
-  const maxSaleable = useMemo(
-    () =>
-    {
-      return presentLedger.totalCount;
-    },
-    [
-      presentLedger,
-    ],
-  );
-  const maxValue = useMemo(
-    () =>
-    {
-      return orderDirection > 0
-        ? maxPurchasable
-        : maxSaleable > 0
-          ? maxSaleable
-          : maxPurchasable;
-    },
-    [
-      orderDirection,
-      maxPurchasable,
-      maxSaleable,
     ],
   );
   const handleChange = useCallback(
@@ -147,13 +121,14 @@ const ChooseShares: React.FC<Props> = (
       <RangeInput
         css=""
         role="slider"
-        max={maxValue}
+        max={purchasable}
+        min={purchasable * -1}
         value={orderShareCount}
         onChange={handleChange}
       />
       <TickBar
         css=""
-        maxValue={maxValue}
+        ceiling={purchasable}
         setOrderShareCount={setOrderShareCount}
       />
     </GrommetContainer>

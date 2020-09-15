@@ -13,6 +13,9 @@ import {
   normalizeColor,
 } from "grommet/utils";
 import {
+  List,
+} from "immutable";
+import {
   Padding,
   Resolution,
 } from "style-types";
@@ -27,7 +30,7 @@ import LineChart, {
 
 type Props = {
   resolution: Resolution;
-  prices: HistoricalPrice[] | undefined;
+  prices: List<HistoricalPrice>;
   padding?: Padding;
 };
 
@@ -85,8 +88,7 @@ const StockChart: React.FC<Props> = (
     ],
   );
 
-  if (!prices ||
-      !prices.length)
+  if (prices.isEmpty())
   {
     return <Spinner />;
   }
@@ -96,7 +98,7 @@ const StockChart: React.FC<Props> = (
       css=""
       label={label}
       padding={responsivePadding}
-      prices={prices}
+      prices={prices.toJS()}
       resolution={resolution}
     />
   );
