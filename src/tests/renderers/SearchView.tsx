@@ -6,16 +6,18 @@ import {
 import Boilerplate from "tests/Boilerplate";
 import SearchView from "views/SearchView";
 
-export const renderSearchView = (
-  handleSearch: any,
-) =>
+/**
+ * @todo Mock iex SDK for search method found in views/SearchView
+ */
+
+export const renderSearchView = () =>
 {
   return render(
     <Boilerplate
       path="/"
       route="/"
     >
-      <SearchView handleSearch={handleSearch} />
+      <SearchView />
     </Boilerplate>,
   );
 };

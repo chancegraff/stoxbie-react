@@ -16,7 +16,7 @@ const logger = createLogger(
 
 const App: React.FC = () =>
 {
-  logger.info(
+  logger.debug(
     "Application started",
   );
 

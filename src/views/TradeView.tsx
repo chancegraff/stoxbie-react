@@ -63,6 +63,11 @@ const TradeView: React.FC<Props> = () =>
       nextTicker: string,
     ) =>
     {
+      if (historicalPrices.count())
+      {
+        return;
+      }
+
       const awaitedPrices = await fetchHistoricalPrices(
         nextTicker,
         "max",
@@ -90,6 +95,7 @@ const TradeView: React.FC<Props> = () =>
       );
     },
     [
+      historicalPrices,
       setHistoricalPrices,
     ],
   );
@@ -97,10 +103,7 @@ const TradeView: React.FC<Props> = () =>
   useEffect(
     () =>
     {
-      if (
-        !ticker ||
-        historicalPrices.count()
-      )
+      if (!ticker)
       {
         return;
       }
@@ -111,7 +114,6 @@ const TradeView: React.FC<Props> = () =>
     },
     [
       ticker,
-      historicalPrices,
       handleLoad,
     ],
   );

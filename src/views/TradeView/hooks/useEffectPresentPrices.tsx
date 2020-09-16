@@ -7,7 +7,6 @@ import {
 } from "@chancey/iex-cloud";
 import {
   differenceInBusinessDays,
-  isAfter,
   isBefore,
   isSameDay,
   isSaturday,
@@ -24,6 +23,9 @@ import {
   useRedirectToDate,
 } from "utils/Hooks";
 import {
+  createLogger,
+} from "utils/Logger";
+import {
   DateFormats,
   parseDate,
   usePrevious,
@@ -32,6 +34,10 @@ import {
   historicalPricesState,
   presentPricesState,
 } from "store/Atoms";
+
+const logger = createLogger(
+  "useEffectPresentPrices",
+);
 
 /**
  * @bug There's an issue with some end indexes not being found properly that
@@ -64,6 +70,104 @@ export const useEffectPresentPrices = (
     presentPricesState,
   );
 
+  const shouldStop = useCallback(
+    (
+      selectedDate: Date,
+    ) =>
+    {
+      /**
+       * @summary Get boolean checks here to improve readability below
+       */
+      const historicalPricesHasLoaded = !historicalPrices.isEmpty();
+      const presentPricesHasLoaded = !presentPrices.isEmpty();
+      const dateHasSameValue = (
+        selectedDate === previousDate
+      );
+
+      /**
+       * @summary Stop if historical prices hasn't loaded; stop if
+       * date has not changed and present prices has already loaded
+       */
+      return (
+        !historicalPricesHasLoaded ||
+        (
+          dateHasSameValue &&
+          presentPricesHasLoaded
+        )
+      );
+    },
+    [
+      historicalPrices,
+      presentPrices,
+      previousDate,
+    ],
+  );
+  const redirectFromWeekend = useCallback(
+    (
+      selectedDate: Date,
+    ) =>
+    {
+      /**
+       * @summary Forward to closest weekday if its a weekend
+       */
+      if (
+        isWeekend(
+          selectedDate,
+        )
+      )
+      {
+        /**
+         * @summary Redirect to Friday if it's Saturday
+         */
+        if (
+          isSaturday(
+            selectedDate,
+          )
+        )
+        {
+          return setDay(
+            selectedDate,
+            5,
+          );
+        }
+        /**
+         * @summary Redirect to Monday if it's Sunday
+         */
+        else if (
+          isSunday(
+            selectedDate,
+          )
+        )
+        {
+          return setDay(
+            selectedDate,
+            1,
+          );
+        }
+      }
+    },
+    [],
+  );
+  const getLastHistoricalPriceDate = useCallback(
+    () =>
+    {
+      /**
+       * @summary Get the last historical price and parse its date
+       */
+      const {
+        date: lastDateAsString,
+      } = historicalPrices.last<HistoricalPrice>();
+      const lastDate = parseDate(
+        lastDateAsString,
+        DateFormats.Iex,
+      );
+
+      return lastDate;
+    },
+    [
+      historicalPrices,
+    ],
+  );
   const updatePresentPrices = useCallback(
     (
       endIndex: number,
@@ -84,6 +188,13 @@ export const useEffectPresentPrices = (
       const nextPrices = historicalPrices.slice(
         startIndex,
         endIndex,
+      );
+
+      logger.debug(
+        "Updating present prices",
+        {
+          lastPrice: nextPrices.last(),
+        },
       );
 
       setPresentPrices(
@@ -118,151 +229,87 @@ export const useEffectPresentPrices = (
       historicalPrices,
     ],
   );
-
-  useEffect(
-    () =>
+  const redirectFromMissingDate = useCallback(
+    (
+      indexAfterSelectedDate: number,
+    ) =>
     {
-      /**
-       * @summary Get boolean checks here to improve readability below
-       */
-      const historicalPricesHasLoaded = !historicalPrices.isEmpty();
-      const presentPricesHasLoaded = !presentPrices.isEmpty();
-      const dateHasSameValue = (
-        date === previousDate
+      const priceAfterSelectedDate = historicalPrices.get(
+        indexAfterSelectedDate,
+        historicalPrices.last<HistoricalPrice>(),
       );
-
-      /**
-       * @summary Stop if historical prices hasn't loaded; stop if
-       * date has not changed and present prices has already loaded
-       */
-      if (
-        !date ||
-        !historicalPricesHasLoaded ||
-        (
-          dateHasSameValue &&
-          presentPricesHasLoaded
-        )
-      )
-      {
-        return;
-      }
-
-      /**
-       * @summary Forward to closest weekday if its a weekend
-       */
-      if (
-        isWeekend(
-          date,
-        )
-      )
-      {
-        /**
-         * @summary Redirect to Friday if it's Saturday
-         */
-        if (
-          isSaturday(
-            date,
-          )
-        )
-        {
-          return redirectToDate(
-            setDay(
-              date,
-              5,
-            ),
-          );
-        }
-        /**
-         * @summary Redirect to Monday if it's Sunday
-         */
-        else if (
-          isSunday(
-            date,
-          )
-        )
-        {
-          return redirectToDate(
-            setDay(
-              date,
-              1,
-            ),
-          );
-        }
-      }
-
-      /**
-       * @summary Get the last historical price and parse its date
-       */
-      const lastPrice = historicalPrices.last<HistoricalPrice>();
-
-      const {
-        date: lastDateAsString,
-      } = lastPrice;
-      const lastDate = parseDate(
-        lastDateAsString,
+      const dateAfterSelected = parseDate(
+        priceAfterSelectedDate.date,
         DateFormats.Iex,
       );
 
-      /**
-       * @summary Get the indexes difference between last date and end date
-       */
-      const endIndexesDifference = differenceInBusinessDays(
-        lastDate,
-        date,
+      logger.debug(
+        "Redirecting to next date in index range",
+        {
+          dateAtSelection: historicalPrices.get(
+            indexAfterSelectedDate - 1,
+          ),
+          dateAfterSelected,
+        },
       );
 
-      /**
-       * @summary Stop if end index date is in the future
-       */
-      if (
-        !isBefore(
-          date,
-          lastDate,
-        )
-      )
-      {
-        throw new Error(
-          "Requested date is in the future",
-        );
-      }
-
+      redirectToDate(
+        dateAfterSelected,
+      );
+    },
+    [
+      historicalPrices,
+      redirectToDate,
+    ],
+  );
+  const lazilyGetHistoricalPriceIndex = useCallback(
+    (
+      selectedDate: Date,
+      endIndexesDifference: number,
+    ) =>
+    {
       /**
          * @summary Lazily get the price at the indexes
          * we'll slice to (ie, the end) and convert its
          * date attribute to a Date type
          */
       const lazyEndIndex = historicalPrices.count() - endIndexesDifference;
-      const lastEndPrice = historicalPrices.get<HistoricalPrice>(
+      const lazyEndPrice = historicalPrices.get(
         lazyEndIndex,
-        historicalPrices.last(),
+        historicalPrices.last<HistoricalPrice>(),
       );
       const lazyEndDate = parseDate(
-        lastEndPrice.date,
+        lazyEndPrice.date,
         DateFormats.Iex,
       );
 
       /**
-       * @summary Stop if this is already the correct date
-       */
+         * @summary Stop if this is already the correct date
+         */
       if (
         isSameDay(
-          date,
+          selectedDate,
           lazyEndDate,
         )
       )
       {
-        updatePresentPrices(
-          lazyEndIndex + 1,
+        logger.debug(
+          "Lazy index is selected date",
+          {
+            selectedDate,
+            lazyEndDate,
+          },
         );
 
-        return;
+        return lazyEndIndex + 1;
       }
 
       /**
-       * @summary Determine the direction of the real value
+       * @summary Get the difference in business days between
+       * the lazy end date and the selected end date
        */
       const lazyIndexesDifference = differenceInBusinessDays(
-        date,
+        selectedDate,
         lazyEndDate,
       );
 
@@ -282,84 +329,76 @@ export const useEffectPresentPrices = (
        * next value after the actual date if it's been passed
        */
       const reversedIndexRange = indexRange.reverse();
-      const indexRangeLength = indexRange.count();
 
       /**
-       * @summary Hard loop so we can exit from it early if
-       * we want while also allowing us to chunk in triplets
+       * @summary With reversed array, get first date after the
+       * selection (which would be the first date before the selection)
        */
-      let endIndexInReversedRange = 0;
-
-      for (; endIndexInReversedRange < indexRangeLength; endIndexInReversedRange += 3)
-      {
-        const historicalPrice = reversedIndexRange.get(
-          endIndexInReversedRange,
-        );
-
-        /**
-         * @summary Skip to the next value if we got undefined
-         * at this index (how would this happen?)
-         */
-        if (!historicalPrice)
+      const firstIndexAfterDateInReverseRange = reversedIndexRange.findIndex(
+        (
+          historicalPrice,
+        ) =>
         {
-          continue;
-        }
-
-        const priceDate = parseDate(
-          historicalPrice.date,
-          DateFormats.Iex,
-        );
-
-        /**
-         * @summary Check that the price date hasn't passed the
-         * chosen date; if we've finally passed the chosen date,
-         * redirect to this date (which is the always the next
-         * value in the array)
-         */
-        if (
-          isAfter(
-            priceDate,
-            date,
-          )
-        )
-        {
-          return redirectToDate(
-            priceDate,
+          const priceDate = parseDate(
+            historicalPrice.date,
+            DateFormats.Iex,
           );
-        }
 
-        /**
-         * @summary Haven't passed value yet so check it and
-         * exit early if it matches
-         */
-        if (
-          isSameDay(
-            date,
+          return isBefore(
             priceDate,
-          )
-        )
-        {
-          break;
-        }
-      }
+            selectedDate,
+          );
+        },
+      );
 
       /**
-       * @summary Return an error if we have no value at all
+       * @summary Slice from the first index before the selected date
+       */
+      const filteredAndReversedIndexRange = reversedIndexRange.slice(
+        0,
+        firstIndexAfterDateInReverseRange,
+      );
+
+      /**
+       * @summary Find the selected date within the filtered and
+       * reversed index range
+       */
+      const endIndexInReversedRange = filteredAndReversedIndexRange.findIndex(
+        (
+          historicalPrice,
+        ) =>
+        {
+          const priceDate = parseDate(
+            historicalPrice.date,
+            DateFormats.Iex,
+          );
+
+          return (
+            isSameDay(
+              priceDate,
+              selectedDate,
+            )
+          );
+        },
+      );
+
+      /**
+       * @summary Couldn't find the value in the range, so we
+       * can instead return the index for the very next date
        */
       if (endIndexInReversedRange === -1)
       {
-        throw new Error(
-          `
-          End index not found for {date} in {range}\n
-          ${date}\n
-          ${JSON.stringify(
-            indexRange,
-            null,
-            2,
-          )}\n
-
-          `,
+        const indexAfterSelectedDate = (
+          lazyEndIndex +
+          lazyIndexesDifference -
+          firstIndexAfterDateInReverseRange
         );
+
+        redirectFromMissingDate(
+          indexAfterSelectedDate,
+        );
+
+        return;
       }
 
       /**
@@ -369,26 +408,115 @@ export const useEffectPresentPrices = (
        * range is 100, that means the real index is at 400;
        * 500 - 100 = 400, which is what we'll now calculate
        */
-      const endIndexInRange = indexRangeLength - endIndexInReversedRange;
+      const endIndexInRange = lazyIndexesDifference - endIndexInReversedRange;
 
       /**
-       * @summary Create the end index from the range, relative
-       * to the full array of historical prices and update the prices!
+       * @summary Create the end index from the range relative
+       * to the full array of historical prices and return it
        */
-      const endIndex = endIndexInRange + lazyEndIndex;
+      return endIndexInRange + lazyEndIndex;
+    },
+    [
+      historicalPrices,
+      sliceHistoricalPrices,
+      redirectFromMissingDate,
+    ],
+  );
+
+  useEffect(
+    () =>
+    {
+      if (
+        !date ||
+        shouldStop(
+          date,
+        )
+      )
+      {
+        return;
+      }
+
+      logger.debug(
+        "Effect called to update present prices",
+      );
+
+      const fromWeekendDate = redirectFromWeekend(
+        date,
+      );
+
+      if (fromWeekendDate)
+      {
+        logger.debug(
+          "Redirect from weekend date",
+        );
+
+        return redirectToDate(
+          fromWeekendDate,
+        );
+      }
+
+      /**
+       * @summary Get the last date and the difference in days
+       * between it and the selected date
+       */
+      const lastDate = getLastHistoricalPriceDate();
+
+      /**
+       * @summary Get the indexes difference between the last date
+       * and end date
+       */
+      const endIndexesDifference = differenceInBusinessDays(
+        lastDate,
+        date,
+      );
+
+      /**
+       * @summary Stop if end index date is in the future
+       */
+      if (
+        !isBefore(
+          date,
+          lastDate,
+        )
+      )
+      {
+        logger.error(
+          "Requested date is in the future",
+        );
+
+        return;
+      }
+
+      const lazyIndex = lazilyGetHistoricalPriceIndex(
+        date,
+        endIndexesDifference,
+      );
+
+      if (!lazyIndex)
+      {
+        return;
+      }
+
+      logger.debug(
+        "Got price index",
+        {
+          lazyIndex,
+        },
+      );
 
       updatePresentPrices(
-        endIndex,
+        lazyIndex,
       );
     },
     [
       date,
-      historicalPrices,
-      presentPrices,
-      previousDate,
+      shouldStop,
+      redirectFromWeekend,
       redirectToDate,
-      sliceHistoricalPrices,
       updatePresentPrices,
+      getLastHistoricalPriceDate,
+      redirectFromMissingDate,
+      lazilyGetHistoricalPriceIndex,
     ],
   );
 };

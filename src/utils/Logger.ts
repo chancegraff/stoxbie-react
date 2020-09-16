@@ -4,6 +4,7 @@ import {
 import {
   createLogger as createWinstonLogger,
   format,
+  transports as defaultTransports,
 } from "winston";
 import * as Transport from "winston-transport";
 
@@ -27,12 +28,14 @@ enum ServiceColors {
 }
 
 enum LevelColors {
+  Debug = "inherit",
   Info = "#00ffff",
   Warn = "#ffd700",
   Error = "#ff2b00",
 }
 
 enum Levels {
+  Debug = "Debug",
   Info = "Info",
   Warn = "Warn",
   Error = "Error",
@@ -197,6 +200,25 @@ class Console extends Transport.default
       ...this.seperator.styles,
     ];
 
+    const {
+      metadata: {
+        label, // eslint-disable-line @typescript-eslint/no-unused-vars
+        color, // eslint-disable-line @typescript-eslint/no-unused-vars
+        ...metadata
+      },
+    } = info;
+
+    if (
+      Object.keys(
+        metadata,
+      ).length > 0
+    )
+    {
+      message.push(
+        metadata,
+      );
+    }
+
     switch (info.level)
     {
       case "info":
@@ -220,6 +242,13 @@ class Console extends Transport.default
         );
         break;
       }
+      case "debug":
+      {
+        console.debug( // eslint-disable-line no-console
+          ...message,
+        );
+        break;
+      }
     }
 
     next();
@@ -238,9 +267,18 @@ export const createLogger = (
     new Console(
       {
         handleExceptions: true,
-        level: "info",
+        level: "debug",
         format: format.combine(
           format.metadata(),
+        ),
+      },
+    ),
+    new defaultTransports.Console(
+      {
+        handleExceptions: true,
+        level: "debug",
+        format: format.combine(
+          format.cli(),
         ),
       },
     ),

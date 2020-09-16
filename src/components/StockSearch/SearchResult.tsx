@@ -23,7 +23,10 @@ const StockSymbol: React.FC<Props> = (
 ) =>
 {
   return (
-    <GrommetContainer css="">
+    <GrommetContainer
+      css=""
+      data-testid="searchResult"
+    >
       <GrommetTopText css="">
         {searchResult.symbol}
       </GrommetTopText>
