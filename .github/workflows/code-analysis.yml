@@ -21,7 +21,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - run: npm install --only=dev
+    - run: npm ci --only=dev
     - uses: bradennapier/eslint-plus-action@v3.4.2
   jest:
     runs-on: ubuntu-latest
@@ -45,3 +45,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: danger/danger-js@9.1.8
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
