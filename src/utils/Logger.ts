@@ -201,8 +201,8 @@ class Console extends Transport.default
 
     const {
       metadata: {
-        label,
-        color,
+        label, // eslint-disable-line @typescript-eslint/no-unused-vars
+        color, // eslint-disable-line @typescript-eslint/no-unused-vars
         ...metadata
       },
     } = info;
