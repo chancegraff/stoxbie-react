@@ -5,6 +5,7 @@ export * from "./components/OrderButton";
 export * from "./components/ExitButtons";
 export * from "./components/ContinueButton";
 export * from "./components/LineChart";
+export * from "./components/SearchResults";
 export * from "./components/TableFooter";
 export * from "./components/TableFooterDollarBalance";
 export * from "./components/TableHeaderChangePercent";

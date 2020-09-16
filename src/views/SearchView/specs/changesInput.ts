@@ -1,10 +1,11 @@
+import * as iex from "@chancey/iex-cloud";
 import {
   waitFor,
 } from "@testing-library/react";
 
 import {
-  mockShouldChange,
   searchInputShouldChange,
+  searchResultsShouldHaveLength,
 } from "tests/Assertions";
 import {
   TickerInput,
@@ -18,11 +19,32 @@ import {
 
 const SEARCH_INPUT_VALUE = "netflix";
 
+jest.mock(
+  "@chancey/iex-cloud",
+);
+
 it(
   "types into the input",
   async () =>
   {
-    const handleSearch = jest.fn();
+    const mockSearch = jest.spyOn(
+      iex,
+      "search",
+    );
+
+    mockSearch.mockResolvedValue(
+      [
+        {
+          symbol: "NFLX", securityName: "ItlNeif,. ncx", securityType: "CS", region: "US", exchange: "SNA",
+        },
+        {
+          symbol: "NFC-GY", securityName: ".,n IeilcNfxt", securityType: "CE", region: "DE", exchange: "TER",
+        },
+        {
+          symbol: "NFLX-MM", securityName: " cIeNf.itxl,n", securityType: "CE", region: "MX", exchange: "MXE",
+        },
+      ],
+    );
 
     renderSearchView();
 
@@ -31,27 +53,16 @@ it(
       SEARCH_INPUT_VALUE,
     );
 
-    await waitFor(
-      () =>
-      {
-        return searchInputShouldChange(
-          SEARCH_INPUT_VALUE,
-        );
-      },
+    searchInputShouldChange(
+      SEARCH_INPUT_VALUE,
     );
 
     await waitFor(
       () =>
       {
-        return mockShouldChange(
-          handleSearch,
-          [
-            SEARCH_INPUT_VALUE,
-          ],
+        return searchResultsShouldHaveLength(
+          3,
         );
-      },
-      {
-        timeout: 1500,
       },
     );
   },

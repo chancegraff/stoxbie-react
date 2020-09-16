@@ -15,3 +15,4 @@ export * from "./assertions/combinedBodyShouldChange";
 export * from "./assertions/combinedRowsShouldChange";
 export * from "./assertions/toggleCombinedShouldChange";
 export * from "./assertions/tableFooterShouldChange";
+export * from "./assertions/searchResultsShouldHaveLength";
