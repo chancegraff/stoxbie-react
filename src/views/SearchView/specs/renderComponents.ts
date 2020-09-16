@@ -12,13 +12,7 @@ it(
   "renders search view",
   () =>
   {
-    const handleSearch = jest.fn();
-
-    renderSearchView(
-      {
-        handleSearch,
-      },
-    );
+    renderSearchView();
 
     componentShouldRender(
       TickerInput(),

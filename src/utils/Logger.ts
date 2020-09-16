@@ -27,12 +27,14 @@ enum ServiceColors {
 }
 
 enum LevelColors {
+  Debug = "inherit",
   Info = "#00ffff",
   Warn = "#ffd700",
   Error = "#ff2b00",
 }
 
 enum Levels {
+  Debug = "Debug",
   Info = "Info",
   Warn = "Warn",
   Error = "Error",
@@ -197,6 +199,25 @@ class Console extends Transport.default
       ...this.seperator.styles,
     ];
 
+    const {
+      metadata: {
+        label,
+        color,
+        ...metadata
+      },
+    } = info;
+
+    if (
+      Object.keys(
+        metadata,
+      ).length > 0
+    )
+    {
+      message.push(
+        metadata,
+      );
+    }
+
     switch (info.level)
     {
       case "info":
@@ -220,6 +241,13 @@ class Console extends Transport.default
         );
         break;
       }
+      case "debug":
+      {
+        console.debug( // eslint-disable-line no-console
+          ...message,
+        );
+        break;
+      }
     }
 
     next();
@@ -238,7 +266,7 @@ export const createLogger = (
     new Console(
       {
         handleExceptions: true,
-        level: "info",
+        level: "debug",
         format: format.combine(
           format.metadata(),
         ),

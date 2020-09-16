@@ -24,9 +24,7 @@ it(
   {
     const handleSearch = jest.fn();
 
-    renderSearchView(
-      handleSearch,
-    );
+    renderSearchView();
 
     changeInput(
       TickerInput(),
