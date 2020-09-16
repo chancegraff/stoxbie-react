@@ -192,6 +192,9 @@ export const useEffectPresentPrices = (
 
       logger.debug(
         "Updating present prices",
+        {
+          lastPrice: nextPrices.last(),
+        },
       );
 
       setPresentPrices(
@@ -291,13 +294,14 @@ export const useEffectPresentPrices = (
       )
       {
         logger.debug(
-          "Lazy index is selected day",
+          "Lazy index is selected date",
+          {
+            selectedDate,
+            lazyEndDate,
+          },
         );
 
-        return {
-          lazyIndex: lazyEndIndex,
-          indexAfterSelectedDate: lazyEndIndex + 1,
-        };
+        return lazyEndIndex + 1;
       }
 
       /**
@@ -384,10 +388,17 @@ export const useEffectPresentPrices = (
        */
       if (endIndexInReversedRange === -1)
       {
-        return {
-          lazyIndex: undefined,
-          indexAfterSelectedDate: lazyEndIndex + lazyIndexesDifference - firstIndexAfterDateInReverseRange,
-        };
+        const indexAfterSelectedDate = (
+          lazyEndIndex +
+          lazyIndexesDifference -
+          firstIndexAfterDateInReverseRange
+        );
+
+        redirectFromMissingDate(
+          indexAfterSelectedDate,
+        );
+
+        return;
       }
 
       /**
@@ -403,14 +414,12 @@ export const useEffectPresentPrices = (
        * @summary Create the end index from the range relative
        * to the full array of historical prices and return it
        */
-      return {
-        lazyIndex: endIndexInRange + lazyEndIndex,
-        indexAfterSelectedDate: endIndexInRange + lazyEndIndex + 1,
-      };
+      return endIndexInRange + lazyEndIndex;
     },
     [
       historicalPrices,
       sliceHistoricalPrices,
+      redirectFromMissingDate,
     ],
   );
 
@@ -478,22 +487,22 @@ export const useEffectPresentPrices = (
         return;
       }
 
-      const {
-        lazyIndex,
-        indexAfterSelectedDate,
-      } = lazilyGetHistoricalPriceIndex(
+      const lazyIndex = lazilyGetHistoricalPriceIndex(
         date,
         endIndexesDifference,
       );
 
       if (!lazyIndex)
       {
-        redirectFromMissingDate(
-          indexAfterSelectedDate,
-        );
-
         return;
       }
+
+      logger.debug(
+        "Got price index",
+        {
+          lazyIndex,
+        },
+      );
 
       updatePresentPrices(
         lazyIndex,

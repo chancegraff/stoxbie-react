@@ -4,6 +4,7 @@ import {
 import {
   createLogger as createWinstonLogger,
   format,
+  transports as defaultTransports,
 } from "winston";
 import * as Transport from "winston-transport";
 
@@ -269,6 +270,15 @@ export const createLogger = (
         level: "debug",
         format: format.combine(
           format.metadata(),
+        ),
+      },
+    ),
+    new defaultTransports.Console(
+      {
+        handleExceptions: true,
+        level: "debug",
+        format: format.combine(
+          format.cli(),
         ),
       },
     ),
