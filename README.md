@@ -1,7 +1,3 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/chancegraff/stoxbie-react/badge?s=8fd09b8082e941ddc4f625817c5affbb5ffaa834)](https://www.codefactor.io/repository/github/chancegraff/stoxbie-react)
-[![DeepSource](https://static.deepsource.io/deepsource-badge-light-mini.svg)](https://deepsource.io/gh/chancegraff/stoxbie-react/?ref=repository-badge)
-[![DeepScan Grade](https://deepscan.io/api/teams/10795/projects/13691/branches/236389/badge/grade.svg?token=a1fa0980263b30233c0ddf1e9c3ed778290db2ee)](https://deepscan.io/dashboard#view=project&tid=10795&pid=13691&bid=236389)
-
 ## Available Scripts
 
 In the project directory, you can run:
