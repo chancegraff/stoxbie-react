@@ -17,10 +17,16 @@ You've changed ${danger.git.modified_files.length} files while adding ${danger.g
 `,
 );
 
+const modifiedFileArray = danger.git.modified_files.join(
+  "",
+).split(
+  ",",
+);
+
 markdown(
   `
 #### Changed Files in this PR:
-${danger.git.modified_files}
+${modifiedFileArray}
 ${danger.git.modified_files.map(
   (
     file: string,
