@@ -81,7 +81,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom-fourteen --outputFile test-results.json --json",
+    "test": "react-scripts test --env=jsdom-fourteen --outputFile result.json --json",
     "clear": "react-scripts test --clearCache",
     "format": "eslint --fix ./src",
     "check": "eslint --format mo ./src",
