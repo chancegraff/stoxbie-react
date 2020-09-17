@@ -24,7 +24,7 @@
         "react-hooks",
         "simple-import-sort",
         "@chancey/wrap-params",
-        "@shopify"
+        "@shopify/eslint-plugin"
     ],
     "settings": {
         "react": {
