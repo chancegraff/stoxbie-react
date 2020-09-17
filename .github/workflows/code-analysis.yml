@@ -8,6 +8,7 @@ on:
 
 jobs:
   eslint:
+    name: Run ESLint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -27,6 +28,7 @@ jobs:
     - run: npm ci --only=dev
     - uses: bradennapier/eslint-plus-action@v3.4.2
   jest:
+    name: Run Jest
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -51,6 +53,7 @@ jobs:
       with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
   danger:
+    name: Run Danger
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
