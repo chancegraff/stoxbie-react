@@ -60,12 +60,10 @@
   },
   "devDependencies": {
     "@chancey/eslint-plugin-wrap-params": "^1.0.0",
-    "@seadub/danger-plugin-eslint": "^2.0.0",
     "@shopify/eslint-plugin": "^38.0.0",
     "@typescript-eslint/eslint-plugin": "^3.7.1",
     "@typescript-eslint/parser": "^3.7.1",
     "danger": "^10.4.0",
-    "danger-plugin-jest": "^1.3.0",
     "danger-plugin-todos": "^1.3.0",
     "eslint": "^7.8.1",
     "eslint-config-standard": "^14.1.1",

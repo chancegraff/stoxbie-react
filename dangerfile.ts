@@ -1,4 +1,3 @@
-import eslint from "@seadub/danger-plugin-eslint";
 import {
   danger,
   markdown,
@@ -6,21 +5,11 @@ import {
   schedule,
   warn,
 } from "danger";
-import jest from "danger-plugin-jest";
 import todos from "danger-plugin-todos";
 
 schedule(
   todos(),
 );
-
-jest(
-  {
-    testResultsJsonPath: "./test-results.json",
-    showSuccessMessage: true,
-  },
-);
-
-eslint();
 
 message(
   `
