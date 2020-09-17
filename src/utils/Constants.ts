@@ -72,3 +72,5 @@ export const DEFAULT_LEDGER: LedgerType = {
 };
 
 export const LOGGER_SEPERATOR = "·";
+
+export const ROUTE_ORDER = "/order";

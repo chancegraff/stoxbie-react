@@ -1,18 +1,21 @@
 import React from "react";
 import {
+  Route,
   RouteProps,
 } from "react-router-dom";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
-import SearchView from "views/SearchView";
+import PageError from "components/PageTemplates/PageError";
 
 type Props = RouteProps;
 
-const SearchRoutes: React.FC<Props> = () =>
+const ErrorRoutes: React.FC<Props> = () =>
 {
   return (
-    <SearchView />
+    <Route path="/oops">
+      <PageError css="" />
+    </Route>
   );
 };
 
-export default SearchRoutes;
+export default ErrorRoutes;

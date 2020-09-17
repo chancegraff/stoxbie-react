@@ -9,6 +9,9 @@ import {
   tradeViewStartDate,
 } from "tests/Helpers";
 import {
+  ROUTE_ORDER,
+} from "utils/Constants";
+import {
   DateFormats,
   formatDate,
 } from "utils/Utilities";
@@ -28,8 +31,8 @@ export const renderTradeView = () =>
   return render(
     (
       <Boilerplate
-        path="/trade/:ticker/:date"
-        route={`/trade/${dayOnePrice.symbol}/${urlDate}`}
+        path={`${ROUTE_ORDER}/:ticker/:date`}
+        route={`${ROUTE_ORDER}/${dayOnePrice.symbol}/${urlDate}`}
       >
         <TradeView />
       </Boilerplate>

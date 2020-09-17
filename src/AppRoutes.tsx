@@ -1,37 +1,20 @@
 import React from "react";
 import {
-  Route,
   Switch,
 } from "react-router-dom";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
-import SearchRoutes from "routes/SearchRoutes";
-import StockRoutes from "routes/StockRoutes";
-import TradeRoutes from "routes/TradeRoutes";
-import PageError from "components/PageTemplates/PageError";
+import CatchRoute from "routes/CatchRoute";
+import ErrorRoute from "routes/ErrorRoute";
+import OrderRoute from "routes/OrderRoute";
 
 const AppRoutes: React.FC<unknown> = () =>
 {
   return (
     <Switch>
-      <Route path="/trade">
-        <TradeRoutes css="" />
-      </Route>
-      <Route path="/stock">
-        <StockRoutes css="" />
-      </Route>
-      <Route path="/oops">
-        <PageError css="" />
-      </Route>
-      <Route
-        path="/"
-        exact={true}
-      >
-        <SearchRoutes css="" />
-      </Route>
-      <Route path="/">
-        <PageError css="" />
-      </Route>
+      <ErrorRoute />
+      <OrderRoute />
+      <CatchRoute />
     </Switch>
   );
 };

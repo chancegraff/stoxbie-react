@@ -18,6 +18,7 @@ import {
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
+  ROUTE_ORDER,
   TICKER_ERROR_MESSAGE,
 } from "utils/Constants";
 import {
@@ -82,7 +83,7 @@ const StockView: React.FC<Props> = () =>
       if (company)
       {
         history.push(
-          `/trade/${company.symbol}/${date}`,
+          `${ROUTE_ORDER}/${company.symbol}/${date}`,
         );
       }
     },
