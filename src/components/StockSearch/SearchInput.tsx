@@ -20,6 +20,9 @@ import {
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
+  ROUTE_ORDER,
+} from "utils/Constants";
+import {
   handleUnloadCreator,
 } from "utils/Utilities";
 
@@ -128,7 +131,7 @@ const StockInput: React.FC<Props> = (
       if (nextValue)
       {
         history.push(
-          `/stock/${nextValue.symbol}`,
+          `${ROUTE_ORDER}/${nextValue.symbol}`,
         );
       }
     },

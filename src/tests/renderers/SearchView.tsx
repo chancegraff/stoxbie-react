@@ -4,6 +4,9 @@ import {
 } from "@testing-library/react";
 
 import Boilerplate from "tests/Boilerplate";
+import {
+  ROUTE_ORDER,
+} from "utils/Constants";
 import SearchView from "views/SearchView";
 
 /**
@@ -14,8 +17,8 @@ export const renderSearchView = () =>
 {
   return render(
     <Boilerplate
-      path="/"
-      route="/"
+      path={ROUTE_ORDER}
+      route={ROUTE_ORDER}
     >
       <SearchView />
     </Boilerplate>,

@@ -10,6 +10,9 @@ import {
   ThemeContext,
 } from "grommet";
 
+import {
+  ROUTE_ORDER,
+} from "utils/Constants";
 import Anchor, {
   AnchorProps,
 } from "components/Grommet/Anchor";
@@ -121,7 +124,7 @@ export const StoxbieTickerBreadcrumb: React.FC<BreadcrumbProps> = (
 {
   const match = useRouteMatch(
     {
-      path: "/stock/:ticker",
+      path: `${ROUTE_ORDER}/:ticker`,
       strict: true,
       sensitive: true,
     },
@@ -136,7 +139,7 @@ export const StoxbieTickerBreadcrumb: React.FC<BreadcrumbProps> = (
 
   return (
     <StoxbieAnchor
-      to={`/stock/${props.children}`}
+      to={`${ROUTE_ORDER}/${props.children}`}
       {...props}
     />
   );
@@ -148,7 +151,7 @@ export const StoxbieDateBreadcrumb: React.FC<BreadcrumbProps> = (
 {
   const match = useRouteMatch(
     {
-      path: "/trade/:ticker/:date",
+      path: `${ROUTE_ORDER}/:ticker/:date`,
       strict: true,
       sensitive: true,
     },
