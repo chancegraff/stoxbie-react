@@ -7,34 +7,8 @@ import {
 } from "danger";
 import todos from "danger-plugin-todos";
 
-const main = () =>
+const packageChanges = () =>
 {
-  if (
-    danger.github.pr.title.includes(
-      "#trivial",
-    ) ||
-    danger.github.pr.body.includes(
-      "#trivial",
-    )
-  )
-  {
-    message(
-      "Trivial PR detected, disregarding Danger",
-    );
-
-    return;
-  }
-
-  schedule(
-    todos(
-      {
-        keywords: [
-          "@todo",
-        ],
-      },
-    ),
-  );
-
   const hasPackageChanges = danger.git.modified_files.some(
     (
       file: string,
@@ -67,7 +41,10 @@ const main = () =>
   `,
     );
   }
+};
 
+const scopeCreep = () =>
+{
   const lineChangeThreshold = 600;
   const fileChangeThreshold = 20;
   const tooManyLineChanges = (
@@ -107,16 +84,14 @@ const main = () =>
   `,
     );
   }
+};
 
-  markdown(
-    `
-  You've changed ${danger.git.modified_files.length} files while adding ${danger.github.pr.additions} lines and deleting ${danger.github.pr.deletions} lines.
-  `,
-  );
-
+const changedFiles = () =>
+{
   markdown(
     `
   ### :briefcase: Changed Files
+  You've changed ${danger.git.modified_files.length} files while adding ${danger.github.pr.additions} lines and deleting ${danger.github.pr.deletions} lines.
   ${
   danger.git.modified_files.reduce(
     (
@@ -137,6 +112,39 @@ const main = () =>
   }
   `,
   );
+};
+
+const main = () =>
+{
+  if (
+    danger.github.pr.title.includes(
+      "#trivial",
+    ) ||
+    danger.github.pr.body.includes(
+      "#trivial",
+    )
+  )
+  {
+    message(
+      "Trivial PR detected, disregarding Danger",
+    );
+
+    return;
+  }
+
+  schedule(
+    todos(
+      {
+        keywords: [
+          "todo",
+        ],
+      },
+    ),
+  );
+
+  packageChanges();
+  scopeCreep();
+  changedFiles();
 };
 
 main();
