@@ -20,6 +20,7 @@ You've changed ${danger.git.modified_files.length} files while adding ${danger.g
 markdown(
   `
 #### Changed Files in this PR:
+${danger.git.modified_files}
 ${danger.git.modified_files.map(
   (
     file: string,
