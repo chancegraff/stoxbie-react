@@ -86,7 +86,7 @@
     "clear": "react-scripts test --clearCache",
     "format": "eslint --fix ./src",
     "check": "eslint --format mo ./src",
-    "danger": "danger ci"
+    "danger": "danger"
   },
   "eslintConfig": {
     "extends": "react-app"
