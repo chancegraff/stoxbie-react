@@ -55,6 +55,6 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - run: npm ci --only=dev
-    - uses: danger/danger-js@9.1.8
+    - run: npx danger ci
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
