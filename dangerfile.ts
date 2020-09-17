@@ -26,8 +26,7 @@ const modifiedFileArray = danger.git.modified_files.join(
 markdown(
   `
 #### Changed Files in this PR:
-${modifiedFileArray}
-${danger.git.modified_files.map(
+${modifiedFileArray.map(
   (
     file: string,
   ) =>
