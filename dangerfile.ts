@@ -33,7 +33,9 @@ markdown(
       file: string,
     ) =>
     {
-      return `- ${file}`;
+      return `
+      - ${file}
+      `;
     },
   )}
   `,
