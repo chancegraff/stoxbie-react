@@ -1,14 +1,20 @@
-import {
+const {
   danger,
   message,
   warn,
-} from "danger";
-import eslint from "danger-plugin-eslint";
-import jest from "danger-plugin-jest";
+} = require(
+  "danger",
+);
+const eslint = require(
+  "danger-plugin-eslint",
+);
+const jest = require(
+  "danger-plugin-jest",
+);
 
 const hasPackageChanges = danger.git.modified_files.some(
   (
-    file: string,
+    file,
   ) =>
   {
     return file === "package.json";
@@ -16,7 +22,7 @@ const hasPackageChanges = danger.git.modified_files.some(
 );
 const hasLockfileChanges = danger.git.modified_files.some(
   (
-    file: string,
+    file,
   ) =>
   {
     return file === "package-lock.json";
