@@ -13,7 +13,12 @@ schedule(
   todos(),
 );
 
-jest();
+jest(
+  {
+    testResultsJsonPath: "./test-results.json",
+    showSuccessMessage: true,
+  },
+);
 
 eslint();
 
