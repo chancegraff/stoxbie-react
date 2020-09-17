@@ -51,6 +51,8 @@ jobs:
     - uses: mattallty/jest-github-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        changes-only: true
   danger:
     name: Run Danger
     runs-on: ubuntu-latest
