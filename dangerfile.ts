@@ -33,12 +33,18 @@ if (
   );
 }
 
-const modifiedMD = danger.git.modified_files.join(
-  "- ",
-);
-
 message(
-  `Changed Files in this PR: \n - ${modifiedMD}`,
+  `
+  #### Changed Files in this PR:
+  ${danger.git.modified_files.map(
+    (
+      file: string,
+    ) =>
+    {
+      return `- ${file}`;
+    },
+  )}
+  `,
 );
 
 jest();
