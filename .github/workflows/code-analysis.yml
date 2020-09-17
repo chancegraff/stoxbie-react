@@ -64,6 +64,6 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - run: npm ci --only=dev
-    - run: npx danger ci
+    - run: npm run danger
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
