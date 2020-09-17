@@ -24,25 +24,23 @@ eslint();
 
 message(
   `
-  You've changed ${danger.git.modified_files.length} files while
-  adding ${danger.github.pr.additions} lines
-  and deleting ${danger.github.pr.deletions} lines.
-  `,
+You've changed ${danger.git.modified_files.length} files while adding ${danger.github.pr.additions} lines and deleting ${danger.github.pr.deletions} lines.
+`,
 );
 
 markdown(
   `
-  #### Changed Files in this PR:
-  ${danger.git.modified_files.map(
-    (
-      file: string,
-    ) =>
-    {
-      return `
-      - ${file}
-      `;
-    },
-  )}
+#### Changed Files in this PR:
+${danger.git.modified_files.map(
+  (
+    file: string,
+  ) =>
+  {
+    return `
+- ${file}
+`;
+  },
+)}
   `,
 );
 
@@ -73,9 +71,9 @@ if (
   );
   markdown(
     `
-    ### :exclamation: Missing Lockfile Changes
-    \`package.json\` was changed but the lockfile wasn't.
-    `,
+### :exclamation: Missing Lockfile Changes
+\`package.json\` was changed but the lockfile wasn't.
+`,
   );
 }
 
@@ -113,8 +111,8 @@ if (
 {
   markdown(
     `
-    ### :exclamation: Too Many Changes
-    Split changes into separate PRs.
-    `,
+### :exclamation: Too Many Changes
+Split changes into separate PRs.
+`,
   );
 }
