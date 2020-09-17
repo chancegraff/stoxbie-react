@@ -1,9 +1,9 @@
+import eslint from "@seadub/danger-plugin-eslint";
 import {
   danger,
   message,
   warn,
 } from "danger";
-import eslint from "danger-plugin-eslint";
 import jest from "danger-plugin-jest";
 
 const hasPackageChanges = danger.git.modified_files.some(
