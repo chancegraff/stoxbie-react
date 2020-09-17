@@ -14,16 +14,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12'
-    - uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
     - run: npm ci --only=dev
     - uses: bradennapier/eslint-plus-action@v3.4.2
   jest:
@@ -53,16 +43,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12'
-    - uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
     - run: npm ci --only=dev
     - run: npm run danger
       env:
