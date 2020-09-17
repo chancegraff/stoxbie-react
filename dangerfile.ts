@@ -1,6 +1,7 @@
 import eslint from "@seadub/danger-plugin-eslint";
 import {
   danger,
+  markdown,
   message,
   warn,
 } from "danger";
@@ -34,6 +35,10 @@ if (
 }
 
 message(
+  `You have changed ${danger.git.modified_files.length} files in this PR.`,
+);
+
+markdown(
   `
   #### Changed Files in this PR:
   ${danger.git.modified_files.map(
