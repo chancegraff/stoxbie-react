@@ -8,35 +8,13 @@ import {
 import todos from "danger-plugin-todos";
 
 schedule(
-  todos(),
-);
-
-message(
-  `
-You've changed ${danger.git.modified_files.length} files while adding ${danger.github.pr.additions} lines and deleting ${danger.github.pr.deletions} lines.
-`,
-);
-
-const modifiedFileArray = danger.git.modified_files.join(
-  "",
-).split(
-  ",",
-);
-
-markdown(
-  `
-#### Changed Files in this PR:
-${modifiedFileArray.map(
-  (
-    file: string,
-  ) =>
-  {
-    return `
-- ${file}
-`;
-  },
-)}
-  `,
+  todos(
+    {
+      keywords: [
+        "@todo",
+      ],
+    },
+  ),
 );
 
 const hasPackageChanges = danger.git.modified_files.some(
@@ -66,7 +44,7 @@ if (
   );
   markdown(
     `
-### :exclamation: Missing Lockfile Changes
+### :warning: Missing Lockfile Changes
 \`package.json\` was changed but the lockfile wasn't.
 `,
   );
@@ -106,8 +84,35 @@ if (
 {
   markdown(
     `
-### :exclamation: Too Many Changes
-Split changes into separate PRs.
+### :warning: Scope Creep
+Split some of these changes into a separate PR.
 `,
   );
 }
+
+markdown(
+  `
+You've changed ${danger.git.modified_files.length} files while adding ${danger.github.pr.additions} lines and deleting ${danger.github.pr.deletions} lines.
+`,
+);
+
+markdown(
+  `
+### :briefcase: Changed Files
+${
+danger.git.modified_files.reduce(
+  (
+    finalString,
+    currentFile,
+  ) =>
+  {
+    return `
+${finalString}
+- ${currentFile}
+`;
+  },
+  "",
+)
+}
+`,
+);
