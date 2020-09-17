@@ -5,19 +5,28 @@ import {
 } from "danger";
 import eslint from "danger-plugin-eslint";
 import jest from "danger-plugin-jest";
-import includes from "lodash.includes";
 
-const hasPackageChanges = includes(
-  danger.git.modified_files,
-  "package.json",
+const hasPackageChanges = danger.git.modified_files.some(
+  (
+    file: string,
+  ) =>
+  {
+    return file === "package.json";
+  },
 );
-const hasLockfileChanges = includes(
-  danger.git.modified_files,
-  "package-lock.json",
+const hasLockfileChanges = danger.git.modified_files.some(
+  (
+    file: string,
+  ) =>
+  {
+    return file === "package-lock.json";
+  },
 );
 
-if (hasPackageChanges &&
-    !hasLockfileChanges)
+if (
+  hasPackageChanges &&
+  !hasLockfileChanges
+)
 {
   warn(
     "There are package.json changes with no corresponding lockfile changes",
