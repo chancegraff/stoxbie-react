@@ -7,6 +7,32 @@ import {
 } from "danger";
 import jest from "danger-plugin-jest";
 
+jest();
+
+eslint();
+
+message(
+  `
+  You've changed ${danger.git.modified_files.length} files while
+  adding ${danger.github.pr.additions} lines
+  and deleting ${danger.github.pr.deletions} lines.
+  `,
+);
+
+markdown(
+  `
+  #### Changed Files in this PR:
+  ${danger.git.modified_files.map(
+    (
+      file: string,
+    ) =>
+    {
+      return `- ${file}`;
+    },
+  )}
+  `,
+);
+
 const hasPackageChanges = danger.git.modified_files.some(
   (
     file: string,
@@ -30,28 +56,52 @@ if (
 )
 {
   warn(
-    "There are package.json changes with no corresponding lockfile changes",
+    "`package.json` changes without lockfile changes",
+  );
+  markdown(
+    `
+    ### :exclamation: Missing Lockfile Changes
+    \`package.json\` was changed but the lockfile wasn't.
+    `,
   );
 }
 
-message(
-  `You have changed ${danger.git.modified_files.length} files in this PR.`,
+const lineChangeThreshold = 600;
+const fileChangeThreshold = 20;
+const tooManyLineChanges = (
+  danger.github.pr.additions + danger.github.pr.deletions > lineChangeThreshold
+);
+const tooManyFileChanges = (
+  danger.git.modified_files.length > fileChangeThreshold
 );
 
-markdown(
-  `
-  #### Changed Files in this PR:
-  ${danger.git.modified_files.map(
-    (
-      file: string,
-    ) =>
-    {
-      return `- ${file}`;
-    },
-  )}
-  `,
-);
+switch (true)
+{
+  case tooManyFileChanges:
+  {
+    warn(
+      `${danger.git.modified_files.length} files changed.`,
+    );
+    break;
+  }
+  case tooManyLineChanges:
+  {
+    warn(
+      `${danger.github.pr.additions + danger.github.pr.deletions} lines changed`,
+    );
+    break;
+  }
+}
 
-jest();
-
-eslint();
+if (
+  tooManyFileChanges ||
+  tooManyLineChanges
+)
+{
+  markdown(
+    `
+    ### :exclamation: Too Many Changes
+    Split changes into separate PRs.
+    `,
+  );
+}
