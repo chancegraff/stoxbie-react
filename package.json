@@ -3,9 +3,18 @@
   "version": "0.1.1",
   "private": true,
   "jest": {
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
     "testMatch": [
       "**/specs/**/*.[jt]s?(x)"
     ]
+  },
+  "jest-junit": {
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "{classname}",
+    "titleTemplate": "{title}"
   },
   "dependencies": {
     "@chancey/iex-cloud": "^2.2.3",
@@ -81,7 +90,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom-fourteen --outputFile result.json --json",
+    "test": "react-scripts test --env=jsdom-fourteen",
     "clear": "react-scripts test --clearCache",
     "format": "eslint --fix ./src",
     "check": "eslint --format mo ./src",

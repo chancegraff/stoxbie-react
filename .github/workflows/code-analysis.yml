@@ -47,11 +47,11 @@ jobs:
           ${{ runner.os }}-
     - run: npm ci
     - run: npm run clear
-    - run: npm test
-    - uses: tanmen/jest-reporter@v1.1
+    - run: npm test -- --reporters=default --reporters=jest-junit
+    - uses: IgnusG/jest-report-action@v2.3.3
       if: always()
       with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          access-token: ${{ secrets.GITHUB_TOKEN }}
   danger:
     name: Run Danger
     runs-on: ubuntu-latest
