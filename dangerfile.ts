@@ -3,9 +3,15 @@ import {
   danger,
   markdown,
   message,
+  schedule,
   warn,
 } from "danger";
 import jest from "danger-plugin-jest";
+import todos from "danger-plugin-todos";
+
+schedule(
+  todos(),
+);
 
 jest();
 
