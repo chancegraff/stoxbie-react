@@ -46,6 +46,10 @@ jobs:
     - run: npm ci
     - run: npm run clear
     - run: npm test
+    - uses: tanmen/jest-reporter@v1.1
+      if: always()
+      with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   danger:
     runs-on: ubuntu-latest
     steps:
