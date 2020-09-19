@@ -31,7 +31,7 @@ export default {
   },
   logo: {
     size: "72px",
-    height: "72px",
+    height: "64px",
     maxWidth: "1008px",
   },
 };

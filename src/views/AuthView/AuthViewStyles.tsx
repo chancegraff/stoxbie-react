@@ -56,7 +56,18 @@ export const GrommetIllustrationContainer: React.FC<JSXBoxProps> = (
     <IllustrationContainer
       gridArea="illustration"
       fill="vertical"
-      background="background-contrast"
+      pad={
+        {
+          horizontal: "large",
+          top: "medium",
+        }
+      }
+      background={
+        {
+          color: "background-back",
+          opacity: 0.3,
+        }
+      }
       {...props}
     />
   );
@@ -75,6 +86,7 @@ export const GrommetFormContainer: React.FC<JSXBoxProps> = (
       fill="vertical"
       elevation="large"
       pad="large"
+      background="background"
       {...props}
     />
   );
