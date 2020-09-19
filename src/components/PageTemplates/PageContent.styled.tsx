@@ -40,7 +40,8 @@ export const GrommetHeader: React.FC<JSXBoxProps> = (
           style: "solid",
         }
       }
-      background="background-front"
+      background="background-back"
+      elevation="small"
       justify="start"
       gap="large"
       pad={
@@ -79,7 +80,16 @@ export const GrommetFooter: React.FC<JSXBoxProps> = (
 {
   return (
     <Footer
-      background="background-front"
+      background="background-back"
+      justify="end"
+      border={
+        {
+          side: "top",
+          size: "small",
+          color: "background",
+          style: "solid",
+        }
+      }
       pad={
         {
           horizontal: "xlarge",

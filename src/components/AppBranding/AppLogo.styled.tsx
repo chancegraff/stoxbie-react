@@ -1,5 +1,6 @@
 import React, {
   PropsHasChildren,
+  useContext,
 } from "react";
 import {
   Box,
@@ -10,7 +11,9 @@ import {
   Text,
   ThemeContext,
 } from "grommet";
-import styled from "styled-components/macro";
+import styled, {
+  ThemeContext as StyledThemeContext,
+} from "styled-components/macro";
 
 export const GrommetTheme: React.FC<PropsHasChildren> = (
   props,
@@ -83,8 +86,27 @@ export const GrommetImage: React.FC<JSXImageProps> = (
   props,
 ) =>
 {
+  const theme = useContext(
+    StyledThemeContext,
+  );
+
+  if (theme.dark)
+  {
+    return (
+      <InvertedImage
+        height="64px"
+        margin={
+          {
+            right: "medium",
+          }
+        }
+        {...props}
+      />
+    );
+  }
+
   return (
-    <InvertedImage
+    <Image
       height="64px"
       margin={
         {

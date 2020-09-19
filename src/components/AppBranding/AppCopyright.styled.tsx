@@ -29,6 +29,7 @@ export const GrommetText: React.FC<JSXTextProps> = (
   return (
     <Text
       size="xsmall"
+      color="text-xweak"
       {...props}
     />
   );

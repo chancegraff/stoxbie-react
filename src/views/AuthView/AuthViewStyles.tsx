@@ -18,6 +18,7 @@ export const GrommetGrid: React.FC<JSXGridProps> = (
     <Grid
       responsive={true}
       fill={true}
+      gap="medium"
       columns={
         [
           "auto",
@@ -42,32 +43,21 @@ export const GrommetGrid: React.FC<JSXGridProps> = (
   );
 };
 
-const IllustrationContainer = styled(
-  Box,
-)`
-position: relative;
-`;
-
 export const GrommetIllustrationContainer: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
   return (
-    <IllustrationContainer
+    <Box
       gridArea="illustration"
       fill="vertical"
       pad={
         {
-          horizontal: "large",
-          top: "medium",
+          horizontal: "xlarge",
+          vertical: "large",
         }
       }
-      background={
-        {
-          color: "background-back",
-          opacity: 0.3,
-        }
-      }
+      background="background-back"
       {...props}
     />
   );
@@ -102,6 +92,7 @@ export const GrommetCard: React.FC<JSXBoxProps> = (
       height="xlarge"
       pad="large"
       elevation="medium"
+      background="background-back"
       {...props}
     />
   );

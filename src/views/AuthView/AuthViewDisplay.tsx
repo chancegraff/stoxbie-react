@@ -1,16 +1,8 @@
-import React, {
-  useContext,
-  useMemo,
-} from "react";
+import React from "react";
 import {
   RouteProps,
 } from "react-router-dom";
-import {
-  normalizeColor,
-} from "grommet/utils";
-import styled, {
-  ThemeContext,
-} from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
+import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import PageContent from "components/PageTemplates/PageContent";
 
@@ -26,26 +18,10 @@ type Props = RouteProps;
 
 const AuthViewDisplay: React.FC<Props> = () =>
 {
-  const theme = useContext(
-    ThemeContext,
-  );
-
-  const stroke = useMemo(
-    () =>
-    {
-      return normalizeColor(
-        theme.global.colors.text,
-        theme,
-      );
-    },
-    [
-      theme,
-    ],
-  );
-
   return (
     <PageContent
       pad="none"
+      background="background-back"
       css=""
     >
       <GrommetGrid>
@@ -58,7 +34,6 @@ const AuthViewDisplay: React.FC<Props> = () =>
         </GrommetFormContainer>
         <GrommetIllustrationContainer>
           <svg
-            width="100%"
             viewBox="0 0 800 600"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

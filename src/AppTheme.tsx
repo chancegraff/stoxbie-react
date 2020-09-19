@@ -18,7 +18,6 @@ const AppTheme: React.FC<PropsHasClass> = (
       full={true}
       cssVars={true}
       theme={Theme}
-      themeMode="dark"
       {...props}
     />
   );
