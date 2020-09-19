@@ -168,7 +168,7 @@ const StockView: React.FC<Props> = () =>
     error,
   );
 
-  logger.info(
+  logger.debug(
     "Rendering logic and display",
   );
 

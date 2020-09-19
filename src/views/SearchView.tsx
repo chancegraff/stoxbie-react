@@ -39,7 +39,7 @@ const SearchView: React.FC<Props> = () =>
     [],
   );
 
-  logger.info(
+  logger.debug(
     "Rendering logic and display",
   );
 

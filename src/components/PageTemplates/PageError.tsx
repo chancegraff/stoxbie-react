@@ -66,7 +66,7 @@ const Error: React.FC<Props> = (
 
   useScrollToTop();
 
-  logger.info(
+  logger.debug(
     `Rendering message: ${message?.substring(0, 20)}`,
   );
 
