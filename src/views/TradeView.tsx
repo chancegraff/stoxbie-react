@@ -28,6 +28,9 @@ import {
   useScrollToTop,
 } from "utils/Hooks";
 import {
+  createLogger,
+} from "utils/Logger";
+import {
   handleUnloadCreator,
 } from "utils/Utilities";
 import {
@@ -37,6 +40,10 @@ import {
 import TradeViewLogic from "./TradeView/TradeViewLogic";
 
 type Props = RouteProps;
+
+const logger = createLogger(
+  "TradeView",
+);
 
 const TradeView: React.FC<Props> = () =>
 {
@@ -148,6 +155,10 @@ const TradeView: React.FC<Props> = () =>
 
   useError(
     error,
+  );
+
+  logger.info(
+    "Rendering logic and display",
   );
 
   return (

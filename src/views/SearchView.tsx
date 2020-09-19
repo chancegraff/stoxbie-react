@@ -9,9 +9,17 @@ import {
 } from "@chancey/iex-cloud";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
+import {
+  createLogger,
+} from "utils/Logger";
+
 import SearchViewLogic from "./SearchView/SearchViewLogic";
 
 type Props = RouteProps;
+
+const logger = createLogger(
+  "SearchView",
+);
 
 const SearchView: React.FC<Props> = () =>
 {
@@ -29,6 +37,10 @@ const SearchView: React.FC<Props> = () =>
       return options;
     },
     [],
+  );
+
+  logger.info(
+    "Rendering logic and display",
   );
 
   return (
