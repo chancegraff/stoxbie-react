@@ -28,7 +28,7 @@ const AuthViewDisplay: React.FC<Props> = () =>
         <GrommetFormContainer>
           <GrommetCard>
             <GrommetHeading css="">
-              Start Playing
+              Play Now
             </GrommetHeading>
           </GrommetCard>
         </GrommetFormContainer>

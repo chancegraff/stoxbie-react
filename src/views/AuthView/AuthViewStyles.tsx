@@ -8,7 +8,6 @@ import {
   JSXGridProps,
   JSXHeadingProps,
 } from "grommet";
-import styled from "styled-components";
 
 export const GrommetGrid: React.FC<JSXGridProps> = (
   props,
@@ -74,7 +73,7 @@ export const GrommetFormContainer: React.FC<JSXBoxProps> = (
       width="xlarge"
       gridArea="form"
       fill="vertical"
-      elevation="large"
+      elevation="xlarge"
       pad="large"
       background="background"
       {...props}

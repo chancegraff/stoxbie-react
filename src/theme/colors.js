@@ -9,15 +9,15 @@ export default {
   },
   "background-back": {
     dark: "#101010",
-    light: "#FFFFFF",
+    light: "#FCFFFF",
   },
   background: {
     dark: "#171717",
-    light: "#F8F8F8",
+    light: "#F4FAFA",
   },
   "background-front": {
     dark: "#232323",
-    light: "#F0F0F0",
+    light: "#E3F0F0",
   },
   "background-contrast": {
     dark: "#00000020",
