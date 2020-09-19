@@ -91,7 +91,7 @@ export const GrommetCard: React.FC<JSXBoxProps> = (
       height="xlarge"
       pad="large"
       elevation="medium"
-      background="background-back"
+      background="background-front"
       {...props}
     />
   );
