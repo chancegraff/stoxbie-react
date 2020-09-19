@@ -146,7 +146,7 @@ export const formatPercentage = (
   );
 };
 
-export enum DateFormats {
+export enum DateFormat {
   Full = "MMMM do, y",
   Iex = "y-MM-dd",
   Url = "'m'MM'd'dd'y'y",
@@ -157,7 +157,7 @@ export enum DateFormats {
 
 export const formatDate = (
   date: string | Date,
-  dateFormat: DateFormats,
+  dateFormat: DateFormat,
 ) =>
 {
   return format(
@@ -172,7 +172,7 @@ export const formatDate = (
 
 export const parseDate = (
   date: string,
-  dateFormat: DateFormats,
+  dateFormat: DateFormat,
 ) =>
 {
   return parse(
@@ -184,8 +184,8 @@ export const parseDate = (
 
 export const formatParsedDate = (
   asString: string,
-  inputFormat: DateFormats,
-  outputFormat: DateFormats,
+  inputFormat: DateFormat,
+  outputFormat: DateFormat,
 ) =>
 {
   return formatDate(

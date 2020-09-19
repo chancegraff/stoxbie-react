@@ -6,7 +6,7 @@ import {
 } from "grommet-icons";
 
 import {
-  DateFormats,
+  DateFormat,
   fiveYearsAgo,
   formatDate,
   oneYearAgo,
@@ -49,7 +49,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           oneYearAgo,
-          DateFormats.Url,
+          DateFormat.Url,
         ),
       );
     },
@@ -63,7 +63,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           fiveYearsAgo,
-          DateFormats.Url,
+          DateFormat.Url,
         ),
       );
     },
@@ -79,7 +79,7 @@ const TradeStart: React.FC<Props> = (
       return handleYearStart(
         formatDate(
           nextDate,
-          DateFormats.Url,
+          DateFormat.Url,
         ),
       );
     },

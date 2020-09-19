@@ -26,7 +26,7 @@ import {
   createLogger,
 } from "utils/Logger";
 import {
-  DateFormats,
+  DateFormat,
   parseDate,
   usePrevious,
 } from "utils/Utilities";
@@ -159,7 +159,7 @@ export const useEffectPresentPrices = (
       } = historicalPrices.last<HistoricalPrice>();
       const lastDate = parseDate(
         lastDateAsString,
-        DateFormats.Iex,
+        DateFormat.Iex,
       );
 
       return lastDate;
@@ -240,7 +240,7 @@ export const useEffectPresentPrices = (
       );
       const dateAfterSelected = parseDate(
         priceAfterSelectedDate.date,
-        DateFormats.Iex,
+        DateFormat.Iex,
       );
 
       logger.debug(
@@ -280,7 +280,7 @@ export const useEffectPresentPrices = (
       );
       const lazyEndDate = parseDate(
         lazyEndPrice.date,
-        DateFormats.Iex,
+        DateFormat.Iex,
       );
 
       /**
@@ -341,7 +341,7 @@ export const useEffectPresentPrices = (
         {
           const priceDate = parseDate(
             historicalPrice.date,
-            DateFormats.Iex,
+            DateFormat.Iex,
           );
 
           return isBefore(
@@ -370,7 +370,7 @@ export const useEffectPresentPrices = (
         {
           const priceDate = parseDate(
             historicalPrice.date,
-            DateFormats.Iex,
+            DateFormat.Iex,
           );
 
           return (

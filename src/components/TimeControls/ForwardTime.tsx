@@ -6,7 +6,7 @@ import {
 } from "@chancey/iex-cloud";
 
 import {
-  DateFormats,
+  DateFormat,
   formatParsedDate,
 } from "utils/Utilities";
 import Spinner from "components/Grommet/Spinner";
@@ -39,8 +39,8 @@ const ForwardTime: React.FC<Props> = (
 
       return formatParsedDate(
         presentPrice.date,
-        DateFormats.Iex,
-        DateFormats.Full,
+        DateFormat.Iex,
+        DateFormat.Full,
       );
     },
     [

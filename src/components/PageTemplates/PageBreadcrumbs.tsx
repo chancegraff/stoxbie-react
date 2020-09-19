@@ -10,7 +10,7 @@ import {
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import {
-  DateFormats,
+  DateFormat,
   formatParsedDate,
 } from "utils/Utilities";
 import {
@@ -46,8 +46,8 @@ const PageBreadcrumbs: React.FC<Props> = () =>
       {
         return formatParsedDate(
           date,
-          DateFormats.Url,
-          DateFormats.Full,
+          DateFormat.Url,
+          DateFormat.Full,
         );
       }
     },

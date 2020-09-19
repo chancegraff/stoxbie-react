@@ -3,7 +3,7 @@ import React, {
 } from "react";
 
 import {
-  DateFormats,
+  DateFormat,
   parseDate,
 } from "utils/Utilities";
 
@@ -50,7 +50,7 @@ const TradeViewLogic: React.FC<Props> = (
 
       return parseDate(
         date,
-        DateFormats.Url,
+        DateFormat.Url,
       );
     },
     [

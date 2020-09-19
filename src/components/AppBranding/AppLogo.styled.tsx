@@ -70,6 +70,7 @@ export const GrommetText: React.FC<JSXTextProps> = (
 {
   return (
     <LogoText
+      alignSelf="end"
       size="logo"
       {...props}
     />

@@ -3,7 +3,7 @@ import {
 } from "@chancey/iex-cloud";
 
 import {
-  DateFormats,
+  DateFormat,
   formatDate,
 } from "utils/Utilities";
 
@@ -416,7 +416,7 @@ export const getIndexByDate = (
 {
   const iexStartDate = formatDate(
     startDate,
-    DateFormats.Iex,
+    DateFormat.Iex,
   );
 
   return prices.findIndex(

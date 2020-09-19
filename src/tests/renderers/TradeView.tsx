@@ -12,14 +12,14 @@ import {
   ROUTE_ORDER,
 } from "utils/Constants";
 import {
-  DateFormats,
+  DateFormat,
   formatDate,
 } from "utils/Utilities";
 import TradeView from "views/TradeView";
 
 const urlDate = formatDate(
   tradeViewStartDate,
-  DateFormats.Url,
+  DateFormat.Url,
 );
 
 const dayOnePrice = getPrice(

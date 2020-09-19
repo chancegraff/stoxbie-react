@@ -13,7 +13,7 @@ import {
 } from "grommet";
 
 import {
-  DateFormats,
+  DateFormat,
   formatParsedDate,
 } from "utils/Utilities";
 
@@ -71,8 +71,8 @@ const MobileTimeLabel: React.FC<Props> = (
       {
         return formatParsedDate(
           formattedValue.toString(),
-          DateFormats.TickLarge,
-          DateFormats.TickYear,
+          DateFormat.TickLarge,
+          DateFormat.TickYear,
         );
       }
     },

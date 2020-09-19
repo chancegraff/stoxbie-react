@@ -19,7 +19,7 @@ import {
   renderTradeView,
 } from "tests/Renderers";
 import {
-  DateFormats,
+  DateFormat,
   formatParsedDate,
 } from "utils/Utilities";
 
@@ -44,8 +44,8 @@ it(
       PriceDateText(
         formatParsedDate(
           dayOnePrice.date,
-          DateFormats.Iex,
-          DateFormats.Full,
+          DateFormat.Iex,
+          DateFormat.Full,
         ),
       ),
     );
@@ -56,8 +56,8 @@ it(
       PriceDateText(
         formatParsedDate(
           dayTwoPrice.date,
-          DateFormats.Iex,
-          DateFormats.Full,
+          DateFormat.Iex,
+          DateFormat.Full,
         ),
       ),
     );

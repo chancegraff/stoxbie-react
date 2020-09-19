@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import {
-  DateFormats,
+  DateFormat,
   formatDate,
 } from "utils/Utilities";
 
@@ -32,7 +32,7 @@ export const useRedirectToDate = (): RedirectToDateHook =>
     {
       const nextDate = formatDate(
         date,
-        DateFormats.Url,
+        DateFormat.Url,
       );
 
       const pathnames = location.pathname

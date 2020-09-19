@@ -16,7 +16,7 @@ import {
 } from "styled-components/macro";
 
 import {
-  DateFormats,
+  DateFormat,
   formatDate,
 } from "utils/Utilities";
 import {
@@ -53,11 +53,11 @@ const AxisBottom: React.FC<Props> = (
       return tick.getMonth() % 12 === 0
         ? formatDate(
             tick,
-            DateFormats.TickLarge,
+            DateFormat.TickLarge,
           )
         : formatDate(
           tick,
-          DateFormats.TickSmall,
+          DateFormat.TickSmall,
         );
     },
     [],
