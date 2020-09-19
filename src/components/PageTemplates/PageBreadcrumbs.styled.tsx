@@ -96,53 +96,69 @@ export const StoxbieRootBreadcrumb: React.FC<BreadcrumbProps> = (
   props,
 ) =>
 {
-  const match = useRouteMatch(
+  const inexactMatch = useRouteMatch(
     {
-      path: "/",
+      path: "/order",
+      exact: false,
+    },
+  );
+  const exactMatch = useRouteMatch(
+    {
+      path: `${ROUTE_ORDER}`,
       exact: true,
-      strict: false,
-      sensitive: false,
     },
   );
 
-  if (match)
+  if (
+    inexactMatch &&
+    !exactMatch
+  )
   {
-    return null;
+    return (
+      <StoxbieAnchor
+        to={`${ROUTE_ORDER}`}
+        {...props}
+      />
+    );
   }
 
-  return (
-    <StoxbieAnchor
-      to="/"
-      {...props}
-    />
-  );
+  return null;
 };
 
 export const StoxbieTickerBreadcrumb: React.FC<BreadcrumbProps> = (
   props,
 ) =>
 {
-  const match = useRouteMatch(
+  const inexactMatch = useRouteMatch(
     {
       path: `${ROUTE_ORDER}/:ticker`,
-      strict: true,
-      sensitive: true,
+      exact: false,
+    },
+  );
+  const exactMatch = useRouteMatch(
+    {
+      path: `${ROUTE_ORDER}/:ticker`,
+      exact: true,
     },
   );
 
-  if (match)
+  if (exactMatch)
   {
     return (
       <MediumText {...props} />
     );
   }
+  else if (inexactMatch)
+  {
+    return (
+      <StoxbieAnchor
+        to={`${ROUTE_ORDER}/${props.children}`}
+        {...props}
+      />
+    );
+  }
 
-  return (
-    <StoxbieAnchor
-      to={`${ROUTE_ORDER}/${props.children}`}
-      {...props}
-    />
-  );
+  return null;
 };
 
 export const StoxbieDateBreadcrumb: React.FC<BreadcrumbProps> = (
@@ -152,8 +168,7 @@ export const StoxbieDateBreadcrumb: React.FC<BreadcrumbProps> = (
   const match = useRouteMatch(
     {
       path: `${ROUTE_ORDER}/:ticker/:date`,
-      strict: true,
-      sensitive: true,
+      exact: false,
     },
   );
 
