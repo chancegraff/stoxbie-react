@@ -18,13 +18,13 @@ const AppBoilerplate: React.FC<PropsHasChildren> = (
 ) =>
 {
   return (
-    <AppTheme css="">
-      <RecoilRoot>
+    <RecoilRoot>
+      <AppTheme css="">
         <BrowserRouter css="">
           {children}
         </BrowserRouter>
-      </RecoilRoot>
-    </AppTheme>
+      </AppTheme>
+    </RecoilRoot>
   );
 };
 

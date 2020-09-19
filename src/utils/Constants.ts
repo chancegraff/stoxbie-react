@@ -42,6 +42,7 @@ export const PRESENT_PRICE_SELECTOR_KEY = "presentPrice";
 export const PRESENT_LEDGER_SELECTOR_KEY = "presentLedger";
 export const PRESENT_HOLDING_SELECTOR_KEY = "presentHolding";
 
+export const THEME_STATE_KEY = "theme";
 export const AUTHENTICATED_USER_STATE_KEY = "authenticatedUser";
 
 export const DEFAULT_LEDGER: LedgerType = {

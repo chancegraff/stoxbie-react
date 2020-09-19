@@ -10,6 +10,15 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
 {
   return (
     <Box
+      pad="small"
+      alignSelf="center"
+      margin={
+        {
+          left: "auto",
+        }
+      }
+      round={true}
+      background="background-contrast"
       {...props}
     />
   );

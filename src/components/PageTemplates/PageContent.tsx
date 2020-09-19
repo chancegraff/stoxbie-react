@@ -9,6 +9,7 @@ import styled from "styled-components/macro"; // eslint-disable-line @typescript
 import AppCopyright from "components/AppBranding/AppCopyright";
 import AppLogo from "components/AppBranding/AppLogo";
 import PageBreadcrumbs from "components/PageTemplates/PageBreadcrumbs";
+import PageTheme from "components/PageTemplates/PageTheme";
 
 import {
   GrommetContainer,
@@ -28,6 +29,7 @@ const PageContent: React.FC<Props> = (
       <GrommetHeader css="">
         <AppLogo css="" />
         <PageBreadcrumbs css="" />
+        <PageTheme css="" />
       </GrommetHeader>
       <GrommetMain
         {...props}
