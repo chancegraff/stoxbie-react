@@ -41,6 +41,19 @@ export const GrommetTheme: React.FC<PropsHasChildren> = (
   );
 };
 
+export const GrommetContainer: React.FC<JSXBoxProps> = (
+  props,
+) =>
+{
+  return (
+    <Box
+      direction="row"
+      align="start"
+      {...props}
+    />
+  );
+};
+
 const LogoText = styled(
   Text,
 )`
@@ -72,25 +85,12 @@ export const GrommetImage: React.FC<JSXImageProps> = (
 {
   return (
     <InvertedImage
-      fill="vertical"
+      height="64px"
       margin={
         {
-          right: "small",
+          right: "medium",
         }
       }
-      {...props}
-    />
-  );
-};
-
-export const GrommetContainer: React.FC<JSXBoxProps> = (
-  props,
-) =>
-{
-  return (
-    <Box
-      direction="row"
-      height="xxsmall"
       {...props}
     />
   );

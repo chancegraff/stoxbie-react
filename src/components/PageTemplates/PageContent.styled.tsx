@@ -5,6 +5,7 @@ import {
   JSXBoxProps,
   Main,
 } from "grommet";
+import styled from "styled-components";
 
 export const GrommetContainer: React.FC<JSXBoxProps> = (
   props,
@@ -18,18 +19,28 @@ export const GrommetContainer: React.FC<JSXBoxProps> = (
   );
 };
 
+const CoveringHeader = styled(
+  Header,
+)`
+position: relative;
+z-index: 2;
+`;
+
 export const GrommetHeader: React.FC<JSXBoxProps> = (
   props,
 ) =>
 {
   return (
-    <Header
-      background={
+    <CoveringHeader
+      border={
         {
           color: "brand",
-          opacity: 0.1,
+          side: "top",
+          size: "16px",
+          style: "solid",
         }
       }
+      background="background"
       justify="start"
       gap="large"
       pad={
@@ -68,6 +79,7 @@ export const GrommetFooter: React.FC<JSXBoxProps> = (
 {
   return (
     <Footer
+      background="background"
       pad={
         {
           horizontal: "xlarge",

@@ -107,6 +107,10 @@ declare module "grommet" {
   declare const Header: React.FC<JSXBoxProps>;
   declare const Main: React.FC<JSXBoxProps>;
   declare const Footer: React.FC<JSXBoxProps>;
+  declare const Card: React.FC<JSXBoxProps>;
+  declare const CardHeader: React.FC<JSXBoxProps>;
+  declare const CardBody: React.FC<JSXBoxProps>;
+  declare const CardFooter: React.FC<JSXBoxProps>;
   declare const Drop: React.FC<JSXDropProps>;
   declare const Calendar: React.FC<JSXCalendarProps>;
   declare const Image: React.FC<JSXImageProps>;

@@ -1,10 +1,10 @@
 export default {
   xxsmall: "48px",
-  xsmall: "96px",
-  small: "192px",
-  medium: "384px",
-  large: "768px",
-  xlarge: "1152px",
-  xxlarge: "1536px",
+  xsmall: "77px",
+  small: "124px",
+  medium: "200px",
+  large: "323px",
+  xlarge: "522px",
+  xxlarge: "844px",
   full: "100%",
 };

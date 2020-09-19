@@ -8,6 +8,8 @@ import {
   createLogger,
 } from "utils/Logger";
 
+import AuthViewLogic from "./AuthView/AuthViewLogic";
+
 type Props = RouteProps;
 
 const logger = createLogger(
@@ -16,11 +18,13 @@ const logger = createLogger(
 
 const AuthView: React.FC<Props> = () =>
 {
-  logger.info(
+  logger.debug(
     "Rendering logic and display",
   );
 
-  return null;
+  return (
+    <AuthViewLogic />
+  );
 };
 
 export default AuthView;

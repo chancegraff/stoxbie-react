@@ -30,8 +30,8 @@ export default {
     maxWidth: "1008px",
   },
   logo: {
-    size: "42px",
-    height: "52px",
+    size: "72px",
+    height: "72px",
     maxWidth: "1008px",
   },
 };

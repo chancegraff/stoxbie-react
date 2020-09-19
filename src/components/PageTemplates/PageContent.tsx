@@ -1,6 +1,9 @@
 import React, {
   PropsHasChildren,
 } from "react";
+import {
+  JSXBoxProps,
+} from "grommet";
 import styled from "styled-components/macro"; // eslint-disable-line @typescript-eslint/no-unused-vars
 
 import AppCopyright from "components/AppBranding/AppCopyright";
@@ -14,10 +17,10 @@ import {
   GrommetMain,
 } from "./PageContent.styled";
 
-const PageContent: React.FC<PropsHasChildren> = (
-  {
-    children,
-  },
+type Props = PropsHasChildren & JSXBoxProps;
+
+const PageContent: React.FC<Props> = (
+  props,
 ) =>
 {
   return (
@@ -26,9 +29,10 @@ const PageContent: React.FC<PropsHasChildren> = (
         <AppLogo css="" />
         <PageBreadcrumbs css="" />
       </GrommetHeader>
-      <GrommetMain css="">
-        {children}
-      </GrommetMain>
+      <GrommetMain
+        {...props}
+        css=""
+      />
       <GrommetFooter css="">
         <AppCopyright css="" />
       </GrommetFooter>

@@ -8,6 +8,7 @@ import styled from "styled-components/macro"; // eslint-disable-line @typescript
 import {
   ROUTE_ORDER,
 } from "utils/Constants";
+import AuthView from "views/AuthView";
 import SearchView from "views/SearchView";
 import StockView from "views/StockView";
 import TradeView from "views/TradeView";
@@ -29,8 +30,13 @@ const AppRoutes: React.FC<unknown> = () =>
       />
       <Route
         exact={true}
-        path="/"
+        path={`${ROUTE_ORDER}`}
         component={SearchView}
+      />
+      <Route
+        exact={true}
+        path="/"
+        component={AuthView}
       />
       <Route
         path="/oops"
