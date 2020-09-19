@@ -25,6 +25,9 @@ import {
   useError,
 } from "utils/Hooks";
 import {
+  createLogger,
+} from "utils/Logger";
+import {
   handleUnloadCreator,
 } from "utils/Utilities";
 
@@ -35,6 +38,10 @@ const ERROR_MESSAGE =
 
 type Props = RouteProps & {
 };
+
+const logger = createLogger(
+  "StockView",
+);
 
 const StockView: React.FC<Props> = () =>
 {
@@ -159,6 +166,10 @@ const StockView: React.FC<Props> = () =>
 
   useError(
     error,
+  );
+
+  logger.debug(
+    "Rendering logic and display",
   );
 
   return (

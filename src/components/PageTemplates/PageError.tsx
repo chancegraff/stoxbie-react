@@ -15,6 +15,9 @@ import {
 import {
   useScrollToTop,
 } from "utils/Hooks";
+import {
+  createLogger,
+} from "utils/Logger";
 import PageContent from "components/PageTemplates/PageContent";
 
 import {
@@ -22,6 +25,10 @@ import {
 } from "./PageError.styled";
 
 type Props = RouteProps;
+
+const logger = createLogger(
+  "PageError",
+);
 
 const Error: React.FC<Props> = (
   {
@@ -58,6 +65,10 @@ const Error: React.FC<Props> = (
   );
 
   useScrollToTop();
+
+  logger.debug(
+    `Rendering message: ${message?.substring(0, 20)}`,
+  );
 
   if (!match)
   {
